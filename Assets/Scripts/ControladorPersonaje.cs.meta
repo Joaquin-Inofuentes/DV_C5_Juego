@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d44f8b819273c964da43318bc1a24e3f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - origenDisparo: {instanceID: 0}
+  - prefabBala: {instanceID: 0}
+  - soldado_jugador: {fileID: 2197918553351814129, guid: 90f62d665c8fd0c4b8ebdf93a36de966, type: 3}
+  - origenGranada: {instanceID: 0}
+  - prefabGranada: {instanceID: 0}
+  - camaraPrincipal: {instanceID: 0}
+  - Cursor: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
