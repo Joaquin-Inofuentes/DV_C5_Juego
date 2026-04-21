@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1667,7 +1668,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 114
     m_FontStyle: 1
     m_BestFit: 0
@@ -5762,7 +5763,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &464384225
@@ -7270,38 +7271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8360,7 +8329,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &586379642
@@ -9130,7 +9099,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &651321085
@@ -9621,7 +9590,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 166
     m_FontStyle: 0
     m_BestFit: 0
@@ -11735,7 +11704,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &824206587
@@ -12677,7 +12646,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 84
     m_FontStyle: 0
     m_BestFit: 0
@@ -13737,7 +13706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976498246}
   - component: {fileID: 976498245}
-  - component: {fileID: 976498244}
+  - component: {fileID: 976498247}
   m_Layer: 0
   m_Name: Auto
   m_TagString: Untagged
@@ -13745,51 +13714,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &976498244
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 976498243}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.45, y: 3.35}
-    newSize: {x: 7.45, y: 3.35}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 7.45, y: 3.35}
-  m_EdgeRadius: 0
 --- !u!212 &976498245
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13857,6 +13781,176 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &976498247
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976498243}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.45, y: 3.35}
+    newSize: {x: 7.45, y: 3.35}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.4449999, y: -1.185}
+      - {x: -1.155, y: -1.3349999}
+      - {x: 1.385, y: -1.3249999}
+      - {x: 1.515, y: -1.255}
+      - {x: 1.6949999, y: -1.025}
+      - {x: 1.755, y: -0.935}
+      - {x: 2.105, y: -1.045}
+      - {x: 1.995, y: -1.045}
+      - {x: 1.785, y: -1.055}
+      - {x: 1.7149999, y: -1.115}
+      - {x: 1.7149999, y: -1.4449999}
+      - {x: 1.765, y: -1.515}
+      - {x: 1.865, y: -1.545}
+      - {x: 2.655, y: -1.545}
+      - {x: 2.695, y: -1.535}
+      - {x: 2.7649999, y: -1.515}
+      - {x: 2.8149998, y: -1.4649999}
+      - {x: 2.855, y: -1.3149999}
+      - {x: 2.7949998, y: -1.0649999}
+      - {x: 2.665, y: -1.045}
+      - {x: 2.455, y: -1.045}
+      - {x: 2.495, y: -0.91499996}
+      - {x: 2.7849998, y: -0.905}
+      - {x: 3.115, y: -0.84499997}
+      - {x: 3.135, y: -0.825}
+      - {x: 3.195, y: -0.73499995}
+      - {x: 3.195, y: -0.515}
+      - {x: 3.365, y: -0.48499998}
+      - {x: 3.465, y: -0.45499998}
+      - {x: 3.495, y: -0.33499998}
+      - {x: 3.495, y: -0.225}
+      - {x: 3.475, y: -0.21499999}
+      - {x: 3.495, y: 0.155}
+      - {x: 3.495, y: 0.39499998}
+      - {x: 3.475, y: 0.505}
+      - {x: 3.425, y: 0.545}
+      - {x: 3.175, y: 0.53499997}
+      - {x: 3.185, y: 0.585}
+      - {x: 3.185, y: 0.84499997}
+      - {x: 3.105, y: 0.91499996}
+      - {x: 2.7849998, y: 1.035}
+      - {x: 2.895, y: 1.045}
+      - {x: 2.975, y: 1.135}
+      - {x: 2.955, y: 1.4449999}
+      - {x: 2.905, y: 1.495}
+      - {x: 2.7849998, y: 1.515}
+      - {x: 2.215, y: 1.515}
+      - {x: 2.055, y: 1.505}
+      - {x: 1.865, y: 1.475}
+      - {x: 1.8149999, y: 1.385}
+      - {x: 1.8349999, y: 1.105}
+      - {x: 1.925, y: 1.045}
+      - {x: 2.065, y: 0.955}
+      - {x: 1.7249999, y: 1.0649999}
+      - {x: 1.655, y: 1.1949999}
+      - {x: 1.605, y: 1.255}
+      - {x: 1.4649999, y: 1.3249999}
+      - {x: 1.0849999, y: 1.295}
+      - {x: 0.905, y: 1.3249999}
+      - {x: 0.015, y: 1.3249999}
+      - {x: -0.185, y: 1.345}
+      - {x: -1.245, y: 1.3349999}
+      - {x: -1.475, y: 1.175}
+      - {x: -1.4649999, y: 1.405}
+      - {x: -1.505, y: 1.475}
+      - {x: -1.5949999, y: 1.505}
+      - {x: -1.7249999, y: 1.515}
+      - {x: -2.375, y: 1.515}
+      - {x: -2.5049999, y: 1.485}
+      - {x: -2.675, y: 1.175}
+      - {x: -2.8149998, y: 1.165}
+      - {x: -2.875, y: 1.115}
+      - {x: -2.895, y: 1.0749999}
+      - {x: -2.905, y: 1.045}
+      - {x: -2.915, y: 0.97499996}
+      - {x: -2.915, y: 0.935}
+      - {x: -2.915, y: 0.955}
+      - {x: -2.895, y: 1.115}
+      - {x: -2.905, y: 1.175}
+      - {x: -3.0649998, y: 1.115}
+      - {x: -3.075, y: 1.005}
+      - {x: -3.095, y: 0.635}
+      - {x: -3.095, y: 0.405}
+      - {x: -3.075, y: 0.39499998}
+      - {x: -3.095, y: -0.375}
+      - {x: -3.085, y: -0.945}
+      - {x: -3.0049999, y: -1.155}
+      - {x: -2.5149999, y: -1.1949999}
+      - {x: -2.5049999, y: -1.4449999}
+      - {x: -2.495, y: -1.475}
+      - {x: -2.475, y: -1.505}
+      - {x: -2.385, y: -1.545}
+      - {x: -1.675, y: -1.545}
+      - {x: -1.525, y: -1.525}
+      - {x: -1.4549999, y: -1.475}
+      - {x: -1.435, y: -1.285}
+    - - {x: -2.915, y: 0.635}
+      - {x: -2.945, y: 0.66499996}
+      - {x: -2.925, y: 0.72499996}
+      - {x: -2.925, y: 0.755}
+      - {x: -2.945, y: 0.805}
+      - {x: -2.925, y: 0.835}
+      - {x: -2.915, y: 0.775}
+      - {x: -2.925, y: 0.765}
+      - {x: -2.915, y: 0.66499996}
+      - {x: -2.935, y: 0.635}
+      - {x: -2.925, y: 0.59499997}
+      - {x: -2.915, y: 0.60499996}
+    - - {x: 2.305, y: 0.905}
+      - {x: 2.305, y: 0.885}
+    - - {x: 2.565, y: 0.945}
+      - {x: 2.5249999, y: 1.025}
+      - {x: 2.5249999, y: 0.97499996}
+      - {x: 2.565, y: 0.895}
+      - {x: 2.575, y: 0.895}
+    - - {x: 2.235, y: 0.935}
+      - {x: 2.235, y: 0.98499995}
+      - {x: 2.245, y: 0.995}
+      - {x: 2.2549999, y: 1.025}
+      - {x: 2.2749999, y: 1.035}
+      - {x: 2.2549999, y: 1.005}
+      - {x: 2.2549999, y: 0.98499995}
+      - {x: 2.225, y: 0.935}
+      - {x: 2.215, y: 0.905}
+      - {x: 2.225, y: 0.895}
+  m_UseDelaunayMesh: 0
 --- !u!1001 &976881545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15224,7 +15318,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1057197852
@@ -21465,7 +21559,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1525953269
@@ -22323,38 +22417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
 --- !u!81 &1571884007
 AudioListener:
   m_ObjectHideFlags: 0
@@ -23000,7 +23062,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &1589240996
@@ -24261,7 +24323,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 114
     m_FontStyle: 1
     m_BestFit: 0
@@ -24538,7 +24600,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -26054,11 +26116,11 @@ PrefabInstance:
       objectReference: {fileID: 452306794}
     - target: {fileID: 6561714445379212303, guid: d6225a3d9bf37e5449eefce10d1220b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.122
+      value: 33.24
       objectReference: {fileID: 0}
     - target: {fileID: 6561714445379212303, guid: d6225a3d9bf37e5449eefce10d1220b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.997
+      value: 3.07
       objectReference: {fileID: 0}
     - target: {fileID: 6561714445379212303, guid: d6225a3d9bf37e5449eefce10d1220b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26768,7 +26830,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 114
     m_FontStyle: 1
     m_BestFit: 0
@@ -28503,7 +28565,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1912341359
@@ -29708,7 +29770,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 0.8828125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1992478119 stripped
@@ -30935,7 +30997,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 114
     m_FontStyle: 1
     m_BestFit: 0
@@ -31757,7 +31819,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
@@ -31999,7 +32061,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 101
     m_FontStyle: 0
     m_BestFit: 1
@@ -32196,7 +32258,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
@@ -32410,9 +32472,9 @@ GameObject:
   - component: {fileID: 7457792351421877745}
   - component: {fileID: 7457792351421877746}
   - component: {fileID: 7457792351421877743}
-  - component: {fileID: 4163188758438340121}
   - component: {fileID: 7457792351421877744}
   - component: {fileID: 7457792351421877747}
+  - component: {fileID: 7457792351421877748}
   m_Layer: 0
   m_Name: Soldado_Jugador
   m_TagString: Jugadores
@@ -32420,51 +32482,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &4163188758438340121
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4163188758438340120}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.055829346, y: -1.0507948}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.34}
-    pivot: {x: 0.47, y: 0}
-    oldSize: {x: 1.18, y: 1.78}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4923021, y: 1.3971729}
-  m_EdgeRadius: 0
 --- !u!224 &4354334624657636895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32593,7 +32610,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 62
     m_FontStyle: 0
     m_BestFit: 0
@@ -32743,7 +32760,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 59
     m_FontStyle: 0
     m_BestFit: 0
@@ -32891,6 +32908,41 @@ MonoBehaviour:
   informacionPersonaje: {fileID: 0}
   duracionPorVelocidadAumentada: 5
   powerUpsActivos: 0
+--- !u!58 &7457792351421877748
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4163188758438340120}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.070819825, y: -1.0859215}
+  serializedVersion: 2
+  m_Radius: 1.0665689
 --- !u!114 &8383087348881190503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32912,7 +32964,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
@@ -32982,7 +33034,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
