@@ -22,22 +22,31 @@ public class FSMController : MonoBehaviour
     public float waitTimer = 0f;
     public float waitDuration = 4f; // Tiempo que espera antes de volver
 
+    public Disparador Dispara;
+    [Header("Combate")]
+    public float fireRate = 0.5f; // Segundos entre disparos
+    private float nextFireTime;
+
     void Update()
     {
         if (returnCooldown > 0)
         {
             returnCooldown -= Time.deltaTime;
-            if(currentState == State.IrAObjetivo
-                || currentState == State.Esperando)
-            {
+            if (currentState == State.IrAObjetivo || currentState == State.Esperando)
                 returnCooldown = 0;
-            }
         }
 
         if (currentState == State.Liderando)
         {
             if (agent.enabled) agent.enabled = false;
             if (selectionIndicator != null) selectionIndicator.SetActive(true);
+
+            // DISPARO MANUAL (Click izquierdo)
+            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            {
+                Disparar();
+                nextFireTime = Time.time + fireRate;
+            }
             return;
         }
         else
@@ -82,10 +91,10 @@ public class FSMController : MonoBehaviour
         switch (currentState)
         {
             case State.IrAObjetivo:
-                MoverA(destinoPos); // Usamos la posición guardada
+                MoverA(destinoPos);
                 if (Vector2.Distance((Vector2)transform.position, (Vector2)destinoPos) < 0.6f)
                 {
-                    tieneOrdenManual = false; // Marcamos como completada
+                    tieneOrdenManual = false;
                     waitTimer = waitDuration;
                     agent.StopAgent();
                 }
@@ -98,11 +107,16 @@ public class FSMController : MonoBehaviour
 
             case State.Atacar:
                 agent.StopAgent();
-
                 if (objetivo != null)
                 {
-                    LookAtTarget2D(objetivo); // Llamada al método
-                    Debug.DrawLine(transform.position, objetivo.position, Color.white);
+                    LookAtTarget2D(objetivo);
+
+                    // DISPARO AUTOMÁTICO
+                    if (Time.time >= nextFireTime)
+                    {
+                        Disparar();
+                        nextFireTime = Time.time + fireRate;
+                    }
                 }
                 break;
 
@@ -155,5 +169,8 @@ public class FSMController : MonoBehaviour
             agent.GoTo(pos);
         }
     }
+
+
+    public void Disparar() => Dispara.Disparar();
 
 }

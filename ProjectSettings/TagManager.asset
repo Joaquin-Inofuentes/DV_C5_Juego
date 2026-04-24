@@ -9,6 +9,8 @@ TagManager:
   - Jugadores
   - Proyectil
   - Enemy
+  - Boid
+  - Bala
   layers:
   - Default
   - TransparentFX

@@ -14,10 +14,6 @@ public class EnemyDetector : MonoBehaviour
     {
         if (fsm == null) fsm = GetComponent<FSMController>();
 
-        // Crear el trigger de detección automáticamente
-        CircleCollider2D col = gameObject.AddComponent<CircleCollider2D>();
-        col.isTrigger = true;
-        col.radius = detectionRadius;
     }
 
     void Update()
