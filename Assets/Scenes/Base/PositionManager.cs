@@ -29,8 +29,9 @@ public class PositionManager : MonoBehaviour
         foreach (var s in todosLosSoldados) s.slotAsignado = null;
 
         // 2. Filtrar solo los que están en estado de formación
+        // Todos los que no sean líderes deben tener un slot reservado, aunque estén atacando
         List<FSMController> seguidores = todosLosSoldados
-            .Where(s => s.currentState == FSMController.State.IrAFormacion)
+            .Where(s => s.currentState != FSMController.State.Liderando)
             .ToList();
 
         List<Transform> puntosDisponibles = new List<Transform>(puntosDeFormacion);

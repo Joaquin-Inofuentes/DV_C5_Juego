@@ -95,12 +95,18 @@ public class EnemyDetector : MonoBehaviour
 ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\FSMController.cs 
 ============================== 
 using UnityEngine;
-using UnityEngine.AI;
 
 public class FSMController : MonoBehaviour
 {
     public enum State { IrAFormacion, Atacar, IrAAtacar, IrAObjetivo, Liderando, Esperando, Idle }
     public State currentState = State.Idle;
+
+
+
+    [Header("Órdenes Manuales")]
+    public Vector3 destinoPos; // Guardamos la posición, no el objeto
+    public bool tieneOrdenManual = false;
+
 
     public IA_P2_AgentIA agent;
     public Transform destino;
@@ -108,8 +114,9 @@ public class FSMController : MonoBehaviour
     public Transform slotAsignado;
     public GameObject selectionIndicator;
 
-    private float waitTimer = 0f;
-    public float waitDuration = 5f; // 5 segundos de espera
+    [Header("Tiempos")]
+    public float waitTimer = 0f;
+    public float waitDuration = 4f; // Tiempo que espera antes de volver
 
     void Update()
     {
@@ -131,8 +138,10 @@ public class FSMController : MonoBehaviour
 
     void DetermineState()
     {
-        // PRIORIDAD 1: Ir a objetivo manual
-        if (destino != null)
+        if (currentState == State.Liderando) return;
+
+        // PRIORIDAD 1: Ir a objetivo manual (Vector3)
+        if (tieneOrdenManual)
         {
             currentState = State.IrAObjetivo;
         }
@@ -141,15 +150,14 @@ public class FSMController : MonoBehaviour
         {
             currentState = State.Esperando;
         }
-        // PRIORIDAD 3: Atacar si hay enemigo
+        // PRIORIDAD 4: Atacar si hay enemigo
         else if (objetivo != null)
         {
-            // Usamos Vector2 para ignorar profundidad Z
             float dist = Vector2.Distance((Vector2)transform.position, (Vector2)objetivo.position);
             currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
         }
-        // PRIORIDAD 4: Formación
-        else
+        // PRIORIDAD 4: Ir a formacion
+        else if (slotAsignado != null)
         {
             currentState = State.IrAFormacion;
         }
@@ -160,11 +168,12 @@ public class FSMController : MonoBehaviour
         switch (currentState)
         {
             case State.IrAObjetivo:
-                MoverA(destino.position);
-                if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+                MoverA(destinoPos); // Usamos la posición guardada
+                if (Vector2.Distance((Vector2)transform.position, (Vector2)destinoPos) < 0.6f)
                 {
-                    destino = null;
-                    waitTimer = waitDuration; // Iniciar cuenta regresiva de 5 seg
+                    tieneOrdenManual = false; // Marcamos como completada
+                    waitTimer = waitDuration;
+                    agent.StopAgent();
                 }
                 break;
 
@@ -175,13 +184,16 @@ public class FSMController : MonoBehaviour
 
             case State.Atacar:
                 agent.StopAgent();
-                // DrawLine Blanca al atacar
+
                 if (objetivo != null)
+                {
+                    LookAtTarget2D(objetivo); // Llamada al método
                     Debug.DrawLine(transform.position, objetivo.position, Color.white);
+                }
                 break;
 
             case State.IrAAtacar:
-                MoverA(objetivo.position);
+                if (objetivo != null) MoverA(objetivo.position);
                 break;
 
             case State.IrAFormacion:
@@ -190,21 +202,46 @@ public class FSMController : MonoBehaviour
         }
     }
 
+    void LookAtTarget2D(Transform target)
+    {
+        if (target == null) return;
+
+        Vector3 diferencia = target.position - transform.position;
+        // Atan2 devuelve el ángulo en radianes, lo pasamos a grados
+
+        float anguloZ = Mathf.Atan2(diferencia.y, diferencia.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, anguloZ);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+    }
+
+    // Reemplaza el SetOrder anterior por este que recibe Vector3
+    public void SetOrder(Vector3 newPos)
+    {
+        this.destinoPos = newPos;
+        this.tieneOrdenManual = true;
+        this.objetivo = null;
+        this.waitTimer = 0;
+    }
+
+    public void RegresarAFormacion()
+    {
+        if (currentState == State.Liderando) return;
+
+        tieneOrdenManual = false;
+        waitTimer = 0;
+        objetivo = null;
+        currentState = State.IrAFormacion;
+        Debug.Log(gameObject.name + " regresando a formación.");
+    }
+
     void MoverA(Vector3 pos)
     {
         if (agent.enabled)
         {
-            //agent.isStopped = false;
             agent.GoTo(pos);
         }
     }
 
-    public void SetOrder(Transform newDest)
-    {
-        this.destino = newDest;
-        this.objetivo = null;
-        this.waitTimer = 0; // Resetear espera si recibe nueva orden
-    }
 } 
 ============================== 
 ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\GlobalData.cs 
@@ -295,8 +332,19 @@ using System.Linq;
 
 public class PositionManager : MonoBehaviour
 {
+    public static PositionManager Instance; // Singleton para acceso rápido
+
     public List<Transform> puntosDeFormacion = new List<Transform>();
     public List<FSMController> todosLosSoldados = new List<FSMController>();
+
+    void OnEnable()
+    {
+        Instance = this;
+    }
+    public void Awake()
+    {
+        OnEnable();
+    }
 
     void Update()
     {
@@ -305,19 +353,16 @@ public class PositionManager : MonoBehaviour
 
     void OrganizarFormacion()
     {
-        // 1. Limpiar TODOS los slots asignados antes de empezar
+        // 1. Limpiar slots asignados
         foreach (var s in todosLosSoldados) s.slotAsignado = null;
 
-        // 2. Filtrar solo los que REALMENTE necesitan formación ahora mismo
-        // (No líderes, no los que van a un objetivo manual, no los que están esperando)
+        // 2. Filtrar solo los que están en estado de formación
         List<FSMController> seguidores = todosLosSoldados
             .Where(s => s.currentState == FSMController.State.IrAFormacion)
             .ToList();
 
-        // 3. Lista de puntos que nadie ha tomado todavía
         List<Transform> puntosDisponibles = new List<Transform>(puntosDeFormacion);
 
-        // 4. Asignación estricta
         foreach (var soldado in seguidores)
         {
             Transform mejorPunto = null;
@@ -337,7 +382,6 @@ public class PositionManager : MonoBehaviour
             if (mejorPunto != null)
             {
                 soldado.slotAsignado = mejorPunto;
-                // ELIMINAR el punto de la lista para que NADIE más pueda elegirlo este frame
                 puntosDisponibles.Remove(mejorPunto);
             }
         }
@@ -359,14 +403,15 @@ public class UnitCommander : MonoBehaviour
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
-            targetMarker.position = mousePos;
+
+            if (targetMarker != null) targetMarker.position = mousePos;
 
             FSMController soldadoMasCercano = null;
             float distanciaMinima = Mathf.Infinity;
 
             foreach (var unit in units)
             {
-                // Solo soldados que no sean el líder actual pueden recibir órdenes manuales
+                // CORRECCIÓN: Accedemos al enum mediante FSMController.State
                 if (unit.currentState == FSMController.State.Liderando) continue;
 
                 float dist = Vector2.Distance(unit.transform.position, mousePos);
@@ -379,7 +424,16 @@ public class UnitCommander : MonoBehaviour
 
             if (soldadoMasCercano != null)
             {
-                soldadoMasCercano.SetOrder(targetMarker);
+                // PASAMOS LA POSICIÓN (Vector3)
+                soldadoMasCercano.SetOrder(mousePos);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            foreach (var unit in units)
+            {
+                unit.RegresarAFormacion();
             }
         }
     }

@@ -5,7 +5,7 @@ public class FSMController : MonoBehaviour
     public enum State { IrAFormacion, Atacar, IrAAtacar, IrAObjetivo, Liderando, Esperando, Idle }
     public State currentState = State.Idle;
 
-
+    public float returnCooldown;
 
     [Header("Órdenes Manuales")]
     public Vector3 destinoPos; // Guardamos la posición, no el objeto
@@ -24,6 +24,16 @@ public class FSMController : MonoBehaviour
 
     void Update()
     {
+        if (returnCooldown > 0)
+        {
+            returnCooldown -= Time.deltaTime;
+            if(currentState == State.IrAObjetivo
+                || currentState == State.Esperando)
+            {
+                returnCooldown = 0;
+            }
+        }
+
         if (currentState == State.Liderando)
         {
             if (agent.enabled) agent.enabled = false;
@@ -44,22 +54,23 @@ public class FSMController : MonoBehaviour
     {
         if (currentState == State.Liderando) return;
 
-        // PRIORIDAD 1: Ir a objetivo manual (Vector3)
+        // PRIORIDAD 1: Orden manual
         if (tieneOrdenManual)
         {
             currentState = State.IrAObjetivo;
         }
-        // PRIORIDAD 2: Esperar en el sitio tras llegar
+        // PRIORIDAD 2: Atacar (Solo si no hay cooldown de "Z")
+        else if (objetivo != null && returnCooldown <= 0)
+        {
+            float dist = Vector2.Distance(transform.position, objetivo.position);
+            currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
+        }
+        // PRIORIDAD 3: Espera temporal tras llegar a un destino manual
         else if (waitTimer > 0)
         {
             currentState = State.Esperando;
         }
-        // PRIORIDAD 3: Atacar si hay enemigo
-        else if (objetivo != null)
-        {
-            float dist = Vector2.Distance((Vector2)transform.position, (Vector2)objetivo.position);
-            currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
-        }
+        // PRIORIDAD 4: Por defecto, siempre intentar volver a la formación
         else
         {
             currentState = State.IrAFormacion;
@@ -87,8 +98,12 @@ public class FSMController : MonoBehaviour
 
             case State.Atacar:
                 agent.StopAgent();
+
                 if (objetivo != null)
+                {
+                    LookAtTarget2D(objetivo); // Llamada al método
                     Debug.DrawLine(transform.position, objetivo.position, Color.white);
+                }
                 break;
 
             case State.IrAAtacar:
@@ -99,6 +114,18 @@ public class FSMController : MonoBehaviour
                 if (slotAsignado != null) MoverA(slotAsignado.position);
                 break;
         }
+    }
+
+    void LookAtTarget2D(Transform target)
+    {
+        if (target == null) return;
+
+        Vector3 diferencia = target.position - transform.position;
+        // Atan2 devuelve el ángulo en radianes, lo pasamos a grados
+
+        float anguloZ = Mathf.Atan2(diferencia.y, diferencia.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, anguloZ);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
 
     // Reemplaza el SetOrder anterior por este que recibe Vector3
@@ -117,8 +144,8 @@ public class FSMController : MonoBehaviour
         tieneOrdenManual = false;
         waitTimer = 0;
         objetivo = null;
+        returnCooldown = 2f; // Bloqueo de 2 segundos
         currentState = State.IrAFormacion;
-        Debug.Log(gameObject.name + " regresando a formación.");
     }
 
     void MoverA(Vector3 pos)
