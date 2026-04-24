@@ -1,0 +1,386 @@
+==== INICIO CONCATENACION ==== 
+Carpeta base: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base 
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\EnemyDetector.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+
+public class EnemyDetector : MonoBehaviour
+{
+    public float detectionRadius = 6f;
+    public LayerMask enemyLayer;    // Capa de los enemigos
+    public LayerMask obstacleLayer; // Capa de paredes/coberturas
+
+    public List<Transform> enemiesInRange = new List<Transform>();
+    public FSMController fsm; // Referencia al FSM
+
+    void Start()
+    {
+        if (fsm == null) fsm = GetComponent<FSMController>();
+
+        // Crear el trigger de detección automáticamente
+        CircleCollider2D col = gameObject.AddComponent<CircleCollider2D>();
+        col.isTrigger = true;
+        col.radius = detectionRadius;
+    }
+
+    void Update()
+    {
+        LimpiarLista();
+        FiltrarYEnviarAlFSM();
+    }
+
+    void LimpiarLista()
+    {
+        // Elimina de la lista si el enemigo fue destruido
+        enemiesInRange.RemoveAll(e => e == null);
+    }
+
+    void FiltrarYEnviarAlFSM()
+    {
+        Transform mejorObjetivo = null;
+        float distanciaCercana = Mathf.Infinity;
+
+        foreach (Transform enemigo in enemiesInRange)
+        {
+            // Calcular dirección y distancia
+            Vector2 direccion = enemigo.position - transform.position;
+            float distancia = direccion.magnitude;
+
+            // RAYCAST: ¿Hay una pared en medio?
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direccion.normalized, detectionRadius, enemyLayer | obstacleLayer);
+
+            // Si el Raycast golpea algo y ese algo está en la capa de enemigos...
+            if (hit.collider != null && ((1 << hit.collider.gameObject.layer) & enemyLayer) != 0)
+            {
+                // Dibujar línea de visión en el editor (Verde = Visible)
+                Debug.DrawLine(transform.position, enemigo.position, Color.green);
+
+                if (distancia < distanciaCercana)
+                {
+                    distanciaCercana = distancia;
+                    mejorObjetivo = enemigo;
+                }
+            }
+            else
+            {
+                // Línea roja = Hay un obstáculo en medio
+                Debug.DrawLine(transform.position, enemigo.position, Color.red);
+            }
+        }
+
+        // Enviamos el enemigo más cercano y visible al FSM
+        fsm.objetivo = mejorObjetivo;
+    }
+
+    // Detectar cuando entran en el círculo
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        {
+            if (!enemiesInRange.Contains(other.transform))
+                enemiesInRange.Add(other.transform);
+        }
+    }
+
+    // Detectar cuando salen del círculo
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        enemiesInRange.Remove(other.transform);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\FSMController.cs 
+============================== 
+using UnityEngine;
+using UnityEngine.AI;
+
+public class FSMController : MonoBehaviour
+{
+    public enum State { IrAFormacion, Atacar, IrAAtacar, IrAObjetivo, Liderando, Esperando, Idle }
+    public State currentState = State.Idle;
+
+    public IA_P2_AgentIA agent;
+    public Transform destino;
+    public Transform objetivo;
+    public Transform slotAsignado;
+    public GameObject selectionIndicator;
+
+    private float waitTimer = 0f;
+    public float waitDuration = 5f; // 5 segundos de espera
+
+    void Update()
+    {
+        if (currentState == State.Liderando)
+        {
+            if (agent.enabled) agent.enabled = false;
+            if (selectionIndicator != null) selectionIndicator.SetActive(true);
+            return;
+        }
+        else
+        {
+            if (!agent.enabled) agent.enabled = true;
+            if (selectionIndicator != null) selectionIndicator.SetActive(false);
+        }
+
+        DetermineState();
+        ExecuteState();
+    }
+
+    void DetermineState()
+    {
+        // PRIORIDAD 1: Ir a objetivo manual
+        if (destino != null)
+        {
+            currentState = State.IrAObjetivo;
+        }
+        // PRIORIDAD 2: Esperar en el sitio tras llegar
+        else if (waitTimer > 0)
+        {
+            currentState = State.Esperando;
+        }
+        // PRIORIDAD 3: Atacar si hay enemigo
+        else if (objetivo != null)
+        {
+            // Usamos Vector2 para ignorar profundidad Z
+            float dist = Vector2.Distance((Vector2)transform.position, (Vector2)objetivo.position);
+            currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
+        }
+        // PRIORIDAD 4: Formación
+        else
+        {
+            currentState = State.IrAFormacion;
+        }
+    }
+
+    void ExecuteState()
+    {
+        switch (currentState)
+        {
+            case State.IrAObjetivo:
+                MoverA(destino.position);
+                if (Vector2.Distance(transform.position, destino.position) < 0.5f)
+                {
+                    destino = null;
+                    waitTimer = waitDuration; // Iniciar cuenta regresiva de 5 seg
+                }
+                break;
+
+            case State.Esperando:
+                agent.StopAgent();
+                waitTimer -= Time.deltaTime;
+                break;
+
+            case State.Atacar:
+                agent.StopAgent();
+                // DrawLine Blanca al atacar
+                if (objetivo != null)
+                    Debug.DrawLine(transform.position, objetivo.position, Color.white);
+                break;
+
+            case State.IrAAtacar:
+                MoverA(objetivo.position);
+                break;
+
+            case State.IrAFormacion:
+                if (slotAsignado != null) MoverA(slotAsignado.position);
+                break;
+        }
+    }
+
+    void MoverA(Vector3 pos)
+    {
+        if (agent.enabled)
+        {
+            //agent.isStopped = false;
+            agent.GoTo(pos);
+        }
+    }
+
+    public void SetOrder(Transform newDest)
+    {
+        this.destino = newDest;
+        this.objetivo = null;
+        this.waitTimer = 0; // Resetear espera si recibe nueva orden
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\GlobalData.cs 
+============================== 
+using UnityEngine;
+
+public class GlobalData : MonoBehaviour
+{
+    public static FSMController liderActual;
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\LeaderManager.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+
+public class LeaderManager : MonoBehaviour
+{
+    public List<FSMController> unidades;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha4)) CambiarLider(0);
+        if (Input.GetKeyDown(KeyCode.Alpha5)) CambiarLider(1);
+        if (Input.GetKeyDown(KeyCode.Alpha6)) CambiarLider(2);
+
+        // El PositionManager sigue al líder actual
+        if (GlobalData.liderActual != null)
+        {
+            transform.position = GlobalData.liderActual.transform.position;
+            // Opcional: transform.rotation = GlobalData.liderActual.transform.rotation;
+        }
+    }
+
+    void CambiarLider(int index)
+    {
+        if (index >= unidades.Count) return;
+
+        for (int i = 0; i < unidades.Count; i++)
+        {
+            if (i == index)
+            {
+                unidades[i].currentState = FSMController.State.Liderando;
+                unidades[i].GetComponent<PlayerController2D>().enabled = true;
+                GlobalData.liderActual = unidades[i];
+            }
+            else
+            {
+                // Si antes era líder, lo devolvemos a formación
+                if (unidades[i].currentState == FSMController.State.Liderando)
+                {
+                    unidades[i].currentState = FSMController.State.IrAFormacion;
+                }
+                unidades[i].GetComponent<PlayerController2D>().enabled = false;
+            }
+        }
+        Debug.Log("<color=cyan>Líder cambiado a: </color>" + unidades[index].name);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\PlayerController2D.cs 
+============================== 
+using UnityEngine;
+
+public class PlayerController2D : MonoBehaviour
+{
+    public float speed = 5f;
+
+    void Update()
+    {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+        transform.position += new Vector3(moveX, moveY, 0).normalized * speed * Time.deltaTime;
+
+        // Rotar hacia el mouse
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 dir = mousePos - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\PositionManager.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
+public class PositionManager : MonoBehaviour
+{
+    public List<Transform> puntosDeFormacion = new List<Transform>();
+    public List<FSMController> todosLosSoldados = new List<FSMController>();
+
+    void Update()
+    {
+        OrganizarFormacion();
+    }
+
+    void OrganizarFormacion()
+    {
+        // 1. Limpiar TODOS los slots asignados antes de empezar
+        foreach (var s in todosLosSoldados) s.slotAsignado = null;
+
+        // 2. Filtrar solo los que REALMENTE necesitan formación ahora mismo
+        // (No líderes, no los que van a un objetivo manual, no los que están esperando)
+        List<FSMController> seguidores = todosLosSoldados
+            .Where(s => s.currentState == FSMController.State.IrAFormacion)
+            .ToList();
+
+        // 3. Lista de puntos que nadie ha tomado todavía
+        List<Transform> puntosDisponibles = new List<Transform>(puntosDeFormacion);
+
+        // 4. Asignación estricta
+        foreach (var soldado in seguidores)
+        {
+            Transform mejorPunto = null;
+            float minDist = Mathf.Infinity;
+
+            foreach (var punto in puntosDisponibles)
+            {
+                if (punto == null) continue;
+                float d = Vector2.Distance(soldado.transform.position, punto.position);
+                if (d < minDist)
+                {
+                    minDist = d;
+                    mejorPunto = punto;
+                }
+            }
+
+            if (mejorPunto != null)
+            {
+                soldado.slotAsignado = mejorPunto;
+                // ELIMINAR el punto de la lista para que NADIE más pueda elegirlo este frame
+                puntosDisponibles.Remove(mejorPunto);
+            }
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\UnitCommander.cs 
+============================== 
+using UnityEngine;
+
+public class UnitCommander : MonoBehaviour
+{
+    public FSMController[] units;
+    public Transform targetMarker;
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1)) // Click derecho
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+            targetMarker.position = mousePos;
+
+            FSMController soldadoMasCercano = null;
+            float distanciaMinima = Mathf.Infinity;
+
+            foreach (var unit in units)
+            {
+                // Solo soldados que no sean el líder actual pueden recibir órdenes manuales
+                if (unit.currentState == FSMController.State.Liderando) continue;
+
+                float dist = Vector2.Distance(unit.transform.position, mousePos);
+                if (dist < distanciaMinima)
+                {
+                    distanciaMinima = dist;
+                    soldadoMasCercano = unit;
+                }
+            }
+
+            if (soldadoMasCercano != null)
+            {
+                soldadoMasCercano.SetOrder(targetMarker);
+            }
+        }
+    }
+} 

@@ -1,0 +1,2325 @@
+==== INICIO CONCATENACION ==== 
+Carpeta base: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts 
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\Final\IA_F_ChangeMode.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using CustomInspector;
+
+public class IA_F_ChangeMode : MonoBehaviour
+{
+    [Button(nameof(OrdenarAtaque))]
+    public IA_P2_AgentIA agentIA;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W)
+            || Input.GetKeyDown(KeyCode.A)
+            || Input.GetKeyDown(KeyCode.S)
+            || Input.GetKeyDown(KeyCode.D)
+            )
+        {
+            CambiarDeModo(true);
+        }
+
+        // Detecta click izquierdo del mouse
+        if (Input.GetMouseButtonDown(0))
+        {
+            CambiarDeModo(false);
+            // Obtiene posicion
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                // Mueve el agente a la posicion del click
+                agentIA.GoTo(hit.point);
+                agentIA.LookAtTarget(hit.point);
+            }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            CambiarDeModo(false);
+            // Obtiene posicion
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                // Mueve el agente a la posicion del click
+                agentIA.LookAtTarget(hit.point);
+            }
+        }
+
+
+
+
+    }
+
+
+    public void CambiarDeModo()
+    {
+        if (agentIA == null )
+        {
+            Debug.LogWarning("AgentIA o SoldadoJugador no asignados.");
+            return;
+        }
+
+        if (agentIA.enabled)
+        {
+            agentIA.enabled = false;
+            Debug.Log("Modo Jugador activado.");
+        }
+        else
+        {
+            agentIA.enabled = true;
+            Debug.Log("Modo IA activado.");
+        }
+    }
+    public void CambiarDeModo(bool ModoIA)
+    {
+        if (agentIA == null)
+        {
+            Debug.LogWarning("AgentIA o SoldadoJugador no asignados.");
+            return;
+        }
+
+        if (ModoIA)
+        {
+            agentIA.enabled = false;
+            //Debug.Log("Modo Jugador activado.");
+        }
+        else
+        {
+            agentIA.enabled = true;
+            //Debug.Log("Modo IA activado.");
+        }
+    }
+
+
+
+
+    public GameObject objetivoEnemigo;
+
+    [ContextMenu("Forzar Ataque Global")]
+    public void OrdenarAtaque()
+    {
+        // Esto activar· a TODOS los agentes que tengan el script IA_P2_FSM
+        IA_P2_BusEvent_Manager.NotificarEncontrado(objetivoEnemigo,"Jugador");
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\Final\IA_F_ControllerSeguidor.cs 
+============================== 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IA_F_ControllerSeguidor : MonoBehaviour
+{
+    public GameObject Posicion;
+    public GameObject target; // El objetivo a seguir
+    public IA_P2_AgentIA agent; // Referencia al agente para moverlo
+    public List<GameObject> Enemigos; // Lista de enemigos para detectar
+    public LayerMask obstacleLayer; // Capa de obst·culos para el raycast
+    public IA_F_EnemyCercanos Cercanos;
+    void Update()
+    {
+        target = ObtenerEnemigo();
+
+        if (Posicion == null) return;
+        if (target != null )
+        {
+            agent.GoTo(target.transform.position);
+        }
+        else
+        {
+            if (Posicion != null)
+            {
+                agent.GoTo(Posicion.transform.position);
+            }
+        }
+
+    }
+
+    private GameObject ObtenerEnemigo()
+    {
+        Enemigos = Cercanos.Colisionados;
+
+        List<GameObject> enemigosVisibles = new List<GameObject>();
+        List<int> IndicesAEliminar = new List<int>();
+        foreach (var enemigo in Enemigos)
+        {
+            if (enemigo == null)
+            {
+                IndicesAEliminar.Add(Enemigos.IndexOf(enemigo)); // Guardamos el Ìndice del enemigo destruido para eliminarlo despuÈs
+                continue; // Si el enemigo ha sido destruido, lo saltamos
+            }
+            Transform PosibleObjetivo = enemigo.transform;
+            if (EsVisible(PosibleObjetivo))
+            {
+                enemigosVisibles.Add(enemigo);
+                Debug.DrawLine(enemigo.transform.position, agent.transform.position,Color.blue);
+            }
+        }
+        // Eliminamos los enemigos destruidos de la lista despuÈs de iterar para evitar problemas de modificaciÛn durante la iteraciÛn
+        foreach (var indice in IndicesAEliminar)
+        {
+            Enemigos.RemoveAt(indice);
+        }
+        // Ordenamos de mas lejos a mas cercano a este
+        Vector3 PosicionPropia = agent.transform.position;
+        enemigosVisibles.Sort((a, b) =>
+            Vector3.Distance(PosicionPropia, a.transform.position).CompareTo(
+                Vector3.Distance(PosicionPropia, b.transform.position)));
+        // Seleccionamos el mas cercano
+        GameObject enemigoMasCercano = Enemigos.Count > 0 ? Enemigos[0] : null;
+
+        return enemigoMasCercano;
+    }
+
+    public bool EsVisible(Transform PosibleEnemigo)
+    {
+        Transform PosicionAgente = agent.transform;
+
+        // DirecciÛn desde el agente hacia el posible enemigo
+        Vector3 direccion = PosibleEnemigo.position - PosicionAgente.position;
+
+        // Distancia al posible enemigo
+        float distancia = Vector3.Distance(PosicionAgente.position, PosibleEnemigo.position);
+
+        // Realizamos un Raycast para verificar si hay obst·culos entre el agente y el posible enemigo
+        if (!Physics.Raycast(PosicionAgente.position, direccion.normalized, distancia, obstacleLayer))
+        {
+            // Si no hay colisiÛn con un obst·culo, el enemigo es visible
+            return true;
+        }
+
+        // Si hay colisiÛn con un obst·culo, el enemigo no es visible
+        return false;
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\Final\IA_F_EnemyCercanos.cs 
+============================== 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IA_F_EnemyCercanos : MonoBehaviour
+{
+    public List<GameObject> Colisionados;
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Colisionados.Add(collision.gameObject);
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        Colisionados.Remove(collision.gameObject);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\Final\IA_F_PathFanding_Theta.cs 
+============================== 
+Ôªøusing System.Collections.Generic;
+using UnityEngine;
+
+public static class IA_F_PathFinding_Theta
+{
+    public static List<Vector3> OptimizarConTheta(List<Vector3> recorridoAStar, LayerMask obstacleLayer)
+    {
+        // ================================
+        // 1) Validaciones b√°sicas
+        // ================================
+
+        if (recorridoAStar == null)
+            return new List<Vector3>();
+
+        if (recorridoAStar.Count == 0)
+            return new List<Vector3>();
+
+        if (recorridoAStar.Count == 1)
+            return new List<Vector3>(recorridoAStar);
+
+        // ================================
+        // 2) Crear lista resultado
+        // ================================
+
+        List<Vector3> resultado = new List<Vector3>();
+
+        // Siempre agregamos el primer punto
+        resultado.Add(recorridoAStar[0]);
+
+        // ================================
+        // 3) Si veo directo del primero al √∫ltimo ‚Üí listo
+        // ================================
+
+        Vector3 inicio = recorridoAStar[0];
+        Vector3 destino = recorridoAStar[recorridoAStar.Count - 1];
+
+        if (IA_P2_LineOfSight3D.Check(inicio, destino, obstacleLayer))
+        {
+            resultado.Add(destino);
+            return resultado;
+        }
+
+        // ================================
+        // 4) Algoritmo Theta (suavizado)
+        // ================================
+
+        // anchorIndex = √∫ltimo punto confirmado
+        int anchorIndex = 0;
+
+        // Mientras no lleguemos al final
+        while (anchorIndex < recorridoAStar.Count - 1)
+        {
+            // Intentamos ir lo m√°s lejos posible
+            int indiceMasLejanoVisible = anchorIndex + 1;
+
+            // Probamos cada punto m√°s adelante
+            for (int i = anchorIndex + 2; i < recorridoAStar.Count; i++)
+            {
+                Vector3 desde = recorridoAStar[anchorIndex];
+                Vector3 hacia = recorridoAStar[i];
+
+                bool hayVisionDirecta = IA_P2_LineOfSight3D.Check(desde, hacia, obstacleLayer);
+
+                if (hayVisionDirecta)
+                {
+                    // Podemos saltar m√°s lejos
+                    indiceMasLejanoVisible = i;
+                }
+                else
+                {
+                    // Si ya no veo, corto ac√°
+                    break;
+                }
+            }
+
+            // Agregamos el punto m√°s lejano alcanzable
+            resultado.Add(recorridoAStar[indiceMasLejanoVisible]);
+
+            // Movemos el anchor
+            anchorIndex = indiceMasLejanoVisible;
+        }
+
+        return resultado;
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_BusEvent_Manager.cs 
+============================== 
+using CustomInspector;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IA_P2_BusEvent_Manager : MonoBehaviour
+{
+    [Button(nameof(BuscarAgentesEnEscena))]
+    public string botonBuscarAgentes;
+
+    public static List<IA_P2_FSM> agentes = new List<IA_P2_FSM>();
+
+    public static Action<GameObject> OnEnemyFound;
+
+    public static Vector3 ultimaPosicionVisto;
+    public static GameObject ultimoEnemigoVisto;
+
+    private void OnEnable()
+    {
+        BuscarAgentesEnEscena();
+    }
+
+    public static void BuscarAgentesEnEscena()
+    {
+        agentes.Clear();
+        IA_P2_FSM[] encontrados = FindObjectsOfType<IA_P2_FSM>();
+
+        for (int i = 0; i < encontrados.Length; i++)
+            agentes.Add(encontrados[i]);
+    }
+
+    public static void NotificarEncontrado(GameObject enemigo,string NombreDelOrigen)
+    {
+        ultimoEnemigoVisto = enemigo;
+        ultimaPosicionVisto = enemigo.transform.position;
+        OnEnemyFound?.Invoke(enemigo);
+        Debug.Log("Se notifico q se encontro al enemigo");
+    }
+
+
+    void Update()
+    {
+
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_FSM.cs 
+============================== 
+using CustomInspector;
+using System.Collections.Generic;
+using UnityEngine;
+
+// (El Enum sigue fuera de la clase, lo cual es correcto)
+public enum AgentState
+{
+    Patrolling,
+    Chasing,
+    Searching,
+    ReturningToPatrol
+}
+
+public class IA_P2_FSM : MonoBehaviour
+{
+    [Button(nameof(ToggleState))]
+    [Button(nameof(DibujarRutaPatrulla))]
+    public IA_P2_AgentIA agent; // El "movedor" (ahora tambi√©n los "ojos")
+
+    [Header("Datos de Estados")]
+    public List<Transform> patrolWaypoints;
+    public GameObject target;
+    public Vector3 lastKnownPosition;
+
+    [Header("Configuraci√≥n FSM")]
+    [Tooltip("Estado inicial. Muestra el estado actual y se puede cambiar en Play Mode para forzar un estado.")]
+    public AgentState currentStateEnum = AgentState.Patrolling;
+
+    private AgentState _previousStateTracker;
+
+    // Referencias a las instancias de estado (esto est√° bien)
+    public IA_P2_INT_gentState _patrolState;
+    public IA_P2_INT_gentState _chaseState;
+    public IA_P2_INT_gentState _searchingState;
+    public IA_P2_INT_gentState _returningState;
+
+    public IA_P2_INT_gentState _currentState;
+
+    // Escucha llamados de perseguir enemigo
+    public IA_P2_FOV NotificacionDeEnemigoVisible;
+
+    void OnEnable()
+    {
+        Debug.Log("Empezo a inicializarse");
+        // Instanciamos TODOS los estados
+        _patrolState = new IA_P2_ST_PatrolState();
+        _chaseState = new IA_P2_ST_ChaseState();
+        _searchingState = new IA_P2_ST_SearchingState();
+        _returningState = new IA_P2_ST_ReturningToPatrolState();
+
+        if (target == null) currentStateEnum = AgentState.Patrolling;
+
+        switch (currentStateEnum) // <-- Lee el valor del Inspector
+        {
+            case AgentState.Patrolling:
+                _currentState = _patrolState;
+                break;
+            case AgentState.Chasing:
+                _currentState = _chaseState;
+                break;
+            default:
+                _currentState = _patrolState;
+                break;
+        }
+
+        // [MODIFICADO] Sincronizamos el tracker con el estado inicial
+        _previousStateTracker = currentStateEnum;
+
+        // Entrar al estado inicial
+        if (_currentState != null)
+        {
+            _currentState.Enter(this);
+        }
+        Debug.Log("Se inicializo correctamente");
+        NotificacionDeEnemigoVisible.OnTargetDetected += PerseguirEnemigo;
+        IA_P2_BusEvent_Manager.OnEnemyFound += PerseguirEnemigo;
+        NotificacionDeEnemigoVisible.OnTargetLost += LoPerdiDeVision;
+    }
+
+    public void LoPerdiDeVision(GameObject objetivoPerdido)
+    {
+        // Solo entramos en modo b√∫squeda si el objeto que se perdi√≥ 
+        // es EXACTAMENTE el que est√°bamos persiguiendo.
+        if (target != null && objetivoPerdido == target)
+        {
+            // Guardamos la √∫ltima posici√≥n antes de pasar a Searching
+            lastKnownPosition = target.transform.position;
+            TransitionTo(AgentState.Searching);
+        }
+    }
+
+    public void PerseguirEnemigo(GameObject enemigo)
+    {
+        if (enemigo == null) return;
+
+        // Seguridad: No perseguirse a s√≠ mismo
+        if (enemigo == this.gameObject) return;
+
+        target = enemigo;
+        lastKnownPosition = enemigo.transform.position;
+
+        if (currentStateEnum != AgentState.Chasing)
+        {
+            TransitionTo(AgentState.Chasing);
+        }
+    }
+
+    void Update()
+    {
+        // [MODIFICADO] Comprobaci√≥n de "Controlador" (Debug)
+        // ¬øEl usuario cambi√≥ el enum en el Inspector?
+        if (currentStateEnum != _previousStateTracker)
+        {
+            // S√≠, el usuario forz√≥ un cambio.
+            Debug.LogWarning("CAMBIO MANUAL: Forzando transici√≥n a " + currentStateEnum.ToString());
+            TransitionTo(currentStateEnum);
+        }
+
+        // Ejecuci√≥n normal del estado
+        if (_currentState != null)
+        {
+            _currentState.Execute(this);
+        }
+        else
+        {
+            Debug.LogWarning("IA_P2_FSM: No hay estado activo");
+        }
+
+        if (agent.currentPath == null || agent.currentPath.Count == 0)
+        {
+            //TransitionTo(AgentState.ReturningToPatrol);
+            //Debug.Log("Intento de vovler a patrolling" + gameObject.name, gameObject);
+        }
+    }
+
+    // [M√âTODO MODIFICADO]
+    public void TransitionTo(AgentState stateKey)
+    {
+        IA_P2_INT_gentState newState = null;
+
+        switch (stateKey)
+        {
+            case AgentState.Patrolling:
+                newState = _patrolState;
+                break;
+            case AgentState.Chasing:
+                newState = _chaseState;
+                break;
+            case AgentState.Searching:
+                newState = _searchingState;
+                break;
+            case AgentState.ReturningToPatrol:
+                newState = _returningState;
+                break;
+        }
+
+        if (newState == null || newState == _currentState)
+        {
+            // Si el estado ya es el correcto, solo nos aseguramos
+            // de que los enums de debug est√©n sincronizados
+            currentStateEnum = stateKey;
+            _previousStateTracker = stateKey;
+            return;
+        }
+
+        if (_currentState != null)
+        {
+            _currentState.Exit(this);
+        }
+
+        //Debug.Log("IA_P2_FSM: Cambiando a " + stateKey.ToString());
+
+        if (target != null && agent != null)
+        {
+            //ebug.DrawLine(agent.transform.position, target.transform.position, Color.blue, 3.0f);
+        }
+
+        _currentState = newState;
+        _currentState.Enter(this);
+
+        // [MODIFICADO] Sincroniza el "Visor" y el "Tracker" al nuevo estado
+        currentStateEnum = stateKey;
+        _previousStateTracker = stateKey;
+    }
+
+    public bool IsPlayerVisible()
+    {
+        if (target == null || agent == null)
+            return false;
+
+        // Como la l√≥gica de FOV se quit√≥ de IA_P2_AgentIA,
+        // 'agent.CanSeeTarget(target)' ya no existe.
+        // Por ahora, devolvemos 'false' para que compile.
+        // Esto significa que el agente nunca "ver√°" al jugador autom√°ticamente.
+        return false;
+    }
+
+    // (El m√©todo ToggleState() sigue igual para debug)
+    public void ToggleState()
+    {
+        if (_currentState == _patrolState)
+        {
+            TransitionTo(AgentState.Chasing);
+        }
+        else
+        {
+            TransitionTo(AgentState.Patrolling);
+        }
+    }
+
+
+    public void DibujarRutaPatrulla()
+    {
+        if (patrolWaypoints == null || patrolWaypoints.Count < 2)
+            return;
+
+        for (int i = 0; i < patrolWaypoints.Count - 1; i++)
+        {
+            Debug.DrawLine(
+                patrolWaypoints[i].position,
+                patrolWaypoints[i + 1].position,
+                Color.cyan,
+                10f
+            );
+        }
+    }
+
+    public void SePerdioElObjetivo()
+    {
+        target = null;
+    }
+
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_INT_gentState.cs 
+============================== 
+// --- IA_P2_INT_gentState.cs ---
+// (Esta es la interfaz que tus estados deben implementar)
+
+public interface IA_P2_INT_gentState
+{
+    // Ahora reciben el "contexto" (MoveAgent) en lugar de solo el agente
+    void Enter(IA_P2_FSM context);
+    void Execute(IA_P2_FSM context);
+    void Exit(IA_P2_FSM context);
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_ST_ChaseState.cs 
+============================== 
+using UnityEngine;
+
+public class IA_P2_ST_ChaseState : IA_P2_INT_gentState
+{
+    private bool _goingToLastKnown;
+
+    public void Enter(IA_P2_FSM context)
+    {
+        context.agent.AsignarColor(Color.red); // ROJO = Te estoy viendo o te estoy buscando donde te vi
+        context.agent.SetSpeed(5f);
+        _goingToLastKnown = false;
+    }
+
+    public void Execute(IA_P2_FSM context)
+    {
+        if (context.target == null)
+        {
+            context.TransitionTo(AgentState.ReturningToPatrol);
+            return;
+        }
+
+        Vector3 targetPos = context.target.transform.position;
+        // Check de visiÛn real
+        bool loVeo = IA_P2_LineOfSight3D.Check(context.agent.transform.position, targetPos, context.NotificacionDeEnemigoVisible.visionObstacles);
+
+        if (loVeo)
+        {
+            // SI LO VEO: PersecuciÛn activa
+            context.lastKnownPosition = targetPos;
+            context.agent.GoTo(targetPos, context.agent.DistanceStop);
+            _goingToLastKnown = false;
+        }
+        else
+        {
+            // SI NO LO VEO:
+            if (!_goingToLastKnown)
+            {
+                // Solo enviamos la orden de ir al ˙ltimo punto UNA VEZ
+                context.agent.GoTo(context.lastKnownPosition, 0f);
+                _goingToLastKnown = true;
+                Debug.Log("<color=red>Chase:</color> Te perdÌ. Yendo a tu ˙ltima posiciÛn...");
+            }
+
+            // Chequeamos si hemos llegado fÌsicamente a ese ˙ltimo punto
+            float distancia = Vector3.Distance(context.agent.transform.position, context.lastKnownPosition);
+
+            // Si estamos a menos de 0.8 metros o el agente se detuvo
+            if (distancia < 0.8f || !context.agent.isMoving)
+            {
+                Debug.Log("<color=yellow>Chase:</color> °LleguÈ al ˙ltimo punto! Entrando en ALERTA.");
+                context.TransitionTo(AgentState.Searching);
+            }
+        }
+    }
+
+    public void Exit(IA_P2_FSM context) { }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_ST_PatrolState.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+
+public class IA_P2_ST_PatrolState : IA_P2_INT_gentState
+{
+    private int _currentWaypoint = 0;
+    private Vector3 _registrada;
+
+    public void Enter(IA_P2_FSM context)
+    {
+        context.agent.AsignarColor(Color.blue);
+        var wps = context.patrolWaypoints;
+
+        if (wps == null || wps.Count == 0) return;
+
+        // 1. Encontrar el Ìndice del waypoint m·s cercano
+        int closestIndex = 0;
+        float minDistance = float.MaxValue;
+        Vector3 agentPos = context.agent.transform.position;
+
+        for (int i = 0; i < wps.Count; i++)
+        {
+            float distance = Vector3.Distance(agentPos, wps[i].position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestIndex = i;
+            }
+        }
+        _currentWaypoint = closestIndex;
+
+        Vector3 targetPos = wps[_currentWaypoint].position;
+        context.agent.GoTo(targetPos);
+        _registrada = targetPos;
+        if (context.patrolWaypoints.Count != 1)
+            context.agent.SetSpeed(2.0f);
+        else
+            context.agent.SetSpeed(5);
+        // (Sacamos el DrawAllWaypoints de aquÌ para que no se
+        // ejecute solo una vez)
+    }
+    private float _lastGoToTime = 0f;
+    private float _cooldown = 0.05f;
+    private Vector3 _ultimoDestino;
+    private float _distanciaMinima = 0.05f;
+    public void Execute(IA_P2_FSM context)
+    {
+        if (context.patrolWaypoints.Count == 1)
+        {
+            Vector3 nuevoDestino = context.patrolWaypoints[0].position;
+
+            bool pasoTiempo = Time.time >= _lastGoToTime + _cooldown;
+            bool cambioDistancia = Vector3.Distance(_ultimoDestino, nuevoDestino) > _distanciaMinima;
+
+            if (pasoTiempo && cambioDistancia)
+            {
+                _lastGoToTime = Time.time;
+                _ultimoDestino = nuevoDestino;
+
+                context.agent.GoTo(nuevoDestino);
+            }
+
+            return;
+        }
+
+
+
+
+
+
+
+        // [NUEVO] ComprobaciÛn de transiciÛn
+        // øVemos al jugador? Si es asÌ, cambiamos a Chase.
+        if (context.IsPlayerVisible())
+        {
+            context.TransitionTo(AgentState.Chasing);
+            return; // Salimos del Execute
+        }
+
+        // --- LÛgica de Patrulla (si no vemos al jugador) ---
+
+        List<Transform> wps = context.patrolWaypoints;
+        if (wps == null || wps.Count == 0) return;
+
+        // Dibujos de Debug
+        DrawAllWaypoints(context);
+        Debug.DrawLine(context.agent.transform.position, _registrada, Color.yellow);
+
+
+        if (!context.agent.isMoving)
+        {
+            float arrivalDistance = 0.5f;
+            if (Vector3.Distance(context.agent.transform.position, _registrada) < arrivalDistance)
+            {
+                // LlegÛ. Calcular siguiente.
+                _currentWaypoint = (_currentWaypoint + 1) % wps.Count;
+                Vector3 newTarget = wps[_currentWaypoint].position;
+                context.agent.GoTo(newTarget);
+                _registrada = newTarget;
+            }
+            else
+            {
+                // Est· parado, pero no donde deberÌa. Reintentar.
+                context.agent.GoTo(_registrada);
+            }
+        }
+    }
+
+    public void Exit(IA_P2_FSM context)
+    {
+        context.agent.StopAgent();
+    }
+
+    // ... (El mÈtodo DrawAllWaypoints no cambia)
+    private void DrawAllWaypoints(IA_P2_FSM context)
+    {
+        var wps = context.patrolWaypoints;
+        if (wps == null || wps.Count < 2) return;
+        for (int i = 0; i < wps.Count; i++)
+        {
+            Vector3 start = wps[i].position;
+            Vector3 end = wps[(i + 1) % wps.Count].position;
+            Debug.DrawLine(start, end, Color.cyan);
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_ST_ReturningToPatrolState.cs 
+============================== 
+// --- Guarda este archivo como IA_P2_ST_ReturningToPatrolState.cs ---
+
+using UnityEngine;
+
+public class IA_P2_ST_ReturningToPatrolState : IA_P2_INT_gentState
+{
+    private Vector3 _patrolDestination;
+
+    // Retry
+    private float _nextRetryTime;
+    private const float RETRY_EVERY = 0.2f;
+    private int _retryCount;
+    private const int MAX_RETRIES = 1; // ajust· si querÈs infinito
+
+    public void Enter(IA_P2_FSM context)
+    {
+        context.agent.AsignarColor(Color.cyan);
+
+        var wps = context.patrolWaypoints;
+        if (wps == null || wps.Count == 0)
+        {
+            context.TransitionTo(AgentState.Patrolling);
+            return;
+        }
+
+        // 1) waypoint m·s cercano
+        int closestIndex = 0;
+        float minDistance = float.MaxValue;
+        Vector3 agentPos = context.agent.transform.position;
+
+        for (int i = 0; i < wps.Count; i++)
+        {
+            float distance = Vector3.Distance(agentPos, wps[i].position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestIndex = i;
+            }
+        }
+
+        // 2) destino
+        _patrolDestination = wps[closestIndex].position;
+
+        // reset retry
+        _retryCount = 0;
+        _nextRetryTime = Time.time; // intento inmediato
+
+        // primer intento
+        TryGoToPatrol(context);
+        context.agent.SetSpeed(2.0f);
+    }
+
+    public void Execute(IA_P2_FSM context)
+    {
+        if (context.IsPlayerVisible())
+        {
+            context.TransitionTo(AgentState.Chasing);
+            return;
+        }
+
+        // Reintento cada 1 segundo si NO estamos avanzando hacia el destino
+        if (Time.time >= _nextRetryTime)
+        {
+            // criterio simple: si no se mueve y todavÌa est· lejos => reintentar
+            float arrivalDistance = 0.5f;
+            bool lejos = Vector3.Distance(context.agent.transform.position, _patrolDestination) > arrivalDistance;
+
+            if (!context.agent.isMoving && lejos)
+            {
+                _retryCount++;
+                if (_retryCount <= MAX_RETRIES)
+                {
+                    TryGoToPatrol(context);
+                }
+                else
+                {
+                    // si querÈs: fallback duro
+                    Debug.LogWarning("ReturningToPatrol: demasiados retries, vuelvo a Patrolling igual.");
+                    context.TransitionTo(AgentState.Patrolling);
+                    return;
+                }
+            }
+
+            _nextRetryTime = Time.time + RETRY_EVERY;
+        }
+
+        // Llegada normal
+        float arrivalDist = 0.5f;
+        if (!context.agent.isMoving && Vector3.Distance(context.agent.transform.position, _patrolDestination) < arrivalDist)
+        {
+            context.TransitionTo(AgentState.Patrolling);
+        }
+    }
+
+    public void Exit(IA_P2_FSM context)
+    {
+        context.agent.SetSpeed(3.0f);
+    }
+
+    private void TryGoToPatrol(IA_P2_FSM context)
+    {
+        //Debug.Log($"ReturningToPatrol: intento #{_retryCount} -> {_patrolDestination}");
+        context.agent.GoTo(_patrolDestination);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\FSM\IA_P2_ST_SearchingState.cs 
+============================== 
+Ôªøusing UnityEngine;
+
+public class IA_P2_ST_SearchingState : IA_P2_INT_gentState
+{
+    private float _alertTimer;
+    private const float ALERT_TIME = 4f;
+
+    public void Enter(IA_P2_FSM context)
+    {
+        // Si entramos aqu√≠ y por alguna raz√≥n el target es null, abortamos de inmediato
+        if (context.target == null)
+        {
+            context.TransitionTo(AgentState.ReturningToPatrol);
+            return;
+        }
+
+        Debug.Log("<color=yellow>ALERTA:</color> Buscando en la zona...");
+        context.agent.StopAgent();
+        context.agent.AsignarColor(Color.yellow);
+        _alertTimer = ALERT_TIME;
+    }
+
+    public void Execute(IA_P2_FSM context)
+    {
+        // VALIDACI√ìN DE SEGURIDAD (Evita el NullReferenceException)
+        if (context.target == null)
+        {
+            context.TransitionTo(AgentState.ReturningToPatrol);
+            return;
+        }
+
+        // 1. Si el enemigo aparece de nuevo
+        bool loVeo = IA_P2_LineOfSight3D.Check(
+            context.agent.transform.position,
+            context.target.transform.position,
+            context.NotificacionDeEnemigoVisible.visionObstacles);
+
+        if (loVeo)
+        {
+            context.TransitionTo(AgentState.Chasing);
+            return;
+        }
+
+        // 2. Comportamiento de b√∫squeda: Girar
+        context.agent.transform.Rotate(Vector3.up, 120f * Time.deltaTime);
+
+        // 3. Temporizador
+        _alertTimer -= Time.deltaTime;
+        if (_alertTimer <= 0)
+        {
+            Debug.Log("<color=cyan>Alerta terminada:</color> Volviendo a patrulla.");
+            context.TransitionTo(AgentState.ReturningToPatrol);
+        }
+    }
+
+    public void Exit(IA_P2_FSM context) { }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_AgentIA.cs 
+============================== 
+Ôªøusing CustomInspector;
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class IA_P2_AgentIA : MonoBehaviour
+{
+    [Button(nameof(GoToGameobject), true)]
+    public GameObject targetObject;
+
+    [Header("Movimiento")]
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 10f;
+    public float nodeReachDistance = 0.5f;
+
+    [Header("Debug")]
+    public bool debug_BlockMovement = false;
+    public bool debug_BlockRotation = false;
+
+    public List<Vector3> currentPath;
+    public int currentIndex = 0;
+    public bool isMoving = false;
+    public float currentSpeed = 0f;
+
+    public float DistanceStop = 1f;
+
+    public void OnDisable()
+    {
+        isMoving = false;
+        currentPath = null;
+        currentIndex = 0;
+        currentSpeed = 0f;
+    }
+
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+    public void AsignarColor(Color color)
+    {
+        gameObject.GetComponent<Renderer>().material.color = color;
+    }
+
+    public void GoToGameobject(GameObject target)
+    {
+        GoTo(target.transform.position);
+    }
+
+    public void GoTo(Vector3 targetPosition, float Offset = 0)
+    {
+        targetPosition.y = 0;
+        int Estado = GetStateActual(targetPosition);
+        if (Estado == 1) // Visible
+        {
+            // Limpiar waypoints
+            currentPath = null;
+            currentIndex = 0;
+
+            // Ir directo sin pensar camino
+            currentPath = new List<Vector3> { targetPosition };
+            isMoving = true;
+            currentSpeed = 0f;
+
+            return;
+        }
+
+        if (Estado == 2) // No visible pero el ultimo waypoint lo ve
+        {
+            // Actualiza la ultima pos
+            currentPath[currentPath.Count - 1] = targetPosition;
+            return;
+        }
+
+        Vector3 Origen = transform.position;
+        Origen.y = 0;
+        targetPosition.y = 0;
+
+        var model = IA_P2_PathfindingModel.Instance;
+        LayerMask obstacleLayer = model.obstacleLayer;
+
+        List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset);
+
+        List<Vector3> RecorridoConTheta =
+            IA_F_PathFinding_Theta.OptimizarConTheta(
+                RecorridoAStar,
+                obstacleLayer
+            );
+
+        currentPath = RecorridoAStar;
+
+        /*
+        if (currentPath != null && currentPath.Count > 1)
+        {
+            for (int i = 0; i < currentPath.Count - 1; i++)
+                Debug.DrawLine(currentPath[i], currentPath[i + 1], Color.cyan, 3f);
+        }
+        */
+        currentIndex = 0;
+        isMoving = currentPath != null && currentPath.Count > 0;
+        currentSpeed = 0f;
+    }
+
+    public int GetStateActual(Vector3 targetPosition)
+    {
+        var model = IA_P2_PathfindingModel.Instance;
+
+        // VALIDACI√ìN DE SEGURIDAD: Si el modelo no existe, no podemos checkear visi√≥n
+        if (model == null)
+        {
+            // Intentamos buscarlo una vez si es null
+            model = FindObjectOfType<IA_P2_PathfindingModel>();
+            if (model == null) return 0;
+        }
+
+        Vector3 PosAAnalizar = transform.position;
+        LayerMask obstacleLayer = model.obstacleLayer;
+
+        // 1. Si, desde mi pos veo al objetivo
+        if (!Physics.Linecast(PosAAnalizar, targetPosition, obstacleLayer))
+        {
+            return 1; // Camino directo visible
+        }
+
+        // 2. Obtengo el √∫ltimo waypoint su posici√≥n
+        if (currentPath != null && currentPath.Count > 0)
+        {
+            if (currentPath.Count >= 2) // Corregido: >= 2 para asegurar que hay un punto previo
+            {
+                Vector3 UltimoWaypoint = currentPath[currentPath.Count - 1];
+
+                // Trazo un rayo del √∫ltimo waypoint al target
+                if (!Physics.Linecast(UltimoWaypoint, targetPosition, obstacleLayer))
+                {
+                    return 2; // Camino visible desde el √∫ltimo waypoint
+                }
+            }
+        }
+
+        return 0; // Camino no sirve
+    }
+
+    void Update()
+    {
+        // 1. Salida si no nos movemos o no hay camino
+        if (!isMoving || currentPath == null || currentPath.Count == 0)
+            return;
+
+        // 2. Obtener el objetivo actual del camino
+        Vector3 target = currentPath[currentIndex];
+        Vector3 toTarget = target - transform.position;
+        float distance = toTarget.magnitude;
+
+        // 3. L√≥gica de Rotaci√≥n
+        // Solo rota si no est√° bloqueado y si no est√° ya en el destino (evita error de LookRotation)
+        if (!debug_BlockRotation && distance > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(toTarget.normalized);
+            // Rotacion instantanea
+            //transform.rotation = targetRotation;
+            // Rotacion suave
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        // 4. L√≥gica de Movimiento
+        // Salir si el movimiento est√° bloqueado por debug
+        if (debug_BlockMovement)
+            return;
+
+        // Comprobar si hemos llegado al nodo actual
+        if (distance <= nodeReachDistance)
+        {
+            // Estamos "en" el nodo, pasamos al siguiente
+            currentIndex++;
+            if (currentIndex >= currentPath.Count)
+            {
+                // Llegamos al final del camino
+                isMoving = false;
+                transform.position = target; // Opcional: "snap" a la posici√≥n final
+                //Debug.DrawLine(transform.position, target, Color.red);
+            }
+        }
+        else
+        {
+            // A√∫n no llegamos, moverse hacia el nodo
+            float step = moveSpeed * Time.deltaTime;
+            transform.position += toTarget.normalized * step;
+        }
+
+        // 5. L√≥gica de Dibujo de L√≠neas (sin cambios)
+        int lastIndex = currentPath.Count - 1;
+
+        // Tramos completados: amarillo
+        for (int i = 0; i < currentIndex - 1; i++)
+        {
+            if (currentPath.Count > i + 1)
+                Debug.DrawLine(currentPath[i], currentPath[i + 1], Color.yellow, 3f);
+        }
+
+        // Tramos por recorrer: blanco
+        for (int i = Mathf.Max(currentIndex - 1, 0); i < lastIndex; i++)
+            Debug.DrawLine(currentPath[i], currentPath[i + 1], Color.white, 0.1f);
+    }
+
+    public void StopAgent()
+    {
+        isMoving = false;
+        currentPath = null;
+        currentIndex = 0;
+        // Si tienes un componente NavMeshAgent, aqu√≠ deber√≠as poner navMesh.isStopped = true;
+    }
+
+    public bool IsMoving()
+    {
+        return isMoving;
+    }
+
+
+    public bool IsOnFinalPathSegment()
+    {
+        if (currentPath == null || currentPath.Count == 0)
+            return false;
+
+        if (currentPath.Count == 1)
+            return true;
+
+        if (currentPath == null || currentPath.Count < 2)
+            return false;
+
+        return currentIndex == currentPath.Count;
+    }
+
+    public void LookAtTarget(Vector3 targetPosition)
+    {
+        Vector3 direction = targetPosition - transform.position;
+        direction.y = 0; // opcional: evita inclinarse hacia arriba/abajo
+
+        if (direction.sqrMagnitude < 0.0001f)
+            return; // evita errores de LookRotation
+
+        Quaternion targetRot = Quaternion.LookRotation(direction.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static List<Vector3> OptimizarConTheta(List<Vector3> RecorridoAStar)
+    {
+        // Primero revisa si 
+
+        return null;
+    }
+
+
+    /* Usa esto
+     
+
+IA_P2_LineOfSight3D. public static bool Check(Vector3 from, Vector3 to,LayerMask obstacleLayer)
+    {
+        from.y = 0;
+        to.y = 0;
+        Vector3 dir = to - from;
+        float dist = dir.magnitude;
+
+        return !Physics.Raycast(from, dir.normalized, dist, obstacleLayer);
+    }
+
+
+     */
+
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_FOV.cs 
+============================== 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor; // Necesario para usar Handles
+
+public class IA_P2_FOV : MonoBehaviour
+{
+    [Range(1f, 180f)]
+    public float fovAngle = 90f;
+    public float viewDistance = 10f;
+    public LayerMask visionObstacles;
+    public LayerMask targetLayer;
+
+    [Header("Eventos de DetecciÛn")]
+    [Tooltip("Se dispara UNA VEZ cuando un objetivo entra en visiÛn.")]
+    public Action<GameObject> OnTargetDetected;
+    [Tooltip("Se dispara UNA VEZ cuando un objetivo sale de la visiÛn.")]
+    public Action<GameObject> OnTargetLost;
+
+    [Header("Debug")]
+    [Tooltip("Lista p˙blica de enemigos que est·n DENTRO del BoxCollider (el trigger).")]
+    public List<GameObject> enemiesInTrigger = new List<GameObject>();
+
+    [Header("VisualizaciÛn Debug")]
+    public int resolution = 20;
+    public Color fovColor = new Color(0, 1, 0, 0.2f);
+    public Color detectionColor = Color.red;
+    public Color lostTargetColor = Color.white;
+
+    private List<GameObject> _visibleTargets = new List<GameObject>();
+    private HashSet<GameObject> _currentlyVisibleTargets = new HashSet<GameObject>();
+
+
+    // --- L”GICA DE DETECCI”N (N⁄CLEO) ---
+
+    private void Update()
+    {
+        _currentlyVisibleTargets.Clear();
+
+        for (int i = enemiesInTrigger.Count - 1; i >= 0; i--)
+        {
+            GameObject enemy = enemiesInTrigger[i];
+
+            if (enemy == null)
+            {
+                enemiesInTrigger.RemoveAt(i);
+                continue;
+            }
+            if (enemy != null)
+                ProcessTarget(enemy);
+        }
+
+        for (int i = _visibleTargets.Count - 1; i >= 0; i--)
+        {
+            GameObject target = _visibleTargets[i];
+
+            if (target == null)
+            {
+                _visibleTargets.RemoveAt(i);
+                continue;
+            }
+
+            if (!_currentlyVisibleTargets.Contains(target))
+            {
+                _visibleTargets.RemoveAt(i);
+                OnTargetLost?.Invoke(target);
+                //Debug.Log("Objetivo PERDIDO: " + target.name, target);
+            }
+        }
+    }
+
+    private void ProcessTarget(GameObject target)
+    {
+        Transform targetTransform = target.transform;
+
+        // 1. Chequeos fÌsicos b·sicos (Distancia, ¡ngulo y Muros)
+        if (Vector3.Distance(transform.position, targetTransform.position) > viewDistance) return;
+        if (!IsInFOV(targetTransform)) return;
+        if (!HasLineOfSight(targetTransform)) return;
+
+        // --- L”GICA DE IDENTIDAD Y EQUIPOS ---
+
+        GameObject miAgente = transform.parent.gameObject;
+        if (target == miAgente) return; // Se ignora a sÌ mismo (sin debug para no colapsar la consola sobre sÌ mismo)
+
+        string miNombre = miAgente.name;
+        string nombreEnemigo = target.name;
+
+        // Detectar facciones
+        bool yoSoyA = miNombre.Contains("EQA");
+        bool yoSoyB = miNombre.Contains("EQB");
+        bool enemigoEsA = nombreEnemigo.Contains("EQA");
+        bool enemigoEsB = nombreEnemigo.Contains("EQB");
+
+        // Determinar quÈ palabra deberÌa tener el enemigo para que yo lo ataque
+        string palabraBuscada = yoSoyA ? "EQB" : (yoSoyB ? "EQA" : "DESCONOCIDO");
+
+        // CondiciÛn de ataque: Equipos opuestos
+        bool sonEnemigos = (yoSoyA && enemigoEsB) || (yoSoyB && enemigoEsA);
+
+        if (sonEnemigos)
+        {
+            _currentlyVisibleTargets.Add(target);
+
+            if (!_visibleTargets.Contains(target))
+            {
+                if (IA_P2_LineOfSight3D.Check(transform.parent.position, target.transform.position, visionObstacles))
+                {
+                    _visibleTargets.Add(target);
+
+                    // DEBUG ATAQUE
+                    Debug.Log($"<color=red>ATAQUE:</color> Se vio a <b>{nombreEnemigo}</b>. Como yo soy <b>{miNombre}</b>, °irÈ por Èl!");
+
+                    OnTargetDetected?.Invoke(target);
+                }
+            }
+        }
+        else
+        {
+            // DEBUG OMISI”N CONSTANTE (Se ejecuta cada frame que lo ve)
+            Debug.Log($"Se vio a {nombreEnemigo} con tal nombre. Se omitiÛ por que no contiene {palabraBuscada} en su nombre en su debug. Soy {miNombre}");
+        }
+    }
+
+    // --- GESTI”N DE TRIGGERS (MODIFICADA) ---
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 1. Chequeo de Layer
+        if (((1 << other.gameObject.layer) & targetLayer) == 0) return;
+
+        // 2. [CORREGIDO] Obtener el GameObject "Padre" (el que tiene el Rigidbody)
+        GameObject enemyRoot = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
+
+        // 3. Ignorarse a sÌ mismo (si el "Padre" del otro es este mismo objeto)
+        if (enemyRoot == this.gameObject) return;
+
+        // 4. AÒadir a la lista (solo si no est· ya)
+        if (!enemiesInTrigger.Contains(enemyRoot))
+        {
+            enemiesInTrigger.Add(enemyRoot);
+            //Debug.Log(enemyRoot.name + " entrÛ al trigger.", enemyRoot);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // 1. Chequeo de Layer
+        if (((1 << other.gameObject.layer) & targetLayer) == 0) return;
+
+        // 2. [CORREGIDO] Obtener el GameObject "Padre"
+        GameObject enemyRoot = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
+
+        // 3. Quitar de la lista p˙blica
+        if (enemiesInTrigger.Remove(enemyRoot))
+        {
+            //Debug.Log(enemyRoot.name + " saliÛ del trigger.", enemyRoot);
+
+            // 4. Si lo quitamos, comprobar si adem·s estaba en la lista de VISIBLES
+            if (_visibleTargets.Remove(enemyRoot))
+            {
+                OnTargetLost?.Invoke(enemyRoot);
+                Debug.Log("Objetivo PERDIDO (SaliÛ del Trigger): " + enemyRoot.name, enemyRoot);
+            }
+        }
+    }
+
+    // --- M…TODOS DE SOPORTE (Sin cambios) ---
+
+    private bool IsInFOV(Transform target)
+    {
+        Vector3 dirToTarget = target.position - transform.position;
+        dirToTarget.y = 0;
+
+        if (dirToTarget.sqrMagnitude < 0.001f)
+        {
+            return false;
+        }
+
+        Vector3 agentForward = transform.forward;
+        agentForward.y = 0;
+
+        float angle = Vector3.Angle(agentForward.normalized, dirToTarget.normalized);
+        return angle <= fovAngle * 0.5f;
+    }
+
+    private bool HasLineOfSight(Transform target)
+    {
+        Vector3 rayStart = transform.position + Vector3.up * 0.5f;
+        Vector3 targetPos = target.position + Vector3.up * 0.5f;
+
+        bool sinObstaculos = IA_P2_LineOfSight3D.Check(rayStart, targetPos, visionObstacles);
+
+        if (!sinObstaculos)
+        {
+            Debug.DrawLine(rayStart, targetPos, Color.yellow);
+        }
+
+        return sinObstaculos;
+    }
+
+
+    // --- CONFIGURACI”N DEL EDITOR (Sin cambios) ---
+
+    private void Reset()
+    {
+        var col = GetComponent<BoxCollider>();
+        if (col == null)
+        {
+            col = gameObject.AddComponent<BoxCollider>();
+        }
+        col.isTrigger = true;
+        col.size = new Vector3(viewDistance * 2, viewDistance * 2, viewDistance * 2);
+    }
+
+    private void OnValidate()
+    {
+        var col = GetComponent<BoxCollider>();
+        if (col != null)
+        {
+            col.size = new Vector3(viewDistance * 2, viewDistance * 2, viewDistance * 2);
+        }
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!enabled) return;
+
+        Vector3 origin = transform.position;
+        Vector3 forward = transform.forward;
+
+        BoxCollider col = GetComponent<BoxCollider>();
+        if (col == null) return;
+
+        // Dibuja la CAJA
+        Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.1f);
+        Matrix4x4 oldMatrix = Gizmos.matrix;
+        Gizmos.matrix = Matrix4x4.TRS(transform.TransformPoint(col.center), transform.rotation, transform.lossyScale);
+        Gizmos.matrix = oldMatrix;
+
+
+        // Dibuja el CONO
+        float halfFOV = fovAngle * 0.5f;
+        Quaternion leftRayRotation = Quaternion.AngleAxis(-halfFOV, Vector3.up);
+        Vector3 fromDirection = leftRayRotation * forward;
+        Handles.color = fovColor;
+        Handles.DrawSolidArc(origin, Vector3.up, fromDirection, fovAngle, viewDistance);
+
+        // Dibuja los BORDES del cono
+        Color edgeColor = fovColor;
+        edgeColor.a = 1f;
+        Handles.color = edgeColor;
+        Quaternion rightRayRotation = Quaternion.AngleAxis(halfFOV, Vector3.up);
+        Vector3 leftRayDirection = fromDirection;
+        Vector3 rightRayDirection = rightRayRotation * forward;
+        Handles.DrawLine(origin, origin + leftRayDirection * viewDistance);
+        Handles.DrawLine(origin, origin + rightRayDirection * viewDistance);
+    }
+#endif
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_LineOfSight3D.cs 
+============================== 
+using UnityEngine;
+
+public static class IA_P2_LineOfSight3D
+{
+    public static bool Check(Vector3 from, Vector3 to,LayerMask obstacleLayer)
+    {
+        from.y = 0;
+        to.y = 0;
+        Vector3 dir = to - from;
+        float dist = dir.magnitude;
+
+        return !Physics.Raycast(from, dir.normalized, dist, obstacleLayer);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_PathfindingManager.cs 
+============================== 
+Ôªøusing System.Collections.Generic;
+using UnityEngine;
+using System.Linq; // Necesario para OrderBy
+
+public static class IA_P2_PathfindingManager
+{
+    // [Clases internas AStarResult, FinalPathResult, NodeDistance no cambian]
+    // ... (Omitidas por brevedad, son iguales que en tu c√≥digo)
+    #region Clases Internas
+    private class AStarResult
+    {
+        public List<IA_P2_PathNode> path;
+        public float cost;
+    }
+    private class FinalPathResult
+    {
+        public List<Vector3> path;
+        public float totalCost;
+    }
+    private class NodeDistance
+    {
+        public IA_P2_PathNode node;
+        public float distance;
+    }
+    #endregion
+
+
+    /// <summary>
+    /// [MODIFICADO] Solicita un camino, probando m√∫ltiples nodos para encontrar el de menor COSTO total.
+    /// Ahora incluye un 'stopOffset' opcional para detenerse antes del destino.
+    /// </summary>
+    /// <param name="Origen">Posici√≥n inicial</param>
+    /// <param name="targetPos">Posici√≥n final</param>
+    /// <param name="stopOffset">[NUEVO] Distancia a la que detenerse ANTES de 'targetPos'. 0 por defecto.</param>
+    public static List<Vector3> RequestPath(Vector3 Origen, Vector3 targetPos, float stopOffset = 0f)
+    {
+        var model = IA_P2_PathfindingModel.Instance;
+        if (model == null || model.allNodes == null || model.allNodes.Count == 0) return null;
+
+        LayerMask obstacleLayer = model.obstacleLayer;
+        if (stopOffset < 0f) stopOffset = 0f;
+
+        // 1. [MODIFICADO] L√≠nea de visi√≥n directa con detecci√≥n de avoidance inmediata
+        var directPath = CheckPathWithAvoidance(Origen, targetPos, obstacleLayer);
+        if (directPath != null)
+        {
+            // Aplicar offset al √∫ltimo punto
+            Vector3 last = directPath.Last();
+            directPath[directPath.Count - 1] = GetOffsetTarget(Origen, last, stopOffset);
+
+            // Debug del primer tramo
+            Debug.DrawLine(Origen, directPath[0], Color.green, 2f);
+
+
+            #region Dibujos de origen y destino
+            // 1. ORIGEN: 1 c√≠rculo amarillo peque√±o
+            //DrawDebugCircle(Origen, 0.3f, Color.yellow, 2f);
+
+            #endregion
+
+            return directPath;
+        }
+
+        // 2. Estrategia KNN + Theta*
+        const int K = 5;
+        List<IA_P2_PathNode> startNodes = FindKClosestVisibleNodes(Origen, K, obstacleLayer);
+        List<IA_P2_PathNode> endNodes = FindKClosestVisibleNodes(targetPos, K, obstacleLayer);
+
+        if (startNodes.Count == 0 || endNodes.Count == 0) return null;
+
+        FinalPathResult bestPath = null;
+
+        foreach (var startNode in startNodes)
+        {
+            foreach (var endNode in endNodes)
+            {
+                // El RunThetaStar ahora ya trae los puntos de evasi√≥n integrados
+                var nodePathResult = RunThetaStar(startNode, endNode, targetPos, obstacleLayer);
+                if (nodePathResult == null) continue;
+
+                Vector3 lastNodePos = nodePathResult.path.Last();
+                Vector3 finalPosWithOffset = GetOffsetTarget(lastNodePos, targetPos, stopOffset);
+
+                float costOriginToStart = Vector3.Distance(Origen, startNode.transform.position);
+                float totalPathCost = costOriginToStart + nodePathResult.cost + Vector3.Distance(lastNodePos, finalPosWithOffset);
+
+                if (bestPath == null || totalPathCost < bestPath.totalCost)
+                {
+                    List<Vector3> fullPath = new List<Vector3>(nodePathResult.path);
+                    fullPath.Add(finalPosWithOffset);
+                    bestPath = new FinalPathResult { path = fullPath, totalCost = totalPathCost };
+                }
+            }
+        }
+
+        if (bestPath != null)
+        {
+            Debug.DrawLine(Origen, bestPath.path[0], Color.green, 2f);
+            for (int i = 0; i < bestPath.path.Count - 1; i++)
+                Debug.DrawLine(bestPath.path[i], bestPath.path[i + 1], Color.cyan, 2f);
+        }
+
+
+
+
+        #region Dibujos de origen y destino
+        // 1. ORIGEN: 1 c√≠rculo amarillo peque√±o
+        //DrawDebugCircle(Origen, 0.3f, Color.yellow, 2f);
+
+        // 2. DESTINO: 2 c√≠rculos (uno grande, uno mediano) y una cruz
+        List<Vector3> processedPath = bestPath?.path;
+        // --- DEBUG DE CAMINO (L√≠neas verde y cian) ---
+        if (processedPath != null && processedPath.Count > 0)
+        {
+            Debug.DrawLine(Origen, processedPath[0], Color.green, 2f);
+            for (int i = 0; i < processedPath.Count - 1; i++)
+            {
+                Debug.DrawLine(processedPath[i], processedPath[i + 1], Color.cyan, 2f);
+            }
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+        return bestPath?.path;
+    }
+
+    /// <summary>
+    /// [NUEVO] Calcula una posici√≥n 'offset' unidades *antes* de 'to',
+    /// viniendo desde 'from'.
+    /// </summary>
+    private static Vector3 GetOffsetTarget(Vector3 from, Vector3 to, float offset)
+    {
+        // Si el offset es 0 (o casi 0), devolver el destino original
+        if (offset <= 0.001f)
+            return to;
+
+        float distance = Vector3.Distance(from, to);
+
+        // Si el offset es mayor que la distancia, no podemos retroceder m√°s.
+        // Devolvemos 'from' para evitar ir hacia atr√°s.
+        if (offset >= distance)
+            return from;
+
+        // Calcular la direcci√≥n y retroceder 'offset' unidades desde 'to'
+        Vector3 direction = (to - from).normalized;
+        return to - direction * offset;
+    }
+
+
+    /// <summary>
+    /// [NUEVO] Encuentra los K nodos m√°s cercanos a una posici√≥n que tienen l√≠nea de visi√≥n directa.
+    /// (Esta funci√≥n no cambia)
+    /// </summary>
+    static List<IA_P2_PathNode> FindKClosestVisibleNodes(Vector3 pos, int k, LayerMask obstacleLayer)
+    {
+        var model = IA_P2_PathfindingModel.Instance;
+        List<NodeDistance> allNodeDistances = new List<NodeDistance>();
+
+        foreach (var n in model.allNodes)
+        {
+            if (n == null)
+            {
+                model.ReCalcularVecinos();
+                continue;
+            }
+            allNodeDistances.Add(new NodeDistance
+            {
+                node = n,
+                distance = Vector3.Distance(pos, n.transform.position)
+            });
+        }
+
+        var sortedNodes = allNodeDistances.OrderBy(nd => nd.distance);
+        List<IA_P2_PathNode> results = new List<IA_P2_PathNode>();
+
+        foreach (var nodeDist in sortedNodes)
+        {
+            if (IA_P2_LineOfSight3D.Check(pos, nodeDist.node.transform.position, obstacleLayer))
+            {
+                results.Add(nodeDist.node);
+                if (results.Count >= k)
+                    break;
+            }
+        }
+        return results;
+    }
+
+
+    // -------------------------------------------------------------------
+    // --- M√âTODOS A* (No cambian) ---
+    // -------------------------------------------------------------------
+
+    static Dictionary<IA_P2_PathNode, float> g_costs = new Dictionary<IA_P2_PathNode, float>();
+    static Dictionary<IA_P2_PathNode, float> f_costs = new Dictionary<IA_P2_PathNode, float>();
+
+    // [RunAStar no cambia]
+    static AStarResult RunAStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, Dictionary<IA_P2_PathNode, float> g)
+    {
+        LayerMask obstacle = IA_P2_PathfindingModel.Instance.obstacleLayer;
+
+        var open = new List<IA_P2_PathNode>();
+        var closed = new HashSet<IA_P2_PathNode>();
+        var came = new Dictionary<IA_P2_PathNode, IA_P2_PathNode>();
+
+        var f = f_costs;
+        g_costs.Clear();
+        f.Clear();
+
+        foreach (var n in IA_P2_PathfindingModel.Instance.allNodes)
+        {
+            if (n == null) continue; // Seguridad extra
+            g[n] = float.MaxValue;
+            f[n] = float.MaxValue;
+        }
+
+        g[start] = 0f;
+        f[start] = Vector3.Distance(start.transform.position, end.transform.position);
+
+        open.Add(start);
+
+        while (open.Count > 0)
+        {
+            IA_P2_PathNode current = open[0];
+            float bestF = f[current];
+            for (int i = 1; i < open.Count; i++)
+            {
+                if (f[open[i]] < bestF)
+                {
+                    current = open[i];
+                    bestF = f[current];
+                }
+            }
+
+            // [IMPORTANTE] El A* sigue usando 'targetPos' (el real) para 
+            // la heur√≠stica y la comprobaci√≥n de visi√≥n. El offset se aplica
+            // *despu√©s* de que A* termine.
+            if (IA_P2_LineOfSight3D.Check(current.transform.position, targetPos, obstacle))
+                return new AStarResult { path = ReconstructPartial(came, current), cost = g[current] };
+
+            if (current == end)
+                return new AStarResult { path = Reconstruct(came, end), cost = g[end] };
+
+            open.Remove(current);
+            closed.Add(current);
+
+            foreach (var nb in current.Vecinos)
+            {
+                if (nb == null || closed.Contains(nb)) continue;
+                if (!IA_P2_LineOfSight3D.Check(current.transform.position, nb.transform.position, obstacle))
+                    continue;
+
+
+                // [CORRECCI√ìN] Usamos el 'movementCost' de tu c√≥digo original
+                float tentative = g[current] + nb.movementCost;
+
+                if (!open.Contains(nb))
+                    open.Add(nb);
+
+                if (tentative >= g[nb]) continue;
+
+                came[nb] = current;
+                g[nb] = tentative;
+                f[nb] = tentative + Vector3.Distance(nb.transform.position, end.transform.position);
+            }
+        }
+        return null;
+    }
+
+    // [Reconstruct no cambia]
+    static List<IA_P2_PathNode> Reconstruct(Dictionary<IA_P2_PathNode, IA_P2_PathNode> came, IA_P2_PathNode end)
+    {
+        List<IA_P2_PathNode> path = new List<IA_P2_PathNode>();
+        IA_P2_PathNode node = end;
+        while (came.ContainsKey(node))
+        {
+            path.Add(node);
+            node = came[node];
+        }
+        path.Add(node);
+        path.Reverse();
+        return path;
+    }
+
+    // [ReconstructPartial no cambia]
+    static List<IA_P2_PathNode> ReconstructPartial(Dictionary<IA_P2_PathNode, IA_P2_PathNode> came, IA_P2_PathNode end)
+    {
+        List<IA_P2_PathNode> path = new List<IA_P2_PathNode>();
+        IA_P2_PathNode node = end;
+        while (came.ContainsKey(node))
+        {
+            path.Add(node);
+            node = came[node];
+        }
+        path.Add(node);
+        path.Reverse();
+        return path;
+    }
+
+
+
+
+    private class ThetaStarResult
+    {
+        public List<Vector3> path;
+        public float cost;
+    }
+
+    static ThetaStarResult RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, LayerMask obstacle)
+    {
+        var open = new List<IA_P2_PathNode>();
+        var closed = new HashSet<IA_P2_PathNode>();
+        var parent = new Dictionary<IA_P2_PathNode, IA_P2_PathNode>();
+        var gScore = new Dictionary<IA_P2_PathNode, float>();
+        var fScore = new Dictionary<IA_P2_PathNode, float>();
+
+        // Diccionario para guardar puntos de evasi√≥n intermedios entre nodos
+        var avoidancePoints = new Dictionary<IA_P2_PathNode, Vector3>();
+
+        foreach (var n in IA_P2_PathfindingModel.Instance.allNodes)
+        {
+            gScore[n] = float.MaxValue;
+            fScore[n] = float.MaxValue;
+        }
+
+        gScore[start] = 0f;
+        fScore[start] = Vector3.Distance(start.transform.position, end.transform.position);
+        parent[start] = start;
+        open.Add(start);
+
+        while (open.Count > 0)
+        {
+            IA_P2_PathNode current = open.OrderBy(n => fScore[n]).First();
+
+            // Check hacia el objetivo final con avoidance
+            var pathToTarget = CheckPathWithAvoidance(current.transform.position, targetPos, obstacle);
+            if (pathToTarget != null)
+            {
+                var finalPath = ReconstructPathWithAvoidance(parent, avoidancePoints, current);
+                finalPath.AddRange(pathToTarget);
+                return new ThetaStarResult { path = finalPath, cost = gScore[current] + Vector3.Distance(current.transform.position, targetPos) };
+            }
+
+            if (current == end)
+            {
+                var finalPath = ReconstructPathWithAvoidance(parent, avoidancePoints, end);
+                return new ThetaStarResult { path = finalPath, cost = gScore[end] };
+            }
+
+            open.Remove(current);
+            closed.Add(current);
+
+            foreach (var neighbor in current.Vecinos)
+            {
+                if (neighbor == null || closed.Contains(neighbor)) continue;
+
+                IA_P2_PathNode p = parent[current];
+
+                // Intentar visi√≥n directa desde el PADRE al VECINO (Theta*)
+                var pathInfo = CheckPathWithAvoidance(p.transform.position, neighbor.transform.position, obstacle);
+
+                if (pathInfo != null) // Si es visible (directo o esquivando)
+                {
+                    float dist = (pathInfo.Count > 1) ?
+                        Vector3.Distance(p.transform.position, pathInfo[0]) + Vector3.Distance(pathInfo[0], neighbor.transform.position) :
+                        Vector3.Distance(p.transform.position, neighbor.transform.position);
+
+                    float tentativeG = gScore[p] + dist;
+                    if (tentativeG < gScore[neighbor])
+                    {
+                        parent[neighbor] = p;
+                        if (pathInfo.Count > 1) avoidancePoints[neighbor] = pathInfo[0];
+                        else avoidancePoints.Remove(neighbor);
+
+                        gScore[neighbor] = tentativeG;
+                        fScore[neighbor] = gScore[neighbor] + Vector3.Distance(neighbor.transform.position, end.transform.position);
+                        if (!open.Contains(neighbor)) open.Add(neighbor);
+                    }
+                }
+                else // A* normal si no hay visi√≥n
+                {
+                    float tentativeG = gScore[current] + Vector3.Distance(current.transform.position, neighbor.transform.position);
+                    if (tentativeG < gScore[neighbor])
+                    {
+                        parent[neighbor] = current;
+                        avoidancePoints.Remove(neighbor);
+                        gScore[neighbor] = tentativeG;
+                        fScore[neighbor] = gScore[neighbor] + Vector3.Distance(neighbor.transform.position, end.transform.position);
+                        if (!open.Contains(neighbor)) open.Add(neighbor);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    
+
+    /// <summary>
+    /// Comprueba si el objeto tiene una escala cercana a 0.7 (en cualquier eje)
+    /// </summary>
+    private static bool IsAvoidable(GameObject obj)
+    {
+        Vector3 scale = obj.transform.localScale;
+        // Usamos un margen de error peque√±o (0.05) para detectar el 0.7
+        float target = 0.7f;
+        float margin = 0.1f;
+
+        bool xMatch = Mathf.Abs(scale.x - target) < margin;
+        bool yMatch = Mathf.Abs(scale.y - target) < margin;
+        bool zMatch = Mathf.Abs(scale.z - target) < margin;
+
+        //Debug.Log($"Se tiene {yMatch} {xMatch} {zMatch} ");
+
+        return xMatch || yMatch || zMatch;
+    }
+
+    /// <summary>
+    /// Calcula un punto lateral para esquivar el objeto
+    /// </summary>
+    private static Vector3 CalculateAvoidancePoint(Vector3 from, Vector3 to, RaycastHit hit, LayerMask layer)
+    {
+        Vector3 direction = (to - from).normalized;
+        Vector3 right = Vector3.Cross(Vector3.up, direction).normalized;
+
+        float sideOffset = 1.3f; // Distancia para alejarse del centro del objeto
+        Vector3 posA = hit.point + (right * sideOffset);
+        Vector3 posB = hit.point - (right * sideOffset);
+
+        // Elegimos el lado que no tenga obst√°culos hacia el destino
+        if (IA_P2_LineOfSight3D.Check(posA, to, layer)) return posA;
+        return posB;
+    }
+
+    /// <summary>
+    /// Dibuja un c√≠rculo de debug en el mundo
+    /// </summary>
+    public static void DrawDebugCircle(Vector3 center, float radius, Color color, float duration)
+    {
+        int segments = 12;
+        float angleStep = 360f / segments;
+        for (int i = 0; i < segments; i++)
+        {
+            Vector3 start = center + Quaternion.Euler(0, i * angleStep, 0) * Vector3.forward * radius;
+            Vector3 end = center + Quaternion.Euler(0, (i + 1) * angleStep, 0) * Vector3.forward * radius;
+            Debug.DrawLine(start, end, color, duration);
+        }
+    }
+
+
+
+
+
+    /// <summary>
+    /// Comprueba si hay camino entre A y B. 
+    /// Si hay un "Obstacule", devuelve una lista con [PuntoEvasion, Destino].
+    /// Si hay un muro real, devuelve null.
+    /// </summary>
+    private static List<Vector3> CheckPathWithAvoidance(Vector3 start, Vector3 end, LayerMask layer)
+    {
+        Vector3 dir = (end - start).normalized;
+        float dist = Vector3.Distance(start, end);
+        RaycastHit hit;
+
+        if (Physics.Raycast(start, dir, out hit, dist, layer))
+        {
+            GameObject obj = hit.collider.gameObject;
+
+            // Filtro por nombre y escala
+            if (obj.name.ToLower().Contains("obstacule") || IsAvoidable(obj))
+            {
+                //Debug.Log($"<color=yellow>Avoidance en tiempo real:</color> Esquivando {obj.name}");
+                //DrawDebugCircle(obj.transform.position, 0.7f, Color.yellow, 1f);
+
+                Vector3 avPoint = CalculateAvoidancePoint(start, end, hit, layer);
+
+                // Verificamos que el punto de evasi√≥n sea seguro
+                if (IA_P2_LineOfSight3D.Check(start, avPoint, layer) && IA_P2_LineOfSight3D.Check(avPoint, end, layer))
+                {
+                    return new List<Vector3> { avPoint, end };
+                }
+            }
+            return null; // Bloqueado por algo no evadible
+        }
+        return new List<Vector3> { end }; // Camino despejado
+    }
+
+    private static List<Vector3> ReconstructPathWithAvoidance(
+        Dictionary<IA_P2_PathNode, IA_P2_PathNode> parentMap,
+        Dictionary<IA_P2_PathNode, Vector3> avoidanceMap,
+        IA_P2_PathNode current)
+    {
+        List<Vector3> path = new List<Vector3>();
+        while (parentMap.ContainsKey(current) && parentMap[current] != current)
+        {
+            path.Add(current.transform.position);
+            if (avoidanceMap.ContainsKey(current)) path.Add(avoidanceMap[current]);
+            current = parentMap[current];
+        }
+        path.Add(current.transform.position);
+        path.Reverse();
+        return path;
+    }
+
+
+
+    /// <summary>
+    /// Dibuja una cruz (X) en el suelo en la posici√≥n indicada.
+    /// </summary>
+    private static void DrawDebugCross(Vector3 center, float size, Color color, float duration)
+    {
+        // L√≠nea 1 de la cruz (Diagonal 1)
+        Vector3 line1Start = center + new Vector3(-size, 0.05f, -size);
+        Vector3 line1End = center + new Vector3(size, 0.05f, size);
+
+        // L√≠nea 2 de la cruz (Diagonal 2)
+        Vector3 line2Start = center + new Vector3(size, 0.05f, -size);
+        Vector3 line2End = center + new Vector3(-size, 0.05f, size);
+
+        Debug.DrawLine(line1Start, line1End, color, duration);
+        Debug.DrawLine(line2Start, line2End, color, duration);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_PathfindingModel.cs 
+============================== 
+using CustomInspector;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IA_P2_PathfindingModel : MonoBehaviour
+{
+    [Button(nameof(OnEnable))]
+    [Header("Configuraci√≥n de Vecinos")]
+    public float sideOffset = 0.5f; // ancho del agente
+
+    [Header("Capa de obst√°culos")]
+    public LayerMask obstacleLayer;
+
+    [Header("Puntos del Grafo")]
+    public List<IA_P2_PathNode> allNodes = new List<IA_P2_PathNode>();
+
+    public static IA_P2_PathfindingModel Instance;
+
+
+    public void Awake()
+    {
+        Instance = this;
+    }
+
+    public void OnEnable()
+    {
+        Instance = this;
+        ReCalcularVecinos();
+    }
+
+
+
+    // ---------------------------------------------------------
+    //   BUSCAR AUTOM√ÅTICAMENTE TODOS LOS NODOS DEL ESCENA
+    // ---------------------------------------------------------
+    public void ReCalcularVecinos()
+    {
+        allNodes = new List<IA_P2_PathNode>(FindObjectsOfType<IA_P2_PathNode>());
+        GenerateNeighbors();
+    }
+
+    // ---------------------------------------------------------
+    //   GENERA TODOS LOS VECINOS
+    // ---------------------------------------------------------
+    public void GenerateNeighbors()
+    {
+        foreach (var node in allNodes)
+        {
+            GenerateNeighborsForNode(node);
+        }
+    }
+
+    public void GenerateNeighborsForNode(IA_P2_PathNode node)
+    {
+        if (node == null) return;
+
+        node.Vecinos.Clear();
+
+        foreach (var other in allNodes)
+        {
+            if (other == null || other == node)
+                continue;
+
+            // ----------------------------
+            //     Line of Sight ancho
+            // ----------------------------
+            Vector3 start = node.transform.position;
+            Vector3 end = other.transform.position;
+            Vector3 dir = (end - start).normalized;
+
+            // vector perpendicular en el plano XZ
+            Vector3 right = Vector3.Cross(dir, Vector3.up).normalized;
+
+            bool centerClear = IA_P2_LineOfSight3D.Check(start, end, obstacleLayer);
+            if (!centerClear) continue;
+
+            // laterales
+            Vector3 startLeft = start - right * sideOffset;
+            Vector3 startRight = start + right * sideOffset;
+
+            Vector3 endLeft = end - right * sideOffset;
+            Vector3 endRight = end + right * sideOffset;
+
+            bool leftClear = IA_P2_LineOfSight3D.Check(startLeft, endLeft, obstacleLayer);
+            bool rightClear = IA_P2_LineOfSight3D.Check(startRight, endRight, obstacleLayer);
+
+            if (!leftClear || !rightClear)
+                continue;
+
+            // Si pas√≥ los 3 raycasts ‚Üí es vecino v√°lido
+            node.Vecinos.Add(other);
+        }
+    }
+
+
+
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_IA\Parcial 2\Scripts\WayPoints\IA_P2_PathNode.cs 
+============================== 
+Ôªøusing CustomInspector;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+public class IA_P2_PathNode : MonoBehaviour
+{
+    [Button(nameof(ReCalcularCercanos))]
+    public float movementCost = 1f;
+    public List<IA_P2_PathNode> Vecinos = new List<IA_P2_PathNode>();
+
+    public void ReCalcularCercanos()
+    {
+        if (IA_P2_PathfindingModel.Instance != null)
+        {
+            IA_P2_PathfindingModel.Instance.OnEnable();
+        }
+    }
+#if UNITY_EDITOR
+
+    void OnDrawGizmos()
+    {
+        if (Selection.activeTransform == null) return;
+
+        bool selectedSelf = Selection.activeTransform == transform;
+        bool selectedParent = transform.parent != null && Selection.activeTransform == transform.parent;
+
+        if (!selectedSelf && !selectedParent) return;
+
+        float verticalOffset = 0.5f;
+        float cutPercent = 0.2f;
+
+        foreach (var n in Vecinos)
+        {
+            if (n == null) continue;
+
+            Vector3 start = transform.position;
+            Vector3 end = n.transform.position;
+
+            // 20% azul
+            Vector3 p20 = Vector3.Lerp(start, end, cutPercent);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(start, p20);
+
+            // 80% amarillo
+            Gizmos.color = Color.yellow;
+
+            if (selectedParent)
+            {
+                Vector3 p80 = Vector3.Lerp(start, end, 1f - cutPercent - 0.2f);
+                Gizmos.DrawLine(p20, p80);
+            }
+            else
+            {
+                Gizmos.DrawLine(p20, end);
+            }
+
+            // Marca vertical en vecino
+            Vector3 top = end + Vector3.up * verticalOffset;
+            Gizmos.DrawLine(end, top);
+        }
+    }
+
+
+
+    void OnDrawGizmosSelected()
+    {
+        float verticalOffset = 0.5f;
+
+        bool selectedSelf = Selection.activeTransform == transform;
+        bool selectedParent = transform.parent != null && Selection.activeTransform == transform.parent;
+
+        if (!selectedSelf && !selectedParent) return;
+
+        // --- COSTO DEL NODO ---
+        Vector3 topSelf = transform.position + Vector3.up * (verticalOffset + 0.3f);
+        DrawLabel(topSelf, Mathf.RoundToInt(movementCost) + "C");
+
+        // --- VECINOS ---
+        foreach (var n in Vecinos)
+        {
+            if (n == null) continue;
+
+            Vector3 start = transform.position;
+            Vector3 end = n.transform.position;
+
+            string value;
+
+            if (selectedSelf)
+            {
+                float dist = Vector3.Distance(start, end);
+                value =
+                    dist.ToString("F2") + "m\n" +
+                    Mathf.RoundToInt(n.movementCost) + "C";
+            }
+            else // selectedParent
+            {
+                value = Mathf.RoundToInt(n.movementCost) + "C";
+            }
+
+            Vector3 top = end + Vector3.up * (verticalOffset + 0.05f);
+            DrawLabel(top, value);
+        }
+    }
+
+    void DrawLabel(Vector3 worldPos, string text)
+    {
+#if UNITY_EDITOR
+        Handles.BeginGUI();
+
+        Vector3 screenPos = HandleUtility.WorldToGUIPoint(worldPos);
+
+        GUIStyle style = new GUIStyle(GUI.skin.label);
+        style.fontSize = 12;
+        style.alignment = TextAnchor.MiddleCenter;
+        style.normal.textColor = Color.white;
+
+        Vector2 textSize = style.CalcSize(new GUIContent(text));
+
+        
+        screenPos.y += textSize.y * 0.8f;
+
+        Rect rect = new Rect(
+            screenPos.x - textSize.x / 2f,
+            screenPos.y - textSize.y / 2f,
+            textSize.x,
+            textSize.y
+        );
+
+        // Fondo NEGRO
+        EditorGUI.DrawRect(rect, Color.black);
+
+        // Texto
+        GUI.Label(rect, text, style);
+
+        Handles.EndGUI();
+#endif
+    }
+
+
+#endif
+}
+ 

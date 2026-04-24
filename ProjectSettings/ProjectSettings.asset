@@ -692,8 +692,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: DV_C5_Juego
-  metroPackageVersion: 
+  metroPackageName: DVC5Juego
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -701,7 +701,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: DV_C5_Juego
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: DV_C5_Juego
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
