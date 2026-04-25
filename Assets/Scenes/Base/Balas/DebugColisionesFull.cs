@@ -7,7 +7,7 @@ public class DebugColisionesFull : MonoBehaviour
     // =========================
 
     public GameObject Objetivo;
-    /*
+    
     private void OnCollisionEnter2D(Collision2D c)
     {
         DebugCollision2D("ENTER", c);
@@ -111,5 +111,5 @@ public class DebugColisionesFull : MonoBehaviour
             gameObject
         );
     }
-    */
+    
 }
