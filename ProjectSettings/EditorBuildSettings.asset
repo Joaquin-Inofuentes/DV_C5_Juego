@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Base/Movimiento de grupos.unity
-    guid: 91e279d48f56c6c4b9fa2b9ace89305f
-  - enabled: 1
     path: Assets/Scenes/MenuInicial.unity
     guid: e5d332c604fb48d488d62208bc0945f8
   - enabled: 1
@@ -17,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuDeVictoria.unity
     guid: d94d542685bcce04184457bc59c98bab
+  - enabled: 1
+    path: Assets/Scenes/Base/Movimiento de grupos.unity
+    guid: 91e279d48f56c6c4b9fa2b9ace89305f
   m_configObjects: {}
