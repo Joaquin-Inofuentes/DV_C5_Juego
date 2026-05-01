@@ -1,0 +1,280 @@
+==== INICIO CONCATENACION ==== 
+Carpeta base: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts 
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownCameraFollow.cs 
+============================== 
+using UnityEngine;
+
+public class TopDownCameraFollow : MonoBehaviour
+{
+    public static TopDownCameraFollow Instance { get; private set; }
+
+    [SerializeField] private Vector3 offset = new Vector3(0f, 0f, -10f);
+    [SerializeField] private float smooth = 12f;
+
+    private Transform _target;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+        Debug.Log("[TopDownCameraFollow] Camera sigui al jugador principal");
+    }
+
+    private void LateUpdate()
+    {
+        if (_target == null) return;
+
+        Vector3 desired = _target.position + offset;
+        transform.position = Vector3.Lerp(transform.position, desired, Time.deltaTime * smooth);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownGameManager.cs 
+============================== 
+﻿using Fusion;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class TopDownGameManager : NetworkBehaviour
+{
+    public static TopDownGameManager Instance { get; private set; }
+
+    [SerializeField] private NetworkObject playerPrefab;
+    [SerializeField] private Transform[] spawnPoints;
+
+    [Networked] public NetworkBool MatchStarted { get; set; }
+    [Networked] public int ConnectedPlayers { get; set; }
+
+    public override void Spawned()
+    {
+        Instance = this;
+        Debug.Log("<color=cyan>[Manager] Iniciado en modo compartido.</color>");
+        if (Runner.IsRunning) SpawnLocalPlayer(Runner.LocalPlayer);
+    }
+
+    private void SpawnLocalPlayer(PlayerRef player)
+    {
+        int index = Runner.ActivePlayers.ToList().IndexOf(player);
+        if (index < 0) index = 0;
+        Transform sp = spawnPoints[index % spawnPoints.Length];
+
+        Debug.Log($"<color=yellow>[Manager] Spawneando jugador local ID: {player.PlayerId}</color>");
+
+        Runner.Spawn(playerPrefab, sp.position, sp.rotation, player, (runner, obj) => {
+            runner.SetPlayerObject(player, obj);
+        });
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if (Runner.IsSharedModeMasterClient && !MatchStarted)
+        {
+            ConnectedPlayers = Runner.ActivePlayers.Count();
+            if (ConnectedPlayers >= 2)
+            {
+                Debug.Log("<color=green>[Manager] 🚀 ¡Suficientes jugadores! Partida iniciada.</color>");
+                MatchStarted = true;
+            }
+        }
+    }
+
+    public void EvaluateWinLose()
+    {
+        // Delay pequeño para que el Despawn se limpie de la lista
+        Invoke(nameof(CheckVictory), 0.3f);
+    }
+
+    private void CheckVictory()
+    {
+        // Buscamos jugadores que tengan objeto activo en la red
+        var alive = Runner.ActivePlayers.Where(p => Runner.TryGetPlayerObject(p, out _)).ToList();
+
+        Debug.Log($"<color=white>[Manager] Jugadores restantes: {alive.Count}</color>");
+
+        if (alive.Count == 1)
+        {
+            PlayerRef winner = alive[0];
+            if (winner == Runner.LocalPlayer)
+                Debug.Log("<color=green><b>🏆 ¡VICTORIA MAGISTRAL! Eres el ganador.</b></color>");
+            else
+                Debug.Log($"<color=red><b>💀 DERROTA. El ganador es P{winner.PlayerId}</b></color>");
+
+            MatchStarted = false;
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownPlayer.cs 
+============================== 
+﻿using Fusion;
+using UnityEngine;
+
+public class TopDownPlayer : NetworkBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private NetworkObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+
+    public override void Spawned()
+    {
+        Debug.Log($"<color=magenta>[Player] Spawned ID: {Object.InputAuthority.PlayerId}</color>");
+        if (Object.HasInputAuthority && TopDownCameraFollow.Instance != null)
+        {
+            TopDownCameraFollow.Instance.SetTarget(transform);
+        }
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if (!Object.HasInputAuthority) return;
+
+        if (TopDownGameManager.Instance == null || !TopDownGameManager.Instance.MatchStarted) return;
+
+        HandleMovement();
+        HandleAiming();
+        HandleShooting();
+    }
+
+    private void HandleMovement()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        if (h != 0 || v != 0)
+        {
+            Vector3 move = new Vector3(h, 0, v).normalized;
+            transform.position += move * moveSpeed * Runner.DeltaTime;
+        }
+    }
+
+    private void HandleAiming()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Vector3 targetPos = hit.point;
+            targetPos.y = transform.position.y;
+            Vector3 dir = targetPos - transform.position;
+            if (dir.sqrMagnitude > 0.1f) transform.rotation = Quaternion.LookRotation(dir);
+        }
+    }
+
+    private void HandleShooting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log($"<color=orange>[Acción] Disparo de P{Object.InputAuthority.PlayerId}</color>");
+
+            Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation, Object.InputAuthority, (runner, obj) =>
+            {
+                var proj = obj.GetComponent<TopDownProjectile>();
+                if (proj != null)
+                    proj.Initialize(Object.InputAuthority.PlayerId, gameObject, 25);
+            });
+        }
+    }
+
+    public void EnableInput() { }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownPlayerHealth.cs 
+============================== 
+using Fusion;
+using UnityEngine;
+
+public class TopDownPlayerHealth : NetworkBehaviour
+{
+    [Networked] public int Health { get; set; } = 100;
+    [Networked] public NetworkBool IsDead { get; set; }
+    [Networked] public int PlayerNumber { get; set; }
+
+    public override void Spawned()
+    {
+        if (Object.HasStateAuthority)
+        {
+            Health = 100;
+            IsDead = false;
+            PlayerNumber = Object.InputAuthority.PlayerId; // Corregido: PlayerId
+            Debug.Log($"<color=white>[SALUD] Inicializada para P{PlayerNumber}</color>");
+        }
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        // Debug de vida propia solo para el due�o
+        if (Object.HasInputAuthority && !IsDead && Runner.Tick % 100 == 0)
+        {
+            Debug.Log($"<color=red>[MI VIDA] Soy Jugador {PlayerNumber} | HP: {Health}</color>");
+        }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_TakeDamage(int damage, int attackerNumber)
+    {
+        if (IsDead) return;
+
+        Debug.Log($"<color=orange>[DA�O] P{PlayerNumber} impactado por P{attackerNumber}. Da�o: {damage}</color>");
+        Health -= damage;
+
+        if (Health <= 0)
+        {
+            Health = 0;
+            IsDead = true;
+            Debug.Log($"<color=black><b>[ELIMINACI�N] P{PlayerNumber} ha muerto.</b></color>");
+
+            if (TopDownGameManager.Instance != null)
+                TopDownGameManager.Instance.EvaluateWinLose();
+
+            Runner.Despawn(Object);
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownProjectile.cs 
+============================== 
+using Fusion;
+using UnityEngine;
+
+public class TopDownProjectile : NetworkBehaviour
+{
+    [SerializeField] private float speed = 18f;
+    [Networked] public int OwnerId { get; set; }
+    [Networked] public int DamageValue { get; set; }
+
+    public void Initialize(int ownerId, GameObject ownerObj, int damage)
+    {
+        OwnerId = ownerId;
+        DamageValue = damage;
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        transform.position += transform.forward * speed * Runner.DeltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!Object.HasStateAuthority) return;
+
+        if (other.TryGetComponent(out TopDownPlayerHealth health))
+        {
+            if (health.PlayerNumber != OwnerId)
+            {
+                Debug.Log($"<color=yellow>[Bala] Impacto P{OwnerId} -> P{health.PlayerNumber}</color>");
+                health.RPC_TakeDamage(DamageValue, OwnerId);
+                Runner.Despawn(Object);
+            }
+        }
+        else if (!other.CompareTag("Player"))
+        {
+            Runner.Despawn(Object);
+        }
+    }
+} 
