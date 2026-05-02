@@ -29,13 +29,18 @@ public class TopDownGameManager : NetworkBehaviour
         }
     }
     [Networked, OnChangedRender(nameof(WinnerChanged))] public PlayerRef Winner { get; set; }
-
+    private bool _localPlayerSpawned = false;
     public override void Spawned()
     {
         Instance = this;
         Winner = PlayerRef.None;
-        Debug.Log("[CLASS: TopDownGameManager] Manager Spawneado.");
-        if (Runner.IsRunning) SpawnLocalPlayer(Runner.LocalPlayer);
+
+        // Solo spawneamos si somos el cliente local y no lo hemos hecho ya
+        if (Runner.IsRunning && !_localPlayerSpawned)
+        {
+            _localPlayerSpawned = true;
+            SpawnLocalPlayer(Runner.LocalPlayer);
+        }
     }
 
     public void WinnerChanged()
@@ -49,25 +54,20 @@ public class TopDownGameManager : NetworkBehaviour
 
     private void SpawnLocalPlayer(PlayerRef player)
     {
-        // Obtenemos la lista actual de jugadores conectados de forma segura
-        var currentPlayers = Runner.ActivePlayers.ToList();
-        int index = currentPlayers.IndexOf(player);
+        // FIX: No uses ActivePlayers.IndexOf, porque la lista no se sincroniza 
+        // instantáneamente al conectar.
 
-        // Si el jugador no está en la lista (raro en Spawned, pero posible por lag de red)
-        // intentamos usar el recuento total como índice temporal
-        if (index == -1) index = currentPlayers.Count - 1;
+        // El PlayerId de Fusion suele empezar en 1, 2, 3... 
+        // Usamos el operador % (módulo) por si el ID es muy alto o para ciclar los spawn points.
+        // Restamos 1 para que el Player 1 use el índice 0.
+        int index = (player.PlayerId - 1) % spawnPoints.Length;
 
-        // Validación de límites de los índices de spawn
-        if (index >= spawnPoints.Length)
-        {
-            Debug.LogError($"[TopDownGameManager] ERROR: No hay suficientes Spawn Points para el jugador {player.PlayerId}. Máximo: {spawnPoints.Length}, Índice intentado: {index}");
-            return;
-        }
+        // Validación de seguridad por si el ID es negativo o extraño
+        if (index < 0) index = 0;
 
-        // Si el índice es válido, procedemos con el spawn
         Transform sp = spawnPoints[index];
 
-        Debug.Log($"[TopDownGameManager] Spawneando Jugador {player.PlayerId} en el índice de spawn: {index}");
+        Debug.Log($"[TopDownGameManager] Spawneando Jugador {player.PlayerId} en el índice de spawn fijo: {index}");
 
         Runner.Spawn(playerPrefab, sp.position, sp.rotation, player, (r, obj) =>
         {
@@ -116,5 +116,14 @@ public class TopDownGameManager : NetworkBehaviour
         Debug.Log($"[CLASS: TopDownGameManager] RPC Recibido. Seteando ganador a P{winner.PlayerId}");
         Winner = winner;
         MatchStarted = false;
+    }
+
+    public void Prueba1(NetworkRunner Runer1, PlayerRef Player1)
+    {
+        Debug.Log($"[TopDownGameManager] Prueba1: Runner {Runer1}, Player {Player1}");
+    }
+    public void Prueba2(NetworkRunner Runer2)
+    {
+        Debug.Log($"[TopDownGameManager] Prueba2: Runner {Runer2}");
     }
 }

@@ -25,36 +25,42 @@ public class TopDownPlayer : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        // Solo el dueño mueve el objeto físicamente
         if (!Object.HasStateAuthority) return;
         if (TopDownGameManager.Instance == null || !TopDownGameManager.Instance.MatchStarted) return;
 
-        // Movimiento
+        // MOVIMIENTO FÍSICO
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        transform.position += new Vector3(h, 0, v).normalized * moveSpeed * Runner.DeltaTime;
+        Vector3 moveDir = new Vector3(h, 0, v).normalized;
+        transform.position += moveDir * moveSpeed * Runner.DeltaTime;
 
-        // Rotación (HandleAiming)
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            Vector3 dir = hit.point - transform.position;
-            dir.y = 0;
-            if (dir.sqrMagnitude > 0.1f) transform.rotation = Quaternion.LookRotation(dir);
-        }
-
-        // Lógica de Disparo
+        // DISPARO
         if (_wasShootPressed && Ammo > 0 && shootCooldown.ExpiredOrNotRunning(Runner))
         {
-            try
-            {
-                ExecuteShoot();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError($"[Shoot Error] Error al spawnear proyectil o animar: {e.Message}");
-            }
+            ExecuteShoot();
         }
         _wasShootPressed = false;
+    }
+
+    // NUEVO: Usamos Render para la rotación visual para eliminar el delay del ratón
+    public override void Render()
+    {
+        // Solo rotamos localmente para el que controla al personaje
+        if (Object.HasInputAuthority)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3 dir = hit.point - transform.position;
+                dir.y = 0;
+                if (dir.sqrMagnitude > 0.1f)
+                {
+                    // Rotación suave pero instantánea visualmente
+                    transform.rotation = Quaternion.LookRotation(dir);
+                }
+            }
+        }
     }
     // Añade esta referencia
     [SerializeField] private NetworkMecanimAnimator networkAnimator;
