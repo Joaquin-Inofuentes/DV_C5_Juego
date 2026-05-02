@@ -11,7 +11,23 @@ public class TopDownGameManager : NetworkBehaviour
     [SerializeField] private NetworkObject playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
-    [Networked] public NetworkBool MatchStarted { get; set; }
+    [Networked] public NetworkBool _matchStarted { get; set; }
+
+    public bool MatchStarted
+    {
+        get
+        {
+            // Usamos solo IsValid. Si el objeto no está en red o fue destruido, devuelve false.
+            if (Object == null || !Object.IsValid) return false;
+            return _matchStarted;
+        }
+        set
+        {
+            // Solo el que tiene autoridad puede cambiar el estado
+            if (Object != null && Object.IsValid && Object.HasStateAuthority)
+                _matchStarted = value;
+        }
+    }
     [Networked, OnChangedRender(nameof(WinnerChanged))] public PlayerRef Winner { get; set; }
 
     public override void Spawned()
@@ -33,16 +49,63 @@ public class TopDownGameManager : NetworkBehaviour
 
     private void SpawnLocalPlayer(PlayerRef player)
     {
-        int index = player.PlayerId - 1;
-        Transform sp = spawnPoints[index % spawnPoints.Length];
-        Runner.Spawn(playerPrefab, sp.position, sp.rotation, player, (r, obj) => r.SetPlayerObject(player, obj));
+        // Obtenemos la lista actual de jugadores conectados de forma segura
+        var currentPlayers = Runner.ActivePlayers.ToList();
+        int index = currentPlayers.IndexOf(player);
+
+        // Si el jugador no está en la lista (raro en Spawned, pero posible por lag de red)
+        // intentamos usar el recuento total como índice temporal
+        if (index == -1) index = currentPlayers.Count - 1;
+
+        // Validación de límites de los índices de spawn
+        if (index >= spawnPoints.Length)
+        {
+            Debug.LogError($"[TopDownGameManager] ERROR: No hay suficientes Spawn Points para el jugador {player.PlayerId}. Máximo: {spawnPoints.Length}, Índice intentado: {index}");
+            return;
+        }
+
+        // Si el índice es válido, procedemos con el spawn
+        Transform sp = spawnPoints[index];
+
+        Debug.Log($"[TopDownGameManager] Spawneando Jugador {player.PlayerId} en el índice de spawn: {index}");
+
+        Runner.Spawn(playerPrefab, sp.position, sp.rotation, player, (r, obj) =>
+        {
+            r.SetPlayerObject(player, obj);
+        });
     }
 
+    // Implementa esta interfaz en la clase: IPlayerLeft
     public override void FixedUpdateNetwork()
     {
-        if (Object.IsValid && Runner.IsSharedModeMasterClient && !MatchStarted)
+        // Verificación de seguridad extrema
+        if (Object == null || !Object.IsValid) return;
+
+        // Si el dueño se fue y yo soy el nuevo Master, tomo la autoridad para que el juego siga
+        if (!Object.HasStateAuthority && Runner.IsSharedModeMasterClient)
+        {
+            Object.RequestStateAuthority();
+        }
+
+        if (Object.HasStateAuthority && !MatchStarted)
         {
             if (Runner.ActivePlayers.Count() >= 2) MatchStarted = true;
+        }
+    }
+
+    // Este método se llama automáticamente si implementas IPlayerLeft o heredas de NetworkBehaviour
+    public void PlayerLeft(PlayerRef player)
+    {
+        if (player == Object.StateAuthority)
+        {
+            Debug.LogWarning("[GameManager] El Authority se desconectó. Intentando migrar...");
+
+            // En Shared Mode, si el StateAuthority se va, podemos pedir la autoridad
+            // desde el nuevo Master Client asignado por Fusion
+            if (Runner.IsSharedModeMasterClient)
+            {
+                Object.RequestStateAuthority();
+            }
         }
     }
 

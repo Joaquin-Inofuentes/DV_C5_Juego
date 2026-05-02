@@ -1,0 +1,421 @@
+==== INICIO CONCATENACION ==== 
+Carpeta base: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts 
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownCameraFollow.cs 
+============================== 
+using UnityEngine;
+
+public class TopDownCameraFollow : MonoBehaviour
+{
+    public static TopDownCameraFollow Instance { get; private set; }
+
+    [SerializeField] private Vector3 offset = new Vector3(0f, 0f, -10f);
+    [SerializeField] private float smooth = 12f;
+
+    private Transform _target;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void LateUpdate()
+    {
+        if (_target == null) return;
+
+        Vector3 desired = _target.position + offset;
+        // Aumentamos a 20f o usamos MoveTowards para que no se sienta "chicle"
+        transform.position = Vector3.Lerp(transform.position, desired, Time.deltaTime * 20f);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
+        Debug.Log("[TopDownCameraFollow] Camera sigui al jugador principal");
+    }
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownGameManager.cs 
+============================== 
+﻿using Fusion;
+using System.Linq;
+using UnityEngine;
+using System;
+
+public class TopDownGameManager : NetworkBehaviour
+{
+    public static TopDownGameManager Instance { get; private set; }
+    public static event Action<PlayerRef> OnGameEndedStatic;
+
+    [SerializeField] private NetworkObject playerPrefab;
+    [SerializeField] private Transform[] spawnPoints;
+
+    [Networked] public NetworkBool _matchStarted { get; set; }
+
+    public bool MatchStarted
+    {
+        get
+        {
+            // Usamos solo IsValid. Si el objeto no está en red o fue destruido, devuelve false.
+            if (Object == null || !Object.IsValid) return false;
+            return _matchStarted;
+        }
+        set
+        {
+            // Solo el que tiene autoridad puede cambiar el estado
+            if (Object != null && Object.IsValid && Object.HasStateAuthority)
+                _matchStarted = value;
+        }
+    }
+    [Networked, OnChangedRender(nameof(WinnerChanged))] public PlayerRef Winner { get; set; }
+
+    public override void Spawned()
+    {
+        Instance = this;
+        Winner = PlayerRef.None;
+        Debug.Log("[CLASS: TopDownGameManager] Manager Spawneado.");
+        if (Runner.IsRunning) SpawnLocalPlayer(Runner.LocalPlayer);
+    }
+
+    public void WinnerChanged()
+    {
+        if (Winner != PlayerRef.None)
+        {
+            Debug.Log($"[CLASS: TopDownGameManager] Sincronización: Ganador P{Winner.PlayerId}");
+            OnGameEndedStatic?.Invoke(Winner);
+        }
+    }
+
+    private void SpawnLocalPlayer(PlayerRef player)
+    {
+        // Obtenemos la lista actual de jugadores conectados de forma segura
+        var currentPlayers = Runner.ActivePlayers.ToList();
+        int index = currentPlayers.IndexOf(player);
+
+        // Si el jugador no está en la lista (raro en Spawned, pero posible por lag de red)
+        // intentamos usar el recuento total como índice temporal
+        if (index == -1) index = currentPlayers.Count - 1;
+
+        // Validación de límites de los índices de spawn
+        if (index >= spawnPoints.Length)
+        {
+            Debug.LogError($"[TopDownGameManager] ERROR: No hay suficientes Spawn Points para el jugador {player.PlayerId}. Máximo: {spawnPoints.Length}, Índice intentado: {index}");
+            return;
+        }
+
+        // Si el índice es válido, procedemos con el spawn
+        Transform sp = spawnPoints[index];
+
+        Debug.Log($"[TopDownGameManager] Spawneando Jugador {player.PlayerId} en el índice de spawn: {index}");
+
+        Runner.Spawn(playerPrefab, sp.position, sp.rotation, player, (r, obj) =>
+        {
+            r.SetPlayerObject(player, obj);
+        });
+    }
+
+    // Implementa esta interfaz en la clase: IPlayerLeft
+    public override void FixedUpdateNetwork()
+    {
+        // Verificación de seguridad extrema
+        if (Object == null || !Object.IsValid) return;
+
+        // Si el dueño se fue y yo soy el nuevo Master, tomo la autoridad para que el juego siga
+        if (!Object.HasStateAuthority && Runner.IsSharedModeMasterClient)
+        {
+            Object.RequestStateAuthority();
+        }
+
+        if (Object.HasStateAuthority && !MatchStarted)
+        {
+            if (Runner.ActivePlayers.Count() >= 2) MatchStarted = true;
+        }
+    }
+
+    // Este método se llama automáticamente si implementas IPlayerLeft o heredas de NetworkBehaviour
+    public void PlayerLeft(PlayerRef player)
+    {
+        if (player == Object.StateAuthority)
+        {
+            Debug.LogWarning("[GameManager] El Authority se desconectó. Intentando migrar...");
+
+            // En Shared Mode, si el StateAuthority se va, podemos pedir la autoridad
+            // desde el nuevo Master Client asignado por Fusion
+            if (Runner.IsSharedModeMasterClient)
+            {
+                Object.RequestStateAuthority();
+            }
+        }
+    }
+
+    // RPC para que CUALQUIERA pueda avisar al Master Client quién ganó
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_SetWinner(PlayerRef winner)
+    {
+        Debug.Log($"[CLASS: TopDownGameManager] RPC Recibido. Seteando ganador a P{winner.PlayerId}");
+        Winner = winner;
+        MatchStarted = false;
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownPlayer.cs 
+============================== 
+﻿using Fusion;
+using UnityEngine;
+
+public class TopDownPlayer : NetworkBehaviour
+{
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private NetworkObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+
+    [Networked] public int Ammo { get; set; }
+    [Networked] private TickTimer shootCooldown { get; set; }
+    private bool _wasShootPressed;
+
+    public override void Spawned()
+    {
+        if (Object.HasStateAuthority) Ammo = 20;
+        if (Object.HasInputAuthority && TopDownCameraFollow.Instance != null)
+            TopDownCameraFollow.Instance.SetTarget(transform);
+    }
+
+    private void Update()
+    {
+        if (Object.HasInputAuthority && Input.GetMouseButtonDown(0)) _wasShootPressed = true;
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        if (!Object.HasStateAuthority) return;
+        if (TopDownGameManager.Instance == null || !TopDownGameManager.Instance.MatchStarted) return;
+
+        // Movimiento
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        transform.position += new Vector3(h, 0, v).normalized * moveSpeed * Runner.DeltaTime;
+
+        // Rotación (HandleAiming)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Vector3 dir = hit.point - transform.position;
+            dir.y = 0;
+            if (dir.sqrMagnitude > 0.1f) transform.rotation = Quaternion.LookRotation(dir);
+        }
+
+        // Lógica de Disparo
+        if (_wasShootPressed && Ammo > 0 && shootCooldown.ExpiredOrNotRunning(Runner))
+        {
+            try
+            {
+                ExecuteShoot();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[Shoot Error] Error al spawnear proyectil o animar: {e.Message}");
+            }
+        }
+        _wasShootPressed = false;
+    }
+    // Añade esta referencia
+    [SerializeField] private NetworkMecanimAnimator networkAnimator;
+
+    private void ExecuteShoot()
+    {
+        Ammo--;
+        shootCooldown = TickTimer.CreateFromSeconds(Runner, 0.3f);
+
+        // En lugar de usar playerAnimator.SetTrigger:
+        if (networkAnimator != null)
+        {
+            networkAnimator.SetTrigger("OnShoot");
+        }
+
+        Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation, Object.InputAuthority, (r, obj) => {
+            obj.GetComponent<TopDownProjectile>().Initialize(Object.InputAuthority, 25);
+        });
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownPlayerHealth.cs 
+============================== 
+using Fusion;
+using System;
+using UnityEngine;
+
+public class TopDownPlayerHealth : NetworkBehaviour
+{
+    [Networked] public int Health { get; set; }
+    // Cambiamos int por PlayerRef para evitar confusiones de IDs
+    [Networked] public PlayerRef OwnerRef { get; set; }
+
+    public override void Spawned()
+    {
+        if (Object.HasStateAuthority)
+        {
+            Health = 100;
+            OwnerRef = Object.InputAuthority;
+        }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_TakeDamage(int damage, PlayerRef attacker)
+    {
+        try
+        {
+            if (Health <= 0) return;
+
+            Health -= damage;
+
+            // Sincronizaci�n de animaci�n v�a Trigger en el StateAuthority
+            // Esto se replicar� a los dem�s si usas un NetworkAnimator 
+            // o mediante la l�gica de cambio de estado.
+            TriggerHurtAnimation();
+
+            if (Health <= 0)
+            {
+                Health = 0;
+                if (TopDownGameManager.Instance != null)
+                    TopDownGameManager.Instance.RPC_SetWinner(attacker);
+
+                Runner.Despawn(Object);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[Health Error] Fallo al procesar da�o: {e.Message}");
+        }
+    }
+    [SerializeField] private NetworkMecanimAnimator networkAnimator;
+
+    private void TriggerHurtAnimation()
+    {
+        try
+        {
+            if (networkAnimator != null)
+                networkAnimator.SetTrigger("OnHurt");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"NetworkAnimator no encontrado: {ex.Message}");
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownProjectile.cs 
+============================== 
+using Fusion;
+using UnityEngine;
+
+public class TopDownProjectile : NetworkBehaviour
+{
+    [SerializeField] private float speed = 25f;
+    [Networked] public PlayerRef Owner { get; set; } // Cambiado a PlayerRef
+    [Networked] public int DamageValue { get; set; }
+
+    public void Initialize(PlayerRef owner, int damage)
+    {
+        Owner = owner;
+        DamageValue = damage;
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        transform.position += transform.forward * speed * Runner.DeltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!Object.HasStateAuthority) return;
+
+        if (other.TryGetComponent(out TopDownPlayerHealth health))
+        {
+            // Comparaci�n directa de PlayerRef
+            if (health.OwnerRef != Owner)
+            {
+                health.RPC_TakeDamage(DamageValue, Owner);
+                Runner.Despawn(Object);
+            }
+        }
+        else if (!other.CompareTag("Player"))
+        {
+            Runner.Despawn(Object);
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\E_DPR\Parcial 1\Scripts\TopDownUIManager.cs 
+============================== 
+using UnityEngine;
+using TMPro;
+using Fusion;
+
+public class TopDownUIManager : MonoBehaviour
+{
+    [Header("Paneles")]
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject losePanel;
+
+    [Header("Textos TMP")]
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI ammoText;
+
+    private void OnEnable() => TopDownGameManager.OnGameEndedStatic += HandleGameEnded;
+    private void OnDisable() => TopDownGameManager.OnGameEndedStatic -= HandleGameEnded;
+
+    private void Start()
+    {
+        winPanel?.SetActive(false);
+        losePanel?.SetActive(false);
+    }
+
+    private void Update()
+    {
+        // 1. Chequeo de nulidad de la instancia
+        if (TopDownGameManager.Instance == null) return;
+
+        // 2. Chequeo de validez del objeto de red
+        if (!TopDownGameManager.Instance.Object.IsValid) return;
+
+        var runner = TopDownGameManager.Instance.Runner;
+        if (runner == null || !runner.IsRunning) return;
+
+        NetworkObject localPlayerObj = runner.GetPlayerObject(runner.LocalPlayer);
+
+        if (localPlayerObj != null && localPlayerObj.IsValid)
+        {
+            if (localPlayerObj.TryGetComponent(out TopDownPlayerHealth hp))
+                healthText.text = $"VIDA: {hp.Health}";
+
+            if (localPlayerObj.TryGetComponent(out TopDownPlayer player))
+                ammoText.text = $"BALAS: {player.Ammo}";
+        }
+    }
+
+    private void HandleGameEnded(PlayerRef winner)
+    {
+        var runner = TopDownGameManager.Instance.Runner;
+
+        // Obtenemos el ID real para el log
+        int myID = runner.LocalPlayer.PlayerId;
+        int winnerID = winner.PlayerId;
+
+        Debug.Log($"[UI] Fin del Juego. Mi ID: {myID} | Ganador ID: {winnerID}");
+
+        // Comparaci�n directa de PlayerRef (es lo m�s seguro en Fusion)
+        if (winner == runner.LocalPlayer)
+        {
+            winPanel?.SetActive(true);
+            losePanel?.SetActive(false);
+        }
+        else
+        {
+            losePanel?.SetActive(true);
+            winPanel?.SetActive(false);
+        }
+    }
+} 

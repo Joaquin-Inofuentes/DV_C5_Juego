@@ -42,17 +42,36 @@ public class TopDownPlayer : NetworkBehaviour
             if (dir.sqrMagnitude > 0.1f) transform.rotation = Quaternion.LookRotation(dir);
         }
 
-        // Disparo
-        // Dentro de FixedUpdateNetwork en el bloque de disparo:
+        // Lógica de Disparo
         if (_wasShootPressed && Ammo > 0 && shootCooldown.ExpiredOrNotRunning(Runner))
         {
-            Ammo--;
-            shootCooldown = TickTimer.CreateFromSeconds(Runner, 0.3f);
-            Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation, Object.InputAuthority, (r, obj) => {
-                // Pasamos Object.InputAuthority que es el PlayerRef del dueño
-                obj.GetComponent<TopDownProjectile>().Initialize(Object.InputAuthority, 25);
-            });
+            try
+            {
+                ExecuteShoot();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"[Shoot Error] Error al spawnear proyectil o animar: {e.Message}");
+            }
         }
         _wasShootPressed = false;
+    }
+    // Añade esta referencia
+    [SerializeField] private NetworkMecanimAnimator networkAnimator;
+
+    private void ExecuteShoot()
+    {
+        Ammo--;
+        shootCooldown = TickTimer.CreateFromSeconds(Runner, 0.3f);
+
+        // En lugar de usar playerAnimator.SetTrigger:
+        if (networkAnimator != null)
+        {
+            networkAnimator.SetTrigger("OnShoot");
+        }
+
+        Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation, Object.InputAuthority, (r, obj) => {
+            obj.GetComponent<TopDownProjectile>().Initialize(Object.InputAuthority, 25);
+        });
     }
 }

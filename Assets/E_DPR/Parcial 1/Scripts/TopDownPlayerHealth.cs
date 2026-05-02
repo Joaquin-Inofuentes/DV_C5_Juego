@@ -1,4 +1,5 @@
 using Fusion;
+using System;
 using UnityEngine;
 
 public class TopDownPlayerHealth : NetworkBehaviour
@@ -19,20 +20,43 @@ public class TopDownPlayerHealth : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_TakeDamage(int damage, PlayerRef attacker)
     {
-        if (Health <= 0) return;
-
-        Health -= damage;
-        Debug.Log($"[HEALTH] P{OwnerRef.PlayerId} recibió daño de P{attacker.PlayerId}. HP: {Health}");
-
-        if (Health <= 0)
+        try
         {
-            Health = 0;
-            if (TopDownGameManager.Instance != null)
+            if (Health <= 0) return;
+
+            Health -= damage;
+
+            // Sincronización de animación vía Trigger en el StateAuthority
+            // Esto se replicará a los demás si usas un NetworkAnimator 
+            // o mediante la lógica de cambio de estado.
+            TriggerHurtAnimation();
+
+            if (Health <= 0)
             {
-                // El atacante es el ganador
-                TopDownGameManager.Instance.RPC_SetWinner(attacker);
+                Health = 0;
+                if (TopDownGameManager.Instance != null)
+                    TopDownGameManager.Instance.RPC_SetWinner(attacker);
+
+                Runner.Despawn(Object);
             }
-            Runner.Despawn(Object);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[Health Error] Fallo al procesar daño: {e.Message}");
+        }
+    }
+    [SerializeField] private NetworkMecanimAnimator networkAnimator;
+
+    private void TriggerHurtAnimation()
+    {
+        try
+        {
+            if (networkAnimator != null)
+                networkAnimator.SetTrigger("OnHurt");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"NetworkAnimator no encontrado: {ex.Message}");
         }
     }
 }

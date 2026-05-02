@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8201167883930407501}
   - component: {fileID: 6890332910590554575}
   - component: {fileID: 4806969177323592043}
-  - component: {fileID: -2277089963371081291}
+  - component: {fileID: 2711151764456118662}
   m_Layer: 7
   m_Name: Jugador
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.89, y: 0.89, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9199431193035228605}
   - {fileID: 890964284788675370}
@@ -112,8 +112,8 @@ MonoBehaviour:
   - {fileID: 4197370316027650886}
   - {fileID: 2183785605764924417}
   - {fileID: 8201167883930407501}
-  - {fileID: -2277089963371081291}
-  - {fileID: 189826610593836101}
+  - {fileID: 2711151764456118662}
+  - {fileID: 4665167495351954963}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &4197370316027650886
 MonoBehaviour:
@@ -148,6 +148,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: -512776671374246440, guid: e290250616c94ce469b18d6ee0b90f26, type: 3}
   firePoint: {fileID: 9199431193035228605}
   _Ammo: 0
+  networkAnimator: {fileID: 4665167495351954963}
 --- !u!114 &8201167883930407501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Health: 0
+  networkAnimator: {fileID: 2711151764456118662}
 --- !u!65 &6890332910590554575
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -203,7 +205,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2277089963371081291
+--- !u!114 &2711151764456118662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,7 +267,7 @@ GameObject:
   - component: {fileID: 4384118955553827461}
   - component: {fileID: 5212477707343247262}
   - component: {fileID: 2388851079155479109}
-  - component: {fileID: 189826610593836101}
+  - component: {fileID: 4665167495351954963}
   m_Layer: 7
   m_Name: Accion de disparo
   m_TagString: Untagged
@@ -380,7 +382,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &189826610593836101
+--- !u!114 &4665167495351954963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

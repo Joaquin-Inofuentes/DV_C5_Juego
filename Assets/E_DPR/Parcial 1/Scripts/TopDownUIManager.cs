@@ -23,13 +23,18 @@ public class TopDownUIManager : MonoBehaviour
 
     private void Update()
     {
-        // En lugar de Instances[0], usamos el Singleton del Manager que ya tiene el Runner
-        if (TopDownGameManager.Instance == null || TopDownGameManager.Instance.Runner == null) return;
+        // 1. Chequeo de nulidad de la instancia
+        if (TopDownGameManager.Instance == null) return;
+
+        // 2. Chequeo de validez del objeto de red
+        if (!TopDownGameManager.Instance.Object.IsValid) return;
 
         var runner = TopDownGameManager.Instance.Runner;
+        if (runner == null || !runner.IsRunning) return;
+
         NetworkObject localPlayerObj = runner.GetPlayerObject(runner.LocalPlayer);
 
-        if (localPlayerObj != null)
+        if (localPlayerObj != null && localPlayerObj.IsValid)
         {
             if (localPlayerObj.TryGetComponent(out TopDownPlayerHealth hp))
                 healthText.text = $"VIDA: {hp.Health}";
