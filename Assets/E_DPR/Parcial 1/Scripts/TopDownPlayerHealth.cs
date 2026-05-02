@@ -1,10 +1,10 @@
 using Fusion;
 using UnityEngine;
+using System;
 
 public class TopDownPlayerHealth : NetworkBehaviour
 {
-    [Networked] public int Health { get; set; } = 100;
-    [Networked] public NetworkBool IsDead { get; set; }
+    [Networked] public int Health { get; set; }
     [Networked] public int PlayerNumber { get; set; }
 
     public override void Spawned()
@@ -12,39 +12,34 @@ public class TopDownPlayerHealth : NetworkBehaviour
         if (Object.HasStateAuthority)
         {
             Health = 100;
-            IsDead = false;
-            PlayerNumber = Object.InputAuthority.PlayerId; // Corregido: PlayerId
-            Debug.Log($"<color=white>[SALUD] Inicializada para P{PlayerNumber}</color>");
-        }
-    }
-
-    public override void FixedUpdateNetwork()
-    {
-        // Debug de vida propia solo para el dueño
-        if (Object.HasInputAuthority && !IsDead && Runner.Tick % 100 == 0)
-        {
-            Debug.Log($"<color=red>[MI VIDA] Soy Jugador {PlayerNumber} | HP: {Health}</color>");
+            PlayerNumber = Object.InputAuthority.PlayerId;
         }
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_TakeDamage(int damage, int attackerNumber)
+    public void RPC_TakeDamage(int damage, int attackerId)
     {
-        if (IsDead) return;
+        if (Health <= 0) return;
 
-        Debug.Log($"<color=orange>[DAÑO] P{PlayerNumber} impactado por P{attackerNumber}. Daño: {damage}</color>");
         Health -= damage;
+        Debug.Log($"[CLASS: TopDownPlayerHealth] P{PlayerNumber} Daño. HP: {Health}");
 
         if (Health <= 0)
         {
             Health = 0;
-            IsDead = true;
-            Debug.Log($"<color=black><b>[ELIMINACIÓN] P{PlayerNumber} ha muerto.</b></color>");
+            // Buscamos al atacante para declararlo ganador
+            PlayerRef winnerRef = PlayerRef.None;
+            foreach (var p in Runner.ActivePlayers)
+            {
+                if (p.PlayerId == attackerId) winnerRef = p;
+            }
 
             if (TopDownGameManager.Instance != null)
-                TopDownGameManager.Instance.EvaluateWinLose();
+                TopDownGameManager.Instance.RPC_SetWinner(winnerRef);
 
-            Runner.Despawn(Object);
+            Invoke(nameof(DelayedDespawn), 0.5f);
         }
     }
+
+    private void DelayedDespawn() => Runner.Despawn(Object);
 }

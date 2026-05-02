@@ -14,17 +14,19 @@ public class TopDownCameraFollow : MonoBehaviour
         Instance = this;
     }
 
+    private void LateUpdate()
+    {
+        if (_target == null) return;
+
+        Vector3 desired = _target.position + offset;
+        // Aumentamos a 20f o usamos MoveTowards para que no se sienta "chicle"
+        transform.position = Vector3.Lerp(transform.position, desired, Time.deltaTime * 20f);
+    }
+
     public void SetTarget(Transform target)
     {
         _target = target;
         Debug.Log("[TopDownCameraFollow] Camera sigui al jugador principal");
     }
 
-    private void LateUpdate()
-    {
-        if (_target == null) return;
-
-        Vector3 desired = _target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, desired, Time.deltaTime * smooth);
-    }
 }
