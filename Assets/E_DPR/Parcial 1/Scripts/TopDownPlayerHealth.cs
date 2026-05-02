@@ -1,45 +1,38 @@
 using Fusion;
 using UnityEngine;
-using System;
 
 public class TopDownPlayerHealth : NetworkBehaviour
 {
     [Networked] public int Health { get; set; }
-    [Networked] public int PlayerNumber { get; set; }
+    // Cambiamos int por PlayerRef para evitar confusiones de IDs
+    [Networked] public PlayerRef OwnerRef { get; set; }
 
     public override void Spawned()
     {
         if (Object.HasStateAuthority)
         {
             Health = 100;
-            PlayerNumber = Object.InputAuthority.PlayerId;
+            OwnerRef = Object.InputAuthority;
         }
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_TakeDamage(int damage, int attackerId)
+    public void RPC_TakeDamage(int damage, PlayerRef attacker)
     {
         if (Health <= 0) return;
 
         Health -= damage;
-        Debug.Log($"[CLASS: TopDownPlayerHealth] P{PlayerNumber} Daño. HP: {Health}");
+        Debug.Log($"[HEALTH] P{OwnerRef.PlayerId} recibió daño de P{attacker.PlayerId}. HP: {Health}");
 
         if (Health <= 0)
         {
             Health = 0;
-            // Buscamos al atacante para declararlo ganador
-            PlayerRef winnerRef = PlayerRef.None;
-            foreach (var p in Runner.ActivePlayers)
-            {
-                if (p.PlayerId == attackerId) winnerRef = p;
-            }
-
             if (TopDownGameManager.Instance != null)
-                TopDownGameManager.Instance.RPC_SetWinner(winnerRef);
-
-            Invoke(nameof(DelayedDespawn), 0.5f);
+            {
+                // El atacante es el ganador
+                TopDownGameManager.Instance.RPC_SetWinner(attacker);
+            }
+            Runner.Despawn(Object);
         }
     }
-
-    private void DelayedDespawn() => Runner.Despawn(Object);
 }

@@ -43,12 +43,14 @@ public class TopDownPlayer : NetworkBehaviour
         }
 
         // Disparo
+        // Dentro de FixedUpdateNetwork en el bloque de disparo:
         if (_wasShootPressed && Ammo > 0 && shootCooldown.ExpiredOrNotRunning(Runner))
         {
             Ammo--;
             shootCooldown = TickTimer.CreateFromSeconds(Runner, 0.3f);
             Runner.Spawn(projectilePrefab, firePoint.position, firePoint.rotation, Object.InputAuthority, (r, obj) => {
-                obj.GetComponent<TopDownProjectile>().Initialize(Object.InputAuthority.PlayerId, 25);
+                // Pasamos Object.InputAuthority que es el PlayerRef del dueño
+                obj.GetComponent<TopDownProjectile>().Initialize(Object.InputAuthority, 25);
             });
         }
         _wasShootPressed = false;

@@ -4,18 +4,17 @@ using UnityEngine;
 public class TopDownProjectile : NetworkBehaviour
 {
     [SerializeField] private float speed = 25f;
-    [Networked] public int OwnerId { get; set; }
+    [Networked] public PlayerRef Owner { get; set; } // Cambiado a PlayerRef
     [Networked] public int DamageValue { get; set; }
 
-    public void Initialize(int ownerId, int damage)
+    public void Initialize(PlayerRef owner, int damage)
     {
-        OwnerId = ownerId;
+        Owner = owner;
         DamageValue = damage;
     }
 
     public override void FixedUpdateNetwork()
     {
-        // Movimiento simple. El NetworkTransform se encarga de sincronizar la posición.
         transform.position += transform.forward * speed * Runner.DeltaTime;
     }
 
@@ -25,9 +24,10 @@ public class TopDownProjectile : NetworkBehaviour
 
         if (other.TryGetComponent(out TopDownPlayerHealth health))
         {
-            if (health.PlayerNumber != OwnerId)
+            // Comparación directa de PlayerRef
+            if (health.OwnerRef != Owner)
             {
-                health.RPC_TakeDamage(DamageValue, OwnerId);
+                health.RPC_TakeDamage(DamageValue, Owner);
                 Runner.Despawn(Object);
             }
         }

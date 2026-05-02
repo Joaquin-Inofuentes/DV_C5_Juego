@@ -17,49 +17,48 @@ public class TopDownUIManager : MonoBehaviour
 
     private void Start()
     {
-        if (winPanel == null || losePanel == null || healthText == null || ammoText == null)
-            Debug.LogError("[CLASS: TopDownUIManager] Faltan referencias en el Inspector.");
-
         winPanel?.SetActive(false);
         losePanel?.SetActive(false);
     }
 
     private void Update()
     {
-        if (NetworkRunner.Instances.Count == 0) return;
-        var runner = NetworkRunner.Instances[0];
-        if (runner == null || !runner.IsRunning) return;
+        // En lugar de Instances[0], usamos el Singleton del Manager que ya tiene el Runner
+        if (TopDownGameManager.Instance == null || TopDownGameManager.Instance.Runner == null) return;
 
-        // HUD: Buscamos al jugador local y actualizamos textos
-        NetworkObject localPlayer = runner.GetPlayerObject(runner.LocalPlayer);
-        if (localPlayer != null)
-        {
-            var hp = localPlayer.GetComponent<TopDownPlayerHealth>();
-            var player = localPlayer.GetComponent<TopDownPlayer>();
+        var runner = TopDownGameManager.Instance.Runner;
+        NetworkObject localPlayerObj = runner.GetPlayerObject(runner.LocalPlayer);
 
-            if (hp != null && healthText != null) healthText.text = $"VIDA: {hp.Health}";
-            if (player != null && ammoText != null) ammoText.text = $"BALAS: {player.Ammo}";
-        }
-        else
+        if (localPlayerObj != null)
         {
-            if (healthText != null) healthText.text = "VIDA: 0";
+            if (localPlayerObj.TryGetComponent(out TopDownPlayerHealth hp))
+                healthText.text = $"VIDA: {hp.Health}";
+
+            if (localPlayerObj.TryGetComponent(out TopDownPlayer player))
+                ammoText.text = $"BALAS: {player.Ammo}";
         }
     }
 
     private void HandleGameEnded(PlayerRef winner)
     {
-        var runner = NetworkRunner.Instances[0];
-        Debug.Log($"[CLASS: TopDownUIManager] Fin del juego. Ganador: P{winner.PlayerId}");
+        var runner = TopDownGameManager.Instance.Runner;
 
+        // Obtenemos el ID real para el log
+        int myID = runner.LocalPlayer.PlayerId;
+        int winnerID = winner.PlayerId;
+
+        Debug.Log($"[UI] Fin del Juego. Mi ID: {myID} | Ganador ID: {winnerID}");
+
+        // Comparación directa de PlayerRef (es lo más seguro en Fusion)
         if (winner == runner.LocalPlayer)
         {
             winPanel?.SetActive(true);
-            Debug.Log("<color=green>¡MOSTRANDO PANEL VICTORIA!</color>");
+            losePanel?.SetActive(false);
         }
         else
         {
             losePanel?.SetActive(true);
-            Debug.Log("<color=red>¡MOSTRANDO PANEL DERROTA!</color>");
+            winPanel?.SetActive(false);
         }
     }
 }
