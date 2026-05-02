@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8201167883930407501}
   - component: {fileID: 6890332910590554575}
   - component: {fileID: 4806969177323592043}
+  - component: {fileID: -2277089963371081291}
   m_Layer: 7
   m_Name: Jugador
   m_TagString: Untagged
@@ -111,6 +112,8 @@ MonoBehaviour:
   - {fileID: 4197370316027650886}
   - {fileID: 2183785605764924417}
   - {fileID: 8201167883930407501}
+  - {fileID: -2277089963371081291}
+  - {fileID: 189826610593836101}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &4197370316027650886
 MonoBehaviour:
@@ -189,10 +192,10 @@ Animator:
   m_GameObject: {fileID: 4013283461930909804}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07e758483f70af7468adf66936a294ac, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -200,6 +203,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2277089963371081291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4013283461930909804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 4806969177323592043}
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 00000000cf8fd52821ed1d5d958341e27e40c91f
+  TriggerHashes: 000000000ea4352f
+  TotalWords: 1
 --- !u!1 &6386191965801430882
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +265,7 @@ GameObject:
   - component: {fileID: 4384118955553827461}
   - component: {fileID: 5212477707343247262}
   - component: {fileID: 2388851079155479109}
+  - component: {fileID: 189826610593836101}
   m_Layer: 7
   m_Name: Accion de disparo
   m_TagString: Untagged
@@ -350,7 +372,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a4ed6a210425ea64ab69ec4a505d24c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -358,3 +380,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &189826610593836101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386953796282718604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 2388851079155479109}
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 00000000cf8fd52821ed1d5d958341e27e40c91f
+  TriggerHashes: 000000006390766a
+  TotalWords: 1
