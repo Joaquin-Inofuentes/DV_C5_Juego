@@ -1,12 +1,14 @@
 ﻿using Fusion;
+using System;
 using System.Linq;
 using UnityEngine;
-using System;
+using UnityEngine.Events;
 
 public class TopDownGameManager : NetworkBehaviour
 {
     public static TopDownGameManager Instance { get; private set; }
     public static event Action<PlayerRef> OnGameEndedStatic;
+    public UnityEvent<PlayerRef> OnWinnerDeclared; // Aparecerá en el Inspector
 
     [SerializeField] private NetworkObject playerPrefab;
     [SerializeField] private Transform[] spawnPoints;
@@ -35,7 +37,16 @@ public class TopDownGameManager : NetworkBehaviour
         Instance = this;
         Winner = PlayerRef.None;
 
-        // Solo spawneamos si somos el cliente local y no lo hemos hecho ya
+        // LOG CRÍTICO PARA TU DUDA:
+        if (Runner.IsRunning)
+        {
+            Debug.Log($"<color=green>[SALA ACTUAL]</color> Nombre de la Sesión: {Runner.SessionInfo.Name}");
+            Debug.Log($"[INFO] Mi ID de Jugador es: {Runner.LocalPlayer.PlayerId}");
+
+            // Si ambos dicen "ID de Jugador: 1", es que siguen en salas separadas.
+            // Si uno dice 1 y el otro 2, ¡lo lograste!
+        }
+
         if (Runner.IsRunning && !_localPlayerSpawned)
         {
             _localPlayerSpawned = true;
@@ -47,8 +58,11 @@ public class TopDownGameManager : NetworkBehaviour
     {
         if (Winner != PlayerRef.None)
         {
-            Debug.Log($"[CLASS: TopDownGameManager] Sincronización: Ganador P{Winner.PlayerId}");
+            Debug.Log($"[Sincronización] Ganador P{Winner.PlayerId}");
             OnGameEndedStatic?.Invoke(Winner);
+
+            // Esto permite arrastrar cosas en el Inspector de Unity
+            OnWinnerDeclared?.Invoke(Winner);
         }
     }
 

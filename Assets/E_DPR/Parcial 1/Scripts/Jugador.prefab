@@ -147,8 +147,8 @@ MonoBehaviour:
   moveSpeed: 5
   projectilePrefab: {fileID: -512776671374246440, guid: e290250616c94ce469b18d6ee0b90f26, type: 3}
   firePoint: {fileID: 9199431193035228605}
-  _Ammo: 0
   networkAnimator: {fileID: 4665167495351954963}
+  _Ammo: 0
 --- !u!114 &8201167883930407501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
