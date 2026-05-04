@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.0149996, z: 0.4}
+  m_LocalScale: {x: 0.4, y: 0.15, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -174,10 +174,6 @@ MonoBehaviour:
   velocidadInicial: 20
   dano: 20
   esBomba: 0
-  Armas:
-  - {fileID: 2800000, guid: 18775b51e3bd42299fd30bd036ea982f, type: 3}
-  - {fileID: 2800000, guid: f5c57327df0fa294c8209aa216435167, type: 3}
-  - {fileID: 2800000, guid: 585b70cb75dd43efbfead809c30a1731, type: 3}
-  - {fileID: 2800000, guid: 68e5a78013e33f247822a837e55b0ab4, type: 3}
-  ImagenDeArmaActual: {fileID: 0}
   tiempoVida: 3
+  efectoSangrePrefab: {fileID: 4843773501469188051, guid: f6fbe88f6cd309b4aae4422f01ad5fc3, type: 3}
+  efectoImpactoPrefab: {fileID: 4843773501469188051, guid: 726f51b287c881f4ab9bd0867c665774, type: 3}

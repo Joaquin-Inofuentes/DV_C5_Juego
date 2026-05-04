@@ -61,7 +61,8 @@ public class ControladorPersonaje : MonoBehaviour
 
     public void Saltar()
     {
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward*10, ForceMode.Impulse);
+        if(rb2D != null)
+            transform.GetComponent<Rigidbody>().AddForce(transform.forward*10, ForceMode.Impulse);
     }
 
     private void Update()
