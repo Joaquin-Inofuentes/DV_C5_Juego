@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CambioDeArma : MonoBehaviour
@@ -99,10 +100,14 @@ public class CambioDeArma : MonoBehaviour
 
         Instantiate(prefabBala, origenDisparo.position, origenDisparo.rotation);
 
-        // Corregido: usa tiposDeArmas
         BD_Audios.ReproducirConSolapamiento($"Disparo de {tiposDeArmas[NumeroDeArmaActual]}");
 
-        if (cambiarOpacidad != null) cambiarOpacidad.esTransparente = false;
+        // EFECTO VISUAL: Lo activamos y lanzamos la espera para apagarlo
+        if (cambiarOpacidad != null)
+        {
+            StopAllCoroutines(); // Evita que se solapen si disparas muy rápido
+            StartCoroutine(EfectoDisparoFlash());
+        }
 
         ActualizarTextoMunicion();
         if (infoPersonaje != null) infoPersonaje.ActualizarUI();
@@ -110,6 +115,13 @@ public class CambioDeArma : MonoBehaviour
         if (balasEnCargador[NumeroDeArmaActual] <= 0) IntentarRecargar();
     }
 
+    // Nueva Corrutina para apagar el efecto
+    IEnumerator EfectoDisparoFlash()
+    {
+        cambiarOpacidad.esTransparente = false; // Se hace visible (opaco)
+        yield return new WaitForSeconds(0.1f);  // Espera el tiempo solicitado
+        cambiarOpacidad.esTransparente = true;  // Vuelve a ser transparente
+    }
     void IntentarRecargar()
     {
         int actual = NumeroDeArmaActual;

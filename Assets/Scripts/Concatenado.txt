@@ -1,0 +1,3544 @@
+==== INICIO CONCATENACION ==== 
+Carpeta base: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts 
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\BD_Audios.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class BD_Audios : MonoBehaviour
+{
+    // Diccionario estático público para almacenar los sonidos, clave es el nombre del archivo y el valor es el AudioSource
+    public static Dictionary<string, AudioSource> Sonidos = new Dictionary<string, AudioSource>();
+
+
+
+    private void Start()
+    {
+        // Cargar los audios al iniciar
+        CargarAudios();
+        ReproducirBucleConVolumen("fondo", false, 0.3f);
+        if (CoroutineHelper.Instance == null)
+        {
+            GameObject helper = new GameObject("CoroutineHelper");
+            helper.AddComponent<CoroutineHelper>();
+        }
+    }
+
+    private void Update()
+    {
+        if (Sonidos.Count == 0)
+        {
+            CargarAudios();
+        }
+        // Recargar los sonidos si se presiona F5
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            Debug.Log("Recargando sonidos...");
+            CargarAudios();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Debug.Log(Sonidos.Count);
+        }
+    }
+
+    public static void ReproducirAudioUnaVez(string nombre)
+    {
+        List<AudioSource> Audios = Sonidos
+    .Where(pair => pair.Key.Contains(nombre)) // Filtra las entradas por la clave
+    .Select(pair => pair.Value) // Obtén el AudioSource asociado a la clave
+    .ToList();
+
+        bool SeEstaReproduciendo = true;
+        // Verificar si el nombre del sonido existe en el diccionario
+        foreach (var audio in Audios)
+        {
+            // Reproducir solo una vez, sin interferir con otros sonidos
+            if (audio.isPlaying)
+            {
+                SeEstaReproduciendo = false;
+                break;
+            }
+            if (SeEstaReproduciendo == true)
+            {
+                audio.PlayOneShot(audio.clip);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Detiene la reproducción de un sonido específico basado en su nombre.
+    /// </summary>
+    /// <param name="nombre">El nombre del audio a detener.</param>
+    public static void DetenerAudio(string nombre)
+    {
+        List<AudioSource> Audios = Sonidos
+    .Where(pair => pair.Key.Contains(nombre)) // Filtra las entradas por la clave
+    .Select(pair => pair.Value) // Obtén el AudioSource asociado a la clave
+    .ToList();
+        // Verificar si el nombre del sonido existe en el diccionario
+        foreach (var audio in Audios)
+        {
+
+            Debug.Log(audio.ToString());
+            // Detener el sonido si está en reproducción
+            if (audio.isPlaying)
+            {
+                audio.Stop();
+                Debug.Log($"El audio {nombre} ha sido detenido.");
+            }
+            else
+            {
+                Debug.Log($"El audio {nombre} no está reproduciéndose.");
+            }
+        }
+    }
+
+    public static bool ReproducirConSolapamiento(string palabraClave)
+    {
+        // Filtrar los sonidos que contienen la palabra clave
+        var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
+
+        // Verificar si hay sonidos que coinciden
+        if (sonidosFiltrados.Count > 0)
+        {
+            // Seleccionar un sonido al azar
+            string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
+
+            // Obtener el AudioSource correspondiente
+            AudioSource audioSource = Sonidos[sonidoAleatorio];
+
+            // Reproducir el audio sin detener el actual
+            audioSource.PlayOneShot(audioSource.clip);
+
+            //Debug.Log($"Reproduciendo audio: {sonidoAleatorio}");
+            return true; // Indicar éxito
+        }
+        else
+        {
+            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
+            return false; // Indicar fallo
+        }
+    }
+
+
+
+    /// <summary>
+    /// Carga todos los audios de la carpeta Resources/Audios y los agrega al diccionario de sonidos.
+    /// </summary>
+    public static void CargarAudios()
+    {
+        Sonidos.Clear(); // Limpiar el diccionario antes de recargar
+
+        // Cargar todos los clips de la carpeta Resources/Audios
+        AudioClip[] clips = Resources.LoadAll<AudioClip>("Audios");
+
+        foreach (AudioClip clip in clips)
+        {
+            if (clip != null)
+            {
+                // Crear un nuevo GameObject para el AudioSource
+                GameObject nuevoSonidoGO = new GameObject(clip.name);
+                AudioSource nuevoAudioSource = nuevoSonidoGO.AddComponent<AudioSource>();
+                nuevoAudioSource.clip = clip;
+
+                // Añadir el AudioSource al diccionario con el nombre del archivo como clave
+                Sonidos.Add(clip.name, nuevoAudioSource);
+                //Debug.Log($"Se cargó el sonido: {clip.name}");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Busca un AudioSource basado en su nombre.
+    /// </summary>
+    public static AudioSource ObtenerSonidoPorNombre(string nombre)
+    {
+        // Buscar en el diccionario el AudioSource por nombre
+        if (Sonidos.ContainsKey(nombre))
+        {
+            return Sonidos[nombre];
+        }
+        return null;
+    }
+
+    public static bool ReproducirBucleConVolumen(string palabraClave, bool esCancionFondo, float volumen)
+    {
+        // Filtrar los sonidos que contienen la palabra clave
+        var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
+
+        // Verificar si hay sonidos que coinciden
+        if (sonidosFiltrados.Count > 0)
+        {
+            // Seleccionar un sonido al azar
+            string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
+
+            // Obtener el AudioSource correspondiente
+            AudioSource audioSource = Sonidos[sonidoAleatorio];
+
+            // Si es una canción de fondo, configurar el AudioSource para que esté en bucle
+            if (esCancionFondo)
+            {
+                audioSource.loop = true; // Activar el bucle
+            }
+
+            // Ajustar el volumen del audio
+            audioSource.volume = Mathf.Clamp(volumen, 0f, 1f); // Asegurarse de que el volumen esté entre 0 y 1
+
+            // Reproducir el audio en bucle
+            audioSource.Play();  // Usamos Play() en lugar de PlayOneShot para mantener la canción en bucle
+
+            //Debug.Log($"Reproduciendo audio en bucle: {sonidoAleatorio} con volumen: {volumen}");
+            return true; // Indicar éxito
+        }
+        else
+        {
+            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
+            return false; // Indicar fallo
+        }
+    }
+
+
+
+    // Clase auxiliar para ejecutar coroutines desde métodos estáticos
+    private class CoroutineHelper : MonoBehaviour
+    {
+        public static CoroutineHelper Instance;
+
+        private void Awake()
+        {
+            // Asegurarse de que solo haya una instancia de CoroutineHelper
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    // Método estático para reproducir audio escalonadamente
+    public static void ReproducirEscalonadamente(string palabraClave, float intervalo)
+    {
+        // Filtrar los sonidos que contienen la palabra clave
+        var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
+
+        // Verificar si hay sonidos que coinciden
+        if (sonidosFiltrados.Count > 0)
+        {
+            // Seleccionar un sonido al azar
+            string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
+
+            // Obtener el AudioSource correspondiente
+            AudioSource audioSource = Sonidos[sonidoAleatorio];
+
+            // Iniciar la reproducción escalonada llamando a la Coroutine del helper
+            if (CoroutineHelper.Instance != null)
+            {
+                CoroutineHelper.Instance.StartCoroutine(ReproducirEscalonadamenteCoroutine(audioSource, intervalo));
+            }
+        }
+        else
+        {
+            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
+        }
+    }
+
+    // Coroutine para reproducir el audio escalonadamente
+    private static IEnumerator ReproducirEscalonadamenteCoroutine(AudioSource audioSource, float intervalo)
+    {
+        while (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(audioSource.clip);
+            yield return new WaitForSeconds(intervalo);
+        }
+    }
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Camara.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Camara : MonoBehaviour
+{
+    [SerializeField] Transform target; //El jugador, es el "objetivo" de la cámara
+    [SerializeField] float offset;
+    [SerializeField] float smoothSpeed;
+
+    private void Update()
+    {
+
+    }
+    private void LateUpdate()
+    {
+        Vector3 targetPos = new Vector3(target.position.x, target.position.y, transform.position.z) + target.up * offset;
+
+        transform.position = Vector3.Lerp(transform.position, targetPos, smoothSpeed * Time.deltaTime);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambiarOpacidad.cs 
+============================== 
+using UnityEngine;
+
+public class CambiarOpacidad : MonoBehaviour
+{
+    public bool esTransparente; // Bool para controlar si el objeto es transparente
+    public float nivelOpacidad = 0f; // Nivel de opacidad deseado (0 a 1)
+    public float tiempoDeOpacidad = 0.08f; //Tiempo que dura la visibilidad del efecto
+
+    private Renderer renderizador; // Renderer del GameObject
+    private Color colorOriginal; // Color original del material
+
+    void Start()
+    {
+        // Obtener el Renderer del objeto al que está asignado el script
+        renderizador = GetComponent<Renderer>();
+
+        esTransparente = true; //Inicializar al principio que es transparente al comienzo del juego
+
+        // Guardar el color original del material
+        if (renderizador != null && renderizador.material.HasProperty("_Color"))
+        {
+            colorOriginal = renderizador.material.color;
+        }
+    }
+
+    void Update()
+    {
+        // Modificar la opacidad según el estado del bool
+        if (renderizador != null && renderizador.material.HasProperty("_Color"))
+        {
+            Color nuevoColor = colorOriginal;
+
+            if (esTransparente)
+            {
+                nuevoColor.a = nivelOpacidad; // Cambiar a la opacidad definida
+            }
+            else
+            {
+                nuevoColor.a = 1.0f; // Opacidad completa
+            }
+
+            renderizador.material.color = nuevoColor;
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeArma.cs 
+============================== 
+using UnityEngine;
+
+public class CambioDeArma : MonoBehaviour
+{
+    [Header("Referencias")]
+    public Proyectil proyectil;
+    public InformacionPersonaje infoPersonaje;
+    public CambiarOpacidad cambiarOpacidad;
+    public Transform origenDisparo;
+    public GameObject prefabBala;
+
+    [Header("UI")]
+    public string IndicadorDeBalas; // Re-añadido para comunicación con InformacionPersonaje
+
+    [Header("Visuales de Armas (Asignar 3 en Inspector)")]
+    public GameObject[] modelosArmas;
+
+    [Header("Configuración de Armas")]
+    public string[] tiposDeArmas = { "Pistola", "Metralleta", "Escopeta" }; // Renombrado para compatibilidad con RecogerItems
+    public float[] danoArmas = { 10f, 4f, 40f };
+    public float[] cadenciaArmas = { 0.2f, 0.08f, 1.0f };
+
+    [Header("Munición (Estilo COD)")]
+    public int[] cargadorMaximo = { 15, 30, 6 };
+    public int[] balasEnCargador;
+    public int[] reservaTotal;
+
+    public int NumeroDeArmaActual = 0;
+    private float tiempoDesdeUltimoDisparo;
+
+    void Start()
+    {
+        balasEnCargador = new int[3];
+        reservaTotal = new int[] { 45, 90, 18 };
+
+        for (int i = 0; i < cargadorMaximo.Length; i++)
+        {
+            balasEnCargador[i] = cargadorMaximo[i];
+        }
+
+        ActualizarArma();
+    }
+
+    void Update()
+    {
+        ManejarCambioTeclado();
+        tiempoDesdeUltimoDisparo += Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && PuedeDisparar())
+        {
+            Disparar();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            IntentarRecargar();
+        }
+    }
+
+    void ManejarCambioTeclado()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SeleccionarArma(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SeleccionarArma(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) SeleccionarArma(2);
+    }
+
+    void SeleccionarArma(int indice)
+    {
+        if (indice >= 0 && indice < tiposDeArmas.Length && indice != NumeroDeArmaActual)
+        {
+            NumeroDeArmaActual = indice;
+            ActualizarArma();
+        }
+    }
+
+    void ActualizarArma()
+    {
+        for (int i = 0; i < modelosArmas.Length; i++)
+        {
+            if (modelosArmas[i] != null)
+                modelosArmas[i].SetActive(i == NumeroDeArmaActual);
+        }
+
+        if (proyectil != null) proyectil.dano = danoArmas[NumeroDeArmaActual];
+
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
+    }
+
+    bool PuedeDisparar()
+    {
+        return tiempoDesdeUltimoDisparo >= cadenciaArmas[NumeroDeArmaActual] && balasEnCargador[NumeroDeArmaActual] > 0;
+    }
+
+    void Disparar()
+    {
+        tiempoDesdeUltimoDisparo = 0f;
+        balasEnCargador[NumeroDeArmaActual]--;
+
+        Instantiate(prefabBala, origenDisparo.position, origenDisparo.rotation);
+
+        // Corregido: usa tiposDeArmas
+        BD_Audios.ReproducirConSolapamiento($"Disparo de {tiposDeArmas[NumeroDeArmaActual]}");
+
+        if (cambiarOpacidad != null) cambiarOpacidad.esTransparente = false;
+
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
+
+        if (balasEnCargador[NumeroDeArmaActual] <= 0) IntentarRecargar();
+    }
+
+    void IntentarRecargar()
+    {
+        int actual = NumeroDeArmaActual;
+        if (balasEnCargador[actual] == cargadorMaximo[actual] || reservaTotal[actual] <= 0) return;
+
+        int balasNecesarias = cargadorMaximo[actual] - balasEnCargador[actual];
+        int aRecargar = Mathf.Min(balasNecesarias, reservaTotal[actual]);
+
+        balasEnCargador[actual] += aRecargar;
+        reservaTotal[actual] -= aRecargar;
+
+        // Corregido: usa tiposDeArmas
+        BD_Audios.ReproducirConSolapamiento($"Recarga de {tiposDeArmas[actual]}");
+
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
+    }
+
+    void ActualizarTextoMunicion()
+    {
+        IndicadorDeBalas = $"{balasEnCargador[NumeroDeArmaActual]} / {reservaTotal[NumeroDeArmaActual]}";
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CodigoDeInicio.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CodigoDeInicio : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("Hola mundo");
+        BD_Audios.ReproducirAudioUnaVez("Musica de intro");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Cohete.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Cohete : MonoBehaviour
+{
+    // Variables
+    public float velocidadCohete = 10f;
+    private Vector3 objetivo;
+    private bool haLlegado = false;
+    public int DañoQueCausaElProyectil = 20; // Agrege la variable
+
+    // Método para definir el objetivo del cohete
+    public void SetObjetivo(Vector3 nuevoObjetivo)
+    {
+        objetivo = nuevoObjetivo;
+
+
+
+
+    }
+
+    // Al colisionar con algo o alguien
+    void OnCollisionEnter(Collision col)
+    {
+        /// Agregar q quite vida al jugador. El jugador principal dentro de sus funciones tiene una funcion publica
+        /// de quitar vida q pide un float o int, usala
+        /// Asi le resta vida  con la variable q tienes de "public int DañoQueCausaElProyectil = 20; // Agrege la variable"
+        /// Pone q si, el collider tiene el componente info de personaje o algo asi q lo use  sino q no haga nada
+        /// ¨Por q la colision puede ser un muro o un soldado
+
+
+        // hace q el disparo explote
+        Explotar();
+    }
+
+    // Función que se ejecutará al colisionar
+    void Explotar()
+    {
+        haLlegado = true;
+        StartCoroutine(ExpandirYDestruir());
+    }
+
+
+
+    void Update()
+    {
+        if (objetivo != Vector3.zero && !haLlegado)
+        {
+            MoverHaciaObjetivo();
+        }
+    }
+
+    void MoverHaciaObjetivo()
+    {
+        // Mover el cohete hacia el objetivo
+        transform.position = Vector3.MoveTowards(transform.position, objetivo, velocidadCohete * Time.deltaTime);
+
+        // Verificar si ha llegado al objetivo
+        if (transform.position == objetivo)
+        {
+            haLlegado = true;
+            StartCoroutine(ExpandirYDestruir());
+        }
+    }
+
+    IEnumerator ExpandirYDestruir()
+    {
+        // Expandir por 0.5 segundos
+        // Aquí puedes aumentar el tamaño del cohete si lo deseas
+        transform.localScale = new Vector3(4f, 4f, 4f); // Ejemplo de expansión
+
+        yield return new WaitForSeconds(0.5f); // Mantener expandido por 0.5 segundos
+
+        // Destruir el cohete
+        Destroy(gameObject);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\ConfiguracionGlobal.cs 
+============================== 
+using UnityEngine;
+
+/// <summary>
+/// Almacena configuraciones globales para el juego.
+/// Este script es estático y accesible desde cualquier otro script.
+/// </summary>
+public static class ConfiguracionGlobal
+{
+    // Coeficientes de dificultad
+    public static float coeficienteDificultad = 1.0f;
+    public static float coeficienteDanioEnemigo = 1.0f;
+    public static float coeficienteVidaJugador = 1.0f;
+
+    // Puntaje para ganar
+    public static int puntajeParaGanar = 100;
+    public static float tiempoEsperaVictoria = 5.0f;
+
+    // Configuración de vibración
+    public static float duracionVibracionCamara = 0.2f;
+    public static float intensidadVibracionDisparo = 0.1f;
+    public static float intensidadVibracionGranada = 0.3f;
+
+    public static long duracionVibracionMovilDisparo = 300; // ms
+    public static long duracionVibracionMovilGranada = 500; // ms
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\ControladorPersonaje.cs 
+============================== 
+using System;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+/// <summary>
+/// Controla las acciones del personaje principal en un entorno 2D, como disparar, recargar, curarse, moverse hacia adelante y atrás, y rotar.
+/// También maneja el seguimiento de la cámara.
+/// Debe estar asociado al objeto principal del jugador.
+/// </summary>
+public class ControladorPersonaje : MonoBehaviour
+{
+    // Variables de disparo
+    public GameObject soldado_jugador;
+
+    // Variables de granadas
+    public Transform origenGranada;   // Origen desde donde se lanzan las granadas
+    public GameObject prefabGranada;  // Prefab de la granada que se lanzará
+
+    // Variables de movimiento y rotación
+    public float velocidadMovimiento = 5f;
+    public float velocidadRotacion = 100f;
+
+    // Referencia a la clase que maneja la información del personaje
+    private InformacionPersonaje infoPersonaje;
+
+    // Referencia al Rigidbody2D
+    private Rigidbody2D rb2D;
+
+    // Variables de seguimiento de cámara
+    public Camera camaraPrincipal;    // Referencia a la cámara principal
+
+    // Cursor
+    public GameObject Cursor;
+
+    float VelocidadDeMovimiento = 1;
+
+    public float DesplazamientoSalto = 5;
+
+    private void Start()
+    {
+        // Buscar el componente InformacionPersonaje en el mismo GameObject
+        infoPersonaje = GetComponent<InformacionPersonaje>();
+        rb2D = GetComponent<Rigidbody2D>();
+
+        // Validación de las referencias asignadas
+        VerificarReferencias();
+    }
+
+    private void FixedUpdate()
+    {
+        ManejarMovimientoPorTeclado();
+
+        if (Input.GetKey(KeyCode.Escape ))
+        {
+            Debug.Log("salto hecho");
+            Saltar();
+        }
+
+    }
+
+
+    public void Saltar()
+    {
+        if(rb2D != null)
+            transform.GetComponent<Rigidbody>().AddForce(transform.forward*10, ForceMode.Impulse);
+    }
+
+    private void Update()
+    {
+        ManejarUsoKitMedico(); // Llama al método para manejar el uso del kit médico
+        //ManejarRotacion();
+
+        // Agregado 23/09/24. Para q rote con el mouse y no con A o D
+        ManejarRotacionPorMouse();
+        QueMireAlCursor();
+
+        //ManejarDisparo();
+        ManejarCuracion();
+        ManejarLanzamientoGranada();
+    }
+
+    private void QueMireAlCursor()
+    {
+        transform.up = (Cursor.transform.position - transform.position).normalized;
+    }
+
+    // Maneja la rotacion del jugador para q siempre apunte hacia el cursor del mouse
+    void ManejarRotacionPorMouse()
+    {
+        // Definimos la variable de posicion en base a desde donde se apunta desde la pantalla
+        Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+        // Corrije lo de q no tome el eje z
+        Vector3 fixedMousePos = new Vector3(MousePosition.x, MousePosition.y, 0);
+        Cursor.transform.position = fixedMousePos;
+    }
+
+
+    private void LateUpdate()
+    {
+        // Sincronizar la posición del Rigidbody2D con el Transform al final del frame
+        if (rb2D != null)
+        {
+            rb2D.position = transform.position;
+            rb2D.rotation = transform.eulerAngles.z;
+
+            Vector3 targetpos = soldado_jugador.transform.position;
+
+            camaraPrincipal.transform.position = new Vector3(targetpos.x, targetpos.y, camaraPrincipal.transform.position.z);
+        }
+    }
+
+    private void VerificarReferencias()
+    {
+        if (origenGranada == null) Debug.LogError("OrigenGranada no está asignado en el Inspector.");
+        if (prefabGranada == null) Debug.LogError("PrefabGranada no está asignado en el Inspector.");
+        if (infoPersonaje == null) Debug.LogError("No se encontró el script InformacionPersonaje en el objeto del jugador.");
+        if (rb2D == null) Debug.LogError("No se encontró el componente Rigidbody2D en el objeto del jugador.");
+        if (camaraPrincipal == null) Debug.LogError("La referencia a la cámara principal no está asignada en el Inspector.");
+    }
+
+    private void ManejarMovimientoPorTeclado()
+    {
+
+        // Obtener entrada horizontal y vertical
+        float movimientoHorizontal = Input.GetAxis("Horizontal"); // A y D
+        float movimientoVertical = Input.GetAxis("Vertical"); // W y S
+
+        // Crear un vector de movimiento basado en la entrada (solo X)
+        Vector3 desplazamiento = new Vector3(movimientoHorizontal, movimientoVertical, 0) * velocidadMovimiento * Time.deltaTime;
+
+        // Aplicar el movimiento al objeto y mantener la posición Z
+        transform.position = new Vector3(transform.position.x + desplazamiento.x, transform.position.y + desplazamiento.y, 0);
+    }
+
+    public void Desplazarse(string Direccion, float Velocidad)
+    {
+        BD_Audios.ReproducirBucleConVolumen("Caminar", true, 0.5f);
+        switch (Direccion)
+        {
+            case "Adelante":
+                transform.Translate(new Vector3(0, 1, 0) * Velocidad * Time.deltaTime);
+                break;
+            case "Derecha":
+                transform.Translate(new Vector3(1, 0, 0) * Velocidad * Time.deltaTime);
+                break;
+            case "Izquierda":
+                transform.Translate(new Vector3(0, -1, 0) * Velocidad * Time.deltaTime);
+                break;
+            case "Atras":
+                transform.Translate(new Vector3(-1, 0, 0) * Velocidad * Time.deltaTime);
+                break;
+        }
+    }
+
+    private void ManejarRotacion()
+    {
+        float rotacionHorizontal = Input.GetAxisRaw("Horizontal");
+        transform.Rotate(Vector3.forward, -rotacionHorizontal * velocidadRotacion * Time.deltaTime);
+    }
+
+    private void ManejarCuracion()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && infoPersonaje != null)
+        {
+            infoPersonaje.UsarKitMedico();
+        }
+    }
+
+    private void ManejarLanzamientoGranada()
+    {
+        if (Input.GetKeyDown(KeyCode.G) || Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if (infoPersonaje.granadas > 0)
+            {
+                CrearGranada();
+                infoPersonaje.granadas--;
+                infoPersonaje.ActualizarUI();
+            }
+        }
+    }
+
+
+    private void ManejarUsoKitMedico()
+    {
+        // Verifica si se presionó la tecla "T" y si hay un kit médico disponible
+        if (Input.GetKeyDown(KeyCode.T) && infoPersonaje != null)
+        {
+            // Usar un kit médico para curar al máximo
+            infoPersonaje.CurarAlMaximo();
+        }
+    }
+
+
+    private void CrearGranada()
+    {
+        // Instanciar la granada en el origen de lanzamiento
+        Instantiate(prefabGranada, origenGranada.position, origenGranada.rotation);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\ControladorTanque.cs 
+============================== 
+// Clase que controla el tanque
+// Gestiona el movimiento y disparo del tanque cuando el soldado estï¿½ dentro
+using UnityEngine;
+using TMPro;  // Asegï¿½rate de incluir la librerï¿½a de TextMeshPro
+
+
+public class ControladorTanque : MonoBehaviour
+{
+    public float velocidadTanque = 10f;
+    public float rotacionTanque = 50f;
+    public GameObject proyectilPrefab;
+    public Transform puntoDisparo;
+
+    public bool controlActivo = false;
+
+    public Rigidbody2D rb2D; // Referencia al Rigidbody2D del tanque
+    public GameObject InterfazDelSoldado;
+    public GameObject InterfazDelTanque;
+
+
+    // Velocidad actual del tanque
+    public float velocidadActual = 0;
+
+    // Configuraciï¿½n del tanque
+    public float velocidadMaxima = 5f; // Velocidad mï¿½xima permitida
+    public float aceleracionTanque = 2f; // Quï¿½ tan rï¿½pido acelera el tanque
+    public float desaceleracionTanque = 3f; // Quï¿½ tan rï¿½pido desacelera el tanque
+
+    public float friccionPiso = 1.5f; // Tasa de fricciï¿½n en el piso
+
+
+    public GameObject canon;
+
+    public TextMeshProUGUI texto;
+
+
+    private void Start()
+    {
+        // Obtï¿½n el Rigidbody2D del objeto al inicio
+        rb2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void MoverTanque()
+    {
+        // Entrada del jugador
+        float entradaMovimiento = Input.GetAxis("Vertical"); // Entrada hacia adelante o atrï¿½s
+        float entradaRotacion = Input.GetAxis("Horizontal"); // Entrada para girar
+
+        // Aceleraciï¿½n progresiva del tanque
+        if (entradaMovimiento != 0)
+        {
+            // Si el tanque estï¿½ moviï¿½ndose hacia adelante pero se presiona "W" para retroceder, o viceversa
+            if ((entradaMovimiento > 0 && velocidadActual > 0) || (entradaMovimiento < 0 && velocidadActual < 0))
+            {
+                // Aumentar la velocidad en la direcciï¿½n actual
+                velocidadActual += entradaMovimiento * aceleracionTanque * Time.deltaTime;
+            }
+            else
+            {
+                // Reducir la velocidad a cero si la entrada es opuesta a la direcciï¿½n del movimiento
+                velocidadActual = 0;
+                // Retroceder el tanque en la direcciï¿½n opuesta
+                velocidadActual = entradaMovimiento * velocidadMaxima;
+            }
+        }
+        else
+        {
+            // Aplicar fricciï¿½n cuando no hay entrada
+            velocidadActual = Mathf.MoveTowards(velocidadActual, 0, friccionPiso * Time.deltaTime);
+        }
+
+        // Limitar la velocidad mï¿½xima
+        velocidadActual = Mathf.Clamp(velocidadActual, -velocidadMaxima, velocidadMaxima);
+
+        // Movimiento del tanque usando Rigidbody2D
+        Vector2 movimiento = transform.right * velocidadActual * Time.deltaTime; // Direcciï¿½n local (X en 2D)
+        rb2D.MovePosition(rb2D.position - movimiento);
+
+        // Rotaciï¿½n del tanque (cuando hay movimiento)
+        if (Mathf.Abs(velocidadActual) > 0.1f) // Evitar rotar si el tanque estï¿½ casi detenido
+        {
+            float rotacion = entradaRotacion * rotacionTanque * Time.deltaTime;
+            transform.Rotate(new Vector3(0, 0, -rotacion));
+        }
+    }
+
+
+    private void ApuntarCanon()
+    {
+        if (!gameObject.activeSelf) return; // Verificar si el tanque estï¿½ activo
+
+        // Obtener la posiciï¿½n del cursor en el mundo
+        Vector3 posicionCursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Calcular la direcciï¿½n hacia el cursor desde el caï¿½ï¿½n
+        Vector3 direccion = posicionCursor - canon.transform.position;
+
+        // Convertir la direcciï¿½n a un ï¿½ngulo en el eje Z
+        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+
+        // Aplicar la rotaciï¿½n al caï¿½ï¿½n en su eje Z local
+        canon.transform.rotation = Quaternion.Euler(0, 0, angulo-180);
+    }
+
+
+
+
+    void FixedUpdate()
+    {
+        // Solo el jugador dentro del tanque puede controlar el tanque
+        if (controlActivo)
+        {
+            MoverTanque();
+            DispararProyectil();
+            ApuntarCanon();
+        }
+
+        if(vida <= 0)
+        {
+            Destroy(gameObject, 1f);
+            gameObject.GetComponent<EntrarAlTanque>().SalirDelTanque();
+        }
+
+    }
+
+    // Mï¿½todo para activar el control del tanque
+    public void ActivarControlTanque()
+    {
+        controlActivo = true;
+        InterfazDelSoldado.SetActive(false);
+        InterfazDelTanque.SetActive(true);
+        texto.text = vida.ToString();
+
+    }
+
+    // Mï¿½todo para desactivar el control del tanque
+    public void DesactivarControlTanque()
+    {
+        controlActivo = false;
+        InterfazDelSoldado.SetActive(true);
+        InterfazDelTanque.SetActive(false);
+    }
+
+    public int vida = 100;
+
+    // Mï¿½todo que maneja el disparo del proyectil
+    private void DispararProyectil()
+    {
+        if (Input.GetMouseButtonDown(0)) // Botï¿½n izquierdo del ratï¿½n
+        {
+            // Crear el proyectil en el punto de disparo
+            GameObject bala = Instantiate(proyectilPrefab, puntoDisparo.position, puntoDisparo.rotation);
+            bala.GetComponent<Proyectil>().velocidadInicial = 25;
+            BD_Audios.ReproducirConSolapamiento("DisparoDeCanon 1");
+        }
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Verificar si el proyectil ha colisionado con la capa "Muros"
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Muros"))
+        {
+            // Detener la velocidad del proyectil
+            Rigidbody2D rb2D = GetComponent<Rigidbody2D>();
+            if (rb2D != null)
+            {
+                rb2D.velocity = Vector2.zero; // Establecer la velocidad a 0 para detener el proyectil
+                velocidadActual = 0;
+            }
+        }
+
+        // Verificar si el proyectil ha colisionado con la capa "Muros"
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bala"))
+        {
+            vida -= 20;
+            texto.text = vida.ToString();
+        }
+
+        // Aquï¿½ irï¿½a el resto de la lï¿½gica para manejar otras colisiones...
+    }
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Enemigo.cs 
+============================== 
+using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+/// <summary>
+/// Gestiona el comportamiento del enemigo.
+/// El enemigo dispara, recibe daï¿½o y tiene una barra de vida.
+/// Desaparece al recibir un disparo.
+/// </summary>
+public class Enemigo : MonoBehaviour
+{
+    public Text DialogoEnemigo;
+
+    public Transform objetivo; // Referencia al transform del jugador
+    public GameObject prefabBala; // Prefab de la bala que dispararï¿½ el enemigo
+    public Transform puntoDisparo; // Punto desde donde se dispararï¿½n las balas
+    public float velocidadBala = 10f; // Velocidad de la bala
+    public float vidaActual = 100f; // Vida actual del enemigo
+    public float vidaMaxima = 100f; // Vida mï¿½xima del enemigo
+    public float armadura = 2f; // Armadura del enemigo
+    public int puntosPorEliminar = 10; // Puntos que se sumarï¿½n al eliminar al enemigo
+
+    public GameManager gameManager; // Referencia al GameManager
+    public bool puedeDisparar = false; // Controla si el enemigo puede disparar
+    public bool estaDisparando = false; // Evita mï¿½ltiples corrutinas de disparo
+
+    public float tiempoEntreDisparos = 2f; // Tiempo entre disparos
+    public float temporizadorDisparo = 0f; // Contador para el disparo
+
+    
+    private void Start()
+    {
+        // Validar que las referencias necesarias estï¿½n asignadas
+        if (objetivo == null)
+        {
+            objetivo = GameObject.Find("Soldado_Jugador").transform;
+        }
+
+        // Obtener la referencia al GameManager
+        gameManager = GameManager.instance;
+
+        // Asegurar que la vida actual no exceda la mï¿½xima al inicio
+        vidaActual = Mathf.Min(vidaActual, vidaMaxima);
+    }
+
+    private void Update()
+    {
+        if (objetivo == null)
+        {
+            objetivo = GameObject.Find("Soldado_Jugador").transform;
+        }
+
+        // Actualiza el temporizador de disparo
+        if (puedeDisparar)
+        {
+            temporizadorDisparo += Time.deltaTime; // Incrementa el temporizador con el tiempo desde el ï¿½ltimo frame
+
+            // Verifica si el temporizador ha superado el tiempo de espera
+            if (temporizadorDisparo >= tiempoEntreDisparos)
+            {
+                // Lanza un raycast hacia el jugador
+                if (RaycastHaciaJugador())
+                {
+                    Disparar(); // Dispara si no hay obstï¿½culos
+                }
+
+                // Reinicia el temporizador
+                temporizadorDisparo = 0f;
+            }
+        }
+
+        if (vidaActual <= 0)
+        {
+            Debug.Log("Eliminado");
+            //<<<<<<< HEAD
+            GameObject.Destroy(gameObject);
+
+            if (DialogoEnemigo != null) DialogoEnemigo.text = $"AAAAHHH !";
+            //=======
+            Morir();
+            //>>>>>>> 82baa7e99e94ff59a79ca76c907c8c2b9c2bd736
+        }
+    }
+
+
+
+    // Mï¿½todo que lanza un raycast hacia el jugador
+    // Mï¿½todo que lanza un raycast hacia el jugador
+    private bool RaycastHaciaJugador()
+    {
+        // Calcula la direcciï¿½n hacia el jugador
+        Vector2 direccion = (objetivo.position - transform.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direccion, Mathf.Infinity); // Lanza el raycast
+
+        // Verifica si el raycast golpea un objeto
+        if (hit.collider != null)
+        {
+            // Se asegura de que el objeto golpeado no sea el jugador ni a sï¿½ mismo
+            if (hit.collider.gameObject != objetivo.gameObject && hit.collider.gameObject != gameObject)
+            {
+                Debug.Log("Hay un obstï¿½culo en el camino: " + hit.collider.gameObject.name); // Mensaje de depuraciï¿½n para obstï¿½culos
+                return false; // No dispara si hay un obstï¿½culo
+            }
+            else
+            {
+                
+                //Debug.Log("El jugador estï¿½ en la lï¿½nea de visiï¿½n."); // Mensaje de depuraciï¿½n si el jugador estï¿½ en la lï¿½nea de visiï¿½n
+            }
+        }
+        else
+        {
+            Debug.Log("No hay nada en la lï¿½nea de visiï¿½n."); // Mensaje de depuraciï¿½n si no hay obstï¿½culos
+        }
+
+        return true; // Dispara si no hay obstï¿½culos
+    }
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// Gestiona el disparo del enemigo.
+    /// </summary>
+    private void Disparar()
+    {
+        if (prefabBala == null)
+        {
+            Debug.LogError("Error: El prefab de la bala no estï¿½ asignado."); // Mensaje de error si el prefab de la bala no estï¿½ asignado
+            return; // No dispara si el prefab no estï¿½ disponible
+        }
+
+        if (puntoDisparo == null)
+        {
+            Debug.LogError("Error: El punto de disparo no estï¿½ asignado."); // Mensaje de error si el punto de disparo no estï¿½ asignado
+            return; // No dispara si el punto de disparo no estï¿½ disponible
+        }
+
+        //Debug.Log("Disparando..."); // Agrega este mensaje para ver si el mï¿½todo se llama
+        GameObject bala = Instantiate(prefabBala, puntoDisparo.position, puntoDisparo.rotation);
+        Rigidbody2D rbBala = bala.GetComponent<Rigidbody2D>();
+        if (rbBala != null)
+        {
+            rbBala.velocity = puntoDisparo.right * velocidadBala;
+            //Debug.Log("Bala disparada con velocidad: " + velocidadBala); // Mensaje de depuraciï¿½n para verificar la velocidad de la bala
+        }
+        else
+        {
+            Debug.LogError("Error: No se encontrï¿½ Rigidbody2D en la bala."); // Mensaje de error si el Rigidbody2D no se encuentra
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// Aplica daï¿½o al enemigo.
+    /// </summary>
+    public void RecibirDanio(float danio)
+    {
+        vidaActual -= danio;
+
+        if (vidaActual < 0) vidaActual = 0;
+        if (vidaActual <= 0) Morir();
+    }
+
+    /// <summary>
+    /// Destruye al enemigo cuando su vida llega a cero.
+    /// </summary>
+    void Morir()
+    {
+        if (gameManager != null)
+        {
+            gameManager.AÃ±adirPuntos(puntosPorEliminar);
+        }
+
+        Destroy(gameObject);
+    }
+
+    // Mï¿½todo para destruir el enemigo manualmente
+    public void DestruirEnemigo()
+    {
+        Destroy(gameObject);
+    }
+
+    public Texture2D texturaVida; // Textura de vida del enemigo
+    public Texture2D texturaFondoVida; // Textura de fondo para la barra de vida
+    private void OnGUI()
+    {
+        float ancho = 250;
+        float alto = 30; // Aumentar la altura de la barra de vida
+
+        // Obtener la posiciï¿½n en pantalla del objeto
+        Vector3 posicionEnPantalla = Camera.main.WorldToScreenPoint(transform.position);
+
+        float posX = posicionEnPantalla.x - ancho / 2;
+        float posY = posicionEnPantalla.y - alto - 5 - 35; // Ajustar la posiciï¿½n vertical
+
+        // Dibujar el fondo de la barra de vida en gris
+        GUI.color = new Color(0.5f, 0.5f, 0.5f, 1f); // Color gris
+        GUI.Box(new Rect(posX, Screen.height - posY, ancho, alto), "");
+
+        // Dibujar la barra de vida en verde
+        GUI.color = new Color(0f, 1f, 0f, 1f); // Color verde
+        GUI.Box(new Rect(posX, Screen.height - posY, ancho * (vidaActual / vidaMaxima), alto), "");
+
+        // Establecer el tamaï¿½o de la fuente y centrar el texto debajo de la barra de vida
+        GUIStyle estiloTexto = new GUIStyle(GUI.skin.label);
+        estiloTexto.fontSize = 30; // Aumentar el tamaï¿½o del texto
+        estiloTexto.alignment = TextAnchor.MiddleCenter; // Centrar el texto
+
+        // Mostrar la cantidad de vida actual y mï¿½xima
+        GUI.color = Color.white; // Restaurar color blanco para el texto
+        GUI.Label(new Rect(posX, Screen.height - posY + alto + 5, ancho, 30), $"{vidaActual}/{vidaMaxima}", estiloTexto); // Aumentar la altura del rectï¿½ngulo del texto
+
+        // Restaurar color blanco al final
+        GUI.color = Color.white;
+    }
+
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\EntrarAlTanque.cs 
+============================== 
+// Clase principal que controla la entrada y salida del tanque en 2D
+// Se encarga de gestionar la interacción entre el soldado y el tanque (entrar y salir)
+using UnityEngine;
+
+public class EntrarAlTanque : MonoBehaviour
+{
+    // Referencias al controlador del tanque y al controlador del soldado
+    public ControladorTanque controladorTanque;
+    public GameObject soldado; // El soldado será un objeto GameObject
+
+    // Estado actual, si el soldado está dentro o fuera del tanque
+    private bool estaDentroDelTanque = false;
+
+    // Mensajes de GUI
+    // Variable para controlar si el soldado está dentro del tanque
+    private bool dentroDelTanque = false;
+
+    public float SizeTamañoNativo;
+
+    private void Start()
+    {
+        SizeTamañoNativo = Camera.main.orthographicSize;
+    }
+
+    void Update()
+    {
+        //Debug.Log(Vector2.Distance(transform.position, soldado.transform.position));
+        // Verificar si el soldado está cerca del tanque y presiona la tecla "E"
+        if (Vector2.Distance(transform.position, soldado.transform.position) < 5f)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // Si el soldado no está dentro, entra al tanque
+                if (!estaDentroDelTanque)
+                {
+                    Debug.Log("Entraste");
+                    AccionDeEntrar();
+                    //controladorTanque.controlActivo = true;
+                }
+                // Si el soldado está dentro, sale del tanque
+                else
+                {
+                    //controladorTanque.controlActivo = false;
+                    Debug.Log("Saliste");
+                    SalirDelTanque();
+                }
+            }
+        }
+
+
+        if(controladorTanque.controlActivo == true)
+        {
+            soldado.transform.localPosition = new Vector3(0, 0, 0);
+            Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -25);
+            soldado.transform.localRotation = Quaternion.Euler(0, 0, 90);
+        }
+    }
+
+    // Método para hacer que el soldado entre al tanque
+    private void AccionDeEntrar()
+    {
+        if (dentroDelTanque)
+        {
+            // Salir del tanque
+            dentroDelTanque = false;
+
+            // Reactivar los componentes del soldado
+            CambiarEstadoComponentesSoldado(true);
+
+            // Separar al soldado del tanque y ubicarlo cerca
+            soldado.transform.SetParent(null); // Quitar al soldado como hijo del tanque
+            soldado.transform.position = new Vector3(transform.position.x + 2, transform.position.y, transform.position.z); // Ubicar a 2 unidades en X
+            controladorTanque.DesactivarControlTanque();
+            Camera.main.orthographicSize = SizeTamañoNativo;
+        }
+        else
+        {
+            
+            // Entrar al tanque
+            dentroDelTanque = true;
+
+            // Desactivar los componentes del soldado
+            CambiarEstadoComponentesSoldado(false);
+
+            // Hacer al soldado hijo del objeto que porta este script
+            soldado.transform.SetParent(transform);
+
+            // Centrar al soldado dentro del tanque
+            soldado.transform.localPosition = Vector3.zero; // Ubicar en el centro del tanque
+            controladorTanque.ActivarControlTanque();
+            Camera.main.orthographicSize = 10f;
+        }
+    }
+
+    private void CambiarEstadoComponentesSoldado(bool estado)
+    {
+        // Cambia el estado activo de los componentes del soldado
+        foreach (var componente in soldado.GetComponents<Component>())
+        {
+            if (!(componente is Transform)) // No desactivar el Transform
+            {
+                // Comprobar si es un componente desactivable
+                if (componente is Behaviour)
+                    ((Behaviour)componente).enabled = estado;
+                else if (componente is Renderer)
+                    ((Renderer)componente).enabled = estado;
+                // Agregar más casos si es necesario
+            }
+        }
+    }
+    // Método para hacer que el soldado salga del tanque
+    public void SalirDelTanque()
+    {
+        soldado.SetActive(true); // Reactivar al soldado
+        controladorTanque.DesactivarControlTanque(); // Desactivar el controlador del tanque
+        soldado.transform.SetParent(null); // El soldado deja de ser hijo del tanque
+        ActivarTodosLosComponentes(soldado);
+
+
+        // Colocar al soldado a 2 unidades en el eje X y mantener su posición en Y y Z
+        soldado.transform.position = new Vector3(controladorTanque.transform.position.x + 2f, soldado.transform.position.y, soldado.transform.position.z);
+
+        estaDentroDelTanque = false;
+        Camera.main.orthographicSize = SizeTamañoNativo;
+
+    }
+
+
+    /// <summary>
+    /// Activa todos los componentes de un GameObject.
+    /// </summary>
+    /// <param name="objeto">El GameObject cuyo componentes serán activados.</param>
+    public void ActivarTodosLosComponentes(GameObject objeto)
+    {
+        // Activar el GameObject en sí
+        objeto.SetActive(true);
+
+        // Obtiene todos los componentes de tipo Component en el GameObject
+        Component[] componentes = objeto.GetComponents<Component>();
+
+        // Recorre cada componente y activa su estado
+        foreach (var componente in componentes)
+        {
+            // Activar el componente si es un Behaviour (como MonoBehaviour, Collider, etc.)
+            if (componente is Behaviour comportamiento)
+            {
+                comportamiento.enabled = true;
+            }
+        }
+    }
+
+
+
+    // Mostrar el mensaje en la pantalla utilizando GUI
+    private void OnGUI()
+    {
+        // Mostrar el mensaje en el centro de la pantalla
+        GUIStyle style = new GUIStyle(GUI.skin.label);
+        style.fontSize = 24;
+        style.alignment = TextAnchor.MiddleCenter;
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\GameManager.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Necesario para trabajar con escenas
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager instance;
+    public static GameObject player;
+
+    public int puntajeActual = 0;
+
+    // Referencia al texto donde se muestra el puntaje
+    public Text textoPuntaje;
+
+    // Lista de posiciones posibles donde aparecerán los enemigos
+    public List<Transform> posicionesEnemigos; // Debe asignarse desde el Inspector
+    public GameObject prefabEnemigo; // Prefab del enemigo que se generará
+    public int maxEnemigos = 5; // Máximo número de enemigos en el juego
+    public List<GameObject> enemigosGenerados = new List<GameObject>(); // Lista de enemigos generados
+
+    private void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
+        player = GameObject.Find("Soldado_Jugador");
+        ActualizarPuntajeUI();
+
+        // Inicia la generación de enemigos
+        StartCoroutine(GenerarEnemigos());
+        StartCoroutine(VerificarEnemigosNulos()); // Inicia la verificación de enemigos nulos
+    }
+
+    private void Update()
+    {
+        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            CambiarEscena("MenuInicial");
+        }
+        // Verifica y elimina enemigos nulos cada frame
+        LimpiarEnemigosNulos();
+    }
+
+    /// <summary>
+    /// Método para verificar y eliminar enemigos nulos de la lista.
+    /// </summary>
+    private void LimpiarEnemigosNulos()
+    {
+        // Usamos una lista temporal para almacenar enemigos a eliminar
+        List<GameObject> enemigosAEliminar = new List<GameObject>();
+
+        // Iteramos sobre la lista de enemigos generados
+        foreach (GameObject enemigo in enemigosGenerados)
+        {
+            // Si el enemigo es nulo, lo añadimos a la lista de eliminación
+            if (enemigo == null)
+            {
+                enemigosAEliminar.Add(enemigo);
+            }
+        }
+
+        // Eliminamos todos los enemigos nulos de la lista original
+        foreach (GameObject enemigo in enemigosAEliminar)
+        {
+            enemigosGenerados.Remove(enemigo);
+        }
+    }
+
+    // Método para añadir puntos
+    public void AñadirPuntos(int puntos)
+    {
+        puntajeActual += puntos;
+        ActualizarPuntajeUI();
+    }
+
+    // Método para actualizar el texto del puntaje en la UI
+    private void ActualizarPuntajeUI()
+    {
+        if (textoPuntaje != null)
+        {
+            textoPuntaje.text = $"Puntaje: {puntajeActual}";
+        }
+    }
+
+    // Método para reiniciar la escena actual
+    public void ReiniciarEscena()
+    {
+        Debug.Log("2");
+        // Obtiene el nombre de la escena actual y la vuelve a cargar
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Corrutina para generar enemigos cada 5 segundos.
+    /// </summary>
+    private IEnumerator GenerarEnemigos()
+    {
+        while (true)
+        {
+            // Verifica si hay espacio para más enemigos
+            if (enemigosGenerados.Count < maxEnemigos)
+            {
+                GenerarEnemigo();
+            }
+            yield return new WaitForSeconds(5f); // Espera 5 segundos
+        }
+    }
+
+    /// <summary>
+    /// Método para generar un nuevo enemigo en una posición aleatoria.
+    /// </summary>
+    private void GenerarEnemigo()
+    {
+        // Selecciona una posición aleatoria de la lista de posiciones
+        int posicionIndex = Random.Range(0, posicionesEnemigos.Count);
+        Transform posicionGeneracion = posicionesEnemigos[posicionIndex];
+
+        // Instancia el enemigo y añade a la lista de enemigos generados
+        GameObject nuevoEnemigo = Instantiate(prefabEnemigo, posicionGeneracion.position, Quaternion.identity);
+        enemigosGenerados.Add(nuevoEnemigo);
+
+        // Reinicia el script del enemigo para que funcione como nuevo
+        nuevoEnemigo.GetComponent<Enemigo>().enabled = true; // Reinicia el comportamiento del enemigo
+    }
+
+    // Método para eliminar un enemigo de la lista
+    public void EliminarEnemigo(GameObject enemigo)
+    {
+        // Asegura que el enemigo no sea nulo antes de eliminarlo
+        if (enemigo != null)
+        {
+            enemigosGenerados.Remove(enemigo); // Elimina el enemigo de la lista
+        }
+    }
+
+    /// <summary>
+    /// Corrutina para verificar y eliminar enemigos nulos de la lista.
+    /// </summary>
+    private IEnumerator VerificarEnemigosNulos()
+    {
+        while (true)
+        {
+            // Itera sobre la lista de enemigos generados
+            for (int i = enemigosGenerados.Count - 1; i >= 0; i--)
+            {
+                // Si el enemigo es nulo, lo elimina de la lista
+                if (enemigosGenerados[i] == null)
+                {
+                    enemigosGenerados.RemoveAt(i); // Elimina el enemigo nulo
+                }
+            }
+            yield return new WaitForSeconds(1f); // Espera 1 segundo antes de volver a verificar
+        }
+    }
+
+    // Método para cargar una escena según el nombre
+    public void CambiarEscena(string nombreEscena)
+    {
+        // Verifica si la escena existe en el build
+        if (Application.CanStreamedLevelBeLoaded(nombreEscena))
+        {
+            // Carga la escena especificada por su nombre
+            SceneManager.LoadScene(nombreEscena);
+            Debug.Log($"Cambiando a la escena: {nombreEscena}");
+        }
+        else
+        {
+            Debug.LogError($"La escena {nombreEscena} no se encuentra en el build de escenas.");
+        }
+    }
+    // Método para salir del juego
+    public void SalirDelJuego()
+    {
+        // Si estamos en el editor de Unity, detiene la reproducción
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            // Si estamos en una compilación, cierra la aplicación
+            Application.Quit();
+#endif
+
+        Debug.Log("Saliendo del juego...");
+    }
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\GestorTexto.cs 
+============================== 
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Este script gestiona la visualización del texto en la UI.
+/// </summary>
+public class GestorTexto : MonoBehaviour
+{
+    // Referencia al objeto de texto en la UI
+    private Text textoRecogido; // Se inicializa automáticamente
+    private float temporizadorOcultarTexto; // Temporizador para ocultar el texto
+    public float tiempoDeVisibilidad = 3f; // Tiempo que el texto será visible
+    private bool textoVisible = false; // Estado de visibilidad del texto
+
+    private void Start()
+    {
+        // Buscar el objeto de texto al inicio
+        BuscarTextoRecogido();
+
+        // Asegurarse de que el texto esté oculto al inicio
+        if (textoRecogido != null)
+        {
+            textoRecogido.gameObject.transform.localScale = Vector3.zero; // Inicialmente oculto
+        }
+    }
+
+    private void Update()
+    {
+        // Buscar el objeto de texto si no está asignado
+        if (textoRecogido == null)
+        {
+            BuscarTextoRecogido();
+        }
+
+        // Manejar el temporizador para ocultar el texto
+        if (textoVisible)
+        {
+            temporizadorOcultarTexto -= Time.deltaTime; // Reducir el tiempo para ocultar texto
+            if (temporizadorOcultarTexto <= 0)
+            {
+                OcultarTexto(); // Ocultar el texto
+            }
+        }
+    }
+
+    /// <summary>
+    /// Busca el objeto de texto en la escena por su nombre.
+    /// </summary>
+    private void BuscarTextoRecogido()
+    {
+        GameObject objetoTexto = GameObject.Find("Interfaz_Soldado"); // Buscar el objeto en la escena
+        if (objetoTexto != null)
+        {
+            textoRecogido = objetoTexto.GetComponent<Text>(); // Obtener el componente Text
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'Interfaz_Soldado'."); // Avisar si no se encontró
+        }
+    }
+
+    /// <summary>
+    /// Muestra el texto durante un tiempo específico.
+    /// </summary>
+    /// <param name="mensaje">El mensaje que se mostrará.</param>
+    public void MostrarTexto(string mensaje)
+    {
+        if (textoRecogido != null)
+        {
+            textoRecogido.text = mensaje; // Asignar el mensaje al texto
+            textoRecogido.gameObject.transform.localScale = Vector3.one; // Ajustar la escala a (1, 1, 1)
+            temporizadorOcultarTexto = tiempoDeVisibilidad; // Reiniciar temporizador para ocultar texto
+            textoVisible = true; // Marcar texto como visible
+        }
+        else
+        {
+            Debug.LogWarning("No se puede mostrar el texto porque 'Texto_Conseguiste' no está asignado."); // Avisar si no se puede mostrar el texto
+        }
+    }
+
+    /// <summary>
+    /// Oculta el texto ajustando su escala a (0, 0, 0).
+    /// </summary>
+    private void OcultarTexto()
+    {
+        if (textoRecogido != null)
+        {
+            textoRecogido.gameObject.transform.localScale = Vector3.zero; // Ajustar la escala a (0, 0, 0)
+            textoVisible = false; // Marcar texto como no visible
+        }
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Ideas y pseudocodigos.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ideasypseudocodigos : MonoBehaviour
+{
+
+    /* Ideas y pseudocodigos
+     * Nuevo enemigo 5p. 
+     *      Tanque, con animacion de movimiento y disparo
+     * Nueva mecanica para el personaje principal 4p. 
+     *      Entrar a tanque y liderar 3 soldados
+     * Power Up 2p. 
+     *      Pensar q meterle
+     * Nuevos obstaculos con nuevos comportamientos 2p.
+     *      Barricada, donde te puedes cubrir de disparos 
+     *          o asomarte para disparar
+     * Nueva mecanica de gameplay 3p.
+     *      Multijugador
+     * 
+     * 
+     * 
+     */ 
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\IndicadorEnemigos.cs 
+============================== 
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class IndicadorEnemigos : MonoBehaviour
+{
+    public GameManager gameManager; // Referencia al GameManager para acceder a la lista de enemigos
+    public Texture2D texturaIndicador; // Textura que se usará como indicador
+    public float desface = 10f; // Desfase para la posición del indicador
+    public Camera camara; // Referencia a la cámara que se está usando
+
+    private void Update()
+    {
+        transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
+
+        // Limpia los hijos del objeto actual
+        foreach (Transform hijo in transform)
+        {
+            Destroy(hijo.gameObject);
+        }
+
+        // Itera sobre la lista de enemigos generados en el GameManager
+        foreach (GameObject enemigo in gameManager.enemigosGenerados)
+        {
+            if (enemigo != null)
+            {
+                // Calcula la posición del enemigo en la pantalla
+                Vector3 posicionEnPantalla = camara.WorldToScreenPoint(enemigo.transform.position);
+                CrearIndicador(posicionEnPantalla);
+            }
+        }
+    }
+
+    private void CrearIndicador(Vector3 posicion)
+    {
+        // Crea un nuevo GameObject para el indicador
+        GameObject indicador = new GameObject("IndicadorEnemigo");
+        indicador.transform.SetParent(transform); // Establece como hijo del objeto actual
+
+        // Agrega un componente de imagen
+        Image imagen = indicador.AddComponent<Image>();
+        imagen.sprite = Sprite.Create(texturaIndicador, new Rect(0, 0, texturaIndicador.width, texturaIndicador.height), new Vector2(0.5f, 2.0f));
+        imagen.rectTransform.sizeDelta = new Vector2(50, 50); // Tamaño del indicador
+
+        // Ajusta la posición del indicador
+        posicion.x = Mathf.Clamp(posicion.x, 0 + desface, Screen.width - desface);
+        posicion.y = Mathf.Clamp(posicion.y, 0 + desface, Screen.height - desface);
+        imagen.rectTransform.anchoredPosition = posicion;
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\InformacionPersonaje.cs 
+============================== 
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Gestiona la información del personaje, como salud, munición y recargas.
+/// Debe estar asociado al objeto principal del jugador.
+/// </summary>
+public class InformacionPersonaje : MonoBehaviour
+{
+    public CambioDeArma cambioDeArma;
+
+    public string IndicadorDeBalas; // Añade esta línea
+
+    // Salud y armadura
+    public float vidaMaxima = 100f;
+    public float vidaActual = 100f;
+    public float armadura = 50f;
+
+    // Inventario
+    public int balasPorCargador = 30;
+    public int balasRestantes;
+    public int kitsMedicos = 2;
+    public int granadas = 5;
+    public int adrenalina = 2;
+
+    // Referencias a los textos del UI
+    public Text textoVida;
+    public Text textoArmadura;
+    public Text textoMunicion;
+    public Text textoRecargas;
+    public Text textoKitsMedicos;
+    public Text textoGranadas;
+    public Text textoAdrenalina;
+    public Text textoContadorMuerte; // Texto para mostrar el contador de muerte
+    public Transform barraVida;
+
+    // Variables para el contador de reinicio
+    public float tiempoRestanteParaReiniciar = 3f;
+    public bool juegoEnPausa = false;
+
+    public GameObject EfectoViñetaNegra;
+
+    
+
+    private void Start()
+    {
+        InicializarValores();
+        ActualizarUI();
+    }
+
+    private void InicializarValores()
+    {
+        // Inicializar valores de vida y munición
+        vidaActual = vidaMaxima;
+        balasRestantes = balasPorCargador;
+    }
+
+    public void RecibirDanio(float danio)
+    {
+        vidaActual -= danio;
+
+        // Asegura que la vida no sea menor a 0
+        if (vidaActual < 0) vidaActual = 0;
+
+        ActualizarUI();
+
+        if (vidaActual <= 0) Morir();
+    }
+
+    private void Morir()
+    {
+        // Desactivar la lógica del juego al morir
+        juegoEnPausa = true;
+
+        // Mostrar el texto del contador
+        textoContadorMuerte?.gameObject.SetActive(true);
+
+        // Iniciar el contador para reiniciar la escena
+        StartCoroutine(ContadorReinicio());
+    }
+
+    private IEnumerator ContadorReinicio()
+    {
+        while (tiempoRestanteParaReiniciar > 0)
+        {
+            // Actualizar el texto del contador
+            textoContadorMuerte.text = $"Reiniciando en: {Mathf.Ceil(tiempoRestanteParaReiniciar)}";
+            yield return new WaitForSeconds(1f);
+            tiempoRestanteParaReiniciar--;
+        }
+        // Reiniciar la escena
+        GameManager.instance.GetComponent<GameManager>().ReiniciarEscena();
+    }
+
+    public void ReAparecer()
+    {
+        // Falta implementar la mecánica de reaparición
+        Debug.Log("Re Apareci");
+    }
+
+    public void UsarKitMedico()
+    {
+        if (kitsMedicos > 0)
+        {
+            kitsMedicos--;
+            vidaActual = Mathf.Min(vidaActual + 30f, vidaMaxima);
+            ActualizarUI();
+        }
+    }
+
+    public void ActualizarUI()
+    {
+        // --- Lógica de la Viñeta de Daño ---
+        if (EfectoViñetaNegra != null)
+        {
+            Image componenteImagen = EfectoViñetaNegra.GetComponent<Image>();
+            if (componenteImagen != null)
+            {
+                float porcentajeVida = vidaActual / vidaMaxima;
+                Color colorViñeta = componenteImagen.color;
+                colorViñeta.a = Mathf.Lerp(1f, 0.1f, porcentajeVida);
+                componenteImagen.color = colorViñeta;
+            }
+        }
+
+        // --- Actualización de Textos de UI ---
+        if (textoVida != null) textoVida.text = $"Vida: {vidaActual}";
+        if (textoArmadura != null) textoArmadura.text = $"Armadura: {armadura}";
+
+        // El texto de munición ahora viene formateado directamente desde el script CambioDeArma
+        if (textoMunicion != null) textoMunicion.text = cambioDeArma.IndicadorDeBalas;
+
+        // Ya no usamos 'recargas', ahora mostramos la reserva total del arma actual
+        if (textoRecargas != null)
+        {
+            int actual = cambioDeArma.NumeroDeArmaActual;
+            textoRecargas.text = $"Reserva: {cambioDeArma.reservaTotal[actual]}";
+        }
+
+        if (textoKitsMedicos != null) textoKitsMedicos.text = $"{kitsMedicos}";
+        if (textoGranadas != null) textoGranadas.text = $"{granadas}";
+        if (textoAdrenalina != null) textoAdrenalina.text = $"{adrenalina}";
+
+        // Llama al método para actualizar la barra de vida física
+        ActualizarBarraVida(barraVida);
+    }
+
+    public void CurarAlMaximo()
+    {
+        // Cura al personaje hasta su vida máxima, si tiene kits médicos disponibles
+        if (kitsMedicos > 0)
+        {
+            // Reduce el número de kits médicos en uno
+            kitsMedicos--;
+
+            // Restablece la vida actual al valor máximo
+            vidaActual = vidaMaxima;
+
+            // Actualiza la interfaz de usuario
+            ActualizarUI();
+        }
+    }
+
+    public void AniadirKitMedico()
+    {
+        kitsMedicos++;
+        ActualizarUI();
+    }
+
+    public void AnadirRecargas(int NumeroDeArma)
+    {
+        // Ejemplo: Añadimos un cargador completo a la reserva total del arma especificada
+        int cantidadAñadir = cambioDeArma.cargadorMaximo[NumeroDeArma];
+        cambioDeArma.reservaTotal[NumeroDeArma] += cantidadAñadir;
+
+        Debug.Log($"Añadidas {cantidadAñadir} balas a la reserva del arma {NumeroDeArma}");
+        ActualizarUI();
+    }
+
+    public void AniadirGranadas()
+    {
+        granadas++;
+        ActualizarUI();
+    }
+
+    public void AnadirAdrenalina()
+    {
+        adrenalina++;
+        ActualizarUI();
+        Debug.Log(1);
+        StartCoroutine(CambiarValorTemporalmente());
+    }
+
+    public void ActualizarBarraVida(Transform barraVida)
+    {
+        // Calcula el porcentaje de vida actual
+        float porcentajeVida = vidaActual / vidaMaxima;
+
+        // Asegúrate de que la barra de vida tenga un rango entre 0 y 1
+        porcentajeVida = Mathf.Clamp01(porcentajeVida);
+
+        // Ajusta la escala de la barra de vida en el eje X
+        barraVida.localScale = new Vector3(porcentajeVida, barraVida.localScale.y, barraVida.localScale.z);
+    }
+
+
+    // Variable a la que se le cambiará el valor
+    public float miVariable = 10f;
+
+    // Variable para almacenar el valor original
+    private float valorOriginal;
+
+    // Corutina que cambia el valor temporalmente
+    IEnumerator CambiarValorTemporalmente()
+    {
+        valorOriginal = gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento;
+        // Doblamos el valor de la variable
+        gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento = 10;
+        Debug.Log("Algo");
+
+        // Esperamos 3 segundos
+        yield return new WaitForSeconds(3f);
+
+        // Restauramos el valor original
+        gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento = valorOriginal;
+
+    }
+
+
+
+
+    private void Update()
+    {
+        // Aquí puedes controlar la lógica del juego para pausar si es necesario
+        if (juegoEnPausa)
+        {
+            // Desactivar el comportamiento de juego aquí, por ejemplo:
+            // Desactivar controles del jugador
+            // Desactivar enemigos, etc.
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MenuVictoria.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement; // Necesario para cargar escenas
+
+public class MenuVictoria : MonoBehaviour
+{
+    public string NombreDeLaEscenaDeJuego = "Juego V4";
+    // Función para salir del juego
+    public void SalirDelJuego()
+    {
+        // Cierra la aplicación
+        Application.Quit();
+        // Para pruebas en el editor, también puedes parar la ejecución
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    // Función para continuar jugando
+    public void ContinuarJugando()
+    {
+        // Asumiendo que deseas cargar la escena principal, cambia "NombreDeLaEscena" por el nombre de tu escena
+        SceneManager.LoadScene(NombreDeLaEscenaDeJuego); // Reemplaza con el nombre de tu escena
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Obstaculo.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Obstaculo : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    /*
+    private void OnColliderEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Proyectil"))
+        {
+            Destroy(collision);
+        }
+    }*/
+}
+
+//Habia una vez....
+//...truz q le gustaba cocinar milanea napolitana con fritas :) 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\PersecucionEnemigo.cs 
+============================== 
+using UnityEngine;
+
+/// <summary>
+/// Gestiona la persecución del enemigo hacia el jugador.
+/// El enemigo se moverá hacia el jugador y se detendrá cuando esté a una distancia específica.
+/// </summary>
+public class PersecucionEnemigo : MonoBehaviour
+{
+    public Transform objetivo; // Referencia al transform del jugador
+    public float velocidadMovimiento = 3f; // Velocidad de movimiento del enemigo
+    public float distanciaDetenerse = 2.5f; // Distancia a la que el enemigo se detendrá del jugador
+    public Enemigo enemigoScript; // Referencia al script Enemigo para que pueda mirar al jugador y disparar
+    public float distanciaVisible = 10f; // Distancia máxima a la que el enemigo puede ver al jugador
+
+    private void Start()
+    {
+        enemigoScript = GetComponent<Enemigo>();
+
+        if (objetivo == null)
+        {
+            objetivo = GameObject.Find("Soldado_Jugador").transform;
+        }
+    }
+
+    private void Update()
+    {
+        if (objetivo != null)
+        {
+            PerseguirJugador();
+        }
+    }
+
+    /// <summary>
+    /// Persigue al jugador y se detiene cuando está lo suficientemente cerca.
+    /// </summary>
+    private void PerseguirJugador()
+    {
+        // Calcula la distancia al jugador
+        float distanciaAlObjetivo = Vector2.Distance(transform.position, objetivo.position);
+
+        // Solo persigue al jugador si está dentro de la distancia visible
+        if (distanciaAlObjetivo <= distanciaVisible)
+        {
+            // Continúa la lógica de persecución
+            if (distanciaAlObjetivo > distanciaDetenerse)
+            {
+                Vector2 direccion = (objetivo.position - transform.position).normalized;
+                transform.position += (Vector3)direccion * velocidadMovimiento * Time.deltaTime;
+
+                enemigoScript.puedeDisparar = false; // No puede disparar mientras se mueve
+                MirarJugador();
+            }
+            else
+            {
+                enemigoScript.puedeDisparar = true; // Puede disparar si está lo suficientemente cerca
+                MirarJugador(); // Llama a la función para que el enemigo mire al jugador
+            }
+        }
+        else
+        {
+            // Si el jugador está fuera de la distancia visible, el enemigo deja de moverse y mirar
+            enemigoScript.puedeDisparar = false; // No puede disparar si el jugador no está visible
+        }
+    }
+
+    /// <summary>
+    /// Hace que el enemigo mire al jugador.
+    /// </summary>
+    public void MirarJugador()
+    {
+        Vector2 direccion = (objetivo.position - transform.position).normalized;
+        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angulo));
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\PoweUps.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PowerUps : MonoBehaviour
+{
+    public ControladorPersonaje controladorPersonaje;
+    public InformacionPersonaje informacionPersonaje;
+
+    public float duracionPorVelocidadAumentada = 5f;
+
+    public int powerUpsActivos;
+    private bool activadoPowerUp1 = false;
+    private bool activadoPowerUp2 = false;
+
+    private float duracionPowerUp1 = 0f;
+    private float duracionPowerUp2 = 0f;
+
+    void Start()
+    {
+        powerUpsActivos = 0;
+        controladorPersonaje.velocidadMovimiento = 5f; // Velocidad base
+    }
+
+    void Update()
+    {
+        GestionarPowerUps();
+        AjustarVelocidad();
+    }
+
+    private void GestionarPowerUps()
+    {
+        if (Input.GetKeyDown(KeyCode.P) && informacionPersonaje.adrenalina > 0) // Cambié a GetKeyDown para evitar repetición constante
+        {
+            // Activa el primer power-up si no está activado
+            if (!activadoPowerUp1)
+            {
+                activadoPowerUp1 = true;
+                powerUpsActivos++;
+            }
+            // Activa el segundo power-up si el primero ya está activo
+            else if (!activadoPowerUp2)
+            {
+                activadoPowerUp2 = true;
+                powerUpsActivos++;
+            }
+
+            informacionPersonaje.adrenalina--;
+        }
+
+        // Manejar la duración de PowerUp1
+        if (activadoPowerUp1)
+        {
+            duracionPowerUp1 += Time.deltaTime;
+            if (duracionPowerUp1 >= duracionPorVelocidadAumentada)
+            {
+                activadoPowerUp1 = false;
+                duracionPowerUp1 = 0f;
+                powerUpsActivos--;
+            }
+        }
+
+        // Manejar la duración de PowerUp2
+        if (activadoPowerUp2)
+        {
+            duracionPowerUp2 += Time.deltaTime;
+            if (duracionPowerUp2 >= duracionPorVelocidadAumentada)
+            {
+                activadoPowerUp2 = false;
+                duracionPowerUp2 = 0f;
+                powerUpsActivos--;
+            }
+        }
+    }
+
+    private void AjustarVelocidad()
+    {
+
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Proyectil.cs 
+============================== 
+using UnityEngine;
+
+public class Proyectil : MonoBehaviour
+{
+    public float velocidadInicial = 20f;
+    public float dano;
+    private Rigidbody2D rb2D;
+    public bool esBomba;
+    public float tiempoVida;
+
+    [Header("Efectos de Impacto")]
+    public GameObject efectoSangrePrefab;   // Asignar prefab de sangre
+    public GameObject efectoImpactoPrefab;  // Asignar prefab de chispas/polvo
+
+    private void Start()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+        if (rb2D != null)
+        {
+            rb2D.velocity = transform.right * velocidadInicial;
+        }
+        Invoke("DestruirBala", tiempoVida);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 1. Determinar quÃ© efecto spawnear segÃºn el Tag
+        if (collision.gameObject.CompareTag("Jugadores") || collision.gameObject.CompareTag("Soldado_Enemigo"))
+        {
+            SpawnearEfecto(efectoSangrePrefab, collision);
+
+            // LÃ³gica de daÃ±o
+            InformacionPersonaje info = collision.gameObject.GetComponent<InformacionPersonaje>();
+            if (info != null) info.RecibirDanio(dano);
+
+            Enemigo enemigo = collision.gameObject.GetComponent<Enemigo>();
+            if (enemigo != null) enemigo.RecibirDanio(dano);
+
+            DestruirBala();
+        }
+        else if (collision.gameObject.CompareTag("Obstaculo"))
+        {
+            SpawnearEfecto(efectoImpactoPrefab, collision);
+            DestruirBala();
+        }
+    }
+
+    void SpawnearEfecto(GameObject prefab, Collision2D col)
+    {
+        if (prefab != null)
+        {
+            // Creamos el efecto en el punto de contacto
+            ContactPoint2D contacto = col.contacts[0];
+            Instantiate(prefab, contacto.point, Quaternion.identity);
+        }
+    }
+
+    void DestruirBala()
+    {
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.transform.localScale = esBomba ? new Vector3(3, 3, 3) : new Vector3(2, 2, 2);
+        Invoke("DesaparecerBala", 0.1f);
+    }
+
+    void DesaparecerBala() => Destroy(gameObject);
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Proyectil2.cs 
+============================== 
+// Clase que controla el proyectil disparado desde el tanque
+// Se encarga de la trayectoria y la explosión al impactar
+using UnityEngine;
+
+public class Proyectil2 : MonoBehaviour
+{
+    public float velocidad = 20f;
+    public float tiempoDeVida = 5f;
+    public GameObject explosionPrefab;
+
+    void Start()
+    {
+        Destroy(gameObject, tiempoDeVida); // El proyectil se destruye después de cierto tiempo
+        
+    }
+
+    void FixedUpdate()
+    {
+        // Movimiento hacia adelante en el eje Z
+        transform.Translate(Vector3.forward * velocidad * Time.deltaTime);
+
+        // Mantener Z fijo en su valor inicial (en este caso, 1)
+        Vector3 nuevaPosicion = transform.localPosition;
+        nuevaPosicion.z = 1;  // Fija el valor de Z
+        transform.localPosition = nuevaPosicion;
+    }
+
+
+    // Detectar colisión con otros objetos
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        // Crear la explosión en la posición de impacto
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Destroy(gameObject); // Destruir el proyectil
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Prueba_de_color.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Prueba_de_color : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Puntero_Tanque.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Puntero_Tanque : MonoBehaviour
+{
+    // Variables
+    public float tiempoSeguir = 2f; // Tiempo en segundos que sigue al jugador
+    public Tanque tanque; // Referencia al script del tanque
+
+    void Start()
+    {
+        tanque = GameObject.FindObjectOfType<Tanque>(); // Buscar el tanque en la escena
+        StartCoroutine(SeguirJugador());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log(3);
+            StartCoroutine(SeguirJugador());
+        }
+    }
+
+    public IEnumerator SeguirJugador()
+    {
+        float tiempoTranscurrido = 0f;
+        //Debug.Log(1);
+        // El puntero sigue al jugador durante el tiempo establecido
+        while (tiempoTranscurrido < tiempoSeguir)
+        {
+            transform.position = GameObject.Find("Soldado_Jugador").transform.position;
+            tiempoTranscurrido += Time.deltaTime;
+            yield return null;
+        }
+
+        // Después de 4 segundos, el puntero se destruye
+        Destroy(gameObject); // Destruimos el puntero
+        tanque.PunteroDestruido(); // Notificamos al tanque que el puntero ha terminado su ciclo
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\RecogerItems.cs 
+============================== 
+using UnityEngine;
+
+/// <summary>
+/// Gestiona la recolección de ítems por parte del jugador.
+/// Este script interactúa con el sistema de Información de Personaje ya existente.
+/// </summary>
+public class RecogerItem : MonoBehaviour
+{
+    public CambioDeArma cambioDeArma;
+
+    // Duración en segundos antes de recoger el ítem
+    public float tiempoDeRecogida = 3f; // Tiempo total para recoger el ítem
+    private float temporizador; // Temporizador para la recogida
+
+    // Referencia al script de Información de Personaje (debe estar en el jugador)
+    public InformacionPersonaje infoPersonaje; // Visible para asignar en el Inspector
+
+    // Referencia al Gestor de Texto
+    public GestorTexto gestorTexto; // Asegúrate de arrastrar el objeto GestorTexto en el Inspector
+
+    // Tipos de ítems que se pueden recoger
+    public enum TipoItem { KitMedico, Recarga, Granada, Adrenalina }
+    public TipoItem tipoItemActual;
+
+    // Indica si el jugador está en la zona del ítem
+    public bool jugadorEnRango = false;
+
+    // Estado de recogida
+    public bool recogiendo = false;
+
+    private void Start()
+    {
+        if (gestorTexto == null)
+        {
+            gestorTexto = GameObject.Find("Texto_Conseguiste").GetComponent<GestorTexto>();
+        }
+
+        // Si no se asignó la referencia de Información de Personaje en el Inspector, buscarla
+        if (infoPersonaje == null)
+        {
+            infoPersonaje = GameObject.Find("Soldado_Jugador").GetComponent<InformacionPersonaje>();
+        }
+
+        if (infoPersonaje == null)
+        {
+            Debug.LogError("No se encontró el script Información de Personaje en el jugador.");
+        }
+
+        // Reiniciar temporizador
+        temporizador = 0;
+    }
+
+    // Cuando el jugador entra en la zona del ítem
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("Jugador"))
+        {
+            Debug.Log("Jugador en la zona del ítem.");
+            jugadorEnRango = true;
+            temporizador = tiempoDeRecogida; // Reiniciar el temporizador
+            recogiendo = true; // Iniciar el proceso de recogida
+
+            // Cambiar el color del ítem a rojo
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+    }
+
+    // Cuando el jugador sale de la zona del ítem
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("Jugador"))
+        {
+            //Debug.Log("Jugador salió de la zona del ítem.");
+            jugadorEnRango = false;
+
+            // Detener la recogida
+            recogiendo = false;
+            temporizador = 0; // Detener el temporizador
+
+            // Restaurar el color del ítem a blanco
+            gameObject.GetComponent<Renderer>().material.color = Color.white;
+
+            // Restaurar escala del ítem
+            gameObject.transform.localScale = new Vector3(2f, 2f, 2f);
+        }
+    }
+
+    private void Update()
+    {
+        if (gestorTexto == null)
+        {
+            gestorTexto = GameObject.Find("Texto_Conseguiste").GetComponent<GestorTexto>();
+        }
+        // Verificar si el jugador está en rango y el temporizador es mayor que cero
+        if (jugadorEnRango && recogiendo)
+        {
+            // Reducir el temporizador según el tiempo transcurrido
+            temporizador -= Time.deltaTime;
+
+            // Actualizar la escala del ítem según el tiempo restante
+            float escalaProporcional = Mathf.Lerp(1.5f, 1f, (tiempoDeRecogida - temporizador) / tiempoDeRecogida);
+            gameObject.transform.localScale = new Vector3(escalaProporcional, escalaProporcional, escalaProporcional);
+
+            // Si el temporizador llega a cero, recoger el ítem
+            if (temporizador <= 0)
+            {
+                RecogerItemYAsignar();
+            }
+        }
+    }
+
+    // Recoger el ítem y asignarlo al jugador
+    private void RecogerItemYAsignar()
+    {
+        recogiendo = false; // Cambiar el estado de recogida
+
+        switch (tipoItemActual)
+        {
+            case TipoItem.KitMedico:
+                Debug.Log("Recogido: Kit Médico");
+                infoPersonaje.AniadirKitMedico(); // Aumentar el contador de kits médicos
+                gestorTexto.MostrarTexto("¡Kit Médico Recogido!"); // Mostrar texto
+                break;
+
+            case TipoItem.Recarga:
+                Debug.Log("Recogido: Recarga");
+                int numeroDeRecarga = Random.Range(0, cambioDeArma.tiposDeArmas.Length);
+                infoPersonaje.AnadirRecargas(numeroDeRecarga); // Aumentar el contador de recargas
+                gestorTexto.MostrarTexto("¡Recarga de " + cambioDeArma.tiposDeArmas[numeroDeRecarga] + " Recogida!"); // Mostrar texto
+                break;
+
+            case TipoItem.Granada:
+                Debug.Log("Recogido: Granada");
+                infoPersonaje.AniadirGranadas(); // Aumentar el contador de granadas
+                gestorTexto.MostrarTexto("¡Granada Recogida!"); // Mostrar texto
+                break;
+
+            case TipoItem.Adrenalina:
+                Debug.Log("Recogido: Adrenalina");
+                infoPersonaje.AnadirAdrenalina(); // Aumentar el contador de granadas
+                gestorTexto.MostrarTexto("¡Adrenalina Recogida!"); // Mostrar texto
+                break;
+        }
+
+        // Destruir el ítem del escenario
+        Destroy(gameObject);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SenalisacionAEnemigos.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SenalizacionDeEnemigos : MonoBehaviour
+{
+    [Header("Configuración")]
+    public GameObject prefabFlecha; // Prefab de la flecha
+    public float distanciaVisible = 20f; // Distancia máxima para señalar enemigos
+    public float tiempoEntreActualizaciones = 0.5f; // Intervalo para actualizar la lista de enemigos
+    public Transform objetoFlechas; // Objeto vacío en el canvas donde se almacenarán las flechas
+
+    [Header("Listas Públicas")]
+    public List<Transform> enemigosTransform = new List<Transform>(); // Lista pública de los Transform de los enemigos
+    public List<GameObject> flechasActivas = new List<GameObject>(); // Lista pública para almacenar flechas activas
+
+    private void Start()
+    {
+        // Comienza la Coroutine para actualizar enemigos
+        StartCoroutine(ActualizarEnemigos());
+    }
+
+    private IEnumerator ActualizarEnemigos()
+    {
+        while (true)
+        {
+            // Encuentra todos los enemigos con el nombre que contiene "Soldado_Enemigo"
+            GameObject[] enemigos = GameObject.FindGameObjectsWithTag("Soldado_Enemigo");
+            List<Transform> enemigosDetectados = new List<Transform>(); // Lista temporal para los enemigos detectados
+
+            // Verifica todos los enemigos encontrados
+            foreach (GameObject enemigo in enemigos)
+            {
+                float distancia = Vector3.Distance(transform.position, enemigo.transform.position);
+                if (distancia <= distanciaVisible)
+                {
+                    enemigosDetectados.Add(enemigo.transform); // Agrega el enemigo detectado a la lista temporal
+
+                    // Si el enemigo no está en la lista, crea una flecha
+                    if (!enemigosTransform.Contains(enemigo.transform))
+                    {
+                        // Genera la flecha
+                        GameObject nuevaFlecha = Instantiate(prefabFlecha, Vector3.zero, Quaternion.identity);
+                        nuevaFlecha.transform.SetParent(objetoFlechas); // Establece el objeto vacío como padre
+
+                        // Inicializa la escala de la flecha
+                        nuevaFlecha.transform.localScale = new Vector3(1,-2,1); // Escala inicial en (1,1,1)
+                        nuevaFlecha.transform.localPosition = new Vector3(0,1,0); // Posición inicial en (0,0,0)
+
+                        // Añade la flecha a la lista activa
+                        flechasActivas.Add(nuevaFlecha);
+                        enemigosTransform.Add(enemigo.transform); // Agrega el transform a la lista de enemigos
+                    }
+                }
+            }
+
+            // Revisa si hay enemigos que se alejan y elimina flechas correspondientes
+            for (int i = flechasActivas.Count - 1; i >= 0; i--)
+            {
+                GameObject flecha = flechasActivas[i];
+                Transform enemigoAsociado = enemigosTransform[i];
+                float distancia = Vector3.Distance(transform.position, enemigoAsociado.position);
+
+                if (distancia > distanciaVisible)
+                {
+                    // Destruye la flecha y elimina el transform de la lista
+                    Destroy(flecha);
+                    flechasActivas.RemoveAt(i);
+                    enemigosTransform.RemoveAt(i);
+                }
+            }
+
+            // Muestra en el debug cuántos enemigos fueron detectados
+            //Debug.Log("Enemigos detectados: " + enemigosTransform.Count);
+
+            yield return new WaitForSeconds(tiempoEntreActualizaciones); // Espera antes de la próxima actualización
+        }
+    }
+
+    private void Update()
+    {
+        // Actualiza la rotación de las flechas en referencia a los enemigos
+        for (int i = flechasActivas.Count - 1; i >= 0; i--) // Itera hacia atrás para poder eliminar elementos sin afectar el índice
+        {
+            GameObject flecha = flechasActivas[i];
+            Transform enemigoAsociado = enemigosTransform[i];
+
+            // Verifica si el enemigo asociado existe
+            if (enemigoAsociado == null)
+            {
+                // Si el enemigo ha sido eliminado, destruye la flecha y elimina de las listas
+                Destroy(flecha);
+                flechasActivas.RemoveAt(i);
+                enemigosTransform.RemoveAt(i);
+            }
+            else
+            {
+                // Solo actualiza la rotación si el enemigo asociado aún existe
+                Vector3 direccion = enemigoAsociado.position - transform.position;
+                float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg - 90f; // Ajusta el ángulo
+                flecha.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angulo));
+            }
+        }
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SistemaPuntaje.cs 
+============================== 
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>
+/// Gestiona el puntaje del jugador y verifica si ha ganado.
+/// Debe estar asociado a un objeto que persista durante toda la escena.
+/// </summary>
+public class SistemaPuntaje : MonoBehaviour
+{
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Soldado_Anim.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Soldado_Anim : MonoBehaviour
+{
+    Animator anim;
+    public bool EstaCaminando;
+    //public GameObject SoldadoReal;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    
+
+    // Variable para rastrear el estado previo de las teclas de movimiento
+    private bool estadoAnteriorTeclasMovimiento = false;
+
+    void Update()
+    {
+        // Obtener los valores de los ejes de movimiento
+        float movimientoHorizontal = Input.GetAxis("Horizontal");
+        float movimientoVertical = Input.GetAxis("Vertical");
+
+        // Verificar si el jugador está intentando moverse
+        bool estaMoviendose = Mathf.Abs(movimientoHorizontal) > 0.1f || Mathf.Abs(movimientoVertical) > 0.1f;
+
+        // Activar o desactivar animación según el movimiento
+        anim.SetBool("EstaCaminando", estaMoviendose);
+
+        // Acciones adicionales si el jugador está moviéndose
+        if (estaMoviendose)
+        {
+            //Debug.Log("El jugador se está moviendo");
+            BD_Audios.ReproducirAudioUnaVez("Caminar");
+            //SoldadoReal.SetActive(false);
+        }
+        else
+        {
+            //SoldadoReal.SetActive(true);
+        }
+    }
+
+
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Tanque.cs 
+============================== 
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class Tanque : MonoBehaviour
+{
+    // Prefabs
+    public GameObject cohetePrefab; // Prefab del cohete
+    public GameObject punteroPrefab; // Prefab del puntero
+
+    // Variables de movimiento
+    public float velocidadMovimiento = 5f;
+    public float distanciaDeteccion = 5f;
+
+    // Referencia al jugador
+    public Transform jugador;
+
+    // Variables de control de puntero
+    private GameObject punteroActual;
+    private bool puedeGenerarPuntero = true;
+    private bool enModoApuntado = false;
+    private bool puedeDisparar = true;
+    public Transform OrigenDeDisparo;
+
+    void Start()
+    {
+        jugador = GameObject.Find("Soldado_Jugador").transform; // Asignar al jugador desde la escena
+    }
+
+    void FixedUpdate()
+    {
+        if (Vector3.Distance(transform.position, jugador.position) > distanciaDeteccion)
+        {
+            MoverHaciaJugador();
+            // Verificamos si el puntero fue destruido y si ya se puede generar un nuevo puntero
+            if (punteroActual == null && puedeGenerarPuntero && puedeDisparar)
+            {
+                //GenerarPuntero();
+            }
+        }
+        else
+        {
+            if (!enModoApuntado)
+            {
+                EntrarModoApuntado();
+            }
+        }
+    }
+
+    void MoverHaciaJugador()
+    {
+        // Mover el tanque hacia el jugador
+        transform.position = Vector3.MoveTowards(transform.position, jugador.position, velocidadMovimiento * Time.deltaTime);
+    }
+
+    void EntrarModoApuntado()
+    {
+        // El tanque entra en el modo de apuntado
+        enModoApuntado = true;
+    }
+
+    void GenerarPuntero()
+    {
+        // Generamos el puntero en la posición del jugador
+        punteroActual = Instantiate(punteroPrefab, jugador.position, Quaternion.identity);
+        punteroActual.GetComponent<Puntero_Tanque>().StartCoroutine(punteroActual.GetComponent<Puntero_Tanque>().SeguirJugador());
+        puedeGenerarPuntero = false;
+    }
+
+    public void Disparar() /// Cambie el nombre
+    {
+        /// Agregue esta verificacion para q no dispare a muros
+        bool PuedeDisparar = VerificaSiAhiUnObstaculoEntreTuyElEnemigo(transform, jugador);
+
+        if (PuedeDisparar == true)
+        {
+            //Debug.Log("Disparaon");
+            /// Solo dispara si es q tiene al enemigo visible
+            if (punteroActual != null)
+            {
+                GameObject cohete = Instantiate(cohetePrefab, OrigenDeDisparo.position, Quaternion.identity);
+                cohete.GetComponent<Cohete>().SetObjetivo(punteroActual.transform.position);
+            }
+        }
+    }
+
+    // Método para recibir la notificación de que el puntero ha terminado su tiempo
+    public void PunteroDestruido()
+    {
+        puedeGenerarPuntero = true;
+        enModoApuntado = false; // El tanque deja el modo de apuntado
+        puedeDisparar = true; // El tanque puede disparar nuevamente
+        Disparar(); // Cambie el nombre de generar a disparar
+    }
+
+    // Método para evitar disparar constantemente
+    public void DesactivarDisparoTemporal()
+    {
+        puedeDisparar = false;
+        StartCoroutine(ReactivarDisparo());
+    }
+
+    private IEnumerator ReactivarDisparo()
+    {
+        yield return new WaitForSeconds(2f); // Espera 2 segundos antes de permitir disparar nuevamente
+        puedeDisparar = true;
+    }
+
+
+
+
+
+    // Lista pública para almacenar todos los GameObjects que colisionaron
+    public List<GameObject> objetosColisionados = new List<GameObject>();
+
+    // Clase para almacenar el GameObject y su distancia
+    [System.Serializable]
+    public class ObjetoColisionado
+    {
+        public GameObject objeto;
+        public float distancia;
+
+        public ObjetoColisionado(GameObject obj, float dist)
+        {
+            objeto = obj;
+            distancia = dist;
+        }
+    }
+
+    // Lista pública que contiene los objetos colisionados con su distancia
+    public List<ObjetoColisionado> objetosColisionadosConDistancia = new List<ObjetoColisionado>();
+
+
+    public bool VerificaSiAhiUnObstaculoEntreTuyElEnemigo(Transform Tanque, Transform soldado)
+    {
+        // Dirección del rayo desde el tanque hacia el soldado
+        Vector2 direccionDelRayo = (soldado.position - Tanque.position).normalized;
+
+        // Dibujar el rayo en la escena para ver si se está lanzando correctamente, de color blanco
+        //Debug.DrawRay(Tanque.position, direccionDelRayo * 10f, Color.white, 2f); // El rayo durará 2 segundos
+
+        // Realizamos el raycast sin omitir capas (detecta todo)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Tanque.position, direccionDelRayo, Mathf.Infinity);
+
+        // Variables para almacenar el muro y el jugador más cercano
+        GameObject muroMasCercano = null;
+        GameObject jugadorMasCercano = null;
+        float distanciaMuro = Mathf.Infinity;
+        float distanciaJugador = Mathf.Infinity;
+
+        // Verificar si encontramos alguna colisión
+        if (hits.Length > 0)
+        {
+
+            // Iterar sobre las colisiones detectadas
+            foreach (RaycastHit2D hit in hits)
+            {
+                // Obtener el nombre del objeto colisionado
+                string nombreObjeto = hit.transform.name;
+
+
+                // Obtener la capa del objeto colisionado
+                string nombreCapa = LayerMask.LayerToName(hit.collider.gameObject.layer);
+
+                // Si es un muro, comprobar si es el más cercano
+                if (nombreCapa == "Muros")
+                {
+                    //Debug.Log(3);
+                    float distancia = Vector2.Distance(transform.position, hit.transform.position);
+                    if (distancia < distanciaMuro)
+                    {
+                        distanciaMuro = distancia;
+                        muroMasCercano = hit.collider.gameObject;
+                    }
+                }
+                // Si es un jugador, comprobar si es el más cercano
+                else if (nombreCapa == "Jugador")
+                {
+                    float distancia = Vector2.Distance(transform.position, hit.transform.position);
+                    if (distancia < distanciaJugador)
+                    {
+                        //Debug.Log(4);
+                        distanciaJugador = distancia;
+                        jugadorMasCercano = hit.collider.gameObject;
+                    }
+                }
+            }
+
+            Debug.Log("Distancia al jugador más cercano: " + distanciaJugador);
+            // Imprimir las distancias al jugador y al muro
+            Debug.Log("Distancia al muro más cercano: " + distanciaMuro);
+
+            // Verificar cuál es más cercano y devolver true o false
+            if (jugadorMasCercano != null && distanciaJugador < distanciaMuro)
+            {
+                // El jugador más cercano es más cercano que el muro
+                //Debug.Log("¡Logrado! El jugador está más cerca que el muro.");
+                return true;
+            }
+            else
+            {
+                // El muro más cercano está más cerca que el jugador
+                //Debug.Log("No logrado. El muro está más cerca.");
+                return false;
+            }
+        }
+
+        // Si no hay colisiones, se devuelve false
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Torreta.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Torreta : MonoBehaviour
+{
+    public GameObject TorretaPrefab;
+    public Transform TorretaTransform;
+    public float Rango = 5;
+    public Transform player;
+    // Start is called before the first frame update
+    void Start()
+    {
+        TorretaTransform = transform;
+        TorretaPrefab = gameObject;
+        player = GameManager.player.transform;
+        Debug.Log(player);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //Debug.Log(Vector2.Distance(transform.position, player.position));
+        if (Vector2.Distance(transform.position, player.position) < Rango)
+        {
+            transform.up = (player.position-transform.position).normalized;
+        }
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Tutorial.cs 
+============================== 
+using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement; // Importar el módulo para gestionar escenas
+
+public class Tutorial : MonoBehaviour
+{
+    public Text mensajeTutorial; // Texto que muestra los mensajes del tutorial
+    public GameObject objetoColisionado; // Objeto con el que colisionó el jugador
+    public string nombreEscenaVictoria; // Nombre de la escena a la que se cambiará al colisionar con "Victoria"
+
+    private bool wPresionado = false;
+    private bool aPresionado = false;
+    private bool dPresionado = false;
+
+    private bool etapaMovimientoCompletada = false;
+    private bool etapaRecogidaCompletada = false;
+    private bool etapaLuchaCompletada = false;
+
+    private float tiempoInicio;
+
+    public GameObject TeclasDeTutorial;
+
+    public bool Indicaciondada = false;
+
+    void Start()
+    {
+        BD_Audios.ReproducirConSolapamiento("Bienvenido");
+        tiempoInicio = Time.time;
+        StartCoroutine(MostrarMensajesIniciales());
+    }
+
+    void Update()
+    {
+        if (Time.time > tiempoInicio + 3f && !etapaMovimientoCompletada) // Solo ejecuta si no está completada la etapa
+        {
+            if (Indicaciondada == false)
+            {
+                Indicaciondada = true;
+                BD_Audios.ReproducirAudioUnaVez("usa WASD");
+                ActualizarTutorialMovimiento();
+            }
+        }
+    }
+
+    private IEnumerator MostrarMensajesIniciales()
+    {
+        mensajeTutorial.text = "Bienvenido a WarZone";
+        yield return new WaitForSeconds(2f);
+        mensajeTutorial.text = "Comencemos...";
+        yield return new WaitForSeconds(1f);
+        mensajeTutorial.text = "Ahora ve adelante y continúa";
+        // Inicia la etapa de lucha después de recoger el objeto
+        StartCoroutine(IniciarEtapaLucha());
+    }
+
+    private void ActualizarTutorialMovimiento()
+    {
+
+        if (!wPresionado && Input.GetKeyDown(KeyCode.W))
+        {
+            wPresionado = true;
+        }
+        if (!aPresionado && Input.GetKeyDown(KeyCode.A))
+        {
+            aPresionado = true;
+        }
+        if (!dPresionado && Input.GetKeyDown(KeyCode.D))
+        {
+            dPresionado = true;
+        }
+
+        // Actualiza el texto del tutorial según las teclas presionadas
+        mensajeTutorial.text = "Presiona: " +
+            (wPresionado ? "" : "W ") +
+            (aPresionado ? "" : "A ") +
+            (dPresionado ? "" : "D ");
+
+        // Si todas las teclas han sido presionadas
+        if (wPresionado && aPresionado && dPresionado)
+        {
+            BD_Audios.DetenerAudio("usa WASD");
+            BD_Audios.ReproducirAudioUnaVez("Voz_Recoje la municion");
+            mensajeTutorial.text = "";
+            etapaMovimientoCompletada = true; // Marca la etapa como completada
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+
+        Debug.Log(other.name);
+        // Cambia a la escena de Victoria al colisionar con el objeto "Victoria"
+        if (other.name.Contains("Victoria"))
+        {
+            SceneManager.LoadScene(nombreEscenaVictoria); // Cambia a la escena con el nombre especificado
+        }
+    }
+
+    private IEnumerator IniciarEtapaLucha()
+    {
+        // Pausa antes de mostrar los controles de granadas y curación
+        yield return new WaitForSeconds(2f);
+        TeclasDeTutorial.SetActive(true);
+        mensajeTutorial.text = ""; // Elimina el texto
+
+        // Pausa antes de eliminar el mensaje final
+        yield return new WaitForSeconds(6f);
+        TeclasDeTutorial.SetActive(false);
+
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\VibracionCamara.cs 
+============================== 
+using UnityEngine;
+
+/// <summary>
+/// Gestiona la vibración de la cámara cuando el jugador recibe un impacto.
+/// Debe estar asociado a la cámara principal.
+/// </summary>
+public class VibracionCamara : MonoBehaviour
+{
+    private Vector3 posicionOriginal;
+    private float tiempoRestante;
+    private float intensidadActual;
+
+    private void Start()
+    {
+        posicionOriginal = transform.localPosition;
+    }
+
+    private void Update()
+    {
+        if (tiempoRestante > 0)
+        {
+            transform.localPosition = posicionOriginal + Random.insideUnitSphere * intensidadActual;
+            tiempoRestante -= Time.deltaTime;
+
+            if (tiempoRestante <= 0f)
+            {
+                transform.localPosition = posicionOriginal;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Inicia la vibración de la cámara.
+    /// </summary>
+    /// <param name="intensidad">Intensidad de la vibración.</param>
+    public void IniciarVibracion(float intensidad)
+    {
+        intensidadActual = intensidad;
+        tiempoRestante = ConfiguracionGlobal.duracionVibracionCamara;
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\CambioDeLider.cs 
+============================== 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CambioDeLider : MonoBehaviour
+{
+    public List<GameObject> Soldados = new List<GameObject>();
+    public GameObject LiderActual;
+    public Transform CabezaDeSeguidores;
+    public Action<GameObject> OnLiderCambiado;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            CambiarLider(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            CambiarLider(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            CambiarLider(3);
+        }
+    }
+    public void CambiarLider(int numeroDeSoldado)
+    {
+        if(numeroDeSoldado > Soldados.Count || numeroDeSoldado < 1)
+        {
+            Debug.Log("Numero de soldado no valido");
+            return;
+        }
+        LiderActual = Soldados[numeroDeSoldado - 1];
+        CabezaDeSeguidores.position = LiderActual.transform.position;
+        OnLiderCambiado?.Invoke(LiderActual);
+        Debug.Log("Lider cambiado a: " + LiderActual.name);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\UnitController.cs 
+============================== 
+using UnityEngine;
+using UnityEngine.AI;
+using System.Collections.Generic;
+
+[RequireComponent(typeof(NavMeshAgent))]
+public class UnitController : MonoBehaviour
+{
+    public NavMeshAgent agent;
+    public float attackRange = 5f;
+    public float stoppingDistance = 0.2f;
+
+    [Header("Formación")]
+    public static List<Transform> TakenSlots = new List<Transform>();
+    public Transform currentSlot;
+
+    private Transform currentEnemy;
+    private Vector3 targetPoint;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        // Configuración para 2D
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
+
+    public void MoveToPoint(Vector3 point)
+    {
+        ReleaseSlot();
+        targetPoint = point;
+        agent.isStopped = false;
+        agent.SetDestination(point);
+    }
+
+    public void FollowLeader(List<Transform> allSlots)
+    {
+        if (currentSlot == null)
+        {
+            currentSlot = GetNearestFreeSlot(allSlots);
+        }
+
+        if (currentSlot != null)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(currentSlot.position);
+        }
+    }
+
+    public void Attack(Transform enemy)
+    {
+        ReleaseSlot();
+        currentEnemy = enemy;
+        if (enemy == null) return;
+
+        float dist = Vector2.Distance(transform.position, enemy.position);
+        if (dist > attackRange)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(enemy.position);
+        }
+        else
+        {
+            agent.isStopped = true;
+            // Aquí iría la lógica de instanciar bala
+            Debug.Log($"[Acción] Disparando a {enemy.name}");
+        }
+    }
+
+    public void Stop()
+    {
+        agent.isStopped = true;
+    }
+
+    public bool ReachedDestination()
+    {
+        return !agent.pathPending && agent.remainingDistance <= stoppingDistance;
+    }
+
+    private Transform GetNearestFreeSlot(List<Transform> allSlots)
+    {
+        Transform bestSlot = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (Transform slot in allSlots)
+        {
+            if (TakenSlots.Contains(slot)) continue;
+
+            float d = Vector2.Distance(transform.position, slot.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                bestSlot = slot;
+            }
+        }
+
+        if (bestSlot != null) TakenSlots.Add(bestSlot);
+        return bestSlot;
+    }
+
+    public void ReleaseSlot()
+    {
+        if (currentSlot != null)
+        {
+            TakenSlots.Remove(currentSlot);
+            currentSlot = null;
+        }
+    }
+
+    public Vector3 GetTargetPoint() => targetPoint;
+    public Transform GetEnemy() => currentEnemy;
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\UnitFSM.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+
+public class UnitFSM : MonoBehaviour
+{
+    public enum State { Controlado, Atacando, SeguirLider, IrADestino }
+
+    [Header("Estado Actual")]
+    public State currentState = State.SeguirLider;
+    private State lastState;
+
+    [Header("Referencias")]
+    public UnitController controller;
+    public Transform groupTransform;
+    public List<Transform> formationPositions;
+
+    [Header("Debug")]
+    public bool showDebug = true;
+
+    void Start()
+    {
+        lastState = currentState;
+        ApplyStateChange();
+    }
+
+    void Update()
+    {
+        // Ejecución de la lógica según estado
+        switch (currentState)
+        {
+            case State.Controlado:
+                // En modo controlado, se queda en su slot asignado
+                controller.FollowLeader(formationPositions);
+                break;
+
+            case State.Atacando:
+                controller.Attack(controller.GetEnemy());
+                break;
+
+            case State.SeguirLider:
+                controller.FollowLeader(formationPositions);
+                break;
+
+            case State.IrADestino:
+                if (controller.ReachedDestination())
+                {
+                    SetState(State.Controlado);
+                }
+                break;
+        }
+    }
+
+    // --- MÉTODOS DE TRANSICIÓN ---
+
+    public void SetState(State newState)
+    {
+        if (currentState == newState) return;
+
+        currentState = newState;
+        Debug.Log($"<color=cyan>[FSM]</color> {gameObject.name} cambió a {newState}");
+        ApplyStateChange();
+    }
+
+    private void ApplyStateChange()
+    {
+        if (currentState != State.SeguirLider && currentState != State.Controlado)
+        {
+            controller.ReleaseSlot();
+        }
+    }
+
+    public void SetEnemy(Transform enemy)
+    {
+        controller.Attack(enemy);
+        SetState(State.Atacando);
+    }
+
+    public void SetDestination(Vector3 pos)
+    {
+        controller.MoveToPoint(pos);
+        SetState(State.IrADestino);
+    }
+
+    // --- DEBUG Y VALIDACIÓN ---
+
+    private void OnValidate()
+    {
+        if (Application.isPlaying && currentState != lastState)
+        {
+            lastState = currentState;
+            ApplyStateChange();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!showDebug || !Application.isPlaying) return;
+
+        switch (currentState)
+        {
+            case State.SeguirLider:
+                Gizmos.color = Color.blue;
+                if (controller.currentSlot) Gizmos.DrawLine(transform.position, controller.currentSlot.position);
+                break;
+            case State.Atacando:
+                Gizmos.color = Color.red;
+                if (controller.GetEnemy()) Gizmos.DrawLine(transform.position, controller.GetEnemy().position);
+                break;
+            case State.IrADestino:
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(transform.position, controller.GetTargetPoint());
+                break;
+            case State.Controlado:
+                Gizmos.color = Color.yellow;
+                if (controller.currentSlot) Gizmos.DrawWireSphere(controller.currentSlot.position, 0.3f);
+                break;
+        }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Nuevos\AutoDestruccionSegura.cs 
+============================== 
+using UnityEngine;
+
+public class AutoDestruccionSegura : MonoBehaviour
+{
+    public float tiempoDeVidaEfecto = 1.0f;
+    private static bool appIsQuitting = false;
+
+    private void Start()
+    {
+        // Se destruye solo después del tiempo asignado
+        Destroy(gameObject, tiempoDeVidaEfecto);
+    }
+
+    private void OnApplicationQuit()
+    {
+        appIsQuitting = true;
+    }
+
+    private void OnDestroy()
+    {
+        // Aquí podrías poner lógica extra, 
+        // pero la protección appIsQuitting evita que 
+        // este objeto intente spawnear otros al cerrarse.
+        if (appIsQuitting) return;
+
+        //Debug.Log("Efecto destruido limpiamente");
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Nuevos\CrearYDestruir.cs 
+============================== 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CrearYDestruir : MonoBehaviour
+{
+    public GameObject PrefabDeSangre;
+    private static bool appIsQuitting = false;
+
+    // Se ejecuta cuando cierras el juego o sales del modo Play
+    private void OnApplicationQuit()
+    {
+        appIsQuitting = true;
+    }
+
+    public void OnDestroy()
+    {
+        // Solo instanciamos la sangre si el juego sigue corriendo 
+        // y si el objeto no es nulo
+        if (!appIsQuitting && PrefabDeSangre != null)
+        {
+            Vector3 NuevaPosicion = transform.position + new Vector3(0, 0, 2);
+            GameObject Sangre = Instantiate(PrefabDeSangre, NuevaPosicion, Quaternion.identity);
+            Destroy(Sangre, 2.0f); // Destruye la sangre después de 2 segundos
+        }
+    }
+} 
