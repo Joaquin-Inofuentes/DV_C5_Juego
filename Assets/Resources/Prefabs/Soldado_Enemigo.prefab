@@ -131,10 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objetivo: {fileID: 0}
-  velocidadMovimiento: 2
-  distanciaDetenerse: 4
+  velocidadMovimiento: 3
+  distanciaDetenerse: 9
   enemigoScript: {fileID: 0}
-  distanciaVisible: 10
+  distanciaVisible: 13
 --- !u!50 &6512148757522118921
 Rigidbody2D:
   serializedVersion: 4

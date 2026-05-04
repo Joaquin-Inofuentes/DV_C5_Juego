@@ -1,221 +1,135 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CambioDeArma : MonoBehaviour
 {
-    public Proyectil proyectil; //Referencia al Script de Proyectil
-    public InformacionPersonaje infoPersonaje; //Referencia al Script de InformacionPersonaje
+    [Header("Referencias")]
+    public Proyectil proyectil;
+    public InformacionPersonaje infoPersonaje;
     public CambiarOpacidad cambiarOpacidad;
+    public Transform origenDisparo;
+    public GameObject prefabBala;
 
-    public Transform origenDisparo; // Origen desde donde se disparan las balas
-    public GameObject prefabBala; // Prefab de la bala que se disparará
+    [Header("UI")]
+    public string IndicadorDeBalas; // Re-añadido para comunicación con InformacionPersonaje
 
-    public float[] danoDelArma = new float[] { 10f, 4f, 40f };
-    public int[] cantidadDeBalasPorTipoDeArma = new int[] { 15, 40, 4 }; // Cantidad de disparos disponibles para cada tipo de arma
-    public int[] cantidadDeBalasActuales = new int[3];
-    // Definir recargas como una lista de enteros
-    public int[] recargas;
+    [Header("Visuales de Armas (Asignar 3 en Inspector)")]
+    public GameObject[] modelosArmas;
 
-    public string[] tiposDeArmas = new string[] { "Pistola", "Metralleta", "Escopeta" };
-    public GameObject[] SimboloDeArmas = new GameObject[] { };
+    [Header("Configuración de Armas")]
+    public string[] tiposDeArmas = { "Pistola", "Metralleta", "Escopeta" }; // Renombrado para compatibilidad con RecogerItems
+    public float[] danoArmas = { 10f, 4f, 40f };
+    public float[] cadenciaArmas = { 0.2f, 0.08f, 1.0f };
 
+    [Header("Munición (Estilo COD)")]
+    public int[] cargadorMaximo = { 15, 30, 6 };
+    public int[] balasEnCargador;
+    public int[] reservaTotal;
 
-    public int NumeroDeArmaActual;
-
-    public string armaActual;
-    public float danoArmaActual;
-    public string IndicadorDeBalas;
-
-
-    public float[] DisparosPorSegundoTipoDeArma = new float[] { 0.1f, 0.01f, 1.5f };
-    private float tiempoDesdeElUltimoDisparo;
+    public int NumeroDeArmaActual = 0;
+    private float tiempoDesdeUltimoDisparo;
 
     void Start()
     {
-        SeteoDeBalas();
+        balasEnCargador = new int[3];
+        reservaTotal = new int[] { 45, 90, 18 };
 
-        if (origenDisparo == null) Debug.LogError("OrigenDisparo no está asignado en el Inspector.");
-        if (prefabBala == null) Debug.LogError("PrefabBala no está asignado en el Inspector.");
+        for (int i = 0; i < cargadorMaximo.Length; i++)
+        {
+            balasEnCargador[i] = cargadorMaximo[i];
+        }
 
-        NumeroDeArmaActual = 0;
         ActualizarArma();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        ManejarCambioTeclado();
+        tiempoDesdeUltimoDisparo += Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && PuedeDisparar())
         {
-            CambiarArma();
+            Disparar();
         }
 
-
-        // Cambia de arma con las teclas del 1 al 9 o al maximo de armas disponibles existentes
-        for (int i = 1; i <= 9; i++)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            // Verificar si la tecla correspondiente ha sido presionada
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + i)))
-            {
-                // Verificar si el número presionado es menor o igual a la cantidad de armas disponibles
-                if (i <= tiposDeArmas.Length)
-                {
-                    NumeroDeArmaActual = i - 1;
-                    ActualizarArma();
-                }
-                else
-                {
-                    Debug.Log("Número de arma fuera de rango. No hay arma " + i);
-                }
-                break; // Salir del bucle una vez detectada una tecla
-            }
+            IntentarRecargar();
         }
-
-
-        tiempoDesdeElUltimoDisparo += Time.deltaTime;
-
-        if (PuedeDisparar())
-        {
-            if (Input.GetButton("Fire1") && cantidadDeBalasActuales[NumeroDeArmaActual] > 0)
-            {
-                Disparar();
-
-                if (cantidadDeBalasActuales[NumeroDeArmaActual] == 0)
-                {
-                    Recargar();
-                }
-
-                ControlarOpacidadDelEfectoAlDisparar();
-            }
-        }
-
-        //Condicion en caso de que el metodo "ControlarOpacidadDelEfectoAlDisparar()" se cumpla
-        if (tiempoDesdeElUltimoDisparo >= cambiarOpacidad.tiempoDeOpacidad)
-        {
-            cambiarOpacidad.esTransparente = true;
-        }
-
-        IndicadorDeBalas = cantidadDeBalasActuales[NumeroDeArmaActual] + " / " + cantidadDeBalasPorTipoDeArma[NumeroDeArmaActual];
-        infoPersonaje.ActualizarUI();
-
-        ManejarRecarga();
     }
 
-    public void CambiarArma()
+    void ManejarCambioTeclado()
     {
-        NumeroDeArmaActual++;
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SeleccionarArma(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SeleccionarArma(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) SeleccionarArma(2);
+    }
 
-        if (NumeroDeArmaActual >= tiposDeArmas.Length)
+    void SeleccionarArma(int indice)
+    {
+        if (indice >= 0 && indice < tiposDeArmas.Length && indice != NumeroDeArmaActual)
         {
-            NumeroDeArmaActual = 0;
+            NumeroDeArmaActual = indice;
+            ActualizarArma();
         }
-
-        ActualizarArma();
     }
 
     void ActualizarArma()
     {
-        // Asignar el arma actual según el índice
-        armaActual = tiposDeArmas[NumeroDeArmaActual];
-
-        // Activar el simbolo de arma correspondiente y desactivar el resto
-        for (int i = 0; i < SimboloDeArmas.Length; i++)
+        for (int i = 0; i < modelosArmas.Length; i++)
         {
-            if (i == NumeroDeArmaActual)
-            {
-                // Activar el símbolo de arma correspondiente
-                SimboloDeArmas[i].SetActive(true);
-            }
-            else
-            {
-                // Desactivar los símbolos de las otras armas
-                SimboloDeArmas[i].SetActive(false);
-            }
+            if (modelosArmas[i] != null)
+                modelosArmas[i].SetActive(i == NumeroDeArmaActual);
         }
 
-        // Si hay un proyectil, actualizar el daño
-        if (proyectil != null)
-        {
-            proyectil.dano = danoDelArma[NumeroDeArmaActual];
-            danoArmaActual = proyectil.dano;
-        }
+        if (proyectil != null) proyectil.dano = danoArmas[NumeroDeArmaActual];
 
-        // Mostrar en consola el arma actual y su daño
-        Debug.Log("El arma actual es " + armaActual + " con daño de " + danoDelArma[NumeroDeArmaActual]);
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
     }
 
-
-    private bool PuedeDisparar()
+    bool PuedeDisparar()
     {
-        // Comprueba si ha pasado el cooldown necesario para el arma actual
-        return tiempoDesdeElUltimoDisparo >= DisparosPorSegundoTipoDeArma[NumeroDeArmaActual];
+        return tiempoDesdeUltimoDisparo >= cadenciaArmas[NumeroDeArmaActual] && balasEnCargador[NumeroDeArmaActual] > 0;
     }
 
-    private void Disparar()
+    void Disparar()
     {
-        BD_Audios.ReproducirConSolapamiento($"Disparo de {armaActual}");
+        tiempoDesdeUltimoDisparo = 0f;
+        balasEnCargador[NumeroDeArmaActual]--;
 
-        // Reinicia el tiempo desde el último disparo
-        tiempoDesdeElUltimoDisparo = 0f;
-
-        CrearBala();
-        cantidadDeBalasActuales[NumeroDeArmaActual]--;
-        infoPersonaje.ActualizarUI();
-
-        //Debug.Log("Disparando " + armaActual + " con daño de " + danoDelArma[NumeroDeArmaActual]);
-    }
-
-    private void CrearBala()
-    {
-        // Instancia la bala en el origen de disparo
         Instantiate(prefabBala, origenDisparo.position, origenDisparo.rotation);
+
+        // Corregido: usa tiposDeArmas
+        BD_Audios.ReproducirConSolapamiento($"Disparo de {tiposDeArmas[NumeroDeArmaActual]}");
+
+        if (cambiarOpacidad != null) cambiarOpacidad.esTransparente = false;
+
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
+
+        if (balasEnCargador[NumeroDeArmaActual] <= 0) IntentarRecargar();
     }
 
-    public void ControlarOpacidadDelEfectoAlDisparar()
+    void IntentarRecargar()
     {
-        cambiarOpacidad.esTransparente = false;
+        int actual = NumeroDeArmaActual;
+        if (balasEnCargador[actual] == cargadorMaximo[actual] || reservaTotal[actual] <= 0) return;
+
+        int balasNecesarias = cargadorMaximo[actual] - balasEnCargador[actual];
+        int aRecargar = Mathf.Min(balasNecesarias, reservaTotal[actual]);
+
+        balasEnCargador[actual] += aRecargar;
+        reservaTotal[actual] -= aRecargar;
+
+        // Corregido: usa tiposDeArmas
+        BD_Audios.ReproducirConSolapamiento($"Recarga de {tiposDeArmas[actual]}");
+
+        ActualizarTextoMunicion();
+        if (infoPersonaje != null) infoPersonaje.ActualizarUI();
     }
 
-    public void SeteoDeBalas()
+    void ActualizarTextoMunicion()
     {
-        for (int i = 0; i < cantidadDeBalasPorTipoDeArma.Length; i++)
-        {
-            cantidadDeBalasActuales[i] = cantidadDeBalasPorTipoDeArma[i];
-            Debug.Log("Se han asignado balas " + cantidadDeBalasActuales[i] + " al Arma " + i);
-        }
+        IndicadorDeBalas = $"{balasEnCargador[NumeroDeArmaActual]} / {reservaTotal[NumeroDeArmaActual]}";
     }
-
-    private void ManejarRecarga()
-    {
-        if (Input.GetKeyDown(KeyCode.R) && infoPersonaje != null && recargas[NumeroDeArmaActual] > 0)
-        {
-            if (armaActual == tiposDeArmas[NumeroDeArmaActual])
-            {
-                BD_Audios.ReproducirConSolapamiento("Recarga de pistola");
-                Recargar();
-            }
-        }
-    }
-
-    public void Recargar()
-    {
-        if (cantidadDeBalasActuales[NumeroDeArmaActual] == cantidadDeBalasPorTipoDeArma[NumeroDeArmaActual])
-        {
-            Debug.Log("Tienes la máxima cantidad de balas.");
-            BD_Audios.ReproducirConSolapamiento("Recarga de Maxima");
-        }
-        else if (recargas[NumeroDeArmaActual] > 0)
-        {
-            recargas[NumeroDeArmaActual]--; // Disminuir las recargas disponibles
-            cantidadDeBalasActuales[NumeroDeArmaActual] = cantidadDeBalasPorTipoDeArma[NumeroDeArmaActual]; // Recargar
-            infoPersonaje.ActualizarUI(); // Actualizar UI
-            
-            BD_Audios.ReproducirConSolapamiento($"Recarga de {armaActual}");
-        }
-        else
-        {
-            Debug.Log("No hay recargas disponibles para el arma actual.");
-            BD_Audios.ReproducirConSolapamiento("RecargaFallida");
-        }
-    }
-
 }

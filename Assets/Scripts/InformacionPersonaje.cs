@@ -10,6 +10,8 @@ public class InformacionPersonaje : MonoBehaviour
 {
     public CambioDeArma cambioDeArma;
 
+    public string IndicadorDeBalas; // Añade esta línea
+
     // Salud y armadura
     public float vidaMaxima = 100f;
     public float vidaActual = 100f;
@@ -109,44 +111,38 @@ public class InformacionPersonaje : MonoBehaviour
 
     public void ActualizarUI()
     {
-        // Verificar que el GameObject está asignado
+        // --- Lógica de la Viñeta de Daño ---
         if (EfectoViñetaNegra != null)
         {
-            // Obtener el componente Image del GameObject
             Image componenteImagen = EfectoViñetaNegra.GetComponent<Image>();
-
-            // Asegurarse de que el GameObject tiene un componente Image
             if (componenteImagen != null)
             {
-                // Calcular el porcentaje de vida restante
                 float porcentajeVida = vidaActual / vidaMaxima;
-
-                // Ajustar el alpha de la viñeta en base al porcentaje de vida (invertido)
                 Color colorViñeta = componenteImagen.color;
-                colorViñeta.a = Mathf.Lerp(1f, 0.1f, porcentajeVida); // Transparencia: 100% cuando casi muere, 10% con vida máxima
+                colorViñeta.a = Mathf.Lerp(1f, 0.1f, porcentajeVida);
                 componenteImagen.color = colorViñeta;
             }
-            else
-            {
-                Debug.LogWarning("El GameObject 'EfectoViñetaNegra' no tiene un componente Image.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No se ha asignado el GameObject 'EfectoViñetaNegra' en el Inspector.");
         }
 
-
-
-        int NumeroDeArmaActual = cambioDeArma.NumeroDeArmaActual;
+        // --- Actualización de Textos de UI ---
+        if (textoVida != null) textoVida.text = $"Vida: {vidaActual}";
         if (textoArmadura != null) textoArmadura.text = $"Armadura: {armadura}";
-        if (textoMunicion != null) textoMunicion.text = $"{cambioDeArma.IndicadorDeBalas}";
-        if (textoRecargas != null) textoRecargas.text = $"{cambioDeArma.recargas[NumeroDeArmaActual]}";
+
+        // El texto de munición ahora viene formateado directamente desde el script CambioDeArma
+        if (textoMunicion != null) textoMunicion.text = cambioDeArma.IndicadorDeBalas;
+
+        // Ya no usamos 'recargas', ahora mostramos la reserva total del arma actual
+        if (textoRecargas != null)
+        {
+            int actual = cambioDeArma.NumeroDeArmaActual;
+            textoRecargas.text = $"Reserva: {cambioDeArma.reservaTotal[actual]}";
+        }
+
         if (textoKitsMedicos != null) textoKitsMedicos.text = $"{kitsMedicos}";
         if (textoGranadas != null) textoGranadas.text = $"{granadas}";
         if (textoAdrenalina != null) textoAdrenalina.text = $"{adrenalina}";
 
-        // Llama al método para actualizar la barra de vida
+        // Llama al método para actualizar la barra de vida física
         ActualizarBarraVida(barraVida);
     }
 
@@ -174,7 +170,11 @@ public class InformacionPersonaje : MonoBehaviour
 
     public void AnadirRecargas(int NumeroDeArma)
     {
-        cambioDeArma.recargas[NumeroDeArma]++;
+        // Ejemplo: Añadimos un cargador completo a la reserva total del arma especificada
+        int cantidadAñadir = cambioDeArma.cargadorMaximo[NumeroDeArma];
+        cambioDeArma.reservaTotal[NumeroDeArma] += cantidadAñadir;
+
+        Debug.Log($"Añadidas {cantidadAñadir} balas a la reserva del arma {NumeroDeArma}");
         ActualizarUI();
     }
 
