@@ -119,7 +119,8 @@ public class InformacionPersonaje : MonoBehaviour
             {
                 float porcentajeVida = vidaActual / vidaMaxima;
                 Color colorViñeta = componenteImagen.color;
-                colorViñeta.a = Mathf.Lerp(1f, 0.1f, porcentajeVida);
+                // Multiplicamos la intensidad por 10 y limitamos a 1 (máxima opacidad)
+                colorViñeta.a = Mathf.Clamp01((1f - porcentajeVida) * 10f);
                 componenteImagen.color = colorViñeta;
             }
         }
