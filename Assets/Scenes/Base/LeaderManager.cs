@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class LeaderManager : MonoBehaviour
 {
-    public List<FSMController> unidades;
+    public List<FSMController> unidades; // La lista mantiene su tamaño original
+    public GameObject MensajeDeQueEstaMuerto;
 
     void Update()
     {
@@ -11,24 +12,43 @@ public class LeaderManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) CambiarLider(1);
         if (Input.GetKeyDown(KeyCode.Alpha6)) CambiarLider(2);
 
-        // El PositionManager sigue al líder actual
-        if (GlobalData.liderActual != null)
+        // Si el líder actual muere, limpiamos la referencia global
+        if (GlobalData.liderActual == null)
+        {
+            GlobalData.liderActual = null;
+        }
+        else
         {
             transform.position = GlobalData.liderActual.transform.position;
-            // Opcional: transform.rotation = GlobalData.liderActual.transform.rotation;
         }
     }
 
     void CambiarLider(int index)
     {
-        if (index >= unidades.Count) return;
+        // Validar que el índice exista en la lista
+        if (index < 0 || index >= unidades.Count) return;
+
+        // VERIFICACIÓN: Si el soldado en ese slot está muerto (es null)
+        if (unidades[index] == null)
+        {
+            Debug.LogError($"<color=red>ACCESO DENEGADO:</color> El soldado en el slot {index + 1} ha muerto y no puede ser líder.");
+            MensajeDeQueEstaMuerto.SetActive(true);
+            return;
+        }
 
         for (int i = 0; i < unidades.Count; i++)
         {
+            // Si este miembro de la lista está muerto, lo saltamos para no tirar error
+            if (unidades[i] == null) continue;
+
             if (i == index)
             {
                 unidades[i].currentState = FSMController.State.Liderando;
-                unidades[i].GetComponent<PlayerController2D>().enabled = true;
+
+                // Activamos control manual
+                PlayerController2D pc = unidades[i].GetComponent<PlayerController2D>();
+                if (pc != null) pc.enabled = true;
+
                 GlobalData.liderActual = unidades[i];
             }
             else
@@ -38,9 +58,17 @@ public class LeaderManager : MonoBehaviour
                 {
                     unidades[i].currentState = FSMController.State.IrAFormacion;
                 }
-                unidades[i].GetComponent<PlayerController2D>().enabled = false;
+
+                // Desactivamos control manual
+                PlayerController2D pc = unidades[i].GetComponent<PlayerController2D>();
+                if (pc != null) pc.enabled = false;
             }
         }
         Debug.Log("<color=cyan>Líder cambiado a: </color>" + unidades[index].name);
+    }
+
+    public void DesactivarMensaje()
+    {
+        MensajeDeQueEstaMuerto.SetActive(false);
     }
 }

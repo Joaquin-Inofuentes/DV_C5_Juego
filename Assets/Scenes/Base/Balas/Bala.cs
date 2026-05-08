@@ -11,7 +11,6 @@ public class Bala : MonoBehaviour
     public Sprite spriteInicio;
     public Sprite spriteDurante;
     public Sprite spriteExplosion;
-    public float tiempoExplosion = 0.5f;
 
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private BoxCollider col; // Usando 3D
@@ -54,27 +53,25 @@ public class Bala : MonoBehaviour
     // Colisión 3D
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.gameObject.name, collision.gameObject); // Log para ver qué colisiona
-        //Debug.DrawLine(Vector3.zero, collision.contacts[0].point, Color.red, 1f); // Línea de depuración para ver colisiones
         if (explotando) return;
-        if (collision.gameObject.layer == dueño.layer || collision.gameObject.CompareTag("Bala")) return;
+        if (dueño != null && (collision.gameObject.layer == dueño.layer || collision.gameObject.CompareTag("Bala"))) return;
 
         IDaniable objetivo = collision.gameObject.GetComponent<IDaniable>();
         if (objetivo != null)
         {
-            objetivo.RecibirDano((int)daño);
+            // PASAMOS EL DUEÑO AQUÍ
+            objetivo.RecibirDano((int)daño, dueño);
         }
 
-        StartCoroutine(Explosion());
+        Explosion();
     }
 
-    IEnumerator Explosion()
+    public void Explosion()
     {
         explotando = true;
         if (col != null) col.enabled = false;
         sr.sprite = spriteExplosion;
         CancelInvoke("Desactivar");
-        yield return new WaitForSeconds(tiempoExplosion);
         Desactivar();
     }
 
@@ -90,5 +87,6 @@ public class Bala : MonoBehaviour
 
 public interface IDaniable
 {
-    void RecibirDano(int cantidad); // Interface
+    // Ahora pedimos la cantidad y quién disparó
+    void RecibirDano(int cantidad, GameObject atacante);
 }

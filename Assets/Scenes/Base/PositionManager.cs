@@ -4,7 +4,7 @@ using System.Linq;
 
 public class PositionManager : MonoBehaviour
 {
-    public static PositionManager Instance; // Singleton para acceso rápido
+    public static PositionManager Instance;
 
     public List<Transform> puntosDeFormacion = new List<Transform>();
     public List<FSMController> todosLosSoldados = new List<FSMController>();
@@ -13,6 +13,7 @@ public class PositionManager : MonoBehaviour
     {
         Instance = this;
     }
+
     public void Awake()
     {
         OnEnable();
@@ -20,21 +21,33 @@ public class PositionManager : MonoBehaviour
 
     void Update()
     {
+        LimpiarSoldadosMuertos(); // Limpiamos antes de organizar
         OrganizarFormacion();
+    }
+
+    void LimpiarSoldadosMuertos()
+    {
+        // Elimina de la lista cualquier soldado que haya sido destruido
+        todosLosSoldados.RemoveAll(s => s == null);
     }
 
     void OrganizarFormacion()
     {
-        // 1. Limpiar slots asignados
-        foreach (var s in todosLosSoldados) s.slotAsignado = null;
+        // 1. Limpiar slots asignados (solo a los que aún existen)
+        foreach (var s in todosLosSoldados)
+        {
+            if (s != null) s.slotAsignado = null;
+        }
 
-        // 2. Filtrar solo los que están en estado de formación
-        // Todos los que no sean líderes deben tener un slot reservado, aunque estén atacando
+        // 2. Filtrar: Solo seguidores que NO sean líderes y que NO sean null
         List<FSMController> seguidores = todosLosSoldados
-            .Where(s => s.currentState != FSMController.State.Liderando)
+            .Where(s => s != null && s.currentState != FSMController.State.Liderando)
             .ToList();
 
-        List<Transform> puntosDisponibles = new List<Transform>(puntosDeFormacion);
+        // 3. Filtrar puntos de formación que no sean null (por si borraste alguno en el editor)
+        List<Transform> puntosDisponibles = puntosDeFormacion
+            .Where(p => p != null)
+            .ToList();
 
         foreach (var soldado in seguidores)
         {
@@ -43,7 +56,9 @@ public class PositionManager : MonoBehaviour
 
             foreach (var punto in puntosDisponibles)
             {
-                if (punto == null) continue;
+                // Doble validación de seguridad
+                if (punto == null || soldado == null) continue;
+
                 float d = Vector2.Distance(soldado.transform.position, punto.position);
                 if (d < minDist)
                 {
@@ -52,7 +67,7 @@ public class PositionManager : MonoBehaviour
                 }
             }
 
-            if (mejorPunto != null)
+            if (mejorPunto != null && soldado != null)
             {
                 soldado.slotAsignado = mejorPunto;
                 puntosDisponibles.Remove(mejorPunto);
