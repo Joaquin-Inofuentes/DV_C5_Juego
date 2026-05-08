@@ -4,7 +4,7 @@ public class PlayerController2D : MonoBehaviour
 {
     public float speed = 5f;
 
-    void Update()
+    void FixedUpdate()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");

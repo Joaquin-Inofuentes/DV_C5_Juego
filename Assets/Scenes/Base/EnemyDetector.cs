@@ -35,38 +35,37 @@ public class EnemyDetector : MonoBehaviour
 
         foreach (Transform enemigo in enemiesInRange)
         {
-            // Calcular dirección y distancia
-            Vector2 direccion = enemigo.position - transform.position;
+            // 3D: Usamos Vector3
+            Vector3 direccion = enemigo.position - transform.position;
             float distancia = direccion.magnitude;
 
-            // RAYCAST: ¿Hay una pared en medio?
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direccion.normalized, detectionRadius, enemyLayer | obstacleLayer);
-
-            // Si el Raycast golpea algo y ese algo está en la capa de enemigos...
-            if (hit.collider != null && ((1 << hit.collider.gameObject.layer) & enemyLayer) != 0)
+            // 3D: Physics.Raycast y RaycastHit
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, direccion.normalized, out hit, detectionRadius, enemyLayer | obstacleLayer))
             {
-                // Dibujar línea de visión en el editor (Verde = Visible)
-                Debug.DrawLine(transform.position, enemigo.position, Color.green);
-
-                if (distancia < distanciaCercana)
+                // Si el Raycast golpea algo y ese algo está en la capa de enemigos...
+                if (((1 << hit.collider.gameObject.layer) & enemyLayer) != 0)
                 {
-                    distanciaCercana = distancia;
-                    mejorObjetivo = enemigo;
+                    Debug.DrawLine(transform.position, enemigo.position, Color.green);
+
+                    if (distancia < distanciaCercana)
+                    {
+                        distanciaCercana = distancia;
+                        mejorObjetivo = enemigo;
+                    }
                 }
-            }
-            else
-            {
-                // Línea roja = Hay un obstáculo en medio
-                Debug.DrawLine(transform.position, enemigo.position, Color.red);
+                else
+                {
+                    Debug.DrawLine(transform.position, enemigo.position, Color.red);
+                }
             }
         }
 
-        // Enviamos el enemigo más cercano y visible al FSM
         fsm.objetivo = mejorObjetivo;
     }
 
-    // Detectar cuando entran en el círculo
-    private void OnTriggerEnter2D(Collider2D other)
+    // 3D: Usamos OnTriggerEnter y Collider (Asegúrate que la Sphere tenga "Is Trigger" marcado)
+    private void OnTriggerEnter(Collider other)
     {
         if (((1 << other.gameObject.layer) & enemyLayer) != 0)
         {
@@ -75,8 +74,8 @@ public class EnemyDetector : MonoBehaviour
         }
     }
 
-    // Detectar cuando salen del círculo
-    private void OnTriggerExit2D(Collider2D other)
+    // 3D: Usamos OnTriggerExit y Collider
+    private void OnTriggerExit(Collider other)
     {
         enemiesInRange.Remove(other.transform);
     }

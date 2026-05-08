@@ -5,7 +5,7 @@ public class Bala : MonoBehaviour
 {
     public float daño;
     public GameObject dueño;
-    public float velocidad = 20f; // Aumentamos velocidad base
+    public float velocidad = 20f;
 
     [Header("Visuales")]
     public Sprite spriteInicio;
@@ -13,20 +13,28 @@ public class Bala : MonoBehaviour
     public Sprite spriteExplosion;
     public float tiempoExplosion = 0.5f;
 
-    private SpriteRenderer sr;
-    private BoxCollider2D col;
-    private bool explotando;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private BoxCollider col; // Usando 3D
+    [SerializeField] private bool explotando;
 
-    void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        col = GetComponent<BoxCollider2D>();
-    }
 
     void OnEnable()
     {
+        // SEGURIDAD: Si col sigue siendo null, intentamos buscarlo una última vez
+        if (col == null) col = GetComponent<BoxCollider>();
+
         explotando = false;
-        col.enabled = true;
+
+        // Solo activamos si la referencia existe para evitar el UnassignedReferenceException
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+        else
+        {
+            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider (3D). Agrégalo en el inspector.");
+        }
+
         sr.sprite = spriteInicio;
         Invoke("CambiarADurante", 0.05f);
         Invoke("Desactivar", 5f);
@@ -36,39 +44,34 @@ public class Bala : MonoBehaviour
     {
         if (!explotando)
         {
-            // Movimiento constante tipo "impulso" sin física
+            // En 3D, transform.right funciona bien si el sprite mira a la derecha
             transform.position += transform.right * velocidad * Time.deltaTime;
         }
     }
 
     void CambiarADurante() => sr.sprite = spriteDurante;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    // Colisión 3D
+    private void OnCollisionEnter(Collision collision)
     {
-        // 1. Ignorar dueño o balas
-        if (other.gameObject == dueño || other.CompareTag("Bala")) return;
+        //Debug.Log(collision.gameObject.name, collision.gameObject); // Log para ver qué colisiona
+        //Debug.DrawLine(Vector3.zero, collision.contacts[0].point, Color.red, 1f); // Línea de depuración para ver colisiones
+        if (explotando) return;
+        if (collision.gameObject.layer == dueño.layer || collision.gameObject.CompareTag("Bala")) return;
 
-        // 2. Intentar dañar si el objeto tiene la interfaz
-        IDaniable objetivo = other.GetComponent<IDaniable>();
+        IDaniable objetivo = collision.gameObject.GetComponent<IDaniable>();
         if (objetivo != null)
         {
             objetivo.RecibirDano((int)daño);
-            Debug.Log($"<color=red>Daño aplicado a:</color> {other.name}");
-        }
-        else
-        {
-            return;
         }
 
-        // 3. Debug de colisión y explosión
-        Debug.Log($"<color=yellow>Colisionó con:</color> {other.name} (Tag: {other.tag})");
         StartCoroutine(Explosion());
     }
 
     IEnumerator Explosion()
     {
         explotando = true;
-        col.enabled = false;
+        if (col != null) col.enabled = false;
         sr.sprite = spriteExplosion;
         CancelInvoke("Desactivar");
         yield return new WaitForSeconds(tiempoExplosion);
@@ -78,7 +81,10 @@ public class Bala : MonoBehaviour
     void Desactivar()
     {
         CancelInvoke();
-        BalaPool.Instance.ReturnBala(this);
+        if (BalaPool.Instance != null)
+            BalaPool.Instance.ReturnBala(this);
+        else
+            gameObject.SetActive(false);
     }
 }
 

@@ -20,10 +20,6 @@ public class EnemyDetector : MonoBehaviour
     {
         if (fsm == null) fsm = GetComponent<FSMController>();
 
-        // Crear el trigger de detección automáticamente
-        CircleCollider2D col = gameObject.AddComponent<CircleCollider2D>();
-        col.isTrigger = true;
-        col.radius = detectionRadius;
     }
 
     void Update()
@@ -101,7 +97,7 @@ public class FSMController : MonoBehaviour
     public enum State { IrAFormacion, Atacar, IrAAtacar, IrAObjetivo, Liderando, Esperando, Idle }
     public State currentState = State.Idle;
 
-
+    public float returnCooldown;
 
     [Header("Órdenes Manuales")]
     public Vector3 destinoPos; // Guardamos la posición, no el objeto
@@ -118,12 +114,31 @@ public class FSMController : MonoBehaviour
     public float waitTimer = 0f;
     public float waitDuration = 4f; // Tiempo que espera antes de volver
 
+    public Disparador Dispara;
+    [Header("Combate")]
+    public float fireRate = 0.5f; // Segundos entre disparos
+    private float nextFireTime;
+
     void Update()
     {
+        if (returnCooldown > 0)
+        {
+            returnCooldown -= Time.deltaTime;
+            if (currentState == State.IrAObjetivo || currentState == State.Esperando)
+                returnCooldown = 0;
+        }
+
         if (currentState == State.Liderando)
         {
             if (agent.enabled) agent.enabled = false;
             if (selectionIndicator != null) selectionIndicator.SetActive(true);
+
+            // DISPARO MANUAL (Click izquierdo)
+            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            {
+                Disparar();
+                nextFireTime = Time.time + fireRate;
+            }
             return;
         }
         else
@@ -140,24 +155,24 @@ public class FSMController : MonoBehaviour
     {
         if (currentState == State.Liderando) return;
 
-        // PRIORIDAD 1: Ir a objetivo manual (Vector3)
+        // PRIORIDAD 1: Orden manual
         if (tieneOrdenManual)
         {
             currentState = State.IrAObjetivo;
         }
-        // PRIORIDAD 2: Esperar en el sitio tras llegar
+        // PRIORIDAD 2: Atacar (Solo si no hay cooldown de "Z")
+        else if (objetivo != null && returnCooldown <= 0)
+        {
+            float dist = Vector2.Distance(transform.position, objetivo.position);
+            currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
+        }
+        // PRIORIDAD 3: Espera temporal tras llegar a un destino manual
         else if (waitTimer > 0)
         {
             currentState = State.Esperando;
         }
-        // PRIORIDAD 4: Atacar si hay enemigo
-        else if (objetivo != null)
-        {
-            float dist = Vector2.Distance((Vector2)transform.position, (Vector2)objetivo.position);
-            currentState = (dist <= 4f) ? State.Atacar : State.IrAAtacar;
-        }
-        // PRIORIDAD 4: Ir a formacion
-        else if (slotAsignado != null)
+        // PRIORIDAD 4: Por defecto, siempre intentar volver a la formación
+        else
         {
             currentState = State.IrAFormacion;
         }
@@ -168,10 +183,10 @@ public class FSMController : MonoBehaviour
         switch (currentState)
         {
             case State.IrAObjetivo:
-                MoverA(destinoPos); // Usamos la posición guardada
+                MoverA(destinoPos);
                 if (Vector2.Distance((Vector2)transform.position, (Vector2)destinoPos) < 0.6f)
                 {
-                    tieneOrdenManual = false; // Marcamos como completada
+                    tieneOrdenManual = false;
                     waitTimer = waitDuration;
                     agent.StopAgent();
                 }
@@ -184,11 +199,16 @@ public class FSMController : MonoBehaviour
 
             case State.Atacar:
                 agent.StopAgent();
-
                 if (objetivo != null)
                 {
-                    LookAtTarget2D(objetivo); // Llamada al método
-                    Debug.DrawLine(transform.position, objetivo.position, Color.white);
+                    LookAtTarget2D(objetivo);
+
+                    // DISPARO AUTOMÁTICO
+                    if (Time.time >= nextFireTime)
+                    {
+                        Disparar();
+                        nextFireTime = Time.time + fireRate;
+                    }
                 }
                 break;
 
@@ -230,8 +250,8 @@ public class FSMController : MonoBehaviour
         tieneOrdenManual = false;
         waitTimer = 0;
         objetivo = null;
+        returnCooldown = 2f; // Bloqueo de 2 segundos
         currentState = State.IrAFormacion;
-        Debug.Log(gameObject.name + " regresando a formación.");
     }
 
     void MoverA(Vector3 pos)
@@ -241,6 +261,9 @@ public class FSMController : MonoBehaviour
             agent.GoTo(pos);
         }
     }
+
+
+    public void Disparar() => Dispara.Disparar();
 
 } 
 ============================== 
@@ -310,7 +333,7 @@ public class PlayerController2D : MonoBehaviour
 {
     public float speed = 5f;
 
-    void Update()
+    void FixedUpdate()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
@@ -357,8 +380,9 @@ public class PositionManager : MonoBehaviour
         foreach (var s in todosLosSoldados) s.slotAsignado = null;
 
         // 2. Filtrar solo los que están en estado de formación
+        // Todos los que no sean líderes deben tener un slot reservado, aunque estén atacando
         List<FSMController> seguidores = todosLosSoldados
-            .Where(s => s.currentState == FSMController.State.IrAFormacion)
+            .Where(s => s.currentState != FSMController.State.Liderando)
             .ToList();
 
         List<Transform> puntosDisponibles = new List<Transform>(puntosDeFormacion);
@@ -436,5 +460,333 @@ public class UnitCommander : MonoBehaviour
                 unit.RegresarAFormacion();
             }
         }
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\Bala.cs 
+============================== 
+using UnityEngine;
+using System.Collections;
+
+public class Bala : MonoBehaviour
+{
+    public float daño;
+    public GameObject dueño;
+    public float velocidad = 20f; // Aumentamos velocidad base
+
+    [Header("Visuales")]
+    public Sprite spriteInicio;
+    public Sprite spriteDurante;
+    public Sprite spriteExplosion;
+    public float tiempoExplosion = 0.5f;
+
+    private SpriteRenderer sr;
+    private BoxCollider col;
+    private bool explotando;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<BoxCollider>();
+    }
+
+    void OnEnable()
+    {
+        explotando = false;
+        col.enabled = true;
+        sr.sprite = spriteInicio;
+        Invoke("CambiarADurante", 0.05f);
+        Invoke("Desactivar", 5f);
+    }
+
+    void Update()
+    {
+        if (!explotando)
+        {
+            // Movimiento constante tipo "impulso" sin física
+            transform.position += transform.right * velocidad * Time.deltaTime;
+        }
+    }
+
+    void CambiarADurante() => sr.sprite = spriteDurante;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 1. Ignorar dueño o balas
+        if (other.gameObject == dueño || other.CompareTag("Bala")) return;
+
+        // 2. Intentar dañar si el objeto tiene la interfaz
+        IDaniable objetivo = other.GetComponent<IDaniable>();
+        if (objetivo != null)
+        {
+            objetivo.RecibirDano((int)daño);
+            Debug.Log($"<color=red>Daño aplicado a:</color> {other.name}");
+        }
+        else
+        {
+            return;
+        }
+
+        // 3. Debug de colisión y explosión
+        Debug.Log($"<color=yellow>Colisionó con:</color> {other.name} (Tag: {other.tag})");
+        StartCoroutine(Explosion());
+    }
+
+    IEnumerator Explosion()
+    {
+        explotando = true;
+        col.enabled = false;
+        sr.sprite = spriteExplosion;
+        CancelInvoke("Desactivar");
+        yield return new WaitForSeconds(tiempoExplosion);
+        Desactivar();
+    }
+
+    void Desactivar()
+    {
+        CancelInvoke();
+        BalaPool.Instance.ReturnBala(this);
+    }
+}
+
+public interface IDaniable
+{
+    void RecibirDano(int cantidad); // Interface
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\BalaPool.cs 
+============================== 
+using UnityEngine;
+using System.Collections.Generic;
+
+public class BalaPool : MonoBehaviour
+{
+    public static BalaPool Instance;
+    public Bala prefabBala;
+
+    private Queue<Bala> pool = new Queue<Bala>();
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    void OnEnable()
+    {
+        Instance = this;
+        ReconstruirPoolDesdeHijos();
+
+        if (pool.Count == 0)
+        {
+            ExpandirPool(500);
+        }
+    }
+
+    void ReconstruirPoolDesdeHijos()
+    {
+        pool.Clear();
+
+        foreach (Transform child in transform)
+        {
+            Bala b = child.GetComponent<Bala>();
+            if (b != null)
+            {
+                b.gameObject.SetActive(false);
+                pool.Enqueue(b);
+            }
+        }
+
+        Debug.Log("Pool reconstruido con hijos: " + pool.Count);
+    }
+
+    void ExpandirPool(int cantidad)
+    {
+        for (int i = 0; i < cantidad; i++)
+        {
+            Bala nueva = Instantiate(prefabBala, transform);
+            nueva.gameObject.SetActive(false);
+            pool.Enqueue(nueva);
+        }
+
+        Debug.Log("Pool expandido: +" + cantidad);
+    }
+
+    public Bala GetBala()
+    {
+        if (pool.Count == 0)
+        {
+            ExpandirPool(50);
+        }
+
+        Bala b = pool.Dequeue();
+        b.gameObject.SetActive(true);
+        return b;
+    }
+
+    public void ReturnBala(Bala b)
+    {
+        b.gameObject.SetActive(false);
+        pool.Enqueue(b);
+    }
+}
+ 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\DebugColisionesFull.cs 
+============================== 
+ï»¿using UnityEngine;
+
+public class DebugColisionesFull : MonoBehaviour
+{
+    // =========================
+    // ðŸ”´ COLLISION 2D
+    // =========================
+
+    public GameObject Objetivo;
+    
+    private void OnCollisionEnter2D(Collision2D c)
+    {
+        DebugCollision2D("ENTER", c);
+    }
+
+    private void OnCollisionStay2D(Collision2D c)
+    {
+        DebugCollision2D("STAY", c);
+    }
+
+    private void OnCollisionExit2D(Collision2D c)
+    {
+        DebugCollision2D("EXIT", c);
+    }
+
+    void DebugCollision2D(string fase, Collision2D c)
+    {
+        Debug.Log(
+            $"[2D COLLISION {fase}] YO: {name} | CON: {c.gameObject.name} | TAG: {c.gameObject.tag} | LAYER: {LayerMask.LayerToName(c.gameObject.layer)} | CONTACTOS: {c.contactCount}",
+            gameObject
+        );
+    }
+
+    // =========================
+    // ðŸŸ¢ TRIGGER 2D
+    // =========================
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        DebugTrigger2D("ENTER", other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        DebugTrigger2D("STAY", other);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        DebugTrigger2D("EXIT", other);
+    }
+
+    void DebugTrigger2D(string fase, Collider2D other)
+    {
+        Debug.Log(
+            $"[2D TRIGGER {fase}] YO: {name} | CON: {other.gameObject.name} | TAG: {other.tag} | LAYER: {LayerMask.LayerToName(other.gameObject.layer)}",
+            gameObject
+        );
+    }
+
+    // =========================
+    // ðŸ”´ COLLISION 3D
+    // =========================
+
+    private void OnCollisionEnter(Collision c)
+    {
+        DebugCollision3D("ENTER", c);
+    }
+
+    private void OnCollisionStay(Collision c)
+    {
+        DebugCollision3D("STAY", c);
+    }
+
+    private void OnCollisionExit(Collision c)
+    {
+        DebugCollision3D("EXIT", c);
+    }
+
+    void DebugCollision3D(string fase, Collision c)
+    {
+        Debug.Log(
+            $"[3D COLLISION {fase}] YO: {name} | CON: {c.gameObject.name} | TAG: {c.gameObject.tag} | LAYER: {LayerMask.LayerToName(c.gameObject.layer)} | CONTACTOS: {c.contactCount}",
+            gameObject
+        );
+    }
+
+    // =========================
+    // ðŸŸ¢ TRIGGER 3D
+    // =========================
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DebugTrigger3D("ENTER", other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        DebugTrigger3D("STAY", other);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        DebugTrigger3D("EXIT", other);
+    }
+
+    void DebugTrigger3D(string fase, Collider other)
+    {
+        Debug.Log(
+            $"[3D TRIGGER {fase}] YO: {name} | CON: {other.gameObject.name} | TAG: {other.tag} | LAYER: {LayerMask.LayerToName(other.gameObject.layer)}",
+            gameObject
+        );
+    }
+    
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\Disparador.cs 
+============================== 
+using UnityEngine;
+
+public class Disparador : MonoBehaviour
+{
+    public float dañoBala = 10f;
+    public float velocidadBala = 25f; // Velocidad alta para que se sienta el impulso
+
+    public void Disparar()
+    {
+        Bala b = BalaPool.Instance.GetBala();
+
+        // Posicionar y Orientar
+        b.transform.position = transform.position;
+        b.transform.rotation = transform.rotation;
+
+        // Pasar datos (IMPORTANTE: Si velocidadBala es 0, no se moverá)
+        b.daño = dañoBala;
+        b.velocidad = velocidadBala;
+        b.dueño = gameObject;
+
+        Debug.Log("<color=green>Se disparó una bala desde:</color> " + gameObject.name);
+    }
+} 
+============================== 
+ARCHIVO: C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\Enemigo2.cs 
+============================== 
+using UnityEngine;
+
+public class Enemigo2 : MonoBehaviour, IDaniable
+{
+    public int vida = 100;
+
+    public void RecibirDano(int cantidad)
+    {
+        vida -= cantidad;
+        Debug.Log("Vida restante: " + vida);
+        if (vida <= 0) Destroy(gameObject);
     }
 } 
