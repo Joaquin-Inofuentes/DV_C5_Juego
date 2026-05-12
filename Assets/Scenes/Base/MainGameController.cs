@@ -17,7 +17,7 @@ public class MainGameController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, destino, suavizado * Time.deltaTime);
 
             // 2. INFO DEL LÍDER
-            Enemigo2 v = GlobalData.liderActual.GetComponent<Enemigo2>();
+            Destruible v = GlobalData.liderActual.GetComponent<Destruible>();
             Municion m = GlobalData.liderActual.GetComponent<Municion>();
             txtLider.text = "LIDER: " + GlobalData.liderActual.name + "\n" +
                             "HP: " + (int)v.vida + " / " + v.maxVida + "\n" +
@@ -37,7 +37,7 @@ public class MainGameController : MonoBehaviour
             }
             else
             {
-                Enemigo2 v = u.GetComponent<Enemigo2>();
+                Destruible v = u.GetComponent<Destruible>();
                 lista += "[" + tecla + "] " + u.name + " HP: " + (int)v.vida + " (" + u.currentState + ")\n";
             }
         }

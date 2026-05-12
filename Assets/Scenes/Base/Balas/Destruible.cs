@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemigo2 : MonoBehaviour, IDaniable
+public class Destruible : MonoBehaviour, IDaniable
 {
     [Header("Estadísticas")]
     public float vida = 100f;
@@ -26,19 +26,25 @@ public class Enemigo2 : MonoBehaviour, IDaniable
     public void RecibirDano(int cantidad, GameObject atacante)
     {
         vida -= cantidad;
-        // lastDamageTime = Time.time; // Si usas regeneración
+        lastDamageTime = Time.time; // Activamos el cooldown de regeneración
 
-        // REACCIÓN: Ir hacia el atacante
         if (atacante != null)
         {
             FSMController fsm = GetComponent<FSMController>();
 
-            // Solo le damos la orden si NO es el líder actual (para no quitarle el control al jugador)
             if (fsm != null && fsm.currentState != FSMController.State.Liderando)
             {
-                // Le damos la orden de ir a la posición donde estaba el atacante
-                fsm.SetOrder(atacante.transform.position);
-                //Debug.Log(gameObject.name + " va tras " + atacante.name);
+                // PRIORIDAD: Si ya tiene un objetivo, no lo cambiamos (Enemigo Único)
+                // Si no tiene ninguno, le asignamos el que nos acaba de disparar
+                if (fsm.objetivo == null)
+                {
+                    fsm.objetivo = atacante.transform;
+
+                    // IMPORTANTE: Reseteamos órdenes manuales para que la FSM 
+                    // pase a estado IrAAtacar/Atacar inmediatamente
+                    fsm.tieneOrdenManual = false;
+                    fsm.waitTimer = 0;
+                }
             }
         }
 

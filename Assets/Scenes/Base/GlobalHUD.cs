@@ -16,7 +16,7 @@ public class GlobalHUD : MonoBehaviour
             if (soldado == null) continue;
 
             // 1. Obtener Vida y FSM
-            Enemigo2 v = soldado.GetComponent<Enemigo2>();
+            Destruible v = soldado.GetComponent<Destruible>();
             FSMController fsm = soldado.GetComponent<FSMController>();
 
             if (v == null) continue;
