@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +42,7 @@ public class InformacionPersonaje : MonoBehaviour
 
     public GameObject EfectoViñetaNegra;
 
-    
+
 
     private void Start()
     {
@@ -133,9 +134,9 @@ public class InformacionPersonaje : MonoBehaviour
         if (textoMunicion != null) textoMunicion.text = cambioDeArma.IndicadorDeBalas;
 
         // Ya no usamos 'recargas', ahora mostramos la reserva total del arma actual
-        if (textoRecargas != null)
+        int actual = cambioDeArma.NumeroDeArmaActual;
+        if (textoRecargas != null && cambioDeArma != null && cambioDeArma.reservaTotal.Count() >= actual)
         {
-            int actual = cambioDeArma.NumeroDeArmaActual;
             textoRecargas.text = $"Reserva: {cambioDeArma.reservaTotal[actual]}";
         }
 

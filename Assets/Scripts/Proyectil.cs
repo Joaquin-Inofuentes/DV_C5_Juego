@@ -11,6 +11,11 @@ public class Proyectil : MonoBehaviour
     [Header("Efectos de Impacto")]
     public GameObject efectoSangrePrefab;   // Asignar prefab de sangre
     public GameObject efectoImpactoPrefab;  // Asignar prefab de chispas/polvo
+    public Vector3 PuntoDeOrigen;
+    public void OnEnable()
+    {
+        PuntoDeOrigen = transform.position;
+    }
 
     private void Start()
     {
@@ -49,16 +54,31 @@ public class Proyectil : MonoBehaviour
     {
         if (prefab != null)
         {
-            // Creamos el efecto en el punto de contacto
             ContactPoint2D contacto = col.contacts[0];
-            Instantiate(prefab, contacto.point, Quaternion.identity);
+
+            // 1. Calculamos la dirección desde el impacto hacia el PuntoDeOrigen
+            Vector2 direccion = (Vector2)PuntoDeOrigen - contacto.point;
+
+            // 2. Calculamos el ángulo en grados para el eje Z (2D)
+            float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+
+            // Nota: Si tu sprite por defecto mira hacia arriba (eje Y), resta 90 al ángulo:
+            // float angulo = (Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg) - 90f;
+
+            // 3. Creamos la rotación final en el eje Z
+            Quaternion rotacionHaciaOrigen = Quaternion.Euler(0, 0, angulo);
+
+            // 4. Instanciamos directamente con la rotación correcta
+            GameObject bala = Instantiate(prefab, contacto.point, rotacionHaciaOrigen);
+
+            bala.transform.localScale = Vector3.one;
         }
     }
 
     void DestruirBala()
     {
         gameObject.GetComponent<Collider2D>().enabled = false;
-        gameObject.transform.localScale = esBomba ? new Vector3(3, 3, 3) : new Vector3(2, 2, 2);
+        //gameObject.transform.localScale = esBomba ? new Vector3(3, 3, 3) : new Vector3(2, 2, 2);
         Invoke("DesaparecerBala", 0.1f);
     }
 

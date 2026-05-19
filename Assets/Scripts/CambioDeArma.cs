@@ -11,15 +11,21 @@ public class CambioDeArma : MonoBehaviour
     public GameObject prefabBala;
 
     [Header("UI")]
-    public string IndicadorDeBalas; // Re-añadido para comunicación con InformacionPersonaje
+    public string IndicadorDeBalas;
 
     [Header("Visuales de Armas (Asignar 3 en Inspector)")]
     public GameObject[] modelosArmas;
+    public GameObject[] modelosArmas1;
 
     [Header("Configuración de Armas")]
-    public string[] tiposDeArmas = { "Pistola", "Metralleta", "Escopeta" }; // Renombrado para compatibilidad con RecogerItems
+    public string[] tiposDeArmas = { "Pistola", "Metralleta", "Escopeta" };
     public float[] danoArmas = { 10f, 4f, 40f };
     public float[] cadenciaArmas = { 0.2f, 0.08f, 1.0f };
+
+    // NUEVO: Fieltro para definir si el arma dispara manteniendo o por click
+    // true = Metralleta (Mantener presionado), false = Pistola/Escopeta (Click por click)
+    [Header("Modo de Disparo (true = Automática, false = Semiautomática)")]
+    public bool[] armasAutomáticas = { false, true, false };
 
     [Header("Munición (Estilo COD)")]
     public int[] cargadorMaximo = { 15, 30, 6 };
@@ -47,7 +53,8 @@ public class CambioDeArma : MonoBehaviour
         ManejarCambioTeclado();
         tiempoDesdeUltimoDisparo += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && PuedeDisparar())
+        // NUEVO: Detectar el tipo de click según el arma actual
+        if (DetectarIntentoDisparo() && PuedeDisparar())
         {
             Disparar();
         }
@@ -55,6 +62,19 @@ public class CambioDeArma : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             IntentarRecargar();
+        }
+    }
+
+    // NUEVO: Función auxiliar para verificar el botón correcto según el arma
+    bool DetectarIntentoDisparo()
+    {
+        if (armasAutomáticas[NumeroDeArmaActual])
+        {
+            return Input.GetButton("Fire1"); // Mantenido (Metralleta)
+        }
+        else
+        {
+            return Input.GetButtonDown("Fire1"); // Un solo click (Pistola y Escopeta)
         }
     }
 
@@ -81,6 +101,11 @@ public class CambioDeArma : MonoBehaviour
             if (modelosArmas[i] != null)
                 modelosArmas[i].SetActive(i == NumeroDeArmaActual);
         }
+        for (int i = 0; i < modelosArmas.Length; i++)
+        {
+            if (modelosArmas1[i] != null)
+                modelosArmas1[i].SetActive(i == NumeroDeArmaActual);
+        }
 
         if (proyectil != null) proyectil.dano = danoArmas[NumeroDeArmaActual];
 
@@ -102,10 +127,9 @@ public class CambioDeArma : MonoBehaviour
 
         BD_Audios.ReproducirConSolapamiento($"Disparo de {tiposDeArmas[NumeroDeArmaActual]}");
 
-        // EFECTO VISUAL: Lo activamos y lanzamos la espera para apagarlo
         if (cambiarOpacidad != null)
         {
-            StopAllCoroutines(); // Evita que se solapen si disparas muy rápido
+            StopAllCoroutines();
             StartCoroutine(EfectoDisparoFlash());
         }
 
@@ -115,13 +139,13 @@ public class CambioDeArma : MonoBehaviour
         if (balasEnCargador[NumeroDeArmaActual] <= 0) IntentarRecargar();
     }
 
-    // Nueva Corrutina para apagar el efecto
     IEnumerator EfectoDisparoFlash()
     {
-        cambiarOpacidad.esTransparente = false; // Se hace visible (opaco)
-        yield return new WaitForSeconds(0.1f);  // Espera el tiempo solicitado
-        cambiarOpacidad.esTransparente = true;  // Vuelve a ser transparente
+        cambiarOpacidad.esTransparente = false;
+        yield return new WaitForSeconds(0.1f);
+        cambiarOpacidad.esTransparente = true;
     }
+
     void IntentarRecargar()
     {
         int actual = NumeroDeArmaActual;
@@ -133,7 +157,6 @@ public class CambioDeArma : MonoBehaviour
         balasEnCargador[actual] += aRecargar;
         reservaTotal[actual] -= aRecargar;
 
-        // Corregido: usa tiposDeArmas
         BD_Audios.ReproducirConSolapamiento($"Recarga de {tiposDeArmas[actual]}");
 
         ActualizarTextoMunicion();
