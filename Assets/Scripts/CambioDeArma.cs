@@ -65,7 +65,9 @@ public class CambioDeArma : MonoBehaviour
         }
     }
 
-    // NUEVO: Función auxiliar para verificar el botón correcto según el arma
+    // Segun si es true o false se usa disparo continuo uo por click
+    // string[] tiposDeArmas = { "Pistola", "Metralleta", "Escopeta" };
+    // bool[] armasAutomáticas = { false, true, false };
     bool DetectarIntentoDisparo()
     {
         if (armasAutomáticas[NumeroDeArmaActual])
