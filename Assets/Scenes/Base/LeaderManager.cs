@@ -5,12 +5,22 @@ public class LeaderManager : MonoBehaviour
 {
     public List<FSMController> unidades; // La lista mantiene su tamaño original
     public GameObject MensajeDeQueEstaMuerto;
+    public int indiceLiderInicial = 0;
+
+    void Start()
+    {
+        if (unidades.Count > indiceLiderInicial)
+        {
+            CambiarLider(indiceLiderInicial);
+        }
+    }
+
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha4)) CambiarLider(0);
-        if (Input.GetKeyDown(KeyCode.Alpha5)) CambiarLider(1);
-        if (Input.GetKeyDown(KeyCode.Alpha6)) CambiarLider(2);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) CambiarLider(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) CambiarLider(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) CambiarLider(2);
 
         // Si el líder actual muere, limpiamos la referencia global
         if (GlobalData.liderActual == null)
