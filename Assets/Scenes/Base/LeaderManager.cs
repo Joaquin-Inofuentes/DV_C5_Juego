@@ -6,9 +6,10 @@ public class LeaderManager : MonoBehaviour
     public List<FSMController> unidades; // La lista mantiene su tamaño original
     public GameObject MensajeDeQueEstaMuerto;
     public int indiceLiderInicial = 0;
-
-    void Start()
+    public static LeaderManager Instance;
+    void OnEnable()
     {
+        Instance = this;
         if (unidades.Count > indiceLiderInicial)
         {
             CambiarLider(indiceLiderInicial);
