@@ -84,6 +84,7 @@ public class Manager_VFX : MonoBehaviour
         }
 
         obj.transform.position = position;
+        obj.transform.localScale = Vector3.one * 2f;
         obj.SetActive(false);
         obj.SetActive(true);
 

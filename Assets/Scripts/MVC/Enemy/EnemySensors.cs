@@ -45,20 +45,31 @@ namespace Game.Enemy
 
         private void EscanearSoldadosEnLineaDeVision()
         {
-            Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, visualRange, targetMask);
+            float range = (controller != null && controller.model != null) ? controller.model.radioDeteccion : visualRange;
+            Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, range);
             foreach (Collider2D target in targets)
             {
+                if (target == null || target.gameObject == gameObject) continue;
+
+                bool isTarget = false;
                 SoldierController soldier = target.GetComponent<SoldierController>();
                 if (soldier != null && soldier.model != null && !soldier.model.IsDead)
                 {
-                    // Raycast para validar línea de visión (sin obstáculos)
+                    isTarget = true;
+                }
+                else if (target.CompareTag("Player") || target.name.Contains("Soldado"))
+                {
+                    isTarget = true;
+                }
+
+                if (isTarget)
+                {
                     Vector2 direction = (target.transform.position - transform.position).normalized;
                     float distance = Vector2.Distance(transform.position, target.transform.position);
 
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, targetMask | obstacleMask);
-                    if (hit.collider != null && hit.collider.gameObject == target.gameObject)
+                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, obstacleMask);
+                    if (hit.collider == null)
                     {
-                        // Encontrado en línea de visión
                         controller.AlertarPresenciaSoldado(target.transform);
                         break;
                     }
@@ -70,7 +81,7 @@ namespace Game.Enemy
         {
             if (controller == null) return;
 
-            // 1. Escuchar balas cercanas
+            // 1. Escuchar balas cercanas (2D)
             Bala bala = other.GetComponent<Bala>();
             if (bala != null)
             {
@@ -78,6 +89,22 @@ namespace Game.Enemy
                 if (bala.dueno != null && !bala.dueno.CompareTag("Enemy") && !bala.dueno.name.Contains("Enemigo"))
                 {
                     Debug.Log($"[EnemySensors] {transform.root.name} escuchó un disparo/bala cercana de {bala.dueno.name}.");
+                    controller.AlertarRuidoDisparo(bala.transform.position);
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (controller == null) return;
+
+            // Escuchar balas cercanas (3D)
+            Bala bala = other.GetComponent<Bala>();
+            if (bala != null)
+            {
+                if (bala.dueno != null && !bala.dueno.CompareTag("Enemy") && !bala.dueno.name.Contains("Enemigo"))
+                {
+                    Debug.Log($"[EnemySensors] {transform.root.name} escuchó un disparo/bala cercana (3D) de {bala.dueno.name}.");
                     controller.AlertarRuidoDisparo(bala.transform.position);
                 }
             }

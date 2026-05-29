@@ -86,18 +86,92 @@ public class LeaderManager : MonoBehaviour
     {
         if (unidades == null || unidades.Count == 0) return;
 
-        int step = forward ? 1 : -1;
-        int startIndex = (liderActualIndex == -1) ? 0 : liderActualIndex;
-        int nextIndex = startIndex;
+        SoldierController currentLeader = GlobalData.liderActual;
+        if (currentLeader == null) return;
 
-        for (int i = 0; i < unidades.Count; i++)
+        float leaderX = currentLeader.transform.position.x;
+        SoldierController bestTarget = null;
+
+        if (forward) // E: Closest soldier to the right
         {
-            nextIndex = (nextIndex + step + unidades.Count) % unidades.Count;
-            if (unidades[nextIndex] != null && unidades[nextIndex].model != null && !unidades[nextIndex].model.IsDead)
+            float minDistance = float.MaxValue;
+            foreach (var u in unidades)
             {
-                liderActualIndex = nextIndex;
-                SquadEventBus.TriggerSoldierSwitchRequested(nextIndex);
-                return;
+                if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
+                {
+                    if (u.transform.position.x > leaderX)
+                    {
+                        float dist = u.transform.position.x - leaderX;
+                        if (dist < minDistance)
+                        {
+                            minDistance = dist;
+                            bestTarget = u;
+                        }
+                    }
+                }
+            }
+
+            // Wrap around to the leftmost soldier if none on the right
+            if (bestTarget == null)
+            {
+                float minX = float.MaxValue;
+                foreach (var u in unidades)
+                {
+                    if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
+                    {
+                        if (u.transform.position.x < minX)
+                        {
+                            minX = u.transform.position.x;
+                            bestTarget = u;
+                        }
+                    }
+                }
+            }
+        }
+        else // Q: Closest soldier to the left
+        {
+            float minDistance = float.MaxValue;
+            foreach (var u in unidades)
+            {
+                if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
+                {
+                    if (u.transform.position.x < leaderX)
+                    {
+                        float dist = leaderX - u.transform.position.x;
+                        if (dist < minDistance)
+                        {
+                            minDistance = dist;
+                            bestTarget = u;
+                        }
+                    }
+                }
+            }
+
+            // Wrap around to the rightmost soldier if none on the left
+            if (bestTarget == null)
+            {
+                float maxX = float.MinValue;
+                foreach (var u in unidades)
+                {
+                    if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
+                    {
+                        if (u.transform.position.x > maxX)
+                        {
+                            maxX = u.transform.position.x;
+                            bestTarget = u;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (bestTarget != null)
+        {
+            int index = unidades.IndexOf(bestTarget);
+            if (index != -1)
+            {
+                liderActualIndex = index;
+                CambiarLider(index);
             }
         }
     }

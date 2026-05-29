@@ -19,7 +19,8 @@ namespace Game.Squad
             IrAObjetivo, 
             Liderando, 
             Esperando, 
-            Interactuando 
+            Interactuando,
+            HuirDetrasLider
         }
 
         [Header("Componentes MVC")]
@@ -48,6 +49,11 @@ namespace Game.Squad
         [Header("Tiempos de Cooldown")]
         public float waitTimer = 0f;
         public float returnCooldown;
+
+        [Header("Feedback Visual de Impacto")]
+        [Tooltip("El SpriteRenderer que parpadeará en rojo al recibir daño (asociar manualmente).")]
+        public SpriteRenderer feedbackRenderer;
+        private float blinkTimer = 0f;
 
         // Implementación del Patrón Estado (SOLID)
         private ISoldierState stateLogic;
@@ -79,10 +85,26 @@ namespace Game.Squad
             if (view == null) Debug.LogError($"[SoldierController] ¡Falta SoldierView! El objeto '{name}' no tiene representación visual.");
             if (agent == null) Debug.LogError($"[SoldierController] ¡Falta IA_P2_AgentIA! El objeto '{name}' no podrá navegar automáticamente.");
             if (dispara == null) Debug.LogError($"[SoldierController] ¡Falta Disparador! El objeto '{name}' no podrá disparar balas.");
+            if (feedbackRenderer == null) feedbackRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
         private void Update()
         {
+            // Actualización del parpadeo de daño
+            if (blinkTimer > 0f)
+            {
+                blinkTimer -= Time.deltaTime;
+                if (feedbackRenderer != null)
+                {
+                    bool toggle = Mathf.Repeat(blinkTimer, 0.1f) > 0.05f;
+                    feedbackRenderer.color = toggle ? Color.red : Color.white;
+                }
+            }
+            else if (feedbackRenderer != null && feedbackRenderer.color != Color.white)
+            {
+                feedbackRenderer.color = Color.white;
+            }
+
             if (model == null || model.IsDead) return;
 
             if (returnCooldown > 0) returnCooldown -= Time.deltaTime;
@@ -120,7 +142,24 @@ namespace Game.Squad
         {
             if (currentState == State.Liderando) return;
 
-            // Transiciones lógicas de estados
+            // Alerta de poca vida: si la vida está al 30% o menos, y hay un líder que no es sí mismo, huir detrás de él.
+            if (model != null && (model.vidaActual / model.vidaMaxima) <= 0.3f && GlobalData.liderActual != null && GlobalData.liderActual != this)
+            {
+                if (!(stateLogic is HuirDetrasLiderState))
+                {
+                    CambiarEstado(new HuirDetrasLiderState());
+                }
+                return;
+            }
+
+            // Si está en estado de huida pero ya no cumple los requisitos (ej: recuperó vida o no hay líder)
+            if (stateLogic is HuirDetrasLiderState)
+            {
+                CambiarEstado(new IrAFormacionState());
+                return;
+            }
+
+            // Transiciones lógicas de estados ordinarios
             if (objetivo != null && returnCooldown <= 0)
             {
                 float dist = Vector3.Distance(transform.position, objetivo.position);
@@ -170,6 +209,7 @@ namespace Game.Squad
             else if (nuevoEstado is IrAFormacionState) currentState = State.IrAFormacion;
             else if (nuevoEstado is EsperandoState) currentState = State.Esperando;
             else if (nuevoEstado is InteractuandoState) currentState = State.Interactuando;
+            else if (nuevoEstado is HuirDetrasLiderState) currentState = State.HuirDetrasLider;
         }
 
         // --- Helper Methods para el Estado ---
@@ -252,6 +292,7 @@ namespace Game.Squad
         {
             if (model == null || model.IsDead) return;
 
+            blinkTimer = 0.3f;
             model.RecibirDano(cantidad);
             view?.TriggerDamageFeedback();
 

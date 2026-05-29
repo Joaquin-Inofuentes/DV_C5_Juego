@@ -253,4 +253,71 @@ namespace Game.Squad
 
         public void Exit(SoldierController controller) { }
     }
+
+    // ==========================================
+    // ESTADO: HUIR DETRÁS DEL LÍDER
+    // ==========================================
+    public class HuirDetrasLiderState : ISoldierState
+    {
+        public void Enter(SoldierController controller)
+        {
+            if (controller.agent != null) controller.agent.enabled = true;
+            Debug.Log($"[HuirDetrasLiderState] {controller.name} tiene poca vida y huye a cubrirse detrás del líder.");
+        }
+
+        public void Update(SoldierController controller)
+        {
+            SoldierController leader = GlobalData.liderActual;
+            if (leader == null || leader == controller)
+            {
+                controller.CambiarEstado(new IrAFormacionState());
+                return;
+            }
+
+            // Buscar enemigo más cercano
+            GameObject closestEnemy = null;
+            float closestDist = float.MaxValue;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                if (enemy != null)
+                {
+                    float d = Vector3.Distance(controller.transform.position, enemy.transform.position);
+                    if (d < closestDist)
+                    {
+                        closestDist = d;
+                        closestEnemy = enemy;
+                    }
+                }
+            }
+
+            // Vector del enemigo al líder
+            Vector3 directionBehind;
+            if (closestEnemy != null)
+            {
+                directionBehind = (leader.transform.position - closestEnemy.transform.position).normalized;
+            }
+            else
+            {
+                // Si no hay enemigo, situarse detrás de donde apunta el líder
+                directionBehind = -leader.transform.right;
+            }
+
+            // Colocarse a 2.5 unidades detrás del líder
+            Vector3 targetPos = leader.transform.position + directionBehind * 2.5f;
+
+            controller.MoverAgenteA(targetPos);
+
+            // Dibujos de Debug para verificar cobertura
+            Debug.DrawLine(controller.transform.position, targetPos, Color.yellow);
+            if (closestEnemy != null)
+            {
+                Debug.DrawLine(leader.transform.position, closestEnemy.transform.position, Color.red * 0.5f);
+            }
+        }
+
+        public void FixedUpdate(SoldierController controller) { }
+
+        public void Exit(SoldierController controller) { }
+    }
 }

@@ -68,7 +68,7 @@ public class Bala : MonoBehaviour
                 CursorManager cursor = FindObjectOfType<CursorManager>();
                 if (cursor != null)
                 {
-                    cursor.transform.localScale = Vector3.one * 1.5f;
+                    cursor.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
                     CoroutineHelper.Instance.StartCoroutine(RestaurarEscalaCursor(cursor));
                 }
             }
@@ -100,7 +100,7 @@ public class Bala : MonoBehaviour
     private IEnumerator RestaurarEscalaCursor(CursorManager cursor)
     {
         yield return new WaitForSeconds(0.08f);
-        if (cursor != null) cursor.transform.localScale = Vector3.one;
+        if (cursor != null) cursor.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
     }
 
     public void Explosion()

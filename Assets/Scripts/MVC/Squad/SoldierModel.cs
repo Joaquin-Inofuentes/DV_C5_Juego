@@ -58,11 +58,13 @@ namespace Game.Squad
         {
             if (IsDead) return;
 
-            // Regeneración pasiva de salud
+            // Regeneración pasiva de salud (Desactivada)
+            /*
             if (Time.time - lastDamageTime >= healDelay && vidaActual < vidaMaxima)
             {
                 vidaActual = Mathf.MoveTowards(vidaActual, vidaMaxima, healRate * Time.deltaTime);
             }
+            */
         }
 
         /// <summary>

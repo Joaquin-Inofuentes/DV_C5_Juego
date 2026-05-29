@@ -9,13 +9,14 @@ public class CursorManager : MonoBehaviour
 
     void Update()
     {
-        // 1. Detectar si el mouse esta FUERA de la ventana del juego
+        // 1. Detectar si el mouse esta FUERA de la ventana del juego o gameplay
         Vector3 mPos = Input.mousePosition;
         bool estaFuera = mPos.x < 0 || mPos.y < 0 || mPos.x > Screen.width || mPos.y > Screen.height;
 
         if (estaFuera)
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            transform.localScale = Vector3.zero;
             return;
         }
 
@@ -53,15 +54,23 @@ public class CursorManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector3 mPos = Input.mousePosition;
+        bool estaFuera = mPos.x < 0 || mPos.y < 0 || mPos.x > Screen.width || mPos.y > Screen.height;
+        if (estaFuera)
+        {
+            transform.localScale = Vector3.zero;
+            return;
+        }
+
         if (scaleBlinkTimer > 0f)
         {
             scaleBlinkTimer -= Time.fixedDeltaTime;
-            float scaleFactor = 1f + Mathf.Abs(Mathf.Sin(scaleBlinkTimer * 20f)) * 0.4f;
+            float scaleFactor = 0.5f + Mathf.Abs(Mathf.Sin(scaleBlinkTimer * 20f)) * 0.2f;
             transform.localScale = new Vector3(scaleFactor, scaleFactor, 1f);
         }
         else
         {
-            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         }
     }
 

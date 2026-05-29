@@ -58,11 +58,13 @@ namespace Game.Enemy
         {
             if (IsDead) return;
 
-            // Regeneración pasiva si es el dueño del estado
+            // Regeneración pasiva si es el dueño del estado (Desactivada)
+            /*
             if (hasNetworkAuthority && Time.time - lastDamageTime >= healDelay && vidaActual < vidaMaxima)
             {
                 vidaActual = Mathf.MoveTowards(vidaActual, vidaMaxima, healRate * Time.deltaTime);
             }
+            */
         }
 
         public void RecibirDano(float cantidad)

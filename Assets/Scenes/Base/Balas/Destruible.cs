@@ -24,11 +24,13 @@ public class Destruible : MonoBehaviour, IDaniable
 
     private void Update()
     {
-        // Regeneración de vida pasiva
+        // Regeneración de vida pasiva (Desactivada)
+        /*
         if (Time.time - lastDamageTime >= healDelay && vida < maxVida)
         {
             vida = Mathf.MoveTowards(vida, maxVida, healRate * Time.deltaTime);
         }
+        */
     }
 
     public void RecibirDano(int cantidad, GameObject atacante)
