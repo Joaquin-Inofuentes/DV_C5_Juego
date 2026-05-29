@@ -1,29 +1,27 @@
 using UnityEngine;
+using Game.Squad;
 
 public class ShotSensor : MonoBehaviour
 {
-    public FSMController fsm;
+    public SoldierController controller;
 
     void Awake()
     {
-        if (fsm == null) fsm = GetComponentInParent<FSMController>();
+        if (controller == null) controller = GetComponentInParent<SoldierController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Si lo que entra es una Bala
         Bala bala = other.GetComponent<Bala>();
         if (bala != null)
         {
-            // Si el dueño de la bala no es mi propio equipo
-            if (bala.dueño != null && bala.dueño.layer != transform.root.gameObject.layer)
+            if (bala.dueÃ±o != null && bala.dueÃ±o.layer != transform.root.gameObject.layer)
             {
-                Debug.Log($"<color=orange>[SENTIDOS]</color> {transform.root.name} detectó un disparo cercano de {bala.dueño.name}");
+                Debug.Log($"<color=orange>[SENTIDOS]</color> {transform.root.name} detectÃ³ un disparo cercano de {bala.dueÃ±o.name}");
 
-                // Si no tiene un objetivo visual, va a investigar de donde vino la bala
-                if (fsm.objetivo == null)
+                if (controller != null && controller.objetivo == null)
                 {
-                    fsm.InvestigarPosicion(bala.dueño.transform.position);
+                    controller.InvestigarPosicion(bala.dueÃ±o.transform.position);
                 }
             }
         }

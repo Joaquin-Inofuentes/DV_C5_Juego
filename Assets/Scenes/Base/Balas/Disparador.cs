@@ -1,38 +1,25 @@
 using UnityEngine;
+using Game.Squad;
 
 public class Disparador : MonoBehaviour
 {
-    public float dañoBala = 10f;
+    public float daÃ±oBala = 10f;
     public float velocidadBala = 25f;
 
     public void Disparar()
     {
-        // 1. Buscamos el componente Municion en este objeto o en el padre (Soldado)
-        Municion m = GetComponentInParent<Municion>();
-
-        // 2. Si existe el sistema de munición, validamos
-        if (m != null)
-        {
-            if (m.balasActuales <= 0)
-            {
-                Debug.Log("<color=orange>Click! Sin balas en: </color>" + transform.root.name);
-                return; // SALIR: No dispara nada
-            }
-
-            // 3. GASTAR LA BALA
-            m.balasActuales--;
-        }
-
-        // 4. LÓGICA DE DISPARO (Solo llega aquí si hay balas o no hay script de munición)
         Bala b = BalaPool.Instance.GetBala();
+        if (b == null)
+        {
+            Debug.LogError("[Disparador] Â¡Falta el prefab de Bala en BalaPool o BalaPool no estÃ¡ instanciado!");
+            return;
+        }
 
         b.transform.position = transform.position;
         b.transform.rotation = transform.rotation;
 
-        b.daño = dañoBala;
+        b.daÃ±o = daÃ±oBala;
         b.velocidad = velocidadBala;
-
-        // El dueño es el objeto raíz (el soldado completo)
-        b.dueño = transform.root.gameObject;
+        b.dueÃ±o = transform.root.gameObject;
     }
 }

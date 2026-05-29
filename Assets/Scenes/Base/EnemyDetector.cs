@@ -1,19 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Game.Squad;
 
 public class EnemyDetector : MonoBehaviour
 {
     public float detectionRadius = 6f;
-    public LayerMask enemyLayer;    // Capa de los enemigos
-    public LayerMask obstacleLayer; // Capa de paredes/coberturas
+    public LayerMask enemyLayer;
+    public LayerMask obstacleLayer;
 
     public List<Transform> enemiesInRange = new List<Transform>();
-    public FSMController fsm; // Referencia al FSM
+    public SoldierController controller;
 
     void Start()
     {
-        if (fsm == null) fsm = GetComponent<FSMController>();
-
+        if (controller == null) controller = GetComponent<SoldierController>();
     }
 
     void Update()
@@ -24,26 +24,24 @@ public class EnemyDetector : MonoBehaviour
 
     void LimpiarLista()
     {
-        // Elimina de la lista si el enemigo fue destruido
         enemiesInRange.RemoveAll(e => e == null);
     }
 
     void FiltrarYEnviarAlFSM()
     {
+        if (controller == null) return;
+
         Transform mejorObjetivo = null;
         float distanciaCercana = Mathf.Infinity;
 
         foreach (Transform enemigo in enemiesInRange)
         {
-            // 3D: Usamos Vector3
             Vector3 direccion = enemigo.position - transform.position;
             float distancia = direccion.magnitude;
 
-            // 3D: Physics.Raycast y RaycastHit
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direccion.normalized, out hit, detectionRadius, enemyLayer | obstacleLayer))
             {
-                // Si el Raycast golpea algo y ese algo está en la capa de enemigos...
                 if (((1 << hit.collider.gameObject.layer) & enemyLayer) != 0)
                 {
                     Debug.DrawLine(transform.position, enemigo.position, Color.green);
@@ -61,10 +59,9 @@ public class EnemyDetector : MonoBehaviour
             }
         }
 
-        fsm.objetivo = mejorObjetivo;
+        controller.objetivo = mejorObjetivo;
     }
 
-    // 3D: Usamos OnTriggerEnter y Collider (Asegúrate que la Sphere tenga "Is Trigger" marcado)
     private void OnTriggerEnter(Collider other)
     {
         if (((1 << other.gameObject.layer) & enemyLayer) != 0)
@@ -74,7 +71,6 @@ public class EnemyDetector : MonoBehaviour
         }
     }
 
-    // 3D: Usamos OnTriggerExit y Collider
     private void OnTriggerExit(Collider other)
     {
         enemiesInRange.Remove(other.transform);

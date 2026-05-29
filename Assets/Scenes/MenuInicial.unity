@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 588576184}
   - component: {fileID: 588576183}
   m_Layer: 5
-  m_Name: Jugar
+  m_Name: BTN_Jugar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1333,10 +1333,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 556002562}
     m_Modifications:
+    - target: {fileID: 1679103564697304690, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_Name
+      value: TX_USP
+      objectReference: {fileID: 0}
     - target: {fileID: 4235724360186181465, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 556002558}
+    - target: {fileID: 4235724360186181465, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: _USP
+      objectReference: {fileID: 0}
     - target: {fileID: 5320381922006419362, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1419,7 +1427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8599299352057078538, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_Name
-      value: Main menu
+      value: BTN_USP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

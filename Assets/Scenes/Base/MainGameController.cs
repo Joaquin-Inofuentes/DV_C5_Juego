@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
+using Game.Squad;
 
 public class MainGameController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MainGameController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (leaderManager == null) return;
+
         // 1. SEGUIR AL LÍDER CON LA CÁMARA
         if (GlobalData.liderActual != null)
         {
@@ -17,13 +20,12 @@ public class MainGameController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, destino, suavizado * Time.deltaTime);
 
             // 2. INFO DETALLADA DEL LÍDER
-            Destruible v = GlobalData.liderActual.GetComponent<Destruible>();
-            Municion m = GlobalData.liderActual.GetComponent<Municion>();
+            SoldierModel m = GlobalData.liderActual.model;
 
-            if (v != null && m != null)
+            if (m != null)
             {
                 txtLider.text = "<color=yellow>LIDER ACTUAL:</color> " + GlobalData.liderActual.name.ToUpper() + "\n" +
-                                "HP: " + (int)v.vida + " / " + v.maxVida + "\n" +
+                                "HP: " + (int)m.vidaActual + " / " + m.vidaMaxima + "\n" +
                                 "AMMO: " + m.balasActuales;
             }
         }
@@ -42,14 +44,13 @@ public class MainGameController : MonoBehaviour
             }
             else
             {
-                Destruible v = u.GetComponent<Destruible>();
-
-                // --- CAMBIO DE COLOR AQUÍ ---
-                // Si es el líder, el estado sale en AMARILLO. Si no, en BLANCO.
-                string colorEstado = (u.currentState == FSMController.State.Liderando) ? "yellow" : "white";
-
-                lista += "[" + numeroReal + "] " + u.name + " HP: " + (int)v.vida +
-                         " (<color=" + colorEstado + ">" + u.currentState + "</color>)\n";
+                SoldierModel m = u.model;
+                if (m != null)
+                {
+                    string colorEstado = (u.currentState == SoldierController.State.Liderando) ? "yellow" : "white";
+                    lista += "[" + numeroReal + "] " + u.name + " HP: " + (int)m.vidaActual +
+                             " (<color=" + colorEstado + ">" + u.currentState + "</color>)\n";
+                }
             }
         }
 

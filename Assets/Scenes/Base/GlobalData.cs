@@ -1,6 +1,7 @@
 using UnityEngine;
+using Game.Squad;
 
 public class GlobalData : MonoBehaviour
 {
-    public static FSMController liderActual;
+    public static SoldierController liderActual;
 }

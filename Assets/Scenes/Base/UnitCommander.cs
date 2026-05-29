@@ -1,19 +1,20 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Game.Squad;
 
 public class UnitCommander : MonoBehaviour
 {
-    public List<FSMController> units = new List<FSMController>();
+    public List<SoldierController> units = new List<SoldierController>();
     public Transform targetMarker;
 
     void Update()
     {
         units.RemoveAll(u => u == null);
 
-        // 1. Lógica de HOVER (Detectar antes de hacer click)
+        // 1. LÃ³gica de HOVER
         ProcesarHoverInteraccion();
 
-        // 2. Lógica de CLICKS
+        // 2. LÃ³gica de CLICKS
         if (Input.GetMouseButtonDown(1)) ProcesarOrden();
 
         if (Input.GetKeyDown(KeyCode.F1)) DarOrdenDirecta(0);
@@ -22,7 +23,10 @@ public class UnitCommander : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            foreach (var unit in units) if (unit != null) unit.RegresarAFormacion();
+            foreach (var unit in units)
+            {
+                if (unit != null) unit.RegresarAFormacion();
+            }
         }
     }
 
@@ -37,8 +41,7 @@ public class UnitCommander : MonoBehaviour
             IInteractable interactuable = hit.collider.GetComponent<IInteractable>();
             if (interactuable != null)
             {
-                // Buscamos al soldado más cercano para mostrarle el camino amarillo
-                FSMController cercano = GetSoldadoMasCercano(hit.point);
+                SoldierController cercano = GetSoldadoMasCercano(hit.point);
                 if (cercano != null)
                 {
                     UnitPathRenderer pathVisual = cercano.GetComponent<UnitPathRenderer>();
@@ -58,10 +61,9 @@ public class UnitCommander : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
-        FSMController soldado = GetSoldadoMasCercano(mousePos);
+        SoldierController soldado = GetSoldadoMasCercano(mousePos);
         if (soldado == null) return;
 
-        // Si es interactuable (Capa 11)
         if (Physics.Raycast(ray, out hit, 100f, 1 << 11))
         {
             IInteractable interactuable = hit.collider.GetComponent<IInteractable>();
@@ -77,13 +79,13 @@ public class UnitCommander : MonoBehaviour
         soldado.SetOrder(mousePos);
     }
 
-    FSMController GetSoldadoMasCercano(Vector3 pos)
+    SoldierController GetSoldadoMasCercano(Vector3 pos)
     {
-        FSMController mejor = null;
+        SoldierController mejor = null;
         float minDist = Mathf.Infinity;
         foreach (var u in units)
         {
-            if (u == null || u.currentState == FSMController.State.Liderando) continue;
+            if (u == null || u.currentState == SoldierController.State.Liderando) continue;
             float d = Vector3.Distance(u.transform.position, pos);
             if (d < minDist) { minDist = d; mejor = u; }
         }
@@ -92,7 +94,7 @@ public class UnitCommander : MonoBehaviour
 
     void DarOrdenDirecta(int indice)
     {
-        if (indice >= units.Count || units[indice] == null || units[indice].currentState == FSMController.State.Liderando) return;
+        if (indice >= units.Count || units[indice] == null || units[indice].currentState == SoldierController.State.Liderando) return;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         MoverMarcador(mousePos);
@@ -103,9 +105,9 @@ public class UnitCommander : MonoBehaviour
     {
         if (targetMarker != null)
         {
+            targetMarker.position = pos;
             MarkerAnim anim = targetMarker.GetComponent<MarkerAnim>();
-            if (anim != null) anim.IniciarAnimacion(pos);
-            else targetMarker.position = pos;
+            //if (anim != null) anim.Play();
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.Squad;
 
 public class AmmoManager : MonoBehaviour
 {
@@ -23,17 +24,17 @@ public class AmmoManager : MonoBehaviour
 
                 if (dist <= distanciaDistribucion)
                 {
-                    DistribuirBalas(unidades[i].GetComponent<Municion>(), unidades[j].GetComponent<Municion>());
+                    DistribuirBalas(unidades[i].model, unidades[j].model);
                 }
             }
         }
     }
 
-    void DistribuirBalas(Municion a, Municion b)
+    void DistribuirBalas(SoldierModel a, SoldierModel b)
     {
-        if (a == null || b == null) return;
+        if (a == null || b == null || a.IsDead || b.IsDead) return;
 
-        // Si uno tiene más que el otro, igualamos poco a poco
+        // Si uno tiene mÃ¡s que el otro, igualamos poco a poco
         if (Mathf.Abs(a.balasActuales - b.balasActuales) > 1)
         {
             if (a.balasActuales > b.balasActuales)

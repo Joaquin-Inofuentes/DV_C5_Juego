@@ -1,85 +1,132 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Game.Squad;
 
+/// <summary>
+/// Gestiona la selecci√≥n y asignaci√≥n del l√≠der de la escuadra utilizando el EventBus.
+/// </summary>
 public class LeaderManager : MonoBehaviour
 {
-    public List<FSMController> unidades; // La lista mantiene su tamaÒo original
+    [Header("Pelot√≥n de Soldados")]
+    public List<SoldierController> unidades;
+
+    [Header("Configuraci√≥n")]
+    [Tooltip("Panel UI o texto de advertencia a activar cuando el jugador intenta cambiar a un soldado muerto.")]
     public GameObject MensajeDeQueEstaMuerto;
+
+    [Tooltip("√çndice de inicio para el l√≠der de la escuadra.")]
     public int indiceLiderInicial = 0;
-    public static LeaderManager Instance;
-    void OnEnable()
+
+    public static LeaderManager Instance { get; private set; }
+
+    private void Awake()
     {
         Instance = this;
-        if (unidades.Count > indiceLiderInicial)
+    }
+
+    private void OnEnable()
+    {
+        // Suscribirse a eventos
+        SquadEventBus.OnSoldierSwitchRequested += CambiarLider;
+        SquadEventBus.OnSoldierDied += HandleSoldierDied;
+
+        if (unidades != null && unidades.Count > indiceLiderInicial)
         {
-            CambiarLider(indiceLiderInicial);
+            StartCoroutine(InicializarLiderTarde());
         }
     }
 
-
-    void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) CambiarLider(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) CambiarLider(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) CambiarLider(2);
+        // Cancelar suscripci√≥n
+        SquadEventBus.OnSoldierSwitchRequested -= CambiarLider;
+        SquadEventBus.OnSoldierDied -= HandleSoldierDied;
+    }
 
-        // Si el lÌder actual muere, limpiamos la referencia global
-        if (GlobalData.liderActual == null)
-        {
-            GlobalData.liderActual = null;
-        }
-        else
+    private System.Collections.IEnumerator InicializarLiderTarde()
+    {
+        yield return new WaitForEndOfFrame();
+        CambiarLider(indiceLiderInicial);
+    }
+
+    private void Update()
+    {
+        // Enviar peticiones de cambio al EventBus
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SquadEventBus.TriggerSoldierSwitchRequested(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SquadEventBus.TriggerSoldierSwitchRequested(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) SquadEventBus.TriggerSoldierSwitchRequested(2);
+
+        // Si el l√≠der actual existe, posicionar este objeto en su posici√≥n (para pivots de formaci√≥n)
+        if (GlobalData.liderActual != null)
         {
             transform.position = GlobalData.liderActual.transform.position;
         }
     }
 
-    void CambiarLider(int index)
+    public void CambiarLider(int index)
     {
-        // Validar que el Ìndice exista en la lista
-        if (index < 0 || index >= unidades.Count) return;
+        if (unidades == null || index < 0 || index >= unidades.Count) return;
 
-        // VERIFICACI”N: Si el soldado en ese slot est· muerto (es null)
-        if (unidades[index] == null)
+        // Si el soldado est√° muerto (nulo)
+        if (unidades[index] == null || (unidades[index].model != null && unidades[index].model.IsDead))
         {
-            Debug.LogError($"<color=red>ACCESO DENEGADO:</color> El soldado en el slot {index + 1} ha muerto y no puede ser lÌder.");
-            MensajeDeQueEstaMuerto.SetActive(true);
+            Debug.LogError($"<color=red>ACCESO DENEGADO:</color> El soldado en el slot {index + 1} ha muerto y no puede liderar.");
+            if (MensajeDeQueEstaMuerto != null)
+            {
+                MensajeDeQueEstaMuerto.SetActive(true);
+            }
             return;
         }
 
         for (int i = 0; i < unidades.Count; i++)
         {
-            // Si este miembro de la lista est· muerto, lo saltamos para no tirar error
             if (unidades[i] == null) continue;
 
-            if (i == index)
+            bool isSelected = (i == index);
+            unidades[i].model.IsLeader = isSelected;
+
+            if (isSelected)
             {
-                unidades[i].currentState = FSMController.State.Liderando;
-
-                // Activamos control manual
-                PlayerController2D pc = unidades[i].GetComponent<PlayerController2D>();
-                if (pc != null) pc.enabled = true;
-
+                unidades[i].currentState = SoldierController.State.Liderando;
+                unidades[i].view?.SetSelectionActive(true);
                 GlobalData.liderActual = unidades[i];
+                SquadEventBus.TriggerLeaderChanged(unidades[i]);
             }
             else
             {
-                // Si antes era lÌder, lo devolvemos a formaciÛn
-                if (unidades[i].currentState == FSMController.State.Liderando)
+                unidades[i].view?.SetSelectionActive(false);
+                if (unidades[i].currentState == SoldierController.State.Liderando)
                 {
-                    unidades[i].currentState = FSMController.State.IrAFormacion;
+                    unidades[i].currentState = SoldierController.State.IrAFormacion;
                 }
-
-                // Desactivamos control manual
-                PlayerController2D pc = unidades[i].GetComponent<PlayerController2D>();
-                if (pc != null) pc.enabled = false;
             }
         }
-        Debug.Log("<color=cyan>LÌder cambiado a: </color>" + unidades[index].name);
+    }
+
+    private void HandleSoldierDied(SoldierController deadSoldier)
+    {
+        // Verificar si toda la escuadra ha sido eliminada
+        bool algunoVivo = false;
+        foreach (var u in unidades)
+        {
+            if (u != null && u.model != null && !u.model.IsDead)
+            {
+                algunoVivo = true;
+                break;
+            }
+        }
+
+        if (!algunoVivo)
+        {
+            Debug.Log("<color=red>Derrota:</color> Todos los soldados han muerto.");
+        }
     }
 
     public void DesactivarMensaje()
     {
-        MensajeDeQueEstaMuerto.SetActive(false);
+        if (MensajeDeQueEstaMuerto != null)
+        {
+            MensajeDeQueEstaMuerto.SetActive(false);
+        }
     }
 }

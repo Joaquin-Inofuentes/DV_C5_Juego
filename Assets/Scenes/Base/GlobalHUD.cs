@@ -1,9 +1,10 @@
 using UnityEngine;
+using Game.Squad;
 
 public class GlobalHUD : MonoBehaviour
 {
     public LeaderManager leaderManager;
-    public Vector2 offset = new Vector2(0, 45); // Un poco más de offset para que quepa el texto
+    public Vector2 offset = new Vector2(0, 45);
     public float anchoBarra = 60f;
     public float altoBarra = 6f;
 
@@ -15,13 +16,9 @@ public class GlobalHUD : MonoBehaviour
         {
             if (soldado == null) continue;
 
-            // 1. Obtener Vida y FSM
-            Destruible v = soldado.GetComponent<Destruible>();
-            FSMController fsm = soldado.GetComponent<FSMController>();
+            SoldierModel m = soldado.model;
+            if (m == null) continue;
 
-            if (v == null) continue;
-
-            // 2. Posicionamiento
             Vector3 screenPos = Camera.main.WorldToScreenPoint(soldado.transform.position);
             if (screenPos.z <= 0) continue;
 
@@ -32,51 +29,38 @@ public class GlobalHUD : MonoBehaviour
             GUI.color = Color.black;
             GUI.DrawTexture(new Rect(x, y, anchoBarra, altoBarra), Texture2D.whiteTexture);
 
-            float porcentaje = (float)v.vida / v.maxVida;
+            float porcentaje = m.vidaActual / m.vidaMaxima;
             GUI.color = porcentaje > 0.3f ? Color.green : Color.red;
             GUI.DrawTexture(new Rect(x, y, anchoBarra * porcentaje, altoBarra), Texture2D.whiteTexture);
 
-            // --- DIBUJAR TEXTO DE VIDA (XX/XX) ---
+            // --- DIBUJAR TEXTO DE VIDA ---
             GUI.color = Color.white;
             GUI.skin.label.alignment = TextAnchor.UpperCenter;
             GUI.skin.label.fontSize = 10;
-            GUI.Label(new Rect(x, y + altoBarra, anchoBarra, 20), $"{(int)v.vida}/{(int)v.maxVida}");
+            GUI.Label(new Rect(x, y + altoBarra, anchoBarra, 20), $"{(int)m.vidaActual}/{(int)m.vidaMaxima}");
 
             // --- DIBUJAR ESTADO DEL FSM ---
-            if (fsm != null)
-            {
-                string textoEstado = fsm.currentState.ToString();
+            string textoEstado = soldado.currentState.ToString();
+            GUI.color = GetColorByState(soldado.currentState);
+            GUI.skin.label.fontStyle = FontStyle.Bold;
+            GUI.Label(new Rect(x - 20, y + altoBarra + 12, anchoBarra + 40, 20), textoEstado);
 
-                // Cambiar color según el estado para que sea más visual
-                GUI.color = GetColorByState(fsm.currentState);
-
-                GUI.skin.label.fontStyle = FontStyle.Bold;
-                // Lo dibujamos un poco más abajo (y + altoBarra + 12)
-                GUI.Label(new Rect(x - 20, y + altoBarra + 12, anchoBarra + 40, 20), textoEstado);
-            }
-            Municion muni = soldado.GetComponent<Municion>();
-
-            // --- DIBUJAR MUNICIÓN ---
-            if (muni != null)
-            {
-                GUI.color = Color.yellow;
-                GUI.skin.label.fontSize = 9;
-                // Dibujamos debajo del estado (y + altoBarra + 25)
-                GUI.Label(new Rect(x, y + altoBarra + 25, anchoBarra, 20), $"AMMO: {muni.balasActuales}");
-            }
+            // --- DIBUJAR MUNICIÃ“N ---
+            GUI.color = Color.yellow;
+            GUI.skin.label.fontSize = 9;
+            GUI.Label(new Rect(x, y + altoBarra + 25, anchoBarra, 20), $"AMMO: {m.balasActuales}");
         }
     }
 
-    // Método auxiliar para dar colores a los estados
-    Color GetColorByState(FSMController.State state)
+    Color GetColorByState(SoldierController.State state)
     {
         switch (state)
         {
-            case FSMController.State.Atacar: return Color.red;
-            case FSMController.State.Liderando: return Color.cyan;
-            case FSMController.State.IrAObjetivo: return Color.yellow;
-            case FSMController.State.IrAFormacion: return Color.gray;
-            case FSMController.State.Esperando: return Color.white;
+            case SoldierController.State.Atacar: return Color.red;
+            case SoldierController.State.Liderando: return Color.cyan;
+            case SoldierController.State.IrAObjetivo: return Color.yellow;
+            case SoldierController.State.IrAFormacion: return Color.gray;
+            case SoldierController.State.Esperando: return Color.white;
             default: return Color.white;
         }
     }

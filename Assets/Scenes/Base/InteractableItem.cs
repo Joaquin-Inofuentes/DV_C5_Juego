@@ -1,58 +1,51 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Squad;
 
 public class InteractableItem : MonoBehaviour, IInteractable
 {
-    public string nombreItem = "BotiquÌn";
+    public string nombreItem = "Botiqu√≠n";
     public float curacion = 50f;
 
     public string GetInteractName() => nombreItem;
-    // En InteractableItem.cs
+    
     public Transform GetTransform()
     {
-        // Si el objeto est· destruido, devolvemos null para que el FSM se entere
         if (this == null) return null;
         return transform;
     }
 
     public void Interact(GameObject interactuante)
     {
-        // 1. L”GICA SI ES BOTIQUÕN
-        if (nombreItem == "BotiquÌn")
+        // L√≥gica si es Botiqu√≠n
+        if (nombreItem == "Botiqu√≠n")
         {
             LeaderManager lm = LeaderManager.Instance;
 
             if (lm != null)
             {
-                // Buscar soldado vivo, no lÌder, con menos vida
+                // Buscar soldado vivo, no l√≠der, con menos vida
                 var objetivo = lm.unidades
                     .Where(u => u != null && u != GlobalData.liderActual)
-                    .Select(u => u.GetComponent<Destruible>())
-                    .Where(d => d != null && d.vida < d.maxVida)
-                    .OrderBy(d => d.vida)
+                    .Select(u => u.model)
+                    .Where(m => m != null && m.vidaActual < m.vidaMaxima)
+                    .OrderBy(m => m.vidaActual)
                     .FirstOrDefault();
 
                 if (objetivo != null)
                 {
-                    Debug.Log($"<color=green>[BOTIQUÕN]</color> Curando a: {objetivo.name}");
-                    objetivo.vida = Mathf.Min(objetivo.vida + curacion, objetivo.maxVida);
-                    Destroy(gameObject); // Solo se destruye si se usa
+                    Debug.Log($"<color=green>[BOTIQU√çN]</color> Curando a: {objetivo.name}");
+                    objetivo.Curar(curacion);
+                    Destroy(gameObject);
                     return;
                 }
             }
-            // Si el cÛdigo llega aquÌ, no habÌa nadie herido (o solo queda el lÌder)
-            Debug.Log("No hay aliados heridos que requieran el botiquÌn.");
+            Debug.Log("No hay aliados heridos que requieran el botiqu√≠n.");
         }
-        // 2. L”GICA SI NO ES BOTIQUÕN (Ej: Enemigos u otros objetos)
         else
         {
             Debug.Log($"<color=blue>[INTERACCION]</color> Interactuando con {nombreItem} sin destruir.");
-
-            // AquÌ puedes llamar a mÈtodos especÌficos del enemigo o Ìtem si los tienes
-            // Ejemplo: interactuante.GetComponent<FSMController>().InteractuarCon(this);
-
-            // Al NO llamar a Destroy(gameObject), el objeto persiste en la escena
         }
     }
 }

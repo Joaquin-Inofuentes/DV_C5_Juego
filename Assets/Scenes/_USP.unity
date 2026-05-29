@@ -429,15 +429,14 @@ GameObject:
   m_Component:
   - component: {fileID: 57095393}
   - component: {fileID: 57095392}
-  - component: {fileID: 57095394}
-  - component: {fileID: 57095396}
   - component: {fileID: 57095397}
   - component: {fileID: 57095398}
   - component: {fileID: 57095399}
-  - component: {fileID: 57095400}
-  - component: {fileID: 57095401}
   - component: {fileID: 57095403}
   - component: {fileID: 57095402}
+  - component: {fileID: 57095406}
+  - component: {fileID: 57095405}
+  - component: {fileID: 57095404}
   m_Layer: 9
   m_Name: J1
   m_TagString: Untagged
@@ -517,43 +516,6 @@ Transform:
   - {fileID: 587401545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &57095394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57095388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75cec80d75e32d0488f0e929eb1e9710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  agent: {fileID: 57095397}
-  objetivo: {fileID: 0}
-  slotAsignado: {fileID: 0}
-  distanciaFuego: 6
-  distanciaPersecucion: 15
-  destinoPos: {x: 0, y: 0, z: 0}
-  tieneOrdenManual: 0
-  waitTimer: 0
-  returnCooldown: 0
-  Dispara: {fileID: 1803416528}
-  fireRate: 0.3
---- !u!114 &57095396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57095388}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc585433edee18b409316aa466ee91db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &57095397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,36 +587,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 1.0000002, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &57095400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57095388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 100
-  maxVida: 100
-  healRate: 1
-  healDelay: 5
---- !u!114 &57095401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57095388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc90f984173c02b41a34581b7a32c30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balasActuales: 100
-  maxBalas: 100
 --- !u!114 &57095402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +706,67 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &57095404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57095388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80e647e2fcd4b248a35da7b4b3d7651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionRing: {fileID: 143433206}
+  spriteRenderer: {fileID: 1223170512}
+--- !u!114 &57095405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57095388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe02fb68673884380cc66e8953994e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreSoldado: Asalto
+  vidaMaxima: 100
+  vidaActual: 100
+  healRate: 5
+  healDelay: 2
+  dano: 15
+  fireRate: 0.5
+  balasActuales: 300
+  maxBalas: 300
+  velocidad: 5
+--- !u!114 &57095406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57095388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e41490952a46746b92e425157bd1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 57095405}
+  view: {fileID: 57095404}
+  agent: {fileID: 57095397}
+  dispara: {fileID: 1803416528}
+  currentState: 6
+  objetivo: {fileID: 0}
+  slotAsignado: {fileID: 0}
+  distanciaFuego: 6
+  distanciaPersecucion: 15
+  destinoPos: {x: 0, y: 0, z: 0}
+  tieneOrdenManual: 0
+  waitTimer: 0
+  returnCooldown: 0
 --- !u!114 &67965973 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 869554472676451434, guid: b69a7d409952d284abdf18ea4fd6e029, type: 3}
@@ -1715,15 +1708,14 @@ GameObject:
   m_Component:
   - component: {fileID: 422490809}
   - component: {fileID: 422490808}
-  - component: {fileID: 422490807}
-  - component: {fileID: 422490806}
   - component: {fileID: 422490804}
   - component: {fileID: 422490810}
   - component: {fileID: 422490811}
-  - component: {fileID: 422490812}
-  - component: {fileID: 422490813}
   - component: {fileID: 422490815}
   - component: {fileID: 422490814}
+  - component: {fileID: 422490818}
+  - component: {fileID: 422490817}
+  - component: {fileID: 422490816}
   m_Layer: 9
   m_Name: J2
   m_TagString: Untagged
@@ -1754,43 +1746,6 @@ MonoBehaviour:
   isMoving: 0
   currentSpeed: 0
   DistanceStop: 1
---- !u!114 &422490806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422490803}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc585433edee18b409316aa466ee91db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
---- !u!114 &422490807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422490803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75cec80d75e32d0488f0e929eb1e9710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  agent: {fileID: 422490804}
-  objetivo: {fileID: 0}
-  slotAsignado: {fileID: 0}
-  distanciaFuego: 6
-  distanciaPersecucion: 15
-  destinoPos: {x: 0, y: 0, z: 0}
-  tieneOrdenManual: 0
-  waitTimer: 0
-  returnCooldown: 0
-  Dispara: {fileID: 1818493762}
-  fireRate: 0.3
 --- !u!212 &422490808
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1911,36 +1866,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 1.0000002, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &422490812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422490803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 100
-  maxVida: 100
-  healRate: 1
-  healDelay: 5
---- !u!114 &422490813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422490803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc90f984173c02b41a34581b7a32c30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balasActuales: 100
-  maxBalas: 100
 --- !u!114 &422490814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2060,6 +1985,67 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &422490816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422490803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80e647e2fcd4b248a35da7b4b3d7651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionRing: {fileID: 952003029}
+  spriteRenderer: {fileID: 447313226}
+--- !u!114 &422490817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422490803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe02fb68673884380cc66e8953994e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreSoldado: Medico
+  vidaMaxima: 100
+  vidaActual: 100
+  healRate: 5
+  healDelay: 2
+  dano: 15
+  fireRate: 0.5
+  balasActuales: 300
+  maxBalas: 300
+  velocidad: 5
+--- !u!114 &422490818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422490803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e41490952a46746b92e425157bd1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 422490817}
+  view: {fileID: 422490816}
+  agent: {fileID: 422490804}
+  dispara: {fileID: 1818493762}
+  currentState: 6
+  objetivo: {fileID: 0}
+  slotAsignado: {fileID: 0}
+  distanciaFuego: 6
+  distanciaPersecucion: 15
+  destinoPos: {x: 0, y: 0, z: 0}
+  tieneOrdenManual: 0
+  waitTimer: 0
+  returnCooldown: 0
 --- !u!1 &435876276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,9 +2650,9 @@ MonoBehaviour:
   - {fileID: 1299040320}
   - {fileID: 461833175}
   todosLosSoldados:
-  - {fileID: 57095394}
-  - {fileID: 422490807}
-  - {fileID: 1789294326}
+  - {fileID: 57095406}
+  - {fileID: 422490818}
+  - {fileID: 1789294337}
 --- !u!114 &485203319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2680,9 +2666,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unidades:
-  - {fileID: 57095394}
-  - {fileID: 422490807}
-  - {fileID: 1789294326}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   MensajeDeQueEstaMuerto: {fileID: 891007834}
   indiceLiderInicial: 0
 --- !u!114 &485203320
@@ -2698,9 +2684,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units:
-  - {fileID: 57095394}
-  - {fileID: 422490807}
-  - {fileID: 1789294326}
+  - {fileID: 57095406}
+  - {fileID: 422490818}
+  - {fileID: 1789294337}
   targetMarker: {fileID: 386717802}
 --- !u!114 &485203321
 MonoBehaviour:
@@ -2913,7 +2899,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemiesInRange: []
-  fsm: {fileID: 1789294326}
+  controller: {fileID: 0}
 --- !u!212 &586985609
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3041,7 +3027,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemiesInRange: []
-  fsm: {fileID: 57095394}
+  controller: {fileID: 0}
 --- !u!212 &587401548
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9919,15 +9905,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1789294328}
   - component: {fileID: 1789294327}
-  - component: {fileID: 1789294326}
-  - component: {fileID: 1789294325}
   - component: {fileID: 1789294323}
   - component: {fileID: 1789294329}
   - component: {fileID: 1789294330}
-  - component: {fileID: 1789294331}
-  - component: {fileID: 1789294332}
   - component: {fileID: 1789294334}
   - component: {fileID: 1789294333}
+  - component: {fileID: 1789294337}
+  - component: {fileID: 1789294336}
+  - component: {fileID: 1789294335}
   m_Layer: 9
   m_Name: J3
   m_TagString: Untagged
@@ -9958,43 +9943,6 @@ MonoBehaviour:
   isMoving: 0
   currentSpeed: 0
   DistanceStop: 1
---- !u!114 &1789294325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789294322}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc585433edee18b409316aa466ee91db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
---- !u!114 &1789294326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789294322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75cec80d75e32d0488f0e929eb1e9710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  agent: {fileID: 1789294323}
-  objetivo: {fileID: 0}
-  slotAsignado: {fileID: 0}
-  distanciaFuego: 6
-  distanciaPersecucion: 15
-  destinoPos: {x: 0, y: 0, z: 0}
-  tieneOrdenManual: 0
-  waitTimer: 0
-  returnCooldown: 0
-  Dispara: {fileID: 462595685}
-  fireRate: 0.3
 --- !u!212 &1789294327
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10115,36 +10063,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 1.0000002, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1789294331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789294322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vida: 100
-  maxVida: 100
-  healRate: 1
-  healDelay: 5
---- !u!114 &1789294332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789294322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc90f984173c02b41a34581b7a32c30a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balasActuales: 100
-  maxBalas: 100
 --- !u!114 &1789294333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10264,6 +10182,67 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1789294335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789294322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80e647e2fcd4b248a35da7b4b3d7651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionRing: {fileID: 1618491690}
+  spriteRenderer: {fileID: 782297161}
+--- !u!114 &1789294336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789294322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe02fb68673884380cc66e8953994e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombreSoldado: Apoyo
+  vidaMaxima: 100
+  vidaActual: 100
+  healRate: 5
+  healDelay: 2
+  dano: 15
+  fireRate: 0.5
+  balasActuales: 300
+  maxBalas: 300
+  velocidad: 5
+--- !u!114 &1789294337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789294322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e41490952a46746b92e425157bd1bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1789294336}
+  view: {fileID: 1789294335}
+  agent: {fileID: 1789294323}
+  dispara: {fileID: 462595685}
+  currentState: 6
+  objetivo: {fileID: 0}
+  slotAsignado: {fileID: 0}
+  distanciaFuego: 6
+  distanciaPersecucion: 15
+  destinoPos: {x: 0, y: 0, z: 0}
+  tieneOrdenManual: 0
+  waitTimer: 0
+  returnCooldown: 0
 --- !u!114 &1794809944 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8751190420907414247, guid: b69a7d409952d284abdf18ea4fd6e029, type: 3}
@@ -11441,7 +11420,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemiesInRange: []
-  fsm: {fileID: 422490807}
+  controller: {fileID: 0}
 --- !u!212 &2139197155
 SpriteRenderer:
   m_ObjectHideFlags: 0
