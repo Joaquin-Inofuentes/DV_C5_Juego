@@ -5,14 +5,11 @@ using UnityEngine;
 
 public class BD_Audios : MonoBehaviour
 {
-    // Diccionario estático público para almacenar los sonidos, clave es el nombre del archivo y el valor es el AudioSource
+    // Diccionario estÃ¡tico pÃºblico para almacenar los sonidos, clave es el nombre del archivo y el valor es el AudioSource
     public static Dictionary<string, AudioSource> Sonidos = new Dictionary<string, AudioSource>();
-
-
 
     private void Start()
     {
-        // Cargar los audios al iniciar
         CargarAudios();
         ReproducirBucleConVolumen("fondo", false, 0.3f);
         if (CoroutineHelper.Instance == null)
@@ -24,10 +21,8 @@ public class BD_Audios : MonoBehaviour
 
     private void Update()
     {
-        if (Sonidos.Count == 0)
-        {
-            CargarAudios();
-        }
+        ValidarYLimpiarSonidos();
+
         // Recargar los sonidos si se presiona F5
         if (Input.GetKeyDown(KeyCode.F5))
         {
@@ -41,46 +36,64 @@ public class BD_Audios : MonoBehaviour
         }
     }
 
+    private static void ValidarYLimpiarSonidos()
+    {
+        // Si hay entradas en el diccionario y al menos una es nula (destruida por cambio de escena), recargar audios
+        bool necesitaRecarga = false;
+        foreach (var pair in Sonidos)
+        {
+            if (pair.Value == null)
+            {
+                necesitaRecarga = true;
+                break;
+            }
+        }
+
+        if (necesitaRecarga || Sonidos.Count == 0)
+        {
+            CargarAudios();
+        }
+    }
+
     public static void ReproducirAudioUnaVez(string nombre)
     {
+        ValidarYLimpiarSonidos();
+
         List<AudioSource> Audios = Sonidos
-    .Where(pair => pair.Key.Contains(nombre)) // Filtra las entradas por la clave
-    .Select(pair => pair.Value) // Obtén el AudioSource asociado a la clave
-    .ToList();
+            .Where(pair => pair.Key.Contains(nombre) && pair.Value != null)
+            .Select(pair => pair.Value)
+            .ToList();
 
         bool SeEstaReproduciendo = true;
-        // Verificar si el nombre del sonido existe en el diccionario
         foreach (var audio in Audios)
         {
-            // Reproducir solo una vez, sin interferir con otros sonidos
+            if (audio == null) continue;
+
             if (audio.isPlaying)
             {
                 SeEstaReproduciendo = false;
                 break;
             }
-            if (SeEstaReproduciendo == true)
+            if (SeEstaReproduciendo)
             {
                 audio.PlayOneShot(audio.clip);
             }
         }
     }
 
-    /// <summary>
-    /// Detiene la reproducción de un sonido específico basado en su nombre.
-    /// </summary>
-    /// <param name="nombre">El nombre del audio a detener.</param>
     public static void DetenerAudio(string nombre)
     {
+        ValidarYLimpiarSonidos();
+
         List<AudioSource> Audios = Sonidos
-    .Where(pair => pair.Key.Contains(nombre)) // Filtra las entradas por la clave
-    .Select(pair => pair.Value) // Obtén el AudioSource asociado a la clave
-    .ToList();
-        // Verificar si el nombre del sonido existe en el diccionario
+            .Where(pair => pair.Key.Contains(nombre) && pair.Value != null)
+            .Select(pair => pair.Value)
+            .ToList();
+
         foreach (var audio in Audios)
         {
+            if (audio == null) continue;
 
-            Debug.Log(audio.ToString());
-            // Detener el sonido si está en reproducción
             if (audio.isPlaying)
             {
                 audio.Stop();
@@ -88,72 +101,61 @@ public class BD_Audios : MonoBehaviour
             }
             else
             {
-                Debug.Log($"El audio {nombre} no está reproduciéndose.");
+                Debug.Log($"El audio {nombre} no estÃ¡ reproduciÃ©ndose.");
             }
         }
     }
 
     public static bool ReproducirConSolapamiento(string palabraClave)
     {
-        // Filtrar los sonidos que contienen la palabra clave
+        ValidarYLimpiarSonidos();
+
         var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
 
-        // Verificar si hay sonidos que coinciden
         if (sonidosFiltrados.Count > 0)
         {
-            // Seleccionar un sonido al azar
             string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
-
-            // Obtener el AudioSource correspondiente
             AudioSource audioSource = Sonidos[sonidoAleatorio];
 
-            // Reproducir el audio sin detener el actual
-            audioSource.PlayOneShot(audioSource.clip);
-
-            //Debug.Log($"Reproduciendo audio: {sonidoAleatorio}");
-            return true; // Indicar éxito
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(audioSource.clip);
+                return true;
+            }
+            return false;
         }
         else
         {
-            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
-            return false; // Indicar fallo
+            Debug.LogError($"No se encontrÃ³ ningÃºn audio que contenga la palabra clave: {palabraClave}");
+            return false;
         }
     }
 
-
-
-    /// <summary>
-    /// Carga todos los audios de la carpeta Resources/Audios y los agrega al diccionario de sonidos.
-    /// </summary>
     public static void CargarAudios()
     {
-        Sonidos.Clear(); // Limpiar el diccionario antes de recargar
+        Sonidos.Clear();
 
-        // Cargar todos los clips de la carpeta Resources/Audios
         AudioClip[] clips = Resources.LoadAll<AudioClip>("Audios");
 
         foreach (AudioClip clip in clips)
         {
             if (clip != null)
             {
-                // Crear un nuevo GameObject para el AudioSource
-                GameObject nuevoSonidoGO = new GameObject(clip.name);
+                GameObject nuevoSonidoGO = new GameObject($"Audio_{clip.name}");
+                DontDestroyOnLoad(nuevoSonidoGO);
+                
                 AudioSource nuevoAudioSource = nuevoSonidoGO.AddComponent<AudioSource>();
                 nuevoAudioSource.clip = clip;
 
-                // Añadir el AudioSource al diccionario con el nombre del archivo como clave
                 Sonidos.Add(clip.name, nuevoAudioSource);
-                //Debug.Log($"Se cargó el sonido: {clip.name}");
             }
         }
     }
 
-    /// <summary>
-    /// Busca un AudioSource basado en su nombre.
-    /// </summary>
     public static AudioSource ObtenerSonidoPorNombre(string nombre)
     {
-        // Buscar en el diccionario el AudioSource por nombre
+        ValidarYLimpiarSonidos();
+
         if (Sonidos.ContainsKey(nombre))
         {
             return Sonidos[nombre];
@@ -163,98 +165,62 @@ public class BD_Audios : MonoBehaviour
 
     public static bool ReproducirBucleConVolumen(string palabraClave, bool esCancionFondo, float volumen)
     {
-        // Filtrar los sonidos que contienen la palabra clave
+        ValidarYLimpiarSonidos();
+
         var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
 
-        // Verificar si hay sonidos que coinciden
         if (sonidosFiltrados.Count > 0)
         {
-            // Seleccionar un sonido al azar
             string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
-
-            // Obtener el AudioSource correspondiente
             AudioSource audioSource = Sonidos[sonidoAleatorio];
 
-            // Si es una canción de fondo, configurar el AudioSource para que esté en bucle
-            if (esCancionFondo)
+            if (audioSource != null)
             {
-                audioSource.loop = true; // Activar el bucle
+                if (esCancionFondo)
+                {
+                    audioSource.loop = true;
+                }
+
+                audioSource.volume = Mathf.Clamp(volumen, 0f, 1f);
+                audioSource.Play();
+                return true;
             }
-
-            // Ajustar el volumen del audio
-            audioSource.volume = Mathf.Clamp(volumen, 0f, 1f); // Asegurarse de que el volumen esté entre 0 y 1
-
-            // Reproducir el audio en bucle
-            audioSource.Play();  // Usamos Play() en lugar de PlayOneShot para mantener la canción en bucle
-
-            //Debug.Log($"Reproduciendo audio en bucle: {sonidoAleatorio} con volumen: {volumen}");
-            return true; // Indicar éxito
+            return false;
         }
         else
         {
-            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
-            return false; // Indicar fallo
+            Debug.LogError($"No se encontrÃ³ ningÃºn audio que contenga la palabra clave: {palabraClave}");
+            return false;
         }
     }
+}
 
+/// <summary>
+/// Singleton helper to run coroutines from non-MonoBehaviour classes or static methods.
+/// </summary>
+public class CoroutineHelper : MonoBehaviour
+{
+    private static CoroutineHelper _instance;
 
-
-    // Clase auxiliar para ejecutar coroutines desde métodos estáticos
-    private class CoroutineHelper : MonoBehaviour
+    public static CoroutineHelper Instance
     {
-        public static CoroutineHelper Instance;
-
-        private void Awake()
+        get
         {
-            // Asegurarse de que solo haya una instancia de CoroutineHelper
-            if (Instance == null)
+            if (_instance == null)
             {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
+                GameObject go = new GameObject("CoroutineHelper");
+                _instance = go.AddComponent<CoroutineHelper>();
+                DontDestroyOnLoad(go);
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+            return _instance;
         }
     }
 
-    // Método estático para reproducir audio escalonadamente
-    public static void ReproducirEscalonadamente(string palabraClave, float intervalo)
+    private void Awake()
     {
-        // Filtrar los sonidos que contienen la palabra clave
-        var sonidosFiltrados = Sonidos.Keys.Where(nombre => nombre.Contains(palabraClave)).ToList();
-
-        // Verificar si hay sonidos que coinciden
-        if (sonidosFiltrados.Count > 0)
-        {
-            // Seleccionar un sonido al azar
-            string sonidoAleatorio = sonidosFiltrados[Random.Range(0, sonidosFiltrados.Count)];
-
-            // Obtener el AudioSource correspondiente
-            AudioSource audioSource = Sonidos[sonidoAleatorio];
-
-            // Iniciar la reproducción escalonada llamando a la Coroutine del helper
-            if (CoroutineHelper.Instance != null)
-            {
-                CoroutineHelper.Instance.StartCoroutine(ReproducirEscalonadamenteCoroutine(audioSource, intervalo));
-            }
-        }
-        else
-        {
-            Debug.LogError($"No se encontró ningún audio que contenga la palabra clave: {palabraClave}");
-        }
+        if (_instance == null)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
     }
-
-    // Coroutine para reproducir el audio escalonadamente
-    private static IEnumerator ReproducirEscalonadamenteCoroutine(AudioSource audioSource, float intervalo)
-    {
-        while (!audioSource.isPlaying)
-        {
-            audioSource.PlayOneShot(audioSource.clip);
-            yield return new WaitForSeconds(intervalo);
-        }
-    }
-
-
 }

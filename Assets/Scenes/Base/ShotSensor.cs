@@ -15,13 +15,13 @@ public class ShotSensor : MonoBehaviour
         Bala bala = other.GetComponent<Bala>();
         if (bala != null)
         {
-            if (bala.dueño != null && bala.dueño.layer != transform.root.gameObject.layer)
+            if (bala.dueno != null && bala.dueno.layer != transform.root.gameObject.layer)
             {
-                Debug.Log($"<color=orange>[SENTIDOS]</color> {transform.root.name} detectó un disparo cercano de {bala.dueño.name}");
+                Debug.Log($"<color=orange>[SENTIDOS]</color> {transform.root.name} detectó un disparo cercano de {bala.dueno.name}");
 
                 if (controller != null && controller.objetivo == null)
                 {
-                    controller.InvestigarPosicion(bala.dueño.transform.position);
+                    controller.InvestigarPosicion(bala.dueno.transform.position);
                 }
             }
         }

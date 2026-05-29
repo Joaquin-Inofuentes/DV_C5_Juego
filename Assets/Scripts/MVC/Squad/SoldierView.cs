@@ -4,7 +4,7 @@ namespace Game.Squad
 {
     /// <summary>
     /// Gestiona la presentación visual de cada soldado (animaciones, luces de disparo, selección).
-    /// </summary>
+    /// </summary> 
     public class SoldierView : MonoBehaviour
     {
         [Header("Efectos Visuales")]

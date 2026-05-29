@@ -17,16 +17,16 @@ namespace Game.Squad
 
         public void Update(SoldierController controller)
         {
-            if (Camera.main == null) return;
+            if (GEN_Inputs.Instance == null) return;
 
-            // Rotar hacia el mouse
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Rotar hacia el mouse usando GEN_Inputs centralizado
+            Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
             Vector3 dir = mousePos - controller.transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             controller.transform.rotation = Quaternion.Euler(0, 0, angle);
 
             // Disparo Manual
-            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            if (GEN_Inputs.Instance.DisparoSostenido && Time.time >= nextFireTime)
             {
                 controller.DispararProyectil();
                 if (controller.model != null)
@@ -38,12 +38,11 @@ namespace Game.Squad
 
         public void FixedUpdate(SoldierController controller)
         {
-            if (controller.model == null) return;
+            if (controller.model == null || GEN_Inputs.Instance == null) return;
 
-            // Movimiento Manual WASD
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
-            Vector3 moveDir = new Vector3(moveX, moveY, 0).normalized;
+            // Movimiento Manual WASD usando GEN_Inputs centralizado
+            Vector2 moveDir2D = GEN_Inputs.Instance.MovimientoInput;
+            Vector3 moveDir = new Vector3(moveDir2D.x, moveDir2D.y, 0f);
             controller.transform.position += moveDir * controller.model.velocidad * Time.deltaTime;
         }
 
@@ -68,6 +67,8 @@ namespace Game.Squad
             if (controller.slotAsignado != null)
             {
                 controller.MoverAgenteA(controller.slotAsignado.position);
+                // Dibujar línea azul de formación
+                Debug.DrawLine(controller.transform.position, controller.slotAsignado.position, Color.blue);
             }
         }
 
@@ -178,6 +179,9 @@ namespace Game.Squad
         public void Update(SoldierController controller)
         {
             controller.MoverAgenteA(controller.destinoPos);
+            // Dibujar línea cian indicando el objetivo de movimiento ordenado manualmente
+            Debug.DrawLine(controller.transform.position, controller.destinoPos, Color.cyan);
+
             if (Vector3.Distance(controller.transform.position, controller.destinoPos) < 0.8f)
             {
                 controller.tieneOrdenManual = false;

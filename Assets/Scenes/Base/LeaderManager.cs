@@ -24,11 +24,18 @@ public class LeaderManager : MonoBehaviour
         Instance = this;
     }
 
+    private int liderActualIndex = -1;
+
     private void OnEnable()
     {
         // Suscribirse a eventos
         SquadEventBus.OnSoldierSwitchRequested += CambiarLider;
         SquadEventBus.OnSoldierDied += HandleSoldierDied;
+
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
+        }
 
         if (unidades != null && unidades.Count > indiceLiderInicial)
         {
@@ -41,25 +48,57 @@ public class LeaderManager : MonoBehaviour
         // Cancelar suscripción
         SquadEventBus.OnSoldierSwitchRequested -= CambiarLider;
         SquadEventBus.OnSoldierDied -= HandleSoldierDied;
+
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+        }
     }
 
     private System.Collections.IEnumerator InicializarLiderTarde()
     {
         yield return new WaitForEndOfFrame();
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
+        }
+        liderActualIndex = indiceLiderInicial;
         CambiarLider(indiceLiderInicial);
     }
 
     private void Update()
     {
-        // Enviar peticiones de cambio al EventBus
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SquadEventBus.TriggerSoldierSwitchRequested(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SquadEventBus.TriggerSoldierSwitchRequested(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SquadEventBus.TriggerSoldierSwitchRequested(2);
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
+        }
 
         // Si el líder actual existe, posicionar este objeto en su posición (para pivots de formación)
         if (GlobalData.liderActual != null)
         {
             transform.position = GlobalData.liderActual.transform.position;
+        }
+    }
+
+    private void HandleCycleLeaderFromInputs(bool forward)
+    {
+        if (unidades == null || unidades.Count == 0) return;
+
+        int step = forward ? 1 : -1;
+        int startIndex = (liderActualIndex == -1) ? 0 : liderActualIndex;
+        int nextIndex = startIndex;
+
+        for (int i = 0; i < unidades.Count; i++)
+        {
+            nextIndex = (nextIndex + step + unidades.Count) % unidades.Count;
+            if (unidades[nextIndex] != null && unidades[nextIndex].model != null && !unidades[nextIndex].model.IsDead)
+            {
+                liderActualIndex = nextIndex;
+                SquadEventBus.TriggerSoldierSwitchRequested(nextIndex);
+                return;
+            }
         }
     }
 
@@ -88,6 +127,7 @@ public class LeaderManager : MonoBehaviour
             if (isSelected)
             {
                 unidades[i].currentState = SoldierController.State.Liderando;
+                unidades[i].CambiarEstado(new LiderandoState());
                 unidades[i].view?.SetSelectionActive(true);
                 GlobalData.liderActual = unidades[i];
                 SquadEventBus.TriggerLeaderChanged(unidades[i]);
@@ -98,6 +138,7 @@ public class LeaderManager : MonoBehaviour
                 if (unidades[i].currentState == SoldierController.State.Liderando)
                 {
                     unidades[i].currentState = SoldierController.State.IrAFormacion;
+                    unidades[i].CambiarEstado(new IrAFormacionState());
                 }
             }
         }

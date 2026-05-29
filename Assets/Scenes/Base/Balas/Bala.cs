@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Bala : MonoBehaviour
 {
-    public float daño;
-    public GameObject dueño;
+    public float damage;
+    public GameObject dueno;
     public float velocidad = 20f;
 
     [Header("Visuales")]
@@ -16,22 +16,19 @@ public class Bala : MonoBehaviour
     [SerializeField] private BoxCollider col; // Usando 3D
     [SerializeField] private bool explotando;
 
-
     void OnEnable()
     {
-        // SEGURIDAD: Si col sigue siendo null, intentamos buscarlo una última vez
         if (col == null) col = GetComponent<BoxCollider>();
 
         explotando = false;
 
-        // Solo activamos si la referencia existe para evitar el UnassignedReferenceException
         if (col != null)
         {
             col.enabled = true;
         }
         else
         {
-            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider (3D). Agrégalo en el inspector.");
+            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider (3D). Agregalo en el inspector.");
         }
 
         sr.sprite = spriteInicio;
@@ -43,27 +40,57 @@ public class Bala : MonoBehaviour
     {
         if (!explotando)
         {
-            // En 3D, transform.right funciona bien si el sprite mira a la derecha
             transform.position += transform.right * velocidad * Time.deltaTime;
         }
     }
 
     void CambiarADurante() => sr.sprite = spriteDurante;
 
-    // Colisión 3D
     private void OnCollisionEnter(Collision collision)
     {
         if (explotando) return;
-        if (dueño != null && (collision.gameObject.layer == dueño.layer || collision.gameObject.CompareTag("Bala"))) return;
+
+        // Si colisiona con el dueno, o con objetos de la misma capa del dueno, o con otra bala, ignorar
+        if (dueno != null && (collision.gameObject == dueno || collision.gameObject.layer == dueno.layer || collision.gameObject.CompareTag("Bala")))
+        {
+            return;
+        }
 
         IDaniable objetivo = collision.gameObject.GetComponent<IDaniable>();
         if (objetivo != null)
         {
-            // PASAMOS EL DUEÑO AQUÍ
-            objetivo.RecibirDano((int)daño, dueño);
+            Debug.Log($"<color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{collision.gameObject.name}</b> causandole {(int)damage} de daÃ±o.");
+            objetivo.RecibirDano((int)damage, dueno);
+
+            // Parpadear cursor si golpea con exito al enemigo
+            if (dueno != null && (dueno.CompareTag("Player") || dueno.name.Contains("Soldado")))
+            {
+                CursorManager cursor = FindObjectOfType<CursorManager>();
+                if (cursor != null)
+                {
+                    cursor.transform.localScale = Vector3.one * 1.5f;
+                    CoroutineHelper.Instance.StartCoroutine(RestaurarEscalaCursor(cursor));
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"<color=orange>[COLISION EN ESCENARIO]</color> Bala de {dueno?.name} impacto contra objeto no danable: {collision.gameObject.name}");
+        }
+
+        // Linea roja indicando punto exacto de choque/destello de impacto
+        if (collision.contacts.Length > 0)
+        {
+            Debug.DrawLine(transform.position, collision.contacts[0].point, Color.red, 2f);
         }
 
         Explosion();
+    }
+
+    private IEnumerator RestaurarEscalaCursor(CursorManager cursor)
+    {
+        yield return new WaitForSeconds(0.08f);
+        if (cursor != null) cursor.transform.localScale = Vector3.one;
     }
 
     public void Explosion()
@@ -87,6 +114,5 @@ public class Bala : MonoBehaviour
 
 public interface IDaniable
 {
-    // Ahora pedimos la cantidad y quién disparó
     void RecibirDano(int cantidad, GameObject atacante);
 }

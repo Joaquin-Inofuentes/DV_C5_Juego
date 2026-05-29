@@ -7,21 +7,40 @@ public class UnitCommander : MonoBehaviour
     public List<SoldierController> units = new List<SoldierController>();
     public Transform targetMarker;
 
+    private void Start()
+    {
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (GEN_Inputs.Instance != null)
+        {
+            GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
+        }
+    }
+
     void Update()
     {
         units.RemoveAll(u => u == null);
+
+        // Si el manager de inputs no está disponible, intentar reconectarse
+        if (GEN_Inputs.Instance == null) return;
+
+        // Suscripción tardía si no se logró en Start por orden de ejecución
+        GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
+        GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
 
         // 1. Lógica de HOVER
         ProcesarHoverInteraccion();
 
         // 2. Lógica de CLICKS
-        if (Input.GetMouseButtonDown(1)) ProcesarOrden();
+        if (GEN_Inputs.Instance.OrdenPresionada) ProcesarOrden();
 
-        if (Input.GetKeyDown(KeyCode.F1)) DarOrdenDirecta(0);
-        if (Input.GetKeyDown(KeyCode.F2)) DarOrdenDirecta(1);
-        if (Input.GetKeyDown(KeyCode.F3)) DarOrdenDirecta(2);
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (GEN_Inputs.Instance.RegresarAFormacion)
         {
             foreach (var unit in units)
             {
@@ -32,6 +51,7 @@ public class UnitCommander : MonoBehaviour
 
     void ProcesarHoverInteraccion()
     {
+        if (GEN_Inputs.Instance == null || Camera.main == null) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         int layerMask = 1 << 11; // Solo Capa 11: Interactuables
@@ -56,10 +76,10 @@ public class UnitCommander : MonoBehaviour
 
     void ProcesarOrden()
     {
+        if (GEN_Inputs.Instance == null || Camera.main == null) return;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
+        Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
 
         SoldierController soldado = GetSoldadoMasCercano(mousePos);
         if (soldado == null) return;
@@ -94,9 +114,9 @@ public class UnitCommander : MonoBehaviour
 
     void DarOrdenDirecta(int indice)
     {
+        if (GEN_Inputs.Instance == null) return;
         if (indice >= units.Count || units[indice] == null || units[indice].currentState == SoldierController.State.Liderando) return;
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
+        Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
         MoverMarcador(mousePos);
         units[indice].SetOrder(mousePos);
     }
@@ -107,7 +127,7 @@ public class UnitCommander : MonoBehaviour
         {
             targetMarker.position = pos;
             MarkerAnim anim = targetMarker.GetComponent<MarkerAnim>();
-            //if (anim != null) anim.Play();
+            if (anim != null) anim.IniciarAnimacion(pos);
         }
     }
 }

@@ -18,8 +18,8 @@ public class Disparador : MonoBehaviour
         b.transform.position = transform.position;
         b.transform.rotation = transform.rotation;
 
-        b.daño = dañoBala;
+        b.damage = dañoBala;
         b.velocidad = velocidadBala;
-        b.dueño = transform.root.gameObject;
+        b.dueno = transform.root.gameObject;
     }
 }
