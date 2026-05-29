@@ -4,28 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Gestiona la información del personaje, como salud, munición y recargas.
+/// Gestiona la informaciÃ³n del personaje, como salud, municiÃ³n y recargas.
 /// Debe estar asociado al objeto principal del jugador.
 /// </summary>
 public class InformacionPersonaje : MonoBehaviour
 {
-    public CambioDeArma cambioDeArma;
+    [Header("Referencias del Sistema de Armas")]
+    public WeaponController cambioDeArma;
 
-    public string IndicadorDeBalas; // Añade esta línea
+    [Header("UI - MuniciÃ³n")]
+    public string IndicadorDeBalas;
 
-    // Salud y armadura
+    [Header("Salud y Armadura")]
     public float vidaMaxima = 100f;
     public float vidaActual = 100f;
     public float armadura = 50f;
 
-    // Inventario
+    [Header("Inventario")]
     public int balasPorCargador = 30;
     public int balasRestantes;
     public int kitsMedicos = 2;
     public int granadas = 5;
     public int adrenalina = 2;
 
-    // Referencias a los textos del UI
+    [Header("Referencias de UI en Pantalla")]
     public Text textoVida;
     public Text textoArmadura;
     public Text textoMunicion;
@@ -33,16 +35,15 @@ public class InformacionPersonaje : MonoBehaviour
     public Text textoKitsMedicos;
     public Text textoGranadas;
     public Text textoAdrenalina;
-    public Text textoContadorMuerte; // Texto para mostrar el contador de muerte
+    public Text textoContadorMuerte;
     public Transform barraVida;
 
-    // Variables para el contador de reinicio
+    [Header("Efectos Visuales")]
+    public GameObject EfectoViÃ±etaNegra;
+
+    [Header("Estado del Juego")]
     public float tiempoRestanteParaReiniciar = 3f;
     public bool juegoEnPausa = false;
-
-    public GameObject EfectoViñetaNegra;
-
-
 
     private void Start()
     {
@@ -52,7 +53,6 @@ public class InformacionPersonaje : MonoBehaviour
 
     private void InicializarValores()
     {
-        // Inicializar valores de vida y munición
         vidaActual = vidaMaxima;
         balasRestantes = balasPorCargador;
     }
@@ -60,8 +60,6 @@ public class InformacionPersonaje : MonoBehaviour
     public void RecibirDanio(float danio)
     {
         vidaActual -= danio;
-
-        // Asegura que la vida no sea menor a 0
         if (vidaActual < 0) vidaActual = 0;
 
         ActualizarUI();
@@ -71,13 +69,8 @@ public class InformacionPersonaje : MonoBehaviour
 
     private void Morir()
     {
-        // Desactivar la lógica del juego al morir
         juegoEnPausa = true;
-
-        // Mostrar el texto del contador
-        textoContadorMuerte?.gameObject.SetActive(true);
-
-        // Iniciar el contador para reiniciar la escena
+        if (textoContadorMuerte != null) textoContadorMuerte.gameObject.SetActive(true);
         StartCoroutine(ContadorReinicio());
     }
 
@@ -85,19 +78,19 @@ public class InformacionPersonaje : MonoBehaviour
     {
         while (tiempoRestanteParaReiniciar > 0)
         {
-            // Actualizar el texto del contador
-            textoContadorMuerte.text = $"Reiniciando en: {Mathf.Ceil(tiempoRestanteParaReiniciar)}";
+            if (textoContadorMuerte != null)
+            {
+                textoContadorMuerte.text = $"Reiniciando en: {Mathf.Ceil(tiempoRestanteParaReiniciar)}";
+            }
             yield return new WaitForSeconds(1f);
             tiempoRestanteParaReiniciar--;
         }
-        // Reiniciar la escena
         GameManager.instance.GetComponent<GameManager>().ReiniciarEscena();
     }
 
     public void ReAparecer()
     {
-        // Falta implementar la mecánica de reaparición
-        Debug.Log("Re Apareci");
+        Debug.Log("Re AparecÃ­");
     }
 
     public void UsarKitMedico()
@@ -112,54 +105,51 @@ public class InformacionPersonaje : MonoBehaviour
 
     public void ActualizarUI()
     {
-        // --- Lógica de la Viñeta de Daño ---
-        if (EfectoViñetaNegra != null)
+        // ViÃ±eta de daÃ±o por porcentaje de vida
+        if (EfectoViÃ±etaNegra != null)
         {
-            Image componenteImagen = EfectoViñetaNegra.GetComponent<Image>();
+            Image componenteImagen = EfectoViÃ±etaNegra.GetComponent<Image>();
             if (componenteImagen != null)
             {
                 float porcentajeVida = vidaActual / vidaMaxima;
-                Color colorViñeta = componenteImagen.color;
-                // Multiplicamos la intensidad por 10 y limitamos a 1 (máxima opacidad)
-                colorViñeta.a = Mathf.Clamp01((1f - porcentajeVida) * 10f);
-                componenteImagen.color = colorViñeta;
+                Color colorViÃ±eta = componenteImagen.color;
+                colorViÃ±eta.a = Mathf.Clamp01((1f - porcentajeVida) * 10f);
+                componenteImagen.color = colorViÃ±eta;
             }
         }
 
-        // --- Actualización de Textos de UI ---
+        // Textos del HUD
         if (textoVida != null) textoVida.text = $"Vida: {vidaActual}";
         if (textoArmadura != null) textoArmadura.text = $"Armadura: {armadura}";
 
-        // El texto de munición ahora viene formateado directamente desde el script CambioDeArma
-        if (textoMunicion != null) textoMunicion.text = cambioDeArma.IndicadorDeBalas;
-
-        // Ya no usamos 'recargas', ahora mostramos la reserva total del arma actual
-        int actual = cambioDeArma.NumeroDeArmaActual;
-        if (textoRecargas != null && cambioDeArma != null && cambioDeArma.reservaTotal.Count() >= actual)
+        // Obtener texto de municiÃ³n desde el WeaponController
+        if (cambioDeArma != null)
         {
-            textoRecargas.text = $"Reserva: {cambioDeArma.reservaTotal[actual]}";
+            if (textoMunicion != null) textoMunicion.text = cambioDeArma.IndicadorDeBalas;
+
+            if (cambioDeArma.model != null)
+            {
+                int actual = cambioDeArma.model.NumeroDeArmaActual;
+                if (textoRecargas != null && cambioDeArma.model.reservaTotal != null && cambioDeArma.model.reservaTotal.Length > actual)
+                {
+                    textoRecargas.text = $"Reserva: {cambioDeArma.model.reservaTotal[actual]}";
+                }
+            }
         }
 
         if (textoKitsMedicos != null) textoKitsMedicos.text = $"{kitsMedicos}";
         if (textoGranadas != null) textoGranadas.text = $"{granadas}";
         if (textoAdrenalina != null) textoAdrenalina.text = $"{adrenalina}";
 
-        // Llama al método para actualizar la barra de vida física
         ActualizarBarraVida(barraVida);
     }
 
     public void CurarAlMaximo()
     {
-        // Cura al personaje hasta su vida máxima, si tiene kits médicos disponibles
         if (kitsMedicos > 0)
         {
-            // Reduce el número de kits médicos en uno
             kitsMedicos--;
-
-            // Restablece la vida actual al valor máximo
             vidaActual = vidaMaxima;
-
-            // Actualiza la interfaz de usuario
             ActualizarUI();
         }
     }
@@ -172,12 +162,13 @@ public class InformacionPersonaje : MonoBehaviour
 
     public void AnadirRecargas(int NumeroDeArma)
     {
-        // Ejemplo: Añadimos un cargador completo a la reserva total del arma especificada
-        int cantidadAñadir = cambioDeArma.cargadorMaximo[NumeroDeArma];
-        cambioDeArma.reservaTotal[NumeroDeArma] += cantidadAñadir;
-
-        Debug.Log($"Añadidas {cantidadAñadir} balas a la reserva del arma {NumeroDeArma}");
-        ActualizarUI();
+        if (cambioDeArma != null && cambioDeArma.model != null)
+        {
+            int cantidadAÃ±adir = cambioDeArma.model.cargadorMaximo[NumeroDeArma];
+            cambioDeArma.model.reservaTotal[NumeroDeArma] += cantidadAÃ±adir;
+            Debug.Log($"AÃ±adidas {cantidadAÃ±adir} balas a la reserva del arma {NumeroDeArma}");
+            ActualizarUI();
+        }
     }
 
     public void AniadirGranadas()
@@ -190,56 +181,21 @@ public class InformacionPersonaje : MonoBehaviour
     {
         adrenalina++;
         ActualizarUI();
-        Debug.Log(1);
         StartCoroutine(CambiarValorTemporalmente());
+    }
+
+    private IEnumerator CambiarValorTemporalmente()
+    {
+        // Puedes agregar comportamiento temporal de adrenalina extra aquÃ­ si lo requieres
+        yield return null;
     }
 
     public void ActualizarBarraVida(Transform barraVida)
     {
-        // Calcula el porcentaje de vida actual
-        float porcentajeVida = vidaActual / vidaMaxima;
-
-        // Asegúrate de que la barra de vida tenga un rango entre 0 y 1
-        porcentajeVida = Mathf.Clamp01(porcentajeVida);
-
-        // Ajusta la escala de la barra de vida en el eje X
-        barraVida.localScale = new Vector3(porcentajeVida, barraVida.localScale.y, barraVida.localScale.z);
-    }
-
-
-    // Variable a la que se le cambiará el valor
-    public float miVariable = 10f;
-
-    // Variable para almacenar el valor original
-    private float valorOriginal;
-
-    // Corutina que cambia el valor temporalmente
-    IEnumerator CambiarValorTemporalmente()
-    {
-        valorOriginal = gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento;
-        // Doblamos el valor de la variable
-        gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento = 10;
-        Debug.Log("Algo");
-
-        // Esperamos 3 segundos
-        yield return new WaitForSeconds(3f);
-
-        // Restauramos el valor original
-        gameObject.GetComponent<ControladorPersonaje>().velocidadMovimiento = valorOriginal;
-
-    }
-
-
-
-
-    private void Update()
-    {
-        // Aquí puedes controlar la lógica del juego para pausar si es necesario
-        if (juegoEnPausa)
+        if (barraVida != null)
         {
-            // Desactivar el comportamiento de juego aquí, por ejemplo:
-            // Desactivar controles del jugador
-            // Desactivar enemigos, etc.
+            float porcentajeVida = vidaActual / vidaMaxima;
+            barraVida.localScale = new Vector3(porcentajeVida, 1f, 1f);
         }
     }
 }
