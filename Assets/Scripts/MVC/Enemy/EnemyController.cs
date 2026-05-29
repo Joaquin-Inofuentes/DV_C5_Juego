@@ -208,6 +208,14 @@ namespace Game.Enemy
                 b.velocidad = model.velocidadBala;
                 b.dueno = gameObject;
             }
+
+            Proyectil p = bala.GetComponent<Proyectil>();
+            if (p != null)
+            {
+                p.dano = model.dano;
+                p.velocidadInicial = model.velocidadBala;
+                p.owner = gameObject;
+            }
         }
 
         public void AlertarRuidoDisparo(Vector3 posicionBala)

@@ -79,9 +79,19 @@ public class Bala : MonoBehaviour
         }
 
         // Linea roja indicando punto exacto de choque/destello de impacto
+        Vector3 contactPoint = transform.position;
         if (collision.contacts.Length > 0)
         {
-            Debug.DrawLine(transform.position, collision.contacts[0].point, Color.red, 2f);
+            contactPoint = collision.contacts[0].point;
+            Debug.DrawLine(transform.position, contactPoint, Color.red, 2f);
+        }
+
+        // Spawn a random VFX from Manager_VFX
+        if (Manager_VFX.Instance != null && Manager_VFX.Instance.vfxPrefabs != null && Manager_VFX.Instance.vfxPrefabs.Count > 0)
+        {
+            int rnd = Random.Range(0, Manager_VFX.Instance.vfxPrefabs.Count);
+            string fxName = Manager_VFX.Instance.vfxPrefabs[rnd].name;
+            Manager_VFX.Instance.SpawnVFX(fxName, contactPoint);
         }
 
         Explosion();

@@ -27,49 +27,33 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Contains("Jugador"))
+        // Detectar si el que colisiona es un soldado (tiene SoldierController)
+        Game.Squad.SoldierController soldado = collision.GetComponent<Game.Squad.SoldierController>();
+        if (soldado != null && soldado.model != null && !soldado.model.IsDead)
         {
-            EfectuarRecogida(collision.gameObject);
+            EfectuarRecogida(soldado);
         }
     }
 
-    private void EfectuarRecogida(GameObject jugador)
+    private void EfectuarRecogida(Game.Squad.SoldierController soldado)
     {
-        // Obtener componentes del jugador
-        InformacionPersonaje infoPersonaje = jugador.GetComponent<InformacionPersonaje>();
-        PlayerController playerController = jugador.GetComponent<PlayerController>();
-
-        if (infoPersonaje == null)
-        {
-            Debug.LogError("No se encontró InformacionPersonaje en el Jugador.");
-            return;
-        }
+        Game.Squad.SoldierModel sModel = soldado.model;
 
         switch (tipoItem)
         {
             case TipoRecogible.Vida:
-                infoPersonaje.vidaActual = Mathf.Min(infoPersonaje.vidaActual + valorItem, infoPersonaje.vidaMaxima);
-                infoPersonaje.ActualizarUI();
-                Debug.Log($"Vida curada en {valorItem}. Vida actual: {infoPersonaje.vidaActual}");
+                sModel.Curar(valorItem);
+                Debug.Log($"[PICKUP] Vida de {soldado.name} curada en {valorItem}. Vida actual: {sModel.vidaActual}/{sModel.vidaMaxima}");
                 break;
 
             case TipoRecogible.Municion:
-                WeaponController weaponController = jugador.GetComponent<WeaponController>();
-                if (weaponController != null && weaponController.model != null)
-                {
-                    int armaEquipada = weaponController.model.NumeroDeArmaActual;
-                    weaponController.model.ReservaActual += (int)valorItem;
-                    infoPersonaje.ActualizarUI();
-                    Debug.Log($"Munición añadida a reserva: {(int)valorItem}.");
-                }
+                sModel.AgregarMunicion((int)valorItem);
+                Debug.Log($"[PICKUP] Munición agregada a {soldado.name}: {(int)valorItem}. Balas actuales: {sModel.balasActuales}/{sModel.maxBalas}");
                 break;
 
             case TipoRecogible.Velocidad:
-                if (playerController != null && playerController.model != null)
-                {
-                    playerController.model.ActivarBoostVelocidadTemporal(multiplicadorVelocidad, duracionVelocidad);
-                    Debug.Log($"Boost de velocidad de x{multiplicadorVelocidad} activado por {duracionVelocidad}s.");
-                }
+                sModel.ActivarBoostVelocidadTemporal(multiplicadorVelocidad, duracionVelocidad);
+                Debug.Log($"[PICKUP] Boost de velocidad temporal activado para {soldado.name} (x{multiplicadorVelocidad}) por {duracionVelocidad}s.");
                 break;
         }
 

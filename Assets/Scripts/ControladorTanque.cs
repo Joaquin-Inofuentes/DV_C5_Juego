@@ -150,7 +150,22 @@ public class ControladorTanque : MonoBehaviour
         {
             // Crear el proyectil en el punto de disparo
             GameObject bala = Instantiate(proyectilPrefab, puntoDisparo.position, puntoDisparo.rotation);
-            bala.GetComponent<Proyectil>().velocidadInicial = 25;
+            
+            Proyectil p = bala.GetComponent<Proyectil>();
+            if (p != null)
+            {
+                p.velocidadInicial = 25;
+                p.owner = gameObject;
+                p.dano = 20;
+            }
+
+            Bala b = bala.GetComponent<Bala>();
+            if (b != null)
+            {
+                b.velocidad = 25;
+                b.dueno = gameObject;
+                b.damage = 20;
+            }
             BD_Audios.ReproducirConSolapamiento("DisparoDeCanon 1");
         }
     }

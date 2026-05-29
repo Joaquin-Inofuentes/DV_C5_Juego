@@ -88,6 +88,26 @@ namespace Game.Squad
             vidaActual = Mathf.Min(vidaActual + cantidad, vidaMaxima);
         }
 
+        public void AgregarMunicion(int cantidad)
+        {
+            if (IsDead) return;
+            balasActuales = Mathf.Min(balasActuales + cantidad, maxBalas);
+        }
+
+        public void ActivarBoostVelocidadTemporal(float multiplicador, float duracion)
+        {
+            if (IsDead) return;
+            StartCoroutine(BoostVelocidadRoutine(multiplicador, duracion));
+        }
+
+        private System.Collections.IEnumerator BoostVelocidadRoutine(float multiplicador, float duracion)
+        {
+            float originalVelocidad = velocidad;
+            velocidad = originalVelocidad * multiplicador;
+            yield return new WaitForSeconds(duracion);
+            velocidad = originalVelocidad;
+        }
+
         public bool PuedeDisparar()
         {
             return balasActuales > 0;

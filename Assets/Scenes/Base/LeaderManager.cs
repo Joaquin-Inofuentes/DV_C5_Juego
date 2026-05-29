@@ -146,20 +146,42 @@ public class LeaderManager : MonoBehaviour
 
     private void HandleSoldierDied(SoldierController deadSoldier)
     {
-        // Verificar si toda la escuadra ha sido eliminada
+        // 1. Verificar si toda la escuadra ha sido eliminada
         bool algunoVivo = false;
+        SoldierController masCercano = null;
+        float minDist = Mathf.Infinity;
+
         foreach (var u in unidades)
         {
-            if (u != null && u.model != null && !u.model.IsDead)
+            if (u != null && u != deadSoldier && u.model != null && !u.model.IsDead)
             {
                 algunoVivo = true;
-                break;
+                float d = Vector3.Distance(deadSoldier.transform.position, u.transform.position);
+                if (d < minDist)
+                {
+                    minDist = d;
+                    masCercano = u;
+                }
             }
         }
 
         if (!algunoVivo)
         {
-            Debug.Log("<color=red>Derrota:</color> Todos los soldados han muerto.");
+            Debug.Log("<color=red>Derrota:</color> Todos los soldados han muerto. Cargando escena de derrota.");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EscenaPerdiste");
+            return;
+        }
+
+        // 2. Si el que murió era el líder, auto-reasignar al vivo más cercano
+        if (GlobalData.liderActual == deadSoldier)
+        {
+            int nuevoIndice = unidades.IndexOf(masCercano);
+            if (nuevoIndice != -1)
+            {
+                Debug.Log($"<color=orange>[SQUAD]</color> El líder ha muerto. Reasignando control a {masCercano.name} (el más cercano).");
+                liderActualIndex = nuevoIndice;
+                CambiarLider(nuevoIndice);
+            }
         }
     }
 

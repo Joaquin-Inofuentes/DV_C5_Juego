@@ -67,7 +67,33 @@ namespace Game.MVC
         {
             if (prefabBala != null && origenDisparo != null)
             {
-                Instantiate(prefabBala, origenDisparo.position, origenDisparo.rotation);
+                GameObject obj = Instantiate(prefabBala, origenDisparo.position, origenDisparo.rotation);
+                
+                GameObject ownerObj = transform.root.gameObject;
+
+                Proyectil p = obj.GetComponent<Proyectil>();
+                if (p != null)
+                {
+                    p.owner = ownerObj;
+                    WeaponModel m = GetComponentInParent<WeaponModel>();
+                    if (m == null) m = GetComponent<WeaponModel>();
+                    if (m != null)
+                    {
+                        p.dano = m.GetCurrentWeaponDamage();
+                    }
+                }
+
+                Bala b = obj.GetComponent<Bala>();
+                if (b != null)
+                {
+                    b.dueno = ownerObj;
+                    WeaponModel m = GetComponentInParent<WeaponModel>();
+                    if (m == null) m = GetComponent<WeaponModel>();
+                    if (m != null)
+                    {
+                        b.damage = m.GetCurrentWeaponDamage();
+                    }
+                }
             }
         }
 
