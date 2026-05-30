@@ -9,6 +9,7 @@ public class CodigoDeInicio : MonoBehaviour
     {
         Debug.Log("Hola mundo");
         BD_Audios.ReproducirAudioUnaVez("Musica de intro");
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
