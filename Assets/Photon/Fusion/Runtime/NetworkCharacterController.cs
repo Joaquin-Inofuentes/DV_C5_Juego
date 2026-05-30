@@ -39,7 +39,7 @@ namespace Fusion {
     new ref NetworkCCData Data => ref ReinterpretState<NetworkCCData>();
 
     [Header("Character Controller Settings")]
-    public float gravity       = -20.0f;
+    public float gravity = -20.0f;
     public float jumpImpulse   = 8.0f;
     public float acceleration  = 10.0f;
     public float braking       = 10.0f;
@@ -48,7 +48,6 @@ namespace Fusion {
 
     Tick                _initial;
     CharacterController _controller;
-
     public CharacterController Controller => _controller;
 
     public Vector3 Velocity {

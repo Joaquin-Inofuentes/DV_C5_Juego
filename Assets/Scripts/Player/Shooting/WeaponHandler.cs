@@ -15,7 +15,10 @@ public class WeaponHandler : NetworkBehaviour
     {
         if (!HasStateAuthority) return;
 
-        SpawnBullet();
+        //SpawnBullet();
+
+        RayBullet();
+
         OnShot();
     }
 
@@ -23,5 +26,21 @@ public class WeaponHandler : NetworkBehaviour
     {
         Runner.Spawn(_bulletPrefab, _shotSpawnTransform.position, _shotSpawnTransform.rotation);
     }
-    
+
+    void RayBullet()
+    {
+        Debug.DrawLine(transform.position, transform.position + transform.forward * 2, Color.magenta, 2);
+        
+        Runner.LagCompensation.Raycast(origin: transform.position, 
+                                        direction: transform.forward, 
+                                        length: 100, 
+                                        player: Object.InputAuthority, 
+                                        hit: out var hitInfo);
+
+        if (hitInfo.Hitbox == null) return;
+
+        if (!hitInfo.Hitbox.transform.root.TryGetComponent(out LifeHandler player)) return;
+        
+        player.TakeDamage(25);
+    }
 }

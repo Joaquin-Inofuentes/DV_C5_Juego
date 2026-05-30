@@ -1,16 +1,14 @@
 using Fusion;
 
-//struct que utilizamos para pasar data de inputs con sus valores a traves de la red
-public struct NetworkInputData : INetworkInput//INetworkInput se usa para network inputs structs
+public struct NetworkInputData : INetworkInput
 {
-    //Crear variable de movimiento
-    //crear variable de disparo
+    public float movementInput;
+    public NetworkBool isFirePressed;
 
-
-    public NetworkButtons networkButtons;//representa un grupo de botones que pueden ser networkeados
+    public NetworkButtons networkButtons;
 }
 
 enum MyButtons
 {
-    //crear salto
+    Jump = 0,
 }

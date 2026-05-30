@@ -6,43 +6,94 @@ using UnityEngine;
 
 public class LifeHandler : NetworkBehaviour
 {
-    //Es mejor usar byte ya que son datos que ocupan menos espacio en memoria y son mas faciles de trasladar en la red
     [Networked, OnChangedRender(nameof(CurrentLifeChanged))]
     private byte CurrentLife { get; set; }
 
     private const byte MAX_LIFE = 100;
+    byte _maxDeaths = 3;
     
+    [Networked, OnChangedRender(nameof(DeadStateChanged))] 
+    private NetworkBool IsDead { get; set; }
+
+    private LifeBarItem _myLifeBar;
+    
+    public event Action<bool> OnDeadChanged = delegate { };
+    public event Action OnRespawn = delegate { };
+    
+    public event Action OnLeft = delegate {  };
 
     public override void Spawned()
-    {   
+    {
+        _myLifeBar = LifeBarHandler.Instance.AddLifeBar(this);
+        
         if (HasStateAuthority)
         {
             CurrentLife = MAX_LIFE;
+        }
+        else
+        {
+            CurrentLifeChanged();
         }
     }
 
     public void TakeDamage(byte dmg)
     {
-        //aplicar daño (recordar que los bytes no pueden tener valores negativos)
+        if (dmg > CurrentLife) dmg = CurrentLife;
 
-        
-        //al morir lo desconecto
+        CurrentLife -= dmg;
 
+        if (CurrentLife != 0) return;
+
+        _maxDeaths--;
+
+        if (_maxDeaths == 0)
+        {
+            DisconnectPlayer();
+            return;
+        }
+
+        IsDead = true;
+        StartCoroutine(Server_RespawnCooldown());
     }
 
+    IEnumerator Server_RespawnCooldown()
+    {
+        yield return new WaitForSeconds(2f);
 
+        Server_Resurrect();
+    }
+
+    void Server_Resurrect()
+    {
+        OnRespawn();
+        IsDead = false;
+        CurrentLife = MAX_LIFE;
+    }
+
+    void DeadStateChanged()
+    {
+        GetComponentInParent<HitboxRoot>().HitboxRootActive = !IsDead;
+        
+        OnDeadChanged(IsDead);
+    }
 
     void CurrentLifeChanged()
     {
-        Debug.Log(CurrentLife);
+        _myLifeBar.UpdateLife(CurrentLife / (float)MAX_LIFE);
     }
     
     void DisconnectPlayer()
     {
-        //si no soy el host me desconecto
-
+        if (!Object.HasInputAuthority)
+        {
+            Runner.Disconnect(Object.InputAuthority);
+        }
         
         Runner.Despawn(Object);
     }
-    
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        OnLeft();
+    }
 }

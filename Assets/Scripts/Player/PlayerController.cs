@@ -14,24 +14,38 @@ public class PlayerController : NetworkBehaviour
     {
         _characterMovement = GetComponent<NetworkCharacterControllerCustom>();
         _weaponHandler = GetComponent<WeaponHandler>();
+
+        if (!TryGetBehaviour(out LifeHandler lifeHandler)) return;
+        
+        lifeHandler.OnDeadChanged += b =>
+        {
+            enabled = !b;
+        };
+
+        lifeHandler.OnRespawn += () =>
+        {
+            _characterMovement.Teleport(transform.position + Vector3.up * 3);
+        };
     }
 
     public override void FixedUpdateNetwork()
     {
-        //Metodo derivado de NetworkBehaviour retorna true si consigue un INetworkInput valido del objeto con InputAutority
-        if (!GetInput(out NetworkInputData inputs)) 
-            return;
+        if (!GetInput(out NetworkInputData inputs)) return;
         
         //Movimiento
-        //consigo la direccion de movimiento
-        //aplico el movimiento
-
+        Vector3 moveDirection = Vector3.forward * inputs.movementInput;
+        _characterMovement.Move(moveDirection);
         
         //Salto
-        //si aprete el boton de salto -> salto
-
+        if (inputs.networkButtons.IsSet(MyButtons.Jump))
+        {
+            _characterMovement.Jump();
+        }
         
         //Disparo
-        //si dispare -> disparo
+        if (inputs.isFirePressed)
+        {
+            _weaponHandler.Fire();
+        }
     }
 }

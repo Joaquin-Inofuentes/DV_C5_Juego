@@ -6,31 +6,35 @@ public class LocalInputs : MonoBehaviour
 {
     private NetworkInputData _networkInputData;
 
-    //crear variable que chequea si salto
-    //crear variable que chequea si disparo
-
+    private bool _isJumpPressed;
+    private bool _isFirePressed;
     
     void Start()
     {
-        //creo y guardo un NetworkInputData
+        _networkInputData = new NetworkInputData();
     }
 
     void Update()
     {
-        //setear movimiento a mi network input
+        _networkInputData.movementInput = Input.GetAxis("Horizontal");
 
-        //chequear si salto
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _isFirePressed = true;
+        }
+
+        //_isFirePressed |= Input.GetKeyDown(KeyCode.Space);
         
-        //chequear si disparo
+        _isJumpPressed |= Input.GetKeyDown(KeyCode.W);
     }
 
     public NetworkInputData GetLocalInputs()
     {
-        //seteo el disparo de mi network input
-        //reinicio el disparo local;
+        _networkInputData.isFirePressed = _isFirePressed;
+        _isFirePressed = false;
 
-        //seteo el salto de mi network input
-        //reinicio el salto local
+        _networkInputData.networkButtons.Set(MyButtons.Jump, _isJumpPressed);
+        _isJumpPressed = false;
         
         return _networkInputData;
     }

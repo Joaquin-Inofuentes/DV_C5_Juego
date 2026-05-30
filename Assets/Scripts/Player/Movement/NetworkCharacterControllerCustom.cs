@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
-//algunos pequeños cambios a la clase NetworkCharacterController (opcional para el parcial)
 public class NetworkCharacterControllerCustom : NetworkCharacterController
 {
     public event Action<float> OnMoving = delegate {  };

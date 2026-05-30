@@ -14,10 +14,12 @@ public class Bullet : NetworkBehaviour
 
     public override void Spawned()
     {
-        //aplicar fuerzas al rigidbody
-        
+        GetComponent<NetworkRigidbody3D>().Rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
 
-        //Crear el timer solo si se cumple una condicion
+        if (HasStateAuthority)
+        {
+            _lifeTimer = TickTimer.CreateFromSeconds(Runner, 2);
+        }
     }
 
     public override void FixedUpdateNetwork()
@@ -37,10 +39,12 @@ public class Bullet : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //retornar si el objeto no existe o no tiene la autoridad correspondiente
+        if (!Object || !Object.HasStateAuthority) return;
 
-        //si colisiono con alguien que puede recibir daño aplico el daño
-        
+        if (other.TryGetComponent(out LifeHandler lifeHandler))
+        {
+            lifeHandler.TakeDamage(_damage);
+        }
         
         DespawnObject();
     }

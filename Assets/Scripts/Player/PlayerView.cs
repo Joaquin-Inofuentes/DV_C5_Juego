@@ -23,7 +23,10 @@ public class PlayerView : NetworkBehaviour
         
         var lifeComponent = GetComponentInParent<LifeHandler>();
 
-
+        if (lifeComponent)
+        {
+            lifeComponent.OnDeadChanged += EnableMeshRender;
+        }
         
         _mecanimAnimator = GetComponent<NetworkMecanimAnimator>();
 
