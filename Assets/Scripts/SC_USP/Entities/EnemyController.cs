@@ -1,6 +1,5 @@
 using USP.Weapons;
 using UnityEngine;
-using System.Collections;
 using Game.Squad;
 using USP.Core;
 using USP.Services;
@@ -9,8 +8,8 @@ namespace USP.Entities
 {
     /// <summary>
     /// Controlador principal del enemigo (MVC - Controller).
-    /// Coordina las acciones del enemigo utilizando sensores, navegación y comportamiento reactivo con FSM.
-    /// Listo para Photon en el futuro (limita la simulación en red).
+    /// FSM distribuida en ticks via TickManager para no quemar el Profiler.
+    /// Reacciona a ruidos de disparo cercanos (ShotImpactBus) con verificación de LOS.
     /// </summary>
     [RequireComponent(typeof(EnemyModel))]
     [RequireComponent(typeof(EnemyView))]
@@ -23,11 +22,8 @@ namespace USP.Entities
         public EnemyView view;
 
         [Header("Referencias Navegación y Combate")]
-        [Tooltip("Agente IA de navegación.")]
         public IA_P2_AgentIA agent;
-        [Tooltip("Punto de salida del proyectil del enemigo.")]
         public Transform puntoDisparo;
-        [Tooltip("Prefab de la bala.")]
         public GameObject prefabBala;
 
         [Header("Estado FSM")]
@@ -35,229 +31,261 @@ namespace USP.Entities
         public Transform objetivoActual;
         public Vector3 investigarPos;
 
+        [Header("Detección de Ruido")]
+        [Tooltip("Radio máximo para reaccionar a impactos de disparos cercanos.")]
+        public float radioRuidoDisparo = 8f;
+        [Tooltip("Máscara de capas que bloquean la visión (LOS). Capa 6 = Obstáculos.")]
+        public LayerMask capasLOS = 1 << 6;
+
         private float nextFireTime;
         private Vector3 spawnPoint;
         private float patrolTimer;
         private Vector3 patrolTarget;
-
         private Vector3 lastTargetPos;
-        private float pathRecalculateInterval = 0.25f;
-        private float nextPathRecalculateTime;
 
+        // ─── Lifecycle ────────────────────────────────────────────────
         private void Start()
         {
-            spawnPoint = transform.position;
-            patrolTarget = ObtenerNuevaPosicionPatrulla();
+            spawnPoint    = transform.position;
+            patrolTarget  = ObtenerNuevaPosicionPatrulla();
 
-            if (model == null) model = GetComponent<EnemyModel>();
-            if (view == null) view = GetComponent<EnemyView>();
-            if (agent == null) agent = GetComponent<IA_P2_AgentIA>();
+            if (model  == null) model  = GetComponent<EnemyModel>();
+            if (view   == null) view   = GetComponent<EnemyView>();
+            if (agent  == null) agent  = GetComponent<IA_P2_AgentIA>();
 
-            // Validaciones detalladas de referencias con feedback
-            if (model == null) Debug.LogError($"[EnemyController] ¡Falta EnemyModel! El objeto '{name}' no tiene estadísticas.");
-            if (view == null) Debug.LogError($"[EnemyController] ¡Falta EnemyView! El objeto '{name}' no tiene visualización de vida.");
-            if (agent == null) Debug.LogWarning($"[EnemyController] ¡Falta IA_P2_AgentIA! El objeto '{name}' no podrá moverse de forma autónoma.");
+            if (model  == null) Debug.LogError($"[EnemyController] '{name}' falta EnemyModel.");
+            if (view   == null) Debug.LogError($"[EnemyController] '{name}' falta EnemyView.");
+            if (agent  == null) Debug.LogWarning($"[EnemyController] '{name}' falta IA_P2_AgentIA — no podrá moverse.");
         }
 
+        private void OnEnable()
+        {
+            // Suscribirse a los ticks — reducimos raycasts de cada frame a ticks controlados
+            if (TickManager.Instance != null)
+            {
+                TickManager.Instance.OnTick_0_1s += Tick_Rapido;
+                TickManager.Instance.OnTick_0_5s += Tick_Medio;
+                TickManager.Instance.OnTick_1s   += Tick_Lento;
+            }
+
+            // Escuchar ruidos de disparo para reaccionar con LOS
+            ShotImpactBus.OnShotImpact += OnShotNearby;
+        }
+
+        private void OnDisable()
+        {
+            if (TickManager.Instance != null)
+            {
+                TickManager.Instance.OnTick_0_1s -= Tick_Rapido;
+                TickManager.Instance.OnTick_0_5s -= Tick_Medio;
+                TickManager.Instance.OnTick_1s   -= Tick_Lento;
+            }
+
+            ShotImpactBus.OnShotImpact -= OnShotNearby;
+        }
+
+        // ─── Update mínimo: solo disparo y rotación (requiere cada frame) ─────
         private void Update()
         {
-            if (model == null || model.IsDead) return;
+            if (model == null || model.IsDead || !model.hasNetworkAuthority) return;
 
-            // En el futuro, si no somos el servidor/host en red (hasNetworkAuthority), omitimos el ciclo FSM
-            if (!model.hasNetworkAuthority) return;
-
-            ActualizarFSM();
-
-            // Dibujar línea de debug verde del recorrido de patrulla o persecución
-            if (agent != null && agent.enabled)
-            {
-                Color pathColor = (currentState == EnemyState.Perseguir || currentState == EnemyState.Atacar) ? Color.red : Color.green;
-                Debug.DrawLine(transform.position, agent.transform.position + Vector3.up * 0.1f, pathColor);
-            }
+            // La rotación hacia el objetivo y disparo se mantienen en Update
+            // porque necesitan precisión frame a frame. El pathfinding va al tick.
+            if (currentState == EnemyState.Atacar)
+                ManejarAtaque_Update();
         }
 
-        private void ActualizarFSM()
+        // ─── Ticks ────────────────────────────────────────────────────
+
+        /// Tick 0.1s — ataque: solo confirmar distancia y disparar
+        private void Tick_Rapido()
         {
+            if (model == null || model.IsDead || !model.hasNetworkAuthority) return;
+            if (currentState == EnemyState.Perseguir)
+                VerificarEntradaRangoAtaque();
+        }
+
+        /// Tick 0.5s — pathfinding de persecución e investigación
+        private void Tick_Medio()
+        {
+            if (model == null || model.IsDead || !model.hasNetworkAuthority) return;
+
             switch (currentState)
             {
-                case EnemyState.Patrullar:
-                    ManejarPatrulla();
-                    break;
-                case EnemyState.Perseguir:
-                    ManejarPersecucion();
-                    break;
-                case EnemyState.Atacar:
-                    ManejarAtaque();
-                    break;
-                case EnemyState.Investigar:
-                    ManejarInvestigacion();
-                    break;
+                case EnemyState.Perseguir:  ManejarPersecucion_Tick(); break;
+                case EnemyState.Investigar: ManejarInvestigacion_Tick(); break;
             }
         }
 
-        private void ManejarPatrulla()
+        /// Tick 1s — patrulla (la más barata, no necesita frecuencia)
+        private void Tick_Lento()
         {
-            if (agent != null && agent.enabled)
-            {
-                agent.SetSpeed(model.velocidadPatrulla);
-                if (patrolTarget != lastTargetPos || Time.time >= nextPathRecalculateTime)
-                {
-                    agent.GoTo(patrolTarget);
-                    lastTargetPos = patrolTarget;
-                    nextPathRecalculateTime = Time.time + pathRecalculateInterval;
-                }
+            if (model == null || model.IsDead || !model.hasNetworkAuthority) return;
 
-                if (Vector3.Distance(transform.position, patrolTarget) < 1f)
+            if (currentState == EnemyState.Patrullar)
+                ManejarPatrulla_Tick();
+        }
+
+        // ─── FSM por tick ─────────────────────────────────────────────
+
+        private void ManejarPatrulla_Tick()
+        {
+            if (agent == null || !agent.enabled) return;
+
+            agent.SetSpeed(model.velocidadPatrulla);
+
+            if (patrolTarget != lastTargetPos)
+            {
+                agent.GoTo(patrolTarget);
+                lastTargetPos = patrolTarget;
+            }
+
+            if (Vector3.Distance(transform.position, patrolTarget) < 1f)
+            {
+                patrolTimer += 1f; // 1 segundo por tick
+                if (patrolTimer >= 3f)
                 {
-                    patrolTimer += Time.deltaTime;
-                    if (patrolTimer >= 3f)
-                    {
-                        patrolTarget = ObtenerNuevaPosicionPatrulla();
-                        patrolTimer = 0f;
-                    }
+                    patrolTarget = ObtenerNuevaPosicionPatrulla();
+                    patrolTimer  = 0f;
                 }
             }
         }
 
-        private void ManejarPersecucion()
+        private void ManejarPersecucion_Tick()
         {
-            if (objetivoActual == null)
-            {
-                RegresarAPatrulla();
-                return;
-            }
+            if (objetivoActual == null) { RegresarAPatrulla(); return; }
 
             if (agent != null && agent.enabled)
             {
                 agent.SetSpeed(model.velocidadPersecucion);
-                if (objetivoActual.position != lastTargetPos && Time.time >= nextPathRecalculateTime)
+                if (objetivoActual.position != lastTargetPos)
                 {
                     agent.GoTo(objetivoActual.position);
                     lastTargetPos = objetivoActual.position;
-                    nextPathRecalculateTime = Time.time + pathRecalculateInterval;
                 }
             }
 
             float dist = Vector3.Distance(transform.position, objetivoActual.position);
-            if (dist <= 6f) // Distancia de ataque
+            if (dist > model.radioDeteccion * 1.5f)
             {
-                currentState = EnemyState.Atacar;
-                Debug.Log($"[EnemyController] {name} entró en rango de ataque contra {objetivoActual.name}. Empezando a disparar.");
-            }
-            else if (dist > model.radioDeteccion * 1.5f)
-            {
-                Debug.Log($"[EnemyController] {name} perdió de vista a {objetivoActual.name}. Regresando a patrullar.");
                 objetivoActual = null;
                 RegresarAPatrulla();
             }
         }
 
-        private void ManejarAtaque()
+        private void VerificarEntradaRangoAtaque()
         {
-            if (objetivoActual == null)
-            {
-                RegresarAPatrulla();
-                return;
-            }
+            if (objetivoActual == null) return;
+            float dist = Vector3.Distance(transform.position, objetivoActual.position);
+            if (dist <= 6f)
+                currentState = EnemyState.Atacar;
+        }
 
-            // Mirar al objetivo
+        private void ManejarAtaque_Update()
+        {
+            if (objetivoActual == null) { RegresarAPatrulla(); return; }
+
+            // Rotar hacia objetivo (precisa cada frame)
             Vector3 dir = (objetivoActual.position - transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            // Detener navegación física al disparar
             if (agent != null && agent.enabled) agent.StopAgent();
 
             float dist = Vector3.Distance(transform.position, objetivoActual.position);
-            if (dist > 7.5f) // El objetivo huyó del rango
+            if (dist > 7.5f)
             {
                 currentState = EnemyState.Perseguir;
-                Debug.Log($"[EnemyController] {name} persigue de nuevo a {objetivoActual.name} (se alejó de rango de disparo).");
             }
-            else
+            else if (Time.time >= nextFireTime)
             {
-                if (Time.time >= nextFireTime)
-                {
-                    DispararAlObjetivo();
-                    nextFireTime = Time.time + model.fireRate;
-                }
+                DispararAlObjetivo();
+                nextFireTime = Time.time + model.fireRate;
             }
         }
 
-        private void ManejarInvestigacion()
+        private void ManejarInvestigacion_Tick()
         {
-            if (agent != null && agent.enabled)
-            {
-                agent.SetSpeed(model.velocidadPatrulla);
-                if (investigarPos != lastTargetPos || Time.time >= nextPathRecalculateTime)
-                {
-                    agent.GoTo(investigarPos);
-                    lastTargetPos = investigarPos;
-                    nextPathRecalculateTime = Time.time + pathRecalculateInterval;
-                }
+            if (agent == null || !agent.enabled) return;
 
-                if (Vector3.Distance(transform.position, investigarPos) < 1f)
+            agent.SetSpeed(model.velocidadPatrulla);
+            if (investigarPos != lastTargetPos)
+            {
+                agent.GoTo(investigarPos);
+                lastTargetPos = investigarPos;
+            }
+
+            if (Vector3.Distance(transform.position, investigarPos) < 1f)
+            {
+                patrolTimer += 0.5f; // 0.5s por tick medio
+                if (patrolTimer >= 4f)
                 {
-                    patrolTimer += Time.deltaTime;
-                    if (patrolTimer >= 4f)
-                    {
-                        patrolTimer = 0f;
-                        RegresarAPatrulla();
-                    }
+                    patrolTimer = 0f;
+                    RegresarAPatrulla();
                 }
             }
         }
+
+        // ─── Reacción a Ruido de Disparo (ShotImpactBus) ─────────────
+
+        /// <summary>
+        /// Llamado por ShotImpactBus cuando cualquier bala impacta.
+        /// Filtra por distancia y luego verifica LOS (Physics2D.Linecast).
+        /// Solo reacciona si está en Patrullar o Investigar (no interrumpe combate).
+        /// </summary>
+        private void OnShotNearby(Vector3 impactPos, GameObject owner)
+        {
+            if (model == null || model.IsDead) return;
+
+            // 1. No interrumpir si ya está en combate activo
+            if (currentState == EnemyState.Atacar || currentState == EnemyState.Perseguir) return;
+
+            // 2. Filtro de distancia — si el impacto no está en el radio, ignorar
+            float dist = Vector3.Distance(transform.position, impactPos);
+            if (dist > radioRuidoDisparo) return;
+
+            // 3. LOS — ¿puede "escuchar"/ver la posición del impacto sin obstáculos?
+            //    Usamos Linecast 2D (capa 6 = Obstáculos)
+            bool bloqueado = Physics2D.Linecast(transform.position, impactPos, capasLOS);
+            if (bloqueado) return;
+
+            // 4. Reaccionar: ir a investigar la posición del ruido
+            investigarPos = impactPos;
+            currentState  = EnemyState.Investigar;
+            patrolTimer   = 0f;
+        }
+
+        // ─── Disparo ──────────────────────────────────────────────────
 
         private void DispararAlObjetivo()
         {
             if (prefabBala == null || puntoDisparo == null) return;
 
-            // Dibujar una línea de debug por 3 segundos de color blanco (Inicio de ataque/Disparo)
-            Debug.DrawLine(puntoDisparo.position, objetivoActual.position, Color.white, 3f);
-            Debug.Log($"[EnemyController] {name} disparó a {objetivoActual.name}. (Debug DrawLine visible por 3s)");
+            Debug.DrawLine(puntoDisparo.position, objetivoActual.position, Color.white, 1f);
 
             GameObject bala = Instantiate(prefabBala, puntoDisparo.position, puntoDisparo.rotation);
+
             Rigidbody2D rbBala = bala.GetComponent<Rigidbody2D>();
-            if (rbBala != null)
-            {
-                rbBala.velocity = puntoDisparo.right * model.velocidadBala;
-            }
+            if (rbBala != null) rbBala.velocity = puntoDisparo.right * model.velocidadBala;
 
             Bala b = bala.GetComponent<Bala>();
-            if (b != null)
-            {
-                b.damage = model.dano;
-                b.velocidad = model.velocidadBala;
-                b.dueno = gameObject;
-            }
+            if (b != null) { b.damage = model.dano; b.velocidad = model.velocidadBala; b.dueno = gameObject; }
 
             Proyectil p = bala.GetComponent<Proyectil>();
-            if (p != null)
-            {
-                p.dano = model.dano;
-                p.velocidadInicial = model.velocidadBala;
-                p.owner = gameObject;
-            }
+            if (p != null) { p.dano = model.dano; p.velocidadInicial = model.velocidadBala; p.owner = gameObject; }
         }
 
-        public void AlertarRuidoDisparo(Vector3 posicionBala)
-        {
-            if (currentState == EnemyState.Atacar || currentState == EnemyState.Perseguir) return;
+        // ─── API pública (para EnemyDetector, etc.) ──────────────────
 
-            investigarPos = posicionBala;
-            currentState = EnemyState.Investigar;
-            patrolTimer = 0f;
-            Debug.Log($"[EnemyController] {name} detectó un disparo cercano. Investigando posición: {posicionBala}");
-        }
-
+        /// <summary>Alertar al enemigo de la presencia de un soldado (llamado por EnemyDetector).</summary>
         public void AlertarPresenciaSoldado(Transform soldado)
         {
-            if (objetivoActual != null) return;
-
+            if (objetivoActual != null) return; // Ya tiene objetivo
             objetivoActual = soldado;
-            currentState = EnemyState.Perseguir;
-            Debug.Log($"[EnemyController] {name} detectó cercanía de {soldado.name}. Empezando a seguirlo.");
+            currentState   = EnemyState.Perseguir;
         }
+
+        // ─── Helpers ──────────────────────────────────────────────────
 
         private void RegresarAPatrulla()
         {
@@ -267,11 +295,11 @@ namespace USP.Entities
 
         private Vector3 ObtenerNuevaPosicionPatrulla()
         {
-            Vector2 randomCircle = Random.insideUnitCircle * 5f;
-            return spawnPoint + new Vector3(randomCircle.x, randomCircle.y, 0f);
+            Vector2 rnd = Random.insideUnitCircle * 5f;
+            return spawnPoint + new Vector3(rnd.x, rnd.y, 0f);
         }
 
-        // --- IDaniable Implementation ---
+        // ─── IDaniable ────────────────────────────────────────────────
         public void RecibirDano(int cantidad, GameObject atacante)
         {
             if (model == null || model.IsDead) return;
@@ -279,23 +307,17 @@ namespace USP.Entities
             model.RecibirDano(cantidad);
             view?.TriggerDamageFeedback();
 
-            Debug.Log($"[EnemyController] {name} recibió {cantidad} de daño. Vida restante: {model.vidaActual}");
-
             if (atacante != null)
             {
                 objetivoActual = atacante.transform;
-                currentState = EnemyState.Perseguir;
+                currentState   = EnemyState.Perseguir;
             }
 
-            if (model.IsDead)
-            {
-                Morir();
-            }
+            if (model.IsDead) Morir();
         }
 
         private void Morir()
         {
-            Debug.Log($"[EnemyController] {name} ha sido eliminado.");
             if (GameManager.instance != null)
             {
                 GameManager.instance.AñadirPuntos(15);
@@ -303,6 +325,12 @@ namespace USP.Entities
             }
             Destroy(gameObject);
         }
+
+        internal void AlertarRuidoDisparo(Vector3 position)
+        {
+            // TODO Falta completar
+            Debug.Log($"[EnemyController] '{name}' alertado por ruido de disparo en {position}.");
+            throw new System.NotImplementedException();
+        }
     }
 }
-
