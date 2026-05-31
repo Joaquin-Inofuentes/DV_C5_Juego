@@ -1,3 +1,4 @@
+using USP.Core;
 using UnityEngine;
 using Game.Squad;
 
@@ -50,3 +51,4 @@ public class AmmoManager : MonoBehaviour
         }
     }
 }
+

@@ -1,3 +1,5 @@
+using USP.Core;
+using USP.Weapons;
 using UnityEngine;
 
 namespace Game.MVC
@@ -112,3 +114,4 @@ namespace Game.MVC
         }
     }
 }
+

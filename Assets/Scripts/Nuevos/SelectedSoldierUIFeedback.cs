@@ -1,3 +1,4 @@
+using USP.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 using Game.Squad;
@@ -57,3 +58,4 @@ public class SelectedSoldierUIFeedback : MonoBehaviour
         }
     }
 }
+

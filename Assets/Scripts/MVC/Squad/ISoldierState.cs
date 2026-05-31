@@ -1,3 +1,5 @@
+using USP.Entities;
+
 namespace Game.Squad
 {
     /// <summary>

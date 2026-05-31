@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using TMPro;
 using Game.Squad;
@@ -57,3 +60,4 @@ public class MainGameController : MonoBehaviour
         txtAliados.text = lista;
     }
 }
+

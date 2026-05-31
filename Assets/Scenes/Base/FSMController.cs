@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using Game.Squad;
 
@@ -143,3 +146,4 @@ public class FSMController : MonoBehaviour
         if (soldierController != null) soldierController.RegresarAFormacion();
     }
 }
+

@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using Game.Squad;
 
@@ -47,7 +50,7 @@ public class Destruible : MonoBehaviour, IDaniable
         }
 
         // Si es un enemigo controlado por EnemyController (MVC nuevo)
-        Game.Enemy.EnemyController newEnemy = GetComponent<Game.Enemy.EnemyController>();
+        EnemyController newEnemy = GetComponent<EnemyController>();
         if (newEnemy != null)
         {
             newEnemy.RecibirDano(cantidad, atacante);
@@ -89,3 +92,4 @@ public class Destruible : MonoBehaviour, IDaniable
         Destroy(gameObject);
     }
 }
+

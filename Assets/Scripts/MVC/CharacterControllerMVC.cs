@@ -1,3 +1,5 @@
+using USP.Core;
+using USP.Entities;
 using UnityEngine;
 
 namespace Game.MVC
@@ -83,3 +85,4 @@ namespace Game.MVC
         }
     }
 }
+

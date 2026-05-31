@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,3 +74,4 @@ public class PositionManager : MonoBehaviour
         }
     }
 }
+

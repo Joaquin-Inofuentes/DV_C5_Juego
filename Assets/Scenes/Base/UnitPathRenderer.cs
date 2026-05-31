@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using UnityEngine.AI;
 using Game.Squad;
@@ -94,3 +97,4 @@ public class UnitPathRenderer : MonoBehaviour
         }
     }
 }
+

@@ -1,4 +1,5 @@
 using UnityEngine;
+using USP.Entities;
 
 namespace Game.Squad
 {
@@ -8,31 +9,39 @@ namespace Game.Squad
     public class LiderandoState : ISoldierState
     {
         private float nextFireTime;
+        private bool loggedMissingInputs = false;
 
         public void Enter(SoldierController controller)
         {
             if (controller.agent != null) controller.agent.enabled = false;
             controller.SetSelectionRing(true);
+            loggedMissingInputs = false;
         }
 
         public void Update(SoldierController controller)
         {
-            if (GEN_Inputs.Instance == null) return;
+            if (GEN_Inputs.Instance == null)
+            {
+                if (!loggedMissingInputs)
+                {
+                    Debug.LogError($"[LiderandoState] GEN_Inputs.Instance es NULL en '{controller.name}'. ¿El objeto Formacion está activo en escena?");
+                    loggedMissingInputs = true;
+                }
+                return;
+            }
 
-            // Rotar hacia el mouse usando GEN_Inputs centralizado
+            // Rotar hacia el mouse
             Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
             Vector3 dir = mousePos - controller.transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             controller.transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            // Disparo Manual
+            // Disparo manual
             if (GEN_Inputs.Instance.DisparoSostenido && Time.time >= nextFireTime)
             {
                 controller.DispararProyectil();
                 if (controller.model != null)
-                {
                     nextFireTime = Time.time + controller.model.fireRate;
-                }
             }
         }
 
@@ -40,7 +49,6 @@ namespace Game.Squad
         {
             if (controller.model == null || GEN_Inputs.Instance == null) return;
 
-            // Movimiento Manual WASD usando GEN_Inputs centralizado
             Vector2 moveDir2D = GEN_Inputs.Instance.MovimientoInput;
             Vector3 moveDir = new Vector3(moveDir2D.x, moveDir2D.y, 0f);
             controller.transform.position += moveDir * controller.model.velocidad * Time.deltaTime;
@@ -67,7 +75,6 @@ namespace Game.Squad
             if (controller.slotAsignado != null)
             {
                 controller.MoverAgenteA(controller.slotAsignado.position);
-                // Dibujar línea azul de formación
                 Debug.DrawLine(controller.transform.position, controller.slotAsignado.position, Color.blue);
             }
         }

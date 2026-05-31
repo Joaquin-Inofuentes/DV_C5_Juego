@@ -1,9 +1,12 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using System.Collections.Generic;
 using Game.Squad;
 
 /// <summary>
-/// Gestiona la selección y asignación del líder de la escuadra utilizando el EventBus.
+/// Gestiona la selección y asignación del líder de la escuadra.
 /// </summary>
 public class LeaderManager : MonoBehaviour
 {
@@ -11,159 +14,91 @@ public class LeaderManager : MonoBehaviour
     public List<SoldierController> unidades;
 
     [Header("Configuración")]
-    [Tooltip("Panel UI o texto de advertencia a activar cuando el jugador intenta cambiar a un soldado muerto.")]
+    [Tooltip("Panel UI a activar cuando se intenta cambiar a un soldado muerto.")]
     public GameObject MensajeDeQueEstaMuerto;
 
-    [Tooltip("Índice de inicio para el líder de la escuadra.")]
+    [Tooltip("Índice del líder inicial.")]
     public int indiceLiderInicial = 0;
 
     public static LeaderManager Instance { get; private set; }
+
+    private int liderActualIndex = -1;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private int liderActualIndex = -1;
-
     private void OnEnable()
     {
-        // Suscribirse a eventos
         SquadEventBus.OnSoldierSwitchRequested += CambiarLider;
-        SquadEventBus.OnSoldierDied += HandleSoldierDied;
-
-        if (GEN_Inputs.Instance != null)
-        {
-            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
-        }
+        SquadEventBus.OnSoldierDied            += HandleSoldierDied;
+        SuscribirseACycleLeader();
 
         if (unidades != null && unidades.Count > indiceLiderInicial)
-        {
             StartCoroutine(InicializarLiderTarde());
-        }
+        else
+            Debug.LogWarning($"[LeaderManager] Lista 'unidades' vacía o indiceLiderInicial ({indiceLiderInicial}) fuera de rango. Asigná J1/J2/J3 en el Inspector.");
     }
 
     private void OnDisable()
     {
-        // Cancelar suscripción
         SquadEventBus.OnSoldierSwitchRequested -= CambiarLider;
-        SquadEventBus.OnSoldierDied -= HandleSoldierDied;
+        SquadEventBus.OnSoldierDied            -= HandleSoldierDied;
 
         if (GEN_Inputs.Instance != null)
-        {
             GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+    }
+
+    private void SuscribirseACycleLeader()
+    {
+        if (GEN_Inputs.Instance == null)
+        {
+            Debug.LogWarning("[LeaderManager] GEN_Inputs.Instance es null en OnEnable. Se reintentará al final del frame.");
+            return;
         }
+        // Evitar doble suscripción
+        GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+        GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
     }
 
     private System.Collections.IEnumerator InicializarLiderTarde()
     {
         yield return new WaitForEndOfFrame();
-        if (GEN_Inputs.Instance != null)
-        {
-            GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
-            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
-        }
+        SuscribirseACycleLeader();
         liderActualIndex = indiceLiderInicial;
         CambiarLider(indiceLiderInicial);
     }
 
     private void Update()
     {
+        // Re-suscribir si GEN_Inputs tardó en inicializarse
         if (GEN_Inputs.Instance != null)
         {
             GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
             GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
         }
 
-        // Si el líder actual existe, posicionar este objeto en su posición (para pivots de formación)
         if (GlobalData.liderActual != null)
-        {
             transform.position = GlobalData.liderActual.transform.position;
-        }
     }
 
     private void HandleCycleLeaderFromInputs(bool forward)
     {
-        if (unidades == null || unidades.Count == 0) return;
+        if (unidades == null || unidades.Count == 0)
+        {
+            Debug.LogWarning("[LeaderManager] HandleCycleLeader → lista de unidades vacía.");
+            return;
+        }
 
         SoldierController currentLeader = GlobalData.liderActual;
-        if (currentLeader == null) return;
-
-        float leaderX = currentLeader.transform.position.x;
-        SoldierController bestTarget = null;
-
-        if (forward) // E: Closest soldier to the right
+        if (currentLeader == null)
         {
-            float minDistance = float.MaxValue;
-            foreach (var u in unidades)
-            {
-                if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
-                {
-                    if (u.transform.position.x > leaderX)
-                    {
-                        float dist = u.transform.position.x - leaderX;
-                        if (dist < minDistance)
-                        {
-                            minDistance = dist;
-                            bestTarget = u;
-                        }
-                    }
-                }
-            }
-
-            // Wrap around to the leftmost soldier if none on the right
-            if (bestTarget == null)
-            {
-                float minX = float.MaxValue;
-                foreach (var u in unidades)
-                {
-                    if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
-                    {
-                        if (u.transform.position.x < minX)
-                        {
-                            minX = u.transform.position.x;
-                            bestTarget = u;
-                        }
-                    }
-                }
-            }
+            Debug.LogWarning("[LeaderManager] HandleCycleLeader → GlobalData.liderActual es null.");
+            return;
         }
-        else // Q: Closest soldier to the left
-        {
-            float minDistance = float.MaxValue;
-            foreach (var u in unidades)
-            {
-                if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
-                {
-                    if (u.transform.position.x < leaderX)
-                    {
-                        float dist = leaderX - u.transform.position.x;
-                        if (dist < minDistance)
-                        {
-                            minDistance = dist;
-                            bestTarget = u;
-                        }
-                    }
-                }
-            }
 
-            // Wrap around to the rightmost soldier if none on the left
-            if (bestTarget == null)
-            {
-                float maxX = float.MinValue;
-                foreach (var u in unidades)
-                {
-                    if (u != null && u != currentLeader && u.model != null && !u.model.IsDead)
-                    {
-                        if (u.transform.position.x > maxX)
-                        {
-                            maxX = u.transform.position.x;
-                            bestTarget = u;
-                        }
-                    }
-                }
-            }
-        }
+        SoldierController bestTarget = BuscarSiguienteUnidad(forward, currentLeader);
 
         if (bestTarget != null)
         {
@@ -176,18 +111,54 @@ public class LeaderManager : MonoBehaviour
         }
     }
 
+    /// <summary>Busca la siguiente unidad viva según la dirección de ciclado.</summary>
+    private SoldierController BuscarSiguienteUnidad(bool forward, SoldierController liderActual)
+    {
+        float leaderX = liderActual.transform.position.x;
+        SoldierController bestTarget = null;
+        float bestValue = forward ? float.MaxValue : float.MinValue;
+
+        foreach (var u in unidades)
+        {
+            if (u == null || u == liderActual || u.model == null || u.model.IsDead) continue;
+
+            float ux = u.transform.position.x;
+            if (forward && ux > leaderX)
+            {
+                float dist = ux - leaderX;
+                if (dist < bestValue) { bestValue = dist; bestTarget = u; }
+            }
+            else if (!forward && ux < leaderX)
+            {
+                float dist = leaderX - ux;
+                if (dist < bestValue) { bestValue = dist; bestTarget = u; }
+            }
+        }
+
+        // Wrap-around: si no hay nadie en esa dirección, tomar el extremo opuesto
+        if (bestTarget == null)
+        {
+            float extremeValue = forward ? float.MaxValue : float.MinValue;
+            foreach (var u in unidades)
+            {
+                if (u == null || u == liderActual || u.model == null || u.model.IsDead) continue;
+                float ux = u.transform.position.x;
+                if (forward  && ux < extremeValue) { extremeValue = ux; bestTarget = u; }
+                if (!forward && ux > extremeValue) { extremeValue = ux; bestTarget = u; }
+            }
+        }
+
+        return bestTarget;
+    }
+
     public void CambiarLider(int index)
     {
         if (unidades == null || index < 0 || index >= unidades.Count) return;
 
-        // Si el soldado está muerto (nulo)
         if (unidades[index] == null || (unidades[index].model != null && unidades[index].model.IsDead))
         {
-            Debug.LogError($"<color=red>ACCESO DENEGADO:</color> El soldado en el slot {index + 1} ha muerto y no puede liderar.");
-            if (MensajeDeQueEstaMuerto != null)
-            {
-                MensajeDeQueEstaMuerto.SetActive(true);
-            }
+            Debug.LogError($"<color=red>[LeaderManager] Acceso denegado:</color> Soldado en slot {index + 1} está muerto.");
+            if (MensajeDeQueEstaMuerto != null) MensajeDeQueEstaMuerto.SetActive(true);
             return;
         }
 
@@ -220,39 +191,30 @@ public class LeaderManager : MonoBehaviour
 
     private void HandleSoldierDied(SoldierController deadSoldier)
     {
-        // 1. Verificar si toda la escuadra ha sido eliminada
         bool algunoVivo = false;
         SoldierController masCercano = null;
         float minDist = Mathf.Infinity;
 
         foreach (var u in unidades)
         {
-            if (u != null && u != deadSoldier && u.model != null && !u.model.IsDead)
-            {
-                algunoVivo = true;
-                float d = Vector3.Distance(deadSoldier.transform.position, u.transform.position);
-                if (d < minDist)
-                {
-                    minDist = d;
-                    masCercano = u;
-                }
-            }
+            if (u == null || u == deadSoldier || u.model == null || u.model.IsDead) continue;
+            algunoVivo = true;
+            float d = Vector3.Distance(deadSoldier.transform.position, u.transform.position);
+            if (d < minDist) { minDist = d; masCercano = u; }
         }
 
         if (!algunoVivo)
         {
-            Debug.Log("<color=red>Derrota:</color> Todos los soldados han muerto. Cargando escena de derrota.");
+            Debug.Log("<color=red>[LeaderManager] Derrota: todos los soldados han muerto.</color>");
             UnityEngine.SceneManagement.SceneManager.LoadScene("EscenaPerdiste");
             return;
         }
 
-        // 2. Si el que murió era el líder, auto-reasignar al vivo más cercano
-        if (GlobalData.liderActual == deadSoldier)
+        if (GlobalData.liderActual == deadSoldier && masCercano != null)
         {
             int nuevoIndice = unidades.IndexOf(masCercano);
             if (nuevoIndice != -1)
             {
-                Debug.Log($"<color=orange>[SQUAD]</color> El líder ha muerto. Reasignando control a {masCercano.name} (el más cercano).");
                 liderActualIndex = nuevoIndice;
                 CambiarLider(nuevoIndice);
             }
@@ -261,9 +223,6 @@ public class LeaderManager : MonoBehaviour
 
     public void DesactivarMensaje()
     {
-        if (MensajeDeQueEstaMuerto != null)
-        {
-            MensajeDeQueEstaMuerto.SetActive(false);
-        }
+        if (MensajeDeQueEstaMuerto != null) MensajeDeQueEstaMuerto.SetActive(false);
     }
 }

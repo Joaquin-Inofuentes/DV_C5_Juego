@@ -1,3 +1,4 @@
+using USP.Entities;
 using UnityEngine;
 using Game.Squad;
 
@@ -13,6 +14,9 @@ namespace Game.Enemy
         public float visualRange = 10f;
         public LayerMask targetMask; // Capa de los soldados (Jugador/Squad)
         public LayerMask obstacleMask; // Obstáculos físicos
+
+        private float scanInterval = 0.15f;
+        private float nextScanTime;
 
         private void Start()
         {
@@ -40,7 +44,11 @@ namespace Game.Enemy
             if (controller == null || controller.model == null || controller.model.IsDead) return;
 
             // Escanear soldados visibles
-            EscanearSoldadosEnLineaDeVision();
+            if (Time.time >= nextScanTime)
+            {
+                EscanearSoldadosEnLineaDeVision();
+                nextScanTime = Time.time + scanInterval;
+            }
         }
 
         private void EscanearSoldadosEnLineaDeVision()
@@ -111,3 +119,4 @@ namespace Game.Enemy
         }
     }
 }
+

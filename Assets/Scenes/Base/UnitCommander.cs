@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using System.Collections.Generic;
 using Game.Squad;
@@ -9,87 +12,78 @@ public class UnitCommander : MonoBehaviour
 
     private void Start()
     {
-        if (GEN_Inputs.Instance != null)
-        {
-            GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
-        }
+        SuscribirseAOrdenDirecta();
+
+        if (units == null || units.Count == 0)
+            Debug.LogWarning("[UnitCommander] Lista 'units' vacía. Asigná J1/J2/J3 en el Inspector: Formacion → UnitCommander → Units.");
     }
 
     private void OnDestroy()
     {
         if (GEN_Inputs.Instance != null)
-        {
             GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
+    }
+
+    private void SuscribirseAOrdenDirecta()
+    {
+        if (GEN_Inputs.Instance == null)
+        {
+            Debug.LogWarning("[UnitCommander] GEN_Inputs.Instance es null en Start. Se reintentará en Update.");
+            return;
         }
+        GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
+        GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
     }
 
     void Update()
     {
         units.RemoveAll(u => u == null);
 
-        // Si el manager de inputs no está disponible, intentar reconectarse
         if (GEN_Inputs.Instance == null) return;
 
-        // Suscripción tardía si no se logró en Start por orden de ejecución
+        // Garantizar suscripción si GEN_Inputs tardó en inicializarse
         GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
         GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
 
-        // 1. Lógica de HOVER
         ProcesarHoverInteraccion();
 
-        // 2. Lógica de CLICKS
         if (GEN_Inputs.Instance.OrdenPresionada) ProcesarOrden();
 
         if (GEN_Inputs.Instance.RegresarAFormacion)
         {
             foreach (var unit in units)
-            {
-                if (unit != null) unit.RegresarAFormacion();
-            }
+                unit?.RegresarAFormacion();
         }
     }
 
     void ProcesarHoverInteraccion()
     {
-        if (GEN_Inputs.Instance == null || Camera.main == null) return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        int layerMask = 1 << 11; // Solo Capa 11: Interactuables
+        Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
+        Collider2D col2D = Physics2D.OverlapPoint(mousePos, 1 << 11);
+        if (col2D == null) return;
 
-        if (Physics.Raycast(ray, out hit, 100f, layerMask))
-        {
-            IInteractable interactuable = hit.collider.GetComponent<IInteractable>();
-            if (interactuable != null)
-            {
-                SoldierController cercano = GetSoldadoMasCercano(hit.point);
-                if (cercano != null)
-                {
-                    UnitPathRenderer pathVisual = cercano.GetComponent<UnitPathRenderer>();
-                    if (pathVisual != null)
-                    {
-                        pathVisual.SetPreviewTarget(hit.collider.transform.position);
-                    }
-                }
-            }
-        }
+        IInteractable interactuable = col2D.GetComponent<IInteractable>();
+        if (interactuable == null) return;
+
+        SoldierController cercano = GetSoldadoMasCercano(mousePos);
+        cercano?.GetComponent<UnitPathRenderer>()?.SetPreviewTarget(col2D.transform.position);
     }
 
     void ProcesarOrden()
     {
-        if (GEN_Inputs.Instance == null || Camera.main == null) return;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
         Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
 
         SoldierController soldado = GetSoldadoMasCercano(mousePos);
         if (soldado == null) return;
 
-        if (Physics.Raycast(ray, out hit, 100f, 1 << 11))
+        // Detección 2D de ítems interactuables (capa 11)
+        Collider2D col2D = Physics2D.OverlapPoint(mousePos, 1 << 11);
+        if (col2D != null)
         {
-            IInteractable interactuable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactuable = col2D.GetComponent<IInteractable>();
             if (interactuable != null)
             {
-                Debug.DrawLine(soldado.transform.position, hit.collider.transform.position, Color.white, 5f);
+                Debug.DrawLine(soldado.transform.position, col2D.transform.position, Color.white, 5f);
                 soldado.SetInteractionOrder(interactuable);
                 return;
             }
@@ -115,7 +109,9 @@ public class UnitCommander : MonoBehaviour
     void DarOrdenDirecta(int indice)
     {
         if (GEN_Inputs.Instance == null) return;
-        if (indice >= units.Count || units[indice] == null || units[indice].currentState == SoldierController.State.Liderando) return;
+        if (indice >= units.Count || units[indice] == null) return;
+        if (units[indice].currentState == SoldierController.State.Liderando) return;
+
         Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
         MoverMarcador(mousePos);
         units[indice].SetOrder(mousePos);
@@ -123,11 +119,8 @@ public class UnitCommander : MonoBehaviour
 
     void MoverMarcador(Vector3 pos)
     {
-        if (targetMarker != null)
-        {
-            targetMarker.position = pos;
-            MarkerAnim anim = targetMarker.GetComponent<MarkerAnim>();
-            if (anim != null) anim.IniciarAnimacion(pos);
-        }
+        if (targetMarker == null) return;
+        targetMarker.position = pos;
+        targetMarker.GetComponent<MarkerAnim>()?.IniciarAnimacion(pos);
     }
 }

@@ -1,3 +1,4 @@
+using USP.Services;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,3 +49,4 @@ public class IndicadorEnemigos : MonoBehaviour
         imagen.rectTransform.anchoredPosition = posicion;
     }
 }
+

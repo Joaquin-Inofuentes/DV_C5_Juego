@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using USP.Entities;
 
 namespace Game.Squad
 {

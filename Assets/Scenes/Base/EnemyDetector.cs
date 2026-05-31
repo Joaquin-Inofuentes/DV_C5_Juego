@@ -1,3 +1,6 @@
+using USP.Entities;
+using USP.Core;
+using USP.Services;
 using UnityEngine;
 using System.Collections.Generic;
 using Game.Squad;
@@ -76,3 +79,4 @@ public class EnemyDetector : MonoBehaviour
         enemiesInRange.Remove(other.transform);
     }
 }
+

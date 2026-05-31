@@ -1,3 +1,5 @@
+using USP.Entities;
+using USP.Core;
 using UnityEngine;
 using Game.MVC;
 
@@ -28,16 +30,16 @@ public class PickUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Detectar si el que colisiona es un soldado (tiene SoldierController)
-        Game.Squad.SoldierController soldado = collision.GetComponent<Game.Squad.SoldierController>();
+        SoldierController soldado = collision.GetComponent<SoldierController>();
         if (soldado != null && soldado.model != null && !soldado.model.IsDead)
         {
             EfectuarRecogida(soldado);
         }
     }
 
-    private void EfectuarRecogida(Game.Squad.SoldierController soldado)
+    private void EfectuarRecogida(SoldierController soldado)
     {
-        Game.Squad.SoldierModel sModel = soldado.model;
+        SoldierModel sModel = soldado.model;
 
         switch (tipoItem)
         {
@@ -67,3 +69,4 @@ public class PickUp : MonoBehaviour
         Destroy(gameObject);
     }
 }
+
