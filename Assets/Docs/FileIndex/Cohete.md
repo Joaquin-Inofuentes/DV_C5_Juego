@@ -1,7 +1,7 @@
 ﻿# Cohete
 
 - Archivo: $relPath
-- Lineas: 81
+- Lineas: 61
 - Clase(s): Cohete
 
 ## Metodos Publicos Clave

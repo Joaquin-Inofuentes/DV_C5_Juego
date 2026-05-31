@@ -1,7 +1,7 @@
 ﻿# EnemyDetector
 
 - Archivo: $relPath
-- Lineas: 83
+- Lineas: 115
 - Clase(s): EnemyDetector
 
 ## Metodos Publicos Clave

@@ -10,6 +10,8 @@ public class UnitCommander : MonoBehaviour
     public List<SoldierController> units = new List<SoldierController>();
     public Transform targetMarker;
 
+    private bool ordenDirectaSuscrito = false;
+
     private void Start()
     {
         SuscribirseAOrdenDirecta();
@@ -22,10 +24,12 @@ public class UnitCommander : MonoBehaviour
     {
         if (GEN_Inputs.Instance != null)
             GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
+        ordenDirectaSuscrito = false;
     }
 
     private void SuscribirseAOrdenDirecta()
     {
+        if (ordenDirectaSuscrito) return;
         if (GEN_Inputs.Instance == null)
         {
             Debug.LogWarning("[UnitCommander] GEN_Inputs.Instance es null en Start. Se reintentará en Update.");
@@ -33,6 +37,7 @@ public class UnitCommander : MonoBehaviour
         }
         GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
         GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
+        ordenDirectaSuscrito = true;
     }
 
     void Update()
@@ -41,9 +46,8 @@ public class UnitCommander : MonoBehaviour
 
         if (GEN_Inputs.Instance == null) return;
 
-        // Garantizar suscripción si GEN_Inputs tardó en inicializarse
-        GEN_Inputs.Instance.OnOrdenDirecta -= DarOrdenDirecta;
-        GEN_Inputs.Instance.OnOrdenDirecta += DarOrdenDirecta;
+        // Garantizar suscripción solo si aún no se logró (GEN_Inputs pudo tardar en inicializarse)
+        if (!ordenDirectaSuscrito) SuscribirseAOrdenDirecta();
 
         ProcesarHoverInteraccion();
 

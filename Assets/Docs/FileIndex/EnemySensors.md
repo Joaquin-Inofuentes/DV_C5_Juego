@@ -1,7 +1,7 @@
 ﻿# EnemySensors
 
 - Archivo: $relPath
-- Lineas: 123
+- Lineas: 128
 - Clase(s): EnemySensors
 
 ## Metodos Publicos Clave

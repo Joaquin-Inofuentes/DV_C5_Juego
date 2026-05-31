@@ -1,7 +1,7 @@
 ﻿# PersecucionEnemigo
 
 - Archivo: $relPath
-- Lineas: 78
+- Lineas: 79
 - Clase(s): PersecucionEnemigo
 
 ## Metodos Publicos Clave

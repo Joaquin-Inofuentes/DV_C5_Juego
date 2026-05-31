@@ -36,10 +36,4 @@ public class IA_P2_BusEvent_Manager : MonoBehaviour
         OnEnemyFound?.Invoke(enemigo);
         Debug.Log("Se notifico q se encontro al enemigo");
     }
-
-
-    void Update()
-    {
-
-    }
 }

@@ -8,16 +8,10 @@ public class IA_F_ChangeMode : MonoBehaviour
     [Button(nameof(OrdenarAtaque))]
     public IA_P2_AgentIA agentIA;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        if (agentIA == null) return;
+
         if (Input.GetKeyDown(KeyCode.W)
             || Input.GetKeyDown(KeyCode.A)
             || Input.GetKeyDown(KeyCode.S)
@@ -31,36 +25,27 @@ public class IA_F_ChangeMode : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             CambiarDeModo(false);
-            // Obtiene posicion
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                // Mueve el agente a la posicion del click
-                agentIA.GoTo(hit.point);
-                agentIA.LookAtTarget(hit.point);
-            }
+            // Obtiene posicion en el mundo 2D
+            Vector3 clickPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickPoint.z = 0;
+            // Mueve el agente a la posicion del click
+            agentIA.GoTo(clickPoint);
+            agentIA.LookAtTarget(clickPoint);
         }
         if (Input.GetMouseButtonDown(1))
         {
             CambiarDeModo(false);
-            // Obtiene posicion
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                // Mueve el agente a la posicion del click
-                agentIA.LookAtTarget(hit.point);
-            }
+            // Obtiene posicion en el mundo 2D
+            Vector3 clickPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickPoint.z = 0;
+            // Mueve el agente a la posicion del click
+            agentIA.LookAtTarget(clickPoint);
         }
-
-
-
-
     }
-
 
     public void CambiarDeModo()
     {
-        if (agentIA == null )
+        if (agentIA == null)
         {
             Debug.LogWarning("AgentIA o SoldadoJugador no asignados.");
             return;
@@ -77,6 +62,7 @@ public class IA_F_ChangeMode : MonoBehaviour
             Debug.Log("Modo IA activado.");
         }
     }
+    
     public void CambiarDeModo(bool ModoIA)
     {
         if (agentIA == null)
@@ -88,24 +74,18 @@ public class IA_F_ChangeMode : MonoBehaviour
         if (ModoIA)
         {
             agentIA.enabled = false;
-            //Debug.Log("Modo Jugador activado.");
         }
         else
         {
             agentIA.enabled = true;
-            //Debug.Log("Modo IA activado.");
         }
     }
-
-
-
 
     public GameObject objetivoEnemigo;
 
     [ContextMenu("Forzar Ataque Global")]
     public void OrdenarAtaque()
     {
-        // Esto activará a TODOS los agentes que tengan el script IA_P2_FSM
-        IA_P2_BusEvent_Manager.NotificarEncontrado(objetivoEnemigo,"Jugador");
+        IA_P2_BusEvent_Manager.NotificarEncontrado(objetivoEnemigo, "Jugador");
     }
 }

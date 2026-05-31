@@ -27,16 +27,23 @@ public class Puntero_Tanque : MonoBehaviour
     {
         float tiempoTranscurrido = 0f;
         //Debug.Log(1);
+
+        // Cacheamos el transform del jugador una sola vez (evita GameObject.Find cada frame)
+        GameObject jugador = GameObject.Find("Soldado_Jugador");
+        Transform jugadorTransform = jugador != null ? jugador.transform : null;
+
         // El puntero sigue al jugador durante el tiempo establecido
         while (tiempoTranscurrido < tiempoSeguir)
         {
-            transform.position = GameObject.Find("Soldado_Jugador").transform.position;
+            if (jugadorTransform != null)
+                transform.position = jugadorTransform.position;
             tiempoTranscurrido += Time.deltaTime;
             yield return null;
         }
 
-        // Después de 4 segundos, el puntero se destruye
+        // Despuï¿½s de 4 segundos, el puntero se destruye
         Destroy(gameObject); // Destruimos el puntero
-        tanque.PunteroDestruido(); // Notificamos al tanque que el puntero ha terminado su ciclo
+        if (tanque != null)
+            tanque.PunteroDestruido(); // Notificamos al tanque que el puntero ha terminado su ciclo
     }
 }

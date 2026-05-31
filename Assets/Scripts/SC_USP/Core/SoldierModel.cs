@@ -90,6 +90,14 @@ namespace USP.Core
             vidaActual = Mathf.Min(vidaActual + cantidad, vidaMaxima);
         }
 
+        /// <summary>Revive al soldado restaurando su vida y limpiando el estado de muerte.</summary>
+        public void Revivir()
+        {
+            IsDead = false;
+            vidaActual = vidaMaxima;
+            lastDamageTime = Time.time;
+        }
+
         public void AgregarMunicion(int cantidad)
         {
             if (IsDead) return;

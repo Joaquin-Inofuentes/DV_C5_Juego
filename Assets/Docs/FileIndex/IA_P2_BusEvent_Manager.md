@@ -1,7 +1,7 @@
 ﻿# IA_P2_BusEvent_Manager
 
 - Archivo: $relPath
-- Lineas: 46
+- Lineas: 40
 - Clase(s): IA_P2_BusEvent_Manager
 
 ## Metodos Publicos Clave

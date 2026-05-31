@@ -16,27 +16,22 @@ public class Soldado_Anim : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    
-
-    // Variable para rastrear el estado previo de las teclas de movimiento
-    private bool estadoAnteriorTeclasMovimiento = false;
-
     void Update()
     {
         // Obtener los valores de los ejes de movimiento
         float movimientoHorizontal = Input.GetAxis("Horizontal");
         float movimientoVertical = Input.GetAxis("Vertical");
 
-        // Verificar si el jugador está intentando moverse
+        // Verificar si el jugador estï¿½ intentando moverse
         bool estaMoviendose = Mathf.Abs(movimientoHorizontal) > 0.1f || Mathf.Abs(movimientoVertical) > 0.1f;
 
-        // Activar o desactivar animación según el movimiento
+        // Activar o desactivar animaciï¿½n segï¿½n el movimiento
         anim.SetBool("EstaCaminando", estaMoviendose);
 
-        // Acciones adicionales si el jugador está moviéndose
+        // Acciones adicionales si el jugador estï¿½ moviï¿½ndose
         if (estaMoviendose)
         {
-            //Debug.Log("El jugador se está moviendo");
+            //Debug.Log("El jugador se estï¿½ moviendo");
             BD_Audios.ReproducirAudioUnaVez("Caminar");
             //SoldadoReal.SetActive(false);
         }

@@ -1,7 +1,7 @@
 ﻿# GameManager
 
 - Archivo: $relPath
-- Lineas: 186
+- Lineas: 188
 - Clase(s): GameManager
 
 ## Metodos Publicos Clave

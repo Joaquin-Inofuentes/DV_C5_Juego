@@ -1,7 +1,7 @@
 ﻿# Proyectil2
 
 - Archivo: $relPath
-- Lineas: 41
+- Lineas: 35
 - Clase(s): Proyectil2
 
 ## Metodos Publicos Clave

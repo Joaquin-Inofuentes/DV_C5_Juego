@@ -1,7 +1,7 @@
 ﻿# IA_P2_LineOfSight3D
 
 - Archivo: $relPath
-- Lineas: 17
+- Lineas: 14
 - Clase(s): IA_P2_LineOfSight3D
 
 ## Metodos Publicos Clave

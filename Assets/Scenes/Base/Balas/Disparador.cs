@@ -8,10 +8,21 @@ public class Disparador : MonoBehaviour
 
     public void Disparar()
     {
+        if (BalaPool.Instance == null)
+        {
+            BalaPool.Instance = FindFirstObjectByType<BalaPool>();
+        }
+
+        if (BalaPool.Instance == null)
+        {
+            Debug.LogError("[Disparador] ¡Falta el prefab de Bala en BalaPool o BalaPool no está instanciado!");
+            return;
+        }
+
         Bala b = BalaPool.Instance.GetBala();
         if (b == null)
         {
-            Debug.LogError("[Disparador] ¡Falta el prefab de Bala en BalaPool o BalaPool no está instanciado!");
+            Debug.LogError("[Disparador] ¡BalaPool.Instance.GetBala() retornó null!");
             return;
         }
 

@@ -1,7 +1,7 @@
 ﻿# InformacionPersonaje
 
 - Archivo: $relPath
-- Lineas: 213
+- Lineas: 214
 - Clase(s): InformacionPersonaje
 
 ## Metodos Publicos Clave

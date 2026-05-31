@@ -1,7 +1,7 @@
 ﻿# IndicadorEnemigos
 
 - Archivo: $relPath
-- Lineas: 53
+- Lineas: 69
 - Clase(s): IndicadorEnemigos
 
 ## Metodos Publicos Clave

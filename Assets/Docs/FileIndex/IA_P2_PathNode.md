@@ -1,7 +1,7 @@
 ﻿# IA_P2_PathNode
 
 - Archivo: $relPath
-- Lineas: 143
+- Lineas: 145
 - Clase(s): IA_P2_PathNode
 
 ## Metodos Publicos Clave

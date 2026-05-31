@@ -27,11 +27,15 @@ public class Tanque : MonoBehaviour
 
     void Start()
     {
-        jugador = GameObject.Find("Soldado_Jugador").transform; // Asignar al jugador desde la escena
+        GameObject jugadorGO = GameObject.Find("Soldado_Jugador"); // Asignar al jugador desde la escena
+        if (jugadorGO != null) jugador = jugadorGO.transform;
+        else Debug.LogWarning("[Tanque] No se encontrÃ³ 'Soldado_Jugador' en la escena.");
     }
 
     void FixedUpdate()
     {
+        if (jugador == null) return; // Sin jugador no hay nada que perseguir
+
         if (Vector3.Distance(transform.position, jugador.position) > distanciaDeteccion)
         {
             MoverHaciaJugador();
@@ -64,7 +68,7 @@ public class Tanque : MonoBehaviour
 
     void GenerarPuntero()
     {
-        // Generamos el puntero en la posición del jugador
+        // Generamos el puntero en la posiciï¿½n del jugador
         punteroActual = Instantiate(punteroPrefab, jugador.position, Quaternion.identity);
         punteroActual.GetComponent<Puntero_Tanque>().StartCoroutine(punteroActual.GetComponent<Puntero_Tanque>().SeguirJugador());
         puedeGenerarPuntero = false;
@@ -87,7 +91,7 @@ public class Tanque : MonoBehaviour
         }
     }
 
-    // Método para recibir la notificación de que el puntero ha terminado su tiempo
+    // Mï¿½todo para recibir la notificaciï¿½n de que el puntero ha terminado su tiempo
     public void PunteroDestruido()
     {
         puedeGenerarPuntero = true;
@@ -96,7 +100,7 @@ public class Tanque : MonoBehaviour
         Disparar(); // Cambie el nombre de generar a disparar
     }
 
-    // Método para evitar disparar constantemente
+    // Mï¿½todo para evitar disparar constantemente
     public void DesactivarDisparoTemporal()
     {
         puedeDisparar = false;
@@ -113,7 +117,7 @@ public class Tanque : MonoBehaviour
 
 
 
-    // Lista pública para almacenar todos los GameObjects que colisionaron
+    // Lista pï¿½blica para almacenar todos los GameObjects que colisionaron
     public List<GameObject> objetosColisionados = new List<GameObject>();
 
     // Clase para almacenar el GameObject y su distancia
@@ -130,28 +134,28 @@ public class Tanque : MonoBehaviour
         }
     }
 
-    // Lista pública que contiene los objetos colisionados con su distancia
+    // Lista pï¿½blica que contiene los objetos colisionados con su distancia
     public List<ObjetoColisionado> objetosColisionadosConDistancia = new List<ObjetoColisionado>();
 
 
     public bool VerificaSiAhiUnObstaculoEntreTuyElEnemigo(Transform Tanque, Transform soldado)
     {
-        // Dirección del rayo desde el tanque hacia el soldado
+        // Direcciï¿½n del rayo desde el tanque hacia el soldado
         Vector2 direccionDelRayo = (soldado.position - Tanque.position).normalized;
 
-        // Dibujar el rayo en la escena para ver si se está lanzando correctamente, de color blanco
-        //Debug.DrawRay(Tanque.position, direccionDelRayo * 10f, Color.white, 2f); // El rayo durará 2 segundos
+        // Dibujar el rayo en la escena para ver si se estï¿½ lanzando correctamente, de color blanco
+        //Debug.DrawRay(Tanque.position, direccionDelRayo * 10f, Color.white, 2f); // El rayo durarï¿½ 2 segundos
 
         // Realizamos el raycast sin omitir capas (detecta todo)
         RaycastHit2D[] hits = Physics2D.RaycastAll(Tanque.position, direccionDelRayo, Mathf.Infinity);
 
-        // Variables para almacenar el muro y el jugador más cercano
+        // Variables para almacenar el muro y el jugador mï¿½s cercano
         GameObject muroMasCercano = null;
         GameObject jugadorMasCercano = null;
         float distanciaMuro = Mathf.Infinity;
         float distanciaJugador = Mathf.Infinity;
 
-        // Verificar si encontramos alguna colisión
+        // Verificar si encontramos alguna colisiï¿½n
         if (hits.Length > 0)
         {
 
@@ -165,7 +169,7 @@ public class Tanque : MonoBehaviour
                 // Obtener la capa del objeto colisionado
                 string nombreCapa = LayerMask.LayerToName(hit.collider.gameObject.layer);
 
-                // Si es un muro, comprobar si es el más cercano
+                // Si es un muro, comprobar si es el mï¿½s cercano
                 if (nombreCapa == "Muros")
                 {
                     //Debug.Log(3);
@@ -176,7 +180,7 @@ public class Tanque : MonoBehaviour
                         muroMasCercano = hit.collider.gameObject;
                     }
                 }
-                // Si es un jugador, comprobar si es el más cercano
+                // Si es un jugador, comprobar si es el mï¿½s cercano
                 else if (nombreCapa == "Jugador")
                 {
                     float distancia = Vector2.Distance(transform.position, hit.transform.position);
@@ -189,21 +193,21 @@ public class Tanque : MonoBehaviour
                 }
             }
 
-            Debug.Log("Distancia al jugador más cercano: " + distanciaJugador);
+            Debug.Log("Distancia al jugador mï¿½s cercano: " + distanciaJugador);
             // Imprimir las distancias al jugador y al muro
-            Debug.Log("Distancia al muro más cercano: " + distanciaMuro);
+            Debug.Log("Distancia al muro mï¿½s cercano: " + distanciaMuro);
 
-            // Verificar cuál es más cercano y devolver true o false
+            // Verificar cuï¿½l es mï¿½s cercano y devolver true o false
             if (jugadorMasCercano != null && distanciaJugador < distanciaMuro)
             {
-                // El jugador más cercano es más cercano que el muro
-                //Debug.Log("¡Logrado! El jugador está más cerca que el muro.");
+                // El jugador mï¿½s cercano es mï¿½s cercano que el muro
+                //Debug.Log("ï¿½Logrado! El jugador estï¿½ mï¿½s cerca que el muro.");
                 return true;
             }
             else
             {
-                // El muro más cercano está más cerca que el jugador
-                //Debug.Log("No logrado. El muro está más cerca.");
+                // El muro mï¿½s cercano estï¿½ mï¿½s cerca que el jugador
+                //Debug.Log("No logrado. El muro estï¿½ mï¿½s cerca.");
                 return false;
             }
         }

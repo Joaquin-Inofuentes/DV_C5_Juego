@@ -3,6 +3,7 @@ using UnityEngine;
 using Game.Squad;
 using USP.Core;
 using USP.Services;
+using Game.Sensors;
 
 namespace USP.Entities
 {
@@ -13,8 +14,12 @@ namespace USP.Entities
     /// </summary>
     [RequireComponent(typeof(EnemyModel))]
     [RequireComponent(typeof(EnemyView))]
-    public class EnemyController : MonoBehaviour, global::IDaniable
+    public class EnemyController : MonoBehaviour, global::IDaniable, IDetectable
     {
+        // Implementacion de IDetectable
+        public string GetName() => name;
+        public DetectableType GetDetectableType() => DetectableType.Enemigo;
+        public Transform GetTransform() => transform;
         public enum EnemyState { Patrullar, Perseguir, Atacar, Investigar }
 
         [Header("MVC")]
@@ -42,6 +47,7 @@ namespace USP.Entities
         private float patrolTimer;
         private Vector3 patrolTarget;
         private Vector3 lastTargetPos;
+        private GenericDetector detector;
 
         // ─── Lifecycle ────────────────────────────────────────────────
         private void Start()
@@ -56,6 +62,45 @@ namespace USP.Entities
             if (model  == null) Debug.LogError($"[EnemyController] '{name}' falta EnemyModel.");
             if (view   == null) Debug.LogError($"[EnemyController] '{name}' falta EnemyView.");
             if (agent  == null) Debug.LogWarning($"[EnemyController] '{name}' falta IA_P2_AgentIA — no podrá moverse.");
+
+            detector = GetComponentInChildren<GenericDetector>();
+            if (detector != null)
+            {
+                detector.OnTargetDetected += HandleTargetDetected;
+                detector.OnTargetLost += HandleTargetLost;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (detector != null)
+            {
+                detector.OnTargetDetected -= HandleTargetDetected;
+                detector.OnTargetLost -= HandleTargetLost;
+            }
+        }
+
+        private void HandleTargetDetected(IDetectable target)
+        {
+            if (target.GetDetectableType() == DetectableType.Aliado)
+            {
+                AlertarPresenciaSoldado(target.GetTransform());
+            }
+            else if (target.GetDetectableType() == DetectableType.Proyectil)
+            {
+                AlertarRuidoDisparo(target.GetTransform().position);
+            }
+        }
+
+        private void HandleTargetLost(IDetectable target)
+        {
+            if (objetivoActual != null && target.GetTransform() == objetivoActual)
+            {
+                string objName = objetivoActual.name;
+                objetivoActual = null;
+                RegresarAPatrulla();
+                Debug.Log($"<color=red>[EnemyController]</color> <b>{name} dejó de seguir a {objName} por haberlo perdido de vista.</b>");
+            }
         }
 
         private void OnEnable()
@@ -173,12 +218,41 @@ namespace USP.Entities
             }
         }
 
+        public void CambiarEstado(EnemyState nuevoEstado, string razon)
+        {
+            if (model == null)
+            {
+                Debug.LogError($"[EnemyController - {name}] CambiarEstado falló: model es nulo.");
+                return;
+            }
+
+            if (model.IsDead)
+            {
+                Debug.LogWarning($"[EnemyController - {name}] Se intentó cambiar de estado a {nuevoEstado} pero el enemigo está MUERTO. Razón: {razon}");
+                return;
+            }
+
+            if (currentState == nuevoEstado)
+            {
+                Debug.Log($"[EnemyController - {name}] Ya está en estado {nuevoEstado}. Ignorado.");
+                return;
+            }
+
+            currentState = nuevoEstado;
+        }
+
         private void VerificarEntradaRangoAtaque()
         {
-            if (objetivoActual == null) return;
+            if (objetivoActual == null)
+            {
+                Debug.LogWarning($"[EnemyController - {name}] VerificarEntradaRangoAtaque: objetivoActual es nulo.");
+                return;
+            }
             float dist = Vector3.Distance(transform.position, objetivoActual.position);
             if (dist <= 6f)
-                currentState = EnemyState.Atacar;
+            {
+                CambiarEstado(EnemyState.Atacar, "Objetivo entró en rango de ataque (distancia <= 6m)");
+            }
         }
 
         private void ManejarAtaque_Update()
@@ -192,10 +266,13 @@ namespace USP.Entities
 
             if (agent != null && agent.enabled) agent.StopAgent();
 
+            // Dibujar línea roja al objetivo que ataca el enemigo
+            Debug.DrawLine(transform.position, objetivoActual.position, Color.red);
+
             float dist = Vector3.Distance(transform.position, objetivoActual.position);
             if (dist > 7.5f)
             {
-                currentState = EnemyState.Perseguir;
+                CambiarEstado(EnemyState.Perseguir, "Objetivo salió del rango de ataque (distancia > 7.5m)");
             }
             else if (Time.time >= nextFireTime)
             {
@@ -251,7 +328,7 @@ namespace USP.Entities
 
             // 4. Reaccionar: ir a investigar la posición del ruido
             investigarPos = impactPos;
-            currentState  = EnemyState.Investigar;
+            CambiarEstado(EnemyState.Investigar, $"Escuchó disparo cercano de {owner?.name}");
             patrolTimer   = 0f;
         }
 
@@ -280,16 +357,26 @@ namespace USP.Entities
         /// <summary>Alertar al enemigo de la presencia de un soldado (llamado por EnemyDetector).</summary>
         public void AlertarPresenciaSoldado(Transform soldado)
         {
-            if (objetivoActual != null) return; // Ya tiene objetivo
+            if (soldado == null)
+            {
+                Debug.LogWarning($"[EnemyController - {name}] AlertarPresenciaSoldado llamado con un transform nulo.");
+                return;
+            }
+            if (objetivoActual != null)
+            {
+                // Ya tiene un objetivo
+                return;
+            }
             objetivoActual = soldado;
-            currentState   = EnemyState.Perseguir;
+            Debug.Log($"<color=green>[EnemyController]</color> <b>{name} sigue a {soldado.name} por haberlo visto.</b>");
+            CambiarEstado(EnemyState.Perseguir, $"Presencia de soldado detectada: {soldado.name}");
         }
 
         // ─── Helpers ──────────────────────────────────────────────────
 
         private void RegresarAPatrulla()
         {
-            currentState = EnemyState.Patrullar;
+            CambiarEstado(EnemyState.Patrullar, "Objetivo perdido o investigación concluida");
             patrolTarget = ObtenerNuevaPosicionPatrulla();
         }
 
@@ -302,7 +389,17 @@ namespace USP.Entities
         // ─── IDaniable ────────────────────────────────────────────────
         public void RecibirDano(int cantidad, GameObject atacante)
         {
-            if (model == null || model.IsDead) return;
+            if (model == null)
+            {
+                Debug.LogError($"[EnemyController - {name}] RecibirDano falló: model es nulo.");
+                return;
+            }
+
+            if (model.IsDead)
+            {
+                Debug.LogWarning($"[EnemyController - {name}] RecibirDano: El enemigo ya está muerto.");
+                return;
+            }
 
             model.RecibirDano(cantidad);
             view?.TriggerDamageFeedback();
@@ -310,7 +407,7 @@ namespace USP.Entities
             if (atacante != null)
             {
                 objetivoActual = atacante.transform;
-                currentState   = EnemyState.Perseguir;
+                CambiarEstado(EnemyState.Perseguir, $"Atacado por {atacante.name}");
             }
 
             if (model.IsDead) Morir();
@@ -326,11 +423,29 @@ namespace USP.Entities
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Alerta al enemigo de un disparo cercano detectado por EnemySensors.
+        /// Reutiliza la misma lógica de reacción a ruido que <see cref="OnShotNearby"/>:
+        /// solo reacciona si no está ya en combate y si tiene línea de visión hacia el ruido.
+        /// </summary>
         internal void AlertarRuidoDisparo(Vector3 position)
         {
-            // TODO Falta completar
-            Debug.Log($"[EnemyController] '{name}' alertado por ruido de disparo en {position}.");
-            throw new System.NotImplementedException();
+            if (model == null || model.IsDead) return;
+
+            // No interrumpir si ya está en combate activo
+            if (currentState == EnemyState.Atacar || currentState == EnemyState.Perseguir) return;
+
+            // LOS — ignorar el ruido si hay un obstáculo de por medio
+            if (Physics2D.Linecast(transform.position, position, capasLOS))
+            {
+                Debug.Log($"[EnemyController - {name}] Ignoró ruido en {position} debido a obstáculos (LOS bloqueado).");
+                return;
+            }
+
+            // Ir a investigar la posición del ruido
+            investigarPos = position;
+            CambiarEstado(EnemyState.Investigar, "Ruido de disparo detectado por sensores");
+            patrolTimer   = 0f;
         }
     }
 }

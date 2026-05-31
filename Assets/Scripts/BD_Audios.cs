@@ -133,6 +133,13 @@ public class BD_Audios : MonoBehaviour
 
     public static void CargarAudios()
     {
+        // Destruir los GameObjects de audio previos para evitar acumulación infinita
+        // de objetos DontDestroyOnLoad en cada recarga / cambio de escena.
+        foreach (var pair in Sonidos)
+        {
+            if (pair.Value != null)
+                Destroy(pair.Value.gameObject);
+        }
         Sonidos.Clear();
 
         AudioClip[] clips = Resources.LoadAll<AudioClip>("Audios");

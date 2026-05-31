@@ -30,9 +30,11 @@ namespace USP.Services
         {
             instance = this;
         }
-        else
+        else if (instance != this)
         {
-            Destroy(instance);
+            // Ya existe un GameManager: destruir este duplicado, no el original
+            Destroy(gameObject);
+            return;
         }
         player = GameObject.Find("Soldado_Jugador");
         ActualizarPuntajeUI();

@@ -1,7 +1,7 @@
 ﻿# Soldado_Anim
 
 - Archivo: $relPath
-- Lineas: 53
+- Lineas: 48
 - Clase(s): Soldado_Anim
 
 ## Metodos Publicos Clave

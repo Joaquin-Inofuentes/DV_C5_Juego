@@ -89,7 +89,8 @@ namespace USP.Core
             yield return new WaitForSeconds(1f);
             tiempoRestanteParaReiniciar--;
         }
-        GameManager.instance.GetComponent<GameManager>().ReiniciarEscena();
+        if (GameManager.instance != null)
+            GameManager.instance.ReiniciarEscena();
     }
 
     public void ReAparecer()

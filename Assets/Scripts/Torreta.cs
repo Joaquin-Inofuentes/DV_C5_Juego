@@ -14,13 +14,16 @@ public class Torreta : MonoBehaviour
     {
         TorretaTransform = transform;
         TorretaPrefab = gameObject;
-        player = GameManager.player.transform;
-        Debug.Log(player);
+        if (GameManager.player != null)
+            player = GameManager.player.transform;
+        else
+            Debug.LogWarning("[Torreta] GameManager.player es null; la torreta no apuntará hasta que exista el jugador.");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
         //Debug.Log(Vector2.Distance(transform.position, player.position));
         if (Vector2.Distance(transform.position, player.position) < Rango)
         {

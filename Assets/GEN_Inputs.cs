@@ -26,8 +26,11 @@ public class GEN_Inputs : MonoBehaviour
 
     public event Action<bool> OnCycleLeader;  // false = Q (izq), true = E (der)
     public event Action<int>  OnOrdenDirecta; // 0/1/2 → teclas 1/2/3
-
-    private void Awake()
+    public void Awake()
+    {
+        OnEnable();
+    }
+    private void OnEnable()
     {
         Instance = this;
 

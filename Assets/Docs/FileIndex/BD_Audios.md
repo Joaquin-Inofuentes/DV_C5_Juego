@@ -1,7 +1,7 @@
 ﻿# BD_Audios
 
 - Archivo: $relPath
-- Lineas: 227
+- Lineas: 234
 - Clase(s): BD_Audios, CoroutineHelper
 
 ## Metodos Publicos Clave

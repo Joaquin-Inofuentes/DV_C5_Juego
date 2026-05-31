@@ -107,7 +107,6 @@ public class Manager_VFX : MonoBehaviour
     public void CargarTodosLosVFX()
     {
         vfxPrefabs.Clear();
-        string relativePath = "Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab";
         string absolutePath = Path.Combine(Application.dataPath, "VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab");
 
         if (!Directory.Exists(absolutePath))

@@ -1,7 +1,7 @@
 ﻿# IA_F_ControllerSeguidor
 
 - Archivo: $relPath
-- Lineas: 90
+- Lineas: 89
 - Clase(s): IA_F_ControllerSeguidor
 
 ## Metodos Publicos Clave

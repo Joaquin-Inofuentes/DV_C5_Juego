@@ -1,7 +1,7 @@
 ﻿# SoldierController
 
 - Archivo: $relPath
-- Lineas: 329
+- Lineas: 450
 - Clase(s): SoldierController
 
 ## Metodos Publicos Clave

@@ -1,11 +1,12 @@
 ﻿# EnemyModel
 
 - Archivo: $relPath
-- Lineas: 90
+- Lineas: 98
 - Clase(s): EnemyModel
 
 ## Metodos Publicos Clave
 - RecibirDano()
+- Revivir()
 - TakeDamage()
 
 ## Eventos

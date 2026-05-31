@@ -1,7 +1,7 @@
 ﻿# CambiarOpacidad
 
 - Archivo: $relPath
-- Lineas: 48
+- Lineas: 46
 - Clase(s): CambiarOpacidad
 
 ## Metodos Publicos Clave

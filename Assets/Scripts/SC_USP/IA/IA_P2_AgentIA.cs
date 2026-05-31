@@ -1,4 +1,4 @@
-﻿using CustomInspector;
+using CustomInspector;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -39,7 +39,8 @@ public class IA_P2_AgentIA : MonoBehaviour
     }
     public void AsignarColor(Color color)
     {
-        gameObject.GetComponent<Renderer>().material.color = color;
+        Renderer rend = GetComponent<Renderer>();
+        if (rend != null) rend.material.color = color;
     }
 
     public void GoToGameobject(GameObject target)
@@ -47,18 +48,49 @@ public class IA_P2_AgentIA : MonoBehaviour
         GoTo(target.transform.position);
     }
 
+    public int GetStateActual(Vector3 targetPosition)
+    {
+        var model = IA_P2_PathfindingModel.Instance;
+        LayerMask obstacleLayer = 0;
+
+        if (model == null)
+        {
+            model = FindObjectOfType<IA_P2_PathfindingModel>();
+        }
+
+        if (model != null)
+        {
+            obstacleLayer = model.obstacleLayer;
+        }
+        else
+        {
+            obstacleLayer = LayerMask.GetMask("Obstacles", "Obstaculos");
+            if (obstacleLayer == 0) obstacleLayer = 1 << 6; // Default a capa 6
+        }
+
+        Vector3 PosAAnalizar = transform.position;
+
+        // Comprobar si hay línea de visión directa
+        var hit = Physics2D.Linecast(PosAAnalizar, targetPosition, obstacleLayer);
+        if (hit.collider == null)
+        {
+            return 1; // Visible
+        }
+
+        return 0; // Bloqueado, requiere A*
+    }
+
     public void GoTo(Vector3 targetPosition, float Offset = 0)
     {
         // 1. VALIDACIÓN DE REPETICIÓN: Si ya vamos a ese destino, no hacer nada.
-        // Esto evita que el currentIndex se resetee a 0 en cada frame.
         if (isMoving && currentPath != null && currentPath.Count > 0)
         {
             float distAlDestinoFinal = Vector3.Distance(currentPath[currentPath.Count - 1], targetPosition);
-            if (distAlDestinoFinal < 0.1f) return; // Ya estamos yendo ahí
+            if (distAlDestinoFinal < 0.1f) return;
         }
 
         int Estado = GetStateActual(targetPosition);
-        if (Estado == 1) // Visible
+        if (Estado == 1) // Visible directo
         {
             currentPath = new List<Vector3> { targetPosition };
             currentIndex = 0;
@@ -66,53 +98,38 @@ public class IA_P2_AgentIA : MonoBehaviour
             return;
         }
 
-        Vector3 Origen = transform.position;
         var model = IA_P2_PathfindingModel.Instance;
-        if (model == null) return;
-
-        LayerMask obstacleLayer = model.obstacleLayer;
-
-        // Pedir camino al manager
-        List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset);
-
-        // Optimizar con Theta (asegúrate que el script Theta también use Vector3 sin aplastar Y)
-        currentPath = IA_F_PathFinding_Theta.OptimizarConTheta(RecorridoAStar, obstacleLayer);
-
-        currentIndex = 0;
-        isMoving = currentPath != null && currentPath.Count > 0;
-    }
-
-    public int GetStateActual(Vector3 targetPosition)
-    {
-        var model = IA_P2_PathfindingModel.Instance;
-
         if (model == null)
         {
             model = FindObjectOfType<IA_P2_PathfindingModel>();
-            if (model == null) return 0;
         }
 
-        Vector3 PosAAnalizar = transform.position;
-        LayerMask obstacleLayer = model.obstacleLayer;
-
-        // 1. Si desde mi posición actual veo al objetivo (en el plano YX)
-        if (!Physics.Linecast(PosAAnalizar, targetPosition, obstacleLayer))
+        if (model == null)
         {
-            return 1; // Camino directo visible
+            // Fallback: Ir directo de todas formas si no hay Pathfinding en escena
+            Debug.LogWarning($"[IA_P2_AgentIA - {name}] No se encontró IA_P2_PathfindingModel en escena. Usando movimiento directo hacia {targetPosition}.");
+            currentPath = new List<Vector3> { targetPosition };
+            currentIndex = 0;
+            isMoving = true;
+            return;
         }
 
-        // 2. Si el último waypoint del camino actual ya ve al nuevo objetivo
-        if (currentPath != null && currentPath.Count >= 2)
+        Vector3 Origen = transform.position;
+        LayerMask obstacleL = model.obstacleLayer;
+
+        List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset);
+        currentPath = IA_F_PathFinding_Theta.OptimizarConTheta(RecorridoAStar, obstacleL);
+
+        currentIndex = 0;
+        isMoving = currentPath != null && currentPath.Count > 0;
+
+        if (!isMoving)
         {
-            Vector3 UltimoWaypoint = currentPath[currentPath.Count - 1];
-
-            if (!Physics.Linecast(UltimoWaypoint, targetPosition, obstacleLayer))
-            {
-                return 2; // Camino visible desde el último waypoint
-            }
+            Debug.LogWarning($"[IA_P2_AgentIA - {name}] No se pudo generar ruta hacia {targetPosition}. Intentando directo.");
+            currentPath = new List<Vector3> { targetPosition };
+            currentIndex = 0;
+            isMoving = true;
         }
-
-        return 0; // El camino no sirve, requiere A* completo
     }
 
     void Update()
@@ -180,10 +197,8 @@ public class IA_P2_AgentIA : MonoBehaviour
         if (currentPath.Count == 1)
             return true;
 
-        if (currentPath == null || currentPath.Count < 2)
-            return false;
-
-        return currentIndex == currentPath.Count;
+        // Estamos en el último tramo cuando el índice apunta al último waypoint (o más allá)
+        return currentIndex >= currentPath.Count - 1;
     }
 
     public void LookAtTarget(Vector3 targetPosition)
@@ -212,29 +227,5 @@ public class IA_P2_AgentIA : MonoBehaviour
 
 
 
-
-    static List<Vector3> OptimizarConTheta(List<Vector3> RecorridoAStar)
-    {
-        // Primero revisa si 
-
-        return null;
-    }
-
-
-    /* Usa esto
-     
-
-IA_P2_LineOfSight3D. public static bool Check(Vector3 from, Vector3 to,LayerMask obstacleLayer)
-    {
-        from.y = 0;
-        to.y = 0;
-        Vector3 dir = to - from;
-        float dist = dir.magnitude;
-
-        return !Physics.Raycast(from, dir.normalized, dist, obstacleLayer);
-    }
-
-
-     */
 
 }

@@ -1,7 +1,7 @@
 ﻿# Tanque
 
 - Archivo: $relPath
-- Lineas: 224
+- Lineas: 228
 - Clase(s): Tanque, ObjetoColisionado
 
 ## Metodos Publicos Clave

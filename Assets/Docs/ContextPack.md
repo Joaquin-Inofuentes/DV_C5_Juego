@@ -53,6 +53,8 @@ graph TD
 ---
 
 ## 4. Riesgos Técnicos y Deuda Identificada
+- **Auditoría 2026-05-31**: Ver [AuditReport_2026-05-31.md](file:///Assets/Docs/AuditReport_2026-05-31.md) para el detalle de 47 correcciones aplicadas (crashes, memory leaks, APIs 3D/2D mal usadas) y la deuda pendiente. Tras las correcciones el proyecto compila limpio (0 errores, 0 warnings).
+- **Interfaz `IDaniable`**: Vive en el namespace **global** (no en `USP.Core`). La implementan `Destruible`, `SoldierController` y `EnemyController`; la consumen los proyectiles vía `GetComponent<IDaniable>()`.
 - **Complejidad de Eventos**: Existen múltiples buses de eventos (`SquadEventBus`, `IA_P2_BusEvent_Manager`, `ShotImpactBus`) que se comunican de forma desacoplada, lo que puede dificultar el seguimiento de bugs en la pila de llamadas.
 - **Doble Lógica de Entrada**: Existe código de MVC antiguo (`Scripts/MVC/`) conviviendo con la estructura USP (`Scripts/SC_USP/`). Deben respetarse los límites de cada arquitectura al hacer cambios.
 - **NavMesh vs Pathfinding**: El movimiento usa tanto NavMesh de Unity (`NavMesh-Square.asset`) como pathfinding customizado Theta* en cuadrícula de nodos (`IA_P2_PathNode`). Cuidado al modificar lógica de movimiento.

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +9,12 @@ public class IA_F_ControllerSeguidor : MonoBehaviour
     public GameObject target; // El objetivo a seguir
     public IA_P2_AgentIA agent; // Referencia al agente para moverlo
     public List<GameObject> Enemigos; // Lista de enemigos para detectar
-    public LayerMask obstacleLayer; // Capa de obstáculos para el raycast
+    public LayerMask obstacleLayer; // Capa de obstculos para el raycast
     public IA_F_EnemyCercanos Cercanos;
     void Update()
     {
+        if (agent == null || Cercanos == null) return;
+
         target = ObtenerEnemigo();
 
         if (Posicion == null) return;
@@ -35,14 +37,10 @@ public class IA_F_ControllerSeguidor : MonoBehaviour
         Enemigos = Cercanos.Colisionados;
 
         List<GameObject> enemigosVisibles = new List<GameObject>();
-        List<int> IndicesAEliminar = new List<int>();
         foreach (var enemigo in Enemigos)
         {
             if (enemigo == null)
-            {
-                IndicesAEliminar.Add(Enemigos.IndexOf(enemigo)); // Guardamos el índice del enemigo destruido para eliminarlo después
                 continue; // Si el enemigo ha sido destruido, lo saltamos
-            }
             Transform PosibleObjetivo = enemigo.transform;
             if (EsVisible(PosibleObjetivo))
             {
@@ -50,18 +48,18 @@ public class IA_F_ControllerSeguidor : MonoBehaviour
                 Debug.DrawLine(enemigo.transform.position, agent.transform.position,Color.blue);
             }
         }
-        // Eliminamos los enemigos destruidos de la lista después de iterar para evitar problemas de modificación durante la iteración
-        foreach (var indice in IndicesAEliminar)
+        // Eliminamos los enemigos destruidos de la lista (recorriendo al revs para no corromper ndices)
+        for (int i = Enemigos.Count - 1; i >= 0; i--)
         {
-            Enemigos.RemoveAt(indice);
+            if (Enemigos[i] == null) Enemigos.RemoveAt(i);
         }
-        // Ordenamos de mas lejos a mas cercano a este
+        // Ordenamos de mas cercano a mas lejos respecto a este agente
         Vector3 PosicionPropia = agent.transform.position;
         enemigosVisibles.Sort((a, b) =>
             Vector3.Distance(PosicionPropia, a.transform.position).CompareTo(
                 Vector3.Distance(PosicionPropia, b.transform.position)));
-        // Seleccionamos el mas cercano
-        GameObject enemigoMasCercano = Enemigos.Count > 0 ? Enemigos[0] : null;
+        // Seleccionamos el visible mas cercano (no la lista sin filtrar)
+        GameObject enemigoMasCercano = enemigosVisibles.Count > 0 ? enemigosVisibles[0] : null;
 
         return enemigoMasCercano;
     }
@@ -70,20 +68,21 @@ public class IA_F_ControllerSeguidor : MonoBehaviour
     {
         Transform PosicionAgente = agent.transform;
 
-        // Dirección desde el agente hacia el posible enemigo
+        // Direccin desde el agente hacia el posible enemigo
         Vector3 direccion = PosibleEnemigo.position - PosicionAgente.position;
 
         // Distancia al posible enemigo
         float distancia = Vector3.Distance(PosicionAgente.position, PosibleEnemigo.position);
 
-        // Realizamos un Raycast para verificar si hay obstáculos entre el agente y el posible enemigo
-        if (!Physics.Raycast(PosicionAgente.position, direccion.normalized, distancia, obstacleLayer))
+        // Realizamos un Raycast2D para verificar si hay obstculos entre el agente y el posible enemigo
+        RaycastHit2D hit = Physics2D.Raycast(PosicionAgente.position, direccion.normalized, distancia, obstacleLayer);
+        if (hit.collider == null)
         {
-            // Si no hay colisión con un obstáculo, el enemigo es visible
+            // Si no hay colisin con un obstculo, el enemigo es visible
             return true;
         }
 
-        // Si hay colisión con un obstáculo, el enemigo no es visible
+        // Si hay colisin con un obstculo, el enemigo no es visible
         return false;
     }
 }

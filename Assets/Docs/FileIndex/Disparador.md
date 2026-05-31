@@ -1,7 +1,7 @@
 ﻿# Disparador
 
 - Archivo: $relPath
-- Lineas: 26
+- Lineas: 37
 - Clase(s): Disparador
 
 ## Metodos Publicos Clave

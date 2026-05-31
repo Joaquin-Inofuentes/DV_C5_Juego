@@ -1,7 +1,7 @@
 ﻿# ControladorTanque
 
 - Archivo: $relPath
-- Lineas: 202
+- Lineas: 216
 - Clase(s): ControladorTanque
 
 ## Metodos Publicos Clave

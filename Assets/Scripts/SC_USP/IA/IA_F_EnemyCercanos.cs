@@ -7,12 +7,12 @@ public class IA_F_EnemyCercanos : MonoBehaviour
 {
     public List<GameObject> Colisionados;
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         Colisionados.Add(collision.gameObject);
     }
 
-    public void OnCollisionExit(Collision collision)
+    public void OnCollisionExit2D(Collision2D collision)
     {
         Colisionados.Remove(collision.gameObject);
     }

@@ -1,7 +1,7 @@
 ﻿# Camara
 
 - Archivo: $relPath
-- Lineas: 22
+- Lineas: 24
 - Clase(s): Camara
 
 ## Metodos Publicos Clave

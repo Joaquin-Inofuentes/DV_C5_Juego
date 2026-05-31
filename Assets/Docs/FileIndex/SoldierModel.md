@@ -1,12 +1,13 @@
 ﻿# SoldierModel
 
 - Archivo: $relPath
-- Lineas: 129
+- Lineas: 137
 - Clase(s): SoldierModel
 
 ## Metodos Publicos Clave
 - RecibirDano()
 - Curar()
+- Revivir()
 - AgregarMunicion()
 - ActivarBoostVelocidadTemporal()
 - PuedeDisparar()

@@ -35,10 +35,22 @@ public class ControladorTanque : MonoBehaviour
     public TextMeshProUGUI texto;
 
 
+    private bool muriendo = false;          // Evita encolar varios Destroy()
+    private bool disparoSolicitado = false; // Click capturado en Update, consumido en FixedUpdate
+
     private void Start()
     {
         // Obt�n el Rigidbody2D del objeto al inicio
         rb2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        // GetMouseButtonDown debe leerse en Update (FixedUpdate puede saltarse frames y perder el click)
+        if (controlActivo && Input.GetMouseButtonDown(0))
+        {
+            disparoSolicitado = true;
+        }
     }
 
     private void MoverTanque()
@@ -116,12 +128,13 @@ public class ControladorTanque : MonoBehaviour
             ApuntarCanon();
         }
 
-        if(vida <= 0)
+        if (vida <= 0 && !muriendo)
         {
+            muriendo = true;
+            EntrarAlTanque entrar = GetComponent<EntrarAlTanque>();
+            if (entrar != null) entrar.SalirDelTanque();
             Destroy(gameObject, 1f);
-            gameObject.GetComponent<EntrarAlTanque>().SalirDelTanque();
         }
-
     }
 
     // M�todo para activar el control del tanque
@@ -147,8 +160,9 @@ public class ControladorTanque : MonoBehaviour
     // M�todo que maneja el disparo del proyectil
     private void DispararProyectil()
     {
-        if (Input.GetMouseButtonDown(0)) // Bot�n izquierdo del rat�n
+        if (disparoSolicitado) // Click capturado en Update
         {
+            disparoSolicitado = false;
             // Crear el proyectil en el punto de disparo
             GameObject bala = Instantiate(proyectilPrefab, puntoDisparo.position, puntoDisparo.rotation);
             

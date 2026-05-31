@@ -81,6 +81,14 @@ namespace USP.Core
             }
         }
 
+        /// <summary>Revive al enemigo restaurando su vida y limpiando el estado de muerte.</summary>
+        public void Revivir()
+        {
+            IsDead = false;
+            vidaActual = vidaMaxima;
+            lastDamageTime = Time.time;
+        }
+
         // IHealth Implementation
         public float CurrentHealth => vidaActual;
         public float MaxHealth => vidaMaxima;

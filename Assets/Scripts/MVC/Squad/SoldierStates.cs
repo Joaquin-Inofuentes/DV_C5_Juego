@@ -100,6 +100,9 @@ namespace Game.Squad
         {
             if (controller.objetivo == null) return;
 
+            // Dibujar línea roja al enemigo que se está atacando
+            Debug.DrawLine(controller.transform.position, controller.objetivo.position, Color.red);
+
             // Mirar al objetivo
             Vector3 diferencia = controller.objetivo.position - controller.transform.position;
             float anguloZ = Mathf.Atan2(diferencia.y, diferencia.x) * Mathf.Rad2Deg;
@@ -266,9 +269,16 @@ namespace Game.Squad
     // ==========================================
     public class HuirDetrasLiderState : ISoldierState
     {
+        // Cache de enemigos refrescado periódicamente para no escanear toda la escena cada frame
+        private GameObject[] _enemiesCache;
+        private float _nextScanTime;
+        private const float ScanInterval = 0.25f;
+
         public void Enter(SoldierController controller)
         {
             if (controller.agent != null) controller.agent.enabled = true;
+            _enemiesCache = null;
+            _nextScanTime = 0f;
             Debug.Log($"[HuirDetrasLiderState] {controller.name} tiene poca vida y huye a cubrirse detrás del líder.");
         }
 
@@ -281,11 +291,15 @@ namespace Game.Squad
                 return;
             }
 
-            // Buscar enemigo más cercano
+            // Buscar enemigo más cercano (refrescando la lista cada ScanInterval segundos)
             GameObject closestEnemy = null;
             float closestDist = float.MaxValue;
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
+            if (_enemiesCache == null || Time.time >= _nextScanTime)
+            {
+                _enemiesCache = GameObject.FindGameObjectsWithTag("Enemy");
+                _nextScanTime = Time.time + ScanInterval;
+            }
+            foreach (GameObject enemy in _enemiesCache)
             {
                 if (enemy != null)
                 {

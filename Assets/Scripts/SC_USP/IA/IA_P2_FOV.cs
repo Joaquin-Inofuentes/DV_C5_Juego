@@ -1,8 +1,10 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor; // Necesario para usar Handles
+#if UNITY_EDITOR
+using UnityEditor; // Necesario para usar Handles (solo en editor, no debe ir en builds)
+#endif
 
 public class IA_P2_FOV : MonoBehaviour
 {
@@ -12,17 +14,17 @@ public class IA_P2_FOV : MonoBehaviour
     public LayerMask visionObstacles;
     public LayerMask targetLayer;
 
-    [Header("Eventos de Detección")]
-    [Tooltip("Se dispara UNA VEZ cuando un objetivo entra en visión.")]
+    [Header("Eventos de DetecciÃ³n")]
+    [Tooltip("Se dispara UNA VEZ cuando un objetivo entra en visiÃ³n.")]
     public Action<GameObject> OnTargetDetected;
-    [Tooltip("Se dispara UNA VEZ cuando un objetivo sale de la visión.")]
+    [Tooltip("Se dispara UNA VEZ cuando un objetivo sale de la visiÃ³n.")]
     public Action<GameObject> OnTargetLost;
 
     [Header("Debug")]
-    [Tooltip("Lista pública de enemigos que están DENTRO del BoxCollider (el trigger).")]
+    [Tooltip("Lista pÃºblica de enemigos que estÃ¡n DENTRO del BoxCollider (el trigger).")]
     public List<GameObject> enemiesInTrigger = new List<GameObject>();
 
-    [Header("Visualización Debug")]
+    [Header("VisualizaciÃ³n Debug")]
     public int resolution = 20;
     public Color fovColor = new Color(0, 1, 0, 0.2f);
     public Color detectionColor = Color.red;
@@ -32,7 +34,7 @@ public class IA_P2_FOV : MonoBehaviour
     private HashSet<GameObject> _currentlyVisibleTargets = new HashSet<GameObject>();
 
 
-    // --- LÓGICA DE DETECCIÓN (NÚCLEO) ---
+    // --- LÃ“GICA DE DETECCIÃ“N (NÃšCLEO) ---
 
     private void Update()
     {
@@ -74,15 +76,15 @@ public class IA_P2_FOV : MonoBehaviour
     {
         Transform targetTransform = target.transform;
 
-        // 1. Chequeos físicos básicos (Distancia, Ángulo y Muros)
+        // 1. Chequeos fÃ­sicos bÃ¡sicos (Distancia, Ãngulo y Muros)
         if (Vector3.Distance(transform.position, targetTransform.position) > viewDistance) return;
         if (!IsInFOV(targetTransform)) return;
         if (!HasLineOfSight(targetTransform)) return;
 
-        // --- LÓGICA DE IDENTIDAD Y EQUIPOS ---
+        // --- LÃ“GICA DE IDENTIDAD Y EQUIPOS ---
 
         GameObject miAgente = transform.parent.gameObject;
-        if (target == miAgente) return; // Se ignora a sí mismo (sin debug para no colapsar la consola sobre sí mismo)
+        if (target == miAgente) return; // Se ignora a sÃ­ mismo (sin debug para no colapsar la consola sobre sÃ­ mismo)
 
         string miNombre = miAgente.name;
         string nombreEnemigo = target.name;
@@ -93,10 +95,10 @@ public class IA_P2_FOV : MonoBehaviour
         bool enemigoEsA = nombreEnemigo.Contains("EQA");
         bool enemigoEsB = nombreEnemigo.Contains("EQB");
 
-        // Determinar qué palabra debería tener el enemigo para que yo lo ataque
+        // Determinar quÃ© palabra deberÃ­a tener el enemigo para que yo lo ataque
         string palabraBuscada = yoSoyA ? "EQB" : (yoSoyB ? "EQA" : "DESCONOCIDO");
 
-        // Condición de ataque: Equipos opuestos
+        // CondiciÃ³n de ataque: Equipos opuestos
         bool sonEnemigos = (yoSoyA && enemigoEsB) || (yoSoyB && enemigoEsA);
 
         if (sonEnemigos)
@@ -110,7 +112,7 @@ public class IA_P2_FOV : MonoBehaviour
                     _visibleTargets.Add(target);
 
                     // DEBUG ATAQUE
-                    Debug.Log($"<color=red>ATAQUE:</color> Se vio a <b>{nombreEnemigo}</b>. Como yo soy <b>{miNombre}</b>, ¡iré por él!");
+                    Debug.Log($"<color=red>ATAQUE:</color> Se vio a <b>{nombreEnemigo}</b>. Como yo soy <b>{miNombre}</b>, Â¡irÃ© por Ã©l!");
 
                     OnTargetDetected?.Invoke(target);
                 }
@@ -118,14 +120,14 @@ public class IA_P2_FOV : MonoBehaviour
         }
         else
         {
-            // DEBUG OMISIÓN CONSTANTE (Se ejecuta cada frame que lo ve)
-            Debug.Log($"Se vio a {nombreEnemigo} con tal nombre. Se omitió por que no contiene {palabraBuscada} en su nombre en su debug. Soy {miNombre}");
+            // OMISIÃ“N: equipo no enemigo. Log comentado para no inundar la consola cada frame.
+            //Debug.Log($"Se vio a {nombreEnemigo} con tal nombre. Se omitiÃ³ por que no contiene {palabraBuscada} en su nombre en su debug. Soy {miNombre}");
         }
     }
 
-    // --- GESTIÓN DE TRIGGERS (MODIFICADA) ---
+    // --- GESTIÃ“N DE TRIGGERS (MODIFICADA) ---
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // 1. Chequeo de Layer
         if (((1 << other.gameObject.layer) & targetLayer) == 0) return;
@@ -133,18 +135,18 @@ public class IA_P2_FOV : MonoBehaviour
         // 2. [CORREGIDO] Obtener el GameObject "Padre" (el que tiene el Rigidbody)
         GameObject enemyRoot = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
 
-        // 3. Ignorarse a sí mismo (si el "Padre" del otro es este mismo objeto)
+        // 3. Ignorarse a sÃ­ mismo (si el "Padre" del otro es este mismo objeto)
         if (enemyRoot == this.gameObject) return;
 
-        // 4. Añadir a la lista (solo si no está ya)
+        // 4. AÃ±adir a la lista (solo si no estÃ¡ ya)
         if (!enemiesInTrigger.Contains(enemyRoot))
         {
             enemiesInTrigger.Add(enemyRoot);
-            //Debug.Log(enemyRoot.name + " entró al trigger.", enemyRoot);
+            //Debug.Log(enemyRoot.name + " entrÃ³ al trigger.", enemyRoot);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         // 1. Chequeo de Layer
         if (((1 << other.gameObject.layer) & targetLayer) == 0) return;
@@ -152,27 +154,27 @@ public class IA_P2_FOV : MonoBehaviour
         // 2. [CORREGIDO] Obtener el GameObject "Padre"
         GameObject enemyRoot = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
 
-        // 3. Quitar de la lista pública
+        // 3. Quitar de la lista pÃºblica
         if (enemiesInTrigger.Remove(enemyRoot))
         {
-            //Debug.Log(enemyRoot.name + " salió del trigger.", enemyRoot);
+            //Debug.Log(enemyRoot.name + " saliÃ³ del trigger.", enemyRoot);
 
-            // 4. Si lo quitamos, comprobar si además estaba en la lista de VISIBLES
+            // 4. Si lo quitamos, comprobar si ademÃ¡s estaba en la lista de VISIBLES
             if (_visibleTargets.Remove(enemyRoot))
             {
                 OnTargetLost?.Invoke(enemyRoot);
-                Debug.Log("Objetivo PERDIDO (Salió del Trigger): " + enemyRoot.name, enemyRoot);
+                Debug.Log("Objetivo PERDIDO (SaliÃ³ del Trigger): " + enemyRoot.name, enemyRoot);
             }
         }
     }
 
-    // --- MÉTODOS DE SOPORTE (Sin cambios) ---
+    // --- MÃ‰TODOS DE SOPORTE (Sin cambios) ---
 
     private bool IsInFOV(Transform target)
     {
         Vector3 dirToTarget = target.position - transform.position;
 
-        // Ignoramos la profundidad Z para el cálculo del ángulo en 2D
+        // Ignoramos la profundidad Z para el cÃ¡lculo del Ã¡ngulo en 2D
         dirToTarget.z = 0;
 
         if (dirToTarget.sqrMagnitude < 0.001f) return false;
@@ -203,25 +205,26 @@ public class IA_P2_FOV : MonoBehaviour
     }
 
 
-    // --- CONFIGURACIÓN DEL EDITOR (Sin cambios) ---
+    // --- CONFIGURACIÃ“N DEL EDITOR (Sin cambios) ---
 
     private void Reset()
     {
-        var col = GetComponent<BoxCollider>();
+        // El FOV usa OnTriggerEnter2D/OnTriggerExit2D, por lo que necesita un collider 2D.
+        var col = GetComponent<BoxCollider2D>();
         if (col == null)
         {
-            col = gameObject.AddComponent<BoxCollider>();
+            col = gameObject.AddComponent<BoxCollider2D>();
         }
         col.isTrigger = true;
-        col.size = new Vector3(viewDistance * 2, viewDistance * 2, viewDistance * 2);
+        col.size = new Vector2(viewDistance * 2, viewDistance * 2);
     }
 
     private void OnValidate()
     {
-        var col = GetComponent<BoxCollider>();
+        var col = GetComponent<BoxCollider2D>();
         if (col != null)
         {
-            col.size = new Vector3(viewDistance * 2, viewDistance * 2, viewDistance * 2);
+            col.size = new Vector2(viewDistance * 2, viewDistance * 2);
         }
     }
 
@@ -232,12 +235,12 @@ public class IA_P2_FOV : MonoBehaviour
 
         Vector3 origin = transform.position;
         // En 2D, el arco debe girar alrededor del eje Z (Vector3.forward)
-        // Y empezar desde la dirección derecha del agente
+        // Y empezar desde la direcciÃ³n derecha del agente
         Vector3 forward = transform.right;
 
         float halfFOV = fovAngle * 0.5f;
 
-        // Rotamos el vector inicial para que el arco esté centrado
+        // Rotamos el vector inicial para que el arco estÃ© centrado
         Quaternion leftRayRotation = Quaternion.AngleAxis(-halfFOV, Vector3.forward);
         Vector3 fromDirection = leftRayRotation * forward;
 

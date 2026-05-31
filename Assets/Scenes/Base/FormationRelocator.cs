@@ -12,20 +12,20 @@ public class FormationRelocator : MonoBehaviour
     public float distanciaPreferida = 3.5f;
     public float distanciaMinima = 1.5f;
 
-    // Guardamos los offsets como vectores de dirección fijos
+    // Guardamos los offsets como vectores de direcciï¿½n fijos
     private List<Vector3> direccionesFijasMundo = new List<Vector3>();
 
     void Start()
     {
-        // Al inicio, guardamos la dirección relativa original basándonos en la jerarquía
-        // pero la trataremos como una dirección absoluta en el mundo
+        // Al inicio, guardamos la direcciï¿½n relativa original basï¿½ndonos en la jerarquï¿½a
+        // pero la trataremos como una direcciï¿½n absoluta en el mundo
         foreach (var p in puntosDeFormacion)
         {
-            // Tomamos la posición local y la normalizamos para tener solo la dirección
+            // Tomamos la posiciï¿½n local y la normalizamos para tener solo la direcciï¿½n
             if (p.localPosition.sqrMagnitude > 0.01f)
                 direccionesFijasMundo.Add(p.localPosition.normalized);
             else
-                direccionesFijasMundo.Add(Vector3.back); // Por defecto atrás si está en el centro
+                direccionesFijasMundo.Add(Vector3.back); // Por defecto atrï¿½s si estï¿½ en el centro
         }
     }
 
@@ -33,35 +33,35 @@ public class FormationRelocator : MonoBehaviour
     {
         if (GlobalData.liderActual == null) return;
 
-        // Tomamos solo la POSICION del líder, ignoramos su rotación por completo
+        // Tomamos solo la POSICION del lï¿½der, ignoramos su rotaciï¿½n por completo
         Vector3 posicionLider = GlobalData.liderActual.transform.position;
 
         for (int i = 0; i < puntosDeFormacion.Count; i++)
         {
             if (puntosDeFormacion[i] == null) continue;
 
-            // 1. Calcular la posición ideal usando la dirección FIJA del mundo
-            // Ya no usamos lider.TransformDirection, así que el slot no "gira" con el líder
+            // 1. Calcular la posiciï¿½n ideal usando la direcciï¿½n FIJA del mundo
+            // Ya no usamos lider.TransformDirection, asï¿½ que el slot no "gira" con el lï¿½der
             Vector3 direccionMundo = direccionesFijasMundo[i];
             Vector3 posicionIdeal = posicionLider + (direccionMundo * distanciaPreferida);
 
-            // 2. Ejecutar Lógica de Reubicación si hay obstáculos
+            // 2. Ejecutar Lï¿½gica de Reubicaciï¿½n si hay obstï¿½culos
             Vector3 posicionFinal = CalcularPosicionValida(posicionLider, posicionIdeal, direccionMundo);
 
-            // 3. Mover el punto de formación suavemente a la posición calculada
+            // 3. Mover el punto de formaciï¿½n suavemente a la posiciï¿½n calculada
             puntosDeFormacion[i].position = Vector3.Lerp(puntosDeFormacion[i].position, posicionFinal, Time.deltaTime * 8f);
 
-            // DEBUG: Línea blanca que siempre mantiene la misma orientación cardinal
+            // DEBUG: Lï¿½nea blanca que siempre mantiene la misma orientaciï¿½n cardinal
             Debug.DrawLine(posicionLider, puntosDeFormacion[i].position, Color.white);
         }
     }
 
     Vector3 CalcularPosicionValida(Vector3 origenLider, Vector3 destinoIdeal, Vector3 direccionOriginal)
     {
-        // PRUEBA 1: ¿La posición ideal está despejada?
+        // PRUEBA 1: ï¿½La posiciï¿½n ideal estï¿½ despejada?
         if (EsPosicionValida(origenLider, destinoIdeal)) return destinoIdeal;
 
-        // PRUEBA 2: Intentar rotando la dirección original 90 grados (Derecha absoluta)
+        // PRUEBA 2: Intentar rotando la direcciï¿½n original 90 grados (Derecha absoluta)
         Vector3 dirDerecha = Quaternion.Euler(0, 0, -90) * direccionOriginal;
         Vector3 posDerecha = origenLider + (dirDerecha * distanciaPreferida);
         if (EsPosicionValida(origenLider, posDerecha)) return posDerecha;
@@ -76,7 +76,7 @@ public class FormationRelocator : MonoBehaviour
         Vector3 posIzquierda = origenLider + (dirIzquierda * distanciaPreferida);
         if (EsPosicionValida(origenLider, posIzquierda)) return posIzquierda;
 
-        // FALLBACK: Si todo está rodeado de paredes, pegarse al líder en la dirección original
+        // FALLBACK: Si todo estï¿½ rodeado de paredes, pegarse al lï¿½der en la direcciï¿½n original
         return origenLider + (direccionOriginal * distanciaMinima);
     }
 
@@ -85,9 +85,9 @@ public class FormationRelocator : MonoBehaviour
         Vector3 dir = destino - origen;
         float dist = dir.magnitude;
 
-        // Raycast circular (SphereCast) para asegurar que el soldado quepa por el camino
-        RaycastHit hit;
-        if (Physics.SphereCast(origen, radioSeguridadSoldado, dir.normalized, out hit, dist, obstacleLayer))
+        // CircleCast 2D (el juego es 2D) para asegurar que el soldado quepa por el camino
+        RaycastHit2D hit = Physics2D.CircleCast(origen, radioSeguridadSoldado, dir.normalized, dist, obstacleLayer);
+        if (hit.collider != null)
         {
             return false;
         }

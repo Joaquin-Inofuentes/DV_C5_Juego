@@ -1,7 +1,7 @@
 ﻿# IA_P2_FSM
 
 - Archivo: $relPath
-- Lineas: 233
+- Lineas: 254
 - Clase(s): IA_P2_FSM
 
 ## Metodos Publicos Clave

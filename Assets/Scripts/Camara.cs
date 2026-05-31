@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camara : MonoBehaviour
 {
-    [SerializeField] Transform target; //El jugador, es el "objetivo" de la cámara
+    [SerializeField] Transform target; //El jugador, es el "objetivo" de la cï¿½mara
     [SerializeField] float offset;
     [SerializeField] float smoothSpeed;
 
@@ -14,6 +14,8 @@ public class Camara : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if (target == null) return; // El objetivo pudo ser destruido (ej. soldado muerto)
+
         Vector3 targetPos = new Vector3(target.position.x, target.position.y, transform.position.z) + target.up * offset;
 
         transform.position = Vector3.Lerp(transform.position, targetPos, smoothSpeed * Time.deltaTime);

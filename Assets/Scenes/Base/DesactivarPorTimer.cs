@@ -9,7 +9,12 @@ public class DesactivarPorTimer : MonoBehaviour
         Invoke(nameof(Desactivar), 2f);
     }
 
-    // Update is called once per frame
+    private void OnDisable()
+    {
+        // Cancelar el Invoke pendiente para que no se acumulen al reactivar el objeto
+        CancelInvoke(nameof(Desactivar));
+    }
+
     void Desactivar()
     {
         gameObject.SetActive(false);

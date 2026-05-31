@@ -58,28 +58,31 @@ namespace USP.Core
             }
         }
 
-        public string GetWeaponName() => tiposDeArmas[NumeroDeArmaActual];
-        public float GetCurrentWeaponDamage() => danoArmas[NumeroDeArmaActual];
-        public float GetCurrentWeaponCadence() => cadenciaArmas[NumeroDeArmaActual];
-        public bool IsCurrentWeaponAutomatic() => armasAutomáticas[NumeroDeArmaActual];
-        public int GetCurrentWeaponMaxMag() => cargadorMaximo[NumeroDeArmaActual];
+        /// <summary>Índice del arma acotado al rango válido de cada array para evitar IndexOutOfRange.</summary>
+        private int Idx(System.Array arr) => arr == null || arr.Length == 0 ? 0 : Mathf.Clamp(NumeroDeArmaActual, 0, arr.Length - 1);
+
+        public string GetWeaponName() => tiposDeArmas[Idx(tiposDeArmas)];
+        public float GetCurrentWeaponDamage() => danoArmas[Idx(danoArmas)];
+        public float GetCurrentWeaponCadence() => cadenciaArmas[Idx(cadenciaArmas)];
+        public bool IsCurrentWeaponAutomatic() => armasAutomáticas[Idx(armasAutomáticas)];
+        public int GetCurrentWeaponMaxMag() => cargadorMaximo[Idx(cargadorMaximo)];
 
         public int BalasActuales
         {
-            get => balasEnCargador[NumeroDeArmaActual];
+            get => balasEnCargador[Idx(balasEnCargador)];
             set
             {
-                balasEnCargador[NumeroDeArmaActual] = value;
+                balasEnCargador[Idx(balasEnCargador)] = value;
                 OnAmmoUpdated?.Invoke();
             }
         }
 
         public int ReservaActual
         {
-            get => reservaTotal[NumeroDeArmaActual];
+            get => reservaTotal[Idx(reservaTotal)];
             set
             {
-                reservaTotal[NumeroDeArmaActual] = value;
+                reservaTotal[Idx(reservaTotal)] = value;
                 OnAmmoUpdated?.Invoke();
             }
         }

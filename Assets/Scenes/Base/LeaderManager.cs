@@ -23,6 +23,7 @@ public class LeaderManager : MonoBehaviour
     public static LeaderManager Instance { get; private set; }
 
     private int liderActualIndex = -1;
+    private bool cycleLeaderSuscrito = false;
 
     private void Awake()
     {
@@ -48,10 +49,12 @@ public class LeaderManager : MonoBehaviour
 
         if (GEN_Inputs.Instance != null)
             GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
+        cycleLeaderSuscrito = false;
     }
 
     private void SuscribirseACycleLeader()
     {
+        if (cycleLeaderSuscrito) return;
         if (GEN_Inputs.Instance == null)
         {
             Debug.LogWarning("[LeaderManager] GEN_Inputs.Instance es null en OnEnable. Se reintentará al final del frame.");
@@ -60,6 +63,7 @@ public class LeaderManager : MonoBehaviour
         // Evitar doble suscripción
         GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
         GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
+        cycleLeaderSuscrito = true;
     }
 
     private System.Collections.IEnumerator InicializarLiderTarde()
@@ -72,12 +76,8 @@ public class LeaderManager : MonoBehaviour
 
     private void Update()
     {
-        // Re-suscribir si GEN_Inputs tardó en inicializarse
-        if (GEN_Inputs.Instance != null)
-        {
-            GEN_Inputs.Instance.OnCycleLeader -= HandleCycleLeaderFromInputs;
-            GEN_Inputs.Instance.OnCycleLeader += HandleCycleLeaderFromInputs;
-        }
+        // Re-suscribir solo si aún no se logró (GEN_Inputs pudo tardar en inicializarse)
+        if (!cycleLeaderSuscrito) SuscribirseACycleLeader();
 
         if (GlobalData.liderActual != null)
             transform.position = GlobalData.liderActual.transform.position;

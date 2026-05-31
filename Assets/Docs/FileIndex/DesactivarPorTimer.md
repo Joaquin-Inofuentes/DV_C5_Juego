@@ -1,7 +1,7 @@
 ﻿# DesactivarPorTimer
 
 - Archivo: $relPath
-- Lineas: 18
+- Lineas: 23
 - Clase(s): DesactivarPorTimer
 
 ## Metodos Publicos Clave

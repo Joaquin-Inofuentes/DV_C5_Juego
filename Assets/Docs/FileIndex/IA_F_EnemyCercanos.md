@@ -5,8 +5,8 @@
 - Clase(s): IA_F_EnemyCercanos
 
 ## Metodos Publicos Clave
-- OnCollisionEnter()
-- OnCollisionExit()
+- OnCollisionEnter2D()
+- OnCollisionExit2D()
 
 ## Eventos
 - Ninguno detectado

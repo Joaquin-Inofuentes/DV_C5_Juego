@@ -1,7 +1,7 @@
 ﻿# IA_P2_PathfindingManager
 
 - Archivo: $relPath
-- Lineas: 478
+- Lineas: 469
 - Clase(s): IA_P2_PathfindingManager, AStarResult, FinalPathResult, NodeDistance, ThetaStarResult
 
 ## Metodos Publicos Clave

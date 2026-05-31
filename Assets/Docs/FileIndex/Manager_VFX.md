@@ -1,7 +1,7 @@
 ﻿# Manager_VFX
 
 - Archivo: $relPath
-- Lineas: 137
+- Lineas: 136
 - Clase(s): Manager_VFX
 
 ## Metodos Publicos Clave

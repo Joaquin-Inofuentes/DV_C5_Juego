@@ -1,6 +1,8 @@
 ﻿using CustomInspector;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 public class IA_P2_PathNode : MonoBehaviour

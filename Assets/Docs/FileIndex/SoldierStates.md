@@ -1,7 +1,7 @@
 ﻿# SoldierStates
 
 - Archivo: $relPath
-- Lineas: 331
+- Lineas: 345
 - Clase(s): LiderandoState, IrAFormacionState, AtacarState, IrAAtacarState, InvestigarState, IrAObjetivoState, EsperandoState, InteractuandoState, HuirDetrasLiderState
 
 ## Metodos Publicos Clave

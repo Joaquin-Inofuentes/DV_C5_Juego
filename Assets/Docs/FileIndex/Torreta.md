@@ -1,7 +1,7 @@
 ﻿# Torreta
 
 - Archivo: $relPath
-- Lineas: 32
+- Lineas: 35
 - Clase(s): Torreta
 
 ## Metodos Publicos Clave

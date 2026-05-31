@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Squad;
 using USP.Core;
+using Game.Sensors;
 
 namespace USP.Entities
 {
@@ -8,8 +9,12 @@ namespace USP.Entities
     /// Controlador principal del soldado (FSM orientada a Patrón Estado y Control Manual).
     /// Implementa IDaniable para integrarse con colisiones de proyectiles.
     /// </summary>
-    public class SoldierController : MonoBehaviour, global::IDaniable
+    public class SoldierController : MonoBehaviour, global::IDaniable, IDetectable
     {
+        // Implementacion de IDetectable
+        public string GetName() => name;
+        public DetectableType GetDetectableType() => DetectableType.Aliado;
+        public Transform GetTransform() => transform;
         // Enlace al estado del FSM anterior por retrocompatibilidad con scripts externos
         public enum State 
         { 
@@ -56,11 +61,64 @@ namespace USP.Entities
         public SpriteRenderer feedbackRenderer;
         private float blinkTimer = 0f;
 
+        private GenericDetector detector;
         // Implementación del Patrón Estado (SOLID)
         private ISoldierState stateLogic;
 
+        private void OnEnable()
+        {
+            SquadEventBus.OnSoldierDamaged += AyudarCompanero;
+        }
+
+        private void OnDisable()
+        {
+            SquadEventBus.OnSoldierDamaged -= AyudarCompanero;
+        }
+
+        private void AyudarCompanero(SoldierController herido, float damage, GameObject atacante)
+        {
+            if (herido == this) return;
+            if (model == null || model.IsDead) return;
+            if (currentState == State.Liderando) return; // Si es el líder actual no toma decisiones de IA
+
+            if (atacante != null)
+            {
+                // Si el herido es el liderActual, ayudamos con máxima prioridad
+                if (herido == GlobalData.liderActual)
+                {
+                    objetivo = atacante.transform;
+                    investigarPos = null;
+                    tieneOrdenManual = false;
+                    waitTimer = 0f;
+                    if (Vector3.Distance(transform.position, atacante.transform.position) <= distanciaPersecucion)
+                    {
+                        CambiarEstado(new IrAAtacarState());
+                    }
+                }
+                // Si es otro soldado, ayudamos si no tenemos objetivo actual y está dentro del rango
+                else if (objetivo == null)
+                {
+                    objetivo = atacante.transform;
+                    investigarPos = null;
+                    tieneOrdenManual = false;
+                    waitTimer = 0f;
+                    if (Vector3.Distance(transform.position, atacante.transform.position) <= distanciaPersecucion)
+                    {
+                        CambiarEstado(new IrAAtacarState());
+                    }
+                }
+            }
+        }
+
         private void Start()
         {
+            if (CompareTag("Enemy") || name.Contains("Enemy") || name.Contains("Enemigo") || name.StartsWith("E") && char.IsDigit(name, 1))
+            {
+                Debug.LogError($"[SoldierController - {name}] ¡ADVERTENCIA CRÍTICA! Este componente está en un objeto marcado como ENEMIGO ({name}). Desactivando SoldierController.");
+                enabled = false;
+                return;
+            }
+
             ValidarReferencias();
 
             // Configurar estado inicial
@@ -76,16 +134,40 @@ namespace USP.Entities
 
         private void ValidarReferencias()
         {
+            // Validar referencias cruzadas (si apuntan a otro personaje/root, limpiarlas)
+            if (model != null && model.transform.root != transform.root)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Referencia cruzada detectada en 'model' ({model.name} pertenece a {model.transform.root.name}). Limpiando...");
+                model = null;
+            }
+            if (view != null && view.transform.root != transform.root)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Referencia cruzada detectada en 'view' ({view.name} pertenece a {view.transform.root.name}). Limpiando...");
+                view = null;
+            }
+            if (agent != null && agent.transform.root != transform.root)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Referencia cruzada detectada en 'agent' ({agent.name} pertenece a {agent.transform.root.name}). Limpiando...");
+                agent = null;
+            }
+            if (dispara != null && dispara.transform.root != transform.root)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Referencia cruzada detectada en 'dispara' ({dispara.name} pertenece a {dispara.transform.root.name}). Limpiando...");
+                dispara = null;
+            }
+
             if (model == null) model = GetComponent<SoldierModel>();
             if (view == null) view = GetComponent<SoldierView>();
             if (agent == null) agent = GetComponent<IA_P2_AgentIA>();
             if (dispara == null) dispara = GetComponent<Disparador>();
+            if (dispara == null) dispara = GetComponentInChildren<Disparador>();
 
             if (model == null) Debug.LogError($"[SoldierController] '{name}' falta SoldierModel.");
             if (view == null) Debug.LogError($"[SoldierController] '{name}' falta SoldierView.");
             if (agent == null) Debug.LogError($"[SoldierController] '{name}' falta IA_P2_AgentIA — no podrá navegar.");
             if (dispara == null) Debug.LogError($"[SoldierController] '{name}' falta Disparador — no podrá disparar.");
             if (feedbackRenderer == null) feedbackRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (detector == null) detector = GetComponentInChildren<GenericDetector>();
         }
 
         private void Update()
@@ -112,6 +194,9 @@ namespace USP.Entities
             // Determinar cambios de estado basados en FSM
             DeterminarTransicionEstado();
 
+            // Buscar objetivos a través del detector genérico
+            ActualizarObjetivoDesdeDetector();
+
             // Ejecutar actualización del estado actual
             stateLogic?.Update(this);
         }
@@ -128,7 +213,23 @@ namespace USP.Entities
         /// </summary>
         public void CambiarEstado(ISoldierState nuevoEstado)
         {
-            if (nuevoEstado == null) return;
+            if (nuevoEstado == null)
+            {
+                Debug.LogError($"[SoldierController - {name}] Se intentó cambiar a un estado lógico NULO.");
+                return;
+            }
+
+            if (model != null && model.IsDead)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Se intentó cambiar de estado a {nuevoEstado.GetType().Name} pero el soldado está MUERTO.");
+                return;
+            }
+
+            if (stateLogic != null && stateLogic.GetType() == nuevoEstado.GetType())
+            {
+                // Mismo estado lógico, omitir
+                return;
+            }
 
             stateLogic?.Exit(this);
             stateLogic = nuevoEstado;
@@ -221,10 +322,30 @@ namespace USP.Entities
 
         public void DispararProyectil()
         {
-            if (model != null && model.PuedeDisparar() && dispara != null)
+            if (model == null)
+            {
+                Debug.LogError($"[SoldierController - {name}] DispararProyectil abortado: SoldierModel es NULO.");
+                return;
+            }
+
+            if (dispara == null)
+            {
+                dispara = GetComponentInChildren<Disparador>();
+                if (dispara == null)
+                {
+                    Debug.LogError($"[SoldierController - {name}] DispararProyectil abortado: Disparador es NULO y no se encontró en hijos.");
+                    return;
+                }
+            }
+
+            if (model.PuedeDisparar())
             {
                 dispara.Disparar();
                 model.GastarBala();
+            }
+            else
+            {
+                Debug.LogWarning($"[SoldierController - {name}] Intento de disparo sin munición (balasActuales: {model.balasActuales}).");
             }
         }
 
@@ -290,14 +411,24 @@ namespace USP.Entities
         // --- Interfaz IDaniable ---
         public void RecibirDano(int cantidad, GameObject atacante)
         {
-            if (model == null || model.IsDead) return;
+            if (model == null)
+            {
+                Debug.LogError($"[SoldierController - {name}] RecibirDano falló: model es nulo.");
+                return;
+            }
+
+            if (model.IsDead)
+            {
+                Debug.LogWarning($"[SoldierController - {name}] RecibirDano: El soldado ya está muerto.");
+                return;
+            }
 
             blinkTimer = 0.3f;
             model.RecibirDano(cantidad);
             view?.TriggerDamageFeedback();
 
             // Notificar eventos de daño al EventBus
-            SquadEventBus.TriggerSoldierDamaged(this, cantidad);
+            SquadEventBus.TriggerSoldierDamaged(this, cantidad, atacante);
 
             if (atacante != null && currentState != State.Liderando)
             {
@@ -323,6 +454,47 @@ namespace USP.Entities
             }
 
             Destroy(gameObject);
+        }
+
+        private void ActualizarObjetivoDesdeDetector()
+        {
+            if (detector == null || currentState == State.Liderando) return;
+
+            var visibleTargets = detector.GetVisibleTargets();
+            Transform mejorObjetivo = null;
+            float distanciaCercana = Mathf.Infinity;
+
+            foreach (var target in visibleTargets)
+            {
+                if (target == null || (target as UnityEngine.Object) == null || target.GetDetectableType() != DetectableType.Enemigo) continue;
+                
+                float dist = Vector3.Distance(transform.position, target.GetTransform().position);
+                if (dist < distanciaCercana)
+                {
+                    distanciaCercana = dist;
+                    mejorObjetivo = target.GetTransform();
+                }
+            }
+
+            // Si hay un objetivo a la vista que es un enemigo, lo asignamos como objetivo actual
+            if (mejorObjetivo != null)
+            {
+                if (objetivo != mejorObjetivo)
+                {
+                    Debug.Log($"<color=green>[SoldierController]</color> <b>{name} sigue a {mejorObjetivo.name} por haberlo visto.</b>");
+                    objetivo = mejorObjetivo;
+                }
+            }
+            else
+            {
+                bool teniaObjetivo = (objetivo as object) != null;
+                if (teniaObjetivo)
+                {
+                    string targetName = (objetivo != null) ? objetivo.name : "Destruido";
+                    Debug.Log($"<color=red>[SoldierController]</color> <b>{name} dejó de seguir a {targetName} por haberlo perdido de vista.</b>");
+                    objetivo = null;
+                }
+            }
         }
     }
 }

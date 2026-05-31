@@ -72,9 +72,30 @@ public class IA_P2_FSM : MonoBehaviour
             _currentState.Enter(this);
         }
         Debug.Log("Se inicializo correctamente");
-        NotificacionDeEnemigoVisible.OnTargetDetected += PerseguirEnemigo;
+
+        if (NotificacionDeEnemigoVisible != null)
+        {
+            NotificacionDeEnemigoVisible.OnTargetDetected += PerseguirEnemigo;
+            NotificacionDeEnemigoVisible.OnTargetLost += LoPerdiDeVision;
+        }
+        else
+        {
+            Debug.LogWarning($"[IA_P2_FSM] '{name}' no tiene asignado 'NotificacionDeEnemigoVisible' (IA_P2_FOV). No detectará enemigos por visión.");
+        }
+
         IA_P2_BusEvent_Manager.OnEnemyFound += PerseguirEnemigo;
-        NotificacionDeEnemigoVisible.OnTargetLost += LoPerdiDeVision;
+    }
+
+    void OnDisable()
+    {
+        // Desuscribir para evitar memory leaks y callbacks sobre objetos destruidos
+        if (NotificacionDeEnemigoVisible != null)
+        {
+            NotificacionDeEnemigoVisible.OnTargetDetected -= PerseguirEnemigo;
+            NotificacionDeEnemigoVisible.OnTargetLost -= LoPerdiDeVision;
+        }
+
+        IA_P2_BusEvent_Manager.OnEnemyFound -= PerseguirEnemigo;
     }
 
     public void LoPerdiDeVision(GameObject objetivoPerdido)
@@ -126,7 +147,7 @@ public class IA_P2_FSM : MonoBehaviour
             Debug.LogWarning("IA_P2_FSM: No hay estado activo");
         }
 
-        if (agent.currentPath == null || agent.currentPath.Count == 0)
+        if (agent != null && (agent.currentPath == null || agent.currentPath.Count == 0))
         {
             //TransitionTo(AgentState.ReturningToPatrol);
             //Debug.Log("Intento de vovler a patrolling" + gameObject.name, gameObject);

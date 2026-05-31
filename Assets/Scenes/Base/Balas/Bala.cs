@@ -1,11 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using Game.Sensors;
 
-public class Bala : MonoBehaviour
+public class Bala : MonoBehaviour, IDetectable
 {
     public float damage;
     public GameObject dueno;
     public float velocidad = 20f;
+
+    // Implementacion de IDetectable
+    public string GetName() => dueno != null ? $"Bala de {dueno.name}" : "Bala";
+    public DetectableType GetDetectableType() => DetectableType.Proyectil;
+    public Transform GetTransform() => transform;
 
     [Header("Visuales")]
     public Sprite spriteInicio;
@@ -13,12 +19,15 @@ public class Bala : MonoBehaviour
     public Sprite spriteExplosion;
 
     [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private BoxCollider col; // Usando 3D
+    [SerializeField] private BoxCollider2D col; // Usando 2D
     [SerializeField] private bool explotando;
+
+    // Cache estático del CursorManager para no hacer FindObjectOfType en cada impacto (hot path)
+    private static CursorManager _cursorCache;
 
     void OnEnable()
     {
-        if (col == null) col = GetComponent<BoxCollider>();
+        if (col == null) col = GetComponent<BoxCollider2D>();
 
         explotando = false;
 
@@ -28,7 +37,7 @@ public class Bala : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider (3D). Agregalo en el inspector.");
+            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider2D. Agregalo en el inspector.");
         }
 
         sr.sprite = spriteInicio;
@@ -46,8 +55,9 @@ public class Bala : MonoBehaviour
 
     void CambiarADurante() => sr.sprite = spriteDurante;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.DrawLine(transform.position, transform.forward * 2);
         if (explotando) return;
 
         // Si colisiona con el dueno, o con objetos de la misma capa del dueno, o con otra bala, ignorar
@@ -65,7 +75,8 @@ public class Bala : MonoBehaviour
             // Parpadear cursor si golpea con exito al enemigo
             if (dueno != null && (dueno.CompareTag("Player") || dueno.name.Contains("Soldado")))
             {
-                CursorManager cursor = FindObjectOfType<CursorManager>();
+                if (_cursorCache == null) _cursorCache = FindObjectOfType<CursorManager>();
+                CursorManager cursor = _cursorCache;
                 if (cursor != null)
                 {
                     cursor.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
@@ -120,9 +131,4 @@ public class Bala : MonoBehaviour
         else
             gameObject.SetActive(false);
     }
-}
-
-public interface IDaniable
-{
-    void RecibirDano(int cantidad, GameObject atacante);
 }

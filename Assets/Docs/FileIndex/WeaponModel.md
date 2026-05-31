@@ -1,7 +1,7 @@
 ﻿# WeaponModel
 
 - Archivo: $relPath
-- Lineas: 125
+- Lineas: 128
 - Clase(s): WeaponModel
 
 ## Metodos Publicos Clave

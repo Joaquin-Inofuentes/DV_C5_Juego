@@ -1,7 +1,7 @@
 ﻿# Puntero_Tanque
 
 - Archivo: $relPath
-- Lineas: 42
+- Lineas: 49
 - Clase(s): Puntero_Tanque
 
 ## Metodos Publicos Clave

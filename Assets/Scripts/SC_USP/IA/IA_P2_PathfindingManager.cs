@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq; // Necesario para OrderBy
 
@@ -151,10 +151,6 @@ public static class IA_P2_PathfindingManager
     // --- MÉTODOS A* (No cambian) ---
     // -------------------------------------------------------------------
 
-    static Dictionary<IA_P2_PathNode, float> g_costs = new Dictionary<IA_P2_PathNode, float>();
-    static Dictionary<IA_P2_PathNode, float> f_costs = new Dictionary<IA_P2_PathNode, float>();
-
-    // [RunAStar no cambia]
     static AStarResult RunAStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, Dictionary<IA_P2_PathNode, float> g)
     {
         LayerMask obstacle = IA_P2_PathfindingModel.Instance.obstacleLayer;
@@ -163,9 +159,9 @@ public static class IA_P2_PathfindingManager
         var closed = new HashSet<IA_P2_PathNode>();
         var came = new Dictionary<IA_P2_PathNode, IA_P2_PathNode>();
 
-        var f = f_costs;
-        g_costs.Clear();
-        f.Clear();
+        // Diccionarios locales: evita corrupción de estado si A* se llama de forma reentrante
+        var f = new Dictionary<IA_P2_PathNode, float>();
+        g.Clear();
 
         foreach (var n in IA_P2_PathfindingModel.Instance.allNodes)
         {
@@ -378,7 +374,7 @@ public static class IA_P2_PathfindingManager
     /// <summary>
     /// Calcula un punto lateral para esquivar el objeto
     /// </summary>
-    private static Vector3 CalculateAvoidancePoint(Vector3 from, Vector3 to, RaycastHit hit, LayerMask layer)
+    private static Vector3 CalculateAvoidancePoint(Vector3 from, Vector3 to, RaycastHit2D hit, LayerMask layer)
     {
         Vector3 direction = (to - from).normalized;
 
@@ -386,8 +382,8 @@ public static class IA_P2_PathfindingManager
         Vector3 sideDir = Vector3.Cross(direction, Vector3.forward).normalized;
 
         float sideOffset = 1.3f; // Distancia lateral para esquivar
-        Vector3 posA = hit.point + (sideDir * sideOffset);
-        Vector3 posB = hit.point - (sideDir * sideOffset);
+        Vector3 posA = (Vector3)hit.point + (sideDir * sideOffset);
+        Vector3 posB = (Vector3)hit.point - (sideDir * sideOffset);
 
         // Elegimos el punto que tenga línea de visión despejada hacia el destino
         if (IA_P2_LineOfSight3D.Check(posA, to, layer)) return posA;
@@ -427,18 +423,13 @@ public static class IA_P2_PathfindingManager
 
 
 
-    /// <summary>
-    /// Comprueba si hay camino entre A y B. 
-    /// Si hay un "Obstacule", devuelve una lista con [PuntoEvasion, Destino].
-    /// Si hay un muro real, devuelve null.
-    /// </summary>
     private static List<Vector3> CheckPathWithAvoidance(Vector3 start, Vector3 end, LayerMask layer)
     {
         Vector3 dir = (end - start).normalized;
         float dist = Vector3.Distance(start, end);
-        RaycastHit hit;
+        RaycastHit2D hit = Physics2D.Raycast(start, dir, dist, layer);
 
-        if (Physics.Raycast(start, dir, out hit, dist, layer))
+        if (hit.collider != null)
         {
             GameObject obj = hit.collider.gameObject;
 

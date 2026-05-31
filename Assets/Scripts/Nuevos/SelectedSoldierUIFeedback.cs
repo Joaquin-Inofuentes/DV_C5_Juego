@@ -32,7 +32,7 @@ public class SelectedSoldierUIFeedback : MonoBehaviour
         SquadEventBus.OnSoldierDamaged -= HandleSoldierDamaged;
     }
 
-    private void HandleSoldierDamaged(SoldierController soldier, float damage)
+    private void HandleSoldierDamaged(SoldierController soldier, float damage, GameObject attacker)
     {
         // Si el soldado herido es el líder seleccionado actual (GlobalData.liderActual)
         if (soldier != null && soldier == GlobalData.liderActual)

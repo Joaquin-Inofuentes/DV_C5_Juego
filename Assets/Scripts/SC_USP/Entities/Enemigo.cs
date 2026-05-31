@@ -29,13 +29,15 @@ public class Enemigo : MonoBehaviour
     public float tiempoEntreDisparos = 2f; // Tiempo entre disparos
     public float temporizadorDisparo = 0f; // Contador para el disparo
 
-    
+    private bool muriendo = false; // Evita disparar Morir() / Destroy() varias veces
+
     private void Start()
     {
         // Validar que las referencias necesarias est�n asignadas
         if (objetivo == null)
         {
-            objetivo = GameObject.Find("Soldado_Jugador").transform;
+            GameObject jugador = GameObject.Find("Soldado_Jugador");
+            if (jugador != null) objetivo = jugador.transform;
         }
 
         // Obtener la referencia al GameManager
@@ -47,9 +49,14 @@ public class Enemigo : MonoBehaviour
 
     private void Update()
     {
+        if (muriendo) return;
+
         if (objetivo == null)
         {
-            objetivo = GameObject.Find("Soldado_Jugador").transform;
+            GameObject jugador = GameObject.Find("Soldado_Jugador");
+            if (jugador != null) objetivo = jugador.transform;
+            // Sin objetivo no se puede apuntar ni disparar; esperamos al siguiente frame
+            if (objetivo == null) return;
         }
 
         // Actualiza el temporizador de disparo
@@ -74,13 +81,8 @@ public class Enemigo : MonoBehaviour
         if (vidaActual <= 0)
         {
             Debug.Log("Eliminado");
-            //<<<<<<< HEAD
-            GameObject.Destroy(gameObject);
-
             if (DialogoEnemigo != null) DialogoEnemigo.text = $"AAAAHHH !";
-            //=======
-            Morir();
-            //>>>>>>> 82baa7e99e94ff59a79ca76c907c8c2b9c2bd736
+            Morir(); // Suma puntos y destruye el objeto (una sola vez via 'muriendo')
         }
     }
 
@@ -175,6 +177,9 @@ public class Enemigo : MonoBehaviour
     /// </summary>
     void Morir()
     {
+        if (muriendo) return; // Ya está en proceso de muerte
+        muriendo = true;
+
         if (gameManager != null)
         {
             gameManager.AñadirPuntos(puntosPorEliminar);

@@ -1,11 +1,11 @@
 ﻿# GEN_Inputs
 
 - Archivo: $relPath
-- Lineas: 98
+- Lineas: 101
 - Clase(s): GEN_Inputs
 
 ## Metodos Publicos Clave
-- Ninguno detectado
+- Awake()
 
 ## Eventos
 - OnCycleLeader

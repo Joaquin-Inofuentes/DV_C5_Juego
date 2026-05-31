@@ -9,23 +9,25 @@ graph TD    MVC_Base[MVC_Base (7 scripts)]
     MVC_Squad[MVC_Squad (3 scripts)]
     MVC_Enemy[MVC_Enemy (1 scripts)]
     CambioDeSoldado[CambioDeSoldado (3 scripts)]
-    SC_USP_Core[SC_USP_Core (6 scripts)]
+    SC_USP_Core[SC_USP_Core (7 scripts)]
     SC_USP_Entities[SC_USP_Entities (11 scripts)]
     SC_USP_IA[SC_USP_IA (16 scripts)]
     SC_USP_Weapons[SC_USP_Weapons (5 scripts)]
     SC_USP_Services[SC_USP_Services (8 scripts)]
     SC_USP_UI[SC_USP_UI (2 scripts)]
     Scenes_Base[Scenes_Base (29 scripts)]
-    Root_Scripts[Root_Scripts (17 scripts)]
+    Root_Scripts[Root_Scripts (19 scripts)]
     CambioDeSoldado --> Scenes_Base
     MVC_Base --> SC_USP_Core
     MVC_Base --> SC_USP_Entities
     MVC_Base --> SC_USP_Weapons
+    MVC_Enemy --> Root_Scripts
     MVC_Enemy --> SC_USP_Entities
     MVC_Enemy --> Scenes_Base
     MVC_Squad --> Root_Scripts
     MVC_Squad --> SC_USP_Entities
     MVC_Squad --> Scenes_Base
+    Root_Scripts --> MVC_Enemy
     Root_Scripts --> MVC_Squad
     Root_Scripts --> SC_USP_Core
     Root_Scripts --> SC_USP_Entities
@@ -36,7 +38,9 @@ graph TD    MVC_Base[MVC_Base (7 scripts)]
     SC_USP_Core --> SC_USP_Entities
     SC_USP_Core --> SC_USP_Services
     SC_USP_Core --> SC_USP_Weapons
+    SC_USP_Core --> Scenes_Base
     SC_USP_Entities --> MVC_Base
+    SC_USP_Entities --> MVC_Enemy
     SC_USP_Entities --> MVC_Squad
     SC_USP_Entities --> Root_Scripts
     SC_USP_Entities --> SC_USP_Core
@@ -105,10 +109,11 @@ graph TD    MVC_Base[MVC_Base (7 scripts)]
 
 ### SC_USP_Core
 - **Ruta de busqueda**: ``Scripts/SC_USP/Core``
-- **Cantidad de scripts**: 6
+- **Cantidad de scripts**: 7
 - **Scripts**:
   - [CharacterModel](file:///Assets/Docs/FileIndex/CharacterModel.md)
   - [EnemyModel](file:///Assets/Docs/FileIndex/EnemyModel.md)
+  - [IDaniable](file:///Assets/Docs/FileIndex/IDaniable.md)
   - [InformacionPersonaje](file:///Assets/Docs/FileIndex/InformacionPersonaje.md)
   - [Interfaces](file:///Assets/Docs/FileIndex/Interfaces.md)
   - [SoldierModel](file:///Assets/Docs/FileIndex/SoldierModel.md)
@@ -217,7 +222,7 @@ graph TD    MVC_Base[MVC_Base (7 scripts)]
 
 ### Root_Scripts
 - **Ruta de busqueda**: ``Scripts/(?![MVC|SC_USP|CambioDeSoldado|Nuevos])``
-- **Cantidad de scripts**: 17
+- **Cantidad de scripts**: 19
 - **Scripts**:
   - [BD_Audios](file:///Assets/Docs/FileIndex/BD_Audios.md)
   - [Camara](file:///Assets/Docs/FileIndex/Camara.md)
@@ -229,8 +234,10 @@ graph TD    MVC_Base[MVC_Base (7 scripts)]
   - [IndicadorEnemigos](file:///Assets/Docs/FileIndex/IndicadorEnemigos.md)
   - [MenuVictoria](file:///Assets/Docs/FileIndex/MenuVictoria.md)
   - [Obstaculo](file:///Assets/Docs/FileIndex/Obstaculo.md)
+  - [Physics2DMigrator](file:///Assets/Docs/FileIndex/Physics2DMigrator.md)
   - [PickUp](file:///Assets/Docs/FileIndex/PickUp.md)
   - [Prueba_de_color](file:///Assets/Docs/FileIndex/Prueba_de_color.md)
+  - [SceneFixer](file:///Assets/Docs/FileIndex/SceneFixer.md)
   - [SelectedSoldierUIFeedback](file:///Assets/Docs/FileIndex/SelectedSoldierUIFeedback.md)
   - [SenalisacionAEnemigos](file:///Assets/Docs/FileIndex/SenalisacionAEnemigos.md)
   - [SistemaPuntaje](file:///Assets/Docs/FileIndex/SistemaPuntaje.md)

@@ -1,7 +1,7 @@
 ﻿# IA_F_ChangeMode
 
 - Archivo: $relPath
-- Lineas: 112
+- Lineas: 92
 - Clase(s): IA_F_ChangeMode
 
 ## Metodos Publicos Clave

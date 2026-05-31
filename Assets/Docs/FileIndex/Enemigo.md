@@ -1,7 +1,7 @@
 ﻿# Enemigo
 
 - Archivo: $relPath
-- Lineas: 231
+- Lineas: 236
 - Clase(s): Enemigo
 
 ## Metodos Publicos Clave

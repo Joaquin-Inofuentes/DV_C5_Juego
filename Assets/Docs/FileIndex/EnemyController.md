@@ -1,10 +1,11 @@
 ﻿# EnemyController
 
 - Archivo: $relPath
-- Lineas: 337
+- Lineas: 406
 - Clase(s): EnemyController
 
 ## Metodos Publicos Clave
+- CambiarEstado()
 - AlertarPresenciaSoldado()
 - RecibirDano()
 
