@@ -106,7 +106,7 @@ MonoBehaviour:
   spriteDurante: {fileID: 21300000, guid: d637b1e90a2618c4eb1c5236b3467362, type: 3}
   spriteExplosion: {fileID: 21300000, guid: d637b1e90a2618c4eb1c5236b3467362, type: 3}
   sr: {fileID: 6272677642488049695}
-  col: {fileID: 0}
+  col: {fileID: 7877060559365598705}
   explotando: 0
 --- !u!61 &7877060559365598705
 BoxCollider2D:
