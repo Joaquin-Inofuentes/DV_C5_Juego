@@ -9,7 +9,7 @@ public class LeaderManager : MonoBehaviour
     public List<UnitController> unidades; // Lista unificada
     public int indiceInicial = 0;
 
-    void Awake() => Instance = this;
+    void OnEnable() => Instance = this;
 
     void Start()
     {
