@@ -20,7 +20,7 @@ public class PositionManager : MonoBehaviour
     {
         if (GlobalData.liderActual == null) return;
 
-        // Filtrar: Solo aliados vivos que NO sean el líder actual
+        // Filtrar: Solo aliados vivos que NO sean el lï¿½der actual
         var seguidores = FindObjectsOfType<UnitController>()
             .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
@@ -31,6 +31,8 @@ public class PositionManager : MonoBehaviour
             if (puntoIndex < puntosFormacion.Count)
             {
                 unidad.currentSlot = puntosFormacion[puntoIndex];
+                if (unidad.GetCurrentState() is EsperandoState)
+                    unidad.CambiarEstado(new SeguirFormacionState());
                 puntoIndex++;
             }
         }

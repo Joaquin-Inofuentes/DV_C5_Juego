@@ -17,7 +17,7 @@ namespace Game.Squad
         // Propiedades necesarias para la FSM
         public Transform currentSlot { get; set; } // Reemplaza slotAsignado
         public Transform target;
-        public Vector3 targetPos; // Para órdenes manuales
+        public Vector3 targetPos; // Para ï¿½rdenes manuales
 
         private GenericDetector detector;
         private float nextFireTime;
@@ -34,6 +34,12 @@ namespace Game.Squad
             if (!agent) agent = GetComponent<IA_P2_AgentIA>();
             if (!shooter) shooter = GetComponentInChildren<Disparador>();
             detector = GetComponentInChildren<GenericDetector>();
+        }
+
+        void Start()
+        {
+            if (_currentStateLogic == null)
+                CambiarEstado(new EsperandoState());
         }
 
         // --- FUNCIONES QUE PIDE TU FSM (ERRORES CS1061) ---
@@ -58,12 +64,12 @@ namespace Game.Squad
             target = objetivo;
             agent.StopAgent();
 
-            // Rotación hacia el enemigo
+            // Rotaciï¿½n hacia el enemigo
             Vector3 dir = (objetivo.position - transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 10f);
 
-            // Lógica de disparo con cooldown
+            // Lï¿½gica de disparo con cooldown
             if (Time.time >= nextFireTime && model.CanFire())
             {
                 shooter.Disparar();
@@ -74,7 +80,7 @@ namespace Game.Squad
 
         public bool ReachedDestination()
         {
-            // Si no se está moviendo, llegó.
+            // Si no se estï¿½ moviendo, llegï¿½.
             if (!agent.isMoving) return true;
 
             // Distancia al destino final
@@ -98,7 +104,7 @@ namespace Game.Squad
             return targetPos;
         }
 
-        // --- LÓGICA DE DETECCIÓN Y DAÑO ---
+        // --- Lï¿½GICA DE DETECCIï¿½N Y DAï¿½O ---
 
         private void OnEnable()
         {
@@ -112,11 +118,15 @@ namespace Game.Squad
 
         private void OnTargetDetected(IDetectable entity)
         {
-            // Si el detectado es de otro equipo, marcar como target
             UnitController other = entity.GetTransform().GetComponent<UnitController>();
             if (other != null && other.model.team != this.model.team)
             {
                 target = other.transform;
+                if (!model.IsLeader && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
+                {
+                    float dist = Vector3.Distance(transform.position, target.position);
+                    CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
+                }
             }
         }
 
@@ -127,10 +137,14 @@ namespace Game.Squad
             model.TakeDamage(cantidad, atacante);
             view.TriggerFlash();
 
-            // Si me atacan y no tengo target, me defiendo
             if (atacante != null && target == null)
             {
                 target = atacante.transform;
+                if (!model.IsLeader)
+                {
+                    float dist = Vector3.Distance(transform.position, target.position);
+                    CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
+                }
             }
 
             if (model.IsDead) Morir();
@@ -139,7 +153,7 @@ namespace Game.Squad
         private void Morir()
         {
             agent.StopAgent();
-            // Notificar que morí para liberar el slot si es necesario
+            // Notificar que morï¿½ para liberar el slot si es necesario
             ReleaseSlot();
             Destroy(gameObject, 0.1f);
         }
@@ -149,6 +163,8 @@ namespace Game.Squad
 
         // Dentro de UnitController.cs
         private IUnitState _currentStateLogic;
+
+        public IUnitState GetCurrentState() => _currentStateLogic;
 
         public void CambiarEstado(IUnitState nuevoEstado)
         {

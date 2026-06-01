@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 57095410}
   - component: {fileID: 57095409}
   - component: {fileID: 57095411}
+  - component: {fileID: 57095412}
   m_Layer: 9
   m_Name: J1
   m_TagString: Untagged
@@ -484,6 +485,20 @@ MonoBehaviour:
   shooter: {fileID: 1803416528}
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
+--- !u!114 &57095412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57095388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 100
+  maxVida: 100
 --- !u!114 &67965973 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 869554472676451434, guid: b69a7d409952d284abdf18ea4fd6e029, type: 3}
@@ -1356,7 +1371,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
-  typesToDetect: 0000000003000000
+  typesToDetect: 00000000
   targetsInRangeSerializables: []
 --- !u!58 &311347483
 CircleCollider2D:
@@ -7060,6 +7075,7 @@ GameObject:
   - component: {fileID: 1130887886}
   - component: {fileID: 1130887885}
   - component: {fileID: 1130887884}
+  - component: {fileID: 1130887893}
   m_Layer: 9
   m_Name: J1 (1)
   m_TagString: Untagged
@@ -7360,6 +7376,20 @@ Transform:
   - {fileID: 1502537037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1130887893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130887883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 100
+  maxVida: 100
 --- !u!114 &1145431391 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5171047029912008706, guid: b69a7d409952d284abdf18ea4fd6e029, type: 3}
@@ -10328,6 +10358,7 @@ GameObject:
   - component: {fileID: 2104059027}
   - component: {fileID: 2104059026}
   - component: {fileID: 2104059025}
+  - component: {fileID: 2104059034}
   m_Layer: 9
   m_Name: J1 (2)
   m_TagString: Untagged
@@ -10628,6 +10659,20 @@ Transform:
   - {fileID: 86652979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &2104059034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104059024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fe1471274f7334fb1b89c77bf3010b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 100
+  maxVida: 100
 --- !u!1001 &191080669055961752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10996,15 +11041,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6054500476885571861}
-  - component: {fileID: 4758399470316795584}
   - component: {fileID: 1484505838476981964}
   - component: {fileID: 5317612353570846425}
   - component: {fileID: 1540820647943223224}
   - component: {fileID: 611462217735374207}
   - component: {fileID: 1774939432142303299}
-  - component: {fileID: 8039001184538971772}
-  - component: {fileID: 8039001184538971771}
-  - component: {fileID: 8039001184538971770}
+  - component: {fileID: 6054500476885571864}
+  - component: {fileID: 6054500476885571863}
+  - component: {fileID: 6054500476885571862}
   m_Layer: 3
   m_Name: E1
   m_TagString: Untagged
@@ -11030,19 +11074,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4758399470316795584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943365216068595463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75cec80d75e32d0488f0e929eb1e9710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soldierController: {fileID: 0}
 --- !u!114 &5317612353570846425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11075,7 +11106,7 @@ Transform:
   - {fileID: 311347481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8039001184538971770
+--- !u!114 &6054500476885571862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11084,66 +11115,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 2943365216068595463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406490a223c26334b987e5d2cfb3432b, type: 3}
+  m_Script: {fileID: 11500000, guid: c17dd99de65d7c345b2bab20f3e2e447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 8039001184538971772}
-  view: {fileID: 8039001184538971771}
+  model: {fileID: 6054500476885571863}
+  mainSprite: {fileID: 0}
+  selectionRing: {fileID: 0}
+  barWidth: 60
+  offset: {x: 0, y: 50}
+--- !u!114 &6054500476885571863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943365216068595463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215e5e41e111c504eb470c41187aedca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Unit
+  team: 1
+  isPlayerControlled: 0
+  healthMax: 100
+  healthActual: 100
+  damage: 10
+  fireRate: 0.5
+  ammoActual: 300
+  ammoMax: 300
+  attackRange: 7
+  detectionRange: 12
+  speedPatrol: 3.5
+  speedChase: 5
+--- !u!114 &6054500476885571864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943365216068595463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da541fbd7fc5f0d41a87d1b74eba13cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 6054500476885571863}
+  view: {fileID: 6054500476885571862}
   agent: {fileID: 1484505838476981964}
-  puntoDisparo: {fileID: 8989546572008399044}
-  prefabBala: {fileID: 0}
-  currentState: 0
-  objetivoActual: {fileID: 0}
-  investigarPos: {x: 0, y: 0, z: 0}
-  radioRuidoDisparo: 8
-  capasLOS:
-    m_Bits: 64
-  nextFireTime: 0
-  spawnPoint: {x: 0, y: 0, z: 0}
-  patrolTimer: 0
-  patrolTarget: {x: 0, y: 0, z: 0}
-  lastTargetPos: {x: 0, y: 0, z: 0}
-  detector: {fileID: 0}
---- !u!114 &8039001184538971771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943365216068595463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b373441598e982a4abf68fc36bb86ccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 8039001184538971772}
-  spriteRenderer: {fileID: 0}
-  anchoBarra: 60
-  altoBarra: 6
-  offset: {x: 0, y: 45}
---- !u!114 &8039001184538971772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943365216068595463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8f54e190b3dd04a9c6fa3d1c501bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vidaMaxima: 100
-  vidaActual: 100
-  healRate: 2
-  healDelay: 3
-  dano: 10
-  fireRate: 1.5
-  velocidadBala: 15
-  velocidadPatrulla: 3.5
-  velocidadPersecucion: 5
-  radioDeteccion: 10
-  hasNetworkAuthority: 1
+  shooter: {fileID: 8850087710944625579}
+  target: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &8400138681501748615
 PrefabInstance:
   m_ObjectHideFlags: 0

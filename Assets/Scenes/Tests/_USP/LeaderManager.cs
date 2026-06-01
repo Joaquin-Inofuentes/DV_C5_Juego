@@ -22,7 +22,11 @@ public class LeaderManager : MonoBehaviour
         if (index < 0 || index >= unidades.Count) return;
 
         // Desactivar líder anterior
-        if (GlobalData.liderActual != null) GlobalData.liderActual.model.IsLeader = false;
+        if (GlobalData.liderActual != null)
+        {
+            GlobalData.liderActual.model.IsLeader = false;
+            GlobalData.liderActual.CambiarEstado(new SeguirFormacionState());
+        }
 
         // Asignar nuevo
         GlobalData.liderActual = unidades[index];
@@ -30,6 +34,7 @@ public class LeaderManager : MonoBehaviour
 
         // El líder no sigue a nadie, se mueve por input
         GlobalData.liderActual.ReleaseSlot();
+        GlobalData.liderActual.CambiarEstado(new LiderandoState());
 
         Debug.Log($"<color=yellow>Nuevo Líder: {GlobalData.liderActual.name}</color>");
     }
