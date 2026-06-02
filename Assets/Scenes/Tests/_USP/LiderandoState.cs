@@ -85,6 +85,7 @@ namespace Game.Squad
         {
             if (unit.target == null)
             {
+                unit.ResetHelpPriority();
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }
@@ -123,6 +124,7 @@ namespace Game.Squad
         {
             if (unit.target == null)
             {
+                unit.ResetHelpPriority();
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }

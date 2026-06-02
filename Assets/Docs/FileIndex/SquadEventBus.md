@@ -1,22 +1,22 @@
-﻿# SquadEventBus
+# SquadEventBus
 
-- Archivo: $relPath
-- Lineas: 30
-- Clase(s): SquadEventBus
+- Archivo: Scripts/MVC/Squad/SquadEventBus.cs
+- Lineas: 33
+- Clase(s): SquadEventBus (static)
 
 ## Metodos Publicos Clave
-- TriggerSoldierSwitchRequested()
-- TriggerLeaderChanged()
-- TriggerSoldierDamaged()
-- TriggerSoldierDied()
+- TriggerUnitDamaged(UnitController, float, GameObject)
+- TriggerUnitDied(UnitController)
+- TriggerLeaderChanged(UnitController)
+- TriggerHelpRequested(UnitController victim, Transform attacker, int priority)
 
 ## Eventos
-- OnSoldierSwitchRequested
+- OnUnitDamaged
+- OnUnitDied
 - OnLeaderChanged
-- OnSoldierDamaged
-- OnSoldierDied
+- OnHelpRequested — pedido de ayuda con prioridad (1=líder, 2=aliado)
 
 ## Dependencias (using)
 - System
 - UnityEngine
-- USP.Entities
+- Game.Squad

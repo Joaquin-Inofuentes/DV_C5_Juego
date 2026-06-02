@@ -112,14 +112,49 @@ namespace Game.Squad
 
         // --- L�GICA DE DETECCI�N Y DA�O ---
 
+        /// Prioridad del objetivo actual de ayuda (0 = ninguno, 1 = líder, 2 = aliado)
+        private int _currentHelpPriority = 0;
+
+        /// <summary>Resetea la prioridad de ayuda cuando se vuelve a formación.</summary>
+        public void ResetHelpPriority() => _currentHelpPriority = 0;
+
         private void OnEnable()
         {
             if (detector) detector.OnTargetDetected += OnTargetDetected;
+            SquadEventBus.OnHelpRequested += OnHelpRequested;
         }
 
         private void OnDisable()
         {
             if (detector) detector.OnTargetDetected -= OnTargetDetected;
+            SquadEventBus.OnHelpRequested -= OnHelpRequested;
+        }
+
+        /// <summary>
+        /// Responde a pedidos de ayuda del escuadrón.
+        /// Prioridad 1 (líder) siempre reemplaza prioridad 2 (aliado).
+        /// No se auto-ayuda ni ayuda si está liderando.
+        /// </summary>
+        private void OnHelpRequested(UnitController victim, Transform attacker, int priority)
+        {
+            // No me ayudo a mí mismo, no reacciono si soy el líder, no reacciono si estoy muerto
+            if (victim == this || model.IsLeader || model.IsDead) return;
+            if (attacker == null) return;
+            // Solo aliados del mismo equipo ayudan
+            if (model.team != Game.Core.UnitTeam.PlayerTeam) return;
+
+            // Sistema de prioridad: número menor = más urgente (1=líder, 2=aliado)
+            bool yaEnCombate = _currentStateLogic is AtacarState || _currentStateLogic is PerseguirState;
+
+            // Si ya estoy en combate con algo de igual o mayor prioridad (número menor), ignorar
+            if (yaEnCombate && _currentHelpPriority > 0 && priority >= _currentHelpPriority && target != null && target != attacker)
+                return;
+
+            target = attacker;
+            _currentHelpPriority = priority;
+
+            float dist = Vector3.Distance(transform.position, attacker.position);
+            CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
         }
 
         private void OnTargetDetected(IDetectable entity)
@@ -148,6 +183,15 @@ namespace Game.Squad
             if (atacante != null)
             {
                 target = atacante.transform;
+
+                // Emitir pedido de ayuda al escuadrón via EventBus
+                // Prioridad 1 = líder (yo, el jugador), Prioridad 2 = aliado
+                if (model.team == Game.Core.UnitTeam.PlayerTeam)
+                {
+                    int prioridad = model.IsLeader ? 1 : 2;
+                    SquadEventBus.TriggerHelpRequested(this, atacante.transform, prioridad);
+                }
+
                 if (!model.IsLeader && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
