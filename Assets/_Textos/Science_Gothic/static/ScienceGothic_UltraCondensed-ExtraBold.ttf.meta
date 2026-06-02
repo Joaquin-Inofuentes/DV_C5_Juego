@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: f91b01a68edabc34db0db56548c35276
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic UltraCondensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e9b31c5fe94ea2449bfcfd289d3818f2, type: 3}
+  - {fileID: 12800000, guid: 90fc4818abd4eda448c38e196e9a89ee, type: 3}
+  - {fileID: 12800000, guid: 2f4acfb743f793c41b916db05193d8f1, type: 3}
+  - {fileID: 12800000, guid: b3527c6a118e9b542b80f6e8b41f69e1, type: 3}
+  - {fileID: 12800000, guid: f5beba8a4da1a614f91eec560317bea9, type: 3}
+  - {fileID: 12800000, guid: 7546c3da19b5be24a9598f2b0ea11c96, type: 3}
+  - {fileID: 12800000, guid: c92319bd6e0467c4eb72e964ee241511, type: 3}
+  - {fileID: 12800000, guid: 18cb35076feccc94194874f3a2ba16a7, type: 3}
+  - {fileID: 12800000, guid: c1a457859c0ffe74c9cc7ab78c5b618c, type: 3}
+  - {fileID: 12800000, guid: 065e1345b2b06074080f5d64046de24d, type: 3}
+  - {fileID: 12800000, guid: 35b657909941059408f1aed626620ea7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

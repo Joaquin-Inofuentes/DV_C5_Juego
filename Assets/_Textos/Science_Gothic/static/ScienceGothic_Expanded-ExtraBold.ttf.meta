@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: 6428a3b824fc8cf44bab92de088c0c4a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic Expanded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a3ebc8d775dff1f43841cfdc4cff00ab, type: 3}
+  - {fileID: 12800000, guid: b524c158cdf1e7f4e8e5643a3e7d06eb, type: 3}
+  - {fileID: 12800000, guid: d3d920f751d0d9a4ba9db8c4b343b649, type: 3}
+  - {fileID: 12800000, guid: 17c373ecd820aab4c9305f1d1360a372, type: 3}
+  - {fileID: 12800000, guid: 5e865b29733556845ba90f696274f52a, type: 3}
+  - {fileID: 12800000, guid: 298fc9fd54ebeec418bb46c991e912be, type: 3}
+  - {fileID: 12800000, guid: 8cb9a2b16dbab2643a9cabde6bfb3f91, type: 3}
+  - {fileID: 12800000, guid: 2e4e26f1105c31e4ba5fd34c15ac72b6, type: 3}
+  - {fileID: 12800000, guid: 0602061ae266df5439ab4aea2a30493f, type: 3}
+  - {fileID: 12800000, guid: 1cb74500b60cb9e42af513f85ba6f9b5, type: 3}
+  - {fileID: 12800000, guid: b164be216e3a6e940a00eb9ac68fc64e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

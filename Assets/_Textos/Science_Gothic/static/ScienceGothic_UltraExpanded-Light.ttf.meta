@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 4ceb896978d62e54888279c268b55ded
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic UltraExpanded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5f18ed24be793ea43a3565d000ed6a27, type: 3}
+  - {fileID: 12800000, guid: 270e3c510867a764f9525c67d1508e94, type: 3}
+  - {fileID: 12800000, guid: 72759470185086c4bb0dc77383328d3f, type: 3}
+  - {fileID: 12800000, guid: baf1aae6b3d3ed644a174feab98032b5, type: 3}
+  - {fileID: 12800000, guid: 243436f80b4709249a60a1872a975f89, type: 3}
+  - {fileID: 12800000, guid: 6ffc0b88a44c33244bfb004b1e37e010, type: 3}
+  - {fileID: 12800000, guid: e1b63693a1f0fc54c9ca23a48568afd0, type: 3}
+  - {fileID: 12800000, guid: 69ce14850f19c24419671af487782d3e, type: 3}
+  - {fileID: 12800000, guid: 4a75797f2725da240a25afc1c6035d25, type: 3}
+  - {fileID: 12800000, guid: 5a7628c9954f4474da73596ed6681b33, type: 3}
+  - {fileID: 12800000, guid: 894ce7f9890dae244850c01ac8a86169, type: 3}
+  - {fileID: 12800000, guid: 0773de3055796bc4ea50fac6314ae30d, type: 3}
+  - {fileID: 12800000, guid: 4ae66fb8ec4dfa7408912a43c3da6c8b, type: 3}
+  - {fileID: 12800000, guid: 49785099d1cbb3f43afe6c81c37a7231, type: 3}
+  - {fileID: 12800000, guid: 786250da90651e548858cf8bf3115932, type: 3}
+  - {fileID: 12800000, guid: f81b3a91d78bb104599148cfccbf61db, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1000,12 +1000,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: ae3675e569a10204ea64bee05dc8741b, type: 3}
+    m_FontSize: 4
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 141
+    m_MinSize: 0
+    m_MaxSize: 121
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1079,12 +1079,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 6f1eb9940ea57c14b8d58d91d5b534b7, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: ae3675e569a10204ea64bee05dc8741b, type: 3}
+    m_FontSize: 4
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 141
+    m_MinSize: 0
+    m_MaxSize: 121
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1312,6 +1312,22 @@ PrefabInstance:
     - target: {fileID: 4235724360186181465, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: _USP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ae3675e569a10204ea64bee05dc8741b, type: 3}
+    - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 121
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5320381922006419362, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_Pivot.x
