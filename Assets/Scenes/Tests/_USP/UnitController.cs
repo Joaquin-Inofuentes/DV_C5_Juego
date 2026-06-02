@@ -34,6 +34,12 @@ namespace Game.Squad
             if (!agent) agent = GetComponent<IA_P2_AgentIA>();
             if (!shooter) shooter = GetComponentInChildren<Disparador>();
             detector = GetComponentInChildren<GenericDetector>();
+
+            if (!model)   Debug.LogError($"[UnitController] {name}: Falta componente UnitModel.");
+            if (!view)    Debug.LogError($"[UnitController] {name}: Falta componente UnitView.");
+            if (!agent)   Debug.LogError($"[UnitController] {name}: Falta componente IA_P2_AgentIA.");
+            if (!shooter) Debug.LogError($"[UnitController] {name}: Falta componente Disparador (hijo).");
+            if (!detector) Debug.LogWarning($"[UnitController] {name}: Falta GenericDetector (hijo). No detectará enemigos.");
         }
 
         void Start()
@@ -80,12 +86,12 @@ namespace Game.Squad
 
         public bool ReachedDestination()
         {
-            // Si no se est� moviendo, lleg�.
-            if (!agent.isMoving) return true;
-
-            // Distancia al destino final
-            float dist = Vector3.Distance(transform.position, agent.targetObject != null ? agent.targetObject.transform.position : transform.position);
-            return dist < 1.0f;
+            if (agent.currentPath != null && agent.currentPath.Count > 0)
+            {
+                float dist = Vector3.Distance(transform.position, agent.currentPath[agent.currentPath.Count - 1]);
+                return dist < 1.0f;
+            }
+            return !agent.isMoving;
         }
 
         public void ReleaseSlot()
@@ -137,10 +143,12 @@ namespace Game.Squad
             model.TakeDamage(cantidad, atacante);
             view.TriggerFlash();
 
-            if (atacante != null && target == null)
+            Debug.Log($"<color=red>[Daño]</color> {name} recibió {cantidad} de {(atacante != null ? atacante.name : "desconocido")}. HP: {model.healthActual}/{model.healthMax}");
+
+            if (atacante != null)
             {
                 target = atacante.transform;
-                if (!model.IsLeader)
+                if (!model.IsLeader && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
@@ -168,6 +176,10 @@ namespace Game.Squad
 
         public void CambiarEstado(IUnitState nuevoEstado)
         {
+            string anterior = _currentStateLogic != null ? _currentStateLogic.GetType().Name : "null";
+            string nuevo = nuevoEstado != null ? nuevoEstado.GetType().Name : "null";
+            Debug.Log($"<color=lime>[FSM]</color> {name}: {anterior} → {nuevo}");
+
             _currentStateLogic?.Exit(this);
             _currentStateLogic = nuevoEstado;
             _currentStateLogic?.Enter(this);

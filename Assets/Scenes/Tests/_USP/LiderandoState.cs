@@ -50,7 +50,7 @@ namespace Game.Squad
     }
 
     // ==========================================
-    // ESTADO: SEGUIR FORMACIÓN (Aliados)
+    // ESTADO: SEGUIR FORMACIï¿½N (Aliados)
     // ==========================================
     public class SeguirFormacionState : IUnitState
     {
@@ -151,7 +151,7 @@ namespace Game.Squad
     }
 
     // ==========================================
-    // ESTADO: HUIR DETRÁS DEL LÍDER (COBERTURA)
+    // ESTADO: HUIR DETRï¿½S DEL Lï¿½DER (COBERTURA)
     // ==========================================
     public class HuirDetrasLiderState : IUnitState
     {
@@ -159,7 +159,7 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            // AQUÍ ESTABA TU ERROR: Ahora usamos UnitController correctamente
+            // AQUï¿½ ESTABA TU ERROR: Ahora usamos UnitController correctamente
             UnitController leader = GlobalData.liderActual;
 
             if (leader == null || leader == unit)
@@ -174,13 +174,13 @@ namespace Game.Squad
                 return;
             }
 
-            // Posicionarse en el lado opuesto al enemigo respecto al líder
+            // Posicionarse en el lado opuesto al enemigo respecto al lï¿½der
             Vector3 dirEnemigoAlLider = (leader.transform.position - unit.target.position).normalized;
             Vector3 puntoCobertura = leader.transform.position + dirEnemigoAlLider * 2.5f;
 
             unit.agent.GoTo(puntoCobertura);
 
-            // Si recupera vida o el enemigo muere, vuelve a formación
+            // Si recupera vida o el enemigo muere, vuelve a formaciï¿½n
             if (unit.model.healthActual / unit.model.healthMax > 0.5f)
             {
                 unit.CambiarEstado(new SeguirFormacionState());
@@ -188,6 +188,31 @@ namespace Game.Squad
         }
 
         public void FixedUpdate(UnitController unit) { }
+        public void Exit(UnitController unit) { }
+    }
+
+    // ==========================================
+    // ESTADO: IR A DESTINO (Orden manual)
+    // ==========================================
+    public class IrADestinoState : IUnitState
+    {
+        public void Enter(UnitController unit)
+        {
+            Debug.Log($"<color=cyan>[Estado]</color> {unit.name} â†’ IrADestino hacia {unit.GetTargetPoint()}");
+            unit.agent.GoTo(unit.GetTargetPoint());
+        }
+
+        public void Update(UnitController unit)
+        {
+            if (unit.ReachedDestination())
+            {
+                Debug.Log($"<color=cyan>[Estado]</color> {unit.name} llegÃ³ a destino. â†’ SeguirFormacion");
+                unit.CambiarEstado(new SeguirFormacionState());
+            }
+        }
+
+        public void FixedUpdate(UnitController unit) { }
+
         public void Exit(UnitController unit) { }
     }
 }

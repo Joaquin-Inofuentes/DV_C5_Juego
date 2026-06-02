@@ -68,18 +68,18 @@ public class GEN_Inputs : MonoBehaviour
         // 4. Click Derecho (Órdenes)
         OrdenPresionada = Input.GetMouseButtonDown(1);
 
-        // 5. Ciclado de Líder: Q / E
+        // 5. Ciclado de Líder: Q (izquierda/-1) / E (derecha/+1)
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (debugVerbose && (OnCycleLeader == null || OnCycleLeader.GetInvocationList().Length == 0))
                 Debug.LogWarning("[GEN_Inputs] OnCycleLeader sin suscriptores (Q). LeaderManager puede no estar activo.");
-            OnCycleLeader?.Invoke(false);
+            OnCycleLeader?.Invoke(true);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (debugVerbose && (OnCycleLeader == null || OnCycleLeader.GetInvocationList().Length == 0))
                 Debug.LogWarning("[GEN_Inputs] OnCycleLeader sin suscriptores (E). LeaderManager puede no estar activo.");
-            OnCycleLeader?.Invoke(true);
+            OnCycleLeader?.Invoke(false);
         }
 
         // 6. Órdenes Directas: 1 / 2 / 3
