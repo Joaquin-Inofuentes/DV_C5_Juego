@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 4a75797f2725da240a25afc1c6035d25
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic UltraExpanded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 72759470185086c4bb0dc77383328d3f, type: 3}
+  - {fileID: 12800000, guid: 243436f80b4709249a60a1872a975f89, type: 3}
+  - {fileID: 12800000, guid: e1b63693a1f0fc54c9ca23a48568afd0, type: 3}
+  - {fileID: 12800000, guid: 0773de3055796bc4ea50fac6314ae30d, type: 3}
+  - {fileID: 12800000, guid: 786250da90651e548858cf8bf3115932, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

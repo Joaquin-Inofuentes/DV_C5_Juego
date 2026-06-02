@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b524c158cdf1e7f4e8e5643a3e7d06eb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic Expanded
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d3d920f751d0d9a4ba9db8c4b343b649, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 633850dfd4216344b9dd8cab25fd94ae
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic SemiCondensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 509177662914bc14b9e435b832a2b260, type: 3}
+  - {fileID: 12800000, guid: a1ebfb512f922b745b6f39c868fd0b05, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

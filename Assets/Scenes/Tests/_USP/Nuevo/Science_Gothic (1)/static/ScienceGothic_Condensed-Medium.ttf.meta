@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 298155d5bcde85847b2059c72bc89736
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f5ba4036a70036c40b868a7731fa22f7, type: 3}
+  - {fileID: 12800000, guid: 25ad5ed233c2b9245b00252bd4531998, type: 3}
+  - {fileID: 12800000, guid: 9268a12cc6b22aa4cbce137d6bec2dfa, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

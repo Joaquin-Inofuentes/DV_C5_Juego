@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c1a457859c0ffe74c9cc7ab78c5b618c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Science Gothic UltraCondensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 90fc4818abd4eda448c38e196e9a89ee, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
