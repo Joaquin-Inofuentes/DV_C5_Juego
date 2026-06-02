@@ -32,7 +32,7 @@ public class PositionManager : MonoBehaviour
             {
                 unidad.currentSlot = puntosFormacion[puntoIndex];
                 var estado = unidad.GetCurrentState();
-                if (estado is EsperandoState || estado == null)
+                if (!unidad.isWaitingOrder && (estado is EsperandoState || estado == null))
                     unidad.CambiarEstado(new SeguirFormacionState());
                 puntoIndex++;
             }

@@ -23,6 +23,8 @@ namespace Game.Squad
         private GenericDetector detector;
         private float nextFireTime;
 
+        [HideInInspector] public bool isWaitingOrder;
+
         // --- IDetectable ---
         public string GetName() => name;
         public DetectableType GetDetectableType() => model.team == UnitTeam.PlayerTeam ? DetectableType.Aliado : DetectableType.Enemigo;
@@ -138,8 +140,7 @@ namespace Game.Squad
         /// </summary>
         private void OnHelpRequested(UnitController victim, Transform attacker, int priority)
         {
-            // No me ayudo a mí mismo, no reacciono si soy el líder, no reacciono si estoy muerto
-            if (victim == this || model.IsLeader || model.IsDead) return;
+            if (victim == this || model.IsLeader || model.IsDead || isWaitingOrder) return;
             if (attacker == null) return;
             // Solo aliados del mismo equipo ayudan
             if (model.team != Game.Core.UnitTeam.PlayerTeam) return;
@@ -164,7 +165,7 @@ namespace Game.Squad
             if (other != null && other.model.team != this.model.team)
             {
                 target = other.transform;
-                if (!model.IsLeader && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
+                if (!model.IsLeader && !isWaitingOrder && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
@@ -193,7 +194,7 @@ namespace Game.Squad
                     SquadEventBus.TriggerHelpRequested(this, atacante.transform, prioridad);
                 }
 
-                if (!model.IsLeader && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
+                if (!model.IsLeader && !isWaitingOrder && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());

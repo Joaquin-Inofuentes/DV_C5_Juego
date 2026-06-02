@@ -190,6 +190,7 @@ namespace Game.Squad
             waitTimer = 0f;
             if (timed)
             {
+                unit.isWaitingOrder = true;
                 unit.view.StartBlink(IndicatorType.Moving);
             }
         }
@@ -209,6 +210,7 @@ namespace Game.Squad
 
         public void Exit(UnitController unit)
         {
+            unit.isWaitingOrder = false;
             unit.view.StopBlink(IndicatorType.Moving);
         }
     }
@@ -259,6 +261,7 @@ namespace Game.Squad
         public void Enter(UnitController unit)
         {
             Debug.Log($"<color=cyan>[Estado]</color> {unit.name} → IrADestino hacia {unit.GetTargetPoint()}");
+            unit.isWaitingOrder = true;
             unit.agent.GoTo(unit.GetTargetPoint());
             unit.view.StartBlink(IndicatorType.Moving);
         }
@@ -279,6 +282,7 @@ namespace Game.Squad
 
         public void Exit(UnitController unit)
         {
+            unit.isWaitingOrder = false;
             unit.view.StopBlink(IndicatorType.Moving);
             unit.view.HideLine();
         }

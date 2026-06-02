@@ -24,6 +24,18 @@ public class UnitCommander : MonoBehaviour
 
         if (GEN_Inputs.Instance == null) return;
 
+        // Z: todas las unidades con orden vuelven a formación
+        if (GEN_Inputs.Instance.RegresarAFormacion)
+        {
+            var enEspera = FindObjectsOfType<UnitController>()
+                .Where(u => u.isWaitingOrder && !u.model.IsDead);
+            foreach (var u in enEspera)
+            {
+                u.isWaitingOrder = false;
+                u.CambiarEstado(new SeguirFormacionState());
+            }
+        }
+
         // Click derecho: mandar al aliado más cercano a esa posición
         if (GEN_Inputs.Instance.OrdenPresionada)
         {
