@@ -27,6 +27,8 @@ public class InteractableItem : MonoBehaviour, IInteractable
             {
                 Debug.Log($"<color=green>[CURACIÓN]</color> Aplicada a {unidadesAliadas.name}");
                 unidadesAliadas.AddHealth(curacion);
+                var healedUnit = unidadesAliadas.GetComponent<UnitController>();
+                if (healedUnit != null) healedUnit.OnHealPickup();
                 Destroy(gameObject);
             }
             else

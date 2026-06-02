@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using Game.Sensors;
 using Game.Core;
 
@@ -70,10 +71,10 @@ namespace Game.Squad
             target = objetivo;
             agent.StopAgent();
 
-            // Rotaci�n hacia el enemigo
+            // Rotación gráfica hacia el enemigo (el root NO rota)
             Vector3 dir = (objetivo.position - transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 10f);
+            view.RotateGraphicsSmooth(angle, 10f);
 
             // L�gica de disparo con cooldown
             if (Time.time >= nextFireTime && model.CanFire())
@@ -200,6 +201,18 @@ namespace Game.Squad
             }
 
             if (model.IsDead) Morir();
+        }
+
+        public void OnHealPickup()
+        {
+            view.StartBlink(IndicatorType.Heal);
+            StartCoroutine(StopHealBlinkAfterDelay(1.5f));
+        }
+
+        private System.Collections.IEnumerator StopHealBlinkAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            view.StopBlink(IndicatorType.Heal);
         }
 
         private void Morir()

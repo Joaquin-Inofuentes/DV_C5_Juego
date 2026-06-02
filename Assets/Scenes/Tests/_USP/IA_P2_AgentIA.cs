@@ -14,6 +14,10 @@ public class IA_P2_AgentIA : MonoBehaviour
     public float rotationSpeed = 10f;
     public float nodeReachDistance = 0.5f;
 
+    [Header("Rotación Gráfica")]
+    [Tooltip("Si se asigna, la rotación se aplica aquí en vez del root.")]
+    public Transform graphicsRoot;
+
     [Header("Debug")]
     public bool debug_BlockMovement = false;
     public bool debug_BlockRotation = false;
@@ -142,14 +146,13 @@ public class IA_P2_AgentIA : MonoBehaviour
         Vector2 toTarget = (Vector2)target - (Vector2)transform.position;
         float distance = toTarget.magnitude;
 
-        // Rotación en Eje Z
+        // Rotación en Eje Z — aplica al graphicsRoot si existe, sino al root
         if (!debug_BlockRotation && distance > 0.05f)
         {
             float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-            // Si tu sprite mira hacia la derecha, usa 'angle'. 
-            // Si mira hacia arriba, usa 'angle - 90'.
             Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Transform rotTarget = graphicsRoot != null ? graphicsRoot : transform;
+            rotTarget.rotation = Quaternion.Slerp(rotTarget.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
         if (debug_BlockMovement) return;
@@ -211,9 +214,9 @@ public class IA_P2_AgentIA : MonoBehaviour
         // Calculamos ángulo para el plano XY
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Aplicamos solo a Z
         Quaternion targetRot = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        Transform rotTarget = graphicsRoot != null ? graphicsRoot : transform;
+        rotTarget.rotation = Quaternion.Slerp(rotTarget.rotation, targetRot, rotationSpeed * Time.deltaTime);
     }
 
 

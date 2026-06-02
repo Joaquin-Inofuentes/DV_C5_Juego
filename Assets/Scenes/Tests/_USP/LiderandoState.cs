@@ -15,19 +15,19 @@ namespace Game.Squad
         {
             if (unit.agent != null) unit.agent.StopAgent();
             unit.view.SetSelectionRing(true);
+            unit.view.StopAllBlinks();
+            unit.view.HideLine();
         }
 
         public void Update(UnitController unit)
         {
             if (GEN_Inputs.Instance == null) return;
 
-            // Rotar hacia el mouse
             Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
             Vector3 dir = (mousePos - unit.transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            unit.transform.rotation = Quaternion.Euler(0, 0, angle);
+            unit.view.RotateGraphics(angle);
 
-            // Disparo manual
             if (GEN_Inputs.Instance.DisparoSostenido && Time.time >= nextFireTime)
             {
                 if (unit.model.CanFire())
@@ -50,11 +50,15 @@ namespace Game.Squad
     }
 
     // ==========================================
-    // ESTADO: SEGUIR FORMACI�N (Aliados)
+    // ESTADO: SEGUIR FORMACIÓN (Aliados)
     // ==========================================
     public class SeguirFormacionState : IUnitState
     {
-        public void Enter(UnitController unit) { }
+        public void Enter(UnitController unit)
+        {
+            unit.view.StopAllBlinks();
+            unit.view.HideLine();
+        }
 
         public void Update(UnitController unit)
         {
@@ -79,7 +83,11 @@ namespace Game.Squad
     {
         private float nextFireTime;
 
-        public void Enter(UnitController unit) => unit.agent.StopAgent();
+        public void Enter(UnitController unit)
+        {
+            unit.agent.StopAgent();
+            unit.view.StartBlink(IndicatorType.Combat);
+        }
 
         public void Update(UnitController unit)
         {
@@ -90,10 +98,13 @@ namespace Game.Squad
                 return;
             }
 
-            // Mirar al objetivo
+            // Rotar gráfica hacia el enemigo
             Vector3 dir = (unit.target.position - unit.transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            unit.transform.rotation = Quaternion.Slerp(unit.transform.rotation, Quaternion.Euler(0, 0, angle), Time.deltaTime * 10f);
+            unit.view.RotateGraphicsSmooth(angle, 10f);
+
+            // Línea roja al objetivo
+            unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
 
             if (Time.time >= nextFireTime && unit.model.CanFire())
             {
@@ -102,7 +113,6 @@ namespace Game.Squad
                 nextFireTime = Time.time + unit.model.fireRate;
             }
 
-            // Si se aleja mucho, perseguir
             if (Vector3.Distance(unit.transform.position, unit.target.position) > unit.model.attackRange)
             {
                 unit.CambiarEstado(new PerseguirState());
@@ -110,7 +120,12 @@ namespace Game.Squad
         }
 
         public void FixedUpdate(UnitController unit) { }
-        public void Exit(UnitController unit) { }
+
+        public void Exit(UnitController unit)
+        {
+            unit.view.StopBlink(IndicatorType.Combat);
+            unit.view.HideLine();
+        }
     }
 
     // ==========================================
@@ -118,7 +133,10 @@ namespace Game.Squad
     // ==========================================
     public class PerseguirState : IUnitState
     {
-        public void Enter(UnitController unit) { }
+        public void Enter(UnitController unit)
+        {
+            unit.view.StartBlink(IndicatorType.Combat);
+        }
 
         public void Update(UnitController unit)
         {
@@ -131,6 +149,9 @@ namespace Game.Squad
 
             unit.agent.GoTo(unit.target.position);
 
+            // Línea roja al enemigo
+            unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
+
             if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange)
             {
                 unit.CambiarEstado(new AtacarState());
@@ -138,22 +159,62 @@ namespace Game.Squad
         }
 
         public void FixedUpdate(UnitController unit) { }
-        public void Exit(UnitController unit) { }
+
+        public void Exit(UnitController unit)
+        {
+            unit.view.StopBlink(IndicatorType.Combat);
+            unit.view.HideLine();
+        }
     }
 
     // ==========================================
-    // ESTADO: ESPERANDO
+    // ESTADO: ESPERANDO (tras orden, 5 segundos)
     // ==========================================
     public class EsperandoState : IUnitState
     {
-        public void Enter(UnitController unit) => unit.agent.StopAgent();
-        public void Update(UnitController unit) { }
+        private float waitTimer;
+        private float waitDuration;
+        private bool timed;
+
+        public EsperandoState() { timed = false; }
+
+        public EsperandoState(float duration)
+        {
+            timed = true;
+            waitDuration = duration;
+        }
+
+        public void Enter(UnitController unit)
+        {
+            unit.agent.StopAgent();
+            waitTimer = 0f;
+            if (timed)
+            {
+                unit.view.StartBlink(IndicatorType.Moving);
+            }
+        }
+
+        public void Update(UnitController unit)
+        {
+            if (!timed) return;
+
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= waitDuration)
+            {
+                unit.CambiarEstado(new SeguirFormacionState());
+            }
+        }
+
         public void FixedUpdate(UnitController unit) { }
-        public void Exit(UnitController unit) { }
+
+        public void Exit(UnitController unit)
+        {
+            unit.view.StopBlink(IndicatorType.Moving);
+        }
     }
 
     // ==========================================
-    // ESTADO: HUIR DETR�S DEL L�DER (COBERTURA)
+    // ESTADO: HUIR DETRÁS DEL LÍDER (COBERTURA)
     // ==========================================
     public class HuirDetrasLiderState : IUnitState
     {
@@ -161,7 +222,6 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            // AQU� ESTABA TU ERROR: Ahora usamos UnitController correctamente
             UnitController leader = GlobalData.liderActual;
 
             if (leader == null || leader == unit)
@@ -176,13 +236,11 @@ namespace Game.Squad
                 return;
             }
 
-            // Posicionarse en el lado opuesto al enemigo respecto al l�der
             Vector3 dirEnemigoAlLider = (leader.transform.position - unit.target.position).normalized;
             Vector3 puntoCobertura = leader.transform.position + dirEnemigoAlLider * 2.5f;
 
             unit.agent.GoTo(puntoCobertura);
 
-            // Si recupera vida o el enemigo muere, vuelve a formaci�n
             if (unit.model.healthActual / unit.model.healthMax > 0.5f)
             {
                 unit.CambiarEstado(new SeguirFormacionState());
@@ -202,19 +260,27 @@ namespace Game.Squad
         {
             Debug.Log($"<color=cyan>[Estado]</color> {unit.name} → IrADestino hacia {unit.GetTargetPoint()}");
             unit.agent.GoTo(unit.GetTargetPoint());
+            unit.view.StartBlink(IndicatorType.Moving);
         }
 
         public void Update(UnitController unit)
         {
+            // Línea verde al destino
+            unit.view.ShowLineToDestination(unit.transform.position, unit.GetTargetPoint());
+
             if (unit.ReachedDestination())
             {
-                Debug.Log($"<color=cyan>[Estado]</color> {unit.name} llegó a destino. → SeguirFormacion");
-                unit.CambiarEstado(new SeguirFormacionState());
+                Debug.Log($"<color=cyan>[Estado]</color> {unit.name} llegó a destino. → Esperando 5s");
+                unit.CambiarEstado(new EsperandoState(5f));
             }
         }
 
         public void FixedUpdate(UnitController unit) { }
 
-        public void Exit(UnitController unit) { }
+        public void Exit(UnitController unit)
+        {
+            unit.view.StopBlink(IndicatorType.Moving);
+            unit.view.HideLine();
+        }
     }
 }
