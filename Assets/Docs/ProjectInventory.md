@@ -1,119 +1,219 @@
-﻿# Inventario del Proyecto
+# Inventario del Proyecto
 
-- Ultima actualizacion: 2026-05-31 14:24
-- Total de scripts C# (propios): 111
+- Ultima actualizacion: 2026-06-01
+- Total de scripts C# (propios): 109
 - Escenas: 15
-- Prefabs: 56
+- Prefabs (propios): 80+
 
-## Lista de Scripts
-1. **Physics2DMigrator.cs** ($relPath)
-2. **SceneFixer.cs** ($relPath)
-3. **GEN_Inputs.cs** ($relPath)
-4. **AmmoManager.cs** ($relPath)
-5. **Bala.cs** ($relPath)
-6. **BalaPool.cs** ($relPath)
-7. **CollisionDetector.cs** ($relPath)
-8. **DebugColisionesFull.cs** ($relPath)
-9. **Destruible.cs** ($relPath)
-10. **Disparador.cs** ($relPath)
-11. **ControlDerrota.cs** ($relPath)
-12. **CursorManager.cs** ($relPath)
-13. **DesactivarPorTimer.cs** ($relPath)
-14. **EnemyDetector.cs** ($relPath)
-15. **FormationRelocator.cs** ($relPath)
-16. **FSMController.cs** ($relPath)
-17. **GlobalData.cs** ($relPath)
-18. **GlobalHUD.cs** ($relPath)
-19. **IInteractable.cs** ($relPath)
-20. **InteractableItem.cs** ($relPath)
-21. **LeaderManager.cs** ($relPath)
-22. **MainGameController.cs** ($relPath)
-23. **MarkerAnim.cs** ($relPath)
-24. **MenuPausa.cs** ($relPath)
-25. **Municion.cs** ($relPath)
-26. **PositionManager.cs** ($relPath)
-27. **RehenBruto.cs** ($relPath)
-28. **ShotImpactBus.cs** ($relPath)
-29. **ShotSensor.cs** ($relPath)
-30. **TickManager.cs** ($relPath)
-31. **UnitCommander.cs** ($relPath)
-32. **UnitPathRenderer.cs** ($relPath)
-33. **BD_Audios.cs** ($relPath)
-34. **Camara.cs** ($relPath)
-35. **CambioDeLider.cs** ($relPath)
-36. **UnitController.cs** ($relPath)
-37. **UnitFSM.cs** ($relPath)
-38. **CodigoDeInicio.cs** ($relPath)
-39. **ConfiguracionGlobal.cs** ($relPath)
-40. **GestorTexto.cs** ($relPath)
-41. **Ideas y pseudocodigos.cs** ($relPath)
-42. **IndicadorEnemigos.cs** ($relPath)
-43. **MenuVictoria.cs** ($relPath)
-44. **CharacterControllerMVC.cs** ($relPath)
-45. **EnemySensors.cs** ($relPath)
-46. **ICharacterInput.cs** ($relPath)
-47. **IMovementHandler.cs** ($relPath)
-48. **IWeaponInput.cs** ($relPath)
-49. **ISoldierState.cs** ($relPath)
-50. **SoldierStates.cs** ($relPath)
-51. **SquadEventBus.cs** ($relPath)
-52. **UnityCharacterInput.cs** ($relPath)
-53. **UnityWeaponInput.cs** ($relPath)
-54. **WeaponControllerMVC.cs** ($relPath)
-55. **SelectedSoldierUIFeedback.cs** ($relPath)
-56. **Obstaculo.cs** ($relPath)
-57. **PickUp.cs** ($relPath)
-58. **Prueba_de_color.cs** ($relPath)
-59. **CharacterModel.cs** ($relPath)
-60. **EnemyModel.cs** ($relPath)
-61. **IDaniable.cs** ($relPath)
-62. **InformacionPersonaje.cs** ($relPath)
-63. **Interfaces.cs** ($relPath)
-64. **SoldierModel.cs** ($relPath)
-65. **WeaponModel.cs** ($relPath)
-66. **CharacterView.cs** ($relPath)
-67. **ControladorTanque.cs** ($relPath)
-68. **Enemigo.cs** ($relPath)
-69. **EnemyController.cs** ($relPath)
-70. **EnemyView.cs** ($relPath)
-71. **EntrarAlTanque.cs** ($relPath)
-72. **PlayerController.cs** ($relPath)
-73. **Puntero_Tanque.cs** ($relPath)
-74. **SoldierController.cs** ($relPath)
-75. **SoldierView.cs** ($relPath)
-76. **Tanque.cs** ($relPath)
-77. **IA_F_ChangeMode.cs** ($relPath)
-78. **IA_F_ControllerSeguidor.cs** ($relPath)
-79. **IA_F_EnemyCercanos.cs** ($relPath)
-80. **IA_F_PathFanding_Theta.cs** ($relPath)
-81. **IA_P2_AgentIA.cs** ($relPath)
-82. **IA_P2_FOV.cs** ($relPath)
-83. **IA_P2_FSM.cs** ($relPath)
-84. **IA_P2_INT_gentState.cs** ($relPath)
-85. **IA_P2_LineOfSight3D.cs** ($relPath)
-86. **IA_P2_PathfindingManager.cs** ($relPath)
-87. **IA_P2_PathfindingModel.cs** ($relPath)
-88. **IA_P2_PathNode.cs** ($relPath)
-89. **IA_P2_ST_ChaseState.cs** ($relPath)
-90. **IA_P2_ST_PatrolState.cs** ($relPath)
-91. **IA_P2_ST_ReturningToPatrolState.cs** ($relPath)
-92. **IA_P2_ST_SearchingState.cs** ($relPath)
-93. **AutoDestruccionSegura.cs** ($relPath)
-94. **CrearYDestruir.cs** ($relPath)
-95. **GameManager.cs** ($relPath)
-96. **IA_P2_BusEvent_Manager.cs** ($relPath)
-97. **Manager_VFX.cs** ($relPath)
-98. **PersecucionEnemigo.cs** ($relPath)
-99. **ProxiesUSP.cs** ($relPath)
-100. **Rigidbody2DMovementHandler.cs** ($relPath)
-101. **CambiarOpacidad.cs** ($relPath)
-102. **Soldado_Anim.cs** ($relPath)
-103. **Cohete.cs** ($relPath)
-104. **Proyectil.cs** ($relPath)
-105. **Proyectil2.cs** ($relPath)
-106. **WeaponController.cs** ($relPath)
-107. **WeaponView.cs** ($relPath)
-108. **SenalisacionAEnemigos.cs** ($relPath)
-109. **SistemaPuntaje.cs** ($relPath)
-110. **Torreta.cs** ($relPath)
-111. **VibracionCamara.cs** ($relPath)
+## Cambios respecto a auditoría 2026-05-31
+- **Refactorización Soldier→Unit**: SoldierController/Model/View/States/ISoldierState ELIMINADOS, reemplazados por UnitController/UnitModel/UnitView/LiderandoState/IUnitState
+- **Sistema de sensores genérico**: Nuevo namespace `Game.Sensors` con IDetectable, DetectableEntity, GenericDetector
+- **SquadEventBus**: reescrito como static class con nuevo evento OnHelpRequested (prioridad)
+- **Scripts movidos**: ~30 scripts migrados de `Scripts/` y `Scenes/Base/` a `Scenes/Tests/_USP/`
+- **Nuevas carpetas**: `Scripts/MVC/Sensors/`, `Editor/`, `Materials/`, `Shaders/`, `Textures/`, `UI/`, `Prefabs/Otros/`, `Prefabs/_USP/`
+- **Scripts eliminados**: SoldierController.cs, SoldierModel.cs, SoldierView.cs, SoldierStates.cs, ISoldierState.cs, EnemySensors.cs, EnemyController.cs
+
+## Estructura de Carpetas (scripts propios)
+
+```
+Assets/
+├── Editor/                          (2 scripts: herramientas de editor)
+├── Scenes/
+│   ├── Base/                        (5 scripts: colisiones, timer, shotImpactBus)
+│   │   └── Balas/                   (CollisionDetector, DebugColisionesFull)
+│   └── Tests/_USP/                  (38 scripts: sistema Unit principal)
+├── Scripts/
+│   ├── CambioDeSoldado/             (2 scripts: CambioDeLider, UnitFSM)
+│   ├── MVC/
+│   │   ├── Sensors/                 (2 scripts: IDetectable, DetectableEntity) ← NUEVO
+│   │   ├── Squad/                   (1 script: SquadEventBus)
+│   │   └── (raíz MVC)              (6 scripts: CharacterControllerMVC, inputs, weapon)
+│   ├── Nuevos/                      (1 script: SelectedSoldierUIFeedback)
+│   ├── SC_USP/
+│   │   ├── Core/                    (5 scripts: modelos, IDaniable, interfaces)
+│   │   ├── Entities/                (7 scripts: Player, Enemigo, tanques)
+│   │   ├── IA/                      (12 scripts: FSM enemiga, FOV, pathfinding)
+│   │   ├── Services/                (6 scripts: GameManager, VFX, pathfinding mgr)
+│   │   ├── UI/                      (2 scripts: opacidad, animación)
+│   │   └── Weapons/                 (5 scripts: proyectiles, weapon controller)
+│   └── (raíz Scripts)              (13 scripts: cámara, audio, config, menús, misc)
+```
+
+## Lista de Scripts (109 total)
+
+### Editor (2)
+1. CentralizadorScripts.cs
+2. Physics2DMigrator.cs
+
+### Scenes/Base (5)
+3. CollisionDetector.cs
+4. DebugColisionesFull.cs
+5. DesactivarPorTimer.cs
+6. IInteractable.cs
+7. ShotImpactBus.cs
+
+### Scenes/Tests/_USP (38) — SISTEMA UNIT PRINCIPAL
+8. AmmoManager.cs
+9. Bala.cs
+10. BalaPool.cs
+11. ControlDerrota.cs
+12. CursorManager.cs
+13. Destruible.cs
+14. Disparador.cs
+15. EnemyModel.cs
+16. EnemyView.cs
+17. FormationRelocator.cs
+18. GameManager.cs
+19. GEN_Inputs.cs
+20. **GenericDetector.cs** ← NUEVO
+21. GlobalData.cs
+22. GlobalHUD.cs
+23. IA_P2_AgentIA.cs
+24. IA_P2_PathfindingModel.cs
+25. IA_P2_PathNode.cs
+26. InteractableItem.cs
+27. LeaderManager.cs
+28. **LiderandoState.cs** ← NUEVO (7 estados)
+29. MainGameController.cs
+30. Manager_VFX.cs
+31. MarkerAnim.cs
+32. MenuPausa.cs
+33. Municion.cs
+34. PositionManager.cs
+35. RehenBruto.cs
+36. ShotSensor.cs
+37. TickManager.cs
+38. UnitCommander.cs
+39. **UnitController.cs** ← NUEVO (reemplaza SoldierController)
+40. **UnitIndicatorSetup.cs** ← NUEVO
+41. **UnitModel.cs** ← NUEVO (reemplaza SoldierModel)
+42. UnitPathRenderer.cs
+43. **UnitStates.cs** ← NUEVO (IUnitState)
+44. **UnitTeam.cs** ← NUEVO
+45. **UnitView.cs** ← NUEVO (reemplaza SoldierView)
+
+### Scripts/CambioDeSoldado (2)
+46. CambioDeLider.cs
+47. UnitFSM.cs
+
+### Scripts/MVC (9)
+48. CharacterControllerMVC.cs
+49. ICharacterInput.cs
+50. IMovementHandler.cs
+51. IWeaponInput.cs
+52. UnityCharacterInput.cs
+53. UnityWeaponInput.cs
+54. WeaponControllerMVC.cs
+55. **DetectableEntity.cs** ← NUEVO (MVC/Sensors)
+56. **IDetectable.cs** ← NUEVO (MVC/Sensors)
+57. SquadEventBus.cs (MVC/Squad)
+
+### Scripts/Nuevos (1)
+58. SelectedSoldierUIFeedback.cs
+
+### Scripts/SC_USP/Core (5)
+59. CharacterModel.cs
+60. IDaniable.cs
+61. InformacionPersonaje.cs
+62. Interfaces.cs
+63. WeaponModel.cs
+
+### Scripts/SC_USP/Entities (7)
+64. CharacterView.cs
+65. ControladorTanque.cs
+66. Enemigo.cs
+67. EntrarAlTanque.cs
+68. PlayerController.cs
+69. Puntero_Tanque.cs
+70. Tanque.cs
+
+### Scripts/SC_USP/IA (12)
+71. IA_F_ChangeMode.cs
+72. IA_F_ControllerSeguidor.cs
+73. IA_F_EnemyCercanos.cs
+74. IA_F_PathFanding_Theta.cs
+75. IA_P2_FOV.cs
+76. IA_P2_FSM.cs
+77. IA_P2_INT_gentState.cs
+78. IA_P2_LineOfSight3D.cs
+79. IA_P2_PathfindingManager.cs
+80. IA_P2_ST_ChaseState.cs
+81. IA_P2_ST_PatrolState.cs
+82. IA_P2_ST_ReturningToPatrolState.cs
+83. IA_P2_ST_SearchingState.cs
+
+### Scripts/SC_USP/Services (6)
+84. AutoDestruccionSegura.cs
+85. CrearYDestruir.cs
+86. IA_P2_BusEvent_Manager.cs
+87. PersecucionEnemigo.cs
+88. ProxiesUSP.cs
+89. Rigidbody2DMovementHandler.cs
+
+### Scripts/SC_USP/UI (2)
+90. CambiarOpacidad.cs
+91. Soldado_Anim.cs
+
+### Scripts/SC_USP/Weapons (5)
+92. Cohete.cs
+93. Proyectil.cs
+94. Proyectil2.cs
+95. WeaponController.cs
+96. WeaponView.cs
+
+### Scripts (raíz) (13)
+97. BD_Audios.cs
+98. Camara.cs
+99. CodigoDeInicio.cs
+100. ConfiguracionGlobal.cs
+101. GestorTexto.cs
+102. Ideas y pseudocodigos.cs
+103. IndicadorEnemigos.cs
+104. MenuVictoria.cs
+105. Obstaculo.cs
+106. PickUp.cs
+107. Prueba_de_color.cs
+108. SenalisacionAEnemigos.cs
+109. SistemaPuntaje.cs
+110. Torreta.cs
+111. VibracionCamara.cs
+
+## Escenas (15)
+
+| Escena | Ruta |
+|---|---|
+| MenuInicial | Scenes/Menus/MenuInicial.unity |
+| MenuDeVictoria | Scenes/Menus/MenuDeVictoria.unity |
+| MenuDeVictoria Grupos USP | Scenes/Menus/MenuDeVictoria Grupos USP.unity |
+| _Juego | Scenes/Tests/_Juego.unity |
+| _USP | Scenes/Tests/_USP.unity |
+| _USP Separada | Scenes/Tests/_USP/_USP Separada.unity |
+| _USP Mejora | Scenes/Tests/_USP Mejora.unity |
+| EscenaPerdiste | Scenes/Tests/EscenaPerdiste.unity |
+| IA | Scenes/Tests/IA.unity |
+| IA_P2 | Scenes/Tests/IA_P2.unity |
+| C5_DPR_P1 | Scenes/Tests/C5_DPR_P1.unity |
+| DPR_P1 | Scenes/Tests/DPR_P1.unity |
+| URP2DSceneTemplate | Scenes/Tests/URP2DSceneTemplate.unity |
+| CI_DemoScene | Plugins/Custom Inspector/Demo/CI_DemoScene.unity |
+| VFXPlayerScene | Plugins/VFXPACK.../VFXPlayerScene.unity |
+
+## Prefabs propios (principales)
+
+### Prefabs/Otros/ (27)
+Bala, Boid, Botiquin, Cajon, Cohete, Enemy, Flecha, Food, GranadaImpactoNormal, Hojas, ImpactoNormal, ImpactoSangre, ItemRecogible, Main menu, map, Obs_Auto, Obs_Barril, Obs_Muro, Overload, PoolDeBalas, Proyectil_Bala, Proyectil_Granada, Proyectil_TanqueTripulado, Puntero_Tanque, Sangre, Soldado_Enemigo, Soldado_Jugador, S_Enemigo, S_Propio, Tanque Variant, TanqueAccesible, T_TileMap1, _Agente, _Nodos, _Obstaculos
+
+### Prefabs/_USP/ (1)
+_Muro
+
+### Scenes/Base/ (5)
+Bala, PoolDeBalas, Botiquin, Enemy, Enemy2
+
+### Scenes/Prefabs/ (4)
+Enemy2, Jugador, Proyectil, _Nodos 1, _Obstaculos 1
+
+### Scenes/Tests/_USP/ (4)
+_J1, __Cobertura, __Muro, Esquema
+
+### Otros (4)
+Textures/Nuevo: Muro, Obstaculo_1, Suelo; Scripts/Nuevos: VFX prefabs

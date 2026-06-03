@@ -1,14 +1,15 @@
-﻿# GlobalData
+# GlobalData
 
-- Archivo: $relPath
-- Lineas: 10
-- Clase(s): GlobalData
+- Archivo: Scenes/Tests/_USP/GlobalData.cs
+- Lineas: 8
+- Clase(s): GlobalData (static)
+- Namespace: global
 
-## Metodos Publicos Clave
-- Ninguno detectado
+## Descripcion
+Contenedor estático de datos globales del juego. Actualmente solo almacena la referencia al líder actual del escuadrón (`UnitController`).
 
-## Eventos
-- Ninguno detectado
+## Campos Estáticos
+- liderActual: UnitController — la unidad que el jugador controla actualmente
 
 ## Dependencias (using)
 - USP.Entities
