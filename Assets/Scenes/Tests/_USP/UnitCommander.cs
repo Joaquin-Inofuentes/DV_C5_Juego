@@ -94,22 +94,74 @@ public class UnitCommander : MonoBehaviour
         }
 
         Debug.Log($"<color=cyan>[UnitCommander]</color> Orden directa: {unidad.name} (tecla {index + 1}) → ir a {destino}");
+        _destinosActivos[unidad] = destino;
         unidad.MoveToPoint(destino);
         unidad.CambiarEstado(new IrADestinoState());
     }
 
+    // Diccionario para registrar el destino actual asignado a cada unidad
+    private static readonly System.Collections.Generic.Dictionary<UnitController, Vector3> _destinosActivos = 
+        new System.Collections.Generic.Dictionary<UnitController, Vector3>();
+
+    private void LimpiarDestinosInactivos()
+    {
+        var inactivos = _destinosActivos.Keys
+            .Where(u => u == null || u.model.IsDead || !u.isWaitingOrder)
+            .ToList();
+        foreach (var u in inactivos)
+        {
+            _destinosActivos.Remove(u);
+        }
+    }
+
+    private Vector3 ObtenerDestinoAjustado(Vector3 destinoOriginal)
+    {
+        LimpiarDestinosInactivos();
+        Vector3 destinoAjustado = destinoOriginal;
+        bool posicionOcupada = true;
+        int intentos = 0;
+
+        // Si la posición ya está ocupada por otra unidad (distancia menor a 1.2 unidades), la desplazamos en espiral
+        while (posicionOcupada && intentos < 8)
+        {
+            posicionOcupada = false;
+            foreach (var pos in _destinosActivos.Values)
+            {
+                if (Vector3.Distance(pos, destinoAjustado) < 1.2f)
+                {
+                    posicionOcupada = true;
+                    // Desplazamiento en espiral simple
+                    float angulo = intentos * 45f * Mathf.Deg2Rad;
+                    float radio = 1.2f;
+                    destinoAjustado = destinoOriginal + new Vector3(Mathf.Cos(angulo) * radio, Mathf.Sin(angulo) * radio, 0f);
+                    break;
+                }
+            }
+            intentos++;
+        }
+        return destinoAjustado;
+    }
+
     void MandarMasCercano(Vector3 destino)
     {
+        LimpiarDestinosInactivos();
+
+        // Filtrar aliados: vivos, que no sean líderes, y que NO estén actualmente realizando una orden (libres)
+        var aliadosLibres = FindObjectsOfType<UnitController>()
+            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead && !u.isWaitingOrder)
+            .ToList();
+
+        if (aliadosLibres.Count == 0)
+        {
+            Debug.LogWarning("[UnitCommander] Todos los aliados están ocupados o no hay disponibles.");
+            return;
+        }
+
         UnitController mejorCandidato = null;
         float minDist = Mathf.Infinity;
 
-        var aliados = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead);
-
-        int count = 0;
-        foreach (var a in aliados)
+        foreach (var a in aliadosLibres)
         {
-            count++;
             float d = Vector3.Distance(a.transform.position, destino);
             if (d < minDist)
             {
@@ -118,16 +170,13 @@ public class UnitCommander : MonoBehaviour
             }
         }
 
-        if (count == 0)
-        {
-            Debug.LogWarning("[UnitCommander] No hay aliados disponibles (no-líder, vivos) para enviar.");
-            return;
-        }
-
         if (mejorCandidato != null)
         {
-            Debug.Log($"<color=cyan>[UnitCommander]</color> Enviando a {mejorCandidato.name} (dist: {minDist:F1}) → {destino}");
-            mejorCandidato.MoveToPoint(destino);
+            Vector3 destinoFinal = ObtenerDestinoAjustado(destino);
+            Debug.Log($"<color=cyan>[UnitCommander]</color> Enviando a {mejorCandidato.name} (libre, dist: {minDist:F1}) → {destinoFinal}");
+            
+            _destinosActivos[mejorCandidato] = destinoFinal;
+            mejorCandidato.MoveToPoint(destinoFinal);
             mejorCandidato.CambiarEstado(new IrADestinoState());
         }
     }

@@ -170,7 +170,15 @@ public class IA_P2_AgentIA : MonoBehaviour
         else
         {
             float step = moveSpeed * Time.deltaTime;
-            transform.position += (Vector3)toTarget.normalized * step;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.MovePosition(rb.position + toTarget.normalized * step);
+            }
+            else
+            {
+                transform.position += (Vector3)toTarget.normalized * step;
+            }
         }
 
         // Debug visual del camino
