@@ -5053,7 +5053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.700061
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalScale.z
@@ -5065,7 +5065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12199306
+      value: 0.145988
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6236,6 +6236,14 @@ PrefabInstance:
     - target: {fileID: 1515516152863043292, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedChase
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedPatrol
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
@@ -12109,7 +12117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.0042287
+      value: 0.69506085
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalScale.z
@@ -12121,7 +12129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12075449
+      value: 0.145488
       objectReference: {fileID: 0}
     - target: {fileID: 6113523244826297628, guid: 59c4c851c6495734ca36986d3928d151, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16535,6 +16543,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedChase
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedPatrol
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
       value: J1
@@ -18136,17 +18152,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedChase
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: speedPatrol
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
       value: J1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8280617388881891515, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8280617388881891515, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
