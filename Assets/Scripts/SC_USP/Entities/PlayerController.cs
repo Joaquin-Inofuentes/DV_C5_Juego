@@ -111,13 +111,6 @@ namespace USP.Entities
         if (!hasInputAuthority) return;
         if (view == null) return;
 
-        // Sincronizar física del Rigidbody2D
-        if (rb2D != null)
-        {
-            rb2D.position = transform.position;
-            rb2D.rotation = transform.eulerAngles.z;
-        }
-
         // Cámara de seguimiento
         view.SyncCameraPosition();
     }

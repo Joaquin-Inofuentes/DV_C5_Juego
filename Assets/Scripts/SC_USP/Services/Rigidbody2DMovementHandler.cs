@@ -6,12 +6,15 @@ namespace Game.MVC
     {
         public void Move(Transform targetTransform, Rigidbody2D rb2D, Vector2 direction, float speed)
         {
-            Vector3 displacement = new Vector3(direction.x, direction.y, 0f) * speed * Time.deltaTime;
-            targetTransform.position += displacement;
+            Vector2 displacement = direction * speed * Time.deltaTime;
 
             if (rb2D != null)
             {
-                rb2D.position = targetTransform.position;
+                rb2D.MovePosition(rb2D.position + displacement);
+            }
+            else
+            {
+                targetTransform.position += new Vector3(displacement.x, displacement.y, 0f);
             }
         }
 

@@ -1,61 +1,67 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    [Header("Ajustes de VisualizaciÛn")]
+    [Header("Ajustes de Visualizaci√≥n")]
     public float radioEsfera = 0.5f;
     public float duracionLinea = 1.0f;
 
-    // --- COLISIONES FÕSICAS (SÛlidas) ---
+    // --- COLISIONES F√çSICAS (S√≥lidas) ---
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // Log directo
-        Debug.Log($"<color=green>[ENTER S”LIDO]</color> Objeto: <b>{gameObject.name}</b> chocÛ con <b>{collision.gameObject.name}</b>");
+        Debug.Log($"<color=green>[ENTER S√ìLIDO 2D]</color> Objeto: <b>{gameObject.name}</b> choc√≥ con <b>{collision.gameObject.name}</b>");
 
         // Esfera verde en el punto de impacto
-        Debug.DrawLine(transform.position, collision.contacts[0].point, Color.green, duracionLinea);
+        if (collision.contactCount > 0)
+        {
+            Debug.DrawLine(transform.position, collision.contacts[0].point, Color.green, duracionLinea);
+        }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        // Log directo (Cuidado: esto inundar· la consola si hay muchos objetos)
-        Debug.Log($"<color=yellow>[STAY S”LIDO]</color> <b>{gameObject.name}</b> sigue tocando a <b>{collision.gameObject.name}</b>");
-
-        // LÌnea amarilla constante al punto de contacto
-        Debug.DrawLine(transform.position, collision.contacts[0].point, Color.yellow);
-    }
-
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         // Log directo
-        Debug.Log($"<color=red>[EXIT S”LIDO]</color> <b>{gameObject.name}</b> se separÛ de <b>{collision.gameObject.name}</b>");
+        Debug.Log($"<color=yellow>[STAY S√ìLIDO 2D]</color> <b>{gameObject.name}</b> sigue tocando a <b>{collision.gameObject.name}</b>");
+
+        // L√≠nea amarilla constante al punto de contacto
+        if (collision.contactCount > 0)
+        {
+            Debug.DrawLine(transform.position, collision.contacts[0].point, Color.yellow);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Log directo
+        Debug.Log($"<color=red>[EXIT S√ìLIDO 2D]</color> <b>{gameObject.name}</b> se separ√≥ de <b>{collision.gameObject.name}</b>");
     }
 
     // --- TRIGGERS (Zonas/Atravesables) ---
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         // Log directo
-        Debug.Log($"<color=blue>[ENTER TRIGGER]</color> <b>{gameObject.name}</b> entrÛ en la zona de <b>{other.gameObject.name}</b>");
+        Debug.Log($"<color=blue>[ENTER TRIGGER 2D]</color> <b>{gameObject.name}</b> entr√≥ en la zona de <b>{other.gameObject.name}</b>");
 
-        // LÌnea azul al centro del trigger
+        // L√≠nea azul al centro del trigger
         Debug.DrawLine(transform.position, other.transform.position, Color.blue, duracionLinea);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         // Log directo
-        Debug.Log($"<color=cyan>[STAY TRIGGER]</color> <b>{gameObject.name}</b> dentro de <b>{other.gameObject.name}</b>");
+        Debug.Log($"<color=cyan>[STAY TRIGGER 2D]</color> <b>{gameObject.name}</b> dentro de <b>{other.gameObject.name}</b>");
 
-        // LÌnea cian constante
+        // L√≠nea cian constante
         Debug.DrawLine(transform.position, other.transform.position, Color.cyan);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         // Log directo
-        Debug.Log($"<color=magenta>[EXIT TRIGGER]</color> <b>{gameObject.name}</b> saliÛ de la zona de <b>{other.gameObject.name}</b>");
+        Debug.Log($"<color=magenta>[EXIT TRIGGER 2D]</color> <b>{gameObject.name}</b> sali√≥ de la zona de <b>{other.gameObject.name}</b>");
     }
 
     // --- GIZMOS (Siempre visibles en la Scene) ---
