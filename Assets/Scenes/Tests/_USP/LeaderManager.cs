@@ -128,6 +128,13 @@ public class LeaderManager : MonoBehaviour
         }
 
         Debug.Log($"[LeaderManager] Ciclando líder: {(derecha ? "E (derecha)" : "Q (izquierda)")} → índice {nuevoIndice}");
+        
+        var cam = FindObjectOfType<MainGameController>();
+        if (cam != null)
+        {
+            cam.IniciarTransicionSuave(0.5f);
+        }
+
         CambiarLider(nuevoIndice);
     }
 

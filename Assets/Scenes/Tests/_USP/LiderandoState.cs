@@ -106,15 +106,38 @@ namespace Game.Squad
             // Línea roja al objetivo
             unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
 
-            // Comprobar visibilidad: raycast/linecast contra obstáculos
+            // Comprobar visibilidad: raycast/linecast contra obstáculos y aliados
             bool visionDirecta = true;
-            LayerMask mask = LayerMask.GetMask("Obstacles", "Obstaculos");
-            if (mask == 0) mask = (1 << 6) | (1 << 14); // Fallback a capa 6 y 14
+            bool aliadoBloquea = false;
+            Vector3 posicionDesvio = Vector3.zero;
 
-            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, mask);
+            LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
+            if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);
+            LayerMask soldMask = LayerMask.GetMask("Soldado");
+            if (soldMask == 0) soldMask = 1 << 9;
+            LayerMask combinedMask = obsMask | soldMask;
+
+            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, combinedMask);
             if (hit.collider != null)
             {
-                visionDirecta = false;
+                if (hit.collider.gameObject != unit.gameObject && hit.collider.gameObject != unit.target.gameObject)
+                {
+                    visionDirecta = false;
+                    var otherUnit = hit.collider.gameObject.GetComponent<UnitController>();
+                    if (otherUnit != null && otherUnit.model.team == unit.model.team && !otherUnit.model.IsDead)
+                    {
+                        aliadoBloquea = true;
+                        posicionDesvio = Vector3.Lerp(unit.transform.position, otherUnit.transform.position, 0.5f);
+                    }
+                }
+            }
+
+            if (aliadoBloquea)
+            {
+                // Mover al punto medio para intentar asomarse
+                unit.agent.GoTo(posicionDesvio);
+                unit.CambiarEstado(new PerseguirState());
+                return;
             }
 
             if (visionDirecta && Time.time >= nextFireTime && unit.model.CanFire())
@@ -163,20 +186,41 @@ namespace Game.Squad
             // Línea roja al enemigo
             unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
 
-            // Comprobar visibilidad: raycast/linecast contra obstáculos
+            // Comprobar visibilidad: raycast/linecast contra obstáculos y aliados
             bool visionDirecta = true;
-            LayerMask mask = LayerMask.GetMask("Obstacles", "Obstaculos");
-            if (mask == 0) mask = (1 << 6) | (1 << 14); // Fallback a capa 6 y 14
+            bool aliadoBloquea = false;
 
-            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, mask);
+            LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
+            if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);
+            LayerMask soldMask = LayerMask.GetMask("Soldado");
+            if (soldMask == 0) soldMask = 1 << 9;
+            LayerMask combinedMask = obsMask | soldMask;
+
+            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, combinedMask);
             if (hit.collider != null)
             {
-                visionDirecta = false;
+                if (hit.collider.gameObject != unit.gameObject && hit.collider.gameObject != unit.target.gameObject)
+                {
+                    visionDirecta = false;
+                    var otherUnit = hit.collider.gameObject.GetComponent<UnitController>();
+                    if (otherUnit != null && otherUnit.model.team == unit.model.team && !otherUnit.model.IsDead)
+                    {
+                        aliadoBloquea = true;
+                    }
+                }
             }
 
-            if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange && visionDirecta)
+            if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange && visionDirecta && !aliadoBloquea)
             {
                 unit.CambiarEstado(new AtacarState());
+            }
+            else
+            {
+                // Si no está listo para atacar o sigue bloqueado, moverse hacia el objetivo (si no fue desviado por bloqueo)
+                if (!aliadoBloquea)
+                {
+                    unit.agent.GoTo(unit.target.position);
+                }
             }
         }
 
