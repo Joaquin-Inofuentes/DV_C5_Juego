@@ -39,6 +39,58 @@ public class LeaderManager : MonoBehaviour
     void Update()
     {
         SuscribirseAInputs();
+
+        // Si el líder actual ha muerto o no existe, cambiar al aliado vivo más cercano
+        if (GlobalData.liderActual == null || GlobalData.liderActual.model.IsDead)
+        {
+            AsignarLiderMasCercanoALiderMuerto();
+        }
+    }
+
+    private void AsignarLiderMasCercanoALiderMuerto()
+    {
+        Vector3 lastLeaderPos = Vector3.zero;
+        if (GlobalData.liderActual != null)
+        {
+            lastLeaderPos = GlobalData.liderActual.transform.position;
+        }
+
+        UnitController mejorCandidato = null;
+        float minDist = Mathf.Infinity;
+        int mejorIndice = -1;
+
+        for (int i = 0; i < unidades.Count; i++)
+        {
+            var u = unidades[i];
+            if (u != null && !u.model.IsDead && u != GlobalData.liderActual)
+            {
+                float d = lastLeaderPos != Vector3.zero ? Vector3.Distance(u.transform.position, lastLeaderPos) : 0f;
+                if (d < minDist)
+                {
+                    minDist = d;
+                    mejorCandidato = u;
+                    mejorIndice = i;
+                }
+            }
+        }
+
+        if (mejorCandidato != null && mejorIndice != -1)
+        {
+            Debug.Log($"[LeaderManager] El líder murió. Cambiando al aliado más cercano: {mejorCandidato.name}");
+            
+            // Iniciar transición suave de la cámara (MainGameController)
+            var cam = FindObjectOfType<MainGameController>();
+            if (cam != null)
+            {
+                cam.IniciarTransicionSuave(0.5f);
+            }
+
+            CambiarLider(mejorIndice);
+        }
+        else
+        {
+            GlobalData.liderActual = null;
+        }
     }
 
     private bool _suscrito = false;

@@ -9,6 +9,17 @@ public class MainGameController : MonoBehaviour
     public TextMeshProUGUI txtAliados;
     public float suavizado = 5f;
 
+    private float transicionDuracion = 0f;
+    private float transicionTimer = 0f;
+    private Vector3 transicionInicioPos;
+
+    public void IniciarTransicionSuave(float duracion)
+    {
+        transicionDuracion = duracion;
+        transicionTimer = duracion;
+        transicionInicioPos = transform.position;
+    }
+
     void FixedUpdate()
     {
         if (leaderManager == null) return;
@@ -17,7 +28,17 @@ public class MainGameController : MonoBehaviour
         if (GlobalData.liderActual != null)
         {
             Vector3 destino = GlobalData.liderActual.transform.position + new Vector3(0, 0, -10);
-            transform.position = Vector3.Lerp(transform.position, destino, suavizado * Time.deltaTime);
+            
+            if (transicionTimer > 0f)
+            {
+                transicionTimer -= Time.deltaTime;
+                float t = Mathf.Clamp01(1f - (transicionTimer / transicionDuracion));
+                transform.position = Vector3.Lerp(transicionInicioPos, destino, Mathf.SmoothStep(0f, 1f, t));
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, destino, suavizado * Time.deltaTime);
+            }
 
             UnitModel m = GlobalData.liderActual.model;
             if (m != null)
