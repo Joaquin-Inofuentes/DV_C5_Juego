@@ -8,7 +8,7 @@ public class BD_Audios : MonoBehaviour
     // Diccionario estático público para almacenar los sonidos, clave es el nombre del archivo y el valor es el AudioSource
     public static Dictionary<string, AudioSource> Sonidos = new Dictionary<string, AudioSource>();
 
-    private void Start()
+    private void OnEnable()
     {
         CargarAudios();
         ReproducirBucleConVolumen("fondo", false, 0.3f);
