@@ -82,7 +82,7 @@ public class LeaderManager : MonoBehaviour
             var cam = FindObjectOfType<MainGameController>();
             if (cam != null)
             {
-                cam.IniciarTransicionSuave(0.5f);
+                cam.IniciarTransicionSuave(1f);
             }
 
             CambiarLider(mejorIndice);

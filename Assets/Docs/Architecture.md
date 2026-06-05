@@ -209,7 +209,9 @@ graph TD
 
 ### Editor_Tools
 - **Ruta**: `Editor/`
-- **Cantidad de scripts**: 2
+- **Cantidad de scripts**: 4
 - **Scripts**:
   - [CentralizadorScripts](file:///Assets/Docs/FileIndex/CentralizadorScripts.md)
   - [Physics2DMigrator](file:///Assets/Docs/FileIndex/Physics2DMigrator.md)
+  - [ComponentPropertiesCopier](file:///Assets/Docs/FileIndex/ComponentPropertiesCopier.md)
+  - [ComponentPropertiesCopierTestMenu](file:///Assets/Docs/FileIndex/ComponentPropertiesCopierTestMenu.md)

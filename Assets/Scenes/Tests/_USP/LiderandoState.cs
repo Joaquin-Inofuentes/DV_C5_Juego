@@ -163,7 +163,18 @@ namespace Game.Squad
             // Línea roja al enemigo
             unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
 
-            if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange)
+            // Comprobar visibilidad: raycast/linecast contra obstáculos
+            bool visionDirecta = true;
+            LayerMask mask = LayerMask.GetMask("Obstacles", "Obstaculos");
+            if (mask == 0) mask = (1 << 6) | (1 << 14); // Fallback a capa 6 y 14
+
+            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, mask);
+            if (hit.collider != null)
+            {
+                visionDirecta = false;
+            }
+
+            if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange && visionDirecta)
             {
                 unit.CambiarEstado(new AtacarState());
             }

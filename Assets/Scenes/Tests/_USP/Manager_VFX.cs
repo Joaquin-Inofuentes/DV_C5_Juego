@@ -65,7 +65,7 @@ public class Manager_VFX : MonoBehaviour
         GameObject targetPrefab = vfxPrefabs.Find(p => p != null && p.name.Equals(effectName, System.StringComparison.OrdinalIgnoreCase));
         if (targetPrefab == null)
         {
-            Debug.LogWarning($"[Manager_VFX] No se encontró ningún prefab de VFX con el nombre '{effectName}'");
+            Debug.LogError($"[Manager_VFX] ¡Error! No se encontró ningún prefab de VFX con el nombre '{effectName}'. Usando el primero por defecto.");
             // Usamos el de respaldo (primer prefab)
             targetPrefab = vfxPrefabs[0];
         }

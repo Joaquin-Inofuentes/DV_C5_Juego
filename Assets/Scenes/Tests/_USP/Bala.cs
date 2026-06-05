@@ -55,21 +55,39 @@ public class Bala : MonoBehaviour, IDetectable
 
     void CambiarADurante() => sr.sprite = spriteDurante;
 
+    [Header("Efectos y Sonidos Asignados")]
+    public string vfxName;
+    public string impactSoundName;
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        ProcesarImpacto(collider.gameObject, transform.position);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.DrawLine(transform.position, transform.forward * 2);
+        Vector3 contactPoint = transform.position;
+        if (collision.contacts.Length > 0)
+        {
+            contactPoint = collision.contacts[0].point;
+        }
+        ProcesarImpacto(collision.gameObject, contactPoint);
+    }
+
+    private void ProcesarImpacto(GameObject hitGo, Vector3 contactPoint)
+    {
         if (explotando) return;
 
         // Si colisiona con el dueno, o con objetos de la misma capa del dueno, o con otra bala, ignorar
-        if (dueno != null && (collision.gameObject == dueno || collision.gameObject.layer == dueno.layer || collision.gameObject.CompareTag("Bala")))
+        if (dueno != null && (hitGo == dueno || hitGo.layer == dueno.layer || hitGo.CompareTag("Bala")))
         {
             return;
         }
 
-        IDaniable objetivo = collision.gameObject.GetComponent<IDaniable>();
+        IDaniable objetivo = hitGo.GetComponent<IDaniable>();
         if (objetivo != null)
         {
-            Debug.Log($"<color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{collision.gameObject.name}</b> causandole {(int)damage} de daño.");
+            Debug.Log($"<color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{hitGo.name}</b> causandole {(int)damage} de daño.");
             objetivo.RecibirDano((int)damage, dueno);
 
             // Parpadear cursor si golpea con exito al enemigo
@@ -86,29 +104,28 @@ public class Bala : MonoBehaviour, IDetectable
         }
         else
         {
-            Debug.Log($"<color=orange>[COLISION EN ESCENARIO]</color> Bala de {dueno?.name} impacto contra objeto no danable: {collision.gameObject.name}");
+            Debug.Log($"<color=orange>[COLISION EN ESCENARIO]</color> Bala de {dueno?.name} impacto contra objeto no danable: {hitGo.name}");
         }
 
-        // Linea roja indicando punto exacto de choque/destello de impacto
-        Vector3 contactPoint = transform.position;
-        if (collision.contacts.Length > 0)
+        // Debug visual de choque
+        Debug.DrawLine(transform.position, contactPoint, Color.red, 2f);
+
+        // Spawn VFX específico o por defecto
+        if (Manager_VFX.Instance != null)
         {
-            contactPoint = collision.contacts[0].point;
-            Debug.DrawLine(transform.position, contactPoint, Color.red, 2f);
+            Manager_VFX.Instance.SpawnVFX(vfxName, contactPoint);
         }
 
-        // Spawn a random VFX from Manager_VFX
-        if (Manager_VFX.Instance != null && Manager_VFX.Instance.vfxPrefabs != null && Manager_VFX.Instance.vfxPrefabs.Count > 0)
+        // Reproducir sonido de impacto
+        if (!string.IsNullOrEmpty(impactSoundName))
         {
-            int rnd = Random.Range(0, Manager_VFX.Instance.vfxPrefabs.Count);
-            string fxName = Manager_VFX.Instance.vfxPrefabs[rnd].name;
-            Manager_VFX.Instance.SpawnVFX(fxName, contactPoint);
+            BD_Audios.ReproducirConSolapamiento(impactSoundName);
         }
 
         Explosion();
     }
 
-    private IEnumerator RestaurarEscalaCursor(CursorManager cursor)
+    private System.Collections.IEnumerator RestaurarEscalaCursor(CursorManager cursor)
     {
         yield return new WaitForSeconds(0.08f);
         if (cursor != null) cursor.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
