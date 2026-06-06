@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 6
   m_Name: __Muro (10)
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.976, y: 0.235, z: 0}
-  m_LocalScale: {x: 10.587955, y: 0.34168202, z: 1}
+  m_LocalScale: {x: 3.215753, y: 0.54427457, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1678158642418876351}
@@ -228,7 +228,7 @@ GameObject:
   m_Layer: 12
   m_Name: Muro (17)
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -287,7 +287,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 7428079610f074ba484c046f3cc92512, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.34901962}
   m_FlipX: 0
