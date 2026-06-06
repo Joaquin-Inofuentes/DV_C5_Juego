@@ -1444,7 +1444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774e9c4d07231428bfb2ed05dc21a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1oBala": 3
+  "da\xF1oBala": 30
   velocidadBala: 50
   vfxName: 
   disparoSoundName: 

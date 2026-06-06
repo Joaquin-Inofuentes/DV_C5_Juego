@@ -606,7 +606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &588576182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1314,6 +1314,10 @@ PrefabInstance:
       value: _USP
       objectReference: {fileID: 0}
     - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
+      propertyPath: m_Text
+      value: JUGAR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214143591373201532, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: ae3675e569a10204ea64bee05dc8741b, type: 3}
@@ -1395,7 +1399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5320381922006419362, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 512
+      value: 311
       objectReference: {fileID: 0}
     - target: {fileID: 5320381922006419362, guid: 5d3d0bdf642e23f4aabfcb104f03956a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
