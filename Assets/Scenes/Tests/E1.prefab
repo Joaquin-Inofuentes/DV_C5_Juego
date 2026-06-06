@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 366180597137038298}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.43, y: -10.92, z: -1}
+  m_LocalPosition: {x: -0.07000017, y: -2.04, z: -1}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 392900306239719612}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4300003, y: -10.92, z: -1}
+  m_LocalPosition: {x: -0.06999993, y: -2.04, z: -1}
   m_LocalScale: {x: 0.25437, y: 0.25437, z: 0.25437}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -521,7 +521,7 @@ LineRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
 --- !u!1 &1535891291324857853
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 7703651134820200739}
   - component: {fileID: 3747093909926471715}
   m_Layer: 9
-  m_Name: Cube (1)
+  m_Name: Sombra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,7 +731,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.121, y: 0, z: 0}
-  m_LocalScale: {x: 0.53055996, y: 0.8489, z: 9.773}
+  m_LocalScale: {x: 0.53055996, y: 0.8489, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3553830604338201164}
@@ -1103,7 +1103,7 @@ Transform:
   m_GameObject: {fileID: 7810049819995306656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4300003, y: -10.92, z: -1}
+  m_LocalPosition: {x: -0.07, y: -2.04, z: -1}
   m_LocalScale: {x: 1.9608699, y: 1.9608699, z: 1.9608699}
   m_ConstrainProportionsScale: 1
   m_Children: []
