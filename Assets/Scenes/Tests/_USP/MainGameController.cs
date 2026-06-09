@@ -43,9 +43,10 @@ public class MainGameController : MonoBehaviour
             UnitModel m = GlobalData.liderActual.model;
             if (m != null)
             {
-                txtLider.text = $"<color=yellow>LIDER:</color> {GlobalData.liderActual.name.ToUpper()}\n" +
-                                $"HP: {(int)m.healthActual}/{m.healthMax}\n" +
-                                $"AMMO: {m.ammoActual}";
+                txtLider.text = $"{GlobalData.liderActual.name.ToUpper()}\n" +
+                                $"Bullets: {m.ammoActual}\n" +
+                                $"HP: {(int)m.healthActual}/{m.healthMax}"
+                                ;
             }
         }
 
