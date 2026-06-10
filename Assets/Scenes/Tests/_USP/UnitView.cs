@@ -181,9 +181,9 @@ public class UnitView : MonoBehaviour
 
     [Header("Colores Barra de Vida")]
     public float barHeight = 6f;
-    private static readonly Color bgColor = new Color(0.1f, 0.6f, 0.1f, 1f);
-    private static readonly Color fillColor = new Color(0.85f, 0.1f, 0.1f, 1f);
-    private static readonly Color borderColor = new Color(0f, 0.4f, 0f, 1f);
+    public Color bgColor = new Color(0.1f, 0.6f, 0.1f, 1f);
+    public Color fillColor = new Color(0.85f, 0.1f, 0.1f, 1f);
+    public Color borderColor = new Color(0f, 0.4f, 0f, 1f);
 
     private void OnGUI()
     {

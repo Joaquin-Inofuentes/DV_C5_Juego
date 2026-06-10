@@ -1026,7 +1026,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 35
   rotationSpeed: 20
   nodeReachDistance: 0.5
   graphicsRoot: {fileID: 0}
@@ -1254,9 +1254,12 @@ MonoBehaviour:
     onTime: 0.3
     offTime: 0.3
     duration: -1
-  barWidth: 60
-  offset: {x: 0, y: 50}
-  barHeight: 6
+  barWidth: 50
+  offset: {x: 0, y: 20}
+  barHeight: 7
+  bgColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  fillColor: {r: 0.85, g: 0.1, b: 0.1, a: 1}
+  borderColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &3712903021573385901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,7 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774e9c4d07231428bfb2ed05dc21a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1oBala": 30
+  "da\xF1oBala": 15
   velocidadBala: 50
   vfxName: 
   disparoSoundName: 

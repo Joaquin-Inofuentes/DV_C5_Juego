@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Game.Sensors;
+using System;
 
 public class Bala : MonoBehaviour, IDetectable
 {
@@ -133,11 +134,21 @@ public class Bala : MonoBehaviour, IDetectable
 
     public void Explosion()
     {
-        explotando = true;
-        if (col != null) col.enabled = false;
-        sr.sprite = spriteExplosion;
-        CancelInvoke("Desactivar");
-        Desactivar();
+        try
+        {
+            explotando = true;
+            if (col != null) col.enabled = false;
+            sr.sprite = spriteExplosion;
+            CancelInvoke("Desactivar");
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Problema al explotar bala " + e, gameObject);
+        }
+        finally
+        {
+            Desactivar();
+        }
     }
 
     void Desactivar()
