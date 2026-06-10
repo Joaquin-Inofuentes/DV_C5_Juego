@@ -375,7 +375,7 @@ MonoBehaviour:
   healthMax: 100
   healthActual: 100
   damage: 8
-  fireRate: 0.5
+  fireRate: 0.1
   ammoActual: 300
   ammoMax: 300
   attackRange: 7
