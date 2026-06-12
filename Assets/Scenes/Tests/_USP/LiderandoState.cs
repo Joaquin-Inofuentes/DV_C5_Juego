@@ -20,9 +20,11 @@ namespace Game.Squad
             unit.view.StopAllBlinks();
             unit.view.HideLine();
 
-            if (Camera.main != null)
-                Camera.main.orthographicSize = unit.model.specialization == UnitSpecialization.Flancotirador
-                    ? CAM_SNIPER : CAM_NORMAL;
+            float targetSize = unit.model.specialization == UnitSpecialization.Flancotirador ? CAM_SNIPER : CAM_NORMAL;
+            if (LeaderManager.Instance != null)
+                LeaderManager.Instance.LerpCameraSize(targetSize, 0.5f);
+            else if (Camera.main != null)
+                Camera.main.orthographicSize = targetSize;
         }
 
         public void Update(UnitController unit)
@@ -51,6 +53,11 @@ namespace Game.Squad
             }
         }
 
+        private static readonly string[] _medicHealLines =
+            { "¡Calma, ya estás bien!", "Tranquilo, camarada.", "¡Ahí va, amigo!" };
+        private static readonly string[] _medicGoLines =
+            { "¡Ahora voy, camarada!", "¡Enseguida te atiendo!", "¡Voy, aguantá!" };
+
         private void HandleMedicHeal(UnitController medic, Vector3 mousePos)
         {
             if (!GEN_Inputs.Instance.HealPresionado) return;
@@ -65,6 +72,8 @@ namespace Game.Squad
 
             ally.model.AddHealth(15f);
             ally.view.TriggerHealEffect();
+            ally.view.ShowSpeech(_medicHealLines[UnityEngine.Random.Range(0, _medicHealLines.Length)], 2f);
+            medic.view.ShowSpeech(_medicGoLines[UnityEngine.Random.Range(0, _medicGoLines.Length)], 2f);
             Debug.Log($"<color=green>[Medico]</color> {medic.name} curó a {ally.name}. HP: {ally.model.healthActual:F0}/{ally.model.healthMax:F0}");
         }
 
@@ -79,7 +88,9 @@ namespace Game.Squad
         public void Exit(UnitController unit)
         {
             unit.view.SetSelectionRing(false);
-            if (Camera.main != null)
+            if (LeaderManager.Instance != null)
+                LeaderManager.Instance.LerpCameraSize(CAM_NORMAL, 0.5f);
+            else if (Camera.main != null)
                 Camera.main.orthographicSize = CAM_NORMAL;
         }
     }

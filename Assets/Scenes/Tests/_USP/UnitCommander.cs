@@ -36,14 +36,31 @@ public class UnitCommander : MonoBehaviour
             }
         }
 
-        // Click derecho: mandar al aliado más cercano a esa posición
+        // Click derecho: si el click es sobre un aliado caído, mandar revividor; si no, mandar al destino
         if (GEN_Inputs.Instance.OrdenPresionada)
         {
             Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
             _ultimaPosOrden = mousePos;
             _hayOrdenPendiente = true;
 
-            Debug.Log($"<color=cyan>[UnitCommander]</color> Click derecho en posición {mousePos}. Buscando aliado más cercano...");
+            // Detectar si hay un aliado caído cerca del click
+            UnitController clickedDown = null;
+            float minClickDist = 1.5f;
+            foreach (var u in FindObjectsOfType<UnitController>())
+            {
+                if (!u.IsDown() || u.model.team != UnitTeam.PlayerTeam) continue;
+                float d = Vector3.Distance(mousePos, u.transform.position);
+                if (d < minClickDist) { minClickDist = d; clickedDown = u; }
+            }
+
+            if (clickedDown != null)
+            {
+                Debug.Log($"<color=lime>[UnitCommander]</color> Click en aliado caído: {clickedDown.name}. Enviando revividor.");
+                MandarRevivir(clickedDown);
+                return;
+            }
+
+            Debug.Log($"<color=cyan>[UnitCommander]</color> Click derecho en {mousePos}. Buscando aliado...");
             MandarMasCercano(mousePos);
         }
     }
@@ -140,6 +157,29 @@ public class UnitCommander : MonoBehaviour
             intentos++;
         }
         return destinoAjustado;
+    }
+
+    void MandarRevivir(UnitController downed)
+    {
+        var candidatos = FindObjectsOfType<UnitController>()
+            .Where(u => u.model.team == UnitTeam.PlayerTeam
+                && !u.model.IsLeader && !u.model.IsDown && !u.isWaitingOrder)
+            .OrderBy(u => Vector3.Distance(u.transform.position, downed.transform.position))
+            .ToList();
+
+        if (candidatos.Count == 0)
+        {
+            Debug.LogWarning("[UnitCommander] No hay aliados libres para revivir.");
+            return;
+        }
+
+        var revividor = candidatos[0];
+        revividor.MoveToPoint(downed.transform.position);
+        revividor.CambiarEstado(new IrADestinoState());
+        revividor.view.ShowSpeech("¡Voy a rescatarte!", 2.5f);
+        downed.view.ShowSpeech("¡Por fin! ¡Aguantando!", 2.5f);
+
+        Debug.Log($"<color=lime>[UnitCommander]</color> {revividor.name} enviado a rescatar a {downed.name}.");
     }
 
     void MandarMasCercano(Vector3 destino)

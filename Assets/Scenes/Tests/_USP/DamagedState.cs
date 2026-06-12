@@ -17,6 +17,14 @@ namespace Game.Squad
         private GameObject downGameObject;
         private DamagedStateHandler stateHandler;
 
+        // Mensajes de angustia periódicos
+        private float _speechTimer = 0f;
+        private float _nextSpeechDelay = 1.8f;
+        private static readonly string[] _distressMessages = {
+            "¡Ayuda!", "¡No aguantaré mucho!", "¡Dame una mano!",
+            "¡Estoy caído!", "¡Aquí, rápido!", "¡Necesito apoyo!"
+        };
+
         public void Enter(UnitController unit)
         {
             LogMethodEntry($"[Enter] Soldado {unit.name} entrando en estado CAIDO");
@@ -61,7 +69,16 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            // El soldado caído no puede hacer nada, solo esperar revivimiento
+            // Mensajes periódicos de angustia
+            _speechTimer += Time.deltaTime;
+            if (_speechTimer >= _nextSpeechDelay)
+            {
+                _speechTimer = 0f;
+                _nextSpeechDelay = Random.Range(2.5f, 4.5f);
+                string msg = _distressMessages[Random.Range(0, _distressMessages.Length)];
+                unit.view.ShowSpeech(msg, 2.8f);
+            }
+
             // Mantener visualización de líneas de debug
             if (stateHandler != null)
             {

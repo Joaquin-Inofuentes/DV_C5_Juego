@@ -22,6 +22,12 @@ public class UnitView : MonoBehaviour
     private float _healTimer = 0f;
     private static Texture2D _circleTexture;
 
+    // Burbujas de diálogo
+    private string _speechText = "";
+    private float _speechTimer = 0f;
+    private float _speechDuration = 3f;
+    private GUIStyle _bubbleStyle;
+
     [Header("Indicadores de Estado")]
     public IndicatorEntry healIndicator = new IndicatorEntry { name = "Heal", onTime = 0.15f, offTime = 0.15f };
     public IndicatorEntry combatIndicator = new IndicatorEntry { name = "Combat", onTime = 0.12f, offTime = 0.12f };
@@ -44,11 +50,19 @@ public class UnitView : MonoBehaviour
     {
         if (_revivalCompleteTimer > 0f) _revivalCompleteTimer -= Time.deltaTime;
         if (_healTimer > 0f) _healTimer -= Time.deltaTime;
+        if (_speechTimer > 0f) _speechTimer -= Time.deltaTime;
         if (selectionRing != null)
             selectionRing.SetActive(model != null && model.IsLeader);
     }
 
     public void TriggerHealEffect() => _healTimer = 0.9f;
+
+    public void ShowSpeech(string msg, float duration = 3f)
+    {
+        _speechText = msg;
+        _speechDuration = Mathf.Max(duration, 0.1f);
+        _speechTimer = _speechDuration;
+    }
 
     /// <summary>Llamado cuando el revivimiento se completa — dispara animación de exhalación.</summary>
     public void OnRevivalComplete()
@@ -230,6 +244,7 @@ public class UnitView : MonoBehaviour
         }
 
         DrawSpecLabel(screenPos);
+        DrawSpeechBubble(screenPos);
     }
 
     private void DrawHealthBar(Vector3 screenPos)
@@ -375,6 +390,41 @@ public class UnitView : MonoBehaviour
             }
         _circleTexture.Apply();
         return _circleTexture;
+    }
+
+    private void DrawSpeechBubble(Vector3 screenPos)
+    {
+        if (_speechTimer <= 0f || string.IsNullOrEmpty(_speechText)) return;
+
+        float lifeRatio = _speechTimer / _speechDuration;
+        float alpha = Mathf.Sin(lifeRatio * Mathf.PI); // fade suave in/out
+
+        if (_bubbleStyle == null)
+        {
+            _bubbleStyle = new GUIStyle(GUI.skin.label);
+            _bubbleStyle.fontSize = 11;
+            _bubbleStyle.fontStyle = FontStyle.Bold;
+            _bubbleStyle.alignment = TextAnchor.MiddleCenter;
+            _bubbleStyle.wordWrap = false;
+        }
+
+        float bubbleW = 130f;
+        float bubbleH = 26f;
+        float bx = screenPos.x - bubbleW * 0.5f;
+        float by = Screen.height - screenPos.y - 70f - bubbleH;
+
+        // Borde oscuro exterior
+        GUI.color = new Color(0f, 0f, 0f, 0.9f * alpha);
+        GUI.DrawTexture(new Rect(bx - 2, by - 2, bubbleW + 4, bubbleH + 4), Texture2D.whiteTexture);
+
+        // Fondo semitransparente
+        GUI.color = new Color(0.12f, 0.12f, 0.18f, 0.92f * alpha);
+        GUI.DrawTexture(new Rect(bx, by, bubbleW, bubbleH), Texture2D.whiteTexture);
+
+        _bubbleStyle.normal.textColor = new Color(1f, 0.95f, 0.8f, alpha);
+        GUI.Label(new Rect(bx, by, bubbleW, bubbleH), _speechText, _bubbleStyle);
+
+        GUI.color = Color.white;
     }
 
     public void SetSelectionRing(bool isActive)

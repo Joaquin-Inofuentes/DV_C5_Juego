@@ -122,6 +122,13 @@ namespace Game.Squad
 
         // --- L�GICA DE DETECCI�N Y DA�O ---
 
+        // Leash: si un aliado se aleja demasiado vuelve automáticamente
+        private const float LEASH_DISTANCE = 16f;
+        private static readonly string[] _leashDialogLines = {
+            "¡Vamos en equipo!", "¡Aguardá, jefe!", "¡No me dejés!",
+            "¡No te sigo tan lejos!", "¡Esperate, campeón!"
+        };
+
         /// Prioridad del objetivo actual de ayuda (0 = ninguno, 1 = líder, 2 = aliado)
         private int _currentHelpPriority = 0;
 
@@ -147,7 +154,9 @@ namespace Game.Squad
         /// </summary>
         private void OnHelpRequested(UnitController victim, Transform attacker, int priority)
         {
-            if (victim == this || model.IsLeader || model.IsDead || isWaitingOrder) return;
+            if (victim == this || model.IsLeader || model.IsDead) return;
+            // Órdenes pendientes solo bloquean ayuda a aliados (prioridad 2); el líder (1) siempre interrumpe
+            if (isWaitingOrder && priority > 1) return;
             if (attacker == null) return;
             // Solo aliados del mismo equipo ayudan
             if (model.team != Game.Core.UnitTeam.PlayerTeam) return;
@@ -238,6 +247,17 @@ namespace Game.Squad
             view.StopBlink(IndicatorType.Heal);
         }
 
+        /// <summary>Recibe alerta de explosión cercana y va a investigar la zona.</summary>
+        public void AlertFromExplosion(Vector3 explosionPos)
+        {
+            if (model.IsDown || model.IsLeader) return;
+            if (_currentStateLogic is AtacarState || _currentStateLogic is PerseguirState) return;
+
+            Vector2 rand = UnityEngine.Random.insideUnitCircle * 2.5f;
+            MoveToPoint(explosionPos + new Vector3(rand.x, rand.y, 0f));
+            CambiarEstado(new IrADestinoState());
+        }
+
         private void Morir()
         {
             agent.StopAgent();
@@ -287,6 +307,23 @@ namespace Game.Squad
             if (!model.IsLeader && !model.IsDown && !(_currentStateLogic is RevivingState))
             {
                 CheckForDamagedAllies();
+            }
+
+            // Leash: si el aliado se alejó demasiado del líder, vuelve automáticamente
+            if (!model.IsLeader && !model.IsDown && GlobalData.liderActual != null && GlobalData.liderActual != this)
+            {
+                float leashDist = Vector3.Distance(transform.position, GlobalData.liderActual.transform.position);
+                if (leashDist > LEASH_DISTANCE &&
+                    !(_currentStateLogic is SeguirFormacionState) &&
+                    !(_currentStateLogic is RevivingState) &&
+                    !(_currentStateLogic is DamagedState))
+                {
+                    target = null;
+                    ResetHelpPriority();
+                    string leashMsg = _leashDialogLines[UnityEngine.Random.Range(0, _leashDialogLines.Length)];
+                    view.ShowSpeech(leashMsg, 2f);
+                    CambiarEstado(new SeguirFormacionState());
+                }
             }
 
             _currentStateLogic?.Update(this);

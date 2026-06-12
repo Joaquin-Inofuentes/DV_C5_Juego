@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
-using Game.Sensors;
 using System;
+using Game.Sensors;
+using Game.Squad;
+using Game.Core;
 
 public class Bala : MonoBehaviour, IDetectable
 {
@@ -138,6 +140,7 @@ public class Bala : MonoBehaviour, IDetectable
             if (col != null) col.enabled = false;
             if (sr != null) sr.sprite = spriteExplosion;
             CancelInvoke("Desactivar");
+            AlertarEnemigasCercanos(transform.position);
         }
         catch (Exception e)
         {
@@ -146,6 +149,22 @@ public class Bala : MonoBehaviour, IDetectable
         finally
         {
             Desactivar();
+        }
+    }
+
+    private void AlertarEnemigasCercanos(Vector3 pos)
+    {
+        if (dueno == null) return;
+        UnitController duenioUnit = dueno.GetComponent<UnitController>();
+        if (duenioUnit == null) return;
+        UnitTeam duenioTeam = duenioUnit.model.team;
+
+        Collider2D[] cercanos = Physics2D.OverlapCircleAll(pos, 5.5f);
+        foreach (var c in cercanos)
+        {
+            var unit = c.GetComponent<UnitController>();
+            if (unit == null || unit.model.team == duenioTeam) continue;
+            unit.AlertFromExplosion(pos);
         }
     }
 

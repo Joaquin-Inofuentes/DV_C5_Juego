@@ -12,29 +12,31 @@ public class FormationRelocator : MonoBehaviour
     public float distanciaPreferida = 3.5f;
     public float distanciaMinima = 1.5f;
 
-    // Guardamos los offsets como vectores de direcci�n fijos
-    private List<Vector3> direccionesFijasMundo = new List<Vector3>();
+    // Dirección de movimiento del líder (suavizada) — los aliados se colocan detrás
+    private Vector3 _leaderMoveDir = new Vector3(0f, -1f, 0f); // sur por defecto
+    private Vector3 _leaderPrevPos;
 
     void Start()
     {
-        // Al inicio, guardamos la direcci�n relativa original bas�ndonos en la jerarqu�a
-        // pero la trataremos como una direcci�n absoluta en el mundo
-        foreach (var p in puntosDeFormacion)
-        {
-            // Tomamos la posicin local y la normalizamos para tener solo la direccin
-            if (p.localPosition.sqrMagnitude > 0.01f)
-                direccionesFijasMundo.Add(p.localPosition.normalized);
-            else
-                direccionesFijasMundo.Add(Vector3.back); // Por defecto atrs si est en el centro
-        }
+        if (GlobalData.liderActual != null)
+            _leaderPrevPos = GlobalData.liderActual.transform.position;
     }
 
     void Update()
     {
         if (GlobalData.liderActual == null) return;
 
-        // Tomamos solo la POSICION del líder, ignoramos su rotación por completo
         Vector3 posicionLider = GlobalData.liderActual.transform.position;
+
+        // Actualizar dirección de movimiento del líder (suavizado)
+        Vector3 delta = posicionLider - _leaderPrevPos;
+        if (delta.sqrMagnitude > 0.0004f)
+            _leaderMoveDir = Vector3.Lerp(_leaderMoveDir, delta.normalized, Time.deltaTime * 4f);
+        _leaderPrevPos = posicionLider;
+
+        // Los aliados se despliegan DETRÁS del líder, alternando lados
+        Vector3 behindDir = -_leaderMoveDir.normalized;
+        Vector3 perpDir = new Vector3(-behindDir.y, behindDir.x, 0f).normalized;
 
         List<Vector3> posicionesCalculadas = new List<Vector3>();
 
@@ -42,20 +44,17 @@ public class FormationRelocator : MonoBehaviour
         {
             if (puntosDeFormacion[i] == null) continue;
 
-            // 1. Calcular la posición ideal usando la dirección FIJA del mundo
-            Vector3 direccionMundo = direccionesFijasMundo[i];
-            Vector3 posicionIdeal = posicionLider + (direccionMundo * distanciaPreferida);
+            // Alternar izq/der + profundidad escalonada
+            float lado = (i % 2 == 0) ? 1f : -1f;
+            float profundidad = 1f + (i / 2) * 0.4f;
+            Vector3 posicionIdeal = posicionLider
+                + behindDir * (distanciaPreferida * profundidad)
+                + perpDir * (lado * distanciaPreferida * 0.65f);
 
-            // 2. Ejecutar Lógica de Reubicación si hay obstáculos o conflicto con otros slots
-            Vector3 posicionFinal = CalcularPosicionValida(posicionLider, posicionIdeal, direccionMundo, posicionesCalculadas);
-
-            // Registrar posición calculada para que los siguientes slots no se encimen aquí
+            Vector3 posicionFinal = CalcularPosicionValida(posicionLider, posicionIdeal, behindDir, posicionesCalculadas);
             posicionesCalculadas.Add(posicionFinal);
 
-            // 3. Mover el punto de formación suavemente a la posición calculada
             puntosDeFormacion[i].position = Vector3.Lerp(puntosDeFormacion[i].position, posicionFinal, Time.deltaTime * 8f);
-
-            // DEBUG: Línea blanca que siempre mantiene la misma orientación cardinal
             Debug.DrawLine(posicionLider, puntosDeFormacion[i].position, Color.white);
         }
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Game.Squad;
 using Game.Core;
@@ -10,8 +11,30 @@ public class LeaderManager : MonoBehaviour
     public int indiceInicial = 0;
 
     private int indiceActual = 0;
+    private Coroutine _cameraLerpCoroutine;
 
     void OnEnable() => Instance = this;
+
+    /// <summary>Suaviza el cambio de orthographicSize de la cámara principal.</summary>
+    public void LerpCameraSize(float targetSize, float duration = 0.5f)
+    {
+        if (Camera.main == null) return;
+        if (_cameraLerpCoroutine != null) StopCoroutine(_cameraLerpCoroutine);
+        _cameraLerpCoroutine = StartCoroutine(CameraLerpRoutine(targetSize, duration));
+    }
+
+    private IEnumerator CameraLerpRoutine(float target, float duration)
+    {
+        float start = Camera.main.orthographicSize;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            Camera.main.orthographicSize = Mathf.Lerp(start, target, elapsed / duration);
+            yield return null;
+        }
+        Camera.main.orthographicSize = target;
+    }
 
     void Start()
     {
