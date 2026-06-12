@@ -146,13 +146,11 @@ public class IA_P2_AgentIA : MonoBehaviour
         Vector2 toTarget = (Vector2)target - (Vector2)transform.position;
         float distance = toTarget.magnitude;
 
-        // Rotación en Eje Z — aplica al graphicsRoot si existe, sino al root
-        if (!debug_BlockRotation && distance > 0.05f)
+        // Rotación en Eje Z — aplica al graphicsRoot si existe (instantánea, sin lag)
+        if (!debug_BlockRotation && distance > 0.05f && graphicsRoot != null)
         {
             float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-            Transform rotTarget = graphicsRoot != null ? graphicsRoot : transform;
-            rotTarget.rotation = Quaternion.Slerp(rotTarget.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            graphicsRoot.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         if (debug_BlockMovement) return;
@@ -214,6 +212,8 @@ public class IA_P2_AgentIA : MonoBehaviour
 
     public void LookAtTarget(Vector3 targetPosition)
     {
+        if (graphicsRoot == null) return;
+
         Vector3 direction = targetPosition - transform.position;
 
         if (direction.sqrMagnitude < 0.0001f)
@@ -223,8 +223,7 @@ public class IA_P2_AgentIA : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         Quaternion targetRot = Quaternion.Euler(0, 0, angle);
-        Transform rotTarget = graphicsRoot != null ? graphicsRoot : transform;
-        rotTarget.rotation = Quaternion.Slerp(rotTarget.rotation, targetRot, rotationSpeed * Time.deltaTime);
+        graphicsRoot.rotation = Quaternion.Slerp(graphicsRoot.rotation, targetRot, rotationSpeed * Time.deltaTime);
     }
 
 

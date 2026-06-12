@@ -4,6 +4,9 @@ namespace Game.MVC
 {
     public class Rigidbody2DMovementHandler : MonoBehaviour, IMovementHandler
     {
+        [Tooltip("Transform que rotará visualmente. El root NUNCA rota.")]
+        public Transform graphicsRoot;
+
         public void Move(Transform targetTransform, Rigidbody2D rb2D, Vector2 direction, float speed)
         {
             Vector2 displacement = direction * speed * Time.deltaTime;
@@ -44,10 +47,12 @@ namespace Game.MVC
 
         public void RotateTowards(Transform targetTransform, Vector3 targetPosition)
         {
+            if (graphicsRoot == null) return;
+
             Vector3 direction = (targetPosition - targetTransform.position).normalized;
             if (direction != Vector3.zero)
             {
-                targetTransform.up = direction;
+                graphicsRoot.up = direction;
             }
         }
 
