@@ -342,7 +342,8 @@ public class UnitView : MonoBehaviour
         if (_specStyle == null)
         {
             _specStyle = new GUIStyle(GUI.skin.label);
-            _specStyle.fontSize = 10;
+            _specStyle.font = Resources.GetBuiltinResource<Font>("Arial.ttf") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _specStyle.fontSize = 11;
             _specStyle.fontStyle = FontStyle.Bold;
             _specStyle.alignment = TextAnchor.MiddleCenter;
         }
@@ -350,6 +351,8 @@ public class UnitView : MonoBehaviour
         float w = 60f;
         float guiY = Screen.height - screenPos.y + offset.y + barHeight + 3f;
         _specStyle.normal.textColor = labelColor;
+        GUI.color = Color.white;
+        GUI.contentColor = Color.white;
         GUI.Label(new Rect(screenPos.x - w * 0.5f, guiY, w, 14f), label, _specStyle);
     }
 
@@ -361,7 +364,6 @@ public class UnitView : MonoBehaviour
         float pulse;
         if (revivalProgress > 0.02f)
         {
-            // Siendo revivido: calmar progresivamente (velocidad x2)
             float stress = 1f - revivalProgress;
             float bpm = Mathf.Lerp(2.0f, 4.8f, stress);
             float phase = (t * bpm) % 1f;
@@ -373,7 +375,6 @@ public class UnitView : MonoBehaviour
         }
         else
         {
-            // Caído sin ser revivido: latido estresado (velocidad x2)
             float bpm = 4.8f + Mathf.Sin(t * 0.7f) * 0.5f;
             float phase = (t * bpm) % 1f;
             float lub   = Mathf.Exp(-Mathf.Pow((phase - 0.08f) / 0.055f, 2f));
@@ -392,9 +393,7 @@ public class UnitView : MonoBehaviour
 
     private void DrawExhaleCircle(Vector3 screenPos)
     {
-        // t va de 1 a 0 durante la animación
         float t = _revivalCompleteTimer / 1.4f;
-        // Sube rápido y baja suave (inhalar y exhalar)
         float inflate = Mathf.Sin(t * Mathf.PI);
         float size = barWidth * (0.8f + inflate * 0.6f);
         float alpha = t * 0.75f;
@@ -432,7 +431,8 @@ public class UnitView : MonoBehaviour
         if (_bubbleStyle == null)
         {
             _bubbleStyle = new GUIStyle(GUI.skin.label);
-            _bubbleStyle.fontSize = 11;
+            _bubbleStyle.font = Resources.GetBuiltinResource<Font>("Arial.ttf") ?? Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _bubbleStyle.fontSize = 12;
             _bubbleStyle.fontStyle = FontStyle.Bold;
             _bubbleStyle.alignment = TextAnchor.MiddleCenter;
             _bubbleStyle.wordWrap = false;
@@ -451,6 +451,9 @@ public class UnitView : MonoBehaviour
         GUI.color = new Color(0.12f, 0.12f, 0.18f, 0.92f * alpha);
         GUI.DrawTexture(new Rect(bx, by, bubbleW, bubbleH), Texture2D.whiteTexture);
 
+        // Renderizar el texto
+        GUI.color = Color.white;
+        GUI.contentColor = Color.white;
         _bubbleStyle.normal.textColor = new Color(1f, 0.95f, 0.8f, alpha);
         GUI.Label(new Rect(bx, by, bubbleW, bubbleH), _speechText, _bubbleStyle);
 

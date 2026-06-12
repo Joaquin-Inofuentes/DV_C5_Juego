@@ -106,7 +106,7 @@ namespace Game.Squad
             bool isMoving = moveDir2D.sqrMagnitude > 0.01f;
             bool isSprinting = isMoving && GEN_Inputs.Instance.SprintInput && unit.model.currentStamina > 0.01f;
 
-            float speed = unit.model.speedChase;
+            float speed = unit.model.speedChase * 2f; // Doble de la velocidad natural
             if (isSprinting)
             {
                 speed *= 1.8f;
@@ -228,16 +228,31 @@ namespace Game.Squad
             var targetUnit = unit.target.GetComponent<UnitController>();
             if (targetUnit != null && targetUnit.model.IsDown) { unit.target = null; unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
 
-            unit.agent.GoTo(unit.target.position);
-            unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
-
             LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
             if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);
-            bool hasLOS = Physics2D.Linecast(unit.transform.position, unit.target.position, obsMask).collider == null;
+            
+            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, obsMask);
+            bool hasLOS = hit.collider == null || hit.collider.transform == unit.target || hit.collider.transform.IsChildOf(unit.target);
+            
             float dist = Vector3.Distance(unit.transform.position, unit.target.position);
 
             if (hasLOS && dist <= unit.model.attackRange)
+            {
                 unit.CambiarEstado(new AtacarState());
+                return;
+            }
+
+            // Evitar que se peguen si por alguna razón no tienen LOS pero están muy cerca
+            if (dist > unit.model.attackRange * 0.8f || !hasLOS && dist > 2f)
+            {
+                unit.agent.GoTo(unit.target.position);
+            }
+            else
+            {
+                unit.agent.StopAgent();
+            }
+
+            unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
         }
 
         public void FixedUpdate(UnitController unit) { }

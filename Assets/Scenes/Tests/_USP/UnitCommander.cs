@@ -203,9 +203,9 @@ public class UnitCommander : MonoBehaviour
     {
         LimpiarDestinosInactivos();
 
-        // Filtrar aliados: vivos, que no sean líderes, y que NO estén actualmente realizando una orden (libres)
+        // Filtrar aliados: vivos y que no sean líderes (ignorar si ya están moviéndose, para que agarre el más cercano siempre)
         var aliadosLibres = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead && !u.isWaitingOrder)
+            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
         if (aliadosLibres.Count == 0)
@@ -241,36 +241,50 @@ public class UnitCommander : MonoBehaviour
     void MandarAtacarEnemigo(UnitController enemy)
     {
         // Encontrar aliados: vivos, que no sean líderes y que no estén caídos
-        var candidatos = FindObjectsOfType<UnitController>()
+        var aliados = FindObjectsOfType<UnitController>()
             .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
-        if (candidatos.Count == 0)
-        {
-            Debug.LogWarning("[UnitCommander] No hay aliados disponibles para atacar.");
-            return;
-        }
+        if (aliados.Count == 0) return;
 
-        // Buscar el más cercano al enemigo
-        UnitController mejorCandidato = null;
-        float minDist = Mathf.Infinity;
-        foreach (var a in candidatos)
+        // Si ambos están "sin movimiento" (ej: SeguirFormacion o EsperandoState), mandar a los dos.
+        // Si no, mandar solo al más cercano.
+        var aliadosSinMovimiento = aliados.Where(u => !u.isWaitingOrder && u.GetCurrentState() is SeguirFormacionState || u.GetCurrentState() is EsperandoState).ToList();
+
+        if (aliadosSinMovimiento.Count >= 2)
         {
-            float d = Vector3.Distance(a.transform.position, enemy.transform.position);
-            if (d < minDist)
+            Debug.Log($"<color=red>[UnitCommander]</color> {aliadosSinMovimiento.Count} aliados libres, enviando a todos a atacar a {enemy.name}.");
+            foreach (var a in aliadosSinMovimiento)
             {
-                minDist = d;
-                mejorCandidato = a;
+                a.target = enemy.transform;
+                a.isWaitingOrder = true;
+                a.CambiarEstado(new PerseguirState());
+                a.view.ShowSpeech("¡Atacando enemigo!", 2.5f);
             }
         }
-
-        if (mejorCandidato != null)
+        else
         {
-            Debug.Log($"<color=red>[UnitCommander]</color> {mejorCandidato.name} enviado a atacar a {enemy.name}.");
-            mejorCandidato.target = enemy.transform;
-            mejorCandidato.isWaitingOrder = true; // No volver de inmediato
-            mejorCandidato.CambiarEstado(new PerseguirState());
-            mejorCandidato.view.ShowSpeech("¡Atacando enemigo!", 2.5f);
+            // Mandar al más cercano
+            UnitController mejorCandidato = null;
+            float minDist = Mathf.Infinity;
+            foreach (var a in aliados)
+            {
+                float d = Vector3.Distance(a.transform.position, enemy.transform.position);
+                if (d < minDist)
+                {
+                    minDist = d;
+                    mejorCandidato = a;
+                }
+            }
+
+            if (mejorCandidato != null)
+            {
+                Debug.Log($"<color=red>[UnitCommander]</color> {mejorCandidato.name} enviado a atacar a {enemy.name}.");
+                mejorCandidato.target = enemy.transform;
+                mejorCandidato.isWaitingOrder = true;
+                mejorCandidato.CambiarEstado(new PerseguirState());
+                mejorCandidato.view.ShowSpeech("¡Atacando enemigo!", 2.5f);
+            }
         }
     }
 }

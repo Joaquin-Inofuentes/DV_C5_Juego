@@ -246,6 +246,23 @@ namespace Game.Squad
                     float dist = Vector3.Distance(transform.position, target.position);
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
                 }
+
+                // Group aggro (Dinámico y Divertido)
+                float aggroRadius = 8f;
+                Collider2D[] vecinos = Physics2D.OverlapCircleAll(transform.position, aggroRadius);
+                foreach (var col in vecinos)
+                {
+                    UnitController vecino = col.GetComponent<UnitController>();
+                    if (vecino != null && vecino != this && vecino.model.team == model.team && !vecino.model.IsDead)
+                    {
+                        if (!vecino.model.IsLeader && !vecino.isWaitingOrder && !(vecino.GetCurrentState() is AtacarState) && !(vecino.GetCurrentState() is PerseguirState))
+                        {
+                            vecino.target = atacante.transform;
+                            float dist = Vector3.Distance(vecino.transform.position, vecino.target.position);
+                            vecino.CambiarEstado(dist <= vecino.model.attackRange ? new AtacarState() : new PerseguirState());
+                        }
+                    }
+                }
             }
 
             if (model.IsDead)
