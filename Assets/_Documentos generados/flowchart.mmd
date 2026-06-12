@@ -1,7 +1,196 @@
-﻿flowchart LR
-    A[Inicio del Análisis]
-    B[336 Archivos]
-    C[880 Clases]
-    D[Fin del Análisis]
+flowchart LR
+    direction LR
+    FusionStatsGraphBase["FusionStatsGraphBase"]
+    FusionBootstrap["FusionBootstrap"]
+    ReflectionUtils["ReflectionUtils"]
+    FusionRunnerVisibilityControlsWindow["FusionRunnerVisibilityContr..."]
+    InformacionPersonaje["InformacionPersonaje"]
+    AssetDatabaseUtils["AssetDatabaseUtils"]
+    NetworkSceneManagerDefault["NetworkSceneManagerDefault"]
+    UnitController["UnitController"]
+    UnitView["UnitView"]
+    FusionStatistics["FusionStatistics"]
+    FusionStatsCanvas["FusionStatsCanvas"]
+    RenderSimStats[/"RenderSimStats"/]
+    ControladorTanque["ControladorTanque"]
+    FusionEditorSkin["FusionEditorSkin"]
+    UnitModel["UnitModel"]
+    FusionEditorGUI["FusionEditorGUI"]
+    Enemigo["Enemigo"]
+    FusionProfiler["FusionProfiler"]
+    FusionNetworkObjectStatsGraphCombine["FusionNetworkObjectStatsGra..."]
+    Bala["Bala"]
+    NetworkRunnerVisibilityExtensions["NetworkRunnerVisibilityExte..."]
+    IA_P2_AgentIA["IA_P2_AgentIA"]
+    FusionGrid["FusionGrid"]
+    NetworkObjectEditor["NetworkObjectEditor"]
+    Labels["Labels"]
+    IA_P2_FSM["IA_P2_FSM"]
+    Tanque["Tanque"]
+    WeaponModel["WeaponModel"]
+    NetworkCharacterController["NetworkCharacterController"]
+    RunnerEnableVisibility["RunnerEnableVisibility"]
+    RunnerVisibilityLink["RunnerVisibilityLink"]
+    ComponentPropertiesCopier["ComponentPropertiesCopier"]
+    IA_P2_FOV["IA_P2_FOV"]
+    FusionStatBuffer["FusionStatBuffer"]
+    CharacterModel["CharacterModel"]
+    EnemyModel["EnemyModel"]
+    GameManager["GameManager"]
+    FusionBootstrapDebugGUI["FusionBootstrapDebugGUI"]
+    FusionStatsConfig["FusionStatsConfig"]
+    LazyGUIStyle["LazyGUIStyle"]
+    FusionStatsPanelHeader["FusionStatsPanelHeader"]
+    FixedBufferPropertyAttributeDrawer["FixedBufferPropertyAttribut..."]
+    FusionCodeDoc["FusionCodeDoc"]
+    RangeExAttributeDrawer["RangeExAttributeDrawer"]
+    FusionInstaller["FusionInstaller"]
+    LogSettingsDrawer["LogSettingsDrawer"]
+    FusionEditorGUI["FusionEditorGUI"]
+    DebugColisionesFull["DebugColisionesFull"]
+    TickRateDrawer["TickRateDrawer"]
+    DecoratingPropertyAttributeDrawer["DecoratingPropertyAttribute..."]
+    AnimatorControllerTools["AnimatorControllerTools"]
+    WeaponView["WeaponView"]
+    GenericDetector["GenericDetector"]
+    Proyectil["Proyectil"]
+    EnumDrawer["EnumDrawer"]
+    PropertyDrawerWithErrorHandling["PropertyDrawerWithErrorHand..."]
+    TransformPathCache["TransformPathCache"]
+    FusionGlobalScriptableObjectUtils["FusionGlobalScriptableObjec..."]
+    SerializedPropertyUtilities["SerializedPropertyUtilities"]
+    SplitterState["SplitterState"]
+    NetworkProjectConfigImporter["NetworkProjectConfigImporter"]
+    IA_P2_PathfindingManager["IA_P2_PathfindingManager"]
+    PlayerController["PlayerController"]
+    UnitFSM["UnitFSM"]
+    GEN_Inputs["GEN_Inputs"]
+    LeaderManager["LeaderManager"]
+    NetworkAssetSourceResource["NetworkAssetSourceResource"]
+    JsonUtilityExtensions["JsonUtilityExtensions"]
+    NetworkObjectBaker["NetworkObjectBaker"]
+    FusionUnitySceneManagerUtils["FusionUnitySceneManagerUtils"]
+    InternalTreeView["InternalTreeView"]
+    ScriptAttributeUtility["ScriptAttributeUtility"]
+    NetworkProjectConfigUtilities["NetworkProjectConfigUtilities"]
+    NetworkProjectConfigImporterEditor["NetworkProjectConfigImporte..."]
+    EntrarAlTanque["EntrarAlTanque"]
+    UnitCommander["UnitCommander"]
+    RawDataDrawer["RawDataDrawer"]
+    EditorGUI["EditorGUI"]
+    WeaponControllerMVC["WeaponControllerMVC"]
+    AssetEnumerator["AssetEnumerator"]
 
-    A --> B --> C --> D
+    FusionStatsGraphBase -->|usa| FusionStatBuffer
+    FusionStatsGraphBase -->|usa| FusionStatistics
+    FusionBootstrap -->|usa| FusionBootstrapDebugGUI
+    FusionBootstrap -->|usa| NetworkSceneManagerDefault
+    FusionRunnerVisibilityControlsWindow -->|usa| RunnerEnableVisibility
+    FusionRunnerVisibilityControlsWindow -->|usa| NetworkRunnerVisibilityExtensions
+    FusionRunnerVisibilityControlsWindow -->|usa| Labels
+    FusionRunnerVisibilityControlsWindow -->|usa| FusionEditorSkin
+    FusionRunnerVisibilityControlsWindow -->|usa| FusionStatistics
+    FusionRunnerVisibilityControlsWindow -->|usa| EditorGUI
+    InformacionPersonaje -->|usa| GameManager
+    AssetDatabaseUtils -->|usa| AssetEnumerator
+    NetworkSceneManagerDefault -->|usa| FusionUnitySceneManagerUtils
+    UnitController -->|usa| UnitModel
+    UnitController -->|usa| UnitView
+    UnitController -->|usa| IA_P2_AgentIA
+    UnitController -->|usa| GenericDetector
+    UnitController -->|usa| Enemigo
+    UnitView -->|usa| UnitModel
+    FusionStatistics -->|usa| FusionStatsGraphBase
+    FusionStatistics -->|usa| FusionNetworkObjectStatsGraphCombine
+    FusionStatistics -->|usa| FusionStatsPanelHeader
+    FusionStatistics -->|usa| FusionStatsConfig
+    FusionStatistics -->|usa| FusionStatsCanvas
+    FusionStatistics -->|usa| RenderSimStats
+    FusionStatsCanvas -->|usa| FusionStatsPanelHeader
+    FusionStatsCanvas -->|usa| FusionStatsConfig
+    FusionStatsCanvas -->|usa| FusionStatistics
+    ControladorTanque -->|usa| EntrarAlTanque
+    ControladorTanque -->|usa| Proyectil
+    ControladorTanque -->|usa| Bala
+    FusionEditorSkin -->|usa| LazyGUIStyle
+    FusionEditorGUI -->|usa| FusionEditorSkin
+    FusionEditorGUI -->|usa| EditorGUI
+    FusionEditorGUI -->|usa| ScriptAttributeUtility
+    FusionEditorGUI -->|usa| FusionCodeDoc
+    Enemigo -->|usa| GameManager
+    FusionNetworkObjectStatsGraphCombine -->|usa| FusionStatistics
+    Bala -->|usa| Proyectil
+    NetworkRunnerVisibilityExtensions -->|usa| RunnerVisibilityLink
+    IA_P2_AgentIA -->|usa| IA_P2_PathfindingManager
+    FusionGrid -->|usa| InternalTreeView
+    FusionGrid -->|usa| FusionEditorSkin
+    FusionGrid -->|usa| EditorGUI
+    NetworkObjectEditor -->|usa| NetworkProjectConfigUtilities
+    NetworkObjectEditor -->|usa| FusionEditorGUI
+    NetworkObjectEditor -->|usa| AssetDatabaseUtils
+    NetworkObjectEditor -->|usa| EditorGUI
+    Labels -->|usa| RunnerEnableVisibility
+    Labels -->|usa| NetworkRunnerVisibilityExtensions
+    IA_P2_FSM -->|usa| IA_P2_AgentIA
+    IA_P2_FSM -->|usa| IA_P2_FOV
+    RunnerVisibilityLink -->|usa| NetworkRunnerVisibilityExtensions
+    CharacterModel -->|usa| InformacionPersonaje
+    GameManager -->|usa| Enemigo
+    FusionBootstrapDebugGUI -->|usa| FusionBootstrap
+    FusionStatsConfig -->|usa| FusionStatistics
+    FusionStatsPanelHeader -->|usa| RenderSimStats
+    FusionStatsPanelHeader -->|usa| FusionStatistics
+    FixedBufferPropertyAttributeDrawer -->|hereda| PropertyDrawerWithErrorHandling
+    FixedBufferPropertyAttributeDrawer -->|usa| EditorGUI
+    FixedBufferPropertyAttributeDrawer -->|usa| FusionEditorGUI
+    FixedBufferPropertyAttributeDrawer -->|usa| ScriptAttributeUtility
+    FusionCodeDoc -->|usa| AssetDatabaseUtils
+    RangeExAttributeDrawer -->|hereda| PropertyDrawerWithErrorHandling
+    RangeExAttributeDrawer -->|usa| EditorGUI
+    RangeExAttributeDrawer -->|usa| FusionEditorGUI
+    LogSettingsDrawer -->|usa| FusionCodeDoc
+    LogSettingsDrawer -->|usa| EditorGUI
+    LogSettingsDrawer -->|usa| FusionEditorGUI
+    LogSettingsDrawer -->|usa| AssetDatabaseUtils
+    FusionEditorGUI -->|usa| EditorGUI
+    FusionEditorGUI -->|usa| FusionEditorSkin
+    FusionEditorGUI -->|usa| ScriptAttributeUtility
+    TickRateDrawer -->|usa| LazyGUIStyle
+    TickRateDrawer -->|usa| EditorGUI
+    TickRateDrawer -->|usa| FusionEditorGUI
+    DecoratingPropertyAttributeDrawer -->|usa| FusionEditorGUI
+    DecoratingPropertyAttributeDrawer -->|usa| EditorGUI
+    DecoratingPropertyAttributeDrawer -->|usa| ScriptAttributeUtility
+    WeaponView -->|usa| Proyectil
+    WeaponView -->|usa| InformacionPersonaje
+    WeaponView -->|usa| WeaponModel
+    WeaponView -->|usa| Bala
+    Proyectil -->|usa| InformacionPersonaje
+    Proyectil -->|usa| Enemigo
+    EnumDrawer -->|usa| EditorGUI
+    PropertyDrawerWithErrorHandling -->|usa| EditorGUI
+    PropertyDrawerWithErrorHandling -->|usa| FusionEditorGUI
+    FusionGlobalScriptableObjectUtils -->|usa| AssetDatabaseUtils
+    NetworkProjectConfigImporter -->|usa| AssetDatabaseUtils
+    PlayerController -->|usa| CharacterModel
+    UnitFSM -->|usa| UnitController
+    LeaderManager -->|usa| UnitController
+    LeaderManager -->|usa| GEN_Inputs
+    NetworkObjectBaker -->|usa| TransformPathCache
+    InternalTreeView -->|usa| FusionGrid
+    NetworkProjectConfigUtilities -->|usa| FusionGlobalScriptableObjectUtils
+    NetworkProjectConfigUtilities -->|usa| AssetDatabaseUtils
+    NetworkProjectConfigUtilities -->|usa| NetworkProjectConfigImporter
+    NetworkProjectConfigImporterEditor -->|usa| NetworkProjectConfigImporter
+    NetworkProjectConfigImporterEditor -->|usa| LogSettingsDrawer
+    NetworkProjectConfigImporterEditor -->|usa| FusionEditorGUI
+    NetworkProjectConfigImporterEditor -->|usa| EditorGUI
+    NetworkProjectConfigImporterEditor -->|usa| NetworkProjectConfigUtilities
+    EntrarAlTanque -->|usa| ControladorTanque
+    UnitCommander -->|usa| GEN_Inputs
+    UnitCommander -->|usa| LeaderManager
+    UnitCommander -->|usa| UnitController
+    RawDataDrawer -->|usa| FusionEditorSkin
+    RawDataDrawer -->|usa| EditorGUI
+    WeaponControllerMVC -->|usa| WeaponModel
+    WeaponControllerMVC -->|usa| WeaponView

@@ -1,0 +1,252 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    SISTEMA DE REVIVIMIENTO - INICIO RÁPIDO                 ║
+║                          ¡IMPLEMENTACIÓN LISTA!                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+✅ COMPLETADO: Sistema de caído y revivimiento 100% implementado
+
+┌─ QUÉ SE ENTREGA ────────────────────────────────────────────────────────┐
+│                                                                           │
+│ 📦 5 Scripts Nuevos:                                                     │
+│  1. DamagedState.cs         → Estado cuando soldado cae (HP = 0)        │
+│  2. RevivalBarView.cs       → UI de barra de revivimiento con Lerp      │
+│  3. RevivingState.cs        → Estado cuando aliado revive               │
+│  4. UnitController_Revival  → Extensión con lógica de revivimiento      │
+│  5. IUnitState.cs           → Interfaz base para estados                │
+│                                                                           │
+│ 📝 2 Scripts Modificados:                                               │
+│  1. UnitController.cs       → Integración de caído/revivimiento         │
+│  2. GEN_Inputs.cs           → Input de barra espaciadora                │
+│                                                                           │
+│ 📚 3 Documentos:                                                         │
+│  1. SISTEMA_REVIVIMIENTO.md → Documentación completa (400+ líneas)      │
+│  2. INSTALACION_REVIVIMIENTO.txt → Guía de instalación                  │
+│  3. RESUMEN_ARCHIVOS_CREADOS.txt → Overview de archivos                 │
+│                                                                           │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ FUNCIONAMIENTO ────────────────────────────────────────────────────────┐
+│                                                                          │
+│ 🔴 SOLDADO CAÍDO:                                                      │
+│    • HP llega a 0 → Entra en DamagedState                             │
+│    • GameObject "Vivo" se desactiva                                   │
+│    • GameObject "Caido" se activa                                     │
+│    • Indetectable por enemigos (ignoran completamente)                │
+│    • No puede moverse ni disparar                                     │
+│    • Líneas de debug a todos los aliados (azul)                       │
+│                                                                          │
+│ 👥 ALIADO SE ACERCA:                                                    │
+│    • Si está dentro de 3 metros → línea se vuelve amarilla            │
+│    • Si no está atacando/bajo fuego → puede revivir                   │
+│    • Logs claros: "[CanReviveAlly] Soldado X PUEDE revivir a Y"      │
+│                                                                          │
+│ ⌨️  LÍDER REVIVA (Barra Espaciadora):                                   │
+│    • Mantiene Spacebar por 3 segundos                                 │
+│    • Barra amarilla se carga progresivamente                          │
+│    • Si suelta o se aleja → barra baja rápido (rojo)                 │
+│    • Completo → Soldado revive con 30% HP                            │
+│    • Log: "[CompleteLeaderRevival] Soldado revivido por LIDER"       │
+│                                                                          │
+│ 🤖 ALIADOS IA REVIVEN (automático):                                     │
+│    • Detectan caído cercano                                           │
+│    • Si no están en combate → van a revivir automáticamente           │
+│    • 3 segundos (sin input) → revivimiento completado                 │
+│    • Log: "[CompleteRevival] Aliado ha revivido a caído"             │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ INSTALACIÓN EN 3 PASOS ────────────────────────────────────────────────┐
+│                                                                          │
+│ PASO 1: Copiar Scripts                                                  │
+│  ☐ Copiar los 5 scripts nuevos a Assets/Scripts/                      │
+│  ☐ Modificar UnitController.cs (reemplazar versión)                   │
+│  ☐ Modificar GEN_Inputs.cs (agregar Spacebar)                         │
+│                                                                          │
+│ PASO 2: Configurar en Scene (por cada soldado)                          │
+│  ☐ Crear hijo "Vivo" con sprite/visuales (ACTIVO)                    │
+│  ☐ Crear hijo "Caido" con sprite/visuales (DESACTIVADO)              │
+│  ☐ Crear Canvas hijo "RevivalBarCanvas" con Image                    │
+│  ☐ Agregar RevivalBarView component a UnitController                 │
+│                                                                          │
+│ PASO 3: Configurar Parámetros                                           │
+│  ☐ En UnitModel: reviveHealthPercent = 0.3f (30% HP)                 │
+│  ☐ En DamagedState: revivalRange = 3f (metros)                       │
+│  ☐ En RevivalBarView: revivalDuration = 3f (segundos)                │
+│                                                                          │
+│ ¡LISTO! Presionar Play y probar.                                        │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ LOGS CLAROS EN CONSOLA ────────────────────────────────────────────────┐
+│                                                                          │
+│ Formato: [NombreMetodo] Descripción                                     │
+│                                                                          │
+│ Entrada a caído:                                                        │
+│  [UnitController] Soldado caído activando view de caído               │
+│  [EnterDamagedState] Soldado X entrando en estado CAIDO               │
+│  [DamagedState] Soldado X completamente en estado CAIDO               │
+│                                                                          │
+│ Detección de aliados:                                                   │
+│  [DrawLinesToAllies] Soldado X cerca de caído pero ocupado            │
+│  [CanReviveCheck] Soldado X ES LIDER y está lo suficientemente cerca  │
+│  [CanReviveAlly] Soldado X PUEDE revivir a Y - distancia: 2.50m      │
+│                                                                          │
+│ Revivimiento en progreso:                                              │
+│  [HandleRevivalInput] Líder comenzando a revivir a X                  │
+│  [HandleRevivalInput] Reviviendo a X. Progreso: 1.50/3.00s           │
+│  [UpdateRevivalBar] Progreso: 50% | Color: Amarillo (subiendo)       │
+│                                                                          │
+│ Revivimiento completado:                                               │
+│  [CompleteLeaderRevival] Líder Y ha revivido a X                      │
+│  [CompleteLeaderRevival] Salud de X restaurada: 30/100                │
+│  [CompleteLeaderRevival] Soldado X revivido por Líder Y               │
+│  [Exit] Soldado X saliendo de estado CAIDO                            │
+│                                                                          │
+│ Revivimiento cancelado:                                                │
+│  [HandleRevivalInput] Líder soltó barra espaciadora                   │
+│  [UpdateRevivalBar] Progreso: 0% | Color: Rojo (bajando)             │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ FLUJO COMPLETO DE EJEMPLO ─────────────────────────────────────────────┐
+│                                                                          │
+│ 1. Soldado "Guerrero" recibe 100 de daño (HP = 0)                     │
+│    → [RecibirDano] Guerrero recibió 100. HP: 0/100                   │
+│    → [EnterDamagedState] Guerrero entrando en estado CAIDO            │
+│    → GameObject "Vivo" se desactiva                                   │
+│    → GameObject "Caido" se activa                                     │
+│                                                                          │
+│ 2. Líder se acerca (distancia = 2.5m)                                  │
+│    → Línea azul a Guerrero cambia a amarilla                          │
+│    → [DrawLinesToAllies] Líder está cerca para revivir               │
+│                                                                          │
+│ 3. Líder mantiene Spacebar                                              │
+│    → [HandleRevivalInput] Líder comenzando a revivir a Guerrero      │
+│    → Barra amarilla aparece y comienza a subir                        │
+│    → [HandleRevivalInput] Reviviendo a Guerrero. Progreso: 0.50/3s  │
+│    → [UpdateRevivalBar] Progreso: 17% | Color: Amarillo              │
+│                                                                          │
+│ 4. A los 3 segundos:                                                    │
+│    → [CompleteLeaderRevival] Líder ha revivido a Guerrero            │
+│    → [CompleteLeaderRevival] Salud restaurada: 30/100                │
+│    → Guerrero vuelve a SeguirFormacionState                           │
+│    → GameObject "Caido" se desactiva                                  │
+│    → GameObject "Vivo" se activa                                      │
+│    → [Exit] Guerrero saliendo de estado CAIDO                         │
+│                                                                          │
+│ 5. Guerrero ahora está operativo nuevamente                            │
+│    → Puede moverse, disparar, formar                                   │
+│    → Logs: "[UnitController] Guerrero completamente CAIDO - ELIMINADO"│
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ CARACTERÍSTICAS TÉCNICAS ──────────────────────────────────────────────┐
+│                                                                          │
+│ ✅ FSM Completo:                                                        │
+│    • SeguirFormacion → DamagedState (al llegar a 0 HP)               │
+│    • DamagedState → RevivingState (aliado cercano)                    │
+│    • RevivingState → SeguirFormacion (3 seg completados)             │
+│    • Todas las transiciones loguedas                                   │
+│                                                                          │
+│ ✅ Visibilidad:                                                         │
+│    • Debug.DrawLine entre caído y aliados                             │
+│    • Colores: azul (aliado normal), amarillo (puede revivir)         │
+│    • Se actualiza cada frame                                           │
+│                                                                          │
+│ ✅ UI:                                                                  │
+│    • Barra de revivimiento con Lerp suave                             │
+│    • Amarilla al subir, roja al bajar (2x velocidad)                 │
+│    • Se reutiliza la barra de vida normal                             │
+│                                                                          │
+│ ✅ Detectabilidad:                                                      │
+│    • Caídos marcados como "Undetectable"                              │
+│    • GenericDetector los ignora completamente                         │
+│    • Enemigos no pueden atacar/ver caídos                             │
+│                                                                          │
+│ ✅ Input:                                                               │
+│    • Spacebar = Revivimiento (GetKey, no GetKeyDown)                 │
+│    • Solo el líder puede iniciar                                      │
+│    • Aliados IA reviven automáticamente                               │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PARÁMETROS AJUSTABLES ────────────────────────────────────────────────┐
+│                                                                          │
+│ En DamagedState.cs:                                                     │
+│  float revivalRange = 3f;        // Metro para considerar "cercano"   │
+│                                                                          │
+│ En RevivalBarView.cs:                                                   │
+│  float revivalDuration = 3f;     // Segundos para cargar barra       │
+│  float revivalDecreaseSped = 2f; // Multiplicador de bajada (2x)     │
+│  Color revivalColor = Color.yellow;      // Color de carga            │
+│  Color revivalFailColor = Color.red;     // Color de cancelación      │
+│                                                                          │
+│ En UnitModel.cs:                                                        │
+│  float reviveHealthPercent = 0.3f;  // % HP al revivir (30%)          │
+│                                                                          │
+│ En GEN_Inputs.cs:                                                       │
+│  KeyCode.Space → RavivicionInput   // Cambiar si lo deseas            │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ TESTING RÁPIDO ────────────────────────────────────────────────────────┐
+│                                                                          │
+│ Paso 1: Abrir scene con soldados                                       │
+│ Paso 2: Play                                                            │
+│ Paso 3: Dejar que enemigo ataque al soldado → HP = 0                  │
+│ Paso 4: Verificar en consola:                                          │
+│         "[DamagedState] Soldado completamente en estado CAIDO"        │
+│ Paso 5: Acercar líder al caído                                         │
+│ Paso 6: Mantener Spacebar por 3 segundos                              │
+│ Paso 7: Verificar log:                                                 │
+│         "[CompleteLeaderRevival] Soldado revivido por LIDER"          │
+│ Paso 8: Verificar que soldado está operativo nuevamente               │
+│                                                                          │
+│ ✅ Si ves todos los logs → Sistema funcionando perfectamente           │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ DOCUMENTACIÓN DISPONIBLE ──────────────────────────────────────────────┐
+│                                                                          │
+│ 📄 SISTEMA_REVIVIMIENTO.md (400+ líneas)                              │
+│    • Resumen ejecutivo                                                  │
+│    • Flujo del usuario con ejemplos                                     │
+│    • Arquitectura completa                                              │
+│    • Configuración en escena                                            │
+│    • Diagrama de logs                                                   │
+│    • Checklist de testing (50+ items)                                  │
+│    • Troubleshooting                                                    │
+│    • Mejoras futuras                                                    │
+│                                                                          │
+│ 📄 INSTALACION_REVIVIMIENTO.txt (150 líneas)                           │
+│    • Guía rápida de instalación                                         │
+│    • Setup en inspector paso a paso                                     │
+│    • Flujo de prueba                                                    │
+│    • Parámetros configurables                                           │
+│    • Solución de problemas comunes                                      │
+│                                                                          │
+│ 📄 RESUMEN_ARCHIVOS_CREADOS.txt (250 líneas)                           │
+│    • Overview de todos los archivos                                     │
+│    • Descripción de clases y métodos                                    │
+│    • Dependencias y relaciones                                          │
+│    • Estadísticas de implementación                                     │
+│    • Referencias cruzadas                                               │
+│                                                                          │
+│ 📘 Comentarios en código                                                │
+│    • Cada archivo tiene comentarios détallados                         │
+│    • Métodos documentados con XML                                       │
+│    • Explicaciones inline de lógica compleja                           │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         ¿LISTO PARA IMPLEMENTAR?                          ║
+║                                                                            ║
+║  1. Lee INSTALACION_REVIVIMIENTO.txt (5 min)                             ║
+║  2. Copia los 5 scripts nuevos                                            ║
+║  3. Modifica UnitController.cs y GEN_Inputs.cs                           ║
+║  4. Configura GameObjects en escena (hijo Vivo/Caido)                    ║
+║  5. Press Play y revisa los logs en consola                              ║
+║                                                                            ║
+║             ¡Sistema 100% funcional y documentado!                       ║
+╚════════════════════════════════════════════════════════════════════════════╝

@@ -8995,7 +8995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -60.320007}
+  m_AnchoredPosition: {x: 0, y: -60.319946}
   m_SizeDelta: {x: -136.84, y: 49.089996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &891007836
@@ -24765,12 +24765,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4946472843723618131, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: revivalBarRoot
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946472843723618131, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: revivalBarSprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
       value: Asalto
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5375546348770307832, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+    - {fileID: 5169213738700451309, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}

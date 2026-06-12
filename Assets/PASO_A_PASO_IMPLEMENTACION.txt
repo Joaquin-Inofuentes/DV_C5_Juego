@@ -1,0 +1,203 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║              IMPLEMENTACIÓN PASO A PASO - SISTEMA DE REVIVIMIENTO           ║
+║                      ¡Guía Exacta Para Integrar!                           ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+TIEMPO ESTIMADO: 15-20 minutos
+
+┌─ PASO 1: COPIAR ARCHIVOS (2 minutos) ───────────────────────────────────┐
+│                                                                            │
+│ Copiar ESTOS 6 archivos a Assets/Scenes/Tests/_USP/:                    │
+│                                                                            │
+│ ☐ DamagedState.cs              (300 líneas - nuevas clases)             │
+│ ☐ RevivalBarView.cs             (200 líneas - barra visual)             │
+│ ☐ RevivingState.cs              (250 líneas - estado de revivimiento)   │
+│ ☐ UnitController_Revival.cs      (400 líneas - lógica de revivimiento)  │
+│ ☐ IUnitState.cs                 (20 líneas - interfaz base)             │
+│ ☐ EsperandoState.cs             (100 líneas - estados faltantes)        │
+│ ☐ RevivalSystemSetup.cs         (100 líneas - helper de setup)          │
+│                                                                            │
+│ NOTA: Todos estos archivos están en Assets/ listos para copiar.          │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PASO 2: MODIFICAR ARCHIVOS EXISTENTES (3 minutos) ───────────────────┐
+│                                                                          │
+│ Ya están modificados en tus archivos. Solo REEMPLAZA:                 │
+│                                                                          │
+│ ☐ UnitController.cs     (REEMPLAZAR - contiene cambios integrales)   │
+│ ☐ GEN_Inputs.cs         (REEMPLAZAR - contiene Spacebar input)       │
+│ ☐ UnitView.cs           (YA MODIFICADO - contiene reviving indicator)│
+│                                                                          │
+│ NOTA: Los cambios principales son:                                      │
+│   - UnitController: Llamada a EnterDamagedState() cuando HP = 0      │
+│   - GEN_Inputs: Propiedad RavivicionInput para Spacebar              │
+│   - UnitView: Indicador de "Reviving" agregado                        │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PASO 3: CONFIGURAR EN ESCENA (POR CADA SOLDADO) (10 min) ─────────────┐
+│                                                                          │
+│ PARA CADA UNITCONTROLLER EN LA ESCENA:                                 │
+│                                                                          │
+│ 3.1 - Crear GameObjects hijos                                          │
+│      ┌─────────────────────────────────────────────────────────┐      │
+│      │ En el Inspector:                                         │      │
+│      │ Soldado (GameObject con UnitController)                 │      │
+│      │ ├─ Vivo (nuevo GameObject - ACTIVO)                   │      │
+│      │ │  └─ [Arrastra aquí el SpriteRenderer o gráficos]   │      │
+│      │ └─ Caido (nuevo GameObject - DESACTIVADO)            │      │
+│      │    └─ [Arrastra aquí el sprite de "caído"]           │      │
+│      └─────────────────────────────────────────────────────────┘      │
+│                                                                          │
+│ 3.2 - Agregar RevivalBarView                                           │
+│      ┌─────────────────────────────────────────────────────────┐      │
+│      │ 1. Select el UnitController                            │      │
+│      │ 2. Add Component → RevivalBarView                      │      │
+│      │ 3. Ya está listo (busca Canvas hijo automáticamente)   │      │
+│      └─────────────────────────────────────────────────────────┘      │
+│                                                                          │
+│ 3.3 - Crear Canvas de Revivimiento (OPCIONAL pero recomendado)        │
+│      ┌─────────────────────────────────────────────────────────┐      │
+│      │ 1. Right-click en Soldado → UI → Canvas                │      │
+│      │ 2. Renombrar Canvas a "RevivalBarCanvas"               │      │
+│      │ 3. World Space (important!)                            │      │
+│      │ 4. Agregar Image hijo para la barra                    │      │
+│      │ 5. Renombrar Image a "RevivalBar"                      │      │
+│      │ 6. Configurar Image:                                   │      │
+│      │    - Image Type: Filled                                │      │
+│      │    - Fill Method: Horizontal                           │      │
+│      │    - Fill Origin: Left                                 │      │
+│      │    - Color: Amarillo (1, 1, 0, 1)                      │      │
+│      └─────────────────────────────────────────────────────────┘      │
+│                                                                          │
+│ 3.4 - Verificar UnitModel                                              │
+│      ☐ reviveHealthPercent = 0.3 (30% HP)                             │
+│      ☐ healthMax = 100 (o el valor que uses)                          │
+│                                                                          │
+│ 3.5 - OPCIONAL: Usar RevivalSystemSetup                               │
+│      ┌─────────────────────────────────────────────────────────┐      │
+│      │ 1. Add Component → RevivalSystemSetup                  │      │
+│      │ 2. Presionar el botón "SetupRevivalSystem()"           │      │
+│      │ 3. Esto crea automáticamente Vivo/Caido si no existen │      │
+│      └─────────────────────────────────────────────────────────┘      │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PASO 4: CONFIGURAR TAGS Y LAYERS (1 minuto) ────────────────────────┐
+│                                                                        │
+│ ☐ Crear Tag "Undetectable"                                          │
+│    - Edit → Project Settings → Tags and Layers                       │
+│    - Add Tag "Undetectable"                                          │
+│                                                                        │
+│ NOTA: El sistema automáticamente asigna este tag al caído.          │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PASO 5: COMPILAR Y PROBAR (3 minutos) ──────────────────────────────┐
+│                                                                        │
+│ ☐ Unity debería compilar automáticamente                             │
+│ ☐ Si hay errores CS0103 (tipo no encontrado):                       │
+│   - Revisar que todos los archivos están en la carpeta correcta      │
+│   - Presionar Ctrl+R (reimportar en Unity)                           │
+│                                                                        │
+│ ☐ Abrir la escena con tus soldados                                   │
+│ ☐ Press Play                                                          │
+│ ☐ Ver consola para logs de inicialización                            │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PASO 6: TESTING RÁPIDO (5 minutos) ──────────────────────────────────┐
+│                                                                        │
+│ EN JUEGO:                                                             │
+│                                                                        │
+│ 1. Dejar que un enemigo ataque a un soldado                          │
+│ 2. Cuando HP → 0:                                                    │
+│    ✓ Log: "[DamagedState] Soldado completamente en estado CAIDO"    │
+│    ✓ GameObject "Caido" debe ser visible                             │
+│    ✓ Enemigos deben ignorarlo (no atacan al caído)                   │
+│                                                                        │
+│ 3. Acercar al líder al caído (dentro de 3 metros)                    │
+│    ✓ Línea azul debe cambiar a amarilla (debug)                      │
+│                                                                        │
+│ 4. Mantener Spacebar presionado por 3 segundos                       │
+│    ✓ Barra amarilla debe aparecer y llenarse                         │
+│    ✓ Log: "[HandleRevivalInput] Reviviendo... X/3.00s"              │
+│                                                                        │
+│ 5. A los 3 segundos:                                                 │
+│    ✓ Log: "[CompleteLeaderRevival] Soldado revivido"               │
+│    ✓ GameObject "Caido" debe desactivarse                            │
+│    ✓ GameObject "Vivo" debe activarse                                │
+│    ✓ Soldado debe estar operativo (puede moverse/disparar)           │
+│                                                                        │
+│ ✅ SI VES TODOS ESTOS LOGS → SISTEMA FUNCIONANDO PERFECTO            │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING RÁPIDO ───────────────────────────────────────────────┐
+│                                                                         │
+│ ❌ "CS0246: The type or namespace name X cannot be found"            │
+│    → Revisar que todos los archivos están en la carpeta correcta     │
+│    → Assets/Scenes/Tests/_USP/                                        │
+│                                                                         │
+│ ❌ "NullReferenceException in RevivalBarView"                         │
+│    → Crear Canvas hijo "RevivalBarCanvas" con Image "RevivalBar"     │
+│                                                                         │
+│ ❌ "Caído no entra en modo indetectable"                             │
+│    → Verificar que GenericDetector ignora el tag "Undetectable"      │
+│    → O simplemente no atacar caídos en tu lógica de enemigos         │
+│                                                                         │
+│ ❌ "No puedo revivir presionando Spacebar"                           │
+│    → Verificar que GEN_Inputs.RavivicionInput = true con Space      │
+│    → Revisar que el líder está en LiderandoState                     │
+│    → Ver que el caído está dentro de 3 metros                        │
+│                                                                         │
+│ ❌ "Los logs no aparecen en consola"                                 │
+│    → Abrir Window → General → Console (F12)                          │
+│    → Verificar que Debug.Log no está deshabilitado                   │
+│    → Presionar Play nuevamente                                        │
+│                                                                         │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ PARÁMETROS AJUSTABLES (DESPUÉS DE IMPLEMENTAR) ──────────────────────┐
+│                                                                         │
+│ Si quieres cambiar tiempos/rangos, edita:                            │
+│                                                                         │
+│ DamagedState.cs:                                                      │
+│   float revivalRange = 3f;  // Cambiar si quieres rango diferente   │
+│                                                                         │
+│ RevivalBarView.cs:                                                    │
+│   float revivalDuration = 3f;           // Segundos para cargar      │
+│   float revivalDecreaseSped = 2f;       // 2x velocidad al bajar     │
+│   Color revivalColor = Color.yellow;    // Color de carga            │
+│   Color revivalFailColor = Color.red;   // Color de cancelación      │
+│                                                                         │
+│ UnitModel.cs:                                                         │
+│   float reviveHealthPercent = 0.3f;     // % HP al revivir           │
+│                                                                         │
+│ GEN_Inputs.cs:                                                        │
+│   KeyCode.Space  // Cambiar a otra tecla si lo deseas               │
+│                                                                         │
+└────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         CHECKLIST FINAL                                    ║
+║                                                                            ║
+│ ☐ 7 archivos copiados/modificados                                       │
+│ ☐ UnitController.cs, GEN_Inputs.cs reemplazados                        │
+│ ☐ Cada soldado tiene hijo "Vivo" y "Caido"                            │
+│ ☐ RevivalBarView agregado a cada soldado                              │
+│ ☐ Canvas RevivalBarCanvas con Image creados                           │
+│ ☐ Tag "Undetectable" creado                                           │
+│ ☐ Sin errores de compilación (Ctrl+R si hay dudas)                    │
+│ ☐ Play → Ver logs en consola                                          │
+│ ☐ Probar revivimiento con Spacebar                                    │
+│                                                                            │
+│                ¡LISTO PARA USAR EL SISTEMA!                           │
+╚════════════════════════════════════════════════════════════════════════════╝
+
+PRÓXIMOS PASOS:
+1. Probar revivimiento en diferentes escenas
+2. Ajustar parámetros según tu balance de juego
+3. Agregar sonidos/animaciones de revivimiento (opcional)
+4. Revisar SISTEMA_REVIVIMIENTO.md para funcionalidades avanzadas

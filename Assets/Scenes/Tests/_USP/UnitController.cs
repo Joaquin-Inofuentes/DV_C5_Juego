@@ -1,15 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using Game.Sensors;
 using Game.Core;
 
 namespace Game.Squad
 {
-    public class UnitController : MonoBehaviour, IDaniable, IDetectable
+    public partial class UnitController : MonoBehaviour, IDaniable, IDetectable
     {
         [Header("MVC")]
         public UnitModel model;
         public UnitView view;
+
+        [Header("Estado Caído")]
+        public GameObject vivoGO;
+        public GameObject caidoGO;
 
         [Header("Referencias")]
         public IA_P2_AgentIA agent;
@@ -27,7 +32,9 @@ namespace Game.Squad
 
         // --- IDetectable ---
         public string GetName() => name;
-        public DetectableType GetDetectableType() => model.team == UnitTeam.PlayerTeam ? DetectableType.Aliado : DetectableType.Enemigo;
+        public DetectableType GetDetectableType() =>
+            model.IsDown ? DetectableType.Invisible :
+            model.team == UnitTeam.PlayerTeam ? DetectableType.Aliado : DetectableType.Enemigo;
         public Transform GetTransform() => transform;
 
         void Awake()
@@ -201,7 +208,22 @@ namespace Game.Squad
                 }
             }
 
-            if (model.IsDead) Morir();
+            if (model.IsDead)
+            {
+                if (model.team == Game.Core.UnitTeam.PlayerTeam)
+                {
+                    if (!isDown)
+                    {
+                        EnterDamagedState();
+                        Debug.Log($"[RecibirDano] {name} fue derrotado. Entrando en estado caído");
+                        CheckAllPlayerUnitsDown();
+                    }
+                }
+                else
+                {
+                    Morir();
+                }
+            }
         }
 
         public void OnHealPickup()
@@ -219,9 +241,16 @@ namespace Game.Squad
         private void Morir()
         {
             agent.StopAgent();
-            // Notificar que mor� para liberar el slot si es necesario
             ReleaseSlot();
             Destroy(gameObject, 0.1f);
+        }
+
+        private void CheckAllPlayerUnitsDown()
+        {
+            foreach (var u in FindObjectsOfType<UnitController>())
+                if (u.model.team == UnitTeam.PlayerTeam && !u.IsDown())
+                    return;
+            SceneManager.LoadScene(0);
         }
 
 
@@ -246,8 +275,33 @@ namespace Game.Squad
         // En el Update de UnitController
         void Update()
         {
-            if (model.IsDead) return;
+            if (model.IsDown && !isDown) return; // Prevenir doble entrada a caído
+
+            // Lógica de revivimiento del líder (si está en LiderandoState)
+            if (model.IsLeader && _currentStateLogic is LiderandoState)
+            {
+                UpdateLeaderRevivalInput();
+            }
+
+            // Lógica de IA para aliados: detectar y revivir caídos
+            if (!model.IsLeader && !model.IsDown && !(_currentStateLogic is RevivingState))
+            {
+                CheckForDamagedAllies();
+            }
+
             _currentStateLogic?.Update(this);
+        }
+
+        private void CheckForDamagedAllies()
+        {
+            // Buscar aliados caídos cercanos para revivir
+            UnitController closestDamaged = FindClosestDamagedAlly();
+
+            if (closestDamaged != null && CanReviveAlly(closestDamaged))
+            {
+                LogMethodEntry($"[CheckForDamagedAllies] Detecté aliado caído {closestDamaged.name}. Iniciando revivimiento");
+                StartRevivingAlly(closestDamaged);
+            }
         }
 
         // En el FixedUpdate de UnitController
@@ -256,5 +310,6 @@ namespace Game.Squad
             if (model.IsDead) return;
             _currentStateLogic?.FixedUpdate(this);
         }
+
     }
 }

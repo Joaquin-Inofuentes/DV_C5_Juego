@@ -29,19 +29,17 @@ public class Bala : MonoBehaviour, IDetectable
     void OnEnable()
     {
         if (col == null) col = GetComponent<BoxCollider2D>();
+        if (sr == null) sr = GetComponent<SpriteRenderer>();
+        if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
 
         explotando = false;
 
         if (col != null)
-        {
             col.enabled = true;
-        }
         else
-        {
-            Debug.LogError($"La Bala en {gameObject.name} NO tiene un BoxCollider2D. Agregalo en el inspector.");
-        }
+            Debug.LogError($"La Bala en {gameObject.name} NO tiene BoxCollider2D.");
 
-        sr.sprite = spriteInicio;
+        if (sr != null) sr.sprite = spriteInicio;
         Invoke("CambiarADurante", 0.05f);
         Invoke("Desactivar", 5f);
     }
@@ -54,7 +52,7 @@ public class Bala : MonoBehaviour, IDetectable
         }
     }
 
-    void CambiarADurante() => sr.sprite = spriteDurante;
+    void CambiarADurante() { if (sr != null) sr.sprite = spriteDurante; }
 
     [Header("Efectos y Sonidos Asignados")]
     public string vfxName;
@@ -138,7 +136,7 @@ public class Bala : MonoBehaviour, IDetectable
         {
             explotando = true;
             if (col != null) col.enabled = false;
-            sr.sprite = spriteExplosion;
+            if (sr != null) sr.sprite = spriteExplosion;
             CancelInvoke("Desactivar");
         }
         catch (Exception e)

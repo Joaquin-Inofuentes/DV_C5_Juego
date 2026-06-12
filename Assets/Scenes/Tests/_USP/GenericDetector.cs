@@ -54,6 +54,8 @@ namespace Game.Sensors
             // 2. Comprobar obstrucciones visuales con Raycast
             foreach (var target in targetsInRange)
             {
+                if (target.GetDetectableType() == DetectableType.Invisible) continue;
+
                 Transform targetTransform = target.GetTransform();
                 Vector2 direction = (targetTransform.position - transform.position).normalized;
                 float distance = Vector2.Distance(transform.position, targetTransform.position);
@@ -95,7 +97,8 @@ namespace Game.Sensors
             IDetectable detectable = other.GetComponent<IDetectable>();
             if (detectable != null)
             {
-                if (typesToDetect.Contains(detectable.GetDetectableType()))
+                if (detectable.GetDetectableType() != DetectableType.Invisible &&
+                    typesToDetect.Contains(detectable.GetDetectableType()))
                 {
                     if (!targetsInRange.Contains(detectable))
                     {

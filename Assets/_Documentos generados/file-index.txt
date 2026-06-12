@@ -1,276 +1,6 @@
 ﻿ÍNDICE DE ARCHIVOS
 ================================================================================
 
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\CentralizadorScripts.cs    104 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\Physics2DMigrator.cs    239 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\CodeGen\Fusion.CodeGen.cs   7423 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\CodeGen\Fusion.CodeGen.User.cs      8 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\Fusion.Unity.Editor.AssemblyAttributes.cs     19 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\Fusion.Unity.Editor.cs  15148 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionEditorConfigImporter.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionEditorSkin.cs    109 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionHubWindow.cs    264 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionRunnerVisibilityControlsWindow.cs    351 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionWeaverTriggerImporter.cs     65 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkPrefabsInspector.cs    304 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkProjectConfigImporter.cs    238 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkProjectConfigImporterEditor.cs    141 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Fusion.Unity.AssemblyAttributes.cs     19 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Fusion.Unity.cs   4336 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionAddressablePrefabsPreloader.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBasicBillboard.cs     75 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBootstrap.cs    676 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBootstrapDebugGUI.cs    359 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkCharacterController.cs    156 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkObjectProviderDefault.cs     97 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkSceneManagerDefault.cs    846 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatistics.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraph.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraphCombine.cs    139 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatistics.cs    262 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsCanvas.cs    207 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsConfig.cs    107 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsGraphDefault.cs     59 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsPanelHeader.cs    283 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsWorldAnchor.cs     25 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\EnableOnSingleRunner.cs    121 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerAOIGizmos.cs     85 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerEnableVisibility.cs     85 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerLagCompensationGizmos.cs     80 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLink.cs    246 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLinksRoot.cs     16 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs    352 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs    347 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Demo\CI_ExampleScene.cs     48 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Demo\DocumentationInfo.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\CodeSnippets.cs   2282 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\Descriptions.cs    540 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\DocWelcomeSite.cs    168 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\GuidanceWindow.cs    247 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\PropertyDList.cs    273 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\SnippetsReader.cs    471 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Documentation\Editor\Implementation\TestClass.cs     15 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\AttributeStyles.cs    403 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\ComparablePropertyAttribute.cs     61 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\AnimatorParameterAttribute.cs     24 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\AsButtonAttribute.cs     27 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\AsRangeAttribute.cs     25 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\AssetsOnlyAttribute.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\BackgroundColorAttribute.cs     29 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ButtonAttribute.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ColorPaletteAttribute.cs     25 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\CopyPasteAttribute.cs     21 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\DecimalsAttribute.cs     19 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\Delayed2Attribute.cs     13 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\DisplayAutoPropertyAttribute.cs     36 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\FixedValuesAttribute.cs     19 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\FoldoutAttribute.cs     18 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ForceFillAttribute.cs     89 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\FromChildrenAttribute.cs     22 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\GetSetAttribute.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\GUIColorAttribute.cs     34 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\Header2Attribute.cs     41 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\HideFieldAttribute.cs     22 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\HookAttribute.cs     50 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\HorizontalGroupAttribute.cs     33 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\HorizontalLineAttribute.cs     81 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\IMinMaxAttribute.cs     11 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\IndentAttribute.cs     24 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\InspectorIconAttribute.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\LabelSettingsAttribute.cs     32 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\LayerAttribute.cs     18 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\MaskAttribute.cs     44 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\MaxAttribute.cs     45 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\MessageBoxAttribute.cs     27 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\Min2Attribute.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\MultipleOfAttribute.cs     71 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\PreviewAttribute.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ProgressBarAttribute.cs     57 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ReadOnlyAttribute.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\RequireHasComponentAttribute.cs     41 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\RequireTypeAttribute.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\RichTextAttribute.cs     18 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\SceneAttribute.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\SelfFillAttribute.cs     77 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ShowAssetReferenceAttribute.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ShowIfAttribute.cs    161 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ShowIfIsAttribute.cs     46 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ShowMethodAttribute.cs     35 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ShowPropertyAttribute.cs     43 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\Space2Attribute.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\TabAttribute.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\TagAttribute.cs     12 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ToolbarAttribute.cs     49 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\TooltipBoxAttribute.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\UnfoldAttribute.cs     18 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\UnitAttribute.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\UnwrapAttribute.cs     21 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\URLAttribute.cs     22 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Attributes\PropertyAttribute\ValidateAttribute.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\CustomEditors.cs     36 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\AnimatorParameterAttributeDrawer.cs    150 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\AsButtonAttributeDrawer.cs    168 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\AsRangeAttributeDrawer.cs    104 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\AssetsOnlyAttributeDrawer.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\BackgroundColorAttributeDrawer.cs     38 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ButtonAttributeDrawer.cs    255 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ColorPaletteAttributeDrawer.cs    413 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\CopyPasteAttributeDrawer.cs    181 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\DecimalsAttributeDrawer.cs     66 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\Delayed2AttributeDrawer.cs    159 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\DisplayAutoPropertyDrawer.cs     98 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\FixedValuesAttributeDrawer.cs     60 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\FoldoutAttributeDrawer.cs    220 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ForceFillAttributeDrawer.cs    173 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\FromChildrenAttributeDrawer.cs    192 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\GetSetAttributeDrawer.cs    224 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\GUIColorAttributeDrawer.cs     63 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\Header2AttributeDrawer.cs     99 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\HideFieldAttributeDrawer.cs     64 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\HookAttributeDrawer.cs    230 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\HorizontalGroupAttributeDrawer.cs    291 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\HorizontalLineAttributeDrawer.cs    129 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\IndentAttributeDrawer.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\InspectorIconAttributeDrawer.cs     69 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\LabelSettingsAttributeDrawer.cs     29 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\LayerAttributeEditorDrawer.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\MaskAttributeDrawer.cs    297 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\MessageBoxDrawer.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\MinMaxAttributeDrawer.cs    223 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\MultipleOfAttributeDrawer.cs    130 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\PreviewAttributeDrawer.cs     90 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ProgressBarAttributeDrawer.cs    219 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ReadOnlyAttributeDrawer.cs    102 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\RequireHasComponentAttributeDrawer.cs    138 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\RequireTypeAttributeDrawer.cs     38 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\RichTextAttributeDrawer.cs    210 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\SceneAttributeDrawer.cs     66 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\SelfFillAttributeDrawer.cs    237 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ShowAssetReferenceAttributeDrawer.cs     93 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ShowIfAttributeDrawer.cs    361 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ShowIfIsAttributeDrawer.cs    109 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ShowMethodDrawer.cs    108 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ShowPropertyAttributeDrawer.cs    248 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\Space2AttributeDrawer.cs     30 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\TabAttributeDrawer.cs    312 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\TagAttributeDrawer.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ToolbarAttributeDrawer.cs     67 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\TooltipBoxAttributeDrawer.cs     61 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\UnfoldAttributeDrawer.cs     46 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\UnitAttributeDrawer.cs     57 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\UnwrapAttributeDrawer.cs     79 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\URLAttributeDrawer.cs     63 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Attributes\PropertyDrawer\ValidateAttributeDrawer.cs    161 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\Array2DDrawer.cs    151 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\AssetPathDrawer.cs    273 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\DynamicSliderDrawer.cs    141 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\LineGraphDrawer.cs    258 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\ListContainerDrawer.cs     65 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\MessageDrawerDrawer.cs     87 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\SerializableDateTimeDrawer.cs    181 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\SerializableInterfaceDrawer.cs     46 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\SerializableNullableDrawer.cs     66 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\StaticsDrawerDrawer.cs    124 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\TupleDrawer.cs     68 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\Sets\DictionaryDrawer.cs    552 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Editor\Types\Sets\SetDrawer.cs    272 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\DebugTest.cs     76 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\InternalStyles.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\UnityParsing.cs    191 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\Common.cs    147 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\DirtyValue.cs    338 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\DrawProperties.cs    674 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\EditProperties.cs    137 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\Exceptions.cs     24 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\GUIColorScope.cs     43 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\InternalEditorStylesConvert.cs     44 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\InvokableMethod.cs    129 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\LabelContent.cs     19 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\LabelWidthScope.cs     24 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\NewIndentLevel.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\NewWideModeScope.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\PropertyConversions.cs    462 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\PropertyIdentifiers.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\PropertyValues.cs    523 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\PropInfoCache.cs     46 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Helpers\Editor\TypedPropertyDrawer.cs     74 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Array2D.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\ArrayContainer.cs    451 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\DynamicSlider.cs    111 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\LineGraph.cs    107 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\ListContainer.cs    167 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\MessageDrawer.cs     95 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\SerializableDateTime.cs    103 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\SerializableInterface.cs     99 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\SerializableNullable.cs    101 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\SerializableTuple.cs    154 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\StaticsDrawer.cs     51 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\AssetPath\AssetPath.cs    178 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\AssetPath\FilePath.cs     93 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\AssetPath\FolderPath.cs    211 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Sets\ReorderableDictionary.cs    168 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Sets\SerializableDictionary.cs    448 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Sets\SerializableSet.cs    220 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Sets\SerializableSortedDictionary.cs     75 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\Custom Inspector\Modules\Types\Sets\SerializableSortedSet.cs    288 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\ClonesManager.cs    693 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\ClonesManagerWindow.cs    199 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\ExternalLinks.cs     13 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\FileUtilities.cs     31 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\ParrelSyncProjectSettings.cs    140 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\Preferences.cs    216 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\Project.cs    112 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\UpdateChecker.cs     61 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\ValidateCopiedFoldersIntegrity.cs     73 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\AssetModBlock\EditorQuit.cs     22 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\AssetModBlock\ParrelSyncAssetModificationProcessor.cs     34 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\NonCore\AskFeedbackDialog.cs     78 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\ParrelSync\Editor\NonCore\OtherMenuItem.cs     26 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\VFXPACK_IMPACT_WALLCOEUR_FreeVersion\Scripts\DropdownController.cs     70 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\VFXPACK_IMPACT_WALLCOEUR_FreeVersion\Scripts\VfxController.cs     32 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\DesactivarPorTimer.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\IInteractable.cs      8 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\ShotImpactBus.cs     27 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\CollisionDetector.cs     69 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\DebugColisionesFull.cs    115 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\AmmoManager.cs     41 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Bala.cs    135 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\BalaPool.cs     74 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\ControlDerrota.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\CursorManager.cs     84 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Destruible.cs     35 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Disparador.cs     37 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\EnemyModel.cs     98 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\EnemyView.cs     76 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\FormationRelocator.cs     96 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GameManager.cs    188 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GenericDetector.cs    137 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GEN_Inputs.cs    101 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GlobalData.cs     11 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GlobalHUD.cs     54 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_AgentIA.cs    234 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_PathfindingModel.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_PathNode.cs    145 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\InteractableItem.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\LeaderManager.cs    113 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\LiderandoState.cs    291 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MainGameController.cs     49 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Manager_VFX.cs    136 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MarkerAnim.cs     35 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MenuPausa.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Municion.cs     21 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\PositionManager.cs     41 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\RehenBruto.cs     68 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\ShotSensor.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\TickManager.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitCommander.cs    135 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitController.cs    260 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitIndicatorSetup.cs     23 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitModel.cs     47 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitPathRenderer.cs     48 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitStates.cs     10 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitTeam.cs      9 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitView.cs    218 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\BD_Audios.cs    234 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Camara.cs     24 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CodigoDeInicio.cs     21 líneas
@@ -286,31 +16,19 @@ C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SenalisacionAEnemigos.cs 
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SistemaPuntaje.cs     12 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Torreta.cs     35 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\VibracionCamara.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\CambioDeLider.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\UnitFSM.cs    156 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\CharacterControllerMVC.cs     89 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\ICharacterInput.cs     15 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\IMovementHandler.cs     13 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\IWeaponInput.cs     12 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\UnityCharacterInput.cs     42 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\UnityWeaponInput.cs     35 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\WeaponControllerMVC.cs    118 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Sensors\DetectableEntity.cs     21 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Sensors\IDetectable.cs     18 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Squad\SquadEventBus.cs     30 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Nuevos\SelectedSoldierUIFeedback.cs     14 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\CharacterModel.cs    100 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\IDaniable.cs     20 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\InformacionPersonaje.cs    214 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\Interfaces.cs     32 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\WeaponModel.cs    128 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\CharacterView.cs     54 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\ControladorTanque.cs    216 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Enemigo.cs    236 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\EntrarAlTanque.cs    163 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\PlayerController.cs    186 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Puntero_Tanque.cs     49 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Tanque.cs    228 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Cohete.cs     61 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Proyectil.cs    153 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Proyectil2.cs     35 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\WeaponController.cs     92 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\WeaponView.cs    153 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\UI\CambiarOpacidad.cs     46 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\UI\Soldado_Anim.cs     48 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\AutoDestruccionSegura.cs     28 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\CrearYDestruir.cs     27 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\IA_P2_BusEvent_Manager.cs     40 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\PersecucionEnemigo.cs     79 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\ProxiesUSP.cs     58 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\Rigidbody2DMovementHandler.cs     77 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_F_ChangeMode.cs     92 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_F_ControllerSeguidor.cs     89 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_F_EnemyCercanos.cs     20 líneas
@@ -324,16 +42,115 @@ C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_P2_ST_ChaseS
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_P2_ST_PatrolState.cs    126 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_P2_ST_ReturningToPatrolState.cs    105 líneas
 C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\IA\IA_P2_ST_SearchingState.cs     53 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\AutoDestruccionSegura.cs     28 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\CrearYDestruir.cs     27 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\IA_P2_BusEvent_Manager.cs     40 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\PersecucionEnemigo.cs     79 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\ProxiesUSP.cs     58 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Services\Rigidbody2DMovementHandler.cs     69 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\UI\CambiarOpacidad.cs     46 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\UI\Soldado_Anim.cs     48 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Cohete.cs     61 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Proyectil.cs    153 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\Proyectil2.cs     35 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\WeaponController.cs     92 líneas
-C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Weapons\WeaponView.cs    153 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\CharacterView.cs     54 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\ControladorTanque.cs    216 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Enemigo.cs    236 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\EntrarAlTanque.cs    163 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\PlayerController.cs    179 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Puntero_Tanque.cs     49 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Entities\Tanque.cs    228 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\CharacterModel.cs    100 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\IDaniable.cs     20 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\InformacionPersonaje.cs    214 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\Interfaces.cs     32 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\SC_USP\Core\WeaponModel.cs    128 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\Nuevos\SelectedSoldierUIFeedback.cs     14 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\CharacterControllerMVC.cs     89 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\ICharacterInput.cs     15 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\IMovementHandler.cs     13 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\IWeaponInput.cs     12 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\UnityCharacterInput.cs     42 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\UnityWeaponInput.cs     35 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\WeaponControllerMVC.cs    118 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Squad\SquadEventBus.cs     51 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Sensors\DetectableEntity.cs     21 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\MVC\Sensors\IDetectable.cs     19 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\CambioDeLider.cs     42 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scripts\CambioDeSoldado\UnitFSM.cs    156 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\AmmoManager.cs     41 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Bala.cs    163 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\BalaPool.cs     74 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\ControlDerrota.cs     40 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\CursorManager.cs     84 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Destruible.cs     35 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Disparador.cs     85 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\EnemyModel.cs     98 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\EnemyView.cs     76 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\FormationRelocator.cs    141 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GameManager.cs    188 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GenericDetector.cs    137 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GEN_Inputs.cs    101 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GlobalData.cs     11 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\GlobalHUD.cs     15 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_AgentIA.cs    241 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_PathfindingModel.cs     92 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\IA_P2_PathNode.cs    145 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\InteractableItem.cs     85 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\LeaderManager.cs    172 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\LiderandoState.cs    357 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MainGameController.cs     71 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Manager_VFX.cs    136 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MarkerAnim.cs     35 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\MenuPausa.cs     40 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\Municion.cs     21 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\PositionManager.cs     41 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\RehenBruto.cs     68 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\ShotSensor.cs     23 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\TickManager.cs     42 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitCommander.cs    184 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitController.cs    260 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitIndicatorSetup.cs     23 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitModel.cs     67 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitPathRenderer.cs     48 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitStates.cs     10 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitTeam.cs      9 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Tests\_USP\UnitView.cs    218 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\DesactivarPorTimer.cs     23 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\IInteractable.cs      8 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\ShotImpactBus.cs     27 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\CollisionDetector.cs     76 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Scenes\Base\Balas\DebugColisionesFull.cs    115 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\VFXPACK_IMPACT_WALLCOEUR_FreeVersion\Scripts\DropdownController.cs     70 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Plugins\VFXPACK_IMPACT_WALLCOEUR_FreeVersion\Scripts\VfxController.cs     32 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs    352 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs    347 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Fusion.Unity.AssemblyAttributes.cs     19 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Fusion.Unity.cs   4336 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionAddressablePrefabsPreloader.cs     42 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBasicBillboard.cs     75 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBootstrap.cs    676 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\FusionBootstrapDebugGUI.cs    359 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkCharacterController.cs    156 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkObjectProviderDefault.cs     97 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\NetworkSceneManagerDefault.cs    846 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\EnableOnSingleRunner.cs    121 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerAOIGizmos.cs     85 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerEnableVisibility.cs     85 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerLagCompensationGizmos.cs     80 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLink.cs    246 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Utilities\RunnerVisibility\RunnerVisibilityLinksRoot.cs     16 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatistics.cs     31 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraph.cs     92 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionNetworkObjectStatsGraphCombine.cs    139 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatistics.cs    262 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsCanvas.cs    207 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsConfig.cs    107 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsGraphDefault.cs     59 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsPanelHeader.cs    283 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Runtime\Statistics\FusionStatsWorldAnchor.cs     25 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\Fusion.Unity.Editor.AssemblyAttributes.cs     19 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\Fusion.Unity.Editor.cs  15148 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionEditorConfigImporter.cs     23 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionEditorSkin.cs    109 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionHubWindow.cs    264 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionRunnerVisibilityControlsWindow.cs    351 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\FusionWeaverTriggerImporter.cs     65 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkPrefabsInspector.cs    304 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkProjectConfigImporter.cs    238 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\Editor\NetworkProjectConfigImporterEditor.cs    141 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\CodeGen\Fusion.CodeGen.cs   7423 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Photon\Fusion\CodeGen\Fusion.CodeGen.User.cs      8 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\CentralizadorScripts.cs    104 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\ComponentPropertiesCopier.cs    522 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\ComponentPropertiesCopierTestMenu.cs     76 líneas
+C:\Users\PC_JOACO\Documents\DV_C5_Juego\Assets\Editor\Physics2DMigrator.cs    239 líneas

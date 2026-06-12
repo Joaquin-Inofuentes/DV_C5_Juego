@@ -1,0 +1,3955 @@
+class BD_Audios {
+  - Sonidos : Dictionary[string, AudioSource]
+  - OnEnable() : void
+  - Update() : void
+  - ValidarYLimpiarSonidos() : void
+  + ReproducirAudioUnaVez(string nombre) : void
+  + DetenerAudio(string nombre) : void
+  + ReproducirConSolapamiento(string palabraClave) : bool
+  + CargarAudios() : void
+  + ObtenerSonidoPorNombre(string nombre) : AudioSource
+  + ReproducirBucleConVolumen(string palabraClave, bool esCancionFondo, float volumen) : bool
+}
+
+class CoroutineHelper {
+  - _instance : CoroutineHelper
+  + Instance : CoroutineHelper
+  - Awake() : void
+}
+
+class Camara {
+  - target : Transform
+  - offset : float
+  - smoothSpeed : float
+  - Update() : void
+  - LateUpdate() : void
+}
+
+class CodigoDeInicio {
+  - Start() : void
+  - Update() : void
+}
+
+class ConfiguracionGlobal <<static>> {
+  - coeficienteDificultad : float
+  - coeficienteDanioEnemigo : float
+  - coeficienteVidaJugador : float
+  - puntajeParaGanar : int
+  - tiempoEsperaVictoria : float
+  - duracionVibracionCamara : float
+  - intensidadVibracionDisparo : float
+  - intensidadVibracionGranada : float
+  - duracionVibracionMovilDisparo : long
+  - duracionVibracionMovilGranada : long
+}
+
+class GestorTexto {
+  - textoRecogido : Text
+  - temporizadorOcultarTexto : float
+  - tiempoDeVisibilidad : float
+  - textoVisible : bool
+  - Start() : void
+  - Update() : void
+  - BuscarTextoRecogido() : void
+  + MostrarTexto(string mensaje) : void
+  - OcultarTexto() : void
+}
+
+class Ideasypseudocodigos {
+  - Start() : void
+  - Update() : void
+}
+
+class IndicadorEnemigos {
+  - gameManager : GameManager
+  - texturaIndicador : Texture2D
+  - desface : float
+  - camara : Camera
+  - _pool : List[Image]
+  - _spriteIndicador : Sprite
+  - Update() : void
+  - ObtenerIndicador(int index) : Image
+}
+
+class MenuVictoria {
+  - NombreDeLaEscenaDeJuego : string
+  + SalirDelJuego() : void
+  + ContinuarJugando() : void
+}
+
+class Obstaculo {
+  - Start() : void
+  - Update() : void
+}
+
+class PickUp {
+  - OnTriggerEnter2D(Collider2D other) : void
+}
+
+class Prueba_de_color {
+  - Start() : void
+  - Update() : void
+}
+
+class SenalizacionDeEnemigos {
+  - prefabFlecha : GameObject
+  - distanciaVisible : float
+  - tiempoEntreActualizaciones : float
+  - objetoFlechas : Transform
+  - enemigosTransform : List[Transform]
+  - flechasActivas : List[GameObject]
+  - Start() : void
+  - ActualizarEnemigos() : IEnumerator
+  - Update() : void
+}
+
+class SistemaPuntaje {
+}
+
+class Torreta {
+  - TorretaPrefab : GameObject
+  - TorretaTransform : Transform
+  - Rango : float
+  - player : Transform
+  - Start() : void
+  - Update() : void
+}
+
+class VibracionCamara {
+  - posicionOriginal : Vector3
+  - tiempoRestante : float
+  - intensidadActual : float
+  - Start() : void
+  - Update() : void
+  + IniciarVibracion(float intensidad) : void
+}
+
+class Cohete {
+  - velocidadCohete : float
+  - objetivo : Vector3
+  - haLlegado : bool
+  - DañoQueCausaElProyectil : int
+  + SetObjetivo(Vector3 nuevoObjetivo) : void
+  - OnCollisionEnter2D(Collision2D col) : void
+  - Explotar() : void
+  - Update() : void
+  - MoverHaciaObjetivo() : void
+  - ExpandirYDestruir() : IEnumerator
+}
+
+class Proyectil {
+  - velocidadInicial : float
+  - dano : float
+  - rb2D : Rigidbody2D
+  - esBomba : bool
+  - tiempoVida : float
+  - efectoSangrePrefab : GameObject
+  - efectoImpactoPrefab : GameObject
+  - PuntoDeOrigen : Vector3
+  - owner : GameObject
+  + OnEnable() : void
+  - Start() : void
+  - OnCollisionEnter2D(Collision2D collision) : void
+  - SpawnearEfecto(GameObject prefab, Collision2D col) : void
+  - DestruirBala() : void
+  - DesaparecerBala() : void
+}
+
+class Proyectil2 {
+  - velocidad : float
+  - tiempoDeVida : float
+  - explosionPrefab : GameObject
+  - Start() : void
+  - FixedUpdate() : void
+  - OnCollisionEnter2D(Collision2D collision) : void
+}
+
+class WeaponController {
+  - model : WeaponModel
+  - view : WeaponView
+  - IndicadorDeBalas : string
+  - hasInputAuthority : bool
+  - input : IWeaponInput
+  - controllerMVC : WeaponControllerMVC
+  - Start() : void
+  - Update() : void
+  - ValidarListasModelo() : void
+  - OnDestroy() : void
+}
+
+class WeaponView {
+  - modelosArmas : GameObject[]
+  - modelosArmas1 : GameObject[]
+  - cambiarOpacidad : CambiarOpacidad
+  - origenDisparo : Transform
+  - prefabBala : GameObject
+  - proyectil : Proyectil
+  - infoPersonaje : InformacionPersonaje
+  - textoMunicionLegacy : Text
+  + UpdateActiveModels(int currentWeaponIndex) : void
+  + SetProyectilDamage(float damage) : void
+  + SpawnBala() : void
+  + PlaySound(string soundName) : void
+  + TriggerFlash() : void
+  - EfectoDisparoFlash() : IEnumerator
+  + UpdateUI() : void
+  + UpdateAmmoUI(string ammoText) : void
+}
+
+class CambiarOpacidad {
+  - esTransparente : bool
+  - nivelOpacidad : float
+  - tiempoDeOpacidad : float
+  - renderizador : Renderer
+  - material : Material
+  - colorOriginal : Color
+  - tieneColor : bool
+  - ultimoEstado : bool?
+  - Start() : void
+  - Update() : void
+}
+
+class Soldado_Anim {
+  - anim : Animator
+  - EstaCaminando : bool
+  - Start() : void
+  - Update() : void
+}
+
+class AutoDestruccionSegura {
+  - tiempoDeVidaEfecto : float
+  - appIsQuitting : bool
+  - Start() : void
+  - OnApplicationQuit() : void
+  - OnDestroy() : void
+}
+
+class CrearYDestruir {
+  - PrefabDeSangre : GameObject
+  - appIsQuitting : bool
+  - OnApplicationQuit() : void
+  + OnDestroy() : void
+}
+
+class IA_P2_BusEvent_Manager {
+  - botonBuscarAgentes : string
+  - agentes : List[IA_P2_FSM]
+  - OnEnemyFound : Action[GameObject]
+  - ultimaPosicionVisto : Vector3
+  - ultimoEnemigoVisto : GameObject
+  - OnEnable() : void
+  + BuscarAgentesEnEscena() : void
+  + NotificarEncontrado(GameObject enemigo, string NombreDelOrigen) : void
+}
+
+class PersecucionEnemigo {
+  - objetivo : Transform
+  - velocidadMovimiento : float
+  - distanciaDetenerse : float
+  - enemigoScript : Enemigo
+  - distanciaVisible : float
+  - Start() : void
+  - Update() : void
+  - PerseguirJugador() : void
+  + MirarJugador() : void
+}
+
+class MovementProxy {
+  + MoveTo(IMovable unit, Vector3 target) : void
+  + Stop(IMovable unit) : void
+}
+
+class ShootingProxy {
+  + Shoot(IAttackable unit) : void
+}
+
+class AIProxy {
+  + CanSeeTarget(Transform agent, Transform target, float viewDistance, LayerMask obstacleMask) : bool
+}
+
+class UIProxy {
+  + UpdateHealthBar(Transform bar, float current, float max) : void
+}
+
+class Rigidbody2DMovementHandler {
+  - graphicsRoot : Transform
+  + Move(Transform targetTransform, Rigidbody2D rb2D, Vector2 direction, float speed) : void
+  + TranslateDirectional(Transform targetTransform, string direction, float speed) : void
+  + RotateTowards(Transform targetTransform, Vector3 targetPosition) : void
+  + Jump(Transform targetTransform, Rigidbody2D rb2D, float jumpForce) : void
+}
+
+class IA_F_ChangeMode {
+  - agentIA : IA_P2_AgentIA
+  - objetivoEnemigo : GameObject
+  - Update() : void
+  + CambiarDeModo() : void
+  + CambiarDeModo(bool ModoIA) : void
+  + OrdenarAtaque() : void
+}
+
+class IA_F_ControllerSeguidor {
+  - Posicion : GameObject
+  - target : GameObject
+  - agent : IA_P2_AgentIA
+  - Enemigos : List[GameObject]
+  - obstacleLayer : LayerMask
+  - Cercanos : IA_F_EnemyCercanos
+  - Update() : void
+  - ObtenerEnemigo() : GameObject
+  + EsVisible(Transform PosibleEnemigo) : bool
+}
+
+class IA_F_EnemyCercanos {
+  - Colisionados : List[GameObject]
+  + OnCollisionEnter2D(Collision2D collision) : void
+  + OnCollisionExit2D(Collision2D collision) : void
+}
+
+class IA_F_PathFinding_Theta <<static>> {
+  + OptimizarConTheta(List[Vector3] recorridoAStar, LayerMask obstacleLayer) : List[Vector3]
+}
+
+class IA_P2_FOV {
+  - fovAngle : float
+  - viewDistance : float
+  - visionObstacles : LayerMask
+  - targetLayer : LayerMask
+  - OnTargetDetected : Action[GameObject]
+  - OnTargetLost : Action[GameObject]
+  - enemiesInTrigger : List[GameObject]
+  - resolution : int
+  - fovColor : Color
+  - detectionColor : Color
+  - lostTargetColor : Color
+  - _visibleTargets : List[GameObject]
+  - _currentlyVisibleTargets : HashSet[GameObject]
+  - Update() : void
+  - ProcessTarget(GameObject target) : void
+  - OnTriggerEnter2D(Collider2D other) : void
+  - OnTriggerExit2D(Collider2D other) : void
+  - IsInFOV(Transform target) : bool
+  - HasLineOfSight(Transform target) : bool
+  - Reset() : void
+  - OnValidate() : void
+}
+
+enum AgentState {
+  - Patrolling : enum
+  - Chasing : enum
+  - Searching : enum
+  - ReturningToPatrol : enum
+}
+
+class IA_P2_FSM {
+  - agent : IA_P2_AgentIA
+  - patrolWaypoints : List[Transform]
+  - target : GameObject
+  - lastKnownPosition : Vector3
+  - currentStateEnum : AgentState
+  - _previousStateTracker : AgentState
+  - _patrolState : IA_P2_INT_gentState
+  - _chaseState : IA_P2_INT_gentState
+  - _searchingState : IA_P2_INT_gentState
+  - _returningState : IA_P2_INT_gentState
+  - _currentState : IA_P2_INT_gentState
+  - NotificacionDeEnemigoVisible : IA_P2_FOV
+  - OnEnable() : void
+  - OnDisable() : void
+  + LoPerdiDeVision(GameObject objetivoPerdido) : void
+  + PerseguirEnemigo(GameObject enemigo) : void
+  - Update() : void
+  + TransitionTo(AgentState stateKey) : void
+  + IsPlayerVisible() : bool
+  + ToggleState() : void
+  + DibujarRutaPatrulla() : void
+  + SePerdioElObjetivo() : void
+}
+
+interface IA_P2_INT_gentState {
+  + Enter(IA_P2_FSM context) : void
+  + Execute(IA_P2_FSM context) : void
+  + Exit(IA_P2_FSM context) : void
+}
+
+class IA_P2_LineOfSight3D <<static>> {
+  + Check(Vector3 from, Vector3 to, LayerMask obstacleLayer) : bool
+}
+
+class IA_P2_PathfindingManager <<static>> {
+  + RequestPath(Vector3 Origen, Vector3 targetPos, float stopOffset = 0f) : List[Vector3]
+  - GetOffsetTarget(Vector3 from, Vector3 to, float offset) : Vector3
+  - FindKClosestVisibleNodes(Vector3 pos, int k, LayerMask obstacleLayer) : List[IA_P2_PathNode]
+  - RunAStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, Dictionary[IA_P2_PathNode, float] g) : AStarResult
+  - Reconstruct(Dictionary[IA_P2_PathNode, IA_P2_PathNode] came, IA_P2_PathNode end) : List[IA_P2_PathNode]
+  - ReconstructPartial(Dictionary[IA_P2_PathNode, IA_P2_PathNode] came, IA_P2_PathNode end) : List[IA_P2_PathNode]
+  - RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, LayerMask obstacle) : ThetaStarResult
+  - IsAvoidable(GameObject obj) : bool
+  - CalculateAvoidancePoint(Vector3 from, Vector3 to, RaycastHit2D hit, LayerMask layer) : Vector3
+  + DrawDebugCircle(Vector3 center, float radius, Color color, float duration) : void
+  - DrawDebugCross(Vector3 center, float size, Color color, float duration) : void
+  - CheckPathWithAvoidance(Vector3 start, Vector3 end, LayerMask layer) : List[Vector3]
+  - ReconstructPathWithAvoidance(Dictionary[IA_P2_PathNode, IA_P2_PathNode] parentMap, Dictionary[IA_P2_PathNode, Vector3] avoidanceMap, IA_P2_PathNode current) : List[Vector3]
+}
+
+class AStarResult {
+  - path : List[IA_P2_PathNode]
+  - cost : float
+}
+
+class FinalPathResult {
+  - path : List[Vector3]
+  - totalCost : float
+}
+
+class NodeDistance {
+  - node : IA_P2_PathNode
+  - distance : float
+}
+
+class ThetaStarResult {
+  - path : List[Vector3]
+  - cost : float
+}
+
+class IA_P2_ST_ChaseState {
+  - _goingToLastKnown : bool
+  + Enter(IA_P2_FSM context) : void
+  + Execute(IA_P2_FSM context) : void
+  + Exit(IA_P2_FSM context) : void
+}
+
+class IA_P2_ST_PatrolState {
+  - _currentWaypoint : int
+  - _registrada : Vector3
+  - _lastGoToTime : float
+  - _cooldown : float
+  - _ultimoDestino : Vector3
+  - _distanciaMinima : float
+  + Enter(IA_P2_FSM context) : void
+  + Execute(IA_P2_FSM context) : void
+  + Exit(IA_P2_FSM context) : void
+  - DrawAllWaypoints(IA_P2_FSM context) : void
+}
+
+class IA_P2_ST_ReturningToPatrolState {
+  - _patrolDestination : Vector3
+  - _nextRetryTime : float
+  - RETRY_EVERY : float
+  - _retryCount : int
+  - MAX_RETRIES : int
+  + Enter(IA_P2_FSM context) : void
+  + Execute(IA_P2_FSM context) : void
+  + Exit(IA_P2_FSM context) : void
+  - TryGoToPatrol(IA_P2_FSM context) : void
+}
+
+class IA_P2_ST_SearchingState {
+  - _alertTimer : float
+  - ALERT_TIME : float
+  + Enter(IA_P2_FSM context) : void
+  + Execute(IA_P2_FSM context) : void
+  + Exit(IA_P2_FSM context) : void
+}
+
+class CharacterView {
+  - soldadoJugador : GameObject
+  - camaraPrincipal : Camera
+  - cursor : GameObject
+  - origenGranada : Transform
+  - prefabGranada : GameObject
+  + UpdateCursorPosition(Vector3 position) : void
+  + SyncCameraPosition() : void
+  + SpawnGrenade() : void
+}
+
+class ControladorTanque {
+  - velocidadTanque : float
+  - rotacionTanque : float
+  - proyectilPrefab : GameObject
+  - puntoDisparo : Transform
+  - controlActivo : bool
+  - rb2D : Rigidbody2D
+  - InterfazDelSoldado : GameObject
+  - InterfazDelTanque : GameObject
+  - velocidadActual : float
+  - velocidadMaxima : float
+  - aceleracionTanque : float
+  - desaceleracionTanque : float
+  - friccionPiso : float
+  - canon : GameObject
+  - texto : TextMeshProUGUI
+  - muriendo : bool
+  - disparoSolicitado : bool
+  - vida : int
+  - Start() : void
+  - Update() : void
+  - MoverTanque() : void
+  - ApuntarCanon() : void
+  - FixedUpdate() : void
+  + ActivarControlTanque() : void
+  + DesactivarControlTanque() : void
+  - DispararProyectil() : void
+  - OnCollisionEnter2D(Collision2D collision) : void
+}
+
+class Enemigo {
+  - DialogoEnemigo : Text
+  - objetivo : Transform
+  - prefabBala : GameObject
+  - puntoDisparo : Transform
+  - velocidadBala : float
+  - vidaActual : float
+  - vidaMaxima : float
+  - armadura : float
+  - puntosPorEliminar : int
+  - gameManager : GameManager
+  - puedeDisparar : bool
+  - estaDisparando : bool
+  - tiempoEntreDisparos : float
+  - temporizadorDisparo : float
+  - muriendo : bool
+  - texturaVida : Texture2D
+  - texturaFondoVida : Texture2D
+  - Start() : void
+  - Update() : void
+  - RaycastHaciaJugador() : bool
+  - Disparar() : void
+  + RecibirDanio(float danio) : void
+  - Morir() : void
+  + DestruirEnemigo() : void
+  - OnGUI() : void
+}
+
+class EntrarAlTanque {
+  - controladorTanque : ControladorTanque
+  - soldado : GameObject
+  - estaDentroDelTanque : bool
+  - dentroDelTanque : bool
+  - SizeTama : float
+  - Start() : void
+  - Update() : void
+  - AccionDeEntrar() : void
+  - CambiarEstadoComponentesSoldado(bool estado) : void
+  + SalirDelTanque() : void
+  + ActivarTodosLosComponentes(GameObject objeto) : void
+  - OnGUI() : void
+}
+
+class PlayerController {
+  - model : CharacterModel
+  - view : CharacterView
+  - movementHandler : Rigidbody2DMovementHandler
+  - nombreEscenaVictoria : string
+  - hasInputAuthority : bool
+  - input : ICharacterInput
+  - rb2D : Rigidbody2D
+  - Start() : void
+  - Update() : void
+  - FixedUpdate() : void
+  - LateUpdate() : void
+  - ManejarUsoPowerUps() : void
+  - OnTriggerEnter2D(Collider2D other) : void
+}
+
+class Puntero_Tanque {
+  - tiempoSeguir : float
+  - tanque : Tanque
+  - Start() : void
+  - Update() : void
+  + SeguirJugador() : IEnumerator
+}
+
+class Tanque {
+  - cohetePrefab : GameObject
+  - punteroPrefab : GameObject
+  - velocidadMovimiento : float
+  - distanciaDeteccion : float
+  - jugador : Transform
+  - punteroActual : GameObject
+  - puedeGenerarPuntero : bool
+  - enModoApuntado : bool
+  - puedeDisparar : bool
+  - OrigenDeDisparo : Transform
+  - objetosColisionados : List[GameObject]
+  - objetosColisionadosConDistancia : List[ObjetoColisionado]
+  - Start() : void
+  - FixedUpdate() : void
+  - MoverHaciaJugador() : void
+  - EntrarModoApuntado() : void
+  - GenerarPuntero() : void
+  + Disparar() : void
+  + PunteroDestruido() : void
+  + DesactivarDisparoTemporal() : void
+  - ReactivarDisparo() : IEnumerator
+  + VerificaSiAhiUnObstaculoEntreTuyElEnemigo(Transform Tanque, Transform soldado) : bool
+}
+
+class ObjetoColisionado {
+  - objeto : GameObject
+  - distancia : float
+  + ObjetoColisionado(GameObject obj, float dist)
+}
+
+class CharacterModel {
+  - velocidadMovimiento : float
+  - velocidadRotacion : float
+  - desplazamientoSalto : float
+  - infoPersonaje : InformacionPersonaje
+  - duracionPorVelocidadAumentada : float
+  - multiplicadorVelocidadPorPowerUp : float
+  - powerUpsActivos : int
+  - activadoPowerUp1 : bool
+  - activadoPowerUp2 : bool
+  - duracionPowerUp1 : float
+  - duracionPowerUp2 : float
+  - multiplicadorBoostTemporal : float
+  + ObtenerVelocidadActual() : float
+  + ActivarBoostVelocidadTemporal(float multiplicador, float duracion) : void
+  - RutinaBoostVelocidad(float multiplicador, float duracion) : IEnumerator
+  + CanUseKitMedico() : bool
+  + UsarKitMedico() : void
+  + CurarAlMaximo() : void
+  + HasGrenades() : bool
+  + ConsumeGrenade() : void
+}
+
+interface IDaniable {
+  + RecibirDano(int cantidad, GameObject atacante) : void
+}
+
+class InformacionPersonaje {
+  - cambioDeArma : WeaponController
+  - IndicadorDeBalas : string
+  - vidaMaxima : float
+  - vidaActual : float
+  - armadura : float
+  - balasPorCargador : int
+  - balasRestantes : int
+  - kitsMedicos : int
+  - granadas : int
+  - adrenalina : int
+  - textoVida : Text
+  - textoArmadura : Text
+  - textoMunicion : Text
+  - textoRecargas : Text
+  - textoKitsMedicos : Text
+  - textoGranadas : Text
+  - textoAdrenalina : Text
+  - textoContadorMuerte : Text
+  - barraVida : Transform
+  - EfectoViñetaNegra : GameObject
+  - tiempoRestanteParaReiniciar : float
+  - juegoEnPausa : bool
+  + CurrentHealth : float
+  + MaxHealth : float
+  + IsDead : bool
+  - Start() : void
+  - InicializarValores() : void
+  + RecibirDanio(float danio) : void
+  - Morir() : void
+  - ContadorReinicio() : IEnumerator
+  + ReAparecer() : void
+  + UsarKitMedico() : void
+  + ActualizarUI() : void
+  + CurarAlMaximo() : void
+  + AniadirKitMedico() : void
+  + AnadirRecargas(int NumeroDeArma) : void
+  + AniadirGranadas() : void
+  + AnadirAdrenalina() : void
+  - CambiarValorTemporalmente() : IEnumerator
+  + ActualizarBarraVida(Transform barraVida) : void
+  + TakeDamage(float amount, GameObject attacker) : void
+}
+
+interface IHealth {
+  + CurrentHealth : float
+  + MaxHealth : float
+  + IsDead : bool
+  + TakeDamage(float amount, GameObject attacker) : void
+}
+
+interface IMovable {
+  + Speed : float
+  + MoveTo(Vector3 position) : void
+  + Stop() : void
+}
+
+interface IAttackable {
+  + CanAttack : bool
+  + Attack() : void
+}
+
+interface IInputProvider {
+  + GetMovementInput() : Vector2
+  + GetShootInput() : bool
+}
+
+class WeaponModel {
+  - tiposDeArmas : string[]
+  - danoArmas : float[]
+  - cadenciaArmas : float[]
+  - armasAutomáticas : bool[]
+  - cargadorMaximo : int[]
+  - balasEnCargador : int[]
+  - reservaTotal : int[]
+  - NumeroDeArmaActual : int
+  + TiempoDesdeUltimoDisparo : float
+  + BalasActuales : int
+  + ReservaActual : int
+  - Awake() : void
+  - Idx(System.Array arr) : int
+  + GetWeaponName() : string
+  + GetCurrentWeaponDamage() : float
+  + GetCurrentWeaponCadence() : float
+  + IsCurrentWeaponAutomatic() : bool
+  + GetCurrentWeaponMaxMag() : int
+  + SelectWeapon(int index) : void
+  + CanFire() : bool
+  + ConsumeBullet() : void
+  + TryReload() : bool
+}
+
+class SelectedSoldierUIFeedback {
+  + OnLeaderChanged(UnitController newLeader) : void
+}
+
+class CharacterControllerMVC {
+  - model : CharacterModel
+  - view : CharacterView
+  - input : ICharacterInput
+  - movement : IMovementHandler
+  + CharacterControllerMVC(CharacterModel model, CharacterView view, ICharacterInput input, IMovementHandler movement)
+  + HandleUpdate(Transform transform) : void
+  + HandleFixedUpdate(Transform transform, Rigidbody2D rb2D) : void
+  + HandleLateUpdate(Transform transform, Rigidbody2D rb2D) : void
+  + ForceTranslate(Transform transform, string direction, float speed) : void
+}
+
+interface ICharacterInput {
+  + GetMovementInput() : Vector2
+  + GetMouseWorldPosition(Camera mainCamera) : Vector3
+  + GetJumpInput() : bool
+  + GetHealInput() : bool
+  + GetThrowGrenadeInput() : bool
+  + GetFullHealInput() : bool
+}
+
+interface IMovementHandler {
+  + Move(Transform transform, Rigidbody2D rb2D, Vector2 direction, float speed) : void
+  + TranslateDirectional(Transform transform, string direction, float speed) : void
+  + RotateTowards(Transform transform, Vector3 targetPosition) : void
+  + Jump(Transform transform, Rigidbody2D rb2D, float jumpForce) : void
+}
+
+interface IWeaponInput {
+  + GetFireInput(bool isAutomatic) : bool
+  + GetReloadInput() : bool
+  + GetWeaponSwitchInput() : int
+}
+
+class UnityCharacterInput {
+  + GetMovementInput() : Vector2
+  + GetMouseWorldPosition(Camera mainCamera) : Vector3
+  + GetJumpInput() : bool
+  + GetHealInput() : bool
+  + GetThrowGrenadeInput() : bool
+  + GetFullHealInput() : bool
+}
+
+class UnityWeaponInput {
+  + GetFireInput(bool isAutomatic) : bool
+  + GetReloadInput() : bool
+  + GetWeaponSwitchInput() : int
+}
+
+class WeaponControllerMVC {
+  - model : WeaponModel
+  - view : WeaponView
+  - input : IWeaponInput
+  + IndicadorDeBalas : string
+  + WeaponControllerMVC(WeaponModel model, WeaponView view, IWeaponInput input)
+  + HandleUpdate(float deltaTime) : void
+  - Disparar() : void
+  - IntentarRecargar() : void
+  - HandleWeaponUpdated() : void
+  - HandleAmmoUpdated() : void
+  + Unsubscribe() : void
+}
+
+class SquadEventBus <<static>> {
+  + TriggerUnitDamaged(UnitController unit, float damage, GameObject attacker) : void
+  + TriggerUnitDied(UnitController unit) : void
+  + TriggerLeaderChanged(UnitController leader) : void
+  + TriggerHelpRequested(UnitController victim, Transform attacker, int priority) : void
+  + TriggerUnitDowned(UnitController downed) : void
+  + TriggerUnitRevived(UnitController revived, UnitController reviver) : void
+}
+
+class DetectableEntity {
+  - targetName : string
+  - type : DetectableType
+  + Initialize(string name, DetectableType detectableType) : void
+  + GetName() : string
+  + GetDetectableType() : DetectableType
+  + GetTransform() : Transform
+}
+
+enum DetectableType {
+  - Aliado : enum
+  - Enemigo : enum
+  - Interactuable : enum
+  - Proyectil : enum
+  - Invisible : enum
+}
+
+interface IDetectable {
+  + GetName() : string
+  + GetDetectableType() : DetectableType
+  + GetTransform() : UnityEngine.Transform
+}
+
+class CambioDeLider {
+  - Soldados : List[GameObject]
+  - LiderActual : GameObject
+  - CabezaDeSeguidores : Transform
+  - OnLiderCambiado : Action[GameObject]
+  - Update() : void
+  + CambiarLider(int numeroDeSoldado) : void
+}
+
+class UnitFSM {
+  - currentState : State
+  - controller : UnitController
+  - autoCombat : bool
+  - Start() : void
+  - OnDestroy() : void
+  - Update() : void
+  - TickLento() : void
+  + SetState(State newState) : void
+  - EnterState(State state) : void
+  - ExitState(State state) : void
+  + SetEnemy(Transform enemy) : void
+  + SetDestination(Vector3 pos) : void
+  - OnDrawGizmos() : void
+}
+
+enum State {
+  - Controlado : enum
+  - Atacando : enum
+  - SeguirLider : enum
+  - IrADestino : enum
+  - Esperando : enum
+}
+
+class AmmoManager {
+  - distanciaCompartir : float
+  - Update() : void
+  - BalancearMunicion(UnitModel a, UnitModel b) : void
+}
+
+class Bala {
+  - damage : float
+  - dueno : GameObject
+  - velocidad : float
+  - spriteInicio : Sprite
+  - spriteDurante : Sprite
+  - spriteExplosion : Sprite
+  - sr : SpriteRenderer
+  - col : BoxCollider2D
+  - explotando : bool
+  - _cursorCache : CursorManager
+  - vfxName : string
+  - impactSoundName : string
+  + GetName() : string
+  + GetDetectableType() : DetectableType
+  + GetTransform() : Transform
+  - OnEnable() : void
+  - Update() : void
+  - CambiarADurante() : void
+  - OnTriggerEnter2D(Collider2D collider) : void
+  - OnCollisionEnter2D(Collision2D collision) : void
+  - ProcesarImpacto(GameObject hitGo, Vector3 contactPoint) : void
+  - RestaurarEscalaCursor(CursorManager cursor) : System.Collections.IEnumerator
+  + Explosion() : void
+  - Desactivar() : void
+}
+
+class BalaPool {
+  - Instance : BalaPool
+  - prefabBala : Bala
+  - pool : Queue[Bala]
+  - Awake() : void
+  - OnEnable() : void
+  - ReconstruirPoolDesdeHijos() : void
+  - ExpandirPool(int cantidad) : void
+  + GetBala() : Bala
+  + ReturnBala(Bala b) : void
+}
+
+class ControlDerrota {
+  - leaderManager : LeaderManager
+  - escenaDerrota : string
+  - soldadosVivos : int
+  - Update() : void
+}
+
+class CursorManager {
+  - cursorNormal : Texture2D
+  - cursorInteractuar : Texture2D
+  - scaleBlinkTimer : float
+  - Update() : void
+  - FixedUpdate() : void
+  - CambiarCursor(Texture2D tex) : void
+}
+
+class Destruible {
+  - vida : float
+  - maxVida : float
+  + RecibirDano(int cantidad, GameObject atacante) : void
+  - MorirObjeto() : void
+}
+
+class Disparador {
+  - dañoBala : float
+  - velocidadBala : float
+  - vfxName : string
+  - disparoSoundName : string
+  - impactSoundName : string
+  - Start() : void
+  + Disparar() : void
+}
+
+class EnemyModel {
+  - vidaMaxima : float
+  - vidaActual : float
+  - healRate : float
+  - healDelay : float
+  - dano : float
+  - fireRate : float
+  - velocidadBala : float
+  - velocidadPatrulla : float
+  - velocidadPersecucion : float
+  - radioDeteccion : float
+  - hasNetworkAuthority : bool
+  - lastDamageTime : float
+  + IsDead : bool
+  + CurrentHealth : float
+  + MaxHealth : float
+  - Start() : void
+  - Update() : void
+  + RecibirDano(float cantidad) : void
+  + Revivir() : void
+  + TakeDamage(float amount, GameObject attacker) : void
+}
+
+class EnemyView {
+  - model : EnemyModel
+  - spriteRenderer : SpriteRenderer
+  - anchoBarra : float
+  - altoBarra : float
+  - offset : Vector2
+  - Start() : void
+  + TriggerDamageFeedback() : void
+  - DamageFlashRoutine() : System.Collections.IEnumerator
+  - OnGUI() : void
+}
+
+class FormationRelocator {
+  - puntosDeFormacion : List[Transform]
+  - obstacleLayer : LayerMask
+  - radioSeguridadSoldado : float
+  - distanciaPreferida : float
+  - distanciaMinima : float
+  - direccionesFijasMundo : List[Vector3]
+  - Start() : void
+  - Update() : void
+  - CalcularPosicionValida(Vector3 origenLider, Vector3 destinoIdeal, Vector3 direccionOriginal, List[Vector3] posicionesOcupadas) : Vector3
+  - EsPosicionValida(Vector3 origen, Vector3 destino, List[Vector3] posicionesOcupadas) : bool
+}
+
+class GameManager {
+  - instance : GameManager
+  - player : GameObject
+  - puntajeActual : int
+  - textoPuntaje : Text
+  - posicionesEnemigos : List[Transform]
+  - prefabEnemigo : GameObject
+  - maxEnemigos : int
+  - enemigosGenerados : List[GameObject]
+  - Start() : void
+  - Update() : void
+  - LimpiarEnemigosNulos() : void
+  + AñadirPuntos(int puntos) : void
+  - ActualizarPuntajeUI() : void
+  + ReiniciarEscena() : void
+  - GenerarEnemigos() : IEnumerator
+  - GenerarEnemigo() : void
+  + EliminarEnemigo(GameObject enemigo) : void
+  - VerificarEnemigosNulos() : IEnumerator
+  + CambiarEscena(string nombreEscena) : void
+  + SalirDelJuego() : void
+}
+
+class GenericDetector {
+  - obstacleMask : LayerMask
+  - typesToDetect : List[DetectableType]
+  - targetsInRangeSerializables : List[MonoBehaviour]
+  - targetsInRange : List[IDetectable]
+  - visibleTargets : List[IDetectable]
+  - previouslyVisibleTargets : List[IDetectable]
+  - trigger : CircleCollider2D
+  - scanInterval : float
+  - nextScanTime : float
+  + GetVisibleTargets() : List[IDetectable]
+  + GetTargetsInRange() : List[IDetectable]
+  - Update() : void
+  - EscanearLíneaDeVisión() : void
+  - OnTriggerEnter2D(Collider2D other) : void
+  - OnTriggerExit2D(Collider2D other) : void
+  - SincronizarInspector() : void
+}
+
+class GEN_Inputs {
+  - camaraReferencia : Camera
+  - debugVerbose : bool
+  + Instance : GEN_Inputs
+  + MovimientoInput : Vector2
+  + MouseWorldPosition : Vector3
+  + DisparoSostenido : bool
+  + DisparoPresionado : bool
+  + OrdenPresionada : bool
+  + RegresarAFormacion : bool
+  + Awake() : void
+  - OnEnable() : void
+  - Update() : void
+  - TriggerOrdenDirecta(int index) : void
+}
+
+class GlobalData {
+  - liderActual : UnitController
+}
+
+class GlobalHUD {
+  - leaderManager : LeaderManager
+  - offset : Vector2
+  - anchoBarra : float
+  - altoBarra : float
+  - OnGUI() : void
+}
+
+class IA_P2_AgentIA {
+  - targetObject : GameObject
+  - moveSpeed : float
+  - rotationSpeed : float
+  - nodeReachDistance : float
+  - graphicsRoot : Transform
+  - debug_BlockMovement : bool
+  - debug_BlockRotation : bool
+  - currentPath : List[Vector3]
+  - currentIndex : int
+  - isMoving : bool
+  - currentSpeed : float
+  - DistanceStop : float
+  + OnDisable() : void
+  + SetSpeed(float speed) : void
+  + AsignarColor(Color color) : void
+  + GoToGameobject(GameObject target) : void
+  + GetStateActual(Vector3 targetPosition) : int
+  + GoTo(Vector3 targetPosition, float Offset = 0) : void
+  - Update() : void
+  + StopAgent() : void
+  + IsMoving() : bool
+  + IsOnFinalPathSegment() : bool
+  + LookAtTarget(Vector3 targetPosition) : void
+}
+
+class IA_P2_PathfindingModel {
+  - sideOffset : float
+  - obstacleLayer : LayerMask
+  - allNodes : List[IA_P2_PathNode]
+  - Instance : IA_P2_PathfindingModel
+  + Awake() : void
+  + OnEnable() : void
+  + ReCalcularVecinos() : void
+  + GenerateNeighbors() : void
+  + GenerateNeighborsForNode(IA_P2_PathNode node) : void
+}
+
+class IA_P2_PathNode {
+  - movementCost : float
+  - Vecinos : List[IA_P2_PathNode]
+  + ReCalcularCercanos() : void
+}
+
+class InteractableItem {
+  - nombreItem : string
+  - curacion : float
+  - leaderInside : bool
+  - leaderGo : GameObject
+  + GetInteractName() : string
+  + GetTransform() : Transform
+  - Update() : void
+  - OnTriggerEnter2D(Collider2D other) : void
+  - OnTriggerExit2D(Collider2D other) : void
+  + Interact(GameObject interactuante) : void
+}
+
+class LeaderManager {
+  - Instance : LeaderManager
+  - unidades : List[UnitController]
+  - indiceInicial : int
+  - indiceActual : int
+  - _suscrito : bool
+  - OnEnable() : void
+  - Start() : void
+  - OnDestroy() : void
+  - Update() : void
+  - AsignarLiderMasCercanoALiderMuerto() : void
+  - SuscribirseAInputs() : void
+  - OnCycleLeader(bool derecha) : void
+  + CambiarLider(int index) : void
+}
+
+class LiderandoState {
+  - nextFireTime : float
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class SeguirFormacionState {
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class AtacarState {
+  - nextFireTime : float
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class PerseguirState {
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class EsperandoState {
+  - waitTimer : float
+  - waitDuration : float
+  - timed : bool
+  + EsperandoState()
+  + EsperandoState(float duration)
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class HuirDetrasLiderState {
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class IrADestinoState {
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+class MainGameController {
+  - leaderManager : LeaderManager
+  - txtLider : TextMeshProUGUI
+  - txtAliados : TextMeshProUGUI
+  - suavizado : float
+  - transicionDuracion : float
+  - transicionTimer : float
+  - transicionInicioPos : Vector3
+  + IniciarTransicionSuave(float duracion) : void
+  - FixedUpdate() : void
+}
+
+class Manager_VFX {
+  - vfxPrefabs : List[GameObject]
+  - poolSize : int
+  - pooledObjects : List[GameObject]
+  - currentPoolIndex : int
+  + Instance : Manager_VFX
+  - OnEnable() : void
+  - Start() : void
+  - InicializarPool() : void
+  + SpawnVFX(string effectName, Vector3 position) : GameObject
+}
+
+class MarkerAnim {
+  - velocidadAnim : float
+  - escalaMaxima : float
+  - animTimer : float
+  - Update() : void
+  + IniciarAnimacion(Vector3 posicion) : void
+}
+
+class MenuPausa {
+  - objetoMenu : GameObject
+  - estaPausado : bool
+  - Update() : void
+  + Reanudar() : void
+  - Pausar() : void
+}
+
+class Municion {
+  - balasActuales : int
+  - maxBalas : int
+  + PuedeDisparar() : bool
+  + GastarBala() : void
+}
+
+class PositionManager {
+  - Instance : PositionManager
+  - puntosFormacion : List[Transform]
+  - Awake() : void
+  - Update() : void
+  - OrganizarEscuadra() : void
+}
+
+class RehenBruto {
+  - distanciaParaSeguir : float
+  - distanciaParaParar : float
+  - yaMeRescataron : bool
+  - objetoVictoria : Transform
+  - distanciaParaGanar : float
+  - nombreDeLaEscena : string
+  - agente : IA_P2_AgentIA
+  - Start() : void
+  - Update() : void
+}
+
+class ShotSensor {
+  - miController : UnitController
+  - OnTriggerEnter2D(Collider2D other) : void
+}
+
+class TickManager {
+  - Instance : TickManager
+  - t01 : float
+  - t05 : float
+  - t1 : float
+  - OnEnable() : void
+  - Update() : void
+}
+
+class UnitCommander {
+  - _suscrito : bool
+  - _ultimaPosOrden : Vector3
+  - _hayOrdenPendiente : bool
+  - _destinosActivos : System.Collections.Generic.Dictionary[UnitController, Vector3]
+  - Start() : void
+  - Update() : void
+  - SuscribirseAInputs() : void
+  - OnDestroy() : void
+  - OnOrdenDirecta(int index) : void
+  - LimpiarDestinosInactivos() : void
+  - ObtenerDestinoAjustado(Vector3 destinoOriginal) : Vector3
+  - MandarMasCercano(Vector3 destino) : void
+}
+
+class UnitController {
+  - model : UnitModel
+  - view : UnitView
+  - agent : IA_P2_AgentIA
+  - shooter : Disparador
+  - target : Transform
+  - targetPos : Vector3
+  - detector : GenericDetector
+  - nextFireTime : float
+  - isWaitingOrder : bool
+  - _currentHelpPriority : int
+  - _currentStateLogic : IUnitState
+  + currentSlot : Transform
+  + GetName() : string
+  + GetDetectableType() : DetectableType
+  + GetTransform() : Transform
+  - Awake() : void
+  - Start() : void
+  + FollowLeader() : void
+  + GetEnemy() : Transform
+  + Attack(Transform objetivo) : void
+  + ReachedDestination() : bool
+  + ReleaseSlot() : void
+  + MoveToPoint(Vector3 point) : void
+  + GetTargetPoint() : Vector3
+  + ResetHelpPriority() : void
+  - OnEnable() : void
+  - OnDisable() : void
+  - OnHelpRequested(UnitController victim, Transform attacker, int priority) : void
+  - OnTargetDetected(IDetectable entity) : void
+  + RecibirDano(int cantidad, GameObject atacante) : void
+  + OnHealPickup() : void
+  - StopHealBlinkAfterDelay(float delay) : System.Collections.IEnumerator
+  - Morir() : void
+  + GetCurrentState() : IUnitState
+  + CambiarEstado(IUnitState nuevoEstado) : void
+  - Update() : void
+  - FixedUpdate() : void
+}
+
+class IndicatorEntry {
+  - name : string
+  - indicator : GameObject
+  - onTime : float
+  - offTime : float
+  - duration : float
+}
+
+enum IndicatorType {
+  - Heal : enum
+  - Combat : enum
+  - Moving : enum
+}
+
+class UnitModel {
+  - unitName : string
+  - team : UnitTeam
+  - isPlayerControlled : bool
+  - healthMax : float
+  - healthActual : float
+  - reviveHealthPercent : float
+  - damage : float
+  - fireRate : float
+  - ammoActual : int
+  - ammoMax : int
+  - attackRange : float
+  - detectionRange : float
+  - speedPatrol : float
+  - speedChase : float
+  + IsDown : bool
+  + IsDead : bool
+  + IsLeader : bool
+  + CurrentHealth : float
+  + MaxHealth : float
+  - Start() : void
+  + TakeDamage(float amount, GameObject attacker) : void
+  + TakeDamage(int amount, GameObject attacker) : void
+  + AddHealth(float amount) : void
+  + CanFire() : bool
+  + ConsumeAmmo() : void
+  + ReviveHealth() : void
+}
+
+class UnitPathRenderer {
+  - line : LineRenderer
+  - controller : UnitController
+  - fsm : UnitFSM
+  - colorMovimiento : Color
+  - anchoLinea : float
+  - Awake() : void
+  - LateUpdate() : void
+  - DibujarCamino() : void
+}
+
+interface IUnitState {
+  + Enter(UnitController unit) : void
+  + Update(UnitController unit) : void
+  + FixedUpdate(UnitController unit) : void
+  + Exit(UnitController unit) : void
+}
+
+enum UnitTeam {
+  - PlayerTeam : enum
+  - EnemyTeam : enum
+  - Neutral : enum
+}
+
+class UnitView {
+  - model : UnitModel
+  - mainSprite : SpriteRenderer
+  - selectionRing : GameObject
+  - graphicsRoot : Transform
+  - lineRenderer : LineRenderer
+  - healIndicator : IndicatorEntry
+  - combatIndicator : IndicatorEntry
+  - movingIndicator : IndicatorEntry
+  - barWidth : float
+  - offset : Vector2
+  - _activeBlinkRoutines : Dictionary[IndicatorType, Coroutine]
+  - barHeight : float
+  - bgColor : Color
+  - fillColor : Color
+  - borderColor : Color
+  - Awake() : void
+  - Update() : void
+  + RotateGraphics(float angle) : void
+  + RotateGraphicsSmooth(float angle, float speed) : void
+  + ShowLineToTarget(Vector3 from, Vector3 targetPos) : void
+  + ShowLineToDestination(Vector3 from, Vector3 destination) : void
+  + ShowLinePath(List[Vector3] path, Color color) : void
+  + HideLine() : void
+  + StartBlink(IndicatorType type) : void
+  + StopBlink(IndicatorType type) : void
+  + StopAllBlinks() : void
+  - BlinkRoutine(IndicatorEntry entry) : IEnumerator
+  - GetEntry(IndicatorType type) : IndicatorEntry
+  - HideAllIndicators() : void
+  + TriggerFlash() : void
+  - FlashRoutine() : IEnumerator
+  - OnGUI() : void
+  + SetSelectionRing(bool isActive) : void
+}
+
+class DesactivarPorTimer {
+  + OnEnable() : void
+  - OnDisable() : void
+  - Desactivar() : void
+}
+
+interface IInteractable {
+  + GetInteractName() : string
+  + Interact(GameObject interactuante) : void
+  + GetTransform() : Transform
+}
+
+class ShotImpactBus <<static>> {
+  + Trigger(Vector3 impactPos, GameObject owner) : void
+}
+
+class CollisionDetector {
+  - radioEsfera : float
+  - duracionLinea : float
+  - OnCollisionEnter2D(Collision2D collision) : void
+  - OnCollisionStay2D(Collision2D collision) : void
+  - OnCollisionExit2D(Collision2D collision) : void
+  - OnTriggerEnter2D(Collider2D other) : void
+  - OnTriggerStay2D(Collider2D other) : void
+  - OnTriggerExit2D(Collider2D other) : void
+  - OnDrawGizmos() : void
+}
+
+class DebugColisionesFull {
+  - Objetivo : GameObject
+  - OnCollisionEnter2D(Collision2D c) : void
+  - OnCollisionStay2D(Collision2D c) : void
+  - OnCollisionExit2D(Collision2D c) : void
+  - DebugCollision2D(string fase, Collision2D c) : void
+  - OnTriggerEnter2D(Collider2D other) : void
+  - OnTriggerStay2D(Collider2D other) : void
+  - OnTriggerExit2D(Collider2D other) : void
+  - DebugTrigger2D(string fase, Collider2D other) : void
+  - OnCollisionEnter(Collision c) : void
+  - OnCollisionStay(Collision c) : void
+  - OnCollisionExit(Collision c) : void
+  - DebugCollision3D(string fase, Collision c) : void
+  - OnTriggerEnter(Collider other) : void
+  - OnTriggerStay(Collider other) : void
+  - OnTriggerExit(Collider other) : void
+  - DebugTrigger3D(string fase, Collider other) : void
+}
+
+class DropdownController {
+  - _vfxController : VfxController
+  - _dropdown : TMP_Dropdown
+  - Start() : void
+  - GenerateDropdown() : void
+  - OnDropdownValueChanged(int index) : void
+  + PlayVfx() : void
+  + StopVfx() : void
+  + PreviousVfx() : void
+  + NextVfx() : void
+}
+
+class VfxController {
+  - _vfxList : List[GameObject]
+  - _currentVfx : GameObject
+  + VfxList : List[GameObject]
+  + Play(int index) : void
+  + Stop() : void
+}
+
+class NetworkAssetSourceResource {
+  - ResourcePath : string
+  - SubObjectName : string
+  - _state : object
+  - _acquireCount : int
+  + IsCompleted : bool
+  + Description : string
+  + Acquire(bool synchronous) : void
+  + Release() : void
+  + WaitForResult() : T
+  - FinishAsyncOp(ResourceRequest asyncOp) : void
+  - LoadNamedResource(string resoucePath, string subObjectName) : T
+  - LoadInternal(bool synchronous) : void
+  - UnloadInternal() : void
+}
+
+class NetworkAssetSourceStatic {
+  - Object : T
+  + Prefab : T
+  + IsCompleted : bool
+  + Description : string
+  + Acquire(bool synchronous) : void
+  + Release() : void
+  + WaitForResult() : T
+}
+
+class NetworkAssetSourceStaticLazy {
+  - Object : LazyLoadReference[T]
+  + Prefab : LazyLoadReference[T]
+  + IsCompleted : bool
+  + Description : string
+  + Acquire(bool synchronous) : void
+  + Release() : void
+  + WaitForResult() : T
+}
+
+class FusionGlobalScriptableObjectAddressAttribute {
+  + Address : string
+  + FusionGlobalScriptableObjectAddressAttribute(Type objectType, string address)
+  + Load(Type type) : FusionGlobalScriptableObjectLoadResult
+}
+
+class FusionGlobalScriptableObjectResourceAttribute {
+  + ResourcePath : string
+  + InstantiateIfLoadedInEditor : bool
+  + FusionGlobalScriptableObjectResourceAttribute(Type objectType, string resourcePath = "")
+  + Load(Type type) : FusionGlobalScriptableObjectLoadResult
+}
+
+class FusionCoroutine {
+  - _inner : IEnumerator
+  - _completed : Action[IAsyncOperation]
+  + IsDone : bool
+  + Progress : float
+  + Error : ExceptionDispatchInfo
+  + Current : object
+  + FusionCoroutine(IEnumerator inner)
+  - MoveNext() : bool
+  - Reset() : void
+  + Dispose() : void
+}
+
+class FusionLogInitializer {
+  - InitializeUnityLoggerUser(ref FusionUnityLogger logger) : void
+  - CreateLogger(bool isDarkMode) : FusionUnityLogger
+}
+
+class FusionUnityLogger {
+  - LogActiveRunnerTick : bool
+  + FusionUnityLogger(Thread mainThread, bool isDarkMode)
+  # CreateMessage(in LogContext context) : (string, Object)
+  - TryAppendRunnerPrefix(StringBuilder builder, NetworkRunner runner) : bool
+  - TryAppendNetworkObjectPrefix(StringBuilder builder, NetworkObject networkObject) : bool
+  - TryAppendSimulationBehaviourPrefix(StringBuilder builder, SimulationBehaviour simulationBehaviour) : bool
+}
+
+class FusionProfiler <<static>> {
+  - Category : ProfilerCategory
+  - InterpolationOffset : IntPtr
+  - InputSize : IntPtr
+  - InputQueue : IntPtr
+  - WorldSnapshotSize : IntPtr
+  - Resimulations : IntPtr
+  - RoundTripTime : IntPtr
+  - RpcIn : IntPtr
+  - RpcOut : IntPtr
+  - InputRecvDelta : IntPtr
+  - InputRecvDeltaDeviation : IntPtr
+  - AllocCounters : Dictionary[EngineProfiler.InternalSimulationType, (IntPtr Count, IntPtr Size)]
+  - ObjectAllocatorUsage : IntPtr
+  - MiscAllocatorUsage : IntPtr
+  - PacketIn : (IntPtr Updates, IntPtr Destroys, IntPtr Count)
+  - PacketOut : (IntPtr Updates, IntPtr Destroys, IntPtr Count)
+  - PacketLost : (IntPtr Updates, IntPtr Destroys, IntPtr Count)
+  - PacketDelivered : (IntPtr Updates, IntPtr Destroys, IntPtr Count)
+  - UDPPackets : IntPtr
+  - Init() : void
+  - CreateCounter(string name, ProfilerMarkerDataType dataType, ProfilerMarkerDataUnit unit) : IntPtr
+  - CreateCounterValue(string name, ProfilerMarkerDataUnit unit, ProfilerCounterOptions options = ProfilerCounterOptions.FlushOnEndOfFrame) : IntPtr
+  - SetCounter(IntPtr counter, int value) : void
+  - SetCounter(IntPtr counter, float value) : void
+  - SetCounterValue(IntPtr counter, int value, bool delta = false) : void
+}
+
+class FusionRuntimeCheck <<static>> {
+  - RuntimeCheck() : void
+}
+
+class TraceChannelsExtensions <<static>> {
+  + AddChannelsFromDefines(this TraceChannels traceChannels) : TraceChannels
+}
+
+class JsonUtilityExtensions <<static>> {
+  - TypePropertyName : string
+  + EnquoteIntegers(string json, int minDigits = 8) : string
+  + ToJsonWithTypeAnnotation(object obj, InstanceIDHandlerDelegate instanceIDHandler = null) : string
+  + ToJsonWithTypeAnnotation(object obj, TextWriter writer, int? integerEnquoteMinDigits = null, TypeSerializerDelegate typeSerializer = null, InstanceIDHandlerDelegate instanceIDHandler = null) : void
+  + FromJsonWithTypeAnnotation(string json, TypeResolverDelegate typeResolver = null) : T
+  + FromJsonWithTypeAnnotation(string json, TypeResolverDelegate typeResolver = null) : object
+  - FromJsonWithTypeAnnotationInternal(string json, TypeResolverDelegate typeResolver = null, IList targetList = null) : object
+  - ToJsonInternal(object obj, TextWriter writer, int? integerEnquoteMinDigits = null, TypeSerializerDelegate typeResolver = null, InstanceIDHandlerDelegate instanceIDHandler = null) : void
+  - FromJsonWithTypeAnnotationToObject(ref int i, string json, TypeResolverDelegate typeResolver) : object
+  ~ FindObjectEnd(string json, int start = 0) : int
+  - FindScopeEnd(string json, int start, char cstart = '{', char cend = '}') : int
+  - SkipWhiteOrThrow(int i) : int
+  - SkipWhiteOrThrow(int i) : int
+}
+
+class TypeNameWrapper {
+  - __TypeName : string
+}
+
+class FusionLogInitializer <<static>> {
+  + Initialize() : void
+  - InitializeUser(ref LogLevel logLevel, ref TraceChannels traceChannels) : void
+}
+
+enum FusionMppmStatus {
+  - Disabled : enum
+  - MainInstance : enum
+  - VirtualInstance : enum
+}
+
+class FusionMppm {
+  - Status : FusionMppmStatus
+  - MainEditor : FusionMppm
+  + Send(T data) : void
+  + Broadcast(T data) : void
+  - FusionMppm()
+}
+
+class FusionMppmCommand <<abstract>> {
+  + NeedsAck : bool
+  + PersistentKey : string
+  + Execute() : void
+}
+
+class FusionUnityExtensions <<static>> {
+}
+
+class NetworkObjectBaker {
+  - _allNetworkObjects : List[NetworkObject]
+  - _networkObjectsPaths : List[TransformPath]
+  - _allSimulationBehaviours : List[SimulationBehaviour]
+  - _pathCache : TransformPathCache
+  - _arrayBufferNB : List[NetworkBehaviour]
+  - _arrayBufferNO : List[NetworkObject]
+  # SetDirty(MonoBehaviour obj) : void
+  # TryGetExecutionOrder(MonoBehaviour obj, out int order) : bool
+  # GetSortKey(NetworkObject obj) : uint
+  # PostprocessBehaviour(SimulationBehaviour behaviour) : bool
+  + Bake(GameObject root) : Result
+  - Set(MonoBehaviour host, ref T field, T value) : bool
+  - Set(MonoBehaviour host, ref T[] field, List[T] value) : bool
+}
+
+class Result <<struct>> {
+  + HadChanges : bool
+  + ObjectCount : int
+  + BehaviourCount : int
+  + Result(bool dirty, int objectCount, int behaviourCount)
+}
+
+class TransformPath <<struct>> {
+  - MaxDepth : int
+  - Indices : _Indices
+  - Depth : ushort
+  - Next : ushort
+  ~ TransformPath(ushort depth, ushort next, List[ushort] indices, int offset, int count)
+  + ToString() : string
+}
+
+class _Indices <<struct>> {
+  - Value : ushort
+}
+
+class TransformPathCache {
+  - _cache : Dictionary[Transform, TransformPath]
+  - _siblingIndexStack : List[ushort]
+  - _nexts : List[TransformPath]
+  + Create(Transform transform) : TransformPath
+  + Clear() : void
+  + Equals(TransformPath x, TransformPath y) : bool
+  + GetHashCode(TransformPath obj) : int
+  + Compare(TransformPath x, TransformPath y) : int
+  - CompareToDepthUnchecked(in TransformPath x, in TransformPath y, int depth) : int
+  - GetHashCode(in TransformPath path, int hash) : int
+  + IsAncestorOf(in TransformPath x, in TransformPath y) : bool
+  + IsEqualOrAncestorOf(in TransformPath x, in TransformPath y) : bool
+  + Dump(in TransformPath x) : string
+  - Dump(in TransformPath x, StringBuilder builder) : void
+}
+
+class NetworkPrefabSourceStatic {
+  - AssetGuid : NetworkObjectGuid
+  + AssetGuid : NetworkObjectGuid
+}
+
+class NetworkPrefabSourceStaticLazy {
+  - AssetGuid : NetworkObjectGuid
+  + AssetGuid : NetworkObjectGuid
+}
+
+class NetworkPrefabSourceResource {
+  - AssetGuid : NetworkObjectGuid
+  + AssetGuid : NetworkObjectGuid
+}
+
+class FusionStatisticsHelper <<static>> {
+  - DEFAULT_GRAPH_HEIGHT : float
+  - DEFAULT_HEADER_HEIGHT : float
+  ~ GetStatGraphDefaultSettings(RenderSimStats stat, out string valueTextFormat, out float valueTextMultiplier, out bool ignoreZeroOnAverage, out bool ignoreZeroOnBuffer, out int accumulateTimeMs) : void
+  ~ GetStatDataFromSnapshot(RenderSimStats stat, FusionStatisticsSnapshot simulationStatsSnapshot) : float
+}
+
+class FusionStatsGraphBase <<abstract>> {
+  - Samples : int
+  - _formatProvider : IFormatProvider
+  - SHADER_PROPERTY_VALUES : string
+  - SHADER_PROPERTY_SAMPLES : string
+  - SHADER_PROPERTY_THRESHOLD_1 : string
+  - SHADER_PROPERTY_THRESHOLD_2 : string
+  - SHADER_PROPERTY_THRESHOLD_3 : string
+  - SHADER_PROPERTY_AVERAGE : string
+  - _valuesShaderPropertyID : int
+  - _threshold1ShaderPropertyID : int
+  - _threshold2ShaderPropertyID : int
+  - _threshold3ShaderPropertyID : int
+  - _averageShaderPropertyID : int
+  - _render : RectTransform
+  - _header : RectTransform
+  - _targetImage : Image
+  - _toggleButton : Button
+  - _averageValueText : Text
+  - _peakValueText : Text
+  - _currentValueText : Text
+  - _threshold1Text : Text
+  - _threshold2Text : Text
+  - _threshold3Text : Text
+  - _valueTextMultiplier : float
+  - _maxSamples : int
+  - _threshold1 : float
+  - _threshold2 : float
+  - _threshold3 : float
+  - _ignoreZeroedValuesOnAverageCalculation : bool
+  - _ignoreZeroedValuesOnBuffer : bool
+  - _valuesTextUpdateDelay : float
+  - _bufferValues : FusionStatBuffer
+  - _bufferNormalizedValues : float[]
+  - _headerHeight : float
+  - _renderHeight : float
+  - _parentLayoutGroup : VerticalLayoutGroup
+  - _invertedRenderMaxValue : float
+  - _lastUpdateTime : float
+  - _material : Material
+  + Initialized : bool
+  # Initialize(int accumulateTimeMs) : void
+  # OnEnable() : void
+  # OnDisable() : void
+  # AddValueToBuffer(float value, ref DateTime now) : void
+  # Refit() : void
+  # Restore() : void
+  + ToggleRenderDisplay() : void
+  # OnSetValues() : void
+  # SetThresholds(float threshold1, float threshold2, float threshold3) : void
+  # SetIgnoreZeroValues(bool ignoreZeroOnAverage, bool ignoreZeroOnBuffer) : void
+  # SetValueTextFormat(string value) : void
+  # SetValueTextMultiplier(float value) : void
+  # SetAccumulateTime(int accumulateTimeMs) : void
+  - UpdateThresholdPosition(Text text, float thresholdNormalized) : void
+  # SetGraphValues(float[] values) : void
+  - RemapValue(float value, float iMin, float iMax, float oMin, float oMax) : float
+  + UpdateGraph(NetworkRunner runner, FusionStatisticsManager statisticsManager, ref DateTime now) : void
+}
+
+class FusionStatBuffer <<struct>> {
+  - _buffer : float[]
+  - _index : int
+  - _count : int
+  - _zeroCount : int
+  - _ignoreZeroOnAverage : bool
+  - _accumulateTimeSpan : TimeSpan
+  - _sum : float
+  - _max : float
+  - _accumulated : float
+  - _lastBufferInsertTime : DateTime
+  + Index : int
+  + Length : int
+  + MaxValue : float
+  + LatestValue : float
+  + AverageValue : float
+  + FusionStatBuffer(int size, bool ignoreZeroOnAverage, int accumulateTimeMs)
+  + SetAccumulateTime(int accumulateTimeMs) : void
+  + SetIgnoreZeroOnAverage(bool value) : void
+  + Add(float value, ref DateTime now) : void
+  - AddOnBuffer(float value) : void
+  - CalculateMax() : float
+}
+
+class FusionStatsGraphBase {
+  - _valueTextFormat : string
+  - _lookupTable : string[][]
+  - _lookupMultiplier : float
+  - LOOKUP_TABLE_0 : string[][]
+  - LOOKUP_TABLE_0ms : string[][]
+  - LOOKUP_TABLE_0_BYTES : string[][]
+  - LOOKUP_TABLE_0_00ms : string[][]
+  - GetValueText(float value) : string
+}
+
+class FusionScalableIMGUI <<static>> {
+  - _scalableSkin : GUISkin
+  - InitializedGUIStyles(GUISkin baseSkin) : void
+  + GetScaledSkin(GUISkin baseSkin, out float height, out float width, out int padding, out int margin, out float boxLeft) : GUISkin
+  + ScaleGuiSkinToScreenHeight() : (float, float, int, int, float)
+}
+
+class FusionUnitySceneManagerUtils <<static>> {
+  - _reusableGameObjectList : List[GameObject]
+  + IsAddedToBuildSettings(this Scene scene) : bool
+  + GetLocalPhysicsMode(this Scene scene) : LocalPhysicsMode
+  + GetComponents(this Scene scene, bool includeInactive) : T[]
+  + GetComponents(this Scene scene, bool includeInactive, out GameObject[] rootObjects) : T[]
+  + GetComponents(this Scene scene, List[T] results, bool includeInactive) : void
+  + FindComponent(this Scene scene, bool includeInactive = false) : T
+  + CanBeUnloaded(this Scene scene) : bool
+  + Dump(this Scene scene) : string
+  + Dump(this LoadSceneParameters loadSceneParameters) : string
+  + GetSceneBuildIndex(string nameOrPath) : int
+  + GetSceneIndex(IList[string] scenePathsOrNames, string nameOrPath) : int
+  + GetFileNameWithoutExtensionPosition(string nameOrPath, out int index, out int length) : void
+}
+
+class SceneEqualityComparer {
+  + Equals(Scene x, Scene y) : bool
+  + GetHashCode(Scene obj) : int
+}
+
+class NetworkRunnerVisibilityExtensions <<static>> {
+  - RecognizedBehaviourNames : string[]
+  - RecognizedBehaviourTypes : System.Type[]
+  - DictionaryLookup : Dictionary[NetworkRunner, RunnerVisibility]
+  - _commonLinksWithMissingInputAuthNeedRefresh : bool
+  - CommonObjectLookup : Dictionary[string, List[RunnerVisibilityLink]]
+  - ResetAllSimulationStatics() : void
+  - NetworkRunnerVisibilityExtensions()
+  + RetryRefreshCommonLinks() : void
+  + EnableVisibilityExtension(this NetworkRunner runner) : void
+  + DisableVisibilityExtension(this NetworkRunner runner) : void
+  + HasVisibilityEnabled(this NetworkRunner runner) : bool
+  + GetVisible(this NetworkRunner runner) : bool
+  + SetVisible(this NetworkRunner runner, bool isVisibile) : void
+  - GetVisibilityNodes(this NetworkRunner runner) : LinkedList[RunnerVisibilityLink]
+  - GetVisibilityInfo(this NetworkRunner runner) : RunnerVisibility
+  + AddVisibilityNodes(this NetworkRunner runner, GameObject go) : void
+  - CollectBehavioursAndAddNodes(GameObject go, NetworkRunner runner, List[RunnerVisibilityLink] existingNodes) : void
+  ~ IsRecognizedByRunnerVisibility(this System.Type type) : bool
+  - RegisterNode(RunnerVisibilityLink link, NetworkRunner runner, Component comp) : void
+  + UnregisterNode(this RunnerVisibilityLink link) : void
+  - AddNodeToCommonLookup(RunnerVisibilityLink link) : void
+  - RefreshRunnerVisibility(NetworkRunner runner, bool refreshCommonObjects = true) : void
+  ~ RefreshCommonObjectVisibilities() : void
+  ~ ResetStatics() : void
+}
+
+class RunnerVisibility {
+  - Nodes : LinkedList[RunnerVisibilityLink]
+  + IsVisible : bool
+}
+
+class FusionAddressablePrefabsPreloader {
+}
+
+class FusionBasicBillboard {
+  - Camera : Camera
+  - _lastCameraFindTime : float
+  - _currentCam : Camera
+  + MainCamera : Camera
+  - OnEnable() : void
+  - OnDisable() : void
+  - LateUpdate() : void
+  + UpdateLookAt() : void
+  - ResetStatics() : void
+}
+
+class FusionBootstrap {
+  - RunnerPrefab : NetworkRunner
+  - StartMode : StartModes
+  - AutoStartAs : GameMode
+  - AutoHideGUI : bool
+  - AutoClients : int
+  - ClientStartDelay : float
+  - ServerPort : ushort
+  - DefaultRoomName : string
+  - _server : NetworkRunner
+  - InitialScenePath : string
+  - _initialScenePath : string
+  - _currentStage : Stage
+  - AutoConnectVirtualInstances : bool
+  - VirtualInstanceConnectDelay : float
+  + CurrentStage : Stage
+  + LastCreatedClientIndex : int
+  + CurrentServerMode : GameMode
+  + CanAddClients : bool
+  + CanAddSharedClients : bool
+  + IsShutdown : bool
+  + IsShutdownAndMultiPeer : bool
+  + UsingMultiPeerMode : bool
+  + ShowAutoClients : bool
+  + IsMPPMEnabled : bool
+  + ShouldShowGUI : bool
+  # Start() : void
+  # ShowUserInterface() : void
+  - TryGetSceneRef(out SceneRef sceneRef) : bool
+  + StartSinglePlayer() : void
+  + StartServer() : void
+  + StartHost() : void
+  + StartClient() : void
+  + StartSharedClient() : void
+  + StartAutoClient() : void
+  + StartServerPlusClients() : void
+  + StartHostPlusClients() : void
+  + Shutdown() : void
+  + StartServerPlusClients(int clientCount) : void
+  + StartHostPlusClients(int clientCount) : void
+  + StartMultipleClients(int clientCount) : void
+  + StartMultipleSharedClients(int clientCount) : void
+  + StartMultipleAutoClients(int clientCount) : void
+  + ShutdownAll() : void
+  # StartWithClients(GameMode serverMode, SceneRef sceneRef, int clientCount) : IEnumerator
+  # StartWithMppmVirtualInstance() : IEnumerator
+  + AddClient() : void
+  + AddSharedClient() : void
+  + AddClient(GameMode serverMode, SceneRef sceneRef) : Task
+  # StartClients(int clientCount, GameMode serverMode, SceneRef sceneRef = default) : IEnumerator
+  # InitializeNetworkRunner(NetworkRunner runner, GameMode gameMode, NetAddress address, SceneRef scene, Action[NetworkRunner] onGameStarted, INetworkRunnerUpdater updater = null) : Task
+}
+
+enum StartModes {
+  - UserInterface : enum
+  - Automatic : enum
+  - Manual : enum
+}
+
+enum Stage {
+  - Disconnected : enum
+  - StartingUp : enum
+  - UnloadOriginalScene : enum
+  - ConnectingServer : enum
+  - ConnectingClients : enum
+  - AllConnected : enum
+}
+
+class StartCommand {
+  - RoomName : string
+  - InitialScene : SceneRef
+  - ClientCount : int
+  - IsShared : bool
+  - Instance : StartCommand
+  + Execute() : void
+}
+
+class FusionBootstrapDebugGUI {
+  - EnableHotkeys : bool
+  - BaseSkin : GUISkin
+  - _networkDebugStart : FusionBootstrap
+  - _clientCount : string
+  - _isMultiplePeerMode : bool
+  - _nicifiedStageNames : Dictionary[FusionBootstrap.Stage, string]
+  # OnValidate() : void
+  # ValidateClientCount() : void
+  # GetClientCount() : int
+  # Awake() : void
+  # Start() : void
+  # EnsureNetworkDebugStartExists() : FusionBootstrap
+  - Update() : void
+  # OnGUI() : void
+  - StartHostWithClients(FusionBootstrap nds) : void
+  - StartServerWithClients(FusionBootstrap nds) : void
+  - StartMultipleClients(FusionBootstrap nds) : void
+  - StartMultipleAutoClients(FusionBootstrap nds) : void
+  - StartMultipleSharedClients(FusionBootstrap nds) : void
+  + ConvertEnumToNicifiedNameLookup(string prefix = null, Dictionary[T, string] nonalloc = null) : Dictionary[T, string]
+}
+
+class NetworkCCData <<struct>> {
+  - WORDS : int
+  - SIZE : int
+  - TRSPData : NetworkTRSPData
+  - _grounded : int
+  - _velocityData : Vector3Compressed
+  + Grounded : bool
+  + Velocity : Vector3
+}
+
+class NetworkCharacterController {
+  - gravity : float
+  - jumpImpulse : float
+  - acceleration : float
+  - braking : float
+  - maxSpeed : float
+  - rotationSpeed : float
+  - _initial : Tick
+  - _controller : CharacterController
+  + Data : ref NetworkCCData
+  + Velocity : Vector3
+  + Grounded : bool
+  + Teleport(Vector3? position = null, Quaternion? rotation = null) : void
+  + Jump(bool ignoreGrounded = false, float? overrideImpulse = null) : void
+  + Move(Vector3 direction) : void
+  + Spawned() : void
+  + Render() : void
+  - BeforeAllTicks(bool resimulation, int tickCount) : void
+  - AfterAllTicks(bool resimulation, int tickCount) : void
+  - BeforeCopyPreviousState() : void
+  - Awake() : void
+  - CopyToBuffer() : void
+  - CopyToEngine() : void
+}
+
+class NetworkObjectProviderDefault {
+  - DelayIfSceneManagerIsBusy : bool
+  + AcquirePrefabInstance(NetworkRunner runner, in NetworkPrefabAcquireContext context, out NetworkObject instance) : NetworkObjectAcquireResult
+  + ReleaseInstance(NetworkRunner runner, in NetworkObjectReleaseContext context) : void
+  + GetPrefabId(NetworkRunner runner, NetworkObjectGuid prefabGuid) : NetworkPrefabId
+  # InstantiatePrefab(NetworkRunner runner, NetworkObject prefab) : NetworkObject
+  # DestroyPrefabInstance(NetworkRunner runner, NetworkPrefabId prefabId, NetworkObject instance) : void
+  # DestroyPrefabNestedObject(NetworkRunner runner, NetworkObject instance) : void
+  # DestroySceneObject(NetworkRunner runner, NetworkSceneObjectId sceneObjectId, NetworkObject instance) : void
+  - Shutdown(NetworkRunner runner) : void
+}
+
+class NetworkSceneManagerDefault {
+  - IsSceneTakeOverEnabled : bool
+  - LogSceneLoadErrors : bool
+  - DestroySpawnedPrefabsOnSceneUnload : bool
+  - _allOwnedScenes : Dictionary[Scene, NetworkSceneManagerDefault]
+  - _multiPeerSceneRoots : List[MultiPeerSceneRoot]
+  - _multiPeerActiveRoot : MultiPeerSceneRoot
+  - _runningCoroutines : List[ICoroutine]
+  - _tempUnloadScene : Scene
+  - _isLoading : bool
+  + MultiPeerScene : Scene
+  + MultiPeerDontDestroyOnLoadRoot : Transform
+  + Runner : NetworkRunner
+  + IsMultiplePeer : bool
+  + IsBusy : bool
+  + MainRunnerScene : Scene
+  - ClearStatics() : void
+  - NetworkSceneManagerDefault()
+  + Initialize(NetworkRunner runner) : void
+  + Shutdown() : void
+  + IsRunnerScene(Scene scene) : bool
+  + TryGetPhysicsScene2D(out PhysicsScene2D scene2D) : bool
+  + TryGetPhysicsScene3D(out PhysicsScene scene3D) : bool
+  + MakeDontDestroyOnLoad(GameObject obj) : void
+  + MoveGameObjectToScene(GameObject gameObject, SceneRef sceneRef) : bool
+  + LoadScene(SceneRef sceneRef, NetworkLoadSceneParameters parameters) : NetworkSceneAsyncOp
+  + UnloadScene(SceneRef sceneRef) : NetworkSceneAsyncOp
+  + GetSceneRef(string sceneNameOrPath) : SceneRef
+  + GetSceneRef(GameObject gameObject) : SceneRef
+  + OnSceneInfoChanged(NetworkSceneInfo sceneInfo, NetworkSceneInfoChangeSource changeSource) : bool
+  # LoadSceneCoroutine(SceneRef sceneRef, NetworkLoadSceneParameters sceneParams) : IEnumerator
+  # UnloadSceneCoroutine(SceneRef sceneRef) : IEnumerator
+  # OnSceneLoaded(SceneRef sceneRef, Scene scene, NetworkLoadSceneParameters sceneParams) : IEnumerator
+  # OnLoadSceneProgress(SceneRef sceneRef, float progress) : void
+  - DestroyAllRuntimeSpawnedObjectsInScene(Scene scene, SceneRef sceneRef) : void
+  - FindSceneToTakeOver(SceneRef sceneRef) : Scene
+  - StartTracedCoroutine(IEnumerator inner) : ICoroutine
+  # MakeLoadingScope() : LoadingScope
+  # MarkSceneAsOwned(SceneRef sceneRef, Scene scene) : void
+  - FailOp(SceneRef sceneRef, Exception exception) : NetworkSceneAsyncOp
+}
+
+class MultiPeerSceneRoot {
+  - SceneRef : SceneRef
+  - ScenePath : string
+  - SceneHandle : int
+  - Scene : Scene
+}
+
+class LoadingScope <<struct>> {
+  - _manager : NetworkSceneManagerDefault
+  + LoadingScope(NetworkSceneManagerDefault manager)
+  + Dispose() : void
+}
+
+class EnableOnSingleRunner {
+  - PreferredRunner : RunnerVisibilityLink.PreferredRunners
+  - Components : UnityEngine.Component[]
+  - _guid : string
+  - reusableComponentsList : List[Component]
+  - reusableComponentsList2 : List[Component]
+  ~ AddNodes(List[RunnerVisibilityLink] existingNodes) : void
+  + FindRecognizedTypes() : void
+  + FindNestedRecognizedTypes() : void
+  - FindRecognizedComponentsOnGameObject(GameObject go) : Component[]
+  - FindRecognizedNestedComponents(GameObject go) : Component[]
+}
+
+class RunnerAOIGizmos {
+}
+
+class RunnerEnableVisibility {
+  - Awake() : void
+  - OnDestroy() : void
+  - RunnerOnObjectAcquired(NetworkRunner runner, NetworkObject obj) : void
+  + OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) : void
+  - OnSceneLoadDone(NetworkRunner runner) : void
+  - OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) : void
+  - OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) : void
+  - OnPlayerJoined(NetworkRunner runner, PlayerRef player) : void
+  - OnPlayerLeft(NetworkRunner runner, PlayerRef player) : void
+  - OnInput(NetworkRunner runner, NetworkInput input) : void
+  - OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) : void
+  - OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) : void
+  - OnConnectedToServer(NetworkRunner runner) : void
+  - OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) : void
+  - OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) : void
+  - OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) : void
+  - OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) : void
+  - OnSessionListUpdated(NetworkRunner runner, List[SessionInfo] sessionList) : void
+  - OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary[string, object] data) : void
+  - OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) : void
+  - OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment[byte] data) : void
+  - OnSceneLoadStart(NetworkRunner runner) : void
+}
+
+class RunnerLagCompensationGizmos {
+  - DrawSnapshotHistory : bool
+  - DrawBroadphaseNodes : bool
+  - StateAuthHitboxCollor : Color
+  - NonStateAuthHitboxCollor : Color
+  - _runner : NetworkRunner
+  - Awake() : void
+  - OnDrawGizmos() : void
+  - RenderHitboxHistory() : void
+  - RenderBHVBroadphase() : void
+}
+
+interface IRunnerVisibilityRecognizedType {
+}
+
+class RunnerVisibilityLink {
+  - PreferredRunner : PreferredRunners
+  - Component : Component
+  - Guid : string
+  - _showAtRuntime : bool
+  - _runner : NetworkRunner
+  - _componentType : ComponentType
+  - _networkObject : NetworkObject
+  - _originalState : bool
+  + IsOnSingleRunner : bool
+  + DefaultState : bool
+  + Enabled : bool
+  - Reset() : void
+  - AssociateComponent(Component component) : bool
+  - OnValidate() : void
+  - Awake() : void
+  - OnDestroy() : void
+  ~ Initialize(UnityEngine.Component comp, NetworkRunner runner) : void
+  + SetEnabled(bool enabled) : void
+  ~ IsInputAuth() : bool
+  ~ SetupOnSingleRunnerLink(PreferredRunners preferredRunner) : void
+  ~ InvokeRefreshCommonObjectVisibilities(float time) : void
+  - RetryRefreshCommonLinks() : void
+}
+
+enum PreferredRunners {
+  - Auto : enum
+  - Server : enum
+  - Client : enum
+  - InputAuthority : enum
+}
+
+enum ComponentType {
+  - None : enum
+  - Renderer : enum
+  - Behaviour : enum
+}
+
+class RunnerVisibilityLinksRoot {
+  - Awake() : void
+}
+
+class FusionNetworkObjectStatistics {
+  - NetworkObject : NetworkObject
+  - ToggleMonitoring(bool value) : void
+  - OnEnable() : void
+  - OnDisable() : void
+}
+
+enum NetworkObjectStat {
+  - InBandwidth : enum
+  - OutBandwidth : enum
+  - InPackets : enum
+  - OutPackets : enum
+  - AverageInPacketSize : enum
+  - AverageOutPacketSize : enum
+}
+
+class FusionNetworkObjectStatsGraph {
+  - _description : Text
+  - _id : NetworkId
+  - _stat : NetworkObjectStat
+  - _combineParentGraph : FusionNetworkObjectStatsGraphCombine
+  + UpdateGraph(NetworkRunner runner, FusionStatisticsManager statisticsManager, ref DateTime now) : void
+  - GetNetworkObjectStatValue(FusionStatisticsManager statisticsManager) : float
+  ~ SetupNetworkObjectStat(NetworkId id, NetworkObjectStat stat) : void
+}
+
+class FusionNetworkObjectStatsGraphCombine {
+  - _titleText : Text
+  - _statDropdown : Dropdown
+  - _statsToRender : NetworkObjectStat
+  - _rect : RectTransform
+  - _combinedGraphRender : RectTransform
+  - _toggleButton : Button
+  - _headerHeight : float
+  - _graphHeight : float
+  - _statsGraphs : Dictionary[NetworkObjectStat, FusionNetworkObjectStatsGraph]
+  - _statsGraphPrefab : FusionNetworkObjectStatsGraph
+  - _parentContentSizeFitter : ContentSizeFitter
+  - _networkObject : NetworkObject
+  - _fusionStatistics : FusionStatistics
+  - _objectStatisticsInstance : FusionNetworkObjectStatistics
+  + NetworkObjectID : NetworkId
+  + SetupNetworkObject(NetworkObject networkObject, FusionStatistics fusionStatistics, FusionNetworkObjectStatistics objectStatisticsInstance) : void
+  - Start() : void
+  - OnDropDownChanged(int arg0) : void
+  - InstantiateStatGraph(NetworkObjectStat stat) : void
+  - DestroyStatGraph(NetworkObjectStat stat) : void
+  - UpdateHeight(float overrideValue = -1) : void
+  - OnDisable() : void
+  - OnEnable() : void
+  + ToggleRenderDisplay() : void
+  + DestroyCombinedGraph() : void
+}
+
+class FusionStatistics {
+  - _statsCanvasPrefab : GameObject
+  - _objectGraphCombinePrefab : FusionNetworkObjectStatsGraphCombine
+  - STATS_CANVAS_PREFAB_PATH : string
+  - STATS_OBJECT_COMBINE_PREFAB_PATH : string
+  - _statsGraph : List[FusionStatsGraphBase]
+  - _header : FusionStatsPanelHeader
+  - _config : FusionStatsConfig
+  - _statsCanvas : FusionStatsCanvas
+  - _statsPanelObject : GameObject
+  - _objectStatsGraphCombines : Dictionary[FusionNetworkObjectStatistics, FusionNetworkObjectStatsGraphCombine]
+  - _statsEnabled : RenderSimStats
+  - _canvasAnchor : CanvasAnchor
+  - _statsCustomConfig : List[FusionStatisticsStatCustomConfig]
+  + ActiveGraphs : List[FusionStatsGraphBase]
+  + StatsCustomConfig : List[FusionStatisticsStatCustomConfig]
+  + IsPanelActive : bool
+  - Awake() : void
+  - Spawned() : void
+  + SetStatsCustomConfig(List[FusionStatisticsStatCustomConfig] customConfig) : void
+  + SetCanvasAnchor(CanvasAnchor anchor) : void
+  - ApplyCustomConfig() : void
+  + OnEditorChange() : void
+  - RenderEnabledStats() : void
+  ~ UpdateStatsEnabled(RenderSimStats stats) : void
+  + SetupStatisticsPanel() : void
+  + SetWorldAnchor(FusionStatsWorldAnchor anchor, float scale) : void
+  + DestroyStatisticsPanel() : void
+  + MonitorNetworkObject(NetworkObject networkObject, FusionNetworkObjectStatistics objectStatisticsInstance, bool monitor) : bool
+  - UpdateAllGraphs(FusionStatisticsManager statisticsManager) : void
+  + RegisterGraph(FusionStatsGraphBase graph) : void
+  + UnregisterGraph(FusionStatsGraphBase graph) : void
+  - Update() : void
+}
+
+class FusionStatisticsStatCustomConfig <<struct>> {
+  - Stat : RenderSimStats
+  - Threshold1 : float
+  - Threshold2 : float
+  - Threshold3 : float
+  - IgnoreZeroOnBuffer : bool
+  - IgnoreZeroOnAverageCalculation : bool
+  - AccumulateTimeMs : int
+}
+
+enum CanvasAnchor {
+  - TopLeft : enum
+  - TopRight : enum
+}
+
+class FusionStatsCanvas {
+  - _canvas : Canvas
+  - _canvasScaler : CanvasScaler
+  - _canvasPanel : RectTransform
+  - _contentPanel : RectTransform
+  - _contentContainer : RectTransform
+  - _bottomPanel : RectTransform
+  - _header : FusionStatsPanelHeader
+  - _hideButton : Button
+  - _closeButton : Button
+  - _config : FusionStatsConfig
+  - _anchor : CanvasAnchor
+  - _dragMode : DragMode
+  - _statsCanvasActiveCount : int
+  + _isColapsed : bool
+  ~ SetupStatsCanvas(FusionStatistics fusionStatistics, CanvasAnchor canvasAnchor, UnityAction closeButtonAction) : void
+  + OnBeginDrag(PointerEventData eventData) : void
+  + OnDrag(PointerEventData eventData) : void
+  + OnEndDrag(PointerEventData eventData) : void
+  + SnapPanelBackToOriginPos() : void
+  - UpdateContentContainerHeight(float yDelta) : void
+  ~ ToggleHide() : void
+  - CheckDraggableRectVisibility(RectTransform rectTransform) : bool
+  - SetContentPanelHeight(float value) : void
+  - AdaptContentHeightToGraphs() : void
+  - OnEnable() : void
+  - OnDisable() : void
+  + SetCanvasAnchor(CanvasAnchor anchor) : void
+  - GetDefinedAnchorPosition() : Vector2
+}
+
+enum DragMode {
+  - None : enum
+  - DragCanvas : enum
+  - ResizeContent : enum
+}
+
+class FusionStatsConfig {
+  - _worldAnchorButtonPrefab : Button
+  - _worldAnchorListContainer : Transform
+  - _configPanel : GameObject
+  - _canvas : Canvas
+  - _renderPanelRectTransform : RectTransform
+  - _worldTransformAnchor : Transform
+  - _worldCanvasScale : float
+  - _fusionStatistics : FusionStatistics
+  - _worldAnchorCandidates : List[Transform]
+  + IsWorldAnchored : bool
+  ~ SetWorldAnchorCandidate(Transform candidate, bool register) : void
+  ~ SetupStatisticReference(FusionStatistics fusionStatistics) : void
+  + ToggleConfigPanel() : void
+  + ToggleUseWorldAnchor(bool value) : void
+  ~ SetWorldAnchor(Transform worldTransformAnchor) : void
+  + SetWorldCanvasScale(float value) : void
+  ~ ResetToCanvasAnchor() : void
+  - UpdateWorldAnchorButtons() : void
+  - OnEnable() : void
+  - OnDestroy() : void
+}
+
+class FusionStatsGraphDefault {
+  - _selectedStats : RenderSimStats
+  - _descriptionText : Text
+  - _statsAdditionalInfo : Dictionary[RenderSimStats, string]
+  + Stat : RenderSimStats
+  # Initialize(int accumulateTimeMs) : void
+  + UpdateGraph(NetworkRunner runner, FusionStatisticsManager statisticsManager, ref DateTime now) : void
+  + ApplyCustomStatsConfig(FusionStatistics.FusionStatisticsStatCustomConfig config) : void
+  ~ SetupDefaultGraph(RenderSimStats stat) : void
+}
+
+enum RenderSimStats {
+  - InPackets : enum
+  - OutPackets : enum
+  - RTT : enum
+  - InBandwidth : enum
+  - OutBandwidth : enum
+  - Resimulations : enum
+  - ForwardTicks : enum
+  - InputReceiveDelta : enum
+  - TimeResets : enum
+  - StateReceiveDelta : enum
+  - SimulationTimeOffset : enum
+  - SimulationSpeed : enum
+  - InterpolationOffset : enum
+  - InterpolationSpeed : enum
+  - InputInBandwidth : enum
+  - InputOutBandwidth : enum
+  - AverageInPacketSize : enum
+  - AverageOutPacketSize : enum
+  - InObjectUpdates : enum
+  - OutObjectUpdates : enum
+  - ObjectsAllocatedMemoryInUse : enum
+  - GeneralAllocatedMemoryInUse : enum
+  - ObjectsAllocatedMemoryFree : enum
+  - GeneralAllocatedMemoryFree : enum
+  - WordsWrittenCount : enum
+  - WordsWrittenSize : enum
+  - WordsReadCount : enum
+  - WordsReadSize : enum
+}
+
+class FusionStatsPanelHeader {
+  - _statsHeaderTitle : Text
+  - _statsDropdown : Dropdown
+  - _defaultGraphPrefab : FusionStatsGraphDefault
+  - ContentRect : RectTransform
+  - _defaultStatsGraph : Dictionary[RenderSimStats,FusionStatsGraphDefault]
+  - _fusionStatistics : FusionStatistics
+  - _statsToRender : RenderSimStats
+  + SetupHeader(string title, FusionStatistics fusionStatistics) : void
+  - SetupDropdown() : void
+  ~ SetStatsToRender(RenderSimStats stats) : void
+  - AddStat(RenderSimStats stat) : void
+  - RemoveStat(RenderSimStats stat) : void
+  - InvokeRenderStatsUpdate() : void
+  - OnDropDownChanged(int arg0) : void
+  - InstantiateStatGraph(RenderSimStats stat) : void
+  - DestroyStatGraph(RenderSimStats stat) : void
+  - TryApplyCustomStatConfig(FusionStatsGraphDefault graph) : void
+  - ApplyCustomStatsConfig(FusionStatsGraphDefault graph, FusionStatistics.FusionStatisticsStatCustomConfig config) : void
+  ~ ApplyStatsConfig(List[FusionStatistics.FusionStatisticsStatCustomConfig] statsConfig) : void
+}
+
+class FusionStatsWorldAnchor {
+  - OnEnable() : void
+  - OnDisable() : void
+  - OnDestroy() : void
+}
+
+class AssetObjectEditor {
+  + OnInspectorGUI() : void
+}
+
+class BehaviourEditor {
+}
+
+class ChangeDllManager <<static>> {
+  - FusionRuntimeDllGuid : string
+  - FileList : string[]
+  + ChangeDllModeToSharedDebug() : void
+  + ChangeDllModeToSharedRelease() : void
+  - ChangeDllMode(NetworkRunner.BuildTypes buildType) : void
+  - GetBuildTypeExtension(NetworkRunner.BuildTypes referenceBuildType) : string
+  - GetBuildTypeSubFolder(NetworkRunner.BuildTypes referenceBuildModes) : string
+}
+
+class FixedBufferPropertyAttributeDrawer {
+  - FixedBufferFieldName : string
+  - WrapperSurrogateDataPath : string
+  - SpacingSubLabel : float
+  - _multiFieldPrefixId : int
+  - _buffer : int[]
+  - _pool : SurrogatePool
+  - _vectorProperties : GUIContent[]
+  - _needsSurrogateCache : Dictionary[string, bool]
+  - _optimisedReaderWriters : Dictionary[Type, UnitySurrogateBase]
+  + ActualFieldType : Type
+  + Capacity : int
+  + SurrogateType : Type
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - DoFloatField(Rect position, SerializedProperty property, GUIContent label, IUnityValueSurrogate[float] surrogate) : void
+  - DoFloatVectorProperty(Rect position, SerializedProperty property, GUIContent label, int count, IUnityValueSurrogate[T] readerWriter) : void
+  - GetFixedBufferProperty(SerializedProperty prop) : SerializedProperty
+  - NeedsSurrogate(SerializedProperty property) : bool
+  - UpdateSurrogateFromFixedBuffer(SerializedProperty sp, UnitySurrogateBase surrogate, bool write, bool force) : bool
+}
+
+class SurrogatePool {
+  - MaxTTL : int
+  - _surrogateField : FieldInfo
+  - _used : Dictionary[(Type, string, int), PropertyEntry]
+  - _wrappersPool : Dictionary[Type, Stack[FusionUnitySurrogateBaseWrapper]]
+  + Flush : bool
+  + WasUsed : bool
+  + SurrogatePool()
+  + Acquire(FieldInfo field, int capacity, SerializedProperty property, Type type) : PropertyEntry
+}
+
+class PropertyEntry {
+  - Property : SerializedProperty
+  - Surrogates : UnitySurrogateBase[]
+  - TTL : int
+  - Wrappers : FusionUnitySurrogateBaseWrapper[]
+}
+
+class INetworkPrefabSourceDrawer {
+  - ThumbnailWidth : int
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + DrawThumbnailPrefix(Rect position, INetworkPrefabSource source) : Rect
+  + DrawThumbnail(Rect position, INetworkPrefabSource source) : void
+  + DrawSourceObjectPicker(Rect position, GUIContent label, INetworkPrefabSource source) : INetworkPrefabSource
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+}
+
+class NetworkBoolDrawer {
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class NetworkObjectGuidDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetValue(SerializedProperty property) : NetworkObjectGuid
+  + SetValue(SerializedProperty property, NetworkObjectGuid guid) : void
+}
+
+class NetworkPrefabAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class NetworkPrefabRefDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + DrawNetworkPrefabPicker(Rect position, GUIContent label, NetworkObject prefab) : NetworkObject
+}
+
+class NetworkStringDrawer {
+  - _str : string
+  - _write : Action[int[], int]
+  - _read : Action[int[], int]
+  - _expectedLength : int
+  + NetworkStringDrawer()
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class SceneRefDrawer {
+  - CheckboxWidth : int
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class SerializableDictionaryDrawer {
+  - ItemsPropertyPath : string
+  - EntryKeyPropertyPath : string
+  - _dictionaryKeyHash : HashSet[SerializedProperty]
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  - VerifyDictionary(SerializedProperty prop, string keyPropertyName) : string
+}
+
+class TickRateDrawer {
+  - PAD : int
+  - _clientRateOptions : GUIContent[]
+  - _clientRateValues : int[]
+  - _reusableRatioGUIArrays : GUIContent[][]
+  - _reusableRatioIntArrays : int[][]
+  - _reusableServerGUIArrays : GUIContent[][]
+  - _reusableServerIntArrays : int[][]
+  - _buttonStyle : LazyGUIStyle
+  + ClientRateOptions : GUIContent[]
+  + ClientRateValues : int[]
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  - DrawPopup(ref Rect labelRect, ref Rect fieldRect, float rowHeight, GUIContent guiContent, int[] sliderValues, int[] values, GUIContent[] options, int currentValue, int offset = 0) : int
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+  - GetIndexForClientRate(int clientRate) : int
+  - ExtractClientRates() : void
+  - GetSelectionValue(SerializedProperty property) : TickRate.Selection
+  - GetValueFromFieldName(string name, object obj, BindingFlags bindings = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic) : object
+}
+
+class EditorRecompileHook <<static>> {
+  - EditorRecompileHook()
+  - ShutdownRunners() : void
+  - StoreConfigPath() : void
+}
+
+class FusionAssistants <<static>> {
+  - PRIORITY : int
+  - PRIORITY_LOW : int
+  + EnsureComponentExists(this GameObject go) : T
+  + EnsureComponentsExistInScene(string preferredGameObjectName, params Type[] components) : GameObject
+  + EnsureExistsInScene(string preferredGameObjectName = null, GameObject onThisObject = null, params Type[] otherRequiredComponents) : T
+  + CreatePrimitive(PrimitiveType? primitive, string name, Vector3? position, Quaternion? rotation, Vector3? scale, Transform parent, Material material, params Type[] addComponents) : GameObject
+  ~ EnsureComponentHasVisibilityNode(this Component component) : EnableOnSingleRunner
+}
+
+class HierarchyIteratorExtensions <<static>> {
+  + GetObjectId(this HierarchyIterator iterator) : int
+  + GetAssetGuid(this HierarchyIterator iterator) : GUID
+}
+
+class LazyLoadReferenceExtensions <<static>> {
+  + GetObjectId(this LazyLoadReference[T] obj) : int
+}
+
+class ObjectExtensions <<static>> {
+  + GetObjectId(this UnityEngine.Object obj) : int
+}
+
+class FusionBootstrapEditor {
+  + OnInspectorGUI() : void
+}
+
+class FusionBuildTriggers {
+  - CallbackOrder : int
+  + callbackOrder : int
+  + OnPreprocessBuild(BuildReport report) : void
+}
+
+interface INetworkAssetSourceFactory {
+  + Order : int
+}
+
+class NetworkAssetSourceFactoryContext <<struct>> {
+  - InstanceID : ObjectIdType
+  - AssetGuid : string
+  - AssetName : string
+  - IsMainAsset : bool
+  + AssetPath : string
+  + Object : UnityEngine.Object
+  + NetworkAssetSourceFactoryContext(string assetGuid, ObjectIdType instanceID, string assetName, bool isMainAsset)
+  + NetworkAssetSourceFactoryContext(HierarchyIteratorType hierarchyProperty)
+  + NetworkAssetSourceFactoryContext(UnityEngine.Object obj)
+}
+
+class NetworkAssetSourceFactoryResource {
+  - Order : int
+  + Order : int
+  # TryCreateInternal(in NetworkAssetSourceFactoryContext context, out TSource result) : bool
+}
+
+class NetworkAssetSourceFactoryStatic {
+  - Order : int
+  + Order : int
+  # TryCreateInternal(in NetworkAssetSourceFactoryContext context, out TSource result) : bool
+}
+
+class AssetDatabaseUtils <<static>> {
+  - s_rootFolders : Lazy[string[]]
+  + ValidBuildTargetGroups : IEnumerable[BuildTargetGroup]
+  + SetAssetAndTheMainAssetDirty(UnityEngine.Object obj) : void
+  + GetAssetPathOrThrow(ObjectIdType instanceID) : string
+  + GetAssetPathOrThrow(UnityEngine.Object obj) : string
+  + GetAssetPathOrThrow(string assetGuid) : string
+  + GetAssetGuidOrThrow(string assetPath) : string
+  + GetAssetGuidOrThrow(ObjectIdType instanceId) : string
+  + GetAssetGuidOrThrow(UnityEngine.Object obj) : string
+  + GetGUIDAndLocalFileIdentifierOrThrow(LazyLoadReference[T] reference) : (string, long)
+  + GetGUIDAndLocalFileIdentifierOrThrow(UnityEngine.Object obj) : (string, long)
+  + GetGUIDAndLocalFileIdentifierOrThrow(ObjectIdType instanceId) : (string, long)
+  + MoveAssetOrThrow(string source, string destination) : void
+  + HasLabel(string assetPath, string label) : bool
+  + HasLabel(UnityEngine.Object obj, string label) : bool
+  + HasLabel(GUID guid, string label) : bool
+  + HasAnyLabel(string assetPath, params string[] labels) : bool
+  + HasAnyLabel(UnityEngine.Object asset, params string[] labels) : bool
+  + SetLabel(string assetPath, string label, bool present) : bool
+  + SetLabel(UnityEngine.Object obj, string label, bool present) : bool
+  + SetLabels(string assetPath, string[] labels) : bool
+  + HasScriptingDefineSymbol(NamedBuildTarget target, string value) : bool
+  + HasScriptingDefineSymbol(BuildTargetGroup group, string value) : bool
+  + SetScriptableObjectType(ScriptableObject obj) : T
+  + SetScriptableObjectType(ScriptableObject obj, Type type) : ScriptableObject
+  - IsEnumValueObsolete(string valueName) : bool
+  + HasScriptingDefineSymbol(string value) : bool?
+  + UpdateScriptingDefineSymbol(BuildTargetGroup group, string define, bool enable) : void
+  + UpdateScriptingDefineSymbol(string define, bool enable) : void
+  ~ UpdateScriptingDefineSymbol(BuildTargetGroup group, IEnumerable[string] definesToAdd, IEnumerable[string] definesToRemove) : void
+  ~ UpdateScriptingDefineSymbol(IEnumerable[string] definesToAdd, IEnumerable[string] definesToRemove) : void
+  - UpdateScriptingDefineSymbolInternal(IEnumerable[BuildTargetGroup] groups, IEnumerable[string] definesToAdd, IEnumerable[string] definesToRemove) : void
+  + IterateAssets(string root = null, string label = null) : AssetEnumerable
+  + IterateAssets(string root = null, string label = null, Type type = null) : AssetEnumerable
+  + IsPathWritable(string path) : bool
+  - IsPackageHidden(UnityEditor.PackageManager.PackageInfo info) : bool
+  ~ GetMainAssetTypeFromGUID(GUID guid) : Type
+  + RegisterCustomDependencyWithMppmWorkaround(string customDependency, Hash128 hash) : void
+  + GetAddress(UnityEngine.Object asset) : string
+  + GetAddress(string guid) : string
+}
+
+class AssetEnumerator <<struct>> {
+  - _hierarchyProperty : HierarchyIteratorType
+  - _rootFolderIndex : int
+  - _skipFirstNext : bool
+  - _rootFolders : string[]
+  + Current : HierarchyIteratorType
+  + Current : object
+  + AssetEnumerator(string root, string label, Type type)
+  + MoveNext() : bool
+  + Reset() : void
+  + Dispose() : void
+  - MakeSearchFilter(string label, Type type) : string
+}
+
+class AssetEnumerable <<struct>> {
+  - _root : string
+  - _label : string
+  - _type : Type
+  + AssetEnumerable(string root, string label, Type type)
+  + GetEnumerator() : AssetEnumerator
+  - GetEnumerator() : IEnumerator[HierarchyIteratorType]
+  - GetEnumerator() : IEnumerator
+}
+
+class EditorButtonDrawer <<struct>> {
+  - _lastEditor : Editor
+  - _buttons : List[ButtonEntry]
+  + Draw(Editor editor) : void
+  - Refresh(Editor editor) : void
+}
+
+class ButtonEntry <<struct>> {
+  - Method : MethodInfo
+  - Content : GUIContent
+  - Attribute : EditorButtonAttribute
+  - DoIfs : (DoIfAttributeBase, Func[object, object])[]
+}
+
+class EnumDrawer <<struct>> {
+  - _values : Mask256[]
+  - _names : string[]
+  - _isFlags : bool
+  - _enumType : Type
+  - _allBitMask : Mask256
+  - _fields : FieldInfo[]
+  - _selectedIndices : List[int]
+  + Values : Mask256[]
+  + Names : string[]
+  + IsFlags : bool
+  + EnumType : Type
+  + BitMask : Mask256
+  + Fields : FieldInfo[]
+  + EnsureInitialized(Type enumType, bool includeFields) : bool
+  + Draw(Rect position, SerializedProperty property, Type enumType, bool isEnum) : void
+}
+
+class HashCodeUtilities <<static>> {
+  - InitialHash : int
+  + GetHashDeterministic(this string str, int initialHash = InitialHash) : int
+  + CombineHashCodes(int a, int b) : int
+  + CombineHashCodes(int a, int b, int c) : int
+  + GetArrayHashCode(T* ptr, int length, int initialHash = InitialHash) : int
+  + GetHashCodeDeterministic(byte[] data, int initialHash = 0) : int
+  + GetHashCodeDeterministic(string data, int initialHash = 0) : int
+  + GetHashCodeDeterministic(T data, int initialHash = 0) : int
+  + GetHashCodeDeterministic(T* data, int initialHash = 0) : int
+}
+
+class LazyAsset {
+  - _value : T
+  - _factory : Func[T]
+  + Value : T
+  + NeedsUpdate : bool
+  + LazyAsset(Func[T] factory)
+}
+
+class LazyGUIStyle {
+  - _factory : Func[List[Object], GUIStyle]
+  - _value : GUIStyle
+  - _dependencies : List[Object]
+  + Value : GUIStyle
+  + NeedsUpdate : bool
+  + font : Font
+  + fontStyle : FontStyle
+  + richText : bool
+  + margin : RectOffset
+  + fixedWidth : float
+  + fixedHeight : float
+  + padding : RectOffset
+  + normal : GUIStyleState
+  + onNormal : GUIStyleState
+  + LazyGUIStyle(Func[List[Object], GUIStyle] factory)
+  + Create(Func[List[Object], GUIStyle] factory) : LazyGUIStyle
+  + CalcSize(GUIContent content) : Vector2
+  + Draw(Rect position, GUIContent content, bool isHover, bool isActive, bool on, bool hasKeyboardFocus) : void
+  + Draw(Rect position, bool isHover, bool isActive, bool on, bool hasKeyboardFocus) : void
+  + CalcHeight(GUIContent content, float width) : float
+}
+
+class LazyGUIContent {
+  - _factory : Func[List[Object], GUIContent]
+  - _value : GUIContent
+  - _dependencies : List[Object]
+  + Value : GUIContent
+  + NeedsUpdate : bool
+  + LazyGUIContent(Func[List[Object], GUIContent] factory)
+  + Create(Func[List[Object], GUIContent] factory) : LazyGUIContent
+}
+
+class LazyAsset <<static>> {
+  + Create(Func[T] factory) : LazyAsset[T]
+}
+
+class LogSettingsDrawer <<struct>> {
+  - _logLevels : Dictionary[string, LogLevel]
+  - _enablingDefines : Dictionary[string, TraceChannels]
+  - _defines : Dictionary[NamedBuildTarget, string[]]
+  - _logLevelHelpContent : Lazy[GUIContent]
+  - _traceChannelsHelpContent : Lazy[GUIContent]
+  - EnsureInitialized() : void
+  + DrawLayoutLevelEnumOnly(ScriptableObject editor) : void
+  + DrawLogLevelEnum(Rect rect) : void
+  + DrawLayout(ScriptableObject editor, bool inlineHelp = true) : void
+  - SetLogLevel(LogLevel activeLogLevel) : void
+  - SetTraceChannels(TraceChannels activeTraceChannels) : void
+  + GetActiveBuildTargetDefinedLogLevel() : LogLevel?
+  - GetActiveBuildTargetDefinedTraceChannels() : TraceChannels
+  - GetAllBuildTargetsDefinedLogLevel() : LogLevel?
+  - GetAllBuildTargetsDefinedTraceChannels() : TraceChannels?
+  - GetDefinedLogLevel(NamedBuildTarget group) : LogLevel?
+  - GetDefinedTraceChannels(NamedBuildTarget group) : TraceChannels
+  - UpdateDefines() : void
+}
+
+class PathUtils <<static>> {
+  + TryMakeRelativeToFolder(string path, string folderWithSlashes, out string result) : bool
+  + MakeRelativeToFolder(string path, string folder, out string result) : bool
+  + MakeSane(string path) : string
+  + Normalize(string path) : string
+  + GetPathWithoutExtension(string path) : string
+}
+
+class FusionCodeDoc <<static>> {
+  - Label : string
+  - Extension : string
+  - ExtensionWithDot : string
+  - s_parsedCodeDocs : Dictionary[string, CodeDoc]
+  - s_guiContentCache : Dictionary[(string assemblyName, string memberKey), (GUIContent withoutType, GUIContent withType)]
+  + CrefColor : string
+  + FindEntry(MemberInfo member, bool addTypeInfo = true) : GUIContent
+  + FindEntry(FieldInfo field, bool addTypeInfo = true) : GUIContent
+  + FindEntry(PropertyInfo property) : GUIContent
+  + FindEntry(MethodInfo method) : GUIContent
+  + FindEntry(Type type) : GUIContent
+  - FindEntry(MemberInfo member, string key, bool addTypeInfo = true) : GUIContent
+  - TryResolveInheritDoc(string key, out MemberInfoEntry entry) : bool
+  - TryGetEntry(string key, out MemberInfoEntry entry, string assemblyName = null) : bool
+  - SanitizeTypeName(Type type) : string
+  + InvalidateCache() : void
+  - TryParseCodeDoc(string path, out CodeDoc result) : bool
+  - Reformat(string summary, bool forTooltip) : string
+  - AppendContent(GUIContent existing, string append) : GUIContent
+}
+
+class MemberInfoEntry <<struct>> {
+  - Summary : string
+  - Tooltip : string
+  - InheritDocKey : string
+}
+
+class CodeDoc {
+  - AssemblyName : string
+  - Entries : Dictionary[string, MemberInfoEntry]
+}
+
+class Postprocessor {
+  - OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
+}
+
+class Regexes <<static>> {
+  - SeeWithCref : Regex
+  - See : Regex
+  - WhitespaceString : Regex
+  - XmlCodeBracket : Regex
+  - XmlEmphasizeBrackets : Regex
+  - BulletPointList : Regex
+  - ListItemBracket : Regex
+}
+
+class FusionCustomDependency {
+  - Name : string
+  - _applyHash : EditorApplication.CallbackFunction
+  - _getter : Func[Hash128?]
+  - IsGlobalImmediateRefreshEnabled : bool
+  + FusionCustomDependency(string name, Func[Hash128?] getter)
+  + Refresh(bool forceImmediate = false) : void
+  - Update(bool delayed) : void
+}
+
+class FusionEditor <<abstract>> {
+  - _buttonDrawer : EditorButtonDrawer
+  # PrepareOnInspectorGUI() : void
+  # DrawEditorButtons() : void
+  + OnInspectorGUI() : void
+  # DrawScriptPropertyField() : void
+  # OnEnable() : void
+  # OnDisable() : void
+}
+
+class FusionEditorGUI <<static>> {
+  - SCROLL_WIDTH : float
+  - LEFT_HELP_INDENT : float
+  - s_expandedHelp : (object, string, int)
+  ~ GetInlineHelpButtonRect(Rect position, bool expectFoldout = true, bool forScriptHeader = false) : Rect
+  ~ DrawInlineHelpButton(Rect buttonRect, bool state, bool doButton = true, bool doIcon = true) : bool
+  ~ GetInlineBoxSize(GUIContent content) : Vector2
+  ~ DrawInlineBoxUnderProperty(GUIContent content, Rect propertyRect, Color color, bool drawSelector = false, bool hasFoldout = false) : Rect
+  ~ DrawScriptHeaderBackground(Rect position, Color color) : void
+  ~ DrawScriptHeaderIcon(Rect position) : void
+  ~ InjectScriptHeaderDrawer(Editor editor) : bool
+  ~ InjectScriptHeaderDrawer(Editor editor, out ScriptFieldDrawer drawer) : bool
+  ~ InjectScriptHeaderDrawer(SerializedObject serializedObject) : bool
+  ~ InjectScriptHeaderDrawer(SerializedObject serializedObject, out ScriptFieldDrawer drawer) : bool
+  ~ SetScriptFieldHidden(Editor editor, bool hidden) : void
+  ~ LayoutHelpPrefix(Editor editor, SerializedProperty property) : Rect
+  ~ LayoutHelpPrefix(ScriptableObject editor, MemberInfo memberInfo) : Rect
+  ~ LayoutHelpPrefix(ScriptableObject editor, string path, GUIContent help) : Rect
+  - AddDrawer(SerializedProperty property, PropertyDrawer drawer) : void
+  - TryInjectDrawer(SerializedProperty property, FieldInfo field, Func[PropertyAttribute] attributeFactory, Func[DrawerType] drawerFactory, out DrawerType drawer) : bool
+  ~ IsHelpExpanded(object id, int pathHash) : bool
+  ~ IsHelpExpanded(object id, string path) : bool
+  ~ SetHelpExpanded(object id, string path, bool value) : void
+  ~ SetHelpExpanded(object id, int pathHash, bool value) : void
+  - HasPropertyDrawer(IEnumerable[PropertyDrawer] orderedDrawers) : bool
+  - GetPropertyDrawer(IEnumerable[PropertyDrawer] orderedDrawers) : T
+  ~ InsertPropertyDrawerByAttributeOrder(List[T] orderedDrawers, T drawer) : int
+}
+
+class InlineHelpStyle <<static>> {
+  - MarginOuter : float
+  - HideInlineContent : GUIContent
+  - ShowInlineContent : GUIContent
+}
+
+class LazyAuto <<static>> {
+  + Create(Func[T] valueFactory) : LazyAuto[T]
+}
+
+class LazyAuto {
+  + LazyAuto(Func[T] valueFactory)
+}
+
+class PropertyDrawerOrderComparer {
+  - Instance : PropertyDrawerOrderComparer
+  + Compare(PropertyDrawer x, PropertyDrawer y) : int
+}
+
+class FusionEditorGUI <<static>> {
+  ~ IfOdin(T ifOdin, T ifNotOdin) : T
+  ~ ForwardObjectField(Rect position, UnityEngine.Object value, Type objectType, bool allowSceneObjects) : UnityEngine.Object
+  ~ ForwardObjectField(Rect position, GUIContent label, UnityEngine.Object value, Type objectType, bool allowSceneObjects) : UnityEngine.Object
+  ~ ForwardPropertyField(Rect position, SerializedProperty property, GUIContent label, bool includeChildren, bool lastDrawer = true) : bool
+}
+
+class FusionEditorGUI <<static>> {
+}
+
+class CustomEditorScope {
+  - serializedObject : SerializedObject
+  + HadChanges : bool
+  + CustomEditorScope(SerializedObject so)
+  + Dispose() : void
+}
+
+class EnabledScope <<struct>> {
+  - value : bool
+  + EnabledScope(bool enabled)
+  + Dispose() : void
+}
+
+class BackgroundColorScope <<struct>> {
+  - value : Color
+  + BackgroundColorScope(Color color)
+  + Dispose() : void
+}
+
+class ColorScope <<struct>> {
+  - value : Color
+  + ColorScope(Color color)
+  + Dispose() : void
+}
+
+class ContentColorScope <<struct>> {
+  - value : Color
+  + ContentColorScope(Color color)
+  + Dispose() : void
+}
+
+class FieldWidthScope <<struct>> {
+  - value : float
+  + FieldWidthScope(float fieldWidth)
+  + Dispose() : void
+}
+
+class HierarchyModeScope <<struct>> {
+  - value : bool
+  + HierarchyModeScope(bool value)
+  + Dispose() : void
+}
+
+class IndentLevelScope <<struct>> {
+  - value : int
+  + IndentLevelScope(int indentLevel)
+  + Dispose() : void
+}
+
+class LabelWidthScope <<struct>> {
+  - value : float
+  + LabelWidthScope(float labelWidth)
+  + Dispose() : void
+}
+
+class ShowMixedValueScope <<struct>> {
+  - value : bool
+  + ShowMixedValueScope(bool show)
+  + Dispose() : void
+}
+
+class DisabledGroupScope <<struct>> {
+  + DisabledGroupScope(bool disabled)
+  + Dispose() : void
+}
+
+class PropertyScope <<struct>> {
+  + PropertyScope(Rect position, GUIContent label, SerializedProperty property)
+  + Dispose() : void
+}
+
+class PropertyScopeWithPrefixLabel <<struct>> {
+  - indent : int
+  + PropertyScopeWithPrefixLabel(Rect position, GUIContent label, SerializedProperty property, out Rect indentedPosition)
+  + Dispose() : void
+}
+
+class BoxScope <<struct>> {
+  - _indent : int
+  + BoxScope(string message, int indent = 0, float space = 0.0f)
+  + Dispose() : void
+}
+
+class WarningScope <<struct>> {
+  - _isValid : bool
+  + WarningScope(string message, float space = 0.0f)
+  + Dispose() : void
+}
+
+class ErrorScope <<struct>> {
+  - _isValid : bool
+  + ErrorScope(string message, float space = 0.0f)
+  + Dispose() : void
+}
+
+class GUIContentScope <<struct>> {
+  - _text : string
+  - _tooltip : string
+  - _content : GUIContent
+  + GUIContentScope(GUIContent content)
+  + Dispose() : void
+}
+
+class FusionEditorGUI <<static>> {
+  - ScriptPropertyName : string
+  - IconHeight : int
+  - WhitespaceContent : GUIContent
+  + PrefebOverridenColor : Color
+  + FoldoutWidth : float
+  ~ Decorate(Rect rect, string tooltip, MessageType messageType, bool hasLabel = false, bool drawBorder = true, bool drawButton = true, bool rightAligned = false) : Rect
+  ~ AppendTooltip(string tooltip, ref GUIContent label) : void
+  ~ ScriptPropertyField(Editor editor) : void
+  ~ ScriptPropertyField(SerializedObject obj) : void
+  ~ Overlay(Rect position, string label) : void
+  ~ Overlay(Rect position, GUIContent label) : void
+  ~ GetLinesHeight(int count) : float
+  ~ GetLinesHeightWithNarrowModeSupport(int count) : float
+  ~ GetDrawerTypeIncludingWorkarounds(System.Attribute attribute) : System.Type
+  ~ DisplayTypePickerMenu(Rect position, Type[] baseTypes, Action[Type] callback, Func[Type, bool] filter, string noneOptionLabel = "[None]", Type selectedType = null, FusionEditorGUIDisplayTypePickerMenuFlags flags = FusionEditorGUIDisplayTypePickerMenuFlags.Default) : void
+  ~ DisplayTypePickerMenu(Rect position, Type[] baseTypes, Action[Type] callback, string noneOptionLabel = "[None]", Type selectedType = null, bool enableAbstract = false, bool enableGenericTypeDefinitions = false, FusionEditorGUIDisplayTypePickerMenuFlags flags = FusionEditorGUIDisplayTypePickerMenuFlags.Default) : void
+  ~ DisplayTypePickerMenu(Rect position, Type baseType, Action[Type] callback, string noneOptionLabel = "[None]", Type selectedType = null, bool enableAbstract = false, bool enableGenericTypeDefinitions = false, FusionEditorGUIDisplayTypePickerMenuFlags flags = FusionEditorGUIDisplayTypePickerMenuFlags.Default) : void
+  ~ GetPropertyHeight(SerializedProperty property) : float
+}
+
+enum FusionEditorGUIDisplayTypePickerMenuFlags {
+  - None : enum
+  - GroupByNamespace : enum
+  - ShowFullName : enum
+  - Default : enum
+}
+
+class FusionEditorUtility {
+  + DelayCall(EditorApplication.CallbackFunction callback) : void
+}
+
+class FusionGlobalScriptableObjectEditorAttribute {
+  + FusionGlobalScriptableObjectEditorAttribute(Type objectType)
+  + Load(Type type) : FusionGlobalScriptableObjectLoadResult
+}
+
+class FusionGlobalScriptableObjectUtils <<static>> {
+  - GlobalAssetLabel : string
+  - s_cache : List[(FusionGlobalScriptableObject, bool)]
+  + SetDirty(this FusionGlobalScriptableObject obj) : void
+  + GetGlobalAssetPath() : string
+  + TryGetGlobalAssetPath(out string path) : bool
+  - GetAttributeOrThrow(Type type) : FusionGlobalScriptableObjectAttribute
+  + EnsureAssetExists() : bool
+  - CreateDefaultAsset(Type type) : FusionGlobalScriptableObject
+  - IsDefault(this FusionGlobalScriptableObject obj) : bool
+  - SetGlobal(FusionGlobalScriptableObject obj) : bool
+  ~ CreateFindDefaultAssetPathCache() : void
+  ~ ClearFindDefaultAssetPathCache() : void
+  ~ FindDefaultAssetPath(Type type, bool fallbackToSearchWithoutLabel = false) : string
+  + TryImportGlobal() : bool
+}
+
+class FusionGridState {
+  - HeaderState : MultiColumnHeaderState
+  - SyncSelection : bool
+}
+
+class FusionGridItem {
+  + TargetObject : Object
+}
+
+class FusionGrid <<abstract>> {
+}
+
+class FusionGrid <<abstract>> {
+  - HasValidState : bool
+  - State : TState
+  - UpdatePeriod : float
+  - _gui : Lazy[GUIState]
+  - _columns : Lazy[Column[]]
+  - _nextUpdateTime : float
+  - _lastContentHash : int
+  + GetContentHash() : int
+  + FusionGrid()
+  - ResetColumns() : void
+  - ResetGUI() : void
+  + OnInspectorUpdate() : void
+  + OnEnable() : void
+  + OnGUI(Rect rect) : void
+  + DrawToolbarReloadButton() : void
+  + DrawToolbarSyncSelectionButton() : void
+  + DrawToolbarSearchField() : void
+  + DrawToolbarResetView() : void
+  + ResetTree() : void
+  # CreateColumns() : IEnumerable[Column]
+  # CreateRows() : IEnumerable[TItem]
+  # CreateContextMenu(TItem item, TreeView treeView) : GenericMenu
+  # MakeSimpleColumn(Expression[Func[TItem, T]] propertyExpression, Column column) : Column
+}
+
+class GUIState {
+  - TreeView : InternalTreeView
+  - MultiColumnHeader : MultiColumnHeader
+  - SearchField : SearchField
+}
+
+class Column {
+  - getSearchText : Func[TItem, string]
+  - getComparer : Func[int, Comparison[TItem]]
+  - cellGUI : Action[TItem, Rect, bool, bool]
+  - initiallyVisible : bool
+  - initiallySorted : bool
+  - initiallySortedAscending : bool
+}
+
+class InternalTreeView {
+  + state : TState
+  + Grid : FusionGrid[TItem, TState]
+  + InternalTreeView(FusionGrid[TItem, TState] grid, MultiColumnHeader header)
+  # SelectionChanged(IList[int] selectedIds) : void
+  # SingleClickedItem(int id) : void
+  + SyncSelection() : void
+  - GetColumnForIndex(int index) : Column
+  # BuildRoot() : TreeViewItem
+  - GetComparision() : Comparison[TItem]
+  # BuildRows(TreeViewItem root) : IList[TreeViewItem]
+  # ContextClickedItem(int id) : void
+  # RowGUI(RowGUIArgs args) : void
+  # DoesItemMatchSearch(TreeViewItem item_, string search) : bool
+}
+
+class ComparisonComparer {
+  - Comparison : Comparison[TItem]
+  + Compare(TItem x, TItem y) : int
+}
+
+class InternalTreeViewItem {
+}
+
+class FusionMonoBehaviourDefaultEditor {
+}
+
+class FusionPropertyDrawerMetaAttribute {
+  + HasFoldout : bool
+  + HandlesUnits : bool
+}
+
+class FusionScriptableObjectDefaultEditor {
+}
+
+class RawDataDrawer <<struct>> {
+  - _builder : StringBuilder
+  - _lastValue : GUIContent
+  - _lastHash : int
+  + HasContent : bool
+  + Clear() : void
+  + Refresh(Span[T] data, int maxLength = 2048, bool addSpaces = true) : void
+  + Refresh(IList[byte] values, int maxLength = 2048) : void
+  + Refresh(SerializedProperty property, int maxLength = 2048) : void
+  + GetHeight(float width) : float
+  + Draw(Rect position) : string
+  + Draw(GUIContent label, Rect position) : string
+  + DrawLayout() : string
+}
+
+class ReflectionUtils <<static>> {
+  - DefaultBindingFlags : BindingFlags
+  + GetUnityLeafType(this Type type) : Type
+  + CreateMethodDelegate(this Type type, string methodName, BindingFlags flags = DefaultBindingFlags) : T
+  + CreateMethodDelegate(this Type type, string methodName, BindingFlags flags, Type delegateType) : Delegate
+  + CreateMethodDelegate(Assembly assembly, string typeName, string methodName, BindingFlags flags = DefaultBindingFlags) : T
+  + CreateMethodDelegate(Assembly assembly, string typeName, string methodName, BindingFlags flags, Type delegateType) : Delegate
+  ~ CreateMethodDelegate(this Type type, string methodName, BindingFlags flags, Type delegateType, params DelegateSwizzle[] fallbackSwizzles) : T
+  + GetMemberIncludingBaseTypes(this Type type, string memberName, BindingFlags flags = DefaultBindingFlags, Type stopAtType = null) : MemberInfo
+  + GetFieldIncludingBaseTypes(this Type type, string fieldName, BindingFlags flags = DefaultBindingFlags, Type stopAtType = null) : FieldInfo
+  + GetFieldOrThrow(this Type type, string fieldName, BindingFlags flags = DefaultBindingFlags) : FieldInfo
+  + GetFieldOrThrow(this Type type, string fieldName, BindingFlags flags = DefaultBindingFlags) : FieldInfo
+  + GetFieldOrThrow(this Type type, string fieldName, Type fieldType, BindingFlags flags = DefaultBindingFlags) : FieldInfo
+  + GetPropertyOrThrow(this Type type, string propertyName, BindingFlags flags = DefaultBindingFlags) : PropertyInfo
+  + GetPropertyOrThrow(this Type type, string propertyName, Type propertyType, BindingFlags flags = DefaultBindingFlags) : PropertyInfo
+  + GetPropertyOrThrow(this Type type, string propertyName, BindingFlags flags = DefaultBindingFlags) : PropertyInfo
+  + GetMethodOrThrow(this Type type, string methodName, BindingFlags flags = DefaultBindingFlags) : MethodInfo
+  + GetConstructorInfoOrThrow(this Type type, Type[] types, BindingFlags flags = DefaultBindingFlags) : ConstructorInfo
+  + GetNestedTypeOrThrow(this Type type, string name, BindingFlags flags) : Type
+  + CreateGetter(this Type type, string memberName, BindingFlags flags = DefaultBindingFlags) : Func[object, object]
+  + CreateGetter(this Type type, string memberName, BindingFlags flags = DefaultBindingFlags) : Func[object, T]
+  + CreateFieldAccessor(this Type type, string fieldName, Type expectedFieldType = null, BindingFlags flags = DefaultBindingFlags) : InstanceAccessor[object]
+  + CreateFieldAccessor(this Type type, string fieldName, Type expectedFieldType = null, BindingFlags flags = DefaultBindingFlags) : InstanceAccessor[FieldType]
+  + CreateStaticFieldAccessor(this Type type, string fieldName, Type expectedFieldType = null) : StaticAccessor[object]
+  + CreateStaticFieldAccessor(this Type type, string fieldName, Type expectedFieldType = null) : StaticAccessor[FieldType]
+  + CreatePropertyAccessor(this Type type, string fieldName, Type expectedPropertyType = null, BindingFlags flags = DefaultBindingFlags) : InstanceAccessor[PropertyType]
+  + CreateStaticPropertyAccessor(this Type type, string fieldName, Type expectedFieldType = null) : StaticAccessor[object]
+  + CreateStaticPropertyAccessor(this Type type, string fieldName, Type expectedFieldType = null) : StaticAccessor[FieldType]
+  - CreateMethodExceptionMessage(Assembly assembly, string typeName, string methodName, BindingFlags flags) : string
+  - CreateMethodExceptionMessage(Assembly assembly, string typeName, string methodName, BindingFlags flags, Type delegateType) : string
+  - CreateFieldExceptionMessage(Assembly assembly, string typeName, string fieldName, BindingFlags flags) : string
+  - CreateConstructorExceptionMessage(Assembly assembly, string typeName, BindingFlags flags) : string
+  - CreateConstructorExceptionMessage(Assembly assembly, string typeName, Type[] types, BindingFlags flags) : string
+  - CreateMethodDelegateInternal(this Type type, string name, BindingFlags flags) : T
+  - CreateMethodDelegateInternal(this Type type, string name, BindingFlags flags, Type delegateType) : Delegate
+  - GetMethodOrThrow(Type type, string name, BindingFlags flags, Type delegateType) : MethodInfo
+  - FindMethod(Type type, string name, BindingFlags flags, Type returnType, params Type[] parameters) : MethodInfo
+  - GetConstructorOrThrow(Type type, BindingFlags flags, Type delegateType, DelegateSwizzle[] swizzles, out DelegateSwizzle firstMatchingSwizzle) : ConstructorInfo
+  - GetMethodOrThrow(Type type, string name, BindingFlags flags, Type delegateType, DelegateSwizzle[] swizzles, out DelegateSwizzle firstMatchingSwizzle) : MethodInfo
+  + IsArrayOrList(this Type listType) : bool
+  + GetArrayOrListElementType(this Type listType) : Type
+  + MakeFuncType(params Type[] types) : Type
+  - GetFuncType(int argumentCount) : Type
+  + MakeActionType(params Type[] types) : Type
+  - GetActionType(int argumentCount) : Type
+  - CreateStaticAccessorInternal(MemberInfo member) : StaticAccessor[T]
+  - CreateAccessorInternal(MemberInfo member) : InstanceAccessor[T]
+}
+
+class InstanceAccessor <<struct>> {
+  - GetValue : Func[object, TValue]
+  - SetValue : Action[object, TValue]
+}
+
+class StaticAccessor <<struct>> {
+  - GetValue : Func[TValue]
+  - SetValue : Action[TValue]
+}
+
+class DelegateSwizzle <<static>> {
+  + Make(Expression[Func[In0, In1, Out0]] out0) : DelegateSwizzle
+  + Make(Expression[Func[In0, In1, Out0]] out0, Expression[Func[In0, In1, Out1]] out1) : DelegateSwizzle
+  + Make(Expression[Func[In0, In1, Out0]] out0, Expression[Func[In0, In1, Out1]] out1, Expression[Func[In0, In1, Out3]] out3) : DelegateSwizzle
+}
+
+class DelegateSwizzle {
+  + Converters : Expression[]
+  + Types : Type[]
+  + DelegateSwizzle(Expression[] converters, Type[] types)
+}
+
+class SerializedPropertyUtilities <<static>> {
+  - _updateFixedBufferTemp : int[]
+  + FindPropertyOrThrow(this SerializedObject so, string propertyPath) : SerializedProperty
+  + FindPropertyRelativeOrThrow(this SerializedProperty sp, string relativePropertyPath) : SerializedProperty
+  + FindPropertyRelativeToParentOrThrow(this SerializedProperty property, string relativePath) : SerializedProperty
+  + FindPropertyRelativeToParent(this SerializedProperty property, string relativePath) : SerializedProperty
+  + IsArrayElement(string propertyPath) : bool
+  + IsArrayElement(this SerializedProperty sp) : bool
+  + IsArrayElement(this SerializedProperty sp, out int index) : bool
+  + GetArrayFromArrayElement(this SerializedProperty sp) : SerializedProperty
+  + IsArrayProperty(this SerializedProperty sp) : bool
+  + ShouldIncludeChildren(this SerializedProperty sp) : bool
+  + GetHashCodeForPropertyPathWithoutArrayIndex(this SerializedProperty sp) : int
+  + GetChildren(this SerializedProperty property, bool visibleOnly = true) : SerializedPropertyEnumerable
+  ~ UpdateFixedBuffer(this SerializedProperty sp, Action[int[], int] fill, Action[int[], int] update, bool write, bool force = false) : bool
+}
+
+class SerializedPropertyEqualityComparer {
+  - Instance : SerializedPropertyEqualityComparer
+  + Equals(SerializedProperty x, SerializedProperty y) : bool
+  + GetHashCode(SerializedProperty p) : int
+}
+
+class SerializedPropertyEnumerable <<struct>> {
+  - property : SerializedProperty
+  - visible : bool
+  + SerializedPropertyEnumerable(SerializedProperty property, bool visible)
+  + GetEnumerator() : SerializedPropertyEnumerator
+  - GetEnumerator() : IEnumerator[SerializedProperty]
+  - GetEnumerator() : IEnumerator
+}
+
+class AssetPostprocessor <<external>>
+class Attribute <<external>>
+class Behaviour <<external>>
+class EditorWindow <<external>>
+class Exception <<external>>
+class FusionGlobalScriptableObjectSourceAttribute <<external>>
+class FusionUnityLoggerBase <<external>>
+class IAfterAllTicks <<external>>
+class IBeforeAllTicks <<external>>
+class IBeforeCopyPreviousState <<external>>
+class IBeginDragHandler <<external>>
+class IComparer <<external>>
+class ICoroutine <<external>>
+class IDisposable <<external>>
+class IDragHandler <<external>>
+class IEndDragHandler <<external>>
+class IEnumerable <<external>>
+class IEnumerator <<external>>
+class IEqualityComparer <<external>>
+class IEquatable <<external>>
+class INetworkObjectProvider <<external>>
+class INetworkPrefabSource <<external>>
+class INetworkRunnerCallbacks <<external>>
+class INetworkSceneManager <<external>>
+class INetworkStruct <<external>>
+class INetworkTRSPTeleport <<external>>
+class IPreprocessBuildWithReport <<external>>
+class ISerializationCallbackReceiver <<external>>
+class ISpawned <<external>>
+class Lazy <<external>>
+class NetworkTRSP <<external>>
+class PopupWindowContent <<external>>
+class ScriptableObject <<external>>
+class ScriptedImporter <<external>>
+class ScriptedImporterEditor <<external>>
+class SimulationBehaviour <<external>>
+class TreeView <<external>>
+class TreeViewItem <<external>>
+class TreeViewState <<external>>
+
+' Relaciones
+BD_Audios --> CoroutineHelper
+CodigoDeInicio --> BD_Audios
+IndicadorEnemigos --> GameManager
+PickUp --> UnitController
+PickUp --> UnitTeam
+Torreta --> GameManager
+VibracionCamara --> ConfiguracionGlobal
+Cohete --> IDaniable
+Proyectil --> Manager_VFX
+Proyectil --> IDaniable
+Proyectil --> InformacionPersonaje
+Proyectil --> Enemigo
+WeaponController --> WeaponModel
+WeaponController --> WeaponView
+WeaponController --> IWeaponInput
+WeaponController --> WeaponControllerMVC
+WeaponController --> UnityWeaponInput
+WeaponView --> CambiarOpacidad
+WeaponView --> Proyectil
+WeaponView --> InformacionPersonaje
+WeaponView --> WeaponModel
+WeaponView --> Bala
+WeaponView --> BD_Audios
+Soldado_Anim --> BD_Audios
+IA_P2_BusEvent_Manager --> IA_P2_FSM
+PersecucionEnemigo --> Enemigo
+MovementProxy --> IMovable
+ShootingProxy --> IAttackable
+Rigidbody2DMovementHandler ..|> IMovementHandler
+Rigidbody2DMovementHandler --> BD_Audios
+IA_F_ChangeMode --> IA_P2_AgentIA
+IA_F_ChangeMode --> IA_P2_BusEvent_Manager
+IA_F_ControllerSeguidor --> IA_P2_AgentIA
+IA_F_ControllerSeguidor --> IA_F_EnemyCercanos
+IA_F_PathFinding_Theta --> IA_P2_LineOfSight3D
+IA_P2_FOV --> IA_P2_LineOfSight3D
+IA_P2_FSM --> IA_P2_AgentIA
+IA_P2_FSM --> AgentState
+IA_P2_FSM --> IA_P2_INT_gentState
+IA_P2_FSM --> IA_P2_FOV
+IA_P2_FSM --> IA_P2_ST_PatrolState
+IA_P2_FSM --> IA_P2_ST_ChaseState
+IA_P2_FSM --> IA_P2_ST_SearchingState
+IA_P2_FSM --> IA_P2_ST_ReturningToPatrolState
+IA_P2_FSM --> IA_P2_BusEvent_Manager
+IA_P2_INT_gentState --> IA_P2_FSM
+IA_P2_PathfindingManager --> IA_P2_PathNode
+IA_P2_PathfindingManager --> IA_P2_PathfindingModel
+IA_P2_PathfindingManager --> FinalPathResult
+IA_P2_PathfindingManager --> NodeDistance
+IA_P2_PathfindingManager --> IA_P2_LineOfSight3D
+IA_P2_PathfindingManager --> AStarResult
+IA_P2_PathfindingManager --> ThetaStarResult
+AStarResult --> IA_P2_PathNode
+NodeDistance --> IA_P2_PathNode
+IA_P2_ST_ChaseState ..|> IA_P2_INT_gentState
+IA_P2_ST_ChaseState --> IA_P2_FSM
+IA_P2_ST_ChaseState --> AgentState
+IA_P2_ST_ChaseState --> IA_P2_LineOfSight3D
+IA_P2_ST_PatrolState ..|> IA_P2_INT_gentState
+IA_P2_ST_PatrolState --> IA_P2_FSM
+IA_P2_ST_PatrolState --> AgentState
+IA_P2_ST_ReturningToPatrolState ..|> IA_P2_INT_gentState
+IA_P2_ST_ReturningToPatrolState --> IA_P2_FSM
+IA_P2_ST_ReturningToPatrolState --> AgentState
+IA_P2_ST_SearchingState ..|> IA_P2_INT_gentState
+IA_P2_ST_SearchingState --> IA_P2_FSM
+IA_P2_ST_SearchingState --> AgentState
+IA_P2_ST_SearchingState --> IA_P2_LineOfSight3D
+ControladorTanque --> EntrarAlTanque
+ControladorTanque --> Proyectil
+ControladorTanque --> Bala
+ControladorTanque --> BD_Audios
+Enemigo --> GameManager
+EntrarAlTanque --> ControladorTanque
+PlayerController --> CharacterModel
+PlayerController --> CharacterView
+PlayerController --> Rigidbody2DMovementHandler
+PlayerController --> ICharacterInput
+PlayerController --> UnityCharacterInput
+PlayerController --> BD_Audios
+Puntero_Tanque --> Tanque
+Tanque --> Puntero_Tanque
+Tanque --> Cohete
+Tanque --> ObjetoColisionado
+CharacterModel --> InformacionPersonaje
+InformacionPersonaje ..|> IHealth
+InformacionPersonaje --> WeaponController
+InformacionPersonaje --> GameManager
+SelectedSoldierUIFeedback --> UnitController
+CharacterControllerMVC --> CharacterModel
+CharacterControllerMVC --> CharacterView
+CharacterControllerMVC --> ICharacterInput
+CharacterControllerMVC --> IMovementHandler
+UnityCharacterInput ..|> ICharacterInput
+UnityWeaponInput ..|> IWeaponInput
+WeaponControllerMVC --> WeaponModel
+WeaponControllerMVC --> WeaponView
+WeaponControllerMVC --> IWeaponInput
+SquadEventBus --> UnitController
+DetectableEntity ..|> IDetectable
+DetectableEntity --> DetectableType
+IDetectable --> DetectableType
+UnitFSM --> State
+UnitFSM --> UnitController
+UnitFSM --> TickManager
+AmmoManager --> UnitController
+AmmoManager --> UnitModel
+Bala ..|> IDetectable
+Bala --> DetectableType
+Bala --> Proyectil
+Bala --> CursorManager
+Bala --> IDaniable
+Bala --> CoroutineHelper
+Bala --> Manager_VFX
+Bala --> BD_Audios
+Bala --> BalaPool
+BalaPool --> Bala
+ControlDerrota --> LeaderManager
+CursorManager --> IInteractable
+CursorManager --> IDaniable
+Destruible ..|> IDaniable
+Destruible --> UnitController
+Disparador --> Manager_VFX
+Disparador --> BD_Audios
+Disparador --> BalaPool
+Disparador --> Bala
+EnemyModel ..|> IHealth
+EnemyView --> EnemyModel
+FormationRelocator --> GlobalData
+FormationRelocator --> IA_P2_PathfindingModel
+GameManager --> Enemigo
+GenericDetector --> DetectableType
+GenericDetector --> IDetectable
+GlobalData --> UnitController
+GlobalHUD --> LeaderManager
+IA_P2_AgentIA --> IA_P2_PathfindingModel
+IA_P2_AgentIA --> IA_P2_PathfindingManager
+IA_P2_AgentIA --> IA_F_PathFinding_Theta
+IA_P2_PathfindingModel --> IA_P2_PathNode
+IA_P2_PathfindingModel --> IA_P2_LineOfSight3D
+IA_P2_PathNode --> IA_P2_PathfindingModel
+InteractableItem ..|> IInteractable
+InteractableItem --> UnitController
+InteractableItem --> UnitTeam
+InteractableItem --> BD_Audios
+LeaderManager --> UnitController
+LeaderManager --> GEN_Inputs
+LeaderManager --> GlobalData
+LeaderManager --> MainGameController
+LeaderManager --> SeguirFormacionState
+LeaderManager --> LiderandoState
+LiderandoState ..|> IUnitState
+LiderandoState --> UnitController
+LiderandoState --> GEN_Inputs
+SeguirFormacionState ..|> IUnitState
+SeguirFormacionState --> UnitController
+SeguirFormacionState --> EsperandoState
+AtacarState ..|> IUnitState
+AtacarState --> UnitController
+AtacarState --> IndicatorType
+AtacarState --> SeguirFormacionState
+AtacarState --> PerseguirState
+PerseguirState ..|> IUnitState
+PerseguirState --> UnitController
+PerseguirState --> IndicatorType
+PerseguirState --> SeguirFormacionState
+PerseguirState --> AtacarState
+EsperandoState ..|> IUnitState
+EsperandoState --> UnitController
+EsperandoState --> IndicatorType
+EsperandoState --> SeguirFormacionState
+HuirDetrasLiderState ..|> IUnitState
+HuirDetrasLiderState --> UnitController
+HuirDetrasLiderState --> GlobalData
+HuirDetrasLiderState --> SeguirFormacionState
+IrADestinoState ..|> IUnitState
+IrADestinoState --> UnitController
+IrADestinoState --> IndicatorType
+IrADestinoState --> EsperandoState
+MainGameController --> LeaderManager
+MainGameController --> GlobalData
+MainGameController --> UnitModel
+MainGameController --> UnitFSM
+PositionManager --> GlobalData
+PositionManager --> UnitController
+PositionManager --> UnitTeam
+PositionManager --> EsperandoState
+PositionManager --> SeguirFormacionState
+RehenBruto --> IA_P2_AgentIA
+RehenBruto --> GlobalData
+ShotSensor --> UnitController
+ShotSensor --> Bala
+UnitCommander --> GEN_Inputs
+UnitCommander --> LeaderManager
+UnitCommander --> UnitController
+UnitCommander --> SeguirFormacionState
+UnitCommander --> IrADestinoState
+UnitCommander --> UnitTeam
+UnitController ..|> IDaniable
+UnitController ..|> IDetectable
+UnitController --> UnitModel
+UnitController --> UnitView
+UnitController --> IA_P2_AgentIA
+UnitController --> Disparador
+UnitController --> GenericDetector
+UnitController --> DetectableType
+UnitController --> UnitTeam
+UnitController --> Enemigo
+UnitController --> EsperandoState
+UnitController --> SquadEventBus
+UnitController --> AtacarState
+UnitController --> PerseguirState
+UnitController --> IndicatorType
+UnitController --> IUnitState
+UnitModel ..|> IHealth
+UnitModel --> UnitTeam
+UnitPathRenderer --> UnitController
+UnitPathRenderer --> UnitFSM
+UnitPathRenderer --> State
+IUnitState --> UnitController
+UnitView --> UnitModel
+UnitView --> IndicatorEntry
+UnitView --> IndicatorType
+DropdownController --> VfxController
+FusionGlobalScriptableObjectAddressAttribute --|> FusionGlobalScriptableObjectSourceAttribute
+FusionGlobalScriptableObjectResourceAttribute --|> FusionGlobalScriptableObjectSourceAttribute
+FusionCoroutine ..|> ICoroutine
+FusionCoroutine ..|> IDisposable
+FusionLogInitializer --> FusionUnityLogger
+FusionUnityLogger --|> FusionUnityLoggerBase
+FusionUnityLogger --> Stage
+JsonUtilityExtensions --> TypeNameWrapper
+FusionMppm --> FusionMppmStatus
+FusionMppm --> FusionMppmCommand
+NetworkObjectBaker --> TransformPath
+NetworkObjectBaker --> TransformPathCache
+NetworkObjectBaker --> Result
+NetworkObjectBaker --> _Indices
+TransformPath --> _Indices
+TransformPathCache ..|> IComparer
+TransformPathCache ..|> IEqualityComparer
+TransformPathCache --> TransformPath
+NetworkPrefabSourceStatic --|> NetworkAssetSourceStatic
+NetworkPrefabSourceStatic ..|> INetworkPrefabSource
+NetworkPrefabSourceStaticLazy --|> NetworkAssetSourceStaticLazy
+NetworkPrefabSourceStaticLazy ..|> INetworkPrefabSource
+NetworkPrefabSourceResource --|> NetworkAssetSourceResource
+NetworkPrefabSourceResource ..|> INetworkPrefabSource
+FusionStatisticsHelper --> RenderSimStats
+FusionStatsGraphBase --> FusionStatBuffer
+FusionStatsGraphBase --> FusionStatistics
+SceneEqualityComparer ..|> IEqualityComparer
+NetworkRunnerVisibilityExtensions --> IRunnerVisibilityRecognizedType
+NetworkRunnerVisibilityExtensions --> RunnerVisibility
+NetworkRunnerVisibilityExtensions --> RunnerVisibilityLink
+NetworkRunnerVisibilityExtensions --> RunnerVisibilityLinksRoot
+NetworkRunnerVisibilityExtensions --> EnableOnSingleRunner
+NetworkRunnerVisibilityExtensions --> PreferredRunners
+RunnerVisibility --> RunnerVisibilityLink
+FusionBasicBillboard --|> Behaviour
+FusionBootstrap --|> Behaviour
+FusionBootstrap --> FusionMppmCommand
+FusionBootstrap --> StartCommand
+FusionBootstrap --> StartModes
+FusionBootstrap --> Stage
+FusionBootstrap --> State
+FusionBootstrap --> FusionBootstrapDebugGUI
+FusionBootstrap --> FusionMppm
+FusionBootstrap --> FusionMppmStatus
+FusionBootstrap --> NetworkSceneManagerDefault
+FusionBootstrap --> NetworkObjectProviderDefault
+StartCommand --|> FusionMppmCommand
+FusionBootstrapDebugGUI --|> Behaviour
+FusionBootstrapDebugGUI --> FusionBootstrap
+FusionBootstrapDebugGUI --> Stage
+FusionBootstrapDebugGUI --> FusionScalableIMGUI
+NetworkCCData ..|> INetworkStruct
+NetworkCharacterController --|> NetworkTRSP
+NetworkCharacterController ..|> INetworkTRSPTeleport
+NetworkCharacterController ..|> IBeforeAllTicks
+NetworkCharacterController ..|> IAfterAllTicks
+NetworkCharacterController ..|> IBeforeCopyPreviousState
+NetworkCharacterController --> NetworkCCData
+NetworkObjectProviderDefault --|> Behaviour
+NetworkObjectProviderDefault ..|> INetworkObjectProvider
+NetworkSceneManagerDefault --|> Behaviour
+NetworkSceneManagerDefault ..|> INetworkSceneManager
+NetworkSceneManagerDefault --> FusionUnitySceneManagerUtils
+NetworkSceneManagerDefault --> SceneEqualityComparer
+NetworkSceneManagerDefault --> MultiPeerSceneRoot
+NetworkSceneManagerDefault --> FusionCoroutine
+NetworkSceneManagerDefault --> LoadingScope
+LoadingScope ..|> IDisposable
+LoadingScope --> NetworkSceneManagerDefault
+EnableOnSingleRunner --|> Behaviour
+EnableOnSingleRunner --> RunnerVisibilityLink
+EnableOnSingleRunner --> PreferredRunners
+RunnerAOIGizmos --|> SimulationBehaviour
+RunnerEnableVisibility --|> Behaviour
+RunnerEnableVisibility ..|> INetworkRunnerCallbacks
+RunnerLagCompensationGizmos --|> Behaviour
+RunnerVisibilityLink --> PreferredRunners
+RunnerVisibilityLink --> ComponentType
+RunnerVisibilityLink --> NetworkRunnerVisibilityExtensions
+FusionNetworkObjectStatistics --> FusionStatistics
+FusionNetworkObjectStatsGraph --|> FusionStatsGraphBase
+FusionNetworkObjectStatsGraph --> NetworkObjectStat
+FusionNetworkObjectStatsGraph --> FusionNetworkObjectStatsGraphCombine
+FusionNetworkObjectStatsGraphCombine --> NetworkObjectStat
+FusionNetworkObjectStatsGraphCombine --> FusionNetworkObjectStatsGraph
+FusionNetworkObjectStatsGraphCombine --> FusionStatistics
+FusionNetworkObjectStatsGraphCombine --> FusionNetworkObjectStatistics
+FusionStatistics --|> SimulationBehaviour
+FusionStatistics ..|> ISpawned
+FusionStatistics --> FusionStatsGraphBase
+FusionStatistics --> FusionNetworkObjectStatsGraphCombine
+FusionStatistics --> FusionStatsPanelHeader
+FusionStatistics --> FusionStatsConfig
+FusionStatistics --> FusionStatsCanvas
+FusionStatistics --> FusionNetworkObjectStatistics
+FusionStatistics --> RenderSimStats
+FusionStatistics --> CanvasAnchor
+FusionStatistics --> FusionStatisticsStatCustomConfig
+FusionStatistics --> FusionBasicBillboard
+FusionStatistics --> FusionStatsWorldAnchor
+FusionStatisticsStatCustomConfig --> RenderSimStats
+FusionStatsCanvas ..|> IDragHandler
+FusionStatsCanvas ..|> IEndDragHandler
+FusionStatsCanvas ..|> IBeginDragHandler
+FusionStatsCanvas --> FusionStatsPanelHeader
+FusionStatsCanvas --> FusionStatsConfig
+FusionStatsCanvas --> CanvasAnchor
+FusionStatsCanvas --> DragMode
+FusionStatsCanvas --> FusionStatistics
+FusionStatsCanvas --> FusionStatisticsHelper
+FusionStatsConfig --> FusionStatistics
+FusionStatsGraphDefault --|> FusionStatsGraphBase
+FusionStatsGraphDefault --> RenderSimStats
+FusionStatsGraphDefault --> FusionStatisticsHelper
+FusionStatsGraphDefault --> FusionStatistics
+FusionStatsGraphDefault --> FusionStatisticsStatCustomConfig
+FusionStatsPanelHeader --> FusionStatsGraphDefault
+FusionStatsPanelHeader --> RenderSimStats
+FusionStatsPanelHeader --> FusionStatistics
+FusionStatsPanelHeader --> FusionStatisticsStatCustomConfig
+FusionStatsWorldAnchor --> FusionStatsConfig
+FusionStatsWorldAnchor --> FusionStatsCanvas
+AssetObjectEditor --|> Editor
+BehaviourEditor --|> FusionEditor
+ChangeDllManager --> AssetDatabase
+ChangeDllManager --> PathUtils
+FixedBufferPropertyAttributeDrawer --|> PropertyDrawerWithErrorHandling
+FixedBufferPropertyAttributeDrawer --> SurrogatePool
+FixedBufferPropertyAttributeDrawer --> SerializedProperty
+FixedBufferPropertyAttributeDrawer --> EditorGUIUtility
+FixedBufferPropertyAttributeDrawer --> EditorGUI
+FixedBufferPropertyAttributeDrawer --> UnityInternal
+FixedBufferPropertyAttributeDrawer --> IndentLevelScope
+FixedBufferPropertyAttributeDrawer --> FusionEditorGUI
+FixedBufferPropertyAttributeDrawer --> LabelWidthScope
+FixedBufferPropertyAttributeDrawer --> ScriptAttributeUtility
+FixedBufferPropertyAttributeDrawer --> FusionUnitySurrogateBaseWrapper
+FixedBufferPropertyAttributeDrawer --> PropertyEntry
+FixedBufferPropertyAttributeDrawer --> EditorApplication
+SurrogatePool --> FusionUnitySurrogateBaseWrapper
+SurrogatePool --> PropertyEntry
+SurrogatePool --> EditorApplication
+SurrogatePool --> SerializedProperty
+PropertyEntry --> SerializedProperty
+PropertyEntry --> FusionUnitySurrogateBaseWrapper
+INetworkPrefabSourceDrawer --|> PropertyDrawerWithErrorHandling
+INetworkPrefabSourceDrawer --> SerializedProperty
+INetworkPrefabSourceDrawer --> FusionEditorGUI
+INetworkPrefabSourceDrawer --> PropertyScopeWithPrefixLabel
+INetworkPrefabSourceDrawer --> EditorGUI
+INetworkPrefabSourceDrawer --> NetworkProjectConfigUtilities
+INetworkPrefabSourceDrawer --> NetworkPrefabRefDrawer
+INetworkPrefabSourceDrawer --> NetworkAssetSourceFactory
+INetworkPrefabSourceDrawer --> NetworkAssetSourceFactoryContext
+INetworkPrefabSourceDrawer --> EditorGUIUtility
+NetworkBoolDrawer --|> PropertyDrawer
+NetworkBoolDrawer --> SerializedProperty
+NetworkBoolDrawer --> FusionEditorGUI
+NetworkBoolDrawer --> PropertyScope
+NetworkBoolDrawer --> EditorGUI
+NetworkObjectGuidDrawer --|> PropertyDrawerWithErrorHandling
+NetworkObjectGuidDrawer --> SerializedProperty
+NetworkObjectGuidDrawer --> FusionEditorGUI
+NetworkObjectGuidDrawer --> PropertyScopeWithPrefixLabel
+NetworkObjectGuidDrawer --> EditorGUI
+NetworkPrefabAttributeDrawer --|> PropertyDrawerWithErrorHandling
+NetworkPrefabAttributeDrawer --> SerializedProperty
+NetworkPrefabAttributeDrawer --> FusionEditorGUI
+NetworkPrefabAttributeDrawer --> PropertyScopeWithPrefixLabel
+NetworkPrefabAttributeDrawer --> EditorGUI
+NetworkPrefabAttributeDrawer --> UnityInternal
+NetworkPrefabAttributeDrawer --> ObjectSelector
+NetworkPrefabAttributeDrawer --> EditorGUIUtility
+NetworkPrefabAttributeDrawer --> NetworkProjectConfigImporter
+NetworkPrefabAttributeDrawer --> AssetDatabaseUtils
+NetworkPrefabRefDrawer --|> PropertyDrawerWithErrorHandling
+NetworkPrefabRefDrawer --> SerializedProperty
+NetworkPrefabRefDrawer --> NetworkObjectGuidDrawer
+NetworkPrefabRefDrawer --> FusionEditorGUI
+NetworkPrefabRefDrawer --> PropertyScopeWithPrefixLabel
+NetworkPrefabRefDrawer --> NetworkProjectConfigUtilities
+NetworkPrefabRefDrawer --> EditorGUI
+NetworkPrefabRefDrawer --> NetworkObjectEditor
+NetworkPrefabRefDrawer --> AssetDatabaseUtils
+NetworkPrefabRefDrawer --> NetworkProjectConfigImporter
+NetworkPrefabRefDrawer --> UnityInternal
+NetworkPrefabRefDrawer --> ObjectSelector
+NetworkPrefabRefDrawer --> EditorGUIUtility
+NetworkStringDrawer --|> PropertyDrawerWithErrorHandling
+NetworkStringDrawer --> SerializedProperty
+NetworkStringDrawer --> EditorGUI
+NetworkStringDrawer --> FusionEditorGUI
+NetworkStringDrawer --> ShowMixedValueScope
+SceneRefDrawer --|> PropertyDrawer
+SceneRefDrawer --> SerializedProperty
+SceneRefDrawer --> FusionEditorGUI
+SceneRefDrawer --> PropertyScopeWithPrefixLabel
+SceneRefDrawer --> EditorGUI
+SerializableDictionaryDrawer --|> PropertyDrawerWithErrorHandling
+SerializableDictionaryDrawer --> SerializedProperty
+SerializableDictionaryDrawer --> FusionEditorGUI
+SerializableDictionaryDrawer --> PropertyScope
+SerializableDictionaryDrawer --> EditorGUI
+SerializableDictionaryDrawer --> SerializedPropertyUtilities
+SerializableDictionaryDrawer --> SerializedPropertyEqualityComparer
+TickRateDrawer --|> PropertyDrawer
+TickRateDrawer --> LazyGUIStyle
+TickRateDrawer --> SerializedProperty
+TickRateDrawer --> EditorGUIUtility
+TickRateDrawer --> EditorGUI
+TickRateDrawer --> FusionEditorGUI
+TickRateDrawer --> PropertyScope
+EditorRecompileHook --> EditorApplication
+EditorRecompileHook --> NetworkProjectConfigUtilities
+FusionAssistants --> EnableOnSingleRunner
+HierarchyIteratorExtensions --> HierarchyIterator
+FusionBootstrapEditor --|> BehaviourEditor
+FusionBootstrapEditor --> FusionBootstrap
+FusionBootstrapEditor --> FusionEditorGUI
+FusionBootstrapEditor --> WarningScope
+FusionBuildTriggers ..|> IPreprocessBuildWithReport
+NetworkAssetSourceFactoryContext --> AssetDatabaseUtils
+NetworkAssetSourceFactoryContext --> EditorUtility
+NetworkAssetSourceFactoryContext --> AssetDatabase
+NetworkAssetSourceFactoryResource ..|> INetworkAssetSourceFactory
+NetworkAssetSourceFactoryResource --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactoryResource --> PathUtils
+NetworkAssetSourceFactoryResource --> NetworkAssetSourceResource
+NetworkAssetSourceFactoryStatic ..|> INetworkAssetSourceFactory
+NetworkAssetSourceFactoryStatic --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactoryStatic --> NetworkAssetSourceStaticLazy
+AssetDatabaseUtils --> EditorUtility
+AssetDatabaseUtils --> AssetDatabase
+AssetDatabaseUtils --> EditorApplication
+AssetDatabaseUtils --> AssetEnumerable
+AssetDatabaseUtils --> UnityInternal
+AssetDatabaseUtils --> HierarchyIterator
+AssetDatabaseUtils --> AssetEnumerator
+AssetDatabaseUtils --> FusionMppm
+AssetEnumerator ..|> IEnumerator
+AssetEnumerator --> UnityInternal
+AssetEnumerator --> HierarchyIterator
+AssetEnumerable ..|> IEnumerable
+AssetEnumerable --> AssetEnumerator
+EditorButtonDrawer --> Editor
+EditorButtonDrawer --> ButtonEntry
+EditorButtonDrawer --> EditorApplication
+EditorButtonDrawer --> DoIfAttributeDrawer
+EditorButtonDrawer --> FusionEditorGUI
+EditorButtonDrawer --> WarningScope
+EditorButtonDrawer --> EditorGUI
+EditorButtonDrawer --> EditorUtility
+EnumDrawer --> SerializedProperty
+EnumDrawer --> EditorGUI
+EnumDrawer --> UnityInternal
+EnumDrawer --> EditorUtility
+LogSettingsDrawer --> FusionCodeDoc
+LogSettingsDrawer --> EditorGUI
+LogSettingsDrawer --> FusionEditorGUI
+LogSettingsDrawer --> ShowMixedValueScope
+LogSettingsDrawer --> WarningScope
+LogSettingsDrawer --> AssetDatabaseUtils
+FusionCodeDoc --> CodeDoc
+FusionCodeDoc --> EditorGUIUtility
+FusionCodeDoc --> MemberInfoEntry
+FusionCodeDoc --> AssetDatabase
+FusionCodeDoc --> Regexes
+FusionCodeDoc --> AssetDatabaseUtils
+CodeDoc --> MemberInfoEntry
+Postprocessor --|> AssetPostprocessor
+Postprocessor --> AssetDatabaseUtils
+FusionCustomDependency --> EditorApplication
+FusionCustomDependency --> AssetDatabase
+FusionCustomDependency --> AssetDatabaseUtils
+FusionEditor --|> Editor
+FusionEditor --> EditorButtonDrawer
+FusionEditor --> FusionEditorGUI
+FusionEditorGUI --> FusionEditorSkin
+FusionEditorGUI --> IndentLevelScope
+FusionEditorGUI --> EditorGUI
+FusionEditorGUI --> EditorGUIUtility
+FusionEditorGUI --> EnabledScope
+FusionEditorGUI --> InlineHelpStyle
+FusionEditorGUI --> Event
+FusionEditorGUI --> UnityInternal
+FusionEditorGUI --> BackgroundColorScope
+FusionEditorGUI --> Editor
+FusionEditorGUI --> ScriptFieldDrawer
+FusionEditorGUI --> PropertyDrawer
+FusionEditorGUI --> SerializedProperty
+FusionEditorGUI --> ScriptAttributeUtility
+FusionEditorGUI --> FusionCodeDoc
+FusionEditorGUI --> PropertyHandler
+FusionEditorGUI --> PropertyDrawerOrderComparer
+FusionEditorGUI --> LazyAuto
+LazyAuto --|> Lazy
+PropertyDrawerOrderComparer ..|> IComparer
+PropertyDrawerOrderComparer --> PropertyDrawer
+FusionEditorGUI --> EditorGUI
+FusionEditorGUI --> SerializedProperty
+FusionEditorGUI --> UnityInternal
+FusionEditorGUI --> EditorGUI
+FusionEditorGUI --> EditorGUIUtility
+FusionEditorGUI --> SerializedProperty
+FusionEditorGUI --> FusionEditorSkin
+CustomEditorScope ..|> IDisposable
+CustomEditorScope --> EditorGUI
+EnabledScope ..|> IDisposable
+BackgroundColorScope ..|> IDisposable
+ColorScope ..|> IDisposable
+ContentColorScope ..|> IDisposable
+FieldWidthScope ..|> IDisposable
+FieldWidthScope --> EditorGUIUtility
+HierarchyModeScope ..|> IDisposable
+HierarchyModeScope --> EditorGUIUtility
+IndentLevelScope ..|> IDisposable
+IndentLevelScope --> EditorGUI
+LabelWidthScope ..|> IDisposable
+LabelWidthScope --> EditorGUIUtility
+ShowMixedValueScope ..|> IDisposable
+ShowMixedValueScope --> EditorGUI
+DisabledGroupScope ..|> IDisposable
+DisabledGroupScope --> EditorGUI
+PropertyScope ..|> IDisposable
+PropertyScope --> SerializedProperty
+PropertyScope --> EditorGUI
+PropertyScopeWithPrefixLabel ..|> IDisposable
+PropertyScopeWithPrefixLabel --> SerializedProperty
+PropertyScopeWithPrefixLabel --> EditorGUI
+BoxScope ..|> IDisposable
+BoxScope --> FusionEditorSkin
+BoxScope --> EditorGUI
+WarningScope ..|> IDisposable
+WarningScope --> FusionEditorSkin
+ErrorScope ..|> IDisposable
+ErrorScope --> FusionEditorSkin
+GUIContentScope ..|> IDisposable
+FusionEditorGUI --> EditorGUIUtility
+FusionEditorGUI --> EnabledScope
+FusionEditorGUI --> Editor
+FusionEditorGUI --> EditorGUI
+FusionEditorGUI --> FusionEditorSkin
+FusionEditorGUI --> UnityInternal
+FusionEditorGUI --> ScriptAttributeUtility
+FusionEditorGUI --> PropertyDrawerForArrayWorkaround
+FusionEditorGUI --> FusionEditorGUIDisplayTypePickerMenuFlags
+FusionEditorGUI --> EditorUtility
+FusionEditorGUI --> SerializedProperty
+FusionEditorUtility --> EditorApplication
+FusionGlobalScriptableObjectEditorAttribute --|> FusionGlobalScriptableObjectSourceAttribute
+FusionGlobalScriptableObjectEditorAttribute --> FusionGlobalScriptableObjectUtils
+FusionGlobalScriptableObjectEditorAttribute --> AssetDatabase
+FusionGlobalScriptableObjectUtils --> EditorUtility
+FusionGlobalScriptableObjectUtils --> AssetDatabase
+FusionGlobalScriptableObjectUtils --> AssetDatabaseUtils
+FusionGridState --|> TreeViewState
+FusionGridItem --|> TreeViewItem
+FusionGrid --|> FusionGrid
+FusionGrid --> FusionGridState
+FusionGrid --> FusionGridItem
+FusionGrid --> FusionGridState
+FusionGrid --> FusionGridItem
+FusionGrid --> InternalTreeView
+FusionGrid --> GUIState
+FusionGrid --> Column
+FusionGrid --> State
+FusionGrid --> FusionEditorSkin
+FusionGrid --> EditorGUI
+FusionGrid --> EditorUtility
+FusionGrid --> Grid
+FusionGrid --> EditorGUIUtility
+FusionGrid --> ComparisonComparer
+GUIState --> InternalTreeView
+Column --|> Column
+InternalTreeView --|> TreeView
+InternalTreeView --> State
+InternalTreeView --> Grid
+InternalTreeView --> EditorGUIUtility
+InternalTreeView --> Column
+InternalTreeView --> ComparisonComparer
+InternalTreeView --> FusionGrid
+ComparisonComparer ..|> IComparer
+InternalTreeViewItem --|> TreeViewItem
+FusionMonoBehaviourDefaultEditor --|> FusionEditor
+FusionPropertyDrawerMetaAttribute --|> Attribute
+FusionScriptableObjectDefaultEditor --|> FusionEditor
+RawDataDrawer --> SerializedProperty
+RawDataDrawer --> FusionEditorSkin
+RawDataDrawer --> UnityInternal
+RawDataDrawer --> EditorGUI
+ReflectionUtils --> DelegateSwizzle
+ReflectionUtils --> InstanceAccessor
+ReflectionUtils --> StaticAccessor
+SerializedPropertyUtilities --> SerializedProperty
+SerializedPropertyUtilities --> UnityInternal
+SerializedPropertyUtilities --> SerializedPropertyEnumerable
+SerializedPropertyUtilities --> SerializedPropertyEqualityComparer
+SerializedPropertyUtilities --> HashCodeUtilities
+SerializedPropertyUtilities --> SerializedPropertyEnumerator
+SerializedPropertyEqualityComparer ..|> IEqualityComparer
+SerializedPropertyEqualityComparer --> SerializedProperty
+SerializedPropertyEqualityComparer --> HashCodeUtilities
+SerializedPropertyEnumerable ..|> IEnumerable
+SerializedPropertyEnumerable --> SerializedProperty
+SerializedPropertyEnumerable --> SerializedPropertyEnumerator

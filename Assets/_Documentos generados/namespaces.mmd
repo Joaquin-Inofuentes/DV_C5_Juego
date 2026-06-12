@@ -1,0 +1,52 @@
+flowchart LR
+    ns_Assets_VFXPACK_IMPACT_WALLCOEUR_Scripts["Assets.VFXPACK_IMPACT_WALLCOEUR.Scripts"]
+    ns_Fusion["Fusion"]
+    ns_Fusion_CodeGen["Fusion.CodeGen"]
+    ns_Fusion_Editor["Fusion.Editor"]
+    ns_Fusion_Statistics["Fusion.Statistics"]
+    ns_Game_Core["Game.Core"]
+    ns_Game_MVC["Game.MVC"]
+    ns_Game_Sensors["Game.Sensors"]
+    ns_Game_Squad["Game.Squad"]
+    ns_USP_Core["USP.Core"]
+    ns_USP_Entities["USP.Entities"]
+    ns_USP_Services["USP.Services"]
+    ns_USP_UI["USP.UI"]
+    ns_USP_Weapons["USP.Weapons"]
+
+    ns__global_ -->|2| ns_USP_Services
+    ns__global_ -->|21| ns_Game_Squad
+    ns__global_ -->|5| ns_Game_Core
+    ns_USP_Weapons -->|5| ns__global_
+    ns_USP_Weapons -->|4| ns_USP_Core
+    ns_USP_Weapons -->|1| ns_USP_Entities
+    ns_USP_Weapons -->|3| ns_Game_MVC
+    ns_USP_Weapons -->|1| ns_USP_UI
+    ns_USP_UI -->|1| ns__global_
+    ns__global_ -->|1| ns_USP_Entities
+    ns_USP_Services -->|2| ns_USP_Core
+    ns_Game_MVC -->|1| ns__global_
+    ns__global_ -->|3| ns_USP_Weapons
+    ns_USP_Entities -->|1| ns_USP_Services
+    ns_USP_Entities -->|2| ns_USP_Core
+    ns_USP_Entities -->|3| ns_Game_MVC
+    ns_USP_Entities -->|1| ns__global_
+    ns_USP_Core -->|1| ns_USP_Weapons
+    ns_USP_Core -->|1| ns_USP_Services
+    ns_Game_MVC -->|2| ns_USP_Core
+    ns_Game_MVC -->|1| ns_USP_Entities
+    ns_Game_MVC -->|1| ns_USP_Weapons
+    ns_Game_Squad -->|14| ns__global_
+    ns__global_ -->|2| ns_Game_Sensors
+    ns_USP_Services -->|1| ns_USP_Entities
+    ns_Game_Squad -->|3| ns_Game_Sensors
+    ns_Game_Squad -->|1| ns_Game_Core
+    ns_Game_Squad -->|1| ns_USP_Entities
+    ns__global_ -->|1| ns_USP_Core
+    ns_Fusion -->|1| ns_Game_Squad
+    ns_Fusion_Statistics -->|1| ns_Fusion
+    ns_Fusion_Editor -->|18| ns_Fusion
+    ns_Fusion_Editor -->|2| ns_Game_Squad
+    ns_Fusion_Statistics -->|2| ns_Fusion_Editor
+    ns_Fusion_Editor -->|2| ns_Fusion_Statistics
+    ns__global_ -->|5| ns_Fusion_Editor

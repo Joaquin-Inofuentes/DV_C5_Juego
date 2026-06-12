@@ -5,7 +5,8 @@ namespace Game.Sensors
         Aliado,
         Enemigo,
         Interactuable,
-        Proyectil
+        Proyectil,
+        Invisible   // Usado por soldados caídos — los detectores enemigos lo ignoran
     }
 
     public interface IDetectable

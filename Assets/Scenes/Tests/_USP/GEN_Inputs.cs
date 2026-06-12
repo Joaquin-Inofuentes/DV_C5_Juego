@@ -23,6 +23,7 @@ public class GEN_Inputs : MonoBehaviour
     public bool DisparoPresionado    { get; private set; }
     public bool OrdenPresionada      { get; private set; }
     public bool RegresarAFormacion   { get; private set; }
+    public bool RavivicionInput      { get; private set; } // Barra espaciadora para revivir
 
     public event Action<bool> OnCycleLeader;  // false = Q (izq), true = E (der)
     public event Action<int>  OnOrdenDirecta; // 0/1/2 → teclas 1/2/3
@@ -89,6 +90,9 @@ public class GEN_Inputs : MonoBehaviour
 
         // 7. Regresar a formación: Z
         RegresarAFormacion = Input.GetKeyDown(KeyCode.Z);
+
+        // 8. Revivimiento: Barra espaciadora
+        RavivicionInput = Input.GetKey(KeyCode.Space);
     }
 
     private void TriggerOrdenDirecta(int index)

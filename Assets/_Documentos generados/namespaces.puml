@@ -1,0 +1,57 @@
+@startuml
+title Diagrama de Namespaces - Assets
+skinparam packageStyle rectangle
+left to right direction
+
+package "Assets.VFXPACK_IMPACT_WALLCOEUR.Scripts  (2 tipos)" as ns_Assets_VFXPACK_IMPACT_WALLCOEUR_Scripts
+package "Fusion  (53 tipos)" as ns_Fusion
+package "Fusion.CodeGen  (1 tipos)" as ns_Fusion_CodeGen
+package "Fusion.Editor  (220 tipos)" as ns_Fusion_Editor
+package "Fusion.Statistics  (19 tipos)" as ns_Fusion_Statistics
+package "Game.Core  (1 tipos)" as ns_Game_Core
+package "Game.MVC  (8 tipos)" as ns_Game_MVC
+package "Game.Sensors  (4 tipos)" as ns_Game_Sensors
+package "Game.Squad  (11 tipos)" as ns_Game_Squad
+package "USP.Core  (8 tipos)" as ns_USP_Core
+package "USP.Entities  (4 tipos)" as ns_USP_Entities
+package "USP.Services  (5 tipos)" as ns_USP_Services
+package "USP.UI  (2 tipos)" as ns_USP_UI
+package "USP.Weapons  (5 tipos)" as ns_USP_Weapons
+
+ns__global_ --> ns_USP_Services : 2
+ns__global_ --> ns_Game_Squad : 21
+ns__global_ --> ns_Game_Core : 5
+ns_USP_Weapons --> ns__global_ : 5
+ns_USP_Weapons --> ns_USP_Core : 4
+ns_USP_Weapons --> ns_USP_Entities : 1
+ns_USP_Weapons --> ns_Game_MVC : 3
+ns_USP_Weapons --> ns_USP_UI : 1
+ns_USP_UI --> ns__global_ : 1
+ns__global_ --> ns_USP_Entities : 1
+ns_USP_Services --> ns_USP_Core : 2
+ns_Game_MVC --> ns__global_ : 1
+ns__global_ --> ns_USP_Weapons : 3
+ns_USP_Entities --> ns_USP_Services : 1
+ns_USP_Entities --> ns_USP_Core : 2
+ns_USP_Entities --> ns_Game_MVC : 3
+ns_USP_Entities --> ns__global_ : 1
+ns_USP_Core --> ns_USP_Weapons : 1
+ns_USP_Core --> ns_USP_Services : 1
+ns_Game_MVC --> ns_USP_Core : 2
+ns_Game_MVC --> ns_USP_Entities : 1
+ns_Game_MVC --> ns_USP_Weapons : 1
+ns_Game_Squad --> ns__global_ : 14
+ns__global_ --> ns_Game_Sensors : 2
+ns_USP_Services --> ns_USP_Entities : 1
+ns_Game_Squad --> ns_Game_Sensors : 3
+ns_Game_Squad --> ns_Game_Core : 1
+ns_Game_Squad --> ns_USP_Entities : 1
+ns__global_ --> ns_USP_Core : 1
+ns_Fusion --> ns_Game_Squad : 1
+ns_Fusion_Statistics --> ns_Fusion : 1
+ns_Fusion_Editor --> ns_Fusion : 18
+ns_Fusion_Editor --> ns_Game_Squad : 2
+ns_Fusion_Statistics --> ns_Fusion_Editor : 2
+ns_Fusion_Editor --> ns_Fusion_Statistics : 2
+ns__global_ --> ns_Fusion_Editor : 5
+@enduml

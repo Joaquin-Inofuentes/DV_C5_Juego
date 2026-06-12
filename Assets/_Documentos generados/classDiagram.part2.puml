@@ -1,0 +1,1572 @@
+class SerializedPropertyEnumerator <<struct>> {
+  - current : SerializedProperty
+  - enterChildren : bool
+  - visible : bool
+  - parentDepth : int
+  + Current : SerializedProperty
+  + Current : SerializedProperty
+  + Current : object
+  + SerializedPropertyEnumerator(SerializedProperty parent, bool visible)
+  + Dispose() : void
+  + MoveNext() : bool
+  + Reset() : void
+}
+
+class UnityInternal <<static>> {
+  + Styles : InternalStyles
+  - FindAssembly(string name) : Assembly
+}
+
+class AssetDatabase <<static>> {
+  - TryGetAssetFolderInfo : TryGetAssetFolderInfoDelegate
+}
+
+class Event <<static>> {
+  - s_Current_ : StaticAccessor[UnityEngine.Event]
+  + s_Current : UnityEngine.Event
+}
+
+class Editor <<static>> {
+  - DoDrawDefaultInspector : DoDrawDefaultInspectorDelegate
+  - InternalSetHidden : BoolSetterDelegate
+}
+
+class EditorGUI <<static>> {
+  - MultiFieldPrefixLabel : MultiFieldPrefixLabelDelegate
+  - TextFieldInternal : TextFieldInternalDelegate
+  - ToolbarSearchField : ToolbarSearchFieldDelegate
+  - DelayedTextFieldInternal : DelayedTextFieldInternalDelegate
+  - DefaultPropertyField : DefaultPropertyFieldDelegate
+  - s_TextFieldHash : FieldInfo
+  - s_DelayedTextFieldHash : FieldInfo
+  - s_indent : StaticAccessor[float]
+  - EndEditingActiveTextField : Action
+  + TextFieldHash : int
+  + DelayedTextFieldHash : int
+  + indent : float
+}
+
+class EditorUtility <<static>> {
+  - DisplayCustomMenu : DisplayCustomMenuDelegate
+}
+
+class GUIClip <<static>> {
+  - InternalType : Type
+  - _visibleRect : StaticAccessor[Rect]
+  + visibleRect : Rect
+}
+
+class HandleUtility <<static>> {
+  - ApplyWireMaterial : Action
+}
+
+class LayerMatrixGUI <<static>> {
+  - TypeName : string
+  - InternalType : Type
+  - InternalGetValueFuncType : Type
+  - InternalSetValueFuncType : Type
+  - _DoGUI : Delegate
+  + Draw(GUIContent label, GetValueFunc getValue, SetValueFunc setValue) : void
+}
+
+class DecoratorDrawer <<static>> {
+  - m_Attribute : InstanceAccessor[PropertyAttribute]
+  + SetAttribute(UnityEditor.DecoratorDrawer drawer, PropertyAttribute attribute) : void
+}
+
+class PropertyDrawer <<static>> {
+  - m_Attribute : InstanceAccessor[PropertyAttribute]
+  - m_FieldInfo : InstanceAccessor[FieldInfo]
+  + SetAttribute(UnityEditor.PropertyDrawer drawer, PropertyAttribute attribute) : void
+  + SetFieldInfo(UnityEditor.PropertyDrawer drawer, FieldInfo fieldInfo) : void
+}
+
+class EditorGUIUtility <<static>> {
+  - s_LastControlID : StaticAccessor[int]
+  - _contentWidth : StaticAccessor[float]
+  - GetScript : GetScriptDelegate
+  - GetIconForObject : GetIconForObjectDelegate
+  - TempContent : TempContentDelegate
+  - GetHelpIcon : GetHelpIconDelegate
+  + LastControlID : int
+  + contextWidth : float
+}
+
+class HierarchyIterator <<static>> {
+  - CopySearchFilterFrom : CopySearchFilterFromDelegate
+}
+
+class ScriptAttributeUtility <<static>> {
+  - InternalType : Type
+  - GetFieldInfoFromProperty : GetFieldInfoFromPropertyDelegate
+  - GetDrawerTypeForType : GetDrawerTypeForTypeDelegate
+  - GetDrawerTypeForPropertyAndType : GetDrawerTypeForPropertyAndTypeDelegate
+  - _GetHandler : GetHandlerDelegate
+  - GetFieldAttributes : GetFieldAttributesDelegate
+  - _propertyHandlerCache : StaticAccessor[object]
+  - s_SharedNullHandler : StaticAccessor[object]
+  - s_NextHandler : StaticAccessor[object]
+  + propertyHandlerCache : PropertyHandlerCache
+  + sharedNullHandler : PropertyHandler
+  + nextHandler : PropertyHandler
+  + GetHandler(UnityEditor.SerializedProperty property) : PropertyHandler
+}
+
+class PropertyHandlerCache <<struct>> {
+  - _instance : object
+  + InternalType : Type
+  + PropertyHandlers : IEnumerable[(int, PropertyHandler)]
+  + GetHandler(UnityEditor.SerializedProperty property) : PropertyHandler
+  + SetHandler(UnityEditor.SerializedProperty property, PropertyHandler newHandler) : void
+}
+
+class Statics <<static>> {
+  - InternalType : Type
+  - GetPropertyHash : GetPropertyHashDelegate
+  - GetHandler : GetHandlerDelegate
+  - SetHandler : SetHandlerDelegate
+  - m_PropertyHandlers : FieldInfo
+}
+
+class PropertyHandler <<struct>> {
+  - _instance : object
+  + InternalType : Type
+  + m_PropertyDrawers : List[UnityEditor.PropertyDrawer]
+  + decoratorDrawers : List[UnityEditor.DecoratorDrawer]
+  ~ Wrap(object instance) : PropertyHandler
+  + New() : PropertyHandler
+  + Equals(PropertyHandler other) : bool
+  + GetHashCode() : int
+  + Equals(object obj) : bool
+}
+
+class Statics <<static>> {
+  - InternalType : Type
+  - m_DecoratorDrawers : InstanceAccessor[List[UnityEditor.DecoratorDrawer]]
+  - m_PropertyDrawers : InstanceAccessor[List[UnityEditor.PropertyDrawer]]
+}
+
+class EditorApplication <<static>> {
+  - Internal_CallAssetLabelsHaveChanged : Action
+}
+
+class ObjectSelector <<struct>> {
+  - _instance : EditorWindow
+  - _objectSelectorID : InstanceAccessor[int]
+  + isVisible : bool
+  + get : ObjectSelector
+  + searchFilter : string
+  + objectSelectorID : int
+}
+
+class Statics <<static>> {
+  - InternalType : Type
+  - _tooltip : StaticAccessor[bool]
+  - _get : StaticAccessor[EditorWindow]
+  - _searchFilter : InstanceAccessor[string]
+}
+
+class InspectorWindow {
+  - InternalType : Type
+  - _isLockedAccessor : InstanceAccessor[bool]
+  - _instance : EditorWindow
+  + isLocked : bool
+  + InspectorWindow(EditorWindow instance)
+}
+
+class SerializedProperty <<static>> {
+  - hashCodeForPropertyPathWithoutArrayIndex : InstanceAccessor[int]
+}
+
+class SplitterGUILayout <<static>> {
+  - EndHorizontalSplit : Action
+  - EndVerticalSplit : Action
+  - _beginHorizontalSplit : Delegate
+  - _beginVerticalSplit : Delegate
+  + BeginHorizontalSplit(SplitterState splitterState, GUIStyle style, params GUILayoutOption[] options) : void
+  + BeginVerticalSplit(SplitterState splitterState, GUIStyle style, params GUILayoutOption[] options) : void
+}
+
+class SplitterState {
+  - InternalType : Type
+  - _relativeSizes : FieldInfo
+  - _realSizes : FieldInfo
+  - _splitSize : FieldInfo
+  - Json : string
+  - InternalState : object
+  + realSizes : float[]
+  + relativeSizes : float[]
+  + splitSize : float
+  - OnAfterDeserialize() : void
+  - OnBeforeSerialize() : void
+  + FromRelative(float[] relativeSizes, int[] minSizes = null, int[] maxSizes = null, int splitSize = 0) : SplitterState
+  - FromRelativeInner(float[] relativeSizes, int[] minSizes = null, int[] maxSizes = null, int splitSize = 0) : object
+  - ConvertArray(Array value) : float[]
+}
+
+class InternalStyles {
+  - Instance : InternalStyles
+  + InspectorTitlebar : LazyGUIStyle
+  + FoldoutTitlebar : LazyGUIStyle
+  + BoxWithBorders : LazyGUIStyle
+  + HierarchyTreeViewLine : LazyGUIStyle
+  + HierarchyTreeViewSceneBackground : LazyGUIStyle
+  + OptionsButtonStyle : LazyGUIStyle
+  + AddComponentButton : LazyGUIStyle
+  + AnimationEventTooltip : LazyGUIStyle
+  + AnimationEventTooltipArrow : LazyGUIStyle
+  - GetStyle(params string[] names) : GUIStyle
+}
+
+class DrawInlineAttributeDrawer {
+}
+
+class HideArrayElementLabelAttributeDrawer {
+}
+
+class FusionOdinAttributeConverterAttribute {
+}
+
+class ReadOnlyAttributeDrawer {
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class ArrayLengthAttributeDrawer {
+  - _style : GUIStyle
+  - GetStyle() : GUIStyle
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class AssemblyNameAttributeDrawer {
+  - DropdownWidth : float
+  - DropdownContent : GUIContent
+  - _lastCheckedAssemblyName : string
+  - _allAssemblies : Dictionary[string, AssemblyInfo]
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - GetAssemblies(AsmDefType types) : IEnumerable[AssemblyInfo]
+}
+
+enum AsmDefType {
+  - Predefined : enum
+  - InPackages : enum
+  - InAssets : enum
+  - Editor : enum
+  - Runtime : enum
+  - All : enum
+}
+
+class AsmDefData {
+  - includePlatforms : string[]
+  - name : string
+  - allowUnsafeCode : bool
+}
+
+class AssemblyInfo <<struct>> {
+  - Name : string
+  - AllowUnsafeCode : bool
+  - IsPredefined : bool
+  + AssemblyInfo(string name, bool allowUnsafeCode, bool isPredefined)
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class BinaryDataAttributeDrawer {
+  - MaxLines : int
+  - _drawer : RawDataDrawer
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+}
+
+class DecoratingPropertyAttributeDrawer <<abstract>> {
+  - _isLastDrawer : bool
+  - _nestingLevel : int
+  - _isInitialized : bool
+  + NextDrawer : PropertyDrawer
+  + DecoratingPropertyAttributeDrawer()
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - InvokeOnGUIOnNextDrawer(DecoratingPropertyAttributeDrawer current, Rect position, SerializedProperty prop, GUIContent label) : void
+  - InvokeGetPropertyHeightOnNextDrawer(SerializedProperty prop, GUIContent label) : float
+  - InvokeOnGUIInternal(Rect position, SerializedProperty prop, GUIContent label) : void
+  - InvokeGetPropertyHeightInternal(SerializedProperty prop, GUIContent label) : float
+  # EnsureInitialized(SerializedProperty property) : bool
+  ~ InitInjected(PropertyDrawer next) : void
+  + GetNextDrawer(SerializedProperty property) : PropertyDrawer
+  - GetLogMessage(string message) : string
+}
+
+class DirectoryPathAttributeDrawer {
+  - MinWidthRequired : int
+  - ButtonContent : GUIContent
+  - _awaitingProperty : (string PropertyPath, string Path)
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - ExpandAndMakeAbsoluteSafe(string path) : string
+}
+
+class DisplayAsEnumAttributeDrawer {
+  - _enumDrawer : EnumDrawer
+  - _cachedGetters : Dictionary[(Type, string), Func[object, Type]]
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class DisplayNameAttributeDrawer {
+  - _label : GUIContent
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class DoIfAttributeDrawer <<abstract>> {
+  - _cachedGetters : Dictionary[(Type, string), Func[object, object]]
+  ~ CheckDraw(DoIfAttributeBase doIf, SerializedObject serializedObject) : bool
+  ~ CheckDraw(DoIfAttributeBase doIf, SerializedProperty property) : bool
+  - CheckProperty(DoIfAttributeBase doIf, SerializedProperty compareProperty) : bool
+  - CheckGetter(DoIfAttributeBase doIf, SerializedObject serializedObject, int depth, string referencePath) : bool?
+  + CheckCondition(DoIfAttributeBase attribute, double value) : bool
+  + CheckCondition(DoIfAttributeBase attribute, long value) : bool
+  + CheckCondition(DoIfAttributeBase attribute, object value) : bool
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class DrawIfAttributeDrawer {
+  + Attribute : DrawIfAttribute
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class DrawInlineAttributeDrawer {
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class ErrorIfAttributeDrawer {
+  + Attribute : ErrorIfAttribute
+  + IsBox : bool
+  + Message : string
+  + MessageType : MessageType
+  + InlineBoxColor : Color
+  + MessageIcon : Texture
+}
+
+class ExpandableEnumAttributeDrawer {
+  - ToggleIndent : float
+  - _gridOptions : GUIContent[]
+  - _enumDrawer : EnumDrawer
+  - _buttonStyle : LazyGUIStyle
+  + attribute : ExpandableEnumAttribute
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  - GetHelpPath(SerializedProperty property, FieldInfo field) : string
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class FieldEditorButtonAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - DrawButton(Rect buttonPosition, FieldEditorButtonAttribute attribute, Type targetObjectType, Object[] targetObjects) : bool
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+}
+
+class HideArrayElementLabelAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class InlineHelpAttributeDrawer {
+  - _initialized : bool
+  - _helpContent : GUIContent
+  - _labelContent : GUIContent
+  + attribute : InlineHelpAttribute
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - EnsureContentInitialized(SerializedProperty property) : void
+  - HasFoldout(PropertyDrawer nextDrawer, SerializedProperty property) : bool
+  + DrawInlineHelpBeforeProperty(GUIContent label, GUIContent helpContent, Rect propertyRect, int pathHash, int depth, bool hasFoldout, object context, bool drawHelp = false) : (bool expanded, Rect buttonRect)
+  + DrawInlineHelpAfterProperty(Rect buttonRect, bool wasExpanded, GUIContent helpContent, Rect propertyRect) : void
+}
+
+interface INonApplicableOnArrayElements {
+}
+
+class LayerAttributeDrawer {
+  + OnGUI(Rect p, SerializedProperty prop, GUIContent label) : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class LayerMatrixAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+}
+
+class LayerMatrixPopup {
+  - checkboxSize : int
+  - margin : int
+  - MaxLayers : int
+  - _label : GUIContent
+  - _numLayers : int
+  - _labelWidth : float
+  - _getter : UnityInternal.LayerMatrixGUI.GetValueFunc
+  - _setter : UnityInternal.LayerMatrixGUI.SetValueFunc
+  + LayerMatrixPopup(string label, UnityInternal.LayerMatrixGUI.GetValueFunc getter, UnityInternal.LayerMatrixGUI.SetValueFunc setter)
+  + OnGUI(Rect rect) : void
+  + GetWindowSize() : Vector2
+}
+
+class MaxStringByteCountAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class MessageIfDrawerBase <<abstract>> {
+  - _messageContent : GUIContent
+  + IsBox : bool
+  + Message : string
+  + MessageType : MessageType
+  + InlineBoxColor : Color
+  + MessageIcon : Texture
+  + Attribute : DoIfAttributeBase
+  + MessageContent : GUIContent
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - CalcBoxHeight() : float
+}
+
+class PropertyDrawerForArrayWorkaround {
+  - _attributeToDrawer : Dictionary[Type, Type]
+  - _handler : UnityInternal.PropertyHandler
+  - _drawer : PropertyDrawer
+  - _initialized : bool
+  + PropertyDrawerForArrayWorkaround()
+  + GetHeight() : float
+  + GetDrawerType(Type attributeDrawerType) : Type
+}
+
+class RedirectCustomPropertyDrawerAttribute {
+  + AttributeType : Type
+  + DrawerType : Type
+  + RedirectCustomPropertyDrawerAttribute(Type attributeType, Type drawerType)
+}
+
+class DummyPropertyDrawer {
+  - _errorReported : bool
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+}
+
+class PropertyDrawerWithErrorHandling <<abstract>> {
+  - _currentProperty : SerializedProperty
+  - _errors : Dictionary[string, Entry]
+  - _hadError : bool
+  - _info : string
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+  - DrawDecoration(Rect position, (string, MessageType, bool) decoration, bool hasLabel, bool drawButton = true, bool drawIcon = true) : void
+  - GetDecoration(SerializedProperty property) : (string, MessageType, bool)?
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  # ClearError() : void
+  # ClearError(SerializedProperty property) : void
+  # ClearErrorIfLostFocus() : void
+  # SetError(string error) : void
+  # SetError(Exception error) : void
+  # SetWarning(string warning) : void
+  # SetInfo(string message) : void
+}
+
+class Entry <<struct>> {
+  - message : string
+  - type : MessageType
+}
+
+class RangeExAttributeDrawer {
+  - FieldWidth : float
+  - Spacing : float
+  - SliderOffset : float
+  - MinSliderWidth : float
+  - _popupOptions : GUIContent[]
+  - GetFloatValue(SerializedProperty property, ref float? floatValue) : void
+  - GetIntValue(SerializedProperty property, ref int? intValue) : void
+  - ApplyFloatValue(SerializedProperty property, float floatValue) : void
+  - ApplyIntValue(SerializedProperty property, int intValue) : void
+  - DrawFloatValue(SerializedProperty property, Rect position, GUIContent label, ref float floatValue) : void
+  - DrawIntValue(SerializedProperty property, Rect position, GUIContent label, ref int intValue) : void
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - DrawValuePopup(Rect position, GUIContent label, int index, double min, double max, double[] values) : double
+  - Clamp(float value, RangeExAttribute attrib) : float
+  - Clamp(int value, RangeExAttribute attrib) : int
+  - DrawValue(SerializedProperty property, Rect position, GUIContent label, float floatValue) : float
+  - DrawValue(SerializedProperty property, Rect position, GUIContent label, int intValue) : int
+  - FindValueIndex(double val) : int
+  - ApplyValue() : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class ReadOnlyAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class ScenePathAttributeDrawer {
+  - _allScenes : SceneAsset[]
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class ScriptFieldDrawer {
+  - ForceHide : bool
+  - _initialized : bool
+  - _helpContent : GUIContent
+  - _headerContent : GUIContent
+  + attribute : ScriptHelpAttribute
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetPropertyHeight(SerializedProperty property, GUIContent label) : float
+  - EnsureInitialized(SerializedProperty property) : void
+}
+
+class SerializableTypeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + GetTypeContent(SerializedProperty property, bool requirePreserveAttribute, out SerializedProperty valueProperty) : (string, MessageType, string)
+}
+
+class SerializeReferenceTypePickerAttributeDrawer {
+  - NullContent : string
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class SpaceAfterAttributeDrawer {
+  # GetPropertyHeightInternal(SerializedProperty property, GUIContent label) : float
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class ToggleLeftAttributeDrawer {
+  + OnGUI(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class UnitAttributeDrawer {
+  - _label : GUIContent
+  - EnsureInitialized() : void
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  + DrawUnitOverlay(Rect position, GUIContent label, SerializedPropertyType propertyType, bool isExpanded, bool odinStyle = false) : void
+  + UnitToLabel(Units units) : string
+}
+
+class UnityAssetGuidAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+  - DrawMangledRawGuid(Rect position, SerializedProperty property, GUIContent label) : string
+  + CopyAndMangleGuid(byte* src, byte* dst) : void
+  + HasFoldout(SerializedProperty property) : bool
+}
+
+class UnityResourcePathAttributeDrawer {
+  # OnGUIInternal(Rect position, SerializedProperty property, GUIContent label) : void
+}
+
+class PropertyDrawerForArrayWorkaround {
+}
+
+class WarnIfAttributeDrawer {
+  + Attribute : WarnIfAttribute
+  + IsBox : bool
+  + Message : string
+  + MessageType : MessageType
+  + InlineBoxColor : Color
+  + MessageIcon : Texture
+}
+
+class FusionHierarchyWindowOverlay {
+  - s_hierarchyOverlayLabelStyle : Lazy[GUIStyle]
+  - s_multipleInstancesContent : GUIContent
+  + Initialize() : void
+  - HierarchyWindowOverlay(int instanceId, Rect position) : void
+  - MakeRunnerContent(NetworkRunner runner) : GUIContent
+}
+
+class FusionInstaller {
+  - DEFINE_VERSION : string
+  - DEFINE_WEAVER : string
+  - DEFINE_VERSION_EXTENDED_CHECK : string
+  - DEFINE_VERSION_EXTENDED : string
+  - DEFINE_LOG_CHECK : string
+  - DEFINE_LOG_DEFAULT : string
+  - PACKAGE_TO_SEARCH : string
+  - PACKAGE_TO_INSTALL : string
+  - PACKAGES_DIR : string
+  - MANIFEST_FILE : string
+  + DEFINE_VERSION_EXTENDED_MAJOR : string
+  + DEFINE_VERSION_EXTENDED_MAJOR_MINOR : string
+  + DEFINE_VERSION_EXTENDED_MAJOR_MINOR_PATCH : string
+  - FusionInstaller()
+  - CheckDefineForRemoval(ref string defines, Func[string, bool] check) : void
+  - TryAddDefine(ref string defines, string targetDefine, Func[string, bool] check) : void
+  - BuildVersionDefines() : IEnumerable[string]
+  - GetCurrentDefines() : string
+  - SetCurrentDefines(string defines) : void
+}
+
+class FusionSceneSetupAssistants <<static>> {
+  + AddNetworkingToScene() : void
+  + AddNetworkStartup() : (FusionBootstrap, NetworkRunner)
+  + AddCurrentSceneToSettings() : void
+  + DirtyAndSaveScene(Scene scene) : void
+  + HandleAudioListeners() : void
+  + HandleLights() : void
+  + AddSceneToBuildSettings(this Scene scene) : void
+}
+
+class FusionUnitySurrogateBaseWrapper {
+  - Surrogate : UnitySurrogateBase
+  - SurrogateProperty : SerializedProperty
+  - SurrogateType : Type
+}
+
+class ILWeaverUtils <<static>> {
+  + RunWeaver() : void
+}
+
+class NetworkBehaviourEditor {
+  - NETOBJ_REQUIRED_WARN_TEXT : string
+  - _buffer : int[]
+  + ValidTargets : IEnumerable[NetworkBehaviour]
+  + OnInspectorGUI() : void
+  - TransferBackingFields(bool backingFieldsToState) : bool
+  - DrawNetworkObjectCheck() : void
+}
+
+class NetworkMecanimAnimatorBaker <<static>> {
+  + PostprocessAnimator(NetworkMecanimAnimator animator) : bool
+}
+
+class NetworkObjectBakerEditTime {
+  - _executionOrderCache : Dictionary[Type, int?]
+  - _bakeHandlers : ILookup[Type, Delegate]
+  + NetworkObjectBakerEditTime()
+  # TryGetExecutionOrder(MonoBehaviour obj, out int order) : bool
+  # SetDirty(MonoBehaviour obj) : void
+  # GetSortKey(NetworkObject obj) : uint
+  # PostprocessBehaviour(SimulationBehaviour behaviour) : bool
+}
+
+class NetworkObjectBakerEditTimeHandlerAttribute {
+  + Order : int
+}
+
+class NetworkObjectEditor {
+  - _runtimeInfoFoldout : bool
+  - _isSpawnable : PropertyInfo
+  - _networkTypeId : FieldInfo
+  - _networkId : PropertyInfo
+  - _nestingRoot : FieldInfo
+  - _nestingKey : FieldInfo
+  - _InputAuthority : PropertyInfo
+  - _StateAuthority : PropertyInfo
+  - _HasInputAuthority : PropertyInfo
+  - _HasStateAuthority : PropertyInfo
+  - _reusableContent : GUIContent[]
+  - _reusablePlayerIds : int[]
+  - _guiContentEmpty : GUIContent
+  - _guiContentNone : GUIContent
+  - _guiContentInputAuthority : GUIContent
+  - GetLoadInfoString(NetworkObjectGuid guid) : string
+  + OnInspectorGUI() : void
+  - Set(UnityEngine.Object host, ref T field, T value, Action[object] setDirty) : bool
+  - Set(UnityEngine.Object host, ref T[] field, List[T] value, Action[object] setDirty) : bool
+  - Trace(string msg) : void
+  + GetPrefabGuid(NetworkObject prefab) : NetworkObjectGuid
+  - GetInputAuthorityPopupContent(NetworkObject obj) : (int[] ids, GUIContent[] content, int currentIndex)
+  - DrawToggleFlag(NetworkObjectFlags flag, string name, bool? force = null) : void
+}
+
+class NetworkObjectPostprocessor {
+  - _baker : NetworkObjectBaker
+  - NetworkObjectPostprocessor()
+  - OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
+  - IsPrefabPath(string path) : bool
+  - IsNetworkObjectPrefab(string path, out NetworkObject no) : bool
+  - OnPostprocessPrefab(GameObject prefab) : void
+  - BakePrefab(string prefabPath, out GameObject root) : bool
+  - OnPlaymodeChange(PlayModeStateChange change) : void
+  - OnSceneSaving(Scene scene, string path) : void
+  + BakeAllOpenScenes() : void
+  + BakeScene(Scene scene) : void
+}
+
+class NetworkObjectBakePrefabArgs {
+  + IsPrefabDirty : bool
+  + Handled : bool
+  + LoadedPrefabRoot : GameObject
+  + Path : string
+  + Baker : NetworkObjectBaker
+  + NetworkObjectBakePrefabArgs(NetworkObjectBaker baker, GameObject loadedPrefabRoot, string path)
+}
+
+class NetworkObjectBakeSceneArgs {
+  + Handled : bool
+  + Scene : Scene
+  + Baker : NetworkObjectBaker
+  + NetworkObjectBakeSceneArgs(NetworkObjectBaker baker, Scene scene)
+}
+
+interface INetworkAssetSourceFactory {
+  + TryCreatePrefabSource(in NetworkAssetSourceFactoryContext context) : INetworkPrefabSource
+}
+
+class NetworkAssetSourceFactory {
+  - _factories : List[INetworkAssetSourceFactory]
+  + TryCreatePrefabSource(in NetworkAssetSourceFactoryContext context, bool removeFaultedFactories = true) : INetworkPrefabSource
+}
+
+class NetworkAssetSourceFactoryStatic {
+  + TryCreatePrefabSource(in NetworkAssetSourceFactoryContext context) : INetworkPrefabSource
+}
+
+class NetworkAssetSourceFactoryResource {
+  + TryCreatePrefabSource(in NetworkAssetSourceFactoryContext context) : INetworkPrefabSource
+}
+
+class NetworkRunnerEditor {
+  - Label(string label, T value) : void
+  + OnInspectorGUI() : void
+}
+
+class NetworkTRSPEditor {
+  + OnInspectorGUI() : void
+}
+
+class PhotonAppSettingsEditor {
+  + OnInspectorGUI() : void
+  + PingNetworkProjectConfigAsset() : void
+}
+
+class ReflectionUtils {
+  + GetCSharpConstraints(this Type type) : string
+  + GetCSharpTypeName(this Type type, string suffix = null, bool includeNamespace = true, bool includeGenerics = true, bool useGenericNames = false, bool shortNameForBuiltIns = true) : string
+  + GetCSharpTypeGenerics(this Type type, bool useGenericNames = false, bool useGenericPlaceholders = false) : string
+  + GetCSharpAttributeDefinition(this MemberInfo type) : string
+  + GetCSharpVisibility(this MemberInfo memberInfo) : string
+  + IsBackingField(this FieldInfo fieldInfo, out string propertyName) : bool
+  + IsFixedSizeBuffer(this Type type, out Type elementType, out int size) : bool
+  + GetDeclaringType(this Type type, Type stopAt) : Type
+  - GetFieldVisibility(FieldAttributes visibility) : string
+  - GetMethodVisibility(MethodAttributes visibility) : string
+  - GetTypeVisibility(TypeAttributes visibility) : string
+}
+
+class FusionStatisticsEditor {
+  + OnInspectorGUI() : void
+}
+
+class AnimatorControllerTools <<static>> {
+  - AUTO_REBUILD_RATE : double
+  - tempNamesList : List[string]
+  - tempHashList : List[int]
+  ~ GetController(Animator a) : AnimatorController
+  - GetTriggerNames(AnimatorController ctr, List[string] namelist) : void
+  - GetTriggerNames(AnimatorController ctr, List[int] hashlist) : void
+  - GetStatesNames(AnimatorController ctr, List[string] namelist) : void
+  - ExtractSubNames(AnimatorController ctr, string path, ChildAnimatorStateMachine[] substates, List[string] namelist) : void
+  - ExtractNames(AnimatorController ctr, string path, ChildAnimatorState[] states, List[string] namelist) : void
+  - GetStatesNames(AnimatorController ctr, List[int] hashlist) : void
+  - ExtractSubtHashes(AnimatorController ctr, string path, ChildAnimatorStateMachine[] substates, List[int] hashlist) : void
+  - ExtractHashes(AnimatorController ctr, string path, ChildAnimatorState[] states, List[int] hashlist) : void
+  ~ GetHashesAndNames(NetworkMecanimAnimator netAnim, List[string] sharedTriggNames, List[string] sharedStateNames, ref int[] sharedTriggIndexes, ref int[] sharedStateIndexes) : void
+  ~ GetWordCount(NetworkMecanimAnimator nma) : int
+  - CompareNameLists(List[string] one, List[string] two) : bool
+  - CompareIntArray(int[] old, List[int] temp) : bool
+  - CopyNameList(List[string] src, List[string] trg) : void
+}
+
+class AssetDatabaseUtils <<static>> {
+  + GetSubAsset(GameObject prefab) : T
+  + IsSceneObject(GameObject go) : bool
+}
+
+class FusionEditorGUI <<static>> {
+  + LayoutSelectableLabel(GUIContent label, string contents) : void
+  + DrawDefaultInspector(SerializedObject obj, bool drawScript = true) : bool
+}
+
+class FusionEditorGUI <<static>> {
+  - _thumbnailFieldHash : int
+  - _thumbnailBackground : Texture2D
+  - _thumbnailStyle : GUIStyle
+  + DrawTypeThumbnail(Rect position, Type type, string prefixToSkip, string tooltip = null) : void
+  - GetPersistentColor(string str) : Color
+  - GeneratePastelColor(int seed) : Color
+  - GenerateAcronym(Type type, string prefixToStrip) : string
+  - EnsureThumbnailStyles() : void
+}
+
+class NetworkProjectConfigUtilities <<static>> {
+  - NetworkProjectConfigUtilities()
+  - PingNetworkProjectConfigAsset() : void
+  + RebuildPrefabTable() : void
+  + PingGlobalConfigAsset(bool select = false) : void
+  + TryGetGlobalPrefabSource(NetworkObjectGuid guid, out T source) : bool
+  + TryGetPrefabId(NetworkObjectGuid guid, out NetworkPrefabId id) : bool
+  + TryGetPrefabId(string prefabPath, out NetworkPrefabId id) : bool
+  ~ TryGetPrefabEditorInstance(NetworkObjectGuid guid, out NetworkObject prefab) : bool
+  ~ GetGlobalConfigPath() : string
+  + ImportGlobalConfig() : bool
+  + SaveGlobalConfig() : string
+  + SaveGlobalConfig(NetworkProjectConfig config) : string
+  - GetEnabledBuildScenes() : string[]
+}
+
+class NetworkRunnerUtilities <<static>> {
+  - reusableRunnerList : List[NetworkRunner]
+  + FindActiveRunners() : NetworkRunner[]
+  + FindActiveRunners(List[NetworkRunner] nonalloc) : void
+}
+
+class FusionEditorConfigImporter {
+  + OnImportAsset(AssetImportContext ctx) : void
+}
+
+class FusionEditorSkin {
+  - s_Instance : FusionEditorSkin
+  - Skin : GUISkin
+  - InfoIcon : LazyAsset[Texture2D]
+  - WarningIcon : LazyAsset[Texture2D]
+  - ErrorIcon : LazyAsset[Texture2D]
+  - LoadStateIcon : LazyAsset[Texture2D]
+  - RefreshIcon : LazyAsset[Texture2D]
+  - OverlayLabelStyle : LazyGUIStyle
+  - RawDataStyle : LazyGUIStyle
+  - DropDownListStyle : LazyGUIStyle
+  - _scriptHeaderStyles : Dictionary[ScriptHeaderBackColor, Color]
+  + instance : FusionEditorSkin
+  + HelpButtonStyle : GUIStyle
+  + InlineBoxFullWidthStyle : GUIStyle
+  + InlineBoxFullWidthScopeStyle : GUIStyle
+  + ScriptHeaderBackgroundStyle : GUIStyle
+  + ScriptHeaderIconStyle : GUIStyle
+  + ScriptHeaderLabelStyle : GUIStyle
+  + RichLabelStyle : GUIStyle
+  + InlineSelectorStyle : GUIStyle
+  + OutlineBoxStyle : GUIStyle
+  + HelpInlineBoxColor : Color
+  + WarningInlineBoxColor : Color
+  + ErrorInlineBoxColor : Color
+  - FindTextureOrThrow(string id) : Texture2D
+  - FindBuiltInStyleOrThrow(string styleName) : GUIStyle
+  + GetScriptHeaderColor(ScriptHeaderBackColor settingsBackColor) : Color
+}
+
+class FusionRunnerVisibilityControlsWindow {
+  - WINDOW_MIN_W : int
+  - WINDOW_MIN_H : int
+  - STATS_BTTN_WIDE : int
+  - STATS_BTTN_SLIM : int
+  - RUNNR_BTTN_WIDE : int
+  - RUNNR_BTTN_SLIM : int
+  - FONT_SIZE : int
+  - TEXT_SWITCH_WIDTH : float
+  - WIDE_SWITCH_WIDTH : float
+  - REFRESH_RATE : double
+  - s_labelStyle : Lazy[GUIStyle]
+  - s_labelTinyStyle : Lazy[GUIStyle]
+  - s_labelCenterStyle : Lazy[GUIStyle]
+  - s_buttonStyle : Lazy[GUIStyle]
+  - s_helpboxStyle : Lazy[GUIStyle]
+  - s_invisibleButtonStyle : Lazy[GUIStyle]
+  - s_invisibleButtonGrayStyle : Lazy[GUIStyle]
+  - Dark : Lazy[string]
+  - s_runnerGC : Lazy[GUIContent]
+  - s_playerObjGC : Lazy[GUIContent]
+  - s_visibleIcon : Lazy[GUIContent]
+  - s_hiddenIcon : Lazy[GUIContent]
+  - s_inputIconLong : Lazy[GUIContent]
+  - s_inputIconShort : Lazy[GUIContent]
+  - s_noInputIconLong : Lazy[GUIContent]
+  - s_noInputIconShort : Lazy[GUIContent]
+  - s_noVisibilityWarn : Lazy[GUIContent]
+  - s_statsGC : Lazy[GUIContent]
+  - _toolbarButtonStyle : GUIStyle
+  - _scrollPosition : Vector2
+  - _lastRepaintTime : double
+  - _stats : Dictionary[NetworkRunner, FusionStatistics]
+  + Instance : FusionRunnerVisibilityControlsWindow
+  + ShowWindow() : void
+  - Awake() : void
+  - OnEnable() : void
+  - OnDestroy() : void
+  - Update() : void
+  - OnGUI() : void
+  - DrawRunnerRow(NetworkRunner runner, bool shortText, bool isWide, float currentViewWidth, ref bool runnerWithoutVisibilityEnabledDetected) : void
+  - CreateOrUpdateFusionStats(NetworkRunner runner, CanvasAnchor anchor) : void
+  - ShowButton(Rect position) : void
+}
+
+class Labels <<static>> {
+  - NoActiveRunner : string
+  - NoRunners : string
+  - SP : string
+  - H : string
+  - S : string
+  - C : string
+  - P : string
+  - Dash : string
+  - ProvidingInputs : string
+  - NoInputs : string
+  - StatsLeft : string
+  - StatsRight : string
+  - ArrowsLeft : string
+  - ArrowsRight : string
+  - UserID : string
+  - VisibilityTooltip : string
+  - InputTooltip : string
+  - StatsTooltip : string
+  - RunnerTooltip : string
+  - PlayerObjTooltip : string
+  - NoVisibilityWarn : string
+  - HoldShift : string
+  - RunnerVisibilityNotEnabled : string
+}
+
+class FusionWeaverTriggerImporter {
+  - Extension : string
+  - ExtensionWithoutDot : string
+  - RunWeaverOnConfigChanges : bool
+  - DependencyHash : FusionCustomDependency
+  + OnImportAsset(AssetImportContext ctx) : void
+}
+
+class Postprocessor {
+  - OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
+}
+
+class NetworkPrefabsInspector {
+  - _grid : Grid
+  + ShowWindow() : void
+  - OnEnable() : void
+  - OnInspectorUpdate() : void
+  - OnGUI() : void
+}
+
+enum LoadState {
+  - NotLoaded : enum
+  - Loading : enum
+  - LoadedNoInstances : enum
+  - Loaded : enum
+}
+
+class InspectorTreeViewState {
+  - HeaderState : MultiColumnHeaderState
+  - SyncSelection : bool
+}
+
+class GridItem {
+  - _prefabId : NetworkPrefabId
+  - _prefabTable : NetworkPrefabTable
+  + InstanceCount : int
+  + Path : string
+  + Guid : string
+  + TargetObject : Object
+  + Source : INetworkPrefabSource
+  + Description : string
+  + LoadState : LoadState
+  + PrefabId : NetworkPrefabId
+  + GridItem(NetworkPrefabTable prefabTable, NetworkPrefabId prefabId)
+}
+
+class Grid {
+  - PrefabTable : NetworkPrefabTable
+  - OnlyLoaded : bool
+  + GetContentHash() : int
+  # CreateColumns() : IEnumerable[Column]
+  # CreateRows() : IEnumerable[GridItem]
+  # CreateContextMenu(GridItem item, TreeView treeView) : GenericMenu
+  - AddSpawnItems(string s, NetworkRunner networkRunner) : void
+}
+
+class NetworkProjectConfigImporter {
+  - ExtensionWithoutDot : string
+  - Extension : string
+  - ImportQueueOffset : int
+  - FusionPrefabTag : string
+  - FusionPrefabTagSearchTerm : string
+  - PrefabOptions : NetworkPrefabTableOptions
+  - ScriptOrderDependency : FusionCustomDependency
+  - AddressablesDependency : FusionCustomDependency
+  - NetworkObjectPrefabDependency : FusionCustomDependency
+  + OnImportAsset(AssetImportContext ctx) : void
+  + LoadConfigFromFile(string path) : NetworkProjectConfig
+  - DiscoverPrefabs(AssetImportContext ctx) : List[INetworkPrefabSource]
+  - CreateBehaviourMeta(AssetImportContext ctx) : NetworkProjectConfigAsset.SerializableSimulationBehaviourMeta[]
+  + RebuildPrefabHash() : void
+}
+
+class Postprocessor {
+  - OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
+  - HasSimulationBehaviours(string path) : bool
+}
+
+class NetworkProjectConfigImporterEditor {
+  - _initializeException : Exception
+  - _logSettingsDrawer : LogSettingsDrawer
+  - _versionExpanded : bool
+  - _version : string
+  - _allVersionInfo : string
+  + showImportedObject : bool
+  + extraDataType : Type
+  + OnInspectorGUI() : void
+  - VersionInfoGUI() : void
+  # Apply() : void
+  # InitializeExtraDataInstance(UnityEngine.Object extraData, int targetIndex) : void
+  - GetImporter(int i) : NetworkProjectConfigImporter
+  - GetConfigWrapper(int i) : NetworkProjectConfigAsset
+}
+
+class ILWeaverException {
+  + ILWeaverException(string error)
+  + ILWeaverException(string error, Exception innerException)
+  + DebugThrowIf(bool condition, string message) : void
+}
+
+class CentralizadorScripts {
+  + CentralizarScriptsEnEscena() : void
+}
+
+class ComponentPropertiesCopier <<static>> {
+  + CopyComponentProperties(MenuCommand command) : void
+  + CopyAllComponentsPropertiesFromComponent(MenuCommand command) : void
+  + CopyGameObjectPropertiesFromGameObjectContext(MenuCommand command) : void
+  + CopyGameObjectProperties(MenuCommand command) : void
+  + PastePropertiesFromComponentContext(MenuCommand command) : void
+  + PastePropertiesFromGameObjectContext(MenuCommand command) : void
+  + PastePropertiesFromGameObjectMenu(MenuCommand command) : void
+  - CopyGameObjectPropertiesInternal(GameObject go) : void
+  + FormatGameObjectProperties(GameObject go) : string
+  + FormatComponentProperties(Component component) : string
+  - ShouldEnterChildren(SerializedProperty property) : bool
+  - GetPropertyValueString(SerializedProperty property) : string
+  + PastePropertiesFromClipboard(GameObject targetGo) : void
+  - SetPropertyValueFromString(SerializedProperty prop, string valueStr) : void
+  - TryParseFloat(string s, out float result) : bool
+  - ParseVector2(string s) : Vector2
+  - ParseVector3(string s) : Vector3
+  - ParseVector4(string s) : Vector4
+  - ParseQuaternion(string s) : Quaternion
+  - ParseVector2Int(string s) : Vector2Int
+  - ParseVector3Int(string s) : Vector3Int
+  - ParseColor(string s) : Color
+}
+
+class ComponentPropertiesCopierTestMenu <<static>> {
+  + RunTest() : void
+  - FindGameObjectWithComponents(GameObject go) : GameObject
+}
+
+class Physics2DMigrator {
+  + Migrate() : void
+  - CleanMissingScriptsRecursively(GameObject obj) : void
+  - AlignZDepthRecursively(GameObject obj) : void
+  - Convert3DTo2DComponents(GameObject obj) : bool
+  + MigratePrefabsTo2D() : void
+}
+
+class AssetPostprocessor <<external>>
+class Attribute <<external>>
+class Behaviour <<external>>
+class EditorWindow <<external>>
+class Exception <<external>>
+class FusionGlobalScriptableObjectSourceAttribute <<external>>
+class FusionUnityLoggerBase <<external>>
+class IAfterAllTicks <<external>>
+class IBeforeAllTicks <<external>>
+class IBeforeCopyPreviousState <<external>>
+class IBeginDragHandler <<external>>
+class IComparer <<external>>
+class ICoroutine <<external>>
+class IDisposable <<external>>
+class IDragHandler <<external>>
+class IEndDragHandler <<external>>
+class IEnumerable <<external>>
+class IEnumerator <<external>>
+class IEqualityComparer <<external>>
+class IEquatable <<external>>
+class INetworkObjectProvider <<external>>
+class INetworkPrefabSource <<external>>
+class INetworkRunnerCallbacks <<external>>
+class INetworkSceneManager <<external>>
+class INetworkStruct <<external>>
+class INetworkTRSPTeleport <<external>>
+class IPreprocessBuildWithReport <<external>>
+class ISerializationCallbackReceiver <<external>>
+class ISpawned <<external>>
+class Lazy <<external>>
+class NetworkTRSP <<external>>
+class PopupWindowContent <<external>>
+class ScriptableObject <<external>>
+class ScriptedImporter <<external>>
+class ScriptedImporterEditor <<external>>
+class SimulationBehaviour <<external>>
+class TreeView <<external>>
+class TreeViewItem <<external>>
+class TreeViewState <<external>>
+
+' Relaciones
+SerializedPropertyEnumerator ..|> IEnumerator
+SerializedPropertyEnumerator --> SerializedProperty
+UnityInternal --> AssetDatabase
+UnityInternal --> Event
+UnityInternal --> Editor
+UnityInternal --> SerializedProperty
+UnityInternal --> EditorGUI
+UnityInternal --> EditorUtility
+UnityInternal --> HandleUtility
+UnityInternal --> DecoratorDrawer
+UnityInternal --> PropertyDrawer
+UnityInternal --> EditorGUIUtility
+UnityInternal --> PropertyHandler
+UnityInternal --> PropertyHandlerCache
+UnityInternal --> Statics
+UnityInternal --> EditorApplication
+UnityInternal --> ObjectSelector
+UnityInternal --> SplitterState
+UnityInternal --> InternalStyles
+UnityInternal --> LazyGUIStyle
+UnityInternal --> StaticAccessor
+UnityInternal --> InstanceAccessor
+UnityInternal --> DelegateSwizzle
+Event --> StaticAccessor
+EditorGUI --> SerializedProperty
+EditorGUI --> StaticAccessor
+GUIClip --> StaticAccessor
+LayerMatrixGUI --> Editor
+DecoratorDrawer --> InstanceAccessor
+PropertyDrawer --> InstanceAccessor
+EditorGUIUtility --> StaticAccessor
+ScriptAttributeUtility --> Editor
+ScriptAttributeUtility --> SerializedProperty
+ScriptAttributeUtility --> PropertyHandler
+ScriptAttributeUtility --> PropertyHandlerCache
+ScriptAttributeUtility --> DelegateSwizzle
+ScriptAttributeUtility --> StaticAccessor
+PropertyHandlerCache --> Editor
+PropertyHandlerCache --> SerializedProperty
+PropertyHandlerCache --> PropertyHandler
+PropertyHandlerCache --> Statics
+Statics --> Editor
+Statics --> SerializedProperty
+Statics --> PropertyHandler
+PropertyHandler ..|> IEquatable
+PropertyHandler --> Editor
+PropertyHandler --> DecoratorDrawer
+PropertyHandler --> PropertyDrawer
+PropertyHandler --> Statics
+PropertyHandler --> InstanceAccessor
+Statics --> Editor
+Statics --> DecoratorDrawer
+Statics --> PropertyDrawer
+Statics --> InstanceAccessor
+ObjectSelector --> Editor
+ObjectSelector --> Statics
+ObjectSelector --> StaticAccessor
+ObjectSelector --> InstanceAccessor
+Statics --> Editor
+Statics --> StaticAccessor
+Statics --> InstanceAccessor
+InspectorWindow --> Editor
+InspectorWindow --> InstanceAccessor
+SerializedProperty --> InstanceAccessor
+SplitterGUILayout --> Editor
+SplitterGUILayout --> SplitterState
+SplitterState ..|> ISerializationCallbackReceiver
+SplitterState --> Editor
+InternalStyles --> LazyGUIStyle
+FusionOdinAttributeConverterAttribute --|> Attribute
+PropertyDrawerForArrayWorkaround --> ArrayLengthAttributeDrawer
+ArrayLengthAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+ArrayLengthAttributeDrawer ..|> INonApplicableOnArrayElements
+ArrayLengthAttributeDrawer --> EditorGUIUtility
+ArrayLengthAttributeDrawer --> SerializedProperty
+AssemblyNameAttributeDrawer --|> PropertyDrawerWithErrorHandling
+AssemblyNameAttributeDrawer --> Editor
+AssemblyNameAttributeDrawer --> AssemblyInfo
+AssemblyNameAttributeDrawer --> SerializedProperty
+AssemblyNameAttributeDrawer --> AsmDefType
+AssemblyNameAttributeDrawer --> FusionEditorGUI
+AssemblyNameAttributeDrawer --> PropertyScope
+AssemblyNameAttributeDrawer --> EditorGUI
+AssemblyNameAttributeDrawer --> UnityInternal
+AssemblyNameAttributeDrawer --> AsmDefData
+AssemblyNameAttributeDrawer --> AssetDatabase
+PropertyDrawerForArrayWorkaround --> BinaryDataAttributeDrawer
+BinaryDataAttributeDrawer --|> PropertyDrawerWithErrorHandling
+BinaryDataAttributeDrawer ..|> INonApplicableOnArrayElements
+BinaryDataAttributeDrawer --> RawDataDrawer
+BinaryDataAttributeDrawer --> SerializedProperty
+BinaryDataAttributeDrawer --> FusionEditorGUI
+BinaryDataAttributeDrawer --> PropertyScope
+BinaryDataAttributeDrawer --> EditorGUIUtility
+BinaryDataAttributeDrawer --> EditorGUI
+BinaryDataAttributeDrawer --> EnabledScope
+BinaryDataAttributeDrawer --> UnityInternal
+DecoratingPropertyAttributeDrawer --|> PropertyDrawer
+DecoratingPropertyAttributeDrawer --> SerializedProperty
+DecoratingPropertyAttributeDrawer --> FusionEditorGUI
+DecoratingPropertyAttributeDrawer --> EditorGUI
+DecoratingPropertyAttributeDrawer --> INonApplicableOnArrayElements
+DecoratingPropertyAttributeDrawer --> UnityInternal
+DecoratingPropertyAttributeDrawer --> ScriptAttributeUtility
+DecoratingPropertyAttributeDrawer --> PropertyDrawerForArrayWorkaround
+DecoratingPropertyAttributeDrawer --> DecoratorDrawer
+DirectoryPathAttributeDrawer --|> PropertyDrawerWithErrorHandling
+DirectoryPathAttributeDrawer --> SerializedProperty
+DirectoryPathAttributeDrawer --> EditorGUIUtility
+DirectoryPathAttributeDrawer --> EditorApplication
+DirectoryPathAttributeDrawer --> EditorUtility
+DirectoryPathAttributeDrawer --> PathUtils
+DirectoryPathAttributeDrawer --> EditorGUI
+DisplayAsEnumAttributeDrawer --|> PropertyDrawerWithErrorHandling
+DisplayAsEnumAttributeDrawer --> EnumDrawer
+DisplayAsEnumAttributeDrawer --> SerializedProperty
+DisplayAsEnumAttributeDrawer --> FusionEditorGUI
+DisplayAsEnumAttributeDrawer --> PropertyScopeWithPrefixLabel
+PropertyDrawerForArrayWorkaround --> DisplayNameAttributeDrawer
+DisplayNameAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+DisplayNameAttributeDrawer ..|> INonApplicableOnArrayElements
+DisplayNameAttributeDrawer --> SerializedProperty
+DoIfAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+DoIfAttributeDrawer ..|> INonApplicableOnArrayElements
+DoIfAttributeDrawer --> SerializedProperty
+PropertyDrawerForArrayWorkaround --> DrawIfAttributeDrawer
+DrawIfAttributeDrawer --|> DoIfAttributeDrawer
+DrawIfAttributeDrawer --> SerializedProperty
+DrawIfAttributeDrawer --> EditorGUIUtility
+DrawIfAttributeDrawer --> EditorGUI
+DrawInlineAttributeDrawer --|> PropertyDrawer
+DrawInlineAttributeDrawer --> SerializedProperty
+DrawInlineAttributeDrawer --> EditorGUI
+DrawInlineAttributeDrawer --> FusionEditorGUI
+DrawInlineAttributeDrawer --> EditorGUIUtility
+PropertyDrawerForArrayWorkaround --> ErrorIfAttributeDrawer
+ErrorIfAttributeDrawer --|> MessageIfDrawerBase
+ErrorIfAttributeDrawer --> FusionEditorSkin
+ExpandableEnumAttributeDrawer --|> PropertyDrawerWithErrorHandling
+ExpandableEnumAttributeDrawer --> EnumDrawer
+ExpandableEnumAttributeDrawer --> LazyGUIStyle
+ExpandableEnumAttributeDrawer --> SerializedProperty
+ExpandableEnumAttributeDrawer --> EditorGUIUtility
+ExpandableEnumAttributeDrawer --> FusionEditorGUI
+ExpandableEnumAttributeDrawer --> PropertyScope
+ExpandableEnumAttributeDrawer --> EditorGUI
+ExpandableEnumAttributeDrawer --> EnabledScope
+ExpandableEnumAttributeDrawer --> Event
+ExpandableEnumAttributeDrawer --> FusionCodeDoc
+ExpandableEnumAttributeDrawer --> FusionEditorSkin
+PropertyDrawerForArrayWorkaround --> FieldEditorButtonAttributeDrawer
+FieldEditorButtonAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+FieldEditorButtonAttributeDrawer --> SerializedProperty
+FieldEditorButtonAttributeDrawer --> EditorGUIUtility
+FieldEditorButtonAttributeDrawer --> EditorGUI
+FieldEditorButtonAttributeDrawer --> DisabledGroupScope
+HideArrayElementLabelAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+HideArrayElementLabelAttributeDrawer --> SerializedProperty
+PropertyDrawerForArrayWorkaround --> InlineHelpAttributeDrawer
+InlineHelpAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+InlineHelpAttributeDrawer ..|> INonApplicableOnArrayElements
+InlineHelpAttributeDrawer --> SerializedProperty
+InlineHelpAttributeDrawer --> FusionEditorGUI
+InlineHelpAttributeDrawer --> GUIContentScope
+InlineHelpAttributeDrawer --> EditorGUI
+InlineHelpAttributeDrawer --> FusionCodeDoc
+InlineHelpAttributeDrawer --> PropertyDrawer
+InlineHelpAttributeDrawer --> FusionPropertyDrawerMetaAttribute
+InlineHelpAttributeDrawer --> EnabledScope
+InlineHelpAttributeDrawer --> FusionEditorSkin
+LayerAttributeDrawer --|> PropertyDrawer
+LayerAttributeDrawer --> SerializedProperty
+LayerAttributeDrawer --> EditorGUI
+LayerAttributeDrawer --> FusionEditorGUI
+LayerAttributeDrawer --> PropertyScope
+LayerAttributeDrawer --> ShowMixedValueScope
+PropertyDrawerForArrayWorkaround --> LayerMatrixAttributeDrawer
+LayerMatrixAttributeDrawer --|> PropertyDrawerWithErrorHandling
+LayerMatrixAttributeDrawer ..|> INonApplicableOnArrayElements
+LayerMatrixAttributeDrawer --> SerializedProperty
+LayerMatrixAttributeDrawer --> FusionEditorGUI
+LayerMatrixAttributeDrawer --> PropertyScopeWithPrefixLabel
+LayerMatrixAttributeDrawer --> LayerMatrixPopup
+LayerMatrixAttributeDrawer --> EditorGUIUtility
+LayerMatrixAttributeDrawer --> UnityInternal
+LayerMatrixAttributeDrawer --> LayerMatrixGUI
+LayerMatrixPopup --|> PopupWindowContent
+LayerMatrixPopup --> UnityInternal
+LayerMatrixPopup --> LayerMatrixGUI
+LayerMatrixPopup --> FusionEditorGUI
+MaxStringByteCountAttributeDrawer --|> PropertyDrawerWithErrorHandling
+MaxStringByteCountAttributeDrawer --> SerializedProperty
+MaxStringByteCountAttributeDrawer --> FusionEditorGUI
+MaxStringByteCountAttributeDrawer --> PropertyScope
+MessageIfDrawerBase --|> DoIfAttributeDrawer
+MessageIfDrawerBase --> SerializedProperty
+MessageIfDrawerBase --> EditorGUIUtility
+MessageIfDrawerBase --> FusionEditorGUI
+PropertyDrawerForArrayWorkaround --|> DecoratorDrawer
+PropertyDrawerForArrayWorkaround --> RedirectCustomPropertyDrawerAttribute
+PropertyDrawerForArrayWorkaround --> UnityInternal
+PropertyDrawerForArrayWorkaround --> PropertyHandler
+PropertyDrawerForArrayWorkaround --> PropertyDrawer
+PropertyDrawerForArrayWorkaround --> ScriptAttributeUtility
+PropertyDrawerForArrayWorkaround --> DummyPropertyDrawer
+PropertyDrawerForArrayWorkaround --> SerializedProperty
+PropertyDrawerForArrayWorkaround --> EditorGUI
+RedirectCustomPropertyDrawerAttribute --|> Attribute
+DummyPropertyDrawer --|> PropertyDrawer
+DummyPropertyDrawer --> SerializedProperty
+DummyPropertyDrawer --> EditorGUI
+PropertyDrawerWithErrorHandling --|> PropertyDrawer
+PropertyDrawerWithErrorHandling --> SerializedProperty
+PropertyDrawerWithErrorHandling --> Entry
+PropertyDrawerWithErrorHandling --> EditorGUI
+PropertyDrawerWithErrorHandling --> EditorGUIUtility
+PropertyDrawerWithErrorHandling --> FusionEditorGUI
+PropertyDrawerWithErrorHandling --> UnityInternal
+RangeExAttributeDrawer --|> PropertyDrawerWithErrorHandling
+RangeExAttributeDrawer --> SerializedProperty
+RangeExAttributeDrawer --> EditorGUI
+RangeExAttributeDrawer --> FusionEditorGUI
+RangeExAttributeDrawer --> PropertyScope
+RangeExAttributeDrawer --> EditorGUIUtility
+RangeExAttributeDrawer --> LabelWidthScope
+RangeExAttributeDrawer --> IndentLevelScope
+PropertyDrawerForArrayWorkaround --> ReadOnlyAttributeDrawer
+ReadOnlyAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+ReadOnlyAttributeDrawer ..|> INonApplicableOnArrayElements
+ReadOnlyAttributeDrawer --> SerializedProperty
+ReadOnlyAttributeDrawer --> EditorApplication
+ReadOnlyAttributeDrawer --> EditorGUI
+ReadOnlyAttributeDrawer --> DisabledGroupScope
+ScenePathAttributeDrawer --|> PropertyDrawerWithErrorHandling
+ScenePathAttributeDrawer --> SerializedProperty
+ScenePathAttributeDrawer --> AssetDatabase
+ScenePathAttributeDrawer --> FusionEditorGUI
+ScenePathAttributeDrawer --> PropertyScope
+ScenePathAttributeDrawer --> EditorGUI
+ScriptFieldDrawer --|> PropertyDrawer
+ScriptFieldDrawer --> SerializedProperty
+ScriptFieldDrawer --> EditorGUI
+ScriptFieldDrawer --> FusionEditorGUI
+ScriptFieldDrawer --> FusionEditorSkin
+ScriptFieldDrawer --> EnabledScope
+ScriptFieldDrawer --> EditorGUIUtility
+ScriptFieldDrawer --> Event
+ScriptFieldDrawer --> AssetDatabase
+ScriptFieldDrawer --> FusionCodeDoc
+SerializableTypeDrawer --|> PropertyDrawerWithErrorHandling
+SerializableTypeDrawer --> SerializedProperty
+SerializableTypeDrawer --> EditorGUI
+SerializableTypeDrawer --> FusionEditorGUI
+SerializeReferenceTypePickerAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+SerializeReferenceTypePickerAttributeDrawer --> SerializedProperty
+SerializeReferenceTypePickerAttributeDrawer --> EditorGUIUtility
+SerializeReferenceTypePickerAttributeDrawer --> EditorGUI
+SerializeReferenceTypePickerAttributeDrawer --> FusionEditorGUI
+SerializeReferenceTypePickerAttributeDrawer --> FusionEditorGUIDisplayTypePickerMenuFlags
+PropertyDrawerForArrayWorkaround --> SpaceAfterAttributeDrawer
+SpaceAfterAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+SpaceAfterAttributeDrawer ..|> INonApplicableOnArrayElements
+SpaceAfterAttributeDrawer --> SerializedProperty
+ToggleLeftAttributeDrawer --|> PropertyDrawer
+ToggleLeftAttributeDrawer --> SerializedProperty
+ToggleLeftAttributeDrawer --> EditorGUI
+UnitAttributeDrawer --|> DecoratingPropertyAttributeDrawer
+UnitAttributeDrawer --> SerializedProperty
+UnitAttributeDrawer --> FusionPropertyDrawerMetaAttribute
+UnitAttributeDrawer --> EditorGUIUtility
+UnitAttributeDrawer --> FusionEditorGUI
+UnityAssetGuidAttributeDrawer --|> PropertyDrawerWithErrorHandling
+UnityAssetGuidAttributeDrawer --> SerializedProperty
+UnityAssetGuidAttributeDrawer --> FusionEditorGUI
+UnityAssetGuidAttributeDrawer --> PropertyScopeWithPrefixLabel
+UnityAssetGuidAttributeDrawer --> EditorGUI
+UnityAssetGuidAttributeDrawer --> AssetDatabase
+UnityAssetGuidAttributeDrawer --> EnabledScope
+UnityAssetGuidAttributeDrawer --> EditorGUIUtility
+UnityAssetGuidAttributeDrawer --> PropertyScope
+UnityResourcePathAttributeDrawer --|> PropertyDrawerWithErrorHandling
+UnityResourcePathAttributeDrawer --> SerializedProperty
+UnityResourcePathAttributeDrawer --> FusionEditorGUI
+UnityResourcePathAttributeDrawer --> PropertyScopeWithPrefixLabel
+UnityResourcePathAttributeDrawer --> EditorGUI
+UnityResourcePathAttributeDrawer --> AssetDatabase
+UnityResourcePathAttributeDrawer --> EnabledScope
+UnityResourcePathAttributeDrawer --> EditorGUIUtility
+PropertyDrawerForArrayWorkaround --> WarnIfAttributeDrawer
+WarnIfAttributeDrawer --|> MessageIfDrawerBase
+WarnIfAttributeDrawer --> FusionEditorSkin
+FusionHierarchyWindowOverlay --> EditorApplication
+FusionHierarchyWindowOverlay --> EditorGUIUtility
+FusionHierarchyWindowOverlay --> EditorUtility
+FusionHierarchyWindowOverlay --> EditorGUI
+FusionSceneSetupAssistants --> FusionAssistants
+FusionSceneSetupAssistants --> FusionBootstrap
+FusionSceneSetupAssistants --> RunnerVisibilityLink
+FusionUnitySurrogateBaseWrapper --|> ScriptableObject
+FusionUnitySurrogateBaseWrapper --> SerializedProperty
+NetworkBehaviourEditor --|> BehaviourEditor
+NetworkBehaviourEditor --> EditorGUI
+NetworkBehaviourEditor --> FusionEditorGUI
+NetworkBehaviourEditor --> WarningScope
+NetworkMecanimAnimatorBaker --> AnimatorControllerTools
+NetworkMecanimAnimatorBaker --> EditorUtility
+NetworkObjectBakerEditTime --|> NetworkObjectBaker
+NetworkObjectBakerEditTime --> NetworkObjectBakerEditTimeHandlerAttribute
+NetworkObjectBakerEditTime --> EditorUtility
+NetworkObjectBakerEditTime --> HashCodeUtilities
+NetworkObjectBakerEditTimeHandlerAttribute --|> Attribute
+NetworkObjectEditor --|> BehaviourEditor
+NetworkObjectEditor --> NetworkProjectConfigUtilities
+NetworkObjectEditor --> FusionEditorGUI
+NetworkObjectEditor --> AssetDatabase
+NetworkObjectEditor --> AssetDatabaseUtils
+NetworkObjectEditor --> WarningScope
+NetworkObjectEditor --> EditorGUI
+NetworkObjectEditor --> EditorApplication
+NetworkObjectEditor --> BoxScope
+NetworkObjectEditor --> EditorUtility
+NetworkObjectEditor --> ShowMixedValueScope
+NetworkObjectEditor --> EditorGUIUtility
+NetworkObjectEditor --> IndentLevelScope
+NetworkObjectPostprocessor --|> AssetPostprocessor
+NetworkObjectPostprocessor --> NetworkObjectBakePrefabArgs
+NetworkObjectPostprocessor --> NetworkObjectBakeSceneArgs
+NetworkObjectPostprocessor --> EditorApplication
+NetworkObjectPostprocessor --> AssetDatabase
+NetworkObjectPostprocessor --> AssetDatabaseUtils
+NetworkObjectPostprocessor --> NetworkProjectConfigImporter
+NetworkObjectPostprocessor --> NetworkObjectBaker
+NetworkObjectPostprocessor --> NetworkObjectBakerEditTime
+NetworkObjectPostprocessor --> FusionAssistants
+NetworkObjectBakePrefabArgs --> NetworkObjectBaker
+NetworkObjectBakeSceneArgs --> NetworkObjectBaker
+INetworkAssetSourceFactory --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactory --> INetworkAssetSourceFactory
+NetworkAssetSourceFactory --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactoryStatic --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactoryStatic --> NetworkPrefabSourceStaticLazy
+NetworkAssetSourceFactoryResource --> NetworkAssetSourceFactoryContext
+NetworkAssetSourceFactoryResource --> NetworkPrefabSourceResource
+NetworkRunnerEditor --|> BehaviourEditor
+NetworkRunnerEditor --> EditorApplication
+NetworkRunnerEditor --> RunnerEnableVisibility
+NetworkTRSPEditor --|> NetworkBehaviourEditor
+NetworkTRSPEditor --> EditorGUI
+PhotonAppSettingsEditor --|> Editor
+PhotonAppSettingsEditor --> FusionEditorGUI
+PhotonAppSettingsEditor --> EditorGUIUtility
+FusionStatisticsEditor --|> Editor
+FusionStatisticsEditor --> FusionStatistics
+FusionStatisticsEditor --> EditorGUI
+AnimatorControllerTools --> EditorUtility
+AssetDatabaseUtils --> AssetDatabase
+FusionEditorGUI --> EditorGUI
+FusionEditorGUI --> IndentLevelScope
+FusionEditorGUI --> SerializedProperty
+FusionEditorGUI --> Event
+FusionEditorGUI --> HashCodeUtilities
+NetworkProjectConfigUtilities --> EditorApplication
+NetworkProjectConfigUtilities --> FusionGlobalScriptableObjectUtils
+NetworkProjectConfigUtilities --> AssetDatabase
+NetworkProjectConfigUtilities --> AssetDatabaseUtils
+NetworkProjectConfigUtilities --> NetworkProjectConfigImporter
+NetworkProjectConfigUtilities --> EditorGUIUtility
+NetworkProjectConfigUtilities --> PathUtils
+FusionEditorConfigImporter --|> ScriptedImporter
+FusionEditorSkin --|> ScriptableObject
+FusionEditorSkin --> EditorGUIUtility
+FusionEditorSkin --> LazyAsset
+FusionEditorSkin --> LazyGUIStyle
+FusionRunnerVisibilityControlsWindow --|> EditorWindow
+FusionRunnerVisibilityControlsWindow --> RunnerEnableVisibility
+FusionRunnerVisibilityControlsWindow --> NetworkRunnerVisibilityExtensions
+FusionRunnerVisibilityControlsWindow --> EditorGUIUtility
+FusionRunnerVisibilityControlsWindow --> Labels
+FusionRunnerVisibilityControlsWindow --> FusionEditorSkin
+FusionRunnerVisibilityControlsWindow --> FusionStatistics
+FusionRunnerVisibilityControlsWindow --> EditorGUI
+FusionRunnerVisibilityControlsWindow --> DisabledGroupScope
+FusionRunnerVisibilityControlsWindow --> Event
+FusionRunnerVisibilityControlsWindow --> CanvasAnchor
+Labels --> RunnerEnableVisibility
+Labels --> NetworkRunnerVisibilityExtensions
+FusionWeaverTriggerImporter --|> ScriptedImporter
+FusionWeaverTriggerImporter --> NetworkProjectConfigImporter
+FusionWeaverTriggerImporter --> ILWeaverUtils
+FusionWeaverTriggerImporter --> FusionCustomDependency
+FusionWeaverTriggerImporter --> EditorApplication
+FusionWeaverTriggerImporter --> NetworkProjectConfigUtilities
+Postprocessor --|> AssetPostprocessor
+Postprocessor --> NetworkProjectConfigImporter
+NetworkPrefabsInspector --|> EditorWindow
+NetworkPrefabsInspector --> Grid
+NetworkPrefabsInspector --> EditorGUI
+NetworkPrefabsInspector --> FusionGridItem
+NetworkPrefabsInspector --> AssetDatabase
+NetworkPrefabsInspector --> NetworkProjectConfigUtilities
+NetworkPrefabsInspector --> LoadState
+NetworkPrefabsInspector --> GridItem
+NetworkPrefabsInspector --> Column
+NetworkPrefabsInspector --> FusionEditorSkin
+NetworkPrefabsInspector --> FusionEditorGUI
+NetworkPrefabsInspector --> ContentColorScope
+NetworkPrefabsInspector --> INetworkPrefabSourceDrawer
+NetworkPrefabsInspector --> EditorUtility
+NetworkPrefabsInspector --> FusionGrid
+InspectorTreeViewState --|> TreeViewState
+GridItem --|> FusionGridItem
+GridItem --> AssetDatabase
+GridItem --> NetworkProjectConfigUtilities
+GridItem --> LoadState
+Grid --|> FusionGrid
+Grid --> GridItem
+Grid --> Column
+Grid --> FusionEditorSkin
+Grid --> LoadState
+Grid --> FusionEditorGUI
+Grid --> ContentColorScope
+Grid --> EditorGUI
+Grid --> INetworkPrefabSourceDrawer
+Grid --> EditorUtility
+NetworkProjectConfigImporter --|> ScriptedImporter
+NetworkProjectConfigImporter --> NetworkAssetSourceFactory
+NetworkProjectConfigImporter --> AssetDatabaseUtils
+NetworkProjectConfigImporter --> AssetDatabase
+NetworkProjectConfigImporter --> NetworkAssetSourceFactoryContext
+NetworkProjectConfigImporter --> FusionCustomDependency
+Postprocessor --|> AssetPostprocessor
+Postprocessor --> AssetDatabase
+NetworkProjectConfigImporterEditor --|> ScriptedImporterEditor
+NetworkProjectConfigImporterEditor --> NetworkProjectConfigImporter
+NetworkProjectConfigImporterEditor --> LogSettingsDrawer
+NetworkProjectConfigImporterEditor --> FusionEditorGUI
+NetworkProjectConfigImporterEditor --> EditorGUI
+NetworkProjectConfigImporterEditor --> NetworkPrefabsInspector
+NetworkProjectConfigImporterEditor --> EnabledScope
+NetworkProjectConfigImporterEditor --> NetworkProjectConfigUtilities
+NetworkProjectConfigImporterEditor --> EditorUtility
+ILWeaverException --|> Exception
+CentralizadorScripts --|> EditorWindow
+CentralizadorScripts --> AssetDatabase
+CentralizadorScripts --> EditorUtility
+ComponentPropertiesCopier --> SerializedProperty
+ComponentPropertiesCopierTestMenu --> ComponentPropertiesCopier
+Physics2DMigrator --> AssetDatabase
+Physics2DMigrator --> EditorApplication

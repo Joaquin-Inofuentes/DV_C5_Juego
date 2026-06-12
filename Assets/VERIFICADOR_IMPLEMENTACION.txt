@@ -1,0 +1,297 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║            VERIFICADOR DE IMPLEMENTACIÓN - CHECKLIST DETALLADO             ║
+║                   Usa esto para validar que todo funciona                  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌─ VERIFICACIÓN 1: ARCHIVOS COPIADOS ────────────────────────────────────┐
+│                                                                          │
+│ Assets/Scenes/Tests/_USP/:                                             │
+│                                                                          │
+│ ☐ DamagedState.cs                (Ctrl+F "class DamagedState")        │
+│ ☐ RevivalBarView.cs              (Ctrl+F "class RevivalBarView")      │
+│ ☐ RevivingState.cs               (Ctrl+F "class RevivingState")       │
+│ ☐ UnitController_Revival.cs       (Ctrl+F "partial class")            │
+│ ☐ IUnitState.cs                  (Ctrl+F "interface IUnitState")      │
+│ ☐ EsperandoState.cs              (Ctrl+F "class EsperandoState")      │
+│ ☐ RevivalSystemSetup.cs          (Ctrl+F "class RevivalSystemSetup")  │
+│                                                                          │
+│ ACTION: Si falta alguno, copiar ahora desde el proyecto original       │
+│                                                                          │
+│ LOGS ESPERADOS EN CONSOLA:                                             │
+│ - Ningún error CS0246 (type not found)                                 │
+│ - Ningún error CS1002 (unexpected character)                           │
+│ - La escena debe compilar sin errores                                  │
+│                                                                          │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 2: ARCHIVOS MODIFICADOS ────────────────────────────────┐
+│                                                                        │
+│ UnitController.cs - BUSCAR ESTAS LÍNEAS:                             │
+│                                                                        │
+│ ☐ Línea ~204: "if (!isDown) { EnterDamagedState(); }"               │
+│   (En lugar de Morir())                                               │
+│                                                                        │
+│ ☐ Línea ~260: "if (model.IsLeader && _currentStateLogic is          │
+│   LiderandoState) { UpdateLeaderRevivalInput(); }"                    │
+│                                                                        │
+│ ☐ Línea ~268: "CheckForDamagedAllies();"                            │
+│                                                                        │
+│ ☐ Método "UpdateLeaderRevivalInput()" existe                         │
+│                                                                        │
+│ ☐ Método "LogMethodEntry(string)" existe                             │
+│                                                                        │
+│ GEN_Inputs.cs - BUSCAR ESTAS LÍNEAS:                                │
+│                                                                        │
+│ ☐ Línea ~26: "public bool RavivicionInput { get; private set; }"    │
+│                                                                        │
+│ ☐ Línea ~94: "RavivicionInput = Input.GetKey(KeyCode.Space);"       │
+│                                                                        │
+│ UnitView.cs - BUSCAR ESTAS LÍNEAS:                                  │
+│                                                                        │
+│ ☐ Línea ~23: "public IndicatorEntry revivingIndicator"              │
+│                                                                        │
+│ ☐ En GetEntry(): "case IndicatorType.Reviving:"                     │
+│                                                                        │
+│ ACTION: Si falta algo, copiar el archivo modificado correcto         │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 3: COMPILACIÓN ────────────────────────────────────────┐
+│                                                                        │
+│ EN UNITY EDITOR:                                                      │
+│                                                                        │
+│ ☐ Presionar Ctrl+R (recompile)                                       │
+│ ☐ Esperar a que diga "Script compilation succeeded"                  │
+│ ☐ NO hay errores en la consola                                       │
+│ ☐ NO hay warnings (amarillo)                                          │
+│                                                                        │
+│ ERRORES COMUNES:                                                      │
+│                                                                        │
+│ ❌ CS0246: Type 'IUnitState' not found                               │
+│    → IUnitState.cs no está en la carpeta correcta                    │
+│    → Verificar Assets/Scenes/Tests/_USP/                             │
+│                                                                        │
+│ ❌ CS1061: 'UnitController' does not contain 'EnterDamagedState'   │
+│    → UnitController_Revival.cs no está copiado                       │
+│    → O la clase UnitController no es partial                         │
+│                                                                        │
+│ ACTION: Resolver todos los errores antes de continuar                │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 4: JERARQUÍA DE GAMEOBJECTS ─────────────────────────┐
+│                                                                      │
+│ PARA CADA SOLDADO EN LA ESCENA:                                     │
+│                                                                      │
+│ Soldado (UnitController, UnitModel, UnitView, IA_P2_AgentIA)       │
+│ ├─ ✓ Vivo (GameObject - ACTIVO)                                    │
+│ │  └─ [SpriteRenderer o visuales de soldado vivo]                 │
+│ ├─ ✓ Caido (GameObject - DESACTIVADO)                             │
+│ │  └─ [SpriteRenderer de soldado caído]                           │
+│ └─ ✓ RevivalBarCanvas (UI Canvas - World Space - OPCIONAL)        │
+│    └─ ✓ RevivalBar (Image - fillAmount)                           │
+│                                                                      │
+│ VERIFICAR EN INSPECTOR:                                             │
+│                                                                      │
+│ ☐ Vivo existe y está ACTIVO                                        │
+│ ☐ Caido existe y está DESACTIVADO                                  │
+│ ☐ Caido tiene un SpriteRenderer (versión caída)                    │
+│ ☐ RevivalBarCanvas existe (o se creará dinámicamente)              │
+│ ☐ RevivalBar Image está configurada:                               │
+│   - Image Type: Filled                                              │
+│   - Fill Method: Horizontal                                         │
+│   - Fill Origin: Left                                               │
+│   - Color: Amarillo o similar                                       │
+│                                                                      │
+│ ACTION: Crear estos GameObjects ahora si no existen                │
+│                                                                      │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 5: COMPONENTES EN UNITCONTROLLER ────────────────────┐
+│                                                                     │
+│ ☐ UnitModel (existente)                                           │
+│   - healthMax = 100                                                │
+│   - reviveHealthPercent = 0.3                                      │
+│                                                                     │
+│ ☐ UnitView (existente)                                            │
+│   - graphicsRoot asignado                                          │
+│   - mainSprite asignado                                            │
+│   - selectionRing asignado                                         │
+│                                                                     │
+│ ☐ IA_P2_AgentIA (existente)                                       │
+│                                                                     │
+│ ☐ GenericDetector (hijo existente)                                │
+│   - Debe estar presente para detección de enemigos                 │
+│                                                                     │
+│ ☐ Disparador (hijo existente)                                     │
+│   - Componente que maneja disparo                                  │
+│                                                                     │
+│ ☐ RevivalBarView (NUEVO - agregar)                                │
+│   - Add Component → RevivalBarView                                 │
+│   - Ya está funcional sin configuración extra                      │
+│                                                                     │
+│ ACTION: Agregar RevivalBarView si no está                         │
+│                                                                     │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 6: TAGS Y LAYERS ────────────────────────────────────┐
+│                                                                     │
+│ ☐ Tag "Undetectable" existe                                       │
+│   - Edit → Project Settings → Tags and Layers → Tags              │
+│   - Crear nuevo tag "Undetectable"                                │
+│                                                                     │
+│ ☐ Cada soldado tiene layer "Player"                               │
+│   - (O el layer que uses para aliados)                            │
+│                                                                     │
+│ NOTA: El sistema automáticamente asigna tag "Undetectable"       │
+│ cuando un soldado entra en DamagedState.                           │
+│                                                                     │
+│ ACTION: Crear Tag "Undetectable" si no existe                    │
+│                                                                     │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 7: TESTING EN PLAY MODE ─────────────────────────────┐
+│                                                                     │
+│ PASO 1: ABRIR CONSOLA                                             │
+│ ☐ Window → General → Console (o presionar F12)                   │
+│                                                                     │
+│ PASO 2: PLAY                                                       │
+│ ☐ Press Play en Unity                                             │
+│ ☐ Revisar que no hay errores en consola                           │
+│ ☐ Soldados deberían estar en estado normal                        │
+│                                                                     │
+│ PASO 3: ATAQUE LETAL                                              │
+│ ☐ Dejar que un enemigo ataque a un soldado                        │
+│ ☐ Llevar HP del soldado a 0 (o disparar con cheat)               │
+│                                                                     │
+│ LOGS ESPERADOS:                                                    │
+│ [RecibirDano] Soldado recibió X de {atacante}. HP: 0/100          │
+│ [UnitController] Soldado caído activando view de caído            │
+│ [EnterDamagedState] Soldado entrando en estado CAIDO              │
+│ [DamagedState] Soldado completamente en estado CAIDO - INDETECTABLE│
+│                                                                     │
+│ VERIFICAR VISUALMENTE:                                             │
+│ ✓ GameObject "Vivo" debe desaparecer                              │
+│ ✓ GameObject "Caido" debe aparecer                                │
+│ ✓ Enemigos deben ignorar al caído (no atacar)                     │
+│                                                                     │
+│ ACTION: Si los logs no aparecen, revisar UnitController           │
+│                                                                     │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 8: REVIVIMIENTO CON LÍDER ──────────────────────────┐
+│                                                                    │
+│ PASO 1: POSICIONAR LÍDER                                          │
+│ ☐ Acercar al líder al soldado caído (dentro de 3 metros)         │
+│ ☐ Presionar E o Q para cambiar líder si es necesario             │
+│                                                                    │
+│ PASO 2: REVISAR DEBUG LINES                                       │
+│ ☐ Debería haber una línea azul desde caído a aliados              │
+│ ☐ La línea al líder debería ser AMARILLA (dentro de rango)        │
+│                                                                    │
+│ LOGS ESPERADOS:                                                   │
+│ [DrawLinesToAllies] Soldado {LIDER} está cerca para revivir      │
+│ [CanReviveCheck] Soldado {LIDER} ES LIDER                         │
+│                                                                    │
+│ PASO 3: PRESIONAR SPACEBAR                                        │
+│ ☐ Mantener Spacebar presionado                                    │
+│ ☐ Barra amarilla debe aparecer sobre el soldado caído             │
+│ ☐ Barra debe llenarse progresivamente                             │
+│                                                                    │
+│ LOGS ESPERADOS CADA FRAME:                                        │
+│ [HandleRevivalInput] Líder comenzando a revivir a {CAIDO}         │
+│ [HandleRevivalInput] Reviviendo a {CAIDO}. Progreso: X.XX/3.00s  │
+│                                                                    │
+│ PASO 4: COMPLETAR REVIVIMIENTO                                    │
+│ ☐ Después de 3 segundos, el revivimiento completa                │
+│                                                                    │
+│ LOGS ESPERADOS:                                                   │
+│ [CompleteLeaderRevival] Líder {LIDER} ha revivido a {CAIDO}      │
+│ [CompleteLeaderRevival] Salud restaurada: 30/100                  │
+│ [CompleteLeaderRevival] Soldado revivido por {LIDER}              │
+│ [Exit] Soldado saliendo de estado CAIDO                           │
+│                                                                    │
+│ VERIFICAR VISUALMENTE:                                            │
+│ ✓ Barra desaparece                                                │
+│ ✓ GameObject "Caido" desaparece                                   │
+│ ✓ GameObject "Vivo" reaparece                                     │
+│ ✓ Soldado está operativo (puede moverse/disparar)                 │
+│                                                                    │
+│ ACTION: Si no funciona, revisar:                                  │
+│ - GEN_Inputs.RavivicionInput está retornando true                 │
+│ - El líder está en LiderandoState (no en otro estado)             │
+│ - El caído está dentro de 3 metros                                │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 9: CANCELACIÓN DE REVIVIMIENTO ────────────────────┐
+│                                                                   │
+│ ESCENARIO 1: Soltar Spacebar                                     │
+│ ☐ Presionar y mantener Spacebar por 1-2 segundos                 │
+│ ☐ Soltar Spacebar                                                 │
+│                                                                   │
+│ LOGS ESPERADOS:                                                  │
+│ [HandleRevivalInput] Líder soltó barra espaciadora               │
+│ [UpdateRevivalBar] Progreso: X% | Color: Rojo (bajando)          │
+│                                                                   │
+│ VERIFICAR:                                                        │
+│ ✓ Barra se reduce rápidamente (roja)                             │
+│ ✓ Si se reduce a 0, desaparece                                   │
+│ ✓ Caído NO fue revivido                                          │
+│                                                                   │
+│ ESCENARIO 2: Alejarse del caído                                  │
+│ ☐ Presionar Spacebar                                             │
+│ ☐ Mover al líder lejos del caído (> 3 metros)                    │
+│                                                                   │
+│ LOGS ESPERADOS:                                                  │
+│ [CanReviveAlly] {LIDER} está lejos - revivimiento cancelado      │
+│                                                                   │
+│ ACTION: Ambos escenarios deben cancelar el revivimiento          │
+│                                                                   │
+└────────────────────────────────────────────────────────────────────┘
+
+┌─ VERIFICACIÓN 10: ALIADOS IA REVIVIENDO ──────────────────────────┐
+│                                                                    │
+│ PARA ALIADOS NO-LÍDERES:                                          │
+│                                                                    │
+│ ☐ Que haya un segundo soldado (no líder) cerca del caído         │
+│ ☐ Que ese soldado NO esté en combate                             │
+│                                                                    │
+│ LOGS ESPERADOS:                                                  │
+│ [CheckForDamagedAllies] Detecté aliado caído. Iniciando reviv    │
+│ [CanReviveAlly] Soldado X PUEDE revivir a Y - distancia: 2.5m   │
+│ [StartRevivingAlly] Soldado X comenzando a revivir a Y           │
+│ [RevivingState] Reviviendo a Y. Progreso: 1.50/3.00s             │
+│ [CompleteRevival] Aliado X ha revivido a Y                       │
+│                                                                    │
+│ VERIFICAR:                                                        │
+│ ✓ Aliado IA automáticamente va a revivir (sin input)             │
+│ ✓ Después de 3 segundos, el caído se revive                      │
+│ ✓ No se necesita presionar Spacebar                              │
+│                                                                    │
+│ ACTION: Testing con 3+ soldados (1 líder + 2+ aliados IA)        │
+│                                                                    │
+└────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         RESUMEN FINAL                                      ║
+║                                                                            ║
+│ ☐ 10 verificaciones completadas                                          │
+│ ☐ CERO errores de compilación                                           │
+│ ☐ Todos los logs aparecen en consola                                    │
+│ ☐ Revivimiento funciona con Spacebar (3 segundos)                       │
+│ ☐ Aliados IA reviven automáticamente                                    │
+│ ☐ Caídos son indetectables por enemigos                                 │
+│ ☐ Visualización de líneas de debug funciona                             │
+│ ☐ Barra de revivimiento se carga/descarga correctamente                 │
+│                                                                            ║
+│            ✅ ¡SISTEMA DE REVIVIMIENTO COMPLETAMENTE FUNCIONAL!          ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Si algo falla en alguna verificación:
+1. Lee el mensaje de error exacto
+2. Busca en TROUBLESHOOTING section arriba
+3. Revisa PASO_A_PASO_IMPLEMENTACION.txt
+4. Consulta SISTEMA_REVIVIMIENTO.md para más detalles
+
+¡El sistema está listo para producción!

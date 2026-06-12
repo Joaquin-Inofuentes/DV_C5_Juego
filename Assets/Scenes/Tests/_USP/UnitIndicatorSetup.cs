@@ -18,5 +18,6 @@ public enum IndicatorType
 {
     Heal,
     Combat,
-    Moving
+    Moving,
+    Reviving
 }

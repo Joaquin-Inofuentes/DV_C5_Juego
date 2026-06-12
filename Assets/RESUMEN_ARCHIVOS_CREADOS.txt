@@ -1,0 +1,246 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║           SISTEMA DE REVIVIMIENTO - ARCHIVOS CREADOS/MODIFICADOS           ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 📁 ARCHIVOS NUEVOS CREADOS                                               │
+└──────────────────────────────────────────────────────────────────────────┘
+
+1️⃣  DamagedState.cs
+    └─ Ubicación: Assets/Scenes/Tests/_USP/
+    └─ Tamaño: ~300 líneas
+    └─ Clases:
+       ├─ DamagedState : IUnitState
+       │  Métodos: Enter(), Update(), FixedUpdate(), Exit()
+       │  Maneja: Intercambio GameObjects, detección, visualización
+       │
+       └─ DamagedStateHandler : MonoBehaviour
+          Métodos: StartDamagedVisualization(), UpdateDamagedVisualization()
+          Maneja: Debug.DrawLine, detección de aliados cercanos
+
+2️⃣  RevivalBarView.cs
+    └─ Ubicación: Assets/Scenes/Tests/_USP/
+    └─ Tamaño: ~200 líneas
+    └─ Clase: RevivalBarView : MonoBehaviour
+    └─ Métodos públicos:
+       ├─ StartRevival(): Comienza a cargar (amarillo)
+       ├─ ContinueRevival(): Continúa cargando
+       ├─ PauseRevival(): Baja rápido (rojo)
+       ├─ CompleteRevival(): Finaliza
+       └─ GetRevivalProgress(): Retorna progreso (0-1)
+
+3️⃣  RevivingState.cs
+    └─ Ubicación: Assets/Scenes/Tests/_USP/
+    └─ Tamaño: ~250 líneas
+    └─ Clase: RevivingState : IUnitState
+    └─ Métodos: Enter(), Update(), FixedUpdate(), Exit()
+    └─ Características:
+       ├─ Constructor: RevivingState(UnitController damagedTarget)
+       ├─ Detecta distancia al objetivo
+       ├─ Maneja input de Spacebar
+       ├─ Timer de 3 segundos
+       └─ Restaura salud al completar
+
+4️⃣  UnitController_Revival.cs
+    └─ Ubicación: Assets/Scenes/Tests/_USP/
+    └─ Tamaño: ~400 líneas
+    └─ Clase: Extensión parcial de UnitController (IMPORTANTE: partial)
+    └─ Métodos principales:
+       ├─ EnterDamagedState(): Entrada a caído
+       ├─ ExitDamagedState(): Salida de caído
+       ├─ UpdateLeaderRevivalInput(): Revisa Spacebar
+       ├─ HandleRevivalInput(): Procesa revivimiento
+       ├─ FindClosestDamagedAlly(): Busca caídos
+       ├─ CanReviveAlly(): Valida revivimiento
+       └─ StartRevivingAlly(): Inicia revivimiento IA
+
+5️⃣  IUnitState.cs
+    └─ Ubicación: Assets/Scenes/Tests/_USP/
+    └─ Tamaño: ~20 líneas
+    └─ Interfaz: IUnitState
+    └─ Métodos:
+       ├─ void Enter(UnitController unit)
+       ├─ void Update(UnitController unit)
+       ├─ void FixedUpdate(UnitController unit)
+       └─ void Exit(UnitController unit)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 📝 DOCUMENTACIÓN CREADA                                                   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+📄 SISTEMA_REVIVIMIENTO.md
+   └─ Documentación completa (400+ líneas)
+   └─ Contiene:
+      ├─ Resumen ejecutivo
+      ├─ Flujo del usuario con ejemplos
+      ├─ Diagrama de archivos
+      ├─ Descripción detallada de cada clase
+      ├─ Flujo de estados FSM
+      ├─ Configuración necesaria
+      ├─ Diagrama de logs por evento
+      ├─ Checklist de testing
+      ├─ Troubleshooting
+      ├─ Notas de implementación
+      ├─ Mejoras futuras
+      └─ Ejemplo de uso completo
+
+📄 INSTALACION_REVIVIMIENTO.txt
+   └─ Guía rápida de instalación
+   └─ Setup en inspector
+   └─ Flujo de prueba
+   └─ Logs importantes
+   └─ Parámetros configurables
+   └─ Solución de problemas
+
+📄 RESUMEN_ARCHIVOS_CREADOS.txt (este archivo)
+   └─ Overview de todos los archivos
+   └─ Estructura y dependencias
+   └─ Referencias cruzadas
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 🔧 ARCHIVOS MODIFICADOS                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+1️⃣  UnitController.cs (Assets/Scenes/Tests/_USP/)
+    Cambios:
+    ├─ En RecibirDano():
+    │  Cambió: Morir() → EnterDamagedState()
+    │  Línea ~204: if (model.IsDead) { ... EnterDamagedState(); }
+    │
+    ├─ En Update():
+    │  Agregó: UpdateLeaderRevivalInput() si IsLeader
+    │  Línea ~247-253: Nuevo condicional
+    │
+    └─ Al final:
+       Agregó: Método LogMethodEntry(string message)
+
+2️⃣  GEN_Inputs.cs (Assets/Scenes/Tests/_USP/)
+    Cambios:
+    ├─ Línea ~26: Agregada propiedad RavivicionInput
+    │  public bool RavivicionInput { get; private set; }
+    │
+    └─ En Update() Línea ~93-94:
+       RavivicionInput = Input.GetKey(KeyCode.Space);
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 🔗 DEPENDENCIAS Y RELACIONES                                             │
+└──────────────────────────────────────────────────────────────────────────┘
+
+UnitController
+├─ Depende de: DamagedState, RevivingState, UnitModel
+├─ Usa: GEN_Inputs.RavivicionInput
+├─ Llama: EnterDamagedState(), ExitDamagedState()
+├─ Contiene: revivalInputTimer, lastDamagedAllyTarget
+└─ Tiene método: UpdateLeaderRevivalInput()
+
+DamagedState
+├─ Implementa: IUnitState
+├─ Contiene: DamagedStateHandler
+├─ Usa: UnitController
+├─ Dibuja: Debug.DrawLine (aliados)
+└─ Tags: "Undetectable"
+
+RevivalBarView
+├─ Depende de: UI Canvas, Image component
+├─ Implementa: MonoBehaviour
+├─ Usa: CanvasGroup, Image.fillAmount
+└─ Llamado por: RevivingState, UnitController
+
+RevivingState
+├─ Implementa: IUnitState
+├─ Constructor: RevivingState(UnitController damagedTarget)
+├─ Usa: GEN_Inputs.RavivicionInput
+├─ Llama: damagedAlly.model.ReviveHealth()
+├─ Llama: unit.CambiarEstado()
+└─ Referencia: RevivalBarView
+
+IUnitState (Interfaz)
+├─ Implementada por:
+│  ├─ LiderandoState
+│  ├─ SeguirFormacionState
+│  ├─ AtacarState
+│  ├─ PerseguirState
+│  ├─ EsperandoState (si existe)
+│  ├─ IrADestinoState (si existe)
+│  ├─ DamagedState (NUEVO)
+│  └─ RevivingState (NUEVO)
+│
+└─ Usada por: UnitController._currentStateLogic
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 📊 ESTADÍSTICAS                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Archivos nuevos:              5 archivos
+Archivos modificados:         2 archivos
+Líneas de código añadidas:    ~1,300 líneas
+Documentación:               ~800 líneas
+Clases nuevas:               8 clases
+Métodos nuevos:              15+ métodos
+Propiedades nuevas:          6+ propiedades
+
+Interfaces implementadas:     2 (IUnitState, IDetectable)
+Estados FSM nuevos:           2 (DamagedState, RevivingState)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ ✅ CHECKLIST DE INTEGRACIÓN                                              │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Preparación:
+ ☐ Copiar DamagedState.cs a Assets/Scripts/
+ ☐ Copiar RevivalBarView.cs a Assets/Scripts/
+ ☐ Copiar RevivingState.cs a Assets/Scripts/
+ ☐ Copiar UnitController_Revival.cs a Assets/Scripts/
+ ☐ Copiar IUnitState.cs a Assets/Scripts/
+
+Integración:
+ ☐ Reemplazar UnitController.cs con versión modificada
+ ☐ Reemplazar GEN_Inputs.cs con versión modificada
+ ☐ Agregar DamagedStateHandler dinámicamente en DamagedState.Enter()
+
+Scene Setup:
+ ☐ Para cada soldado, crear hijo "Vivo" (activo)
+ ☐ Para cada soldado, crear hijo "Caido" (desactivado)
+ ☐ Para cada soldado, crear hijo "RevivalBarCanvas"
+ ☐ Agregar componente RevivalBarView a cada UnitController
+
+Configuration:
+ ☐ Configurar reviveHealthPercent en UnitModel
+ ☐ Revisar que UnitTeam esté bien asignado
+ ☐ Verificar que GenericDetector existe en aliados
+
+Testing:
+ ☐ Ejecutar en Scene Test
+ ☐ Verificar logs en consola
+ ☐ Probar entrada a estado caído
+ ☐ Probar revivimiento con Spacebar
+ ☐ Verificar líneas de debug
+ ☐ Probar detección enemiga (caído ignorado)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 📚 REFERENCIAS CRUZADAS                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Para más detalles, ver:
+
+SISTEMA_REVIVIMIENTO.md:
+   - Flujo completo: Línea 8-50
+   - Arquitectura: Línea 120-180
+   - Testing: Línea 200-280
+   - Troubleshooting: Línea 300-340
+
+INSTALACION_REVIVIMIENTO.txt:
+   - Setup rápido: Línea 20-60
+   - Parámetros: Línea 110-130
+   - Issues comunes: Línea 135-160
+
+Comentarios en código:
+   DamagedState.cs:          Línea 10-30 (descripción)
+   RevivalBarView.cs:        Línea 10-20 (descripción)
+   RevivingState.cs:         Línea 10-30 (descripción)
+   UnitController_Revival.cs: Línea 10-30 (descripción)
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    FIN DEL RESUMEN DE ARCHIVOS                            ║
+║            Sistema listo para integración e implementación                 ║
+╚════════════════════════════════════════════════════════════════════════════╝

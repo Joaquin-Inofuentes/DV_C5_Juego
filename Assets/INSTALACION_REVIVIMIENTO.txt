@@ -1,0 +1,127 @@
+================================================
+INSTALACIÓN DEL SISTEMA DE REVIVIMIENTO
+================================================
+
+ARCHIVOS CREADOS (copiar a Assets/Scripts):
+1. DamagedState.cs
+2. RevivalBarView.cs
+3. RevivingState.cs
+4. UnitController_Revival.cs (extensión parcial)
+5. IUnitState.cs (interfaz)
+
+ARCHIVOS MODIFICADOS:
+1. UnitController.cs
+   - Modificado RecibirDano() para entrar en DamagedState
+   - Agregado UpdateLeaderRevivalInput() en Update
+   - Agregado LogMethodEntry()
+
+2. GEN_Inputs.cs
+   - Agregada propiedad RavivicionInput (Spacebar)
+
+================================================
+SETUP EN INSPECTOR (Para cada soldado)
+================================================
+
+1. EN LA JERARQUÍA:
+   Soldado (GameObject con UnitController)
+   ├── Vivo (GameObject - hijo)
+   │   └── [Sprite y visuales de soldado vivo]
+   └── Caido (GameObject - hijo, DESACTIVADO)
+       └── [Sprite y visuales de soldado caído]
+
+2. COMPONENTES REQUERIDOS:
+   ✓ UnitController (ya existe)
+   ✓ UnitModel (ya existe)
+   ✓ UnitView (ya existe)
+   ✓ IA_P2_AgentIA (ya existe)
+   ✓ GenericDetector (ya existe)
+   ✓ RevivalBarView (nuevo - agregar)
+
+3. CONFIGURAR EN UnitModel:
+   - healthMax: 100
+   - reviveHealthPercent: 0.3 (revive al 30% de HP)
+
+4. CREAR CANVAS DE REVIVIMIENTO:
+   ├── RevivalBarCanvas (UI Canvas, world space)
+   │   └── RevivalBar (Image component con fillAmount)
+
+5. TAGS Y LAYERS:
+   - Soldato: Layer "Player"
+   - Tag "Undetectable" para caídos
+
+================================================
+FLUJO RÁPIDO DE PRUEBA
+================================================
+
+1. Asegurar que el detector enemigo tiene alcance
+2. Dejar que un enemigo ataque al soldado
+3. Cuando HP → 0:
+   - Debe entrar en DamagedState
+   - GameObject "Vivo" debe desactivarse
+   - GameObject "Caido" debe activarse
+4. Acercar el líder
+5. Presionar y mantener SPACEBAR por 3 segundos
+6. Barra amarilla debe llenarse
+7. Soldado debe revivir
+
+================================================
+LOGS IMPORTANTES A VERIFICAR
+================================================
+
+Entrada a caído:
+[DamagedState] Soldado {NAME} completamente en estado CAIDO - INDETECTABLE
+
+Revivimiento en progreso:
+[HandleRevivalInput] Reviviendo a {NAME}. Progreso: X.XX/3.00s
+
+Revivimiento completado:
+[CompleteLeaderRevival] Soldado {NAME} revivido por {LIDER}
+
+================================================
+PARÁMETROS CONFIGURABLES
+================================================
+
+En DamagedState:
+- float revivalRange = 3f; // Rango para revivir
+
+En RevivalBarView:
+- float revivalDuration = 3f; // Segundos para cargar
+- float revivalDecreaseSped = 2f; // Multiplicador al bajar
+
+En UnitController_Revival:
+- float revivalRequiredDuration = 3f; // Segundos con Spacebar
+- float revivalDetectionRange = 3f; // Rango de detección
+
+En UnitModel:
+- float reviveHealthPercent = 0.3f; // % de HP al revivir
+
+================================================
+COMMON ISSUES
+================================================
+
+❌ No funciona el revivimiento:
+✓ Verificar que el caído esté en DamagedState
+✓ Verificar que el líder está en LiderandoState
+✓ Verificar que GEN_Inputs.RavivicionInput = true
+
+❌ No aparecen las líneas de debug:
+✓ Game View > Gizmos debe estar ON
+✓ Verificar que DamagedStateHandler existe
+✓ Los aliados deben tener UnitController
+
+❌ Barra de revivimiento no aparece:
+✓ Verificar que RevivalBarCanvas existe como hijo
+✓ Revisar nombre de la Image: "RevivalBar" o "FillImage"
+✓ Canvas debe estar en World Space (no Screen Space)
+
+================================================
+ESTADO FINAL
+================================================
+
+✅ Sistema completamente integrado
+✅ 7 archivos nuevos/modificados
+✅ Logs claros en cada punto
+✅ Compatibilidad con FSM existente
+✅ Listo para testing y ajustes
+
+================================================

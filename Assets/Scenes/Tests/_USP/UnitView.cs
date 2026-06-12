@@ -16,10 +16,16 @@ public class UnitView : MonoBehaviour
     [Header("LineRenderer")]
     public LineRenderer lineRenderer;
 
+    // Estado de revivimiento — se actualiza desde UnitController_Revival y RevivingState
+    [HideInInspector] public float revivalProgress = 0f; // 0=sin revivir, 1=completo
+    private float _revivalCompleteTimer = 0f;
+    private static Texture2D _circleTexture;
+
     [Header("Indicadores de Estado")]
     public IndicatorEntry healIndicator = new IndicatorEntry { name = "Heal", onTime = 0.15f, offTime = 0.15f };
     public IndicatorEntry combatIndicator = new IndicatorEntry { name = "Combat", onTime = 0.12f, offTime = 0.12f };
     public IndicatorEntry movingIndicator = new IndicatorEntry { name = "Moving", onTime = 0.3f, offTime = 0.3f };
+    public IndicatorEntry revivingIndicator = new IndicatorEntry { name = "Reviving", onTime = 0.25f, offTime = 0.25f };
 
     [Header("UI")]
     public float barWidth = 60f;
@@ -35,8 +41,17 @@ public class UnitView : MonoBehaviour
 
     void Update()
     {
+        if (_revivalCompleteTimer > 0f)
+            _revivalCompleteTimer -= Time.deltaTime;
         if (selectionRing != null)
             selectionRing.SetActive(model != null && model.IsLeader);
+    }
+
+    /// <summary>Llamado cuando el revivimiento se completa — dispara animación de exhalación.</summary>
+    public void OnRevivalComplete()
+    {
+        _revivalCompleteTimer = 1.4f;
+        revivalProgress = 0f;
     }
 
     // === ROTACIÓN GRÁFICA ===
@@ -125,6 +140,7 @@ public class UnitView : MonoBehaviour
         StopBlink(IndicatorType.Heal);
         StopBlink(IndicatorType.Combat);
         StopBlink(IndicatorType.Moving);
+        StopBlink(IndicatorType.Reviving);
     }
 
     IEnumerator BlinkRoutine(IndicatorEntry entry)
@@ -150,6 +166,7 @@ public class UnitView : MonoBehaviour
             case IndicatorType.Heal: return healIndicator;
             case IndicatorType.Combat: return combatIndicator;
             case IndicatorType.Moving: return movingIndicator;
+            case IndicatorType.Reviving: return revivingIndicator;
             default: return null;
         }
     }
@@ -159,6 +176,7 @@ public class UnitView : MonoBehaviour
         if (healIndicator.indicator != null) healIndicator.indicator.SetActive(false);
         if (combatIndicator.indicator != null) combatIndicator.indicator.SetActive(false);
         if (movingIndicator.indicator != null) movingIndicator.indicator.SetActive(false);
+        if (revivingIndicator.indicator != null) revivingIndicator.indicator.SetActive(false);
     }
 
     // === FLASH DE DAÑO ===
@@ -187,11 +205,28 @@ public class UnitView : MonoBehaviour
 
     private void OnGUI()
     {
-        if (model == null || model.IsDead || Camera.main == null) return;
+        if (model == null || Camera.main == null) return;
 
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         if (screenPos.z <= 0) return;
 
+        if (model.IsDown)
+        {
+            DrawHeartbeatCircle(screenPos);
+        }
+        else if (_revivalCompleteTimer > 0f)
+        {
+            DrawExhaleCircle(screenPos);
+            DrawHealthBar(screenPos);
+        }
+        else
+        {
+            DrawHealthBar(screenPos);
+        }
+    }
+
+    private void DrawHealthBar(Vector3 screenPos)
+    {
         float x = screenPos.x - (barWidth / 2);
         float y = Screen.height - screenPos.y + offset.y;
         float border = 1f;
@@ -199,14 +234,83 @@ public class UnitView : MonoBehaviour
         GUI.color = borderColor;
         GUI.DrawTexture(new Rect(x - border, y - border, barWidth + border * 2, barHeight + border * 2), Texture2D.whiteTexture);
 
-        GUI.color = bgColor;
+        GUI.color = new Color(0f, 0f, 0f, 1f); // fondo negro
         GUI.DrawTexture(new Rect(x, y, barWidth, barHeight), Texture2D.whiteTexture);
 
         float healthPercent = model.healthActual / model.healthMax;
-        GUI.color = fillColor;
+        GUI.color = fillColor; // rojo
         GUI.DrawTexture(new Rect(x, y, barWidth * healthPercent, barHeight), Texture2D.whiteTexture);
 
         GUI.color = Color.white;
+    }
+
+    private void DrawHeartbeatCircle(Vector3 screenPos)
+    {
+        float t = Time.time;
+        float baseSize = barWidth * 1.1f;
+
+        float pulse;
+        if (revivalProgress > 0.02f)
+        {
+            // Siendo revivido: calmar progresivamente
+            float stress = 1f - revivalProgress;
+            float bpm = Mathf.Lerp(1.0f, 2.4f, stress);
+            float phase = (t * bpm) % 1f;
+            float lub   = Mathf.Exp(-Mathf.Pow((phase - 0.08f) / 0.06f, 2f));
+            float dub   = 0.5f * Mathf.Exp(-Mathf.Pow((phase - 0.22f) / 0.07f, 2f));
+            float erratic = Mathf.Clamp01(lub + dub);
+            float breathing = Mathf.Sin(t * Mathf.PI * 1.1f) * 0.4f + 0.5f;
+            pulse = Mathf.Lerp(breathing, erratic, stress);
+        }
+        else
+        {
+            // Caído sin ser revivido: latido estresado rápido
+            float bpm = 2.4f + Mathf.Sin(t * 0.7f) * 0.25f;
+            float phase = (t * bpm) % 1f;
+            float lub   = Mathf.Exp(-Mathf.Pow((phase - 0.08f) / 0.055f, 2f));
+            float dub   = 0.45f * Mathf.Exp(-Mathf.Pow((phase - 0.21f) / 0.065f, 2f));
+            float echo  = 0.2f * Mathf.Exp(-Mathf.Pow((phase - 0.38f) / 0.05f, 2f));
+            pulse = Mathf.Clamp01(lub + dub + echo);
+        }
+
+        float size = baseSize * (0.7f + pulse * 0.7f);
+        float guiY = Screen.height - screenPos.y;
+
+        GUI.color = new Color(0.9f, 0.08f, 0.08f, 0.88f);
+        GUI.DrawTexture(new Rect(screenPos.x - size * 0.5f, guiY - size * 0.5f, size, size), GetCircleTexture());
+        GUI.color = Color.white;
+    }
+
+    private void DrawExhaleCircle(Vector3 screenPos)
+    {
+        // t va de 1 a 0 durante la animación
+        float t = _revivalCompleteTimer / 1.4f;
+        // Sube rápido y baja suave (inhalar y exhalar)
+        float inflate = Mathf.Sin(t * Mathf.PI);
+        float size = barWidth * (0.8f + inflate * 0.6f);
+        float alpha = t * 0.75f;
+        float guiY = Screen.height - screenPos.y;
+
+        GUI.color = new Color(0.2f, 0.9f, 0.3f, alpha);
+        GUI.DrawTexture(new Rect(screenPos.x - size * 0.5f, guiY - size * 0.5f, size, size), GetCircleTexture());
+        GUI.color = Color.white;
+    }
+
+    private static Texture2D GetCircleTexture()
+    {
+        if (_circleTexture != null) return _circleTexture;
+        const int sz = 64;
+        _circleTexture = new Texture2D(sz, sz, TextureFormat.RGBA32, false);
+        float c = (sz - 1) * 0.5f;
+        for (int y = 0; y < sz; y++)
+            for (int x = 0; x < sz; x++)
+            {
+                float dist = Vector2.Distance(new Vector2(x, y), new Vector2(c, c));
+                float a = Mathf.Clamp01(1f - (dist - (c - 1.5f)));
+                _circleTexture.SetPixel(x, y, new Color(1, 1, 1, a));
+            }
+        _circleTexture.Apply();
+        return _circleTexture;
     }
 
     public void SetSelectionRing(bool isActive)
