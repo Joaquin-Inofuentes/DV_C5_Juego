@@ -48,55 +48,33 @@ namespace Game.Squad
         {
             if (damagedAlly == null || !damagedAlly.isActiveAndEnabled)
             {
-                LogMethodEntry($"[Update] Objetivo caído fue destruido o desactivado. Abortando revivimiento");
                 isActivelyReviving = false;
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }
 
-            // Verificar distancia
             float distance = Vector3.Distance(unit.transform.position, damagedAlly.transform.position);
-
             if (distance > revivalRange)
             {
-                LogMethodEntry($"[Update] {unit.name} se alejó del caído (distancia: {distance:F2}). Abortando revivimiento");
+                LogMethodEntry($"[Update] {unit.name} se alejó del caído ({distance:F1}m). Abortando.");
                 isActivelyReviving = false;
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }
 
-            // Incrementar timer solo si se mantiene presionada la barra espaciadora
-            if (GEN_Inputs.Instance != null && GEN_Inputs.Instance.RavivicionInput)
-            {
-                revivalTimer += Time.deltaTime;
-                LogMethodEntry($"[Update] Reviviendo a {damagedAlly.name}. Progreso: {revivalTimer:F2}/{revivalDuration:F2} segundos");
+            // Aliados IA reviven automáticamente (sin input del jugador)
+            revivalTimer += Time.deltaTime;
+            damagedAlly.view.revivalProgress = revivalTimer / revivalDuration;
 
-                damagedAlly.view.revivalProgress = revivalTimer / revivalDuration;
-
-                // Si se completa el revivimiento
-                if (revivalTimer >= revivalDuration)
-                {
-                    CompleteRevival(unit);
-                    return;
-                }
-            }
-            else
+            if (revivalTimer >= revivalDuration)
             {
-                // Si soltó la tecla, cancelar revivimiento
-                if (revivalTimer > 0)
-                {
-                    LogMethodEntry($"[Update] {unit.name} soltó la barra espaciadora. Revivimiento CANCELADO");
-                    revivalTimer = 0f;
-                    damagedAlly.view.revivalProgress = 0f;
-                    isActivelyReviving = false;
-                    unit.CambiarEstado(new SeguirFormacionState());
-                }
+                CompleteRevival(unit);
+                return;
             }
 
-            // Mantener rotación hacia el objetivo
+            // Rotar hacia el objetivo durante el revivimiento
             Vector3 dir = (damagedAlly.transform.position - unit.transform.position).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            unit.view.RotateGraphicsSmooth(angle, 10f);
+            unit.view.RotateGraphicsSmooth(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, 10f);
         }
 
         public void FixedUpdate(UnitController unit)

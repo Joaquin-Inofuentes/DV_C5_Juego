@@ -1,8 +1,8 @@
-﻿using Game.Core;
+using Game.Core;
 using UnityEngine;
 using USP.Core;
 
-public enum UnitSpecialization { Flancotirador, Apoyo, Medico }
+public enum UnitSpecialization { Flancotirador, Apoyo, Medico, Asalto }
 
 public class UnitModel : MonoBehaviour, IHealth
 {
@@ -12,7 +12,7 @@ public class UnitModel : MonoBehaviour, IHealth
     public bool isPlayerControlled = false;
 
     [Header("Especialidad")]
-    public UnitSpecialization specialization = UnitSpecialization.Apoyo;
+    public UnitSpecialization specialization = UnitSpecialization.Asalto;
 
     [Header("Salud")]
     public float healthMax = 100f;
@@ -46,6 +46,11 @@ public class UnitModel : MonoBehaviour, IHealth
 
     private void Awake()
     {
+        // Reducir velocidad base a la mitad globalmente
+        speedChase *= 0.5f;
+        speedPatrol *= 0.5f;
+
+        // Bono de HP para Apoyo
         if (specialization == UnitSpecialization.Apoyo)
             healthMax *= 2f;
     }

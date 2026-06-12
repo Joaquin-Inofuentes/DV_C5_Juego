@@ -29,12 +29,19 @@ public class IA_P2_AgentIA : MonoBehaviour
 
     public float DistanceStop = 1f;
 
+    // Velocidad suavizada para movimiento más natural
+    private Vector2 _smoothedVelocity = Vector2.zero;
+    [Header("Suavizado de Movimiento")]
+    [Tooltip("Qué tan rápido el agente alcanza su velocidad objetivo. Más alto = más brusco.")]
+    public float acceleration = 8f;
+
     public void OnDisable()
     {
         isMoving = false;
         currentPath = null;
         currentIndex = 0;
         currentSpeed = 0f;
+        _smoothedVelocity = Vector2.zero;
     }
 
     public void SetSpeed(float speed)
@@ -162,21 +169,21 @@ public class IA_P2_AgentIA : MonoBehaviour
             if (currentIndex >= currentPath.Count)
             {
                 isMoving = false;
-                // No hacemos snap de posición para evitar saltos bruscos en 2D
+                _smoothedVelocity = Vector2.zero;
             }
         }
         else
         {
-            float step = moveSpeed * Time.deltaTime;
+            // Movimiento con lerp de velocidad para suavidad natural
+            Vector2 targetVel = toTarget.normalized * moveSpeed;
+            _smoothedVelocity = Vector2.Lerp(_smoothedVelocity, targetVel, Time.deltaTime * acceleration);
+            currentSpeed = _smoothedVelocity.magnitude;
+
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             if (rb != null)
-            {
-                rb.MovePosition(rb.position + toTarget.normalized * step);
-            }
+                rb.MovePosition(rb.position + _smoothedVelocity * Time.deltaTime);
             else
-            {
-                transform.position += (Vector3)toTarget.normalized * step;
-            }
+                transform.position += (Vector3)(_smoothedVelocity * Time.deltaTime);
         }
 
         // Debug visual del camino
@@ -189,7 +196,7 @@ public class IA_P2_AgentIA : MonoBehaviour
         isMoving = false;
         currentPath = null;
         currentIndex = 0;
-        // Si tienes un componente NavMeshAgent, aquí deberías poner navMesh.isStopped = true;
+        _smoothedVelocity = Vector2.zero;
     }
 
     public bool IsMoving()

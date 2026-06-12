@@ -6,6 +6,10 @@ public class Disparador : MonoBehaviour
     public float dañoBala = 10f;
     public float velocidadBala = 25f;
 
+    [Header("Dispersión")]
+    [Tooltip("Ángulo total de dispersión en grados (0=preciso, 30=cono amplio)")]
+    public float dispersión = 0f;
+
     [Header("Efectos y Sonidos (Por Nombre)")]
     public string vfxName;
     public string disparoSoundName;
@@ -71,12 +75,22 @@ public class Disparador : MonoBehaviour
         }
 
         b.transform.position = transform.position;
-        b.transform.rotation = transform.rotation;
+
+        // Aplicar dispersión: rotación base + variación aleatoria dentro del cono
+        if (dispersión > 0.01f)
+        {
+            float angulo = UnityEngine.Random.Range(-dispersión * 0.5f, dispersión * 0.5f);
+            b.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, angulo);
+        }
+        else
+        {
+            b.transform.rotation = transform.rotation;
+        }
 
         b.damage = dañoBala;
         b.velocidad = velocidadBala;
         b.dueno = transform.root.gameObject;
-        
+
         // Asignar nombres de VFX e Impacto a la bala
         b.vfxName = vfxName;
         b.impactSoundName = impactSoundName;

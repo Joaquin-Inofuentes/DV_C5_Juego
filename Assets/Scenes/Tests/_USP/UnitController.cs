@@ -56,6 +56,41 @@ namespace Game.Squad
         {
             if (_currentStateLogic == null)
                 CambiarEstado(new EsperandoState());
+
+            // Configurar stats y dispersión según especialidad
+            ConfigurarEspecialidad();
+
+            // Sincronizar velocidad del agente con el modelo (ya con el 0.5x de Awake)
+            if (agent != null && model != null)
+                agent.SetSpeed(model.speedChase);
+        }
+
+        private void ConfigurarEspecialidad()
+        {
+            if (model == null || shooter == null) return;
+            switch (model.specialization)
+            {
+                case UnitSpecialization.Flancotirador:
+                    shooter.dañoBala   = 50f;
+                    model.fireRate     = 1.2f;
+                    shooter.dispersión = 0f;
+                    break;
+                case UnitSpecialization.Apoyo:
+                    shooter.dañoBala   = 5f;
+                    model.fireRate     = 0.08f;
+                    shooter.dispersión = 30f;
+                    break;
+                case UnitSpecialization.Medico:
+                    shooter.dañoBala   = 8f;
+                    model.fireRate     = 0.9f;
+                    shooter.dispersión = 0f;
+                    break;
+                case UnitSpecialization.Asalto:
+                    shooter.dañoBala   = 15f;
+                    model.fireRate     = 0.45f;
+                    shooter.dispersión = 5f;
+                    break;
+            }
         }
 
         // --- FUNCIONES QUE PIDE TU FSM (ERRORES CS1061) ---
@@ -309,8 +344,9 @@ namespace Game.Squad
                 CheckForDamagedAllies();
             }
 
-            // Leash: si el aliado se alejó demasiado del líder, vuelve automáticamente
-            if (!model.IsLeader && !model.IsDown && GlobalData.liderActual != null && GlobalData.liderActual != this)
+            // Leash: solo aliados jugador que se alejan demasiado del líder
+            if (!model.IsLeader && !model.IsDown && model.team == UnitTeam.PlayerTeam &&
+                GlobalData.liderActual != null && GlobalData.liderActual != this)
             {
                 float leashDist = Vector3.Distance(transform.position, GlobalData.liderActual.transform.position);
                 if (leashDist > LEASH_DISTANCE &&

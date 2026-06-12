@@ -331,20 +331,20 @@ public class UnitView : MonoBehaviour
         float pulse;
         if (revivalProgress > 0.02f)
         {
-            // Siendo revivido: calmar progresivamente
+            // Siendo revivido: calmar progresivamente (velocidad x2)
             float stress = 1f - revivalProgress;
-            float bpm = Mathf.Lerp(1.0f, 2.4f, stress);
+            float bpm = Mathf.Lerp(2.0f, 4.8f, stress);
             float phase = (t * bpm) % 1f;
             float lub   = Mathf.Exp(-Mathf.Pow((phase - 0.08f) / 0.06f, 2f));
             float dub   = 0.5f * Mathf.Exp(-Mathf.Pow((phase - 0.22f) / 0.07f, 2f));
             float erratic = Mathf.Clamp01(lub + dub);
-            float breathing = Mathf.Sin(t * Mathf.PI * 1.1f) * 0.4f + 0.5f;
+            float breathing = Mathf.Sin(t * Mathf.PI * 2.2f) * 0.4f + 0.5f;
             pulse = Mathf.Lerp(breathing, erratic, stress);
         }
         else
         {
-            // Caído sin ser revivido: latido estresado rápido
-            float bpm = 2.4f + Mathf.Sin(t * 0.7f) * 0.25f;
+            // Caído sin ser revivido: latido estresado (velocidad x2)
+            float bpm = 4.8f + Mathf.Sin(t * 0.7f) * 0.5f;
             float phase = (t * bpm) % 1f;
             float lub   = Mathf.Exp(-Mathf.Pow((phase - 0.08f) / 0.055f, 2f));
             float dub   = 0.45f * Mathf.Exp(-Mathf.Pow((phase - 0.21f) / 0.065f, 2f));
@@ -408,10 +408,10 @@ public class UnitView : MonoBehaviour
             _bubbleStyle.wordWrap = false;
         }
 
-        float bubbleW = 130f;
-        float bubbleH = 26f;
+        float bubbleW = 140f;
+        float bubbleH = 28f;
         float bx = screenPos.x - bubbleW * 0.5f;
-        float by = Screen.height - screenPos.y - 70f - bubbleH;
+        float by = Mathf.Max(5f, Screen.height - screenPos.y - 130f - bubbleH);
 
         // Borde oscuro exterior
         GUI.color = new Color(0f, 0f, 0f, 0.9f * alpha);
