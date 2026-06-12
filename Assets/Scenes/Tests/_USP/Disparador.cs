@@ -50,14 +50,17 @@ public class Disparador : MonoBehaviour
 
     public void Disparar()
     {
+        Debug.Log($"[FLAG:SHOOT_START] {name} inició secuencia de Disparar()");
+
         if (BalaPool.Instance == null)
         {
             BalaPool.Instance = FindFirstObjectByType<BalaPool>();
+            Debug.Log($"[FLAG:SHOOT_POOL_FIND] Buscando BalaPool en escena...");
         }
 
         if (BalaPool.Instance == null)
         {
-            Debug.LogError("[Disparador] ¡Falta el prefab de Bala en BalaPool o BalaPool no está instanciado!");
+            Debug.LogError("[FLAG:SHOOT_ERROR] ¡Falta el prefab de Bala en BalaPool o BalaPool no está instanciado!");
             return;
         }
 
@@ -65,14 +68,17 @@ public class Disparador : MonoBehaviour
         if (!string.IsNullOrEmpty(disparoSoundName))
         {
             BD_Audios.ReproducirConSolapamiento(disparoSoundName);
+            Debug.Log($"[FLAG:SHOOT_AUDIO] Sonido '{disparoSoundName}' reproducido.");
         }
 
         Bala b = BalaPool.Instance.GetBala();
         if (b == null)
         {
-            Debug.LogError("[Disparador] ¡BalaPool.Instance.GetBala() retornó null!");
+            Debug.LogError("[FLAG:SHOOT_ERROR] ¡BalaPool.Instance.GetBala() retornó null!");
             return;
         }
+
+        Debug.Log($"[FLAG:SHOOT_SPAWN] Bala instanciada/obtenida del pool exitosamente.");
 
         b.transform.position = transform.position;
 
@@ -81,6 +87,7 @@ public class Disparador : MonoBehaviour
         {
             float angulo = UnityEngine.Random.Range(-dispersión * 0.5f, dispersión * 0.5f);
             b.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, angulo);
+            Debug.Log($"[FLAG:SHOOT_SPREAD] Dispersión aplicada: {angulo} grados.");
         }
         else
         {
@@ -94,5 +101,7 @@ public class Disparador : MonoBehaviour
         // Asignar nombres de VFX e Impacto a la bala
         b.vfxName = vfxName;
         b.impactSoundName = impactSoundName;
+
+        Debug.Log($"[FLAG:SHOOT_EXPELLED] Bala expulsada. Dueño: {b.dueno.name}, Daño: {b.damage}, Vel: {b.velocidad}");
     }
 }

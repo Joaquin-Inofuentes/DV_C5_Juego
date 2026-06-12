@@ -441,7 +441,7 @@ public class UnitView : MonoBehaviour
         float bubbleW = 140f;
         float bubbleH = 28f;
         float bx = screenPos.x - bubbleW * 0.5f;
-        float by = Mathf.Max(5f, Screen.height - screenPos.y - 130f - bubbleH);
+        float by = Mathf.Max(5f, Screen.height - screenPos.y - 65f - bubbleH);
 
         // Borde oscuro exterior
         GUI.color = new Color(0f, 0f, 0f, 0.9f * alpha);

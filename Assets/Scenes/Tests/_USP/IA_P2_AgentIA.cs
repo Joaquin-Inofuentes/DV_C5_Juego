@@ -224,6 +224,13 @@ public class IA_P2_AgentIA : MonoBehaviour
         currentPath = null;
         currentIndex = 0;
         _smoothedVelocity = Vector2.zero;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
     }
 
     public bool IsMoving()

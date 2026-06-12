@@ -72,7 +72,25 @@ public class UnitModel : MonoBehaviour, IHealth
 
     public void AddHealth(float amount) => healthActual = Mathf.Min(healthActual + amount, healthMax);
     public bool CanFire() => ammoActual > 0 && !IsDown;
-    public void ConsumeAmmo() => ammoActual--;
+    public void ConsumeAmmo()
+    {
+        ammoActual--;
+        if (ammoActual <= 0)
+        {
+            if (this.gameObject.activeInHierarchy)
+            {
+                StartCoroutine(AutoReload());
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator AutoReload()
+    {
+        Debug.Log($"[UnitModel] {name} sin munición, recargando...");
+        yield return new WaitForSeconds(2.0f); // 2 segundos de recarga
+        ammoActual = ammoMax;
+        Debug.Log($"[UnitModel] {name} recarga completada. Munición: {ammoActual}/{ammoMax}");
+    }
 
     /// <summary>Restaura HP al porcentaje de revive configurado.</summary>
     public void ReviveHealth()
