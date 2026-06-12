@@ -35,6 +35,12 @@ public class IA_P2_AgentIA : MonoBehaviour
     [Tooltip("Qué tan rápido el agente alcanza su velocidad objetivo. Más alto = más brusco.")]
     public float acceleration = 8f;
 
+    private void Awake()
+    {
+        // Mitad de velocidad global
+        moveSpeed *= 0.5f;
+    }
+
     public void OnDisable()
     {
         isMoving = false;

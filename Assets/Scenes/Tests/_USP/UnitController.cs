@@ -59,10 +59,6 @@ namespace Game.Squad
 
             // Configurar stats y dispersión según especialidad
             ConfigurarEspecialidad();
-
-            // Sincronizar velocidad del agente con el modelo (ya con el 0.5x de Awake)
-            if (agent != null && model != null)
-                agent.SetSpeed(model.speedChase);
         }
 
         private void ConfigurarEspecialidad()
