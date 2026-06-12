@@ -36,6 +36,26 @@ namespace Game.Squad
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             unit.view.RotateGraphics(angle);
 
+            // Lógica de Sprint y Estamina
+            bool isMoving = GEN_Inputs.Instance.MovimientoInput.sqrMagnitude > 0.01f;
+            bool isSprinting = isMoving && GEN_Inputs.Instance.SprintInput;
+
+            if (isSprinting && unit.model.currentStamina > 0f)
+            {
+                unit.model.currentStamina -= Time.deltaTime;
+                if (unit.model.currentStamina < 0f) unit.model.currentStamina = 0f;
+            }
+            else
+            {
+                if (unit.model.currentStamina < unit.model.maxStamina)
+                {
+                    // Recuperar en 4 segundos
+                    unit.model.currentStamina += Time.deltaTime * (unit.model.maxStamina / 4f);
+                    if (unit.model.currentStamina > unit.model.maxStamina)
+                        unit.model.currentStamina = unit.model.maxStamina;
+                }
+            }
+
             if (unit.model.specialization == UnitSpecialization.Medico)
             {
                 HandleMedicHeal(unit, mousePos);
@@ -82,7 +102,25 @@ namespace Game.Squad
             if (GEN_Inputs.Instance == null) return;
             Vector2 moveDir2D = GEN_Inputs.Instance.MovimientoInput;
             Vector3 moveDir = new Vector3(moveDir2D.x, moveDir2D.y, 0f);
-            unit.transform.position += moveDir * unit.model.speedChase * Time.deltaTime;
+
+            bool isMoving = moveDir2D.sqrMagnitude > 0.01f;
+            bool isSprinting = isMoving && GEN_Inputs.Instance.SprintInput && unit.model.currentStamina > 0.01f;
+
+            float speed = unit.model.speedChase;
+            if (isSprinting)
+            {
+                speed *= 1.8f;
+            }
+
+            Rigidbody2D rb = unit.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.MovePosition(rb.position + (Vector2)moveDir * speed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                unit.transform.position += moveDir * speed * Time.fixedDeltaTime;
+            }
         }
 
         public void Exit(UnitController unit)

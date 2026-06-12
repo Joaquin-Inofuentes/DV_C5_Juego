@@ -25,6 +25,7 @@ public class GEN_Inputs : MonoBehaviour
     public bool RegresarAFormacion   { get; private set; }
     public bool RavivicionInput      { get; private set; } // Barra espaciadora sostenida (revivir)
     public bool HealPresionado       { get; private set; } // Barra espaciadora pulsada (médico cura)
+    public bool SprintInput          { get; private set; } // Tecla Shift presionada (sprint)
 
     public event Action<bool> OnCycleLeader;  // false = Q (izq), true = E (der)
     public event Action<int>  OnOrdenDirecta; // 0/1/2 → teclas 1/2/3
@@ -95,6 +96,9 @@ public class GEN_Inputs : MonoBehaviour
         // 8. Barra espaciadora
         RavivicionInput = Input.GetKey(KeyCode.Space);
         HealPresionado  = Input.GetKeyDown(KeyCode.Space);
+
+        // 9. Sprint
+        SprintInput = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
     }
 
     private void TriggerOrdenDirecta(int index)

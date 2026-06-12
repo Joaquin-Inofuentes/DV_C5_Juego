@@ -34,6 +34,10 @@ public class UnitModel : MonoBehaviour, IHealth
     public float speedPatrol = 3.5f;
     public float speedChase = 5f;
 
+    [Header("Estamina")]
+    public float maxStamina = 3f;
+    public float currentStamina = 3f;
+
     /// <summary>
     /// True cuando la salud llego a 0. El soldado esta caido pero puede ser revivido.
     /// </summary>

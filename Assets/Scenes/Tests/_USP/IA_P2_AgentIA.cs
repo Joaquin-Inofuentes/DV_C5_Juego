@@ -87,8 +87,22 @@ public class IA_P2_AgentIA : MonoBehaviour
 
         Vector3 PosAAnalizar = transform.position;
 
-        // Comprobar si hay línea de visión directa
-        var hit = Physics2D.Linecast(PosAAnalizar, targetPosition, obstacleLayer);
+        // Determinar radio del agente usando su CircleCollider2D o fallback
+        float agentRadius = 0.4f;
+        CircleCollider2D col = GetComponent<CircleCollider2D>();
+        if (col != null)
+        {
+            agentRadius = col.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
+        }
+
+        Vector2 origin = PosAAnalizar;
+        Vector2 direction = targetPosition - PosAAnalizar;
+        float distance = direction.magnitude;
+        if (distance < 0.01f) return 1;
+        direction.Normalize();
+
+        // Comprobar si hay línea de visión directa usando CircleCast
+        var hit = Physics2D.CircleCast(origin, agentRadius, direction, distance, obstacleLayer);
         if (hit.collider == null)
         {
             return 1; // Visible
@@ -134,8 +148,15 @@ public class IA_P2_AgentIA : MonoBehaviour
         Vector3 Origen = transform.position;
         LayerMask obstacleL = model.obstacleLayer;
 
+        float agentRadius = 0.4f;
+        CircleCollider2D col = GetComponent<CircleCollider2D>();
+        if (col != null)
+        {
+            agentRadius = col.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
+        }
+
         List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset);
-        currentPath = IA_F_PathFinding_Theta.OptimizarConTheta(RecorridoAStar, obstacleL);
+        currentPath = IA_F_PathFinding_Theta.OptimizarConTheta(RecorridoAStar, obstacleL, agentRadius);
 
         currentIndex = 0;
         isMoving = currentPath != null && currentPath.Count > 0;

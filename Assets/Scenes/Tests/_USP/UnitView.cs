@@ -220,6 +220,11 @@ public class UnitView : MonoBehaviour
     public Color fillColor = new Color(0.85f, 0.1f, 0.1f, 1f);
     public Color borderColor = new Color(0f, 0.4f, 0f, 1f);
 
+    [Header("Colores Barra de Estamina")]
+    public float staminaBarHeight = 4f;
+    public Color staminaColor = new Color(0.1f, 0.7f, 1f, 1f);
+    public Color staminaBgColor = new Color(0f, 0.2f, 0.4f, 0.6f);
+
     private void OnGUI()
     {
         if (model == null || Camera.main == null) return;
@@ -236,15 +241,40 @@ public class UnitView : MonoBehaviour
         {
             DrawExhaleCircle(screenPos);
             DrawHealthBar(screenPos);
+            if (model.IsLeader) DrawStaminaBar(screenPos);
         }
         else
         {
             DrawHealthBar(screenPos);
+            if (model.IsLeader) DrawStaminaBar(screenPos);
             if (_healTimer > 0f) DrawHealCircle(screenPos);
         }
 
         DrawSpecLabel(screenPos);
         DrawSpeechBubble(screenPos);
+    }
+
+    private void DrawStaminaBar(Vector3 screenPos)
+    {
+        float x = screenPos.x - (barWidth / 2);
+        // Colocar la barra justo debajo de la de salud (usando barHeight + offset)
+        float y = Screen.height - screenPos.y + offset.y + barHeight + 2f;
+        float border = 1f;
+
+        // Borde
+        GUI.color = borderColor;
+        GUI.DrawTexture(new Rect(x - border, y - border, barWidth + border * 2, staminaBarHeight + border * 2), Texture2D.whiteTexture);
+
+        // Fondo
+        GUI.color = staminaBgColor;
+        GUI.DrawTexture(new Rect(x, y, barWidth, staminaBarHeight), Texture2D.whiteTexture);
+
+        // Barra activa
+        float staminaPercent = model.currentStamina / model.maxStamina;
+        GUI.color = staminaColor;
+        GUI.DrawTexture(new Rect(x, y, barWidth * staminaPercent, staminaBarHeight), Texture2D.whiteTexture);
+
+        GUI.color = Color.white;
     }
 
     private void DrawHealthBar(Vector3 screenPos)

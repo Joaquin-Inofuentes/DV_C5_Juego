@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class IA_F_PathFinding_Theta
 {
-    public static List<Vector3> OptimizarConTheta(List<Vector3> recorridoAStar, LayerMask obstacleLayer)
+    public static List<Vector3> OptimizarConTheta(List<Vector3> recorridoAStar, LayerMask obstacleLayer, float radius = 0f)
     {
         // ================================
         // 1) Validaciones básicas
@@ -34,7 +34,7 @@ public static class IA_F_PathFinding_Theta
         Vector3 inicio = recorridoAStar[0];
         Vector3 destino = recorridoAStar[recorridoAStar.Count - 1];
 
-        if (IA_P2_LineOfSight3D.Check(inicio, destino, obstacleLayer))
+        if (IA_P2_LineOfSight3D.Check(inicio, destino, obstacleLayer, radius))
         {
             resultado.Add(destino);
             return resultado;
@@ -59,7 +59,7 @@ public static class IA_F_PathFinding_Theta
                 Vector3 desde = recorridoAStar[anchorIndex];
                 Vector3 hacia = recorridoAStar[i];
 
-                bool hayVisionDirecta = IA_P2_LineOfSight3D.Check(desde, hacia, obstacleLayer);
+                bool hayVisionDirecta = IA_P2_LineOfSight3D.Check(desde, hacia, obstacleLayer, radius);
 
                 if (hayVisionDirecta)
                 {

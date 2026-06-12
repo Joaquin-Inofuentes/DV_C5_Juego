@@ -36,7 +36,7 @@ public class UnitCommander : MonoBehaviour
             }
         }
 
-        // Click derecho: si el click es sobre un aliado caído, mandar revividor; si no, mandar al destino
+        // Click derecho: si el click es sobre un aliado caído, mandar revividor; si es sobre un enemigo, atacar; si no, mandar al destino
         if (GEN_Inputs.Instance.OrdenPresionada)
         {
             Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
@@ -57,6 +57,23 @@ public class UnitCommander : MonoBehaviour
             {
                 Debug.Log($"<color=lime>[UnitCommander]</color> Click en aliado caído: {clickedDown.name}. Enviando revividor.");
                 MandarRevivir(clickedDown);
+                return;
+            }
+
+            // Detectar si hay un enemigo cerca del click
+            UnitController clickedEnemy = null;
+            float minEnemyClickDist = 1.5f;
+            foreach (var u in FindObjectsOfType<UnitController>())
+            {
+                if (u.model.team == UnitTeam.PlayerTeam || u.model.IsDead) continue;
+                float d = Vector3.Distance(mousePos, u.transform.position);
+                if (d < minEnemyClickDist) { minEnemyClickDist = d; clickedEnemy = u; }
+            }
+
+            if (clickedEnemy != null)
+            {
+                Debug.Log($"<color=red>[UnitCommander]</color> Click en enemigo: {clickedEnemy.name}. Enviando aliado a atacar.");
+                MandarAtacarEnemigo(clickedEnemy);
                 return;
             }
 
@@ -218,6 +235,42 @@ public class UnitCommander : MonoBehaviour
             _destinosActivos[mejorCandidato] = destinoFinal;
             mejorCandidato.MoveToPoint(destinoFinal);
             mejorCandidato.CambiarEstado(new IrADestinoState());
+        }
+    }
+
+    void MandarAtacarEnemigo(UnitController enemy)
+    {
+        // Encontrar aliados: vivos, que no sean líderes y que no estén caídos
+        var candidatos = FindObjectsOfType<UnitController>()
+            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
+            .ToList();
+
+        if (candidatos.Count == 0)
+        {
+            Debug.LogWarning("[UnitCommander] No hay aliados disponibles para atacar.");
+            return;
+        }
+
+        // Buscar el más cercano al enemigo
+        UnitController mejorCandidato = null;
+        float minDist = Mathf.Infinity;
+        foreach (var a in candidatos)
+        {
+            float d = Vector3.Distance(a.transform.position, enemy.transform.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                mejorCandidato = a;
+            }
+        }
+
+        if (mejorCandidato != null)
+        {
+            Debug.Log($"<color=red>[UnitCommander]</color> {mejorCandidato.name} enviado a atacar a {enemy.name}.");
+            mejorCandidato.target = enemy.transform;
+            mejorCandidato.isWaitingOrder = true; // No volver de inmediato
+            mejorCandidato.CambiarEstado(new PerseguirState());
+            mejorCandidato.view.ShowSpeech("¡Atacando enemigo!", 2.5f);
         }
     }
 }
