@@ -1,0 +1,11 @@
+@startuml
+title Diagrama de Clases - DV_C5_Juego
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+left to right direction
+skinparam linetype ortho
+
+!include C:/Users/PC_JOACO/Documents/DV_C5_Juego/_Documentos generados/classDiagram.part1.puml
+!include C:/Users/PC_JOACO/Documents/DV_C5_Juego/_Documentos generados/classDiagram.part2.puml
+
+@enduml
