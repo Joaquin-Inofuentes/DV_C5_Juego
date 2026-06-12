@@ -1294,7 +1294,7 @@ MonoBehaviour:
   moveSpeed: 35
   rotationSpeed: 20
   nodeReachDistance: 0.5
-  graphicsRoot: {fileID: 0}
+  graphicsRoot: {fileID: 7578417479965078212}
   debug_BlockMovement: 0
   debug_BlockRotation: 0
   currentPath: []
@@ -1451,7 +1451,7 @@ MonoBehaviour:
   unitName: Unit
   team: 0
   isPlayerControlled: 0
-  specialization: 1
+  specialization: 3
   healthMax: 100
   healthActual: 100
   reviveHealthPercent: 0.3

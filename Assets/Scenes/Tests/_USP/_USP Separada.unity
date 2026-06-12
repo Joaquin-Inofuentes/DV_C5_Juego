@@ -5013,9 +5013,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: specialization
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
-      value: J1
+      value: Flancotirador
       objectReference: {fileID: 0}
     - target: {fileID: 9008703767442406605, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Color.b
@@ -13310,9 +13314,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: specialization
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
-      value: J1
+      value: Medico
       objectReference: {fileID: 0}
     - target: {fileID: 9008703767442406605, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Color.b
@@ -15705,7 +15713,7 @@ MonoBehaviour:
   moveSpeed: 4
   rotationSpeed: 0.4
   nodeReachDistance: 0.5
-  graphicsRoot: {fileID: 0}
+  graphicsRoot: {fileID: 1420032307497564071}
   debug_BlockMovement: 0
   debug_BlockRotation: 0
   currentPath: []
@@ -21603,6 +21611,7 @@ MonoBehaviour:
   unitName: Unit
   team: 1
   isPlayerControlled: 0
+  specialization: 3
   healthMax: 100
   healthActual: 100
   damage: 8
@@ -22008,9 +22017,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: specialization
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
-      value: J1
+      value: Asalto
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
