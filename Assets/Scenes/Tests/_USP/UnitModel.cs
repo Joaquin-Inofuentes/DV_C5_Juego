@@ -2,12 +2,17 @@
 using UnityEngine;
 using USP.Core;
 
+public enum UnitSpecialization { Flancotirador, Apoyo, Medico }
+
 public class UnitModel : MonoBehaviour, IHealth
 {
     [Header("Identidad")]
     public string unitName = "Unit";
     public UnitTeam team;
     public bool isPlayerControlled = false;
+
+    [Header("Especialidad")]
+    public UnitSpecialization specialization = UnitSpecialization.Apoyo;
 
     [Header("Salud")]
     public float healthMax = 100f;
@@ -38,6 +43,12 @@ public class UnitModel : MonoBehaviour, IHealth
     public bool IsDead => IsDown;
 
     public bool IsLeader { get; set; } = false;
+
+    private void Awake()
+    {
+        if (specialization == UnitSpecialization.Apoyo)
+            healthMax *= 2f;
+    }
 
     private void Start() { healthActual = healthMax; }
 

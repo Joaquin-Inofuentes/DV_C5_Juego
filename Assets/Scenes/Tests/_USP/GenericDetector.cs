@@ -49,9 +49,22 @@ namespace Game.Sensors
                 SincronizarInspector();
             }
 
+            // 2. Remover targets que se volvieron invisibles (e.g. unidades caídas)
+            var nowInvisible = targetsInRange.FindAll(t => t.GetDetectableType() == DetectableType.Invisible);
+            foreach (var t in nowInvisible)
+            {
+                targetsInRange.Remove(t);
+                if (previouslyVisibleTargets.Contains(t))
+                {
+                    Debug.Log($"<color=red>[GenericDetector]</color> {transform.root.name} <b>DEJÓ DE VER</b> a {t.GetName()} (caído/invisible)");
+                    OnTargetLost?.Invoke(t);
+                }
+            }
+            if (nowInvisible.Count > 0) SincronizarInspector();
+
             visibleTargets.Clear();
 
-            // 2. Comprobar obstrucciones visuales con Raycast
+            // 3. Comprobar obstrucciones visuales con Raycast
             foreach (var target in targetsInRange)
             {
                 if (target.GetDetectableType() == DetectableType.Invisible) continue;
@@ -69,7 +82,7 @@ namespace Game.Sensors
                 }
             }
 
-            // 3. Evaluar cambios de visibilidad para disparar eventos e imprimir debugs
+            // 4. Evaluar cambios de visibilidad para disparar eventos e imprimir debugs
             foreach (var target in visibleTargets)
             {
                 if (!previouslyVisibleTargets.Contains(target))

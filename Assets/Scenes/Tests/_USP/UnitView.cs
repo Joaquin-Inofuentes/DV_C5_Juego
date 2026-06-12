@@ -19,6 +19,7 @@ public class UnitView : MonoBehaviour
     // Estado de revivimiento — se actualiza desde UnitController_Revival y RevivingState
     [HideInInspector] public float revivalProgress = 0f; // 0=sin revivir, 1=completo
     private float _revivalCompleteTimer = 0f;
+    private float _healTimer = 0f;
     private static Texture2D _circleTexture;
 
     [Header("Indicadores de Estado")]
@@ -41,11 +42,13 @@ public class UnitView : MonoBehaviour
 
     void Update()
     {
-        if (_revivalCompleteTimer > 0f)
-            _revivalCompleteTimer -= Time.deltaTime;
+        if (_revivalCompleteTimer > 0f) _revivalCompleteTimer -= Time.deltaTime;
+        if (_healTimer > 0f) _healTimer -= Time.deltaTime;
         if (selectionRing != null)
             selectionRing.SetActive(model != null && model.IsLeader);
     }
+
+    public void TriggerHealEffect() => _healTimer = 0.9f;
 
     /// <summary>Llamado cuando el revivimiento se completa — dispara animación de exhalación.</summary>
     public void OnRevivalComplete()
@@ -213,6 +216,7 @@ public class UnitView : MonoBehaviour
         if (model.IsDown)
         {
             DrawHeartbeatCircle(screenPos);
+            if (revivalProgress > 0.02f) DrawRevivalBar(screenPos);
         }
         else if (_revivalCompleteTimer > 0f)
         {
@@ -222,7 +226,10 @@ public class UnitView : MonoBehaviour
         else
         {
             DrawHealthBar(screenPos);
+            if (_healTimer > 0f) DrawHealCircle(screenPos);
         }
+
+        DrawSpecLabel(screenPos);
     }
 
     private void DrawHealthBar(Vector3 screenPos)
@@ -244,10 +251,55 @@ public class UnitView : MonoBehaviour
         GUI.color = Color.white;
     }
 
+    private void DrawRevivalBar(Vector3 screenPos)
+    {
+        float w = barWidth * 2f;
+        float h = barHeight * 1.5f;
+        float x = screenPos.x - w * 0.5f;
+        float y = Screen.height - screenPos.y + offset.y + barHeight + 3f;
+        float border = 1f;
+
+        GUI.color = borderColor;
+        GUI.DrawTexture(new Rect(x - border, y - border, w + border * 2, h + border * 2), Texture2D.whiteTexture);
+        GUI.color = Color.black;
+        GUI.DrawTexture(new Rect(x, y, w, h), Texture2D.whiteTexture);
+        GUI.color = Color.yellow;
+        GUI.DrawTexture(new Rect(x, y, w * revivalProgress, h), Texture2D.whiteTexture);
+        GUI.color = Color.white;
+    }
+
+    private void DrawHealCircle(Vector3 screenPos)
+    {
+        float t = _healTimer / 0.9f; // 1→0
+        float size = barWidth * (1.0f + (1f - t) * 1.2f);
+        float alpha = t * 0.8f;
+        float guiY = Screen.height - screenPos.y;
+        GUI.color = new Color(0.2f, 1f, 0.3f, alpha);
+        GUI.DrawTexture(new Rect(screenPos.x - size * 0.5f, guiY - size * 0.5f, size, size), GetCircleTexture());
+        GUI.color = Color.white;
+    }
+
+    private void DrawSpecLabel(Vector3 screenPos)
+    {
+        if (model == null) return;
+        string label;
+        switch (model.specialization)
+        {
+            case UnitSpecialization.Flancotirador: label = "FLANC"; break;
+            case UnitSpecialization.Apoyo:         label = "APOYO"; break;
+            case UnitSpecialization.Medico:        label = "MED";   break;
+            default:                               label = "";       break;
+        }
+        if (string.IsNullOrEmpty(label)) return;
+        float guiY = Screen.height - screenPos.y + offset.y + barHeight + (model.IsDown ? barHeight * 4f : barHeight + 2f);
+        GUI.color = Color.white;
+        GUI.Label(new Rect(screenPos.x - 20f, guiY, 40f, 14f), label);
+    }
+
     private void DrawHeartbeatCircle(Vector3 screenPos)
     {
         float t = Time.time;
-        float baseSize = barWidth * 1.1f;
+        float baseSize = barWidth * 2.2f;
 
         float pulse;
         if (revivalProgress > 0.02f)

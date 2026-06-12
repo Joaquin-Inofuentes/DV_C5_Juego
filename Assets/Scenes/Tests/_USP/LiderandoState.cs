@@ -10,6 +10,8 @@ namespace Game.Squad
     public class LiderandoState : IUnitState
     {
         private float nextFireTime;
+        private const float CAM_NORMAL = 8f;
+        private const float CAM_SNIPER = 16f;
 
         public void Enter(UnitController unit)
         {
@@ -17,6 +19,10 @@ namespace Game.Squad
             unit.view.SetSelectionRing(true);
             unit.view.StopAllBlinks();
             unit.view.HideLine();
+
+            if (Camera.main != null)
+                Camera.main.orthographicSize = unit.model.specialization == UnitSpecialization.Flancotirador
+                    ? CAM_SNIPER : CAM_NORMAL;
         }
 
         public void Update(UnitController unit)
@@ -27,6 +33,12 @@ namespace Game.Squad
             Vector3 dir = (mousePos - unit.transform.position).normalized;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             unit.view.RotateGraphics(angle);
+
+            if (unit.model.specialization == UnitSpecialization.Medico)
+            {
+                HandleMedicHeal(unit, mousePos);
+                return; // Médico no dispara
+            }
 
             if (GEN_Inputs.Instance.DisparoSostenido && Time.time >= nextFireTime)
             {
@@ -39,14 +51,37 @@ namespace Game.Squad
             }
         }
 
+        private void HandleMedicHeal(UnitController medic, Vector3 mousePos)
+        {
+            if (!GEN_Inputs.Instance.HealPresionado) return;
+
+            LayerMask allyMask = LayerMask.GetMask("Soldado");
+            Collider2D hit = Physics2D.OverlapPoint(mousePos, allyMask);
+            if (hit == null) return;
+
+            var ally = hit.GetComponent<UnitController>();
+            if (ally == null || ally == medic || ally.model.team != medic.model.team || ally.model.IsDown) return;
+            if (ally.model.healthActual >= ally.model.healthMax) return;
+
+            ally.model.AddHealth(15f);
+            ally.view.TriggerHealEffect();
+            Debug.Log($"<color=green>[Medico]</color> {medic.name} curó a {ally.name}. HP: {ally.model.healthActual:F0}/{ally.model.healthMax:F0}");
+        }
+
         public void FixedUpdate(UnitController unit)
         {
+            if (GEN_Inputs.Instance == null) return;
             Vector2 moveDir2D = GEN_Inputs.Instance.MovimientoInput;
             Vector3 moveDir = new Vector3(moveDir2D.x, moveDir2D.y, 0f);
             unit.transform.position += moveDir * unit.model.speedChase * Time.deltaTime;
         }
 
-        public void Exit(UnitController unit) => unit.view.SetSelectionRing(false);
+        public void Exit(UnitController unit)
+        {
+            unit.view.SetSelectionRing(false);
+            if (Camera.main != null)
+                Camera.main.orthographicSize = CAM_NORMAL;
+        }
     }
 
     // ==========================================
@@ -91,65 +126,33 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            if (unit.target == null)
-            {
-                unit.ResetHelpPriority();
-                unit.CambiarEstado(new SeguirFormacionState());
-                return;
-            }
+            if (unit.target == null) { unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
 
-            // Rotar gráfica hacia el enemigo
+            // Si el objetivo cayó, limpiar y volver a formación
+            var targetUnit = unit.target.GetComponent<UnitController>();
+            if (targetUnit != null && targetUnit.model.IsDown) { unit.target = null; unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+
             Vector3 dir = (unit.target.position - unit.transform.position).normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            unit.view.RotateGraphicsSmooth(angle, 10f);
-
-            // Línea roja al objetivo
+            unit.view.RotateGraphicsSmooth(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, 10f);
             unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
 
-            // Comprobar visibilidad: raycast/linecast contra obstáculos y aliados
-            bool visionDirecta = true;
-            bool aliadoBloquea = false;
-            Vector3 posicionDesvio = Vector3.zero;
-
+            // LOS solo contra obstáculos (no aliados)
             LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
             if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);
-            LayerMask soldMask = LayerMask.GetMask("Soldado");
-            if (soldMask == 0) soldMask = 1 << 9;
-            LayerMask combinedMask = obsMask | soldMask;
+            bool hasLOS = Physics2D.Linecast(unit.transform.position, unit.target.position, obsMask).collider == null;
 
-            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, combinedMask);
-            if (hit.collider != null)
+            float dist = Vector3.Distance(unit.transform.position, unit.target.position);
+            if (!hasLOS || dist > unit.model.attackRange)
             {
-                if (hit.collider.gameObject != unit.gameObject && hit.collider.gameObject != unit.target.gameObject)
-                {
-                    visionDirecta = false;
-                    var otherUnit = hit.collider.gameObject.GetComponent<UnitController>();
-                    if (otherUnit != null && otherUnit.model.team == unit.model.team && !otherUnit.model.IsDead)
-                    {
-                        aliadoBloquea = true;
-                        posicionDesvio = Vector3.Lerp(unit.transform.position, otherUnit.transform.position, 0.5f);
-                    }
-                }
-            }
-
-            if (aliadoBloquea)
-            {
-                // Mover al punto medio para intentar asomarse
-                unit.agent.GoTo(posicionDesvio);
                 unit.CambiarEstado(new PerseguirState());
                 return;
             }
 
-            if (visionDirecta && Time.time >= nextFireTime && unit.model.CanFire())
+            if (Time.time >= nextFireTime && unit.model.CanFire())
             {
                 unit.shooter.Disparar();
                 unit.model.ConsumeAmmo();
                 nextFireTime = Time.time + unit.model.fireRate;
-            }
-
-            if (Vector3.Distance(unit.transform.position, unit.target.position) > unit.model.attackRange || !visionDirecta)
-            {
-                unit.CambiarEstado(new PerseguirState());
             }
         }
 
@@ -167,61 +170,25 @@ namespace Game.Squad
     // ==========================================
     public class PerseguirState : IUnitState
     {
-        public void Enter(UnitController unit)
-        {
-            unit.view.StartBlink(IndicatorType.Combat);
-        }
+        public void Enter(UnitController unit) => unit.view.StartBlink(IndicatorType.Combat);
 
         public void Update(UnitController unit)
         {
-            if (unit.target == null)
-            {
-                unit.ResetHelpPriority();
-                unit.CambiarEstado(new SeguirFormacionState());
-                return;
-            }
+            if (unit.target == null) { unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+
+            var targetUnit = unit.target.GetComponent<UnitController>();
+            if (targetUnit != null && targetUnit.model.IsDown) { unit.target = null; unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
 
             unit.agent.GoTo(unit.target.position);
-
-            // Línea roja al enemigo
             unit.view.ShowLineToTarget(unit.transform.position, unit.target.position);
-
-            // Comprobar visibilidad: raycast/linecast contra obstáculos y aliados
-            bool visionDirecta = true;
-            bool aliadoBloquea = false;
 
             LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
             if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);
-            LayerMask soldMask = LayerMask.GetMask("Soldado");
-            if (soldMask == 0) soldMask = 1 << 9;
-            LayerMask combinedMask = obsMask | soldMask;
+            bool hasLOS = Physics2D.Linecast(unit.transform.position, unit.target.position, obsMask).collider == null;
+            float dist = Vector3.Distance(unit.transform.position, unit.target.position);
 
-            RaycastHit2D hit = Physics2D.Linecast(unit.transform.position, unit.target.position, combinedMask);
-            if (hit.collider != null)
-            {
-                if (hit.collider.gameObject != unit.gameObject && hit.collider.gameObject != unit.target.gameObject)
-                {
-                    visionDirecta = false;
-                    var otherUnit = hit.collider.gameObject.GetComponent<UnitController>();
-                    if (otherUnit != null && otherUnit.model.team == unit.model.team && !otherUnit.model.IsDead)
-                    {
-                        aliadoBloquea = true;
-                    }
-                }
-            }
-
-            if (Vector3.Distance(unit.transform.position, unit.target.position) <= unit.model.attackRange && visionDirecta && !aliadoBloquea)
-            {
+            if (hasLOS && dist <= unit.model.attackRange)
                 unit.CambiarEstado(new AtacarState());
-            }
-            else
-            {
-                // Si no está listo para atacar o sigue bloqueado, moverse hacia el objetivo (si no fue desviado por bloqueo)
-                if (!aliadoBloquea)
-                {
-                    unit.agent.GoTo(unit.target.position);
-                }
-            }
         }
 
         public void FixedUpdate(UnitController unit) { }
