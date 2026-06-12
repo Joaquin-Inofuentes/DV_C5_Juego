@@ -279,21 +279,33 @@ public class UnitView : MonoBehaviour
         GUI.color = Color.white;
     }
 
+    private GUIStyle _specStyle;
+
     private void DrawSpecLabel(Vector3 screenPos)
     {
         if (model == null) return;
         string label;
+        Color labelColor;
         switch (model.specialization)
         {
-            case UnitSpecialization.Flancotirador: label = "FLANC"; break;
-            case UnitSpecialization.Apoyo:         label = "APOYO"; break;
-            case UnitSpecialization.Medico:        label = "MED";   break;
-            default:                               label = "";       break;
+            case UnitSpecialization.Flancotirador: label = "FLANC"; labelColor = new Color(0.4f, 0.8f, 1f); break;
+            case UnitSpecialization.Apoyo:         label = "APOYO"; labelColor = new Color(1f, 0.8f, 0.2f); break;
+            case UnitSpecialization.Medico:        label = "MED";   labelColor = new Color(0.3f, 1f, 0.4f); break;
+            default: return;
         }
-        if (string.IsNullOrEmpty(label)) return;
-        float guiY = Screen.height - screenPos.y + offset.y + barHeight + (model.IsDown ? barHeight * 4f : barHeight + 2f);
-        GUI.color = Color.white;
-        GUI.Label(new Rect(screenPos.x - 20f, guiY, 40f, 14f), label);
+
+        if (_specStyle == null)
+        {
+            _specStyle = new GUIStyle(GUI.skin.label);
+            _specStyle.fontSize = 10;
+            _specStyle.fontStyle = FontStyle.Bold;
+            _specStyle.alignment = TextAnchor.MiddleCenter;
+        }
+
+        float w = 60f;
+        float guiY = Screen.height - screenPos.y + offset.y + barHeight + 3f;
+        _specStyle.normal.textColor = labelColor;
+        GUI.Label(new Rect(screenPos.x - w * 0.5f, guiY, w, 14f), label, _specStyle);
     }
 
     private void DrawHeartbeatCircle(Vector3 screenPos)
