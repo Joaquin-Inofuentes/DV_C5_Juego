@@ -82,7 +82,7 @@ namespace Game.Squad
                     shooter.dispersión = 0f;
                     break;
                 case UnitSpecialization.Asalto:
-                    shooter.dañoBala   = 15f;
+                    shooter.dañoBala   = 5f;
                     model.fireRate     = 0.45f;
                     shooter.dispersión = 5f;
                     break;

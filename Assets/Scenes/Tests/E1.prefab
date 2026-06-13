@@ -238,6 +238,7 @@ MonoBehaviour:
   isMoving: 0
   currentSpeed: 0
   DistanceStop: 1
+  acceleration: 8
 --- !u!114 &1915039409697799703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,11 +353,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 796381161699690066}
   view: {fileID: 2983668425057584109}
+  vivoGO: {fileID: 0}
+  caidoGO: {fileID: 0}
   agent: {fileID: 798236151152862464}
   shooter: {fileID: 692881671279151379}
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
   isWaitingOrder: 0
+  isDown: 0
+  revivalInputTimer: 0
+  revivalRequiredDuration: 3
+  revivalDetectionRange: 3
 --- !u!114 &796381161699690066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,8 +379,10 @@ MonoBehaviour:
   unitName: Unit
   team: 1
   isPlayerControlled: 0
+  specialization: 1
   healthMax: 100
   healthActual: 100
+  reviveHealthPercent: 0.3
   damage: 8
   fireRate: 0.1
   ammoActual: 300
@@ -382,6 +391,8 @@ MonoBehaviour:
   detectionRange: 12
   speedPatrol: 3.5
   speedChase: 5
+  maxStamina: 3
+  currentStamina: 3
 --- !u!114 &2983668425057584109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +410,7 @@ MonoBehaviour:
   selectionRing: {fileID: 0}
   graphicsRoot: {fileID: 7133489419772280197}
   lineRenderer: {fileID: 1644043348357668627}
+  revivalProgress: 0
   healIndicator:
     name: Heal
     indicator: {fileID: 366180597137038298}
@@ -417,12 +429,21 @@ MonoBehaviour:
     onTime: 0.3
     offTime: 0.3
     duration: -1
+  revivingIndicator:
+    name: Reviving
+    indicator: {fileID: 0}
+    onTime: 0.25
+    offTime: 0.25
+    duration: -1
   barWidth: 50
   offset: {x: 0, y: 20}
   barHeight: 8
   bgColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
   fillColor: {r: 0.85, g: 0.1, b: 0.1, a: 1}
   borderColor: {r: 0, g: 0, b: 0, a: 1}
+  staminaBarHeight: 4
+  staminaColor: {r: 0.1, g: 0.7, b: 1, a: 1}
+  staminaBgColor: {r: 0, g: 0.2, b: 0.4, a: 0.6}
 --- !u!120 &1644043348357668627
 LineRenderer:
   serializedVersion: 2
@@ -855,8 +876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774e9c4d07231428bfb2ed05dc21a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "da\xF1oBala": 8
+  "da\xF1oBala": 2
   velocidadBala: 40
+  "dispersi\xF3n": 0
   vfxName: 
   disparoSoundName: 
   impactSoundName: 
