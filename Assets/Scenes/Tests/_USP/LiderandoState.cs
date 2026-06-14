@@ -146,13 +146,23 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            if (unit.currentSlot != null)
-            {
-                unit.agent.GoTo(unit.currentSlot.position);
-            }
-            else
+            if (GlobalData.liderActual == null)
             {
                 unit.CambiarEstado(new EsperandoState());
+                return;
+            }
+
+            Vector3 posicionLider = GlobalData.liderActual.transform.position;
+            float dist = Vector3.Distance(unit.transform.position, posicionLider);
+            float distanciaSeguimiento = 3.5f;
+
+            if (dist > distanciaSeguimiento + 0.3f)
+            {
+                unit.agent.GoTo(posicionLider);
+            }
+            else if (dist <= distanciaSeguimiento)
+            {
+                unit.agent.StopAgent();
             }
         }
 
