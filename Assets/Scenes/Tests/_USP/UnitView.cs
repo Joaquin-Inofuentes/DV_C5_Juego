@@ -34,6 +34,9 @@ public class UnitView : MonoBehaviour
     public IndicatorEntry movingIndicator = new IndicatorEntry { name = "Moving", onTime = 0.3f, offTime = 0.3f };
     public IndicatorEntry revivingIndicator = new IndicatorEntry { name = "Reviving", onTime = 0.25f, offTime = 0.25f };
 
+    [Header("Tipografía")]
+    public Font customFont;
+
     [Header("UI")]
     public float barWidth = 60f;
     public Vector2 offset = new Vector2(0, 50);
@@ -342,7 +345,7 @@ public class UnitView : MonoBehaviour
         if (_specStyle == null)
         {
             _specStyle = new GUIStyle(GUI.skin.label);
-            _specStyle.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _specStyle.font = customFont != null ? customFont : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             _specStyle.fontSize = 11;
             _specStyle.fontStyle = FontStyle.Bold;
             _specStyle.alignment = TextAnchor.MiddleCenter;
@@ -431,7 +434,7 @@ public class UnitView : MonoBehaviour
         if (_bubbleStyle == null)
         {
             _bubbleStyle = new GUIStyle(GUI.skin.label);
-            _bubbleStyle.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _bubbleStyle.font = customFont != null ? customFont : Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             _bubbleStyle.fontSize = 12;
             _bubbleStyle.fontStyle = FontStyle.Bold;
             _bubbleStyle.alignment = TextAnchor.MiddleCenter;

@@ -61,53 +61,14 @@ public class FormationRelocator : MonoBehaviour
 
     Vector3 CalcularPosicionValida(Vector3 origenLider, Vector3 destinoIdeal, Vector3 direccionOriginal, List<Vector3> posicionesOcupadas)
     {
-        // PRUEBA 1: ¿La posición ideal está despejada?
-        if (EsPosicionValida(origenLider, destinoIdeal, posicionesOcupadas)) return destinoIdeal;
-
-        // PRUEBA 2: Intentar rotando la dirección original 90 grados (Derecha absoluta)
-        Vector3 dirDerecha = Quaternion.Euler(0, 0, -90) * direccionOriginal;
-        Vector3 posDerecha = origenLider + (dirDerecha * distanciaPreferida);
-        if (EsPosicionValida(origenLider, posDerecha, posicionesOcupadas)) return posDerecha;
-
-        // PRUEBA 3: Intentar rotando 180 grados (Opuesto absoluto)
-        Vector3 dirOpuesta = Quaternion.Euler(0, 0, 180) * direccionOriginal;
-        Vector3 posOpuesta = origenLider + (dirOpuesta * distanciaPreferida);
-        if (EsPosicionValida(origenLider, posOpuesta, posicionesOcupadas)) return posOpuesta;
-
-        // PRUEBA 4: Intentar rotando 90 grados a la izquierda (Izquierda absoluta)
-        Vector3 dirIzquierda = Quaternion.Euler(0, 0, 90) * direccionOriginal;
-        Vector3 posIzquierda = origenLider + (dirIzquierda * distanciaPreferida);
-        if (EsPosicionValida(origenLider, posIzquierda, posicionesOcupadas)) return posIzquierda;
-
-        // PRUEBA 5: Intentar a distancia mínima en la dirección original
-        Vector3 posCercana = origenLider + (direccionOriginal * distanciaMinima);
-        if (EsPosicionValida(origenLider, posCercana, posicionesOcupadas)) return posCercana;
-
-        // FALLBACK: Si todo está completamente bloqueado, los esparcimos en abanico alrededor del líder
-        float angulo = posicionesOcupadas.Count * (360f / puntosDeFormacion.Count) * Mathf.Deg2Rad;
-        Vector3 offset = new Vector3(Mathf.Cos(angulo) * 0.8f, Mathf.Sin(angulo) * 0.8f, 0f);
-        return origenLider + offset;
-    }
-
-    bool EsPosicionValida(Vector3 origen, Vector3 destino, List<Vector3> posicionesOcupadas)
-    {
-        // 1. Evitar encimar slots en la misma posición (distancia mínima de 0.8 unidades)
-        foreach (var pos in posicionesOcupadas)
-        {
-            if (Vector3.Distance(destino, pos) < 0.8f)
-            {
-                return false;
-            }
-        }
-
-        // 2. Obtener la máscara de capa de obstáculos
+        // 1. Obtener la máscara de capa de obstáculos
         LayerMask mask = obstacleLayer;
         if (mask == 0)
         {
-            var model = FindObjectOfType<IA_P2_PathfindingModel>();
-            if (model != null)
+            var pathfindingModel = FindFirstObjectByType<IA_P2_PathfindingModel>();
+            if (pathfindingModel != null)
             {
-                mask = model.obstacleLayer;
+                mask = pathfindingModel.obstacleLayer;
             }
             else
             {
@@ -116,25 +77,36 @@ public class FormationRelocator : MonoBehaviour
             }
         }
 
-        // 3. Comprobar si el punto final está superpuesto directamente con un obstáculo
-        Collider2D col = Physics2D.OverlapCircle(destino, radioSeguridadSoldado, mask);
-        if (col != null)
-        {
-            return false;
-        }
-
-        // 4. Comprobar mediante CircleCast si hay camino libre desde el origen al destino
-        Vector3 dir = destino - origen;
+        Vector3 dir = destinoIdeal - origenLider;
         float dist = dir.magnitude;
+        Vector3 posFinal = destinoIdeal;
+
+        // 2. Si el destino ideal está detrás de una pared, acercarlo suavemente
         if (dist > 0.01f)
         {
-            RaycastHit2D hit = Physics2D.CircleCast(origen, radioSeguridadSoldado, dir.normalized, dist, mask);
+            RaycastHit2D hit = Physics2D.CircleCast(origenLider, radioSeguridadSoldado, dir.normalized, dist, mask);
             if (hit.collider != null)
             {
-                return false;
+                // Obstruido: Acercamos la posición justo antes del obstáculo para evitar saltos bruscos
+                float safeDist = Mathf.Max(0f, hit.distance - 0.15f);
+                posFinal = origenLider + dir.normalized * safeDist;
             }
         }
 
-        return true;
+        // 3. Pequeña fuerza de repulsión entre aliados para no encimarse si se agrupan en una pared
+        Vector3 repulsion = Vector3.zero;
+        foreach (var pos in posicionesOcupadas)
+        {
+            float d = Vector3.Distance(posFinal, pos);
+            if (d < 1.0f && d > 0.001f) // Si están muy cerca
+            {
+                Vector3 away = (posFinal - pos).normalized;
+                repulsion += away * (1.0f - d) * 0.5f; // Fuerza suave de repulsión
+            }
+        }
+
+        posFinal += repulsion;
+
+        return posFinal;
     }
 }
