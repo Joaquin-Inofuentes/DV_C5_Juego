@@ -2,7 +2,7 @@ using Game.Core;
 using UnityEngine;
 using USP.Core;
 
-public enum UnitSpecialization { Flancotirador, Apoyo, Medico, Asalto }
+public enum UnitSpecialization { Flancotirador, Apoyo, Medico, Asalto, EnemigoSimple }
 
 public class UnitModel : MonoBehaviour, IHealth
 {
@@ -48,18 +48,94 @@ public class UnitModel : MonoBehaviour, IHealth
 
     public bool IsLeader { get; set; } = false;
 
-    private void Awake()
-    {
-        // Reducir velocidad base a la mitad globalmente
-        speedChase *= 0.5f;
-        speedPatrol *= 0.5f;
+    [SerializeField, HideInInspector]
+    private UnitSpecialization lastSpecialization;
+    [SerializeField, HideInInspector]
+    private float lastDamage;
+    [SerializeField, HideInInspector]
+    private float lastFireRate;
+    [SerializeField, HideInInspector]
+    private float lastHealthMax;
 
-        // Bono de HP para Apoyo
-        if (specialization == UnitSpecialization.Apoyo)
-            healthMax *= 2f;
+    private void OnValidate()
+    {
+        // Auto-assign specialization or enforce team rules if desired
+        if (team == UnitTeam.BandoB && specialization != UnitSpecialization.EnemigoSimple)
+        {
+            specialization = UnitSpecialization.EnemigoSimple;
+        }
+        else if (team == UnitTeam.BandoA && specialization == UnitSpecialization.EnemigoSimple)
+        {
+            // If they are on BandoA, they shouldn't be EnemigoSimple, default to Asalto
+            specialization = UnitSpecialization.Asalto;
+        }
+
+        if (specialization != lastSpecialization)
+        {
+            UpdateStatsToDefaults();
+            lastSpecialization = specialization;
+            lastDamage = damage;
+            lastFireRate = fireRate;
+            lastHealthMax = healthMax;
+        }
+        else
+        {
+            // Keep manually changed values in inspector
+            lastDamage = damage;
+            lastFireRate = fireRate;
+            lastHealthMax = healthMax;
+        }
+
+        if (!Application.isPlaying)
+        {
+            healthActual = healthMax;
+            ammoActual = ammoMax;
+        }
     }
 
-    private void Start() { healthActual = healthMax; }
+    public void UpdateStatsToDefaults()
+    {
+        switch (specialization)
+        {
+            case UnitSpecialization.Flancotirador:
+                damage = 50f;
+                fireRate = 1.2f;
+                healthMax = 100f;
+                break;
+            case UnitSpecialization.Apoyo:
+                damage = 5f;
+                fireRate = 0.08f;
+                healthMax = 200f;
+                break;
+            case UnitSpecialization.Medico:
+                damage = 5f;
+                fireRate = 0.1f;
+                healthMax = 100f;
+                break;
+            case UnitSpecialization.Asalto:
+                damage = 5f;
+                fireRate = 0.1f;
+                healthMax = 100f;
+                break;
+            case UnitSpecialization.EnemigoSimple:
+                damage = 5f;
+                fireRate = 0.1f;
+                healthMax = 100f;
+                break;
+        }
+    }
+
+    private void Awake()
+    {
+        // Reducir velocidad base a la mitad globalmente al iniciar
+        speedChase *= 0.5f;
+        speedPatrol *= 0.5f;
+    }
+
+    private void Start() 
+    { 
+        // Ya no asignamos salud en Start, se usa el valor serializado de OnValidate
+    }
 
     public void TakeDamage(float amount, GameObject attacker)
     {

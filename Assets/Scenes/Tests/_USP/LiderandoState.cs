@@ -206,7 +206,7 @@ namespace Game.Squad
             if (unit.target == null) 
             { 
                 unit.ResetHelpPriority(); 
-                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.BandoA ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
                 return; 
             }
 
@@ -216,7 +216,7 @@ namespace Game.Squad
             { 
                 unit.target = null; 
                 unit.ResetHelpPriority(); 
-                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.BandoA ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
                 return; 
             }
 
@@ -265,7 +265,7 @@ namespace Game.Squad
             if (unit.target == null) 
             { 
                 unit.ResetHelpPriority(); 
-                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.BandoA ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
                 return; 
             }
 
@@ -274,7 +274,7 @@ namespace Game.Squad
             { 
                 unit.target = null; 
                 unit.ResetHelpPriority(); 
-                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.BandoA ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
                 return; 
             }
 

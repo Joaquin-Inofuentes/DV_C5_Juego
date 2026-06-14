@@ -48,7 +48,7 @@ public class UnitCommander : MonoBehaviour
             float minClickDist = 1.5f;
             foreach (var u in FindObjectsOfType<UnitController>())
             {
-                if (!u.IsDown() || u.model.team != UnitTeam.PlayerTeam) continue;
+                if (!u.IsDown() || u.model.team != UnitTeam.BandoA) continue;
                 float d = Vector3.Distance(mousePos, u.transform.position);
                 if (d < minClickDist) { minClickDist = d; clickedDown = u; }
             }
@@ -65,7 +65,7 @@ public class UnitCommander : MonoBehaviour
             float minEnemyClickDist = 1.5f;
             foreach (var u in FindObjectsOfType<UnitController>())
             {
-                if (u.model.team == UnitTeam.PlayerTeam || u.model.IsDead) continue;
+                if (u.model.team == UnitTeam.BandoA || u.model.IsDead) continue;
                 float d = Vector3.Distance(mousePos, u.transform.position);
                 if (d < minEnemyClickDist) { minEnemyClickDist = d; clickedEnemy = u; }
             }
@@ -179,7 +179,7 @@ public class UnitCommander : MonoBehaviour
     void MandarRevivir(UnitController downed)
     {
         var candidatos = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam
+            .Where(u => u.model.team == UnitTeam.BandoA
                 && !u.model.IsLeader && !u.model.IsDown && !u.isWaitingOrder)
             .OrderBy(u => Vector3.Distance(u.transform.position, downed.transform.position))
             .ToList();
@@ -205,7 +205,7 @@ public class UnitCommander : MonoBehaviour
 
         // Filtrar aliados: vivos y que no sean líderes (ignorar si ya están moviéndose, para que agarre el más cercano siempre)
         var aliadosLibres = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
+            .Where(u => u.model.team == UnitTeam.BandoA && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
         if (aliadosLibres.Count == 0)
@@ -242,7 +242,7 @@ public class UnitCommander : MonoBehaviour
     {
         // Encontrar aliados: vivos, que no sean líderes y que no estén caídos
         var aliados = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
+            .Where(u => u.model.team == UnitTeam.BandoA && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
         if (aliados.Count == 0) return;

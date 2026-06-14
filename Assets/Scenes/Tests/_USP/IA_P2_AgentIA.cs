@@ -35,10 +35,13 @@ public class IA_P2_AgentIA : MonoBehaviour
     [Tooltip("Qué tan rápido el agente alcanza su velocidad objetivo. Más alto = más brusco.")]
     public float acceleration = 8f;
 
+    private UnitModel _unitModel;
+
     private void Awake()
     {
         // Mitad de velocidad global
         moveSpeed *= 0.5f;
+        _unitModel = GetComponent<UnitModel>();
     }
 
     public void OnDisable()
@@ -113,6 +116,12 @@ public class IA_P2_AgentIA : MonoBehaviour
 
     public void GoTo(Vector3 targetPosition, float Offset = 0)
     {
+        if (_unitModel != null && _unitModel.IsDown)
+        {
+            StopAgent();
+            return;
+        }
+
         // 1. VALIDACIÓN DE REPETICIÓN: Si ya vamos a ese destino, no hacer nada.
         if (isMoving && currentPath != null && currentPath.Count > 0)
         {
@@ -172,6 +181,12 @@ public class IA_P2_AgentIA : MonoBehaviour
 
     void Update()
     {
+        if (_unitModel != null && _unitModel.IsDown)
+        {
+            StopAgent();
+            return;
+        }
+
         if (!isMoving || currentPath == null || currentPath.Count == 0)
             return;
 

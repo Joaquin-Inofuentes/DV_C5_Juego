@@ -36,7 +36,7 @@ namespace Game.Squad
         public string GetName() => name;
         public DetectableType GetDetectableType() =>
             model.IsDown ? DetectableType.Invisible :
-            model.team == UnitTeam.PlayerTeam ? DetectableType.Aliado : DetectableType.Enemigo;
+            model.team == UnitTeam.BandoA ? DetectableType.Aliado : DetectableType.Enemigo;
         public Transform GetTransform() => transform;
 
         void Awake()
@@ -61,32 +61,36 @@ namespace Game.Squad
 
             // Configurar stats y dispersión según especialidad
             ConfigurarEspecialidad();
+
+            if (model != null && model.specialization == UnitSpecialization.Medico)
+            {
+                StartCoroutine(MedicoHealingRoutine());
+            }
         }
 
         private void ConfigurarEspecialidad()
         {
             if (model == null || shooter == null) return;
+            
+            // Sincronizar stats desde el modelo configurado en OnValidate
+            shooter.dañoBala = model.damage;
+            
             switch (model.specialization)
             {
                 case UnitSpecialization.Flancotirador:
-                    shooter.dañoBala   = 50f;
-                    model.fireRate     = 1.2f; // Sniper bolt-action realista (1.2 segundos)
                     shooter.dispersión = 0f;
                     break;
                 case UnitSpecialization.Apoyo:
-                    shooter.dañoBala   = 5f;
-                    model.fireRate     = 0.08f;
                     shooter.dispersión = 30f;
                     break;
                 case UnitSpecialization.Medico:
-                    shooter.dañoBala   = 5f;
-                    model.fireRate     = 0.1f; // Cadencia tipo AK-47 (10 disparos/seg = 0.1 segundos)
                     shooter.dispersión = 6f;
                     break;
                 case UnitSpecialization.Asalto:
-                    shooter.dañoBala   = 5f;
-                    model.fireRate     = 0.1f; // Cadencia tipo AK-47 (10 disparos/seg = 0.1 segundos)
                     shooter.dispersión = 5f;
+                    break;
+                case UnitSpecialization.EnemigoSimple:
+                    shooter.dispersión = 12f; // Mayor dispersión para enemigos
                     break;
             }
         }
@@ -192,7 +196,7 @@ namespace Game.Squad
             if (isWaitingOrder && priority > 1) return;
             if (attacker == null) return;
             // Solo aliados del mismo equipo ayudan
-            if (model.team != Game.Core.UnitTeam.PlayerTeam) return;
+            if (model.team != Game.Core.UnitTeam.BandoA) return;
 
             // Sistema de prioridad: número menor = más urgente (1=líder, 2=aliado)
             bool yaEnCombate = _currentStateLogic is AtacarState || _currentStateLogic is PerseguirState;
@@ -240,14 +244,14 @@ namespace Game.Squad
 
                 // Emitir pedido de ayuda al escuadrón via EventBus
                 // Prioridad 1 = líder (yo, el jugador), Prioridad 2 = aliado
-                if (model.team == Game.Core.UnitTeam.PlayerTeam)
+                if (model.team == Game.Core.UnitTeam.BandoA)
                 {
                     int prioridad = model.IsLeader ? 1 : 2;
                     SquadEventBus.TriggerHelpRequested(this, atacante.transform, prioridad);
                 }
 
                 // Si es enemigo, reacciona siempre. Si es aliado, reacciona si no es el líder y no tiene orden pendiente
-                bool puedeReaccionar = (model.team != UnitTeam.PlayerTeam) || (!model.IsLeader && !isWaitingOrder);
+                bool puedeReaccionar = (model.team != UnitTeam.BandoA) || (!model.IsLeader && !isWaitingOrder);
 
                 if (puedeReaccionar && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
@@ -275,7 +279,7 @@ namespace Game.Squad
 
             if (model.IsDead)
             {
-                if (model.team == Game.Core.UnitTeam.PlayerTeam)
+                if (model.team == Game.Core.UnitTeam.BandoA)
                 {
                     if (!isDown)
                     {
@@ -324,7 +328,7 @@ namespace Game.Squad
         private void CheckAllPlayerUnitsDown()
         {
             foreach (var u in FindObjectsOfType<UnitController>())
-                if (u.model.team == UnitTeam.PlayerTeam && !u.IsDown())
+                if (u.model.team == UnitTeam.BandoA && !u.IsDown())
                     return;
             SceneManager.LoadScene(0);
         }
@@ -366,7 +370,7 @@ namespace Game.Squad
             }
 
             // Leash: solo aliados jugador que se alejan demasiado del líder
-            if (!model.IsLeader && !model.IsDown && model.team == UnitTeam.PlayerTeam &&
+            if (!model.IsLeader && !model.IsDown && model.team == UnitTeam.BandoA &&
                 GlobalData.liderActual != null && GlobalData.liderActual != this)
             {
                 float leashDist = Vector3.Distance(transform.position, GlobalData.liderActual.transform.position);
@@ -403,6 +407,55 @@ namespace Game.Squad
         {
             if (model.IsDead) return;
             _currentStateLogic?.FixedUpdate(this);
+        }
+
+        private IEnumerator MedicoHealingRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.5f);
+
+                // Solo curar si está vivo (no caído)
+                if (model.IsDown) continue;
+
+                // "standby osea q no esta atacndo ni moviendose" y sin órdenes directas activas
+                bool isAttacking = _currentStateLogic is AtacarState || _currentStateLogic is PerseguirState || target != null;
+                bool isMoving = agent != null && agent.isMoving;
+
+                if (!isAttacking && !isMoving && !isWaitingOrder)
+                {
+                    float healRange = 8f; // Radio de curación
+                    UnitController bestTarget = null;
+                    float lowestHealth = float.MaxValue;
+
+                    // Buscar el aliado más herido que esté en rango y necesite curación
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, healRange);
+                    foreach (var col in colliders)
+                    {
+                        UnitController ally = col.GetComponent<UnitController>();
+                        if (ally != null && ally != this && ally.model.team == model.team && !ally.model.IsDead)
+                        {
+                            if (ally.model.healthActual < ally.model.healthMax)
+                            {
+                                if (ally.model.healthActual < lowestHealth)
+                                {
+                                    lowestHealth = ally.model.healthActual;
+                                    bestTarget = ally;
+                                }
+                            }
+                        }
+                    }
+
+                    if (bestTarget != null)
+                    {
+                        float amountToHeal = 10f; // Cantidad a curar cada 0.5s
+                        bestTarget.model.AddHealth(amountToHeal);
+                        bestTarget.OnHealPickup();
+                        
+                        Debug.Log($"<color=lime>[Médico Curación]</color> {name} curó a {bestTarget.name} (+{amountToHeal} HP). Vida: {bestTarget.model.healthActual}/{bestTarget.model.healthMax}");
+                    }
+                }
+            }
         }
 
     }

@@ -2,8 +2,8 @@ namespace Game.Core
 {
     public enum UnitTeam
     {
-        PlayerTeam,
-        EnemyTeam,
+        BandoA, // Aliado (Jugador)
+        BandoB, // Enemigo
         Neutral
     }
 }

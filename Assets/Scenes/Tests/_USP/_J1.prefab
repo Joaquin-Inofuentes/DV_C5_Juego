@@ -1359,7 +1359,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   healthMax: 100
   healthActual: 100
   reviveHealthPercent: 0.3
-  damage: 3
+  damage: 5
   fireRate: 0.1
   ammoActual: 300
   ammoMax: 300
@@ -1470,6 +1470,10 @@ MonoBehaviour:
   speedChase: 5
   maxStamina: 3
   currentStamina: 3
+  lastSpecialization: 3
+  lastDamage: 5
+  lastFireRate: 0.1
+  lastHealthMax: 100
 --- !u!114 &4878676102652249997
 MonoBehaviour:
   m_ObjectHideFlags: 0

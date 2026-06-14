@@ -27,7 +27,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D other)
     {
         UnitController unit = other.GetComponent<UnitController>();
-        if (unit == null || unit.model.IsDead || unit.model.team != UnitTeam.PlayerTeam) return;
+        if (unit == null || unit.model.IsDead || unit.model.team != UnitTeam.BandoA) return;
 
         if (unit.model.IsLeader)
         {
@@ -59,7 +59,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
         {
             // Buscar la unidad del equipo Player con menos vida (incluyendo al líder si lo necesita, priorizando heridos)
             var unidadesHeridas = FindObjectsOfType<UnitController>()
-                .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsDead && u.model.healthActual < u.model.healthMax)
+                .Where(u => u.model.team == UnitTeam.BandoA && !u.model.IsDead && u.model.healthActual < u.model.healthMax)
                 .OrderBy(u => u.model.healthActual)
                 .Select(u => u.model)
                 .FirstOrDefault();

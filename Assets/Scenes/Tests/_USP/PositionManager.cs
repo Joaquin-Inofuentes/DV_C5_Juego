@@ -22,7 +22,7 @@ public class PositionManager : MonoBehaviour
 
         // Filtrar: Solo aliados vivos que NO sean el lder actual
         var seguidores = FindObjectsOfType<UnitController>()
-            .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
+            .Where(u => u.model.team == UnitTeam.BandoA && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
         foreach (var unidad in seguidores)
