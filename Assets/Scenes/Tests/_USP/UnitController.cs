@@ -27,7 +27,7 @@ namespace Game.Squad
         public Transform target;
         public Vector3 targetPos; // Para �rdenes manuales
 
-        private GenericDetector detector;
+        public GenericDetector detector;
         private float nextFireTime;
 
         [HideInInspector] public bool isWaitingOrder;
@@ -75,6 +75,11 @@ namespace Game.Squad
             // Sincronizar stats desde el modelo configurado en OnValidate
             shooter.dañoBala = model.damage;
             shooter.dispersión = model.dispersionAngle;
+
+            if (detector != null)
+            {
+                detector.SetRadius(model.detectionRange);
+            }
         }
 
         // --- FUNCIONES QUE PIDE TU FSM (ERRORES CS1061) ---

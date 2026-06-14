@@ -29,6 +29,19 @@ namespace Game.Sensors
         public List<IDetectable> GetVisibleTargets() => visibleTargets;
         public List<IDetectable> GetTargetsInRange() => targetsInRange;
 
+        private void Awake()
+        {
+            trigger = GetComponent<CircleCollider2D>();
+        }
+
+        public void SetRadius(float radius)
+        {
+            if (trigger == null) trigger = GetComponent<CircleCollider2D>();
+            if (trigger != null)
+            {
+                trigger.radius = radius;
+            }
+        }
 
         private void Update()
         {

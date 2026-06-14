@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Core;
 using Game.Squad;
+using Game.Sensors;
 
 namespace Game.Squad
 {
@@ -192,6 +193,24 @@ namespace Game.Squad
                 }
                 else
                 {
+                    // Si hay enemigos visibles en attackRange, entrar en AtacarState
+                    if (unit.detector != null)
+                    {
+                        var targets = unit.detector.GetVisibleTargets();
+                        foreach (var targetDetectable in targets)
+                        {
+                            if (targetDetectable.GetDetectableType() == DetectableType.Enemigo)
+                            {
+                                float distanceToTarget = Vector3.Distance(unit.transform.position, targetDetectable.GetTransform().position);
+                                if (distanceToTarget <= unit.model.attackRange)
+                                {
+                                    unit.target = targetDetectable.GetTransform();
+                                    unit.CambiarEstado(new AtacarState());
+                                    return;
+                                }
+                            }
+                        }
+                    }
                     return; // Ignorar seguimiento de formación
                 }
             }
