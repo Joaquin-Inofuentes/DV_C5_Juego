@@ -19,6 +19,8 @@ namespace Game.Squad
         [Header("Referencias")]
         public IA_P2_AgentIA agent;
         public Disparador shooter;
+        [Tooltip("Collider de la unidad que se desactivará al morir y se reactivará al ser revivido.")]
+        public Collider2D unitCollider;
 
         // Propiedades necesarias para la FSM
         public Transform currentSlot { get; set; } // Reemplaza slotAsignado

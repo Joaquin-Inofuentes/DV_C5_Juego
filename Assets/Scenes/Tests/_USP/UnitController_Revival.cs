@@ -33,6 +33,13 @@ namespace Game.Squad
             LogMethodEntry($"[EnterDamagedState] {name} entrando en estado CAIDO");
             isDown = true;
 
+            // Desactivar el collider propio para no recibir balas mientras está caído
+            if (unitCollider != null)
+            {
+                unitCollider.enabled = false;
+                LogMethodEntry($"[EnterDamagedState] Collider desactivado en {name}");
+            }
+
             // Cambiar a estado caído
             CambiarEstado(new DamagedState());
 
@@ -53,6 +60,13 @@ namespace Game.Squad
             LogMethodEntry($"[ExitDamagedState] {name} siendo revivido");
             isDown = false;
             revivalInputTimer = 0f;
+
+            // Reactivar el collider propio para volver a recibir balas
+            if (unitCollider != null)
+            {
+                unitCollider.enabled = true;
+                LogMethodEntry($"[ExitDamagedState] Collider reactivado en {name}");
+            }
 
             // La salud ya fue restaurada por el RevivingState
             LogMethodEntry($"[ExitDamagedState] {name} ahora está VIVO nuevamente (HP: {model.healthActual}/{model.healthMax})");
