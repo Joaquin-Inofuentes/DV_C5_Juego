@@ -10,6 +10,7 @@ public class UnitModel : MonoBehaviour, IHealth
     public string unitName = "Unit";
     public UnitTeam team;
     public bool isPlayerControlled = false;
+    public bool isCamper = false;
 
     [Header("Especialidad")]
     public UnitSpecialization specialization = UnitSpecialization.Asalto;

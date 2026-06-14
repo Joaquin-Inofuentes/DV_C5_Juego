@@ -68,6 +68,45 @@ public class LeaderManager : MonoBehaviour
         {
             AsignarLiderMasCercanoALiderMuerto();
         }
+
+        // --- LÓGICA DE CAMPER ---
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+        {
+            UnitController targetUnit = null;
+
+            // 1. Verificar si el mouse apunta a algún soldado de la capa "Soldado"
+            if (Camera.main != null)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask("Soldado"));
+                if (hit != null)
+                {
+                    targetUnit = hit.GetComponent<UnitController>();
+                }
+            }
+
+            // 2. Si no apunta a nadie, aplicar al líder actual
+            if (targetUnit == null)
+            {
+                targetUnit = GlobalData.liderActual;
+            }
+
+            // 3. Aplicar toggle de camper
+            if (targetUnit != null && !targetUnit.model.IsDead)
+            {
+                targetUnit.model.isCamper = !targetUnit.model.isCamper;
+                if (targetUnit.model.isCamper)
+                {
+                    targetUnit.view.ShowSpeech("Camper", 2.8f);
+                    targetUnit.agent.StopAgent();
+                }
+                else
+                {
+                    targetUnit.view.ShowSpeech("¡Activo!", 1.5f);
+                }
+                Debug.Log($"[Camper Toggle] {targetUnit.name} isCamper = {targetUnit.model.isCamper}");
+            }
+        }
     }
 
     private void AsignarLiderMasCercanoALiderMuerto()

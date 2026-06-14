@@ -130,6 +130,7 @@ namespace Game.Squad
 
         public void MoveToPoint(Vector3 point)
         {
+            model.isCamper = false;
             targetPos = point;
             agent.GoTo(point);
         }

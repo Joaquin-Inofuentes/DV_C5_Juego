@@ -38,6 +38,11 @@ namespace Game.Squad
 
             // Lógica de Sprint y Estamina
             bool isMoving = GEN_Inputs.Instance.MovimientoInput.sqrMagnitude > 0.01f;
+            if (unit.model.isCamper && isMoving)
+            {
+                unit.model.isCamper = false;
+                unit.view.ShowSpeech("¡Activo!", 1.5f);
+            }
             bool isSprinting = isMoving && GEN_Inputs.Instance.SprintInput;
 
             if (isSprinting && unit.model.currentStamina > 0f)
@@ -173,6 +178,23 @@ namespace Game.Squad
             Vector3 posicionLider = GlobalData.liderActual.transform.position;
             float dist = Vector3.Distance(unit.transform.position, posicionLider);
             float distanciaSeguimiento = 3.5f;
+
+            if (unit.model.isCamper)
+            {
+                unit.agent.StopAgent();
+                
+                // Si el líder se aleja más de 18 unidades, se rompe el modo camper y vuelve a la formación
+                float maxCamperDist = 18f;
+                if (dist > maxCamperDist)
+                {
+                    unit.model.isCamper = false;
+                    unit.view.ShowSpeech("¡Volviendo!", 1.5f);
+                }
+                else
+                {
+                    return; // Ignorar seguimiento de formación
+                }
+            }
 
             if (dist > distanciaSeguimiento + 0.3f)
             {

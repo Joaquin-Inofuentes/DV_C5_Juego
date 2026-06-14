@@ -336,15 +336,24 @@ public class UnitView : MonoBehaviour
     private void DrawSpecLabel(Vector3 screenPos)
     {
         if (model == null) return;
-        string label;
-        Color labelColor;
+        string label = "";
+        Color labelColor = Color.white;
         switch (model.specialization)
         {
             case UnitSpecialization.Flancotirador: label = "FLANC"; labelColor = new Color(0.4f, 0.8f, 1f); break;
             case UnitSpecialization.Apoyo:         label = "APOYO"; labelColor = new Color(1f, 0.8f, 0.2f); break;
             case UnitSpecialization.Medico:        label = "MED";   labelColor = new Color(0.3f, 1f, 0.4f); break;
-            default: return;
+            case UnitSpecialization.Asalto:        label = "ASALTO"; labelColor = Color.white; break;
+            case UnitSpecialization.EnemigoSimple: label = "AK47"; labelColor = Color.red; break;
         }
+
+        if (model.isCamper)
+        {
+            label = "CAMPER";
+            labelColor = Color.red;
+        }
+
+        if (string.IsNullOrEmpty(label)) return;
 
         if (_specStyle == null)
         {
@@ -355,7 +364,7 @@ public class UnitView : MonoBehaviour
             _specStyle.alignment = TextAnchor.MiddleCenter;
         }
 
-        float w = 60f;
+        float w = 80f;
         float guiY = Screen.height - screenPos.y + offset.y + barHeight + 3f;
         _specStyle.normal.textColor = labelColor;
         GUI.color = Color.white;
