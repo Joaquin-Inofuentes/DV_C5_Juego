@@ -70,7 +70,7 @@ namespace Game.Squad
             {
                 case UnitSpecialization.Flancotirador:
                     shooter.dañoBala   = 50f;
-                    model.fireRate     = 1.2f;
+                    model.fireRate     = 1.2f; // Sniper bolt-action realista (1.2 segundos)
                     shooter.dispersión = 0f;
                     break;
                 case UnitSpecialization.Apoyo:
@@ -79,13 +79,13 @@ namespace Game.Squad
                     shooter.dispersión = 30f;
                     break;
                 case UnitSpecialization.Medico:
-                    shooter.dañoBala   = 8f;
-                    model.fireRate     = 0.9f;
-                    shooter.dispersión = 0f;
+                    shooter.dañoBala   = 5f;
+                    model.fireRate     = 0.1f; // Cadencia tipo AK-47 (10 disparos/seg = 0.1 segundos)
+                    shooter.dispersión = 6f;
                     break;
                 case UnitSpecialization.Asalto:
                     shooter.dañoBala   = 5f;
-                    model.fireRate     = 0.45f;
+                    model.fireRate     = 0.1f; // Cadencia tipo AK-47 (10 disparos/seg = 0.1 segundos)
                     shooter.dispersión = 5f;
                     break;
             }
