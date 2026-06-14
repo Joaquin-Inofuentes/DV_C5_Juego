@@ -246,7 +246,10 @@ namespace Game.Squad
                     SquadEventBus.TriggerHelpRequested(this, atacante.transform, prioridad);
                 }
 
-                if (!model.IsLeader && !isWaitingOrder && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
+                // Si es enemigo, reacciona siempre. Si es aliado, reacciona si no es el líder y no tiene orden pendiente
+                bool puedeReaccionar = (model.team != UnitTeam.PlayerTeam) || (!model.IsLeader && !isWaitingOrder);
+
+                if (puedeReaccionar && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
