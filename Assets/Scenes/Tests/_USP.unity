@@ -9782,7 +9782,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: dispersionAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: lastSpecialization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: lastDispersionAngle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4548303295063924460, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
@@ -20052,6 +20060,7 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   nodeReachDistance: 0.5
+  pathfindingAgentRadius: 0.4
   graphicsRoot: {fileID: 0}
   debug_BlockMovement: 0
   debug_BlockRotation: 0
@@ -23375,12 +23384,20 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: fireRate
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: healthMax
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: lastDamage
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: healthActual
@@ -23399,8 +23416,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: dispersionAngle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: lastSpecialization
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: lastDispersionAngle
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4548303295063924460, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25966,20 +25991,40 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: healthMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: lastDamage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: healthActual
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: lastFireRate
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: lastHealthMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: specialization
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: dispersionAngle
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: lastSpecialization
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: lastDispersionAngle
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name

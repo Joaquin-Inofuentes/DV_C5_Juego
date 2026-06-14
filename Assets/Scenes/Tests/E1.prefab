@@ -230,6 +230,7 @@ MonoBehaviour:
   moveSpeed: 30
   rotationSpeed: 0.4
   nodeReachDistance: 0.5
+  pathfindingAgentRadius: 0.4
   graphicsRoot: {fileID: 0}
   debug_BlockMovement: 0
   debug_BlockRotation: 0
@@ -357,6 +358,7 @@ MonoBehaviour:
   caidoGO: {fileID: 0}
   agent: {fileID: 798236151152862464}
   shooter: {fileID: 692881671279151379}
+  unitCollider: {fileID: 0}
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
   isWaitingOrder: 0
@@ -379,12 +381,13 @@ MonoBehaviour:
   unitName: Unit
   team: 1
   isPlayerControlled: 0
-  specialization: 1
+  specialization: 4
   healthMax: 100
   healthActual: 100
   reviveHealthPercent: 0.3
-  damage: 8
+  damage: 5
   fireRate: 0.1
+  dispersionAngle: 12
   ammoActual: 300
   ammoMax: 300
   attackRange: 7
@@ -393,6 +396,11 @@ MonoBehaviour:
   speedChase: 5
   maxStamina: 3
   currentStamina: 3
+  lastSpecialization: 4
+  lastDamage: 5
+  lastFireRate: 0.1
+  lastHealthMax: 100
+  lastDispersionAngle: 12
 --- !u!114 &2983668425057584109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +443,7 @@ MonoBehaviour:
     onTime: 0.25
     offTime: 0.25
     duration: -1
+  customFont: {fileID: 0}
   barWidth: 50
   offset: {x: 0, y: 20}
   barHeight: 8

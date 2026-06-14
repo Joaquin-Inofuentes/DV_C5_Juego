@@ -124,7 +124,7 @@ namespace Game.Squad
             bool isMoving = moveDir2D.sqrMagnitude > 0.01f;
             bool isSprinting = isMoving && GEN_Inputs.Instance.SprintInput && unit.model.currentStamina > 0.01f;
 
-            float speed = unit.model.speedChase * 2f; // Doble de la velocidad natural
+            float speed = unit.model.speedChase; // Velocidad natural del modelo (que ya viene duplicada si es aliado)
             if (isSprinting)
             {
                 speed *= 1.8f;
