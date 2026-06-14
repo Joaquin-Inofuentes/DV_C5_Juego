@@ -387,6 +387,13 @@ namespace Game.Squad
                 }
             }
 
+            // Sincronizar velocidad del agente según el estado (Perseguir/Atacar usa speedChase, otros speedPatrol)
+            if (agent != null && model != null)
+            {
+                bool isChasing = _currentStateLogic is PerseguirState || _currentStateLogic is AtacarState;
+                agent.moveSpeed = isChasing ? model.speedChase : model.speedPatrol;
+            }
+
             _currentStateLogic?.Update(this);
         }
 

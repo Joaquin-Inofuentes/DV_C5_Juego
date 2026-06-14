@@ -46,6 +46,10 @@ public class UnitView : MonoBehaviour
     void Awake()
     {
         if (lineRenderer == null) lineRenderer = GetComponent<LineRenderer>();
+        if (lineRenderer != null)
+        {
+            lineRenderer.useWorldSpace = true;
+        }
         HideAllIndicators();
     }
 
