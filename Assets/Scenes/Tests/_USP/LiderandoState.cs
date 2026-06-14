@@ -254,7 +254,16 @@ namespace Game.Squad
             float dist = Vector3.Distance(unit.transform.position, unit.target.position);
             if (!hasLOS || dist > unit.model.attackRange)
             {
-                unit.CambiarEstado(new PerseguirState());
+                if (unit.model.isCamper)
+                {
+                    unit.target = null;
+                    unit.ResetHelpPriority();
+                    unit.CambiarEstado(unit.model.team == UnitTeam.BandoA ? (IUnitState)new SeguirFormacionState() : new EsperandoState());
+                }
+                else
+                {
+                    unit.CambiarEstado(new PerseguirState());
+                }
                 return;
             }
 

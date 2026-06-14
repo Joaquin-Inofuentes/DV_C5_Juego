@@ -192,6 +192,11 @@ namespace Game.Squad
             _currentHelpPriority = priority;
 
             float dist = Vector3.Distance(transform.position, attacker.position);
+            if (model.isCamper)
+            {
+                if (dist <= model.attackRange) CambiarEstado(new AtacarState());
+                return;
+            }
             CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
         }
 
@@ -207,6 +212,11 @@ namespace Game.Squad
                 if (!model.IsLeader && !isWaitingOrder && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
+                    if (model.isCamper)
+                    {
+                        if (dist <= model.attackRange) CambiarEstado(new AtacarState());
+                        return;
+                    }
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
                 }
             }
@@ -239,7 +249,14 @@ namespace Game.Squad
                 if (puedeReaccionar && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
                     float dist = Vector3.Distance(transform.position, target.position);
-                    CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
+                    if (model.isCamper)
+                    {
+                        if (dist <= model.attackRange) CambiarEstado(new AtacarState());
+                    }
+                    else
+                    {
+                        CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
+                    }
                 }
 
                 // Group aggro (Dinámico y Divertido)
@@ -254,7 +271,14 @@ namespace Game.Squad
                         {
                             vecino.target = atacante.transform;
                             float dist = Vector3.Distance(vecino.transform.position, vecino.target.position);
-                            vecino.CambiarEstado(dist <= vecino.model.attackRange ? new AtacarState() : new PerseguirState());
+                            if (vecino.model.isCamper)
+                            {
+                                if (dist <= vecino.model.attackRange) vecino.CambiarEstado(new AtacarState());
+                            }
+                            else
+                            {
+                                vecino.CambiarEstado(dist <= vecino.model.attackRange ? new AtacarState() : new PerseguirState());
+                            }
                         }
                     }
                 }
