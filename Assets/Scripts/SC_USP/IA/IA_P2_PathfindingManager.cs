@@ -32,7 +32,7 @@ public static class IA_P2_PathfindingManager
     /// <param name="Origen">Posición inicial</param>
     /// <param name="targetPos">Posición final</param>
     /// <param name="stopOffset">[NUEVO] Distancia a la que detenerse ANTES de 'targetPos'. 0 por defecto.</param>
-    public static List<Vector3> RequestPath(Vector3 Origen, Vector3 targetPos, float stopOffset = 0f)
+    public static List<Vector3> RequestPath(Vector3 Origen, Vector3 targetPos, float stopOffset = 0f, float agentRadius = 0f)
     {
         var model = IA_P2_PathfindingModel.Instance;
         if (model == null || model.allNodes == null || model.allNodes.Count == 0) return null;
@@ -43,7 +43,7 @@ public static class IA_P2_PathfindingManager
         // MODIFICADO: Ya no forzamos targetPos.y = 0 ni Origen.y = 0
 
         // 1. Línea de visión directa
-        var directPath = CheckPathWithAvoidance(Origen, targetPos, obstacleLayer);
+        var directPath = CheckPathWithAvoidance(Origen, targetPos, obstacleLayer, agentRadius);
         if (directPath != null)
         {
             Vector3 last = directPath.Last();
@@ -53,8 +53,8 @@ public static class IA_P2_PathfindingManager
 
         // 2. Estrategia KNN + Theta*
         const int K = 5;
-        List<IA_P2_PathNode> startNodes = FindKClosestVisibleNodes(Origen, K, obstacleLayer);
-        List<IA_P2_PathNode> endNodes = FindKClosestVisibleNodes(targetPos, K, obstacleLayer);
+        List<IA_P2_PathNode> startNodes = FindKClosestVisibleNodes(Origen, K, obstacleLayer, agentRadius);
+        List<IA_P2_PathNode> endNodes = FindKClosestVisibleNodes(targetPos, K, obstacleLayer, agentRadius);
 
         if (startNodes.Count == 0 || endNodes.Count == 0) return null;
 
@@ -64,7 +64,7 @@ public static class IA_P2_PathfindingManager
         {
             foreach (var endNode in endNodes)
             {
-                var nodePathResult = RunThetaStar(startNode, endNode, targetPos, obstacleLayer);
+                var nodePathResult = RunThetaStar(startNode, endNode, targetPos, obstacleLayer, agentRadius);
                 if (nodePathResult == null) continue;
 
                 Vector3 lastNodePos = nodePathResult.path.Last();
@@ -112,7 +112,7 @@ public static class IA_P2_PathfindingManager
     /// [NUEVO] Encuentra los K nodos más cercanos a una posición que tienen línea de visión directa.
     /// (Esta función no cambia)
     /// </summary>
-    static List<IA_P2_PathNode> FindKClosestVisibleNodes(Vector3 pos, int k, LayerMask obstacleLayer)
+    static List<IA_P2_PathNode> FindKClosestVisibleNodes(Vector3 pos, int k, LayerMask obstacleLayer, float agentRadius = 0f)
     {
         var model = IA_P2_PathfindingModel.Instance;
         List<NodeDistance> allNodeDistances = new List<NodeDistance>();
@@ -136,7 +136,7 @@ public static class IA_P2_PathfindingManager
 
         foreach (var nodeDist in sortedNodes)
         {
-            if (IA_P2_LineOfSight3D.Check(pos, nodeDist.node.transform.position, obstacleLayer))
+            if (IA_P2_LineOfSight3D.Check(pos, nodeDist.node.transform.position, obstacleLayer, agentRadius))
             {
                 results.Add(nodeDist.node);
                 if (results.Count >= k)
@@ -262,7 +262,7 @@ public static class IA_P2_PathfindingManager
         public float cost;
     }
 
-    static ThetaStarResult RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, LayerMask obstacle)
+    static ThetaStarResult RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, LayerMask obstacle, float agentRadius = 0f)
     {
         var open = new List<IA_P2_PathNode>();
         var closed = new HashSet<IA_P2_PathNode>();
@@ -289,7 +289,7 @@ public static class IA_P2_PathfindingManager
             IA_P2_PathNode current = open.OrderBy(n => fScore[n]).First();
 
             // Check hacia el objetivo final con avoidance
-            var pathToTarget = CheckPathWithAvoidance(current.transform.position, targetPos, obstacle);
+            var pathToTarget = CheckPathWithAvoidance(current.transform.position, targetPos, obstacle, agentRadius);
             if (pathToTarget != null)
             {
                 var finalPath = ReconstructPathWithAvoidance(parent, avoidancePoints, current);
@@ -313,7 +313,7 @@ public static class IA_P2_PathfindingManager
                 IA_P2_PathNode p = parent[current];
 
                 // Intentar visión directa desde el PADRE al VECINO (Theta*)
-                var pathInfo = CheckPathWithAvoidance(p.transform.position, neighbor.transform.position, obstacle);
+                var pathInfo = CheckPathWithAvoidance(p.transform.position, neighbor.transform.position, obstacle, agentRadius);
 
                 if (pathInfo != null) // Si es visible (directo o esquivando)
                 {
@@ -423,11 +423,20 @@ public static class IA_P2_PathfindingManager
 
 
 
-    private static List<Vector3> CheckPathWithAvoidance(Vector3 start, Vector3 end, LayerMask layer)
+    private static List<Vector3> CheckPathWithAvoidance(Vector3 start, Vector3 end, LayerMask layer, float agentRadius = 0f)
     {
         Vector3 dir = (end - start).normalized;
         float dist = Vector3.Distance(start, end);
-        RaycastHit2D hit = Physics2D.Raycast(start, dir, dist, layer);
+        RaycastHit2D hit;
+
+        if (agentRadius > 0f)
+        {
+            hit = Physics2D.CircleCast(start, agentRadius, dir, dist, layer);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(start, dir, dist, layer);
+        }
 
         if (hit.collider != null)
         {
@@ -437,7 +446,7 @@ public static class IA_P2_PathfindingManager
             {
                 Vector3 avPoint = CalculateAvoidancePoint(start, end, hit, layer);
 
-                if (IA_P2_LineOfSight3D.Check(start, avPoint, layer) && IA_P2_LineOfSight3D.Check(avPoint, end, layer))
+                if (IA_P2_LineOfSight3D.Check(start, avPoint, layer, agentRadius) && IA_P2_LineOfSight3D.Check(avPoint, end, layer, agentRadius))
                 {
                     return new List<Vector3> { avPoint, end };
                 }

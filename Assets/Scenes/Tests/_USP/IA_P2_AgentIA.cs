@@ -14,6 +14,10 @@ public class IA_P2_AgentIA : MonoBehaviour
     public float rotationSpeed = 10f;
     public float nodeReachDistance = 0.5f;
 
+    [Header("Radio de Pathfinding")]
+    [Tooltip("Radio del agente para evitar estrechos y esquinas en el pathfinding.")]
+    public float pathfindingAgentRadius = 0.4f;
+
     [Header("Rotación Gráfica")]
     [Tooltip("Si se asigna, la rotación se aplica aquí en vez del root.")]
     public Transform graphicsRoot;
@@ -157,14 +161,14 @@ public class IA_P2_AgentIA : MonoBehaviour
         Vector3 Origen = transform.position;
         LayerMask obstacleL = model.obstacleLayer;
 
-        float agentRadius = 0.4f;
+        float agentRadius = pathfindingAgentRadius;
         CircleCollider2D col = GetComponent<CircleCollider2D>();
-        if (col != null)
+        if (col != null && pathfindingAgentRadius == 0.4f) // Solo fallback si no se ha configurado
         {
             agentRadius = col.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
         }
 
-        List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset);
+        List<Vector3> RecorridoAStar = IA_P2_PathfindingManager.RequestPath(Origen, targetPosition, Offset, agentRadius);
         currentPath = IA_F_PathFinding_Theta.OptimizarConTheta(RecorridoAStar, obstacleL, agentRadius);
 
         currentIndex = 0;
@@ -176,6 +180,15 @@ public class IA_P2_AgentIA : MonoBehaviour
             currentPath = new List<Vector3> { targetPosition };
             currentIndex = 0;
             isMoving = true;
+        }
+
+        // Dibujar el camino elegido durante 4 segundos en Amarillo
+        if (isMoving && currentPath != null && currentPath.Count > 1)
+        {
+            for (int i = 0; i < currentPath.Count - 1; i++)
+            {
+                Debug.DrawLine(currentPath[i], currentPath[i + 1], Color.yellow, 4f);
+            }
         }
     }
 
@@ -228,9 +241,15 @@ public class IA_P2_AgentIA : MonoBehaviour
                 transform.position += (Vector3)(_smoothedVelocity * Time.deltaTime);
         }
 
-        // Debug visual del camino
-        for (int i = Mathf.Max(currentIndex - 1, 0); i < currentPath.Count - 1; i++)
-            Debug.DrawLine(currentPath[i], currentPath[i + 1], Color.white, 0.1f);
+        // Debug visual del camino (Rojo para ya recorridos, Verde para los activos/faltantes)
+        if (currentPath != null)
+        {
+            for (int i = 0; i < currentPath.Count - 1; i++)
+            {
+                Color tramoColor = (i < currentIndex) ? Color.red : Color.green;
+                Debug.DrawLine(currentPath[i], currentPath[i + 1], tramoColor, 0.1f);
+            }
+        }
     }
 
     public void StopAgent()

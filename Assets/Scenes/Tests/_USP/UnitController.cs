@@ -74,25 +74,7 @@ namespace Game.Squad
             
             // Sincronizar stats desde el modelo configurado en OnValidate
             shooter.dañoBala = model.damage;
-            
-            switch (model.specialization)
-            {
-                case UnitSpecialization.Flancotirador:
-                    shooter.dispersión = 0f;
-                    break;
-                case UnitSpecialization.Apoyo:
-                    shooter.dispersión = 30f;
-                    break;
-                case UnitSpecialization.Medico:
-                    shooter.dispersión = 6f;
-                    break;
-                case UnitSpecialization.Asalto:
-                    shooter.dispersión = 5f;
-                    break;
-                case UnitSpecialization.EnemigoSimple:
-                    shooter.dispersión = 12f; // Mayor dispersión para enemigos
-                    break;
-            }
+            shooter.dispersión = model.dispersionAngle;
         }
 
         // --- FUNCIONES QUE PIDE TU FSM (ERRORES CS1061) ---

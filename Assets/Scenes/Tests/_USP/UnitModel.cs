@@ -25,6 +25,7 @@ public class UnitModel : MonoBehaviour, IHealth
     [Header("Combate")]
     public float damage = 10f;
     public float fireRate = 0.5f;
+    public float dispersionAngle = 5f;
     public int ammoActual = 300;
     public int ammoMax = 300;
     public float attackRange = 7f;
@@ -56,6 +57,8 @@ public class UnitModel : MonoBehaviour, IHealth
     private float lastFireRate;
     [SerializeField, HideInInspector]
     private float lastHealthMax;
+    [SerializeField, HideInInspector]
+    private float lastDispersionAngle;
 
     private void OnValidate()
     {
@@ -77,6 +80,7 @@ public class UnitModel : MonoBehaviour, IHealth
             lastDamage = damage;
             lastFireRate = fireRate;
             lastHealthMax = healthMax;
+            lastDispersionAngle = dispersionAngle;
         }
         else
         {
@@ -84,6 +88,7 @@ public class UnitModel : MonoBehaviour, IHealth
             lastDamage = damage;
             lastFireRate = fireRate;
             lastHealthMax = healthMax;
+            lastDispersionAngle = dispersionAngle;
         }
 
         if (!Application.isPlaying)
@@ -101,35 +106,49 @@ public class UnitModel : MonoBehaviour, IHealth
                 damage = 50f;
                 fireRate = 1.2f;
                 healthMax = 100f;
+                dispersionAngle = 0f;
                 break;
             case UnitSpecialization.Apoyo:
                 damage = 5f;
                 fireRate = 0.08f;
                 healthMax = 200f;
+                dispersionAngle = 30f;
                 break;
             case UnitSpecialization.Medico:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
+                dispersionAngle = 6f;
                 break;
             case UnitSpecialization.Asalto:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
+                dispersionAngle = 5f;
                 break;
             case UnitSpecialization.EnemigoSimple:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
+                dispersionAngle = 12f;
                 break;
         }
     }
 
     private void Awake()
     {
-        // Reducir velocidad base a la mitad globalmente al iniciar
-        speedChase *= 0.5f;
-        speedPatrol *= 0.5f;
+        if (team == UnitTeam.BandoA)
+        {
+            // Aliados: velocidad doble al iniciar
+            speedChase *= 2.0f;
+            speedPatrol *= 2.0f;
+        }
+        else
+        {
+            // Enemigos/otros: reducir velocidad base a la mitad globalmente
+            speedChase *= 0.5f;
+            speedPatrol *= 0.5f;
+        }
     }
 
     private void Start() 
