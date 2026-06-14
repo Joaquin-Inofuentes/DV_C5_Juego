@@ -95,9 +95,14 @@ public class Bala : MonoBehaviour, IDetectable
             Debug.Log($"[FLAG:SHOOT_IMPACT_HIT] <color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{hitGo.name}</b> causandole {(int)damage} de daño.");
             objetivo.RecibirDano((int)damage, dueno);
 
-            // Parpadear cursor si golpea con exito al enemigo
-            if (dueno != null && (dueno.CompareTag("Player") || dueno.name.Contains("Soldado")))
+            // Parpadear y cambiar cursor si golpea con exito al enemigo
+            if (dueno != null && (dueno.CompareTag("Player") || dueno.name.Contains("Soldado") || dueno.GetComponent<UnitController>() != null))
             {
+                if (CursorManager.Instance != null)
+                {
+                    CursorManager.Instance.TriggerHitFeedback();
+                }
+
                 if (_cursorCache == null) _cursorCache = FindObjectOfType<CursorManager>();
                 CursorManager cursor = _cursorCache;
                 if (cursor != null)

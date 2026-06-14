@@ -58,12 +58,8 @@ namespace Game.Squad
 
             if (unit.model.specialization == UnitSpecialization.Medico)
             {
-                if (GEN_Inputs.Instance.DisparoSostenido)
-                {
-                    Debug.Log($"[SHOOT_CLICK_DEBUG] Click de disparo detectado en {unit.name}. Rechazado: Es de tipo Médico (los médicos curan con barra espaciadora en vez de disparar).");
-                }
                 HandleMedicHeal(unit, mousePos);
-                return; // Médico no dispara
+                // El médico ahora también puede disparar cuando está bajo control manual
             }
 
             if (GEN_Inputs.Instance.DisparoSostenido)
@@ -79,6 +75,12 @@ namespace Game.Squad
                     unit.shooter.Disparar();
                     unit.model.ConsumeAmmo();
                     nextFireTime = Time.time + unit.model.fireRate;
+                    
+                    if (CursorManager.Instance != null)
+                    {
+                        CursorManager.Instance.TriggerShootFeedback();
+                    }
+
                     Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo completado. Próximo disparo disponible en {nextFireTime:F2}s.");
                 }
                 else

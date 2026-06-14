@@ -4,8 +4,29 @@ public class CursorManager : MonoBehaviour
 {
     public Texture2D cursorNormal;
     public Texture2D cursorInteractuar;
+    public Texture2D cursorDisparar;
+    public Texture2D cursorImpacto;
+
+    public static CursorManager Instance { get; private set; }
 
     private float scaleBlinkTimer = 0f;
+    private float _shootFeedbackTimer = 0f;
+    private float _hitFeedbackTimer = 0f;
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public void TriggerShootFeedback()
+    {
+        _shootFeedbackTimer = 0.15f;
+    }
+
+    public void TriggerHitFeedback()
+    {
+        _hitFeedbackTimer = 0.25f;
+    }
 
     void Update()
     {
@@ -17,6 +38,23 @@ public class CursorManager : MonoBehaviour
         {
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             transform.localScale = Vector3.zero;
+            return;
+        }
+
+        // Si tenemos feedback de impacto, usar cursor de impacto
+        if (_hitFeedbackTimer > 0f)
+        {
+            _hitFeedbackTimer -= Time.deltaTime;
+            CambiarCursor(cursorImpacto != null ? cursorImpacto : cursorNormal);
+            scaleBlinkTimer = 0.3f;
+            return;
+        }
+
+        // Si tenemos feedback de disparo, usar cursor de disparo
+        if (_shootFeedbackTimer > 0f)
+        {
+            _shootFeedbackTimer -= Time.deltaTime;
+            CambiarCursor(cursorDisparar != null ? cursorDisparar : cursorNormal);
             return;
         }
 
