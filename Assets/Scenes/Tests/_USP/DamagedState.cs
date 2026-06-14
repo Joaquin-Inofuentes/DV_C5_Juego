@@ -159,9 +159,9 @@ namespace Game.Squad
             // Obtener el componente IDetectable
             if (unit is IDetectable detectable)
             {
-                // Aquí deberías marcar el unit como indetectable
-                // Esto se usa en detectores enemigos para ignorar a caídos
-                unit.gameObject.tag = isUndetectable ? "Undetectable" : "Detectable";
+                // La invisibilidad para los detectores enemigos ya está manejada por 
+                // el método GetDetectableType() de IDetectable en UnitController,
+                // el cual retorna DetectableType.Invisible cuando la unidad está caída.
                 LogMethodEntry($"[SetUndetectable] Soldado {unit.name} es indetectable: {isUndetectable}");
             }
         }

@@ -1431,6 +1431,7 @@ MonoBehaviour:
     onTime: 0.25
     offTime: 0.25
     duration: -1
+  customFont: {fileID: 0}
   barWidth: 50
   offset: {x: 0, y: 20}
   barHeight: 7
@@ -1487,6 +1488,7 @@ MonoBehaviour:
   caidoGO: {fileID: 460636036699617724}
   agent: {fileID: 1787558798094533365}
   shooter: {fileID: 1229891036080159078}
+  unitCollider: {fileID: 3202648273224610699}
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
   isWaitingOrder: 0
