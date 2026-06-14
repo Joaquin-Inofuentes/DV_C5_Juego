@@ -47,29 +47,28 @@ public class FormationRelocator : MonoBehaviour
         {
             if (puntosDeFormacion[i] == null) continue;
 
-            // Dirección actual del líder al punto de formación
-            Vector3 dir = puntosDeFormacion[i].position - posicionLider;
-            dir.z = 0f;
+            // Ángulo fijo para cada slot para que nunca se peleen por la misma posición:
+            // Slot 0: atrás-izquierda (-135 grados)
+            // Slot 1: atrás-derecha (135 grados)
+            // Otros slots: distribuir en otros ángulos fijos
+            float angulo = -135f;
+            if (i == 1) angulo = 135f;
+            else if (i > 1) angulo = (i % 2 == 0) ? -90f - (i * 15f) : 90f + (i * 15f);
 
-            if (dir.sqrMagnitude < 0.01f)
-            {
-                // Si está encima o muy cerca del líder, asignar una dirección por defecto según el índice
-                float angulo = (i % 2 == 0) ? -135f : 135f;
-                dir = Quaternion.Euler(0, 0, angulo) * Vector3.down;
-            }
+            Vector3 dir = Quaternion.Euler(0, 0, angulo) * Vector3.down;
 
-            // Forzar la posición a estar exactamente a 'distanciaPreferida'
-            Vector3 targetPos = posicionLider + dir.normalized * distanciaPreferida;
+            // Forzar la posición a estar a 'distanciaPreferida'
+            Vector3 targetPos = posicionLider + dir * distanciaPreferida;
 
             // Evitar que cruce paredes usando un raycast simple
-            RaycastHit2D hit = Physics2D.Raycast(posicionLider, dir.normalized, distanciaPreferida, mask);
+            RaycastHit2D hit = Physics2D.Raycast(posicionLider, dir, distanciaPreferida, mask);
             if (hit.collider != null)
             {
-                targetPos = (Vector3)hit.point - dir.normalized * radioSeguridadSoldado;
+                targetPos = (Vector3)hit.point - dir * radioSeguridadSoldado;
             }
 
-            // Mover el punto de formación de forma suave hacia la posición objetivo
-            puntosDeFormacion[i].position = Vector3.Lerp(puntosDeFormacion[i].position, targetPos, Time.deltaTime * 10f);
+            // Asignar o interpolar
+            puntosDeFormacion[i].position = Vector3.Lerp(puntosDeFormacion[i].position, targetPos, Time.deltaTime * 12f);
             Debug.DrawLine(posicionLider, puntosDeFormacion[i].position, Color.white);
         }
     }
