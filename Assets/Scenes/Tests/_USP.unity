@@ -9751,6 +9751,18 @@ PrefabInstance:
       propertyPath: specialization
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4548303295063924460, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548303295063924460, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671461941309156490, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fa2b2754ebf1c8488fbedb41c1ef3b5, type: 3}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
       value: Flancotirador
@@ -23189,6 +23201,18 @@ PrefabInstance:
     - target: {fileID: 3712903021573385901, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: specialization
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548303295063924460, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5671461941309156490, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bd141ee87319409488a81d1f34f1e805, type: 3}
+    - target: {fileID: 5671461941309156490, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5972477560629325820, guid: ba4361ce76647c04993a87a373e4ff6c, type: 3}
       propertyPath: m_Name
