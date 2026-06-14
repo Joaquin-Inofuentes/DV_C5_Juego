@@ -20,22 +20,17 @@ public class PositionManager : MonoBehaviour
     {
         if (GlobalData.liderActual == null) return;
 
-        // Filtrar: Solo aliados vivos que NO sean el l�der actual
+        // Filtrar: Solo aliados vivos que NO sean el lder actual
         var seguidores = FindObjectsOfType<UnitController>()
             .Where(u => u.model.team == UnitTeam.PlayerTeam && !u.model.IsLeader && !u.model.IsDead)
             .ToList();
 
-        int puntoIndex = 0;
         foreach (var unidad in seguidores)
         {
-            if (puntoIndex < puntosFormacion.Count)
-            {
-                unidad.currentSlot = puntosFormacion[puntoIndex];
-                var estado = unidad.GetCurrentState();
-                if (!unidad.isWaitingOrder && (estado is EsperandoState || estado == null))
-                    unidad.CambiarEstado(new SeguirFormacionState());
-                puntoIndex++;
-            }
+            unidad.currentSlot = null; // Quitar slots por completo
+            var estado = unidad.GetCurrentState();
+            if (!unidad.isWaitingOrder && (estado is EsperandoState || estado == null))
+                unidad.CambiarEstado(new SeguirFormacionState());
         }
     }
 }
