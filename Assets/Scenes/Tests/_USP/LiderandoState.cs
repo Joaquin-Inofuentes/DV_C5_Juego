@@ -185,11 +185,22 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            if (unit.target == null) { unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+            if (unit.target == null) 
+            { 
+                unit.ResetHelpPriority(); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                return; 
+            }
 
-            // Si el objetivo cayó, limpiar y volver a formación
+            // Si el objetivo cayó, limpiar
             var targetUnit = unit.target.GetComponent<UnitController>();
-            if (targetUnit != null && targetUnit.model.IsDown) { unit.target = null; unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+            if (targetUnit != null && targetUnit.model.IsDown) 
+            { 
+                unit.target = null; 
+                unit.ResetHelpPriority(); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                return; 
+            }
 
             Vector3 dir = (unit.target.position - unit.transform.position).normalized;
             unit.view.RotateGraphicsSmooth(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg, 10f);
@@ -233,10 +244,21 @@ namespace Game.Squad
 
         public void Update(UnitController unit)
         {
-            if (unit.target == null) { unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+            if (unit.target == null) 
+            { 
+                unit.ResetHelpPriority(); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                return; 
+            }
 
             var targetUnit = unit.target.GetComponent<UnitController>();
-            if (targetUnit != null && targetUnit.model.IsDown) { unit.target = null; unit.ResetHelpPriority(); unit.CambiarEstado(new SeguirFormacionState()); return; }
+            if (targetUnit != null && targetUnit.model.IsDown) 
+            { 
+                unit.target = null; 
+                unit.ResetHelpPriority(); 
+                unit.CambiarEstado(unit.model.team == UnitTeam.PlayerTeam ? (IUnitState)new SeguirFormacionState() : new EsperandoState()); 
+                return; 
+            }
 
             LayerMask obsMask = LayerMask.GetMask("Obstacles", "Obstaculos");
             if (obsMask == 0) obsMask = (1 << 6) | (1 << 14);

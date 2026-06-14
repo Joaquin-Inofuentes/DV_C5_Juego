@@ -213,6 +213,9 @@ namespace Game.Squad
             UnitController other = entity.GetTransform().GetComponent<UnitController>();
             if (other != null && other.model.team != this.model.team)
             {
+                // Si el objetivo está caído, ignorarlo
+                if (other.model.IsDown) return;
+
                 target = other.transform;
                 if (!model.IsLeader && !isWaitingOrder && !(_currentStateLogic is AtacarState) && !(_currentStateLogic is PerseguirState))
                 {
