@@ -60,6 +60,10 @@ public class UnitModel : MonoBehaviour, IHealth
     private float lastHealthMax;
     [SerializeField, HideInInspector]
     private float lastDispersionAngle;
+    [SerializeField, HideInInspector]
+    private float lastAttackRange;
+    [SerializeField, HideInInspector]
+    private float lastDetectionRange;
 
     private void OnValidate()
     {
@@ -82,6 +86,8 @@ public class UnitModel : MonoBehaviour, IHealth
             lastFireRate = fireRate;
             lastHealthMax = healthMax;
             lastDispersionAngle = dispersionAngle;
+            lastAttackRange = attackRange;
+            lastDetectionRange = detectionRange;
         }
         else
         {
@@ -90,6 +96,8 @@ public class UnitModel : MonoBehaviour, IHealth
             lastFireRate = fireRate;
             lastHealthMax = healthMax;
             lastDispersionAngle = dispersionAngle;
+            lastAttackRange = attackRange;
+            lastDetectionRange = detectionRange;
         }
 
         if (!Application.isPlaying)
@@ -108,30 +116,40 @@ public class UnitModel : MonoBehaviour, IHealth
                 fireRate = 1.2f;
                 healthMax = 100f;
                 dispersionAngle = 0f;
+                attackRange = 20f;
+                detectionRange = 25f;
                 break;
             case UnitSpecialization.Apoyo:
                 damage = 5f;
                 fireRate = 0.08f;
                 healthMax = 200f;
                 dispersionAngle = 30f;
+                attackRange = 8f;
+                detectionRange = 12f;
                 break;
             case UnitSpecialization.Medico:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
                 dispersionAngle = 6f;
+                attackRange = 7f;
+                detectionRange = 12f;
                 break;
             case UnitSpecialization.Asalto:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
                 dispersionAngle = 5f;
+                attackRange = 8f;
+                detectionRange = 12f;
                 break;
             case UnitSpecialization.EnemigoSimple:
                 damage = 5f;
                 fireRate = 0.1f;
                 healthMax = 100f;
                 dispersionAngle = 12f;
+                attackRange = 7f;
+                detectionRange = 12f;
                 break;
         }
     }
