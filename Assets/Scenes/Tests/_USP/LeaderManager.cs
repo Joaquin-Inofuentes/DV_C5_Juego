@@ -3,12 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Squad;
 using Game.Core;
+using UnityEngine.UI;
 
 public class LeaderManager : MonoBehaviour
 {
     public static LeaderManager Instance;
     public List<UnitController> unidades;
     public int indiceInicial = 0;
+
+    [Header("UI por Especialidad")]
+    public Image imagenVisual;
+    public List<UnitSpecialization> tiposSoldado = new List<UnitSpecialization>()
+    {
+        UnitSpecialization.Flancotirador,
+        UnitSpecialization.Asalto,
+        UnitSpecialization.Medico
+    };
+    public List<Texture2D> texturasSoldado = new List<Texture2D>();
 
     private int indiceActual = 0;
     private Coroutine _cameraLerpCoroutine;
@@ -230,5 +241,30 @@ public class LeaderManager : MonoBehaviour
         GlobalData.liderActual.CambiarEstado(new LiderandoState());
 
         Debug.Log($"<color=yellow>[LeaderManager] Nuevo Líder: {GlobalData.liderActual.name} (índice {index})</color>");
+        
+        ActualizarImagenLider(GlobalData.liderActual.model.specialization);
+    }
+
+    public void ActualizarImagenLider(UnitSpecialization especialidad)
+    {
+        if (imagenVisual == null || tiposSoldado == null || texturasSoldado == null) return;
+
+        int index = tiposSoldado.IndexOf(especialidad);
+        if (index >= 0 && index < texturasSoldado.Count)
+        {
+            Texture2D tex = texturasSoldado[index];
+            if (tex != null)
+            {
+                imagenVisual.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            }
+            else
+            {
+                imagenVisual.sprite = null;
+            }
+        }
+        else
+        {
+            imagenVisual.sprite = null;
+        }
     }
 }
