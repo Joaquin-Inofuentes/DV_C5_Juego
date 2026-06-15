@@ -1,12 +1,15 @@
 using Game.Squad;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MainGameController : MonoBehaviour
 {
     public LeaderManager leaderManager;
     public TextMeshProUGUI txtLider;
     public TextMeshProUGUI txtAliados;
+    public Image imgHP;
+    public Image imgAmmo;
     public float suavizado = 5f;
 
     private float transicionDuracion = 0f;
@@ -43,10 +46,22 @@ public class MainGameController : MonoBehaviour
             UnitModel m = GlobalData.liderActual.model;
             if (m != null)
             {
-                txtLider.text = $"{GlobalData.liderActual.name.ToUpper()}\n" +
-                                $"Bullets: {m.ammoActual}\n" +
-                                $"HP: {(int)m.healthActual}/{m.healthMax}"
-                                ;
+                string specName = m.specialization.ToString().ToUpper();
+                if (m.specialization == UnitSpecialization.Flancotirador)
+                {
+                    specName = "SNIPER";
+                }
+
+                txtLider.text = specName;
+
+                if (imgHP != null)
+                {
+                    imgHP.fillAmount = Mathf.Clamp01(m.healthActual / m.healthMax);
+                }
+                if (imgAmmo != null)
+                {
+                    imgAmmo.fillAmount = Mathf.Clamp01((float)m.ammoActual / m.ammoMax);
+                }
             }
         }
 
@@ -63,7 +78,12 @@ public class MainGameController : MonoBehaviour
             {
                 UnitFSM fsm = u.GetComponent<UnitFSM>();
                 string estado = fsm != null ? fsm.currentState.ToString() : "---";
-                lista += $"[{i + 1}] {u.name} HP: {(int)u.model.healthActual} ({estado})\n";
+                string specName = u.model.specialization.ToString();
+                if (u.model.specialization == UnitSpecialization.Flancotirador)
+                {
+                    specName = "Sniper";
+                }
+                lista += $"[{i + 1}] {specName} ({estado})\n";
             }
         }
         txtAliados.text = lista;
