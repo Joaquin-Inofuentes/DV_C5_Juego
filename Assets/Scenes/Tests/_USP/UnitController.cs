@@ -207,6 +207,8 @@ namespace Game.Squad
 
         private void OnTargetDetected(IDetectable entity)
         {
+            if (Time.timeSinceLevelLoad < 2.0f) return;
+
             UnitController other = entity.GetTransform().GetComponent<UnitController>();
             if (other != null && other.model.team != this.model.team)
             {
