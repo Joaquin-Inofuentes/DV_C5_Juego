@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using Game.Squad;
 
@@ -30,21 +30,21 @@ public static class SquadEventBus
     /// </summary>
     public static void TriggerHelpRequested(UnitController victim, Transform attacker, int priority)
     {
-        Debug.Log($"<color=orange>[SquadEventBus]</color> HelpRequested: {victim.name} atacado por {(attacker != null ? attacker.name : "?")} (prioridad {priority})");
+        // Debug.Log($"<color=orange>[SquadEventBus]</color> HelpRequested: {victim.name} atacado por {(attacker != null ? attacker.name : "?")} (prioridad {priority})");
         OnHelpRequested?.Invoke(victim, attacker, priority);
     }
 
     /// <summary>Notifica al escuadron que un soldado ha caido.</summary>
     public static void TriggerUnitDowned(UnitController downed)
     {
-        Debug.Log($"<color=red>[SquadEventBus]</color> <b>OnUnitDowned</b>: {downed.name} ha caido. El escuadron es notificado.");
+        // Debug.Log($"<color=red>[SquadEventBus]</color> <b>OnUnitDowned</b>: {downed.name} ha caido. El escuadron es notificado.");
         OnUnitDowned?.Invoke(downed);
     }
 
     /// <summary>Notifica al escuadron que un soldado fue revivido.</summary>
     public static void TriggerUnitRevived(UnitController revived, UnitController reviver)
     {
-        Debug.Log($"<color=lime>[SquadEventBus]</color> <b>OnUnitRevived</b>: {revived.name} fue revivido por {reviver.name}.");
+        // Debug.Log($"<color=lime>[SquadEventBus]</color> <b>OnUnitRevived</b>: {revived.name} fue revivido por {reviver.name}.");
         OnUnitRevived?.Invoke(revived, reviver);
     }
 }

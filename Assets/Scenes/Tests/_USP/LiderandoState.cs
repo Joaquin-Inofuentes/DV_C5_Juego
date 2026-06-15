@@ -73,11 +73,11 @@ namespace Game.Squad
                 bool cooldownListo = Time.time >= nextFireTime;
                 bool puedeDisparar = unit.model.CanFire();
                 
-                Debug.Log($"[SHOOT_CLICK_DEBUG] Click de disparo detectado en {unit.name} ({unit.model.specialization}). Cooldown Listo: {cooldownListo} (NextFire: {nextFireTime:F2}s, Time: {Time.time:F2}s) | CanFire(): {puedeDisparar} (Balas: {unit.model.ammoActual}/{unit.model.ammoMax})");
+                // Debug.Log($"[SHOOT_CLICK_DEBUG] Click de disparo detectado en {unit.name} ({unit.model.specialization}). Cooldown Listo: {cooldownListo} (NextFire: {nextFireTime:F2}s, Time: {Time.time:F2}s) | CanFire(): {puedeDisparar} (Balas: {unit.model.ammoActual}/{unit.model.ammoMax})");
 
                 if (cooldownListo && puedeDisparar)
                 {
-                    Debug.Log($"[SHOOT_CLICK_DEBUG] Ejecutando disparo en {unit.name}...");
+                    // Debug.Log($"[SHOOT_CLICK_DEBUG] Ejecutando disparo en {unit.name}...");
                     unit.shooter.Disparar();
                     unit.model.ConsumeAmmo();
                     nextFireTime = Time.time + unit.model.fireRate;
@@ -87,12 +87,12 @@ namespace Game.Squad
                         CursorManager.Instance.TriggerShootFeedback();
                     }
 
-                    Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo completado. Próximo disparo disponible en {nextFireTime:F2}s.");
+                    // Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo completado. Próximo disparo disponible en {nextFireTime:F2}s.");
                 }
                 else
                 {
-                    if (!cooldownListo) Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo falló: Aún en cooldown (esperar {nextFireTime - Time.time:F2}s).");
-                    if (!puedeDisparar) Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo falló: CanFire() es falso (sin munición o recargando).");
+                    // if (!cooldownListo) Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo falló: Aún en cooldown (esperar {nextFireTime - Time.time:F2}s).");
+                    // if (!puedeDisparar) Debug.Log($"[SHOOT_CLICK_DEBUG] Disparo falló: CanFire() es falso (sin munición o recargando).");
                 }
             }
         }
@@ -457,7 +457,7 @@ namespace Game.Squad
     {
         public void Enter(UnitController unit)
         {
-            Debug.Log($"<color=cyan>[Estado]</color> {unit.name} → IrADestino hacia {unit.GetTargetPoint()}");
+            // Debug.Log($"<color=cyan>[Estado]</color> {unit.name} → IrADestino hacia {unit.GetTargetPoint()}");
             unit.isWaitingOrder = true;
             unit.agent.GoTo(unit.GetTargetPoint());
             unit.view.StartBlink(IndicatorType.Moving);
@@ -470,7 +470,7 @@ namespace Game.Squad
 
             if (unit.ReachedDestination())
             {
-                Debug.Log($"<color=cyan>[Estado]</color> {unit.name} llegó a destino. → Esperando 5s");
+                // Debug.Log($"<color=cyan>[Estado]</color> {unit.name} llegó a destino. → Esperando 5s");
                 unit.CambiarEstado(new EsperandoState(5f));
             }
         }

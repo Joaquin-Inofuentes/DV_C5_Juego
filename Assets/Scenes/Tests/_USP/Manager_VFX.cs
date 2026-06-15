@@ -59,6 +59,7 @@ public class Manager_VFX : MonoBehaviour
     /// </summary>
     public GameObject SpawnVFX(string effectName, Vector3 position)
     {
+        if (string.IsNullOrEmpty(effectName)) return null;
         if (pooledObjects.Count == 0) return null;
 
         // Buscar el prefab correspondiente por nombre
