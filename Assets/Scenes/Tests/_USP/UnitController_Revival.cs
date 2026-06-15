@@ -255,7 +255,7 @@ namespace Game.Squad
 
         private void LogMethodEntry(string message)
         {
-            Debug.Log($"<color=blue>[UnitController_Revival]</color> {message}");
+            // Debug.Log($"<color=blue>[UnitController_Revival]</color> {message}");
         }
     }
 }

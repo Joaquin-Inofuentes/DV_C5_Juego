@@ -39,6 +39,7 @@ public class IA_P2_AgentIA : MonoBehaviour
     [Tooltip("Qué tan rápido el agente alcanza su velocidad objetivo. Más alto = más brusco.")]
     public float acceleration = 8f;
 
+    private float lastPathRecalcTime = 0f;
     private UnitModel _unitModel;
 
     private void Awake()
@@ -130,8 +131,12 @@ public class IA_P2_AgentIA : MonoBehaviour
         if (isMoving && currentPath != null && currentPath.Count > 0)
         {
             float distAlDestinoFinal = Vector3.Distance(currentPath[currentPath.Count - 1], targetPosition);
-            if (distAlDestinoFinal < 0.1f) return;
+            if (distAlDestinoFinal < 1.0f && Time.time - lastPathRecalcTime < 0.25f)
+            {
+                return;
+            }
         }
+        lastPathRecalcTime = Time.time;
 
         int Estado = GetStateActual(targetPosition);
         if (Estado == 1) // Visible directo
@@ -176,7 +181,7 @@ public class IA_P2_AgentIA : MonoBehaviour
 
         if (!isMoving)
         {
-            Debug.LogWarning($"[IA_P2_AgentIA - {name}] No se pudo generar ruta hacia {targetPosition}. Intentando directo.");
+            // Debug.LogWarning($"[IA_P2_AgentIA - {name}] No se pudo generar ruta hacia {targetPosition}. Intentando directo.");
             currentPath = new List<Vector3> { targetPosition };
             currentIndex = 0;
             isMoving = true;

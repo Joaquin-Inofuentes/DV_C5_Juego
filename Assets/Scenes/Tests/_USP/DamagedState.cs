@@ -168,7 +168,7 @@ namespace Game.Squad
 
         private void LogMethodEntry(string message)
         {
-            Debug.Log($"<color=yellow>[DamagedState]</color> {message}");
+            // Debug.Log($"<color=yellow>[DamagedState]</color> {message}");
         }
     }
 
@@ -270,7 +270,7 @@ namespace Game.Squad
 
         private void LogMethodEntry(string message)
         {
-            Debug.Log($"<color=cyan>[DamagedStateHandler]</color> {message}");
+            // Debug.Log($"<color=cyan>[DamagedStateHandler]</color> {message}");
         }
     }
 }

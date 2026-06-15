@@ -113,7 +113,7 @@ namespace Game.Squad
 
         private void LogMethodEntry(string message)
         {
-            Debug.Log($"<color=green>[RevivingState]</color> {message}");
+            // Debug.Log($"<color=green>[RevivingState]</color> {message}");
         }
     }
 
