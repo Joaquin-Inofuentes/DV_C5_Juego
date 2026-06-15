@@ -58,7 +58,7 @@ namespace Game.Sensors
             int removed = targetsInRange.RemoveAll(t => t == null || (t as UnityEngine.Object) == null || t.GetTransform() == null || !t.GetTransform().gameObject.activeInHierarchy);
             if (removed > 0)
             {
-                Debug.Log($"<color=orange>[GenericDetector]</color> {transform.root.name} limpio {removed} objetivos nulos o desactivados.");
+                // Debug.Log($"<color=orange>[GenericDetector]</color> {transform.root.name} limpio {removed} objetivos nulos o desactivados.");
                 SincronizarInspector();
             }
 
@@ -69,7 +69,7 @@ namespace Game.Sensors
                 targetsInRange.Remove(t);
                 if (previouslyVisibleTargets.Contains(t))
                 {
-                    Debug.Log($"<color=red>[GenericDetector]</color> {transform.root.name} <b>DEJÓ DE VER</b> a {t.GetName()} (caído/invisible)");
+                    // Debug.Log($"<color=red>[GenericDetector]</color> {transform.root.name} <b>DEJÓ DE VER</b> a {t.GetName()} (caído/invisible)");
                     OnTargetLost?.Invoke(t);
                 }
             }
@@ -100,7 +100,7 @@ namespace Game.Sensors
             {
                 if (!previouslyVisibleTargets.Contains(target))
                 {
-                    Debug.Log($"<color=green>[GenericDetector]</color> {transform.root.name} <b>VIO</b> a {target.GetName()} ({target.GetDetectableType()})");
+                    // Debug.Log($"<color=green>[GenericDetector]</color> {transform.root.name} <b>VIO</b> a {target.GetName()} ({target.GetDetectableType()})");
                     OnTargetDetected?.Invoke(target);
                 }
             }
@@ -109,7 +109,7 @@ namespace Game.Sensors
             {
                 if (target != null && (target as UnityEngine.Object) != null && !visibleTargets.Contains(target))
                 {
-                    Debug.Log($"<color=red>[GenericDetector]</color> {transform.root.name} <b>DEJÓ DE VER</b> a {target.GetName()} ({target.GetDetectableType()})");
+                    // Debug.Log($"<color=red>[GenericDetector]</color> {transform.root.name} <b>DEJÓ DE VER</b> a {target.GetName()} ({target.GetDetectableType()})");
                     OnTargetLost?.Invoke(target);
                 }
             }
@@ -129,7 +129,7 @@ namespace Game.Sensors
                     if (!targetsInRange.Contains(detectable))
                     {
                         targetsInRange.Add(detectable);
-                        Debug.Log($"<color=yellow>[GenericDetector]</color> {transform.root.name} <b>DETECTÓ EN RADIO</b> a {detectable.GetName()} ({detectable.GetDetectableType()})");
+                        // Debug.Log($"<color=yellow>[GenericDetector]</color> {transform.root.name} <b>DETECTÓ EN RADIO</b> a {detectable.GetName()} ({detectable.GetDetectableType()})");
                         SincronizarInspector();
                     }
                 }
@@ -144,7 +144,7 @@ namespace Game.Sensors
                 if (targetsInRange.Contains(detectable))
                 {
                     targetsInRange.Remove(detectable);
-                    Debug.Log($"<color=yellow>[GenericDetector]</color> {transform.root.name} <b>PERDIÓ DE SU RADIO</b> a {detectable.GetName()} ({detectable.GetDetectableType()})");
+                    // Debug.Log($"<color=yellow>[GenericDetector]</color> {transform.root.name} <b>PERDIÓ DE SU RADIO</b> a {detectable.GetName()} ({detectable.GetDetectableType()})");
                     SincronizarInspector();
                 }
             }

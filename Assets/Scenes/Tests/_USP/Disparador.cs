@@ -50,12 +50,12 @@ public class Disparador : MonoBehaviour
 
     public void Disparar()
     {
-        Debug.Log($"[FLAG:SHOOT_START] {name} inició secuencia de Disparar()");
+        // Debug.Log($"[FLAG:SHOOT_START] {name} inició secuencia de Disparar()");
 
         if (BalaPool.Instance == null)
         {
             BalaPool.Instance = FindFirstObjectByType<BalaPool>();
-            Debug.Log($"[FLAG:SHOOT_POOL_FIND] Buscando BalaPool en escena...");
+            // Debug.Log($"[FLAG:SHOOT_POOL_FIND] Buscando BalaPool en escena...");
         }
 
         if (BalaPool.Instance == null)
@@ -68,7 +68,7 @@ public class Disparador : MonoBehaviour
         if (!string.IsNullOrEmpty(disparoSoundName))
         {
             BD_Audios.ReproducirConSolapamiento(disparoSoundName);
-            Debug.Log($"[FLAG:SHOOT_AUDIO] Sonido '{disparoSoundName}' reproducido.");
+            // Debug.Log($"[FLAG:SHOOT_AUDIO] Sonido '{disparoSoundName}' reproducido.");
         }
 
         Bala b = BalaPool.Instance.GetBala();
@@ -78,7 +78,7 @@ public class Disparador : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[FLAG:SHOOT_SPAWN] Bala instanciada/obtenida del pool exitosamente.");
+        // Debug.Log($"[FLAG:SHOOT_SPAWN] Bala instanciada/obtenida del pool exitosamente.");
 
         b.transform.position = transform.position;
 
@@ -87,7 +87,7 @@ public class Disparador : MonoBehaviour
         {
             float angulo = UnityEngine.Random.Range(-dispersión * 0.5f, dispersión * 0.5f);
             b.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, angulo);
-            Debug.Log($"[FLAG:SHOOT_SPREAD] Dispersión aplicada: {angulo} grados.");
+            // Debug.Log($"[FLAG:SHOOT_SPREAD] Dispersión aplicada: {angulo} grados.");
         }
         else
         {
@@ -102,6 +102,6 @@ public class Disparador : MonoBehaviour
         b.vfxName = vfxName;
         b.impactSoundName = impactSoundName;
 
-        Debug.Log($"[FLAG:SHOOT_EXPELLED] Bala expulsada. Dueño: {b.dueno.name}, Daño: {b.damage}, Vel: {b.velocidad}");
+        // Debug.Log($"[FLAG:SHOOT_EXPELLED] Bala expulsada. Dueño: {b.dueno.name}, Daño: {b.damage}, Vel: {b.velocidad}");
     }
 }

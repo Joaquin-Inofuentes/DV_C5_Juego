@@ -30,7 +30,7 @@ public class Bala : MonoBehaviour, IDetectable
 
     void OnEnable()
     {
-        Debug.Log($"[FLAG:SHOOT_BALA_ENABLE] Bala {name} habilitada en posición {transform.position}.");
+        // Debug.Log($"[FLAG:SHOOT_BALA_ENABLE] Bala {name} habilitada en posición {transform.position}.");
         if (col == null) col = GetComponent<BoxCollider2D>();
         if (sr == null) sr = GetComponent<SpriteRenderer>();
         if (sr == null) sr = GetComponentInChildren<SpriteRenderer>();
@@ -45,7 +45,7 @@ public class Bala : MonoBehaviour, IDetectable
         if (sr != null) sr.sprite = spriteInicio;
         Invoke("CambiarADurante", 0.05f);
         Invoke("Desactivar", 5f);
-        Debug.Log($"[FLAG:SHOOT_BALA_READY] Bala {name} lista y moviéndose.");
+        // Debug.Log($"[FLAG:SHOOT_BALA_READY] Bala {name} lista y moviéndose.");
     }
 
     void Update()
@@ -87,12 +87,12 @@ public class Bala : MonoBehaviour, IDetectable
             return;
         }
 
-        Debug.Log($"[FLAG:SHOOT_IMPACT_START] Bala de {dueno?.name} ha detectado impacto válido contra {hitGo.name} en {contactPoint}.");
+        // Debug.Log($"[FLAG:SHOOT_IMPACT_START] Bala de {dueno?.name} ha detectado impacto válido contra {hitGo.name} en {contactPoint}.");
 
         IDaniable objetivo = hitGo.GetComponent<IDaniable>();
         if (objetivo != null)
         {
-            Debug.Log($"[FLAG:SHOOT_IMPACT_HIT] <color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{hitGo.name}</b> causandole {(int)damage} de daño.");
+            // Debug.Log($"[FLAG:SHOOT_IMPACT_HIT] <color=cyan>[COLISION BALA]</color> Bala de <b>{dueno?.name}</b> impacto en <b>{hitGo.name}</b> causandole {(int)damage} de daño.");
             objetivo.RecibirDano((int)damage, dueno);
 
             // Parpadear y cambiar cursor si golpea con exito al enemigo
@@ -114,7 +114,7 @@ public class Bala : MonoBehaviour, IDetectable
         }
         else
         {
-            Debug.Log($"[FLAG:SHOOT_IMPACT_ENV] <color=orange>[COLISION EN ESCENARIO]</color> Bala de {dueno?.name} impacto contra objeto no danable: {hitGo.name}");
+            // Debug.Log($"[FLAG:SHOOT_IMPACT_ENV] <color=orange>[COLISION EN ESCENARIO]</color> Bala de {dueno?.name} impacto contra objeto no danable: {hitGo.name}");
         }
 
         // Debug visual de choque
@@ -145,7 +145,7 @@ public class Bala : MonoBehaviour, IDetectable
     {
         try
         {
-            Debug.Log($"[FLAG:SHOOT_EXPLOSION] Iniciando explosión/desactivación de bala {name}.");
+            // Debug.Log($"[FLAG:SHOOT_EXPLOSION] Iniciando explosión/desactivación de bala {name}.");
             explotando = true;
             if (col != null) col.enabled = false;
             if (sr != null) sr.sprite = spriteExplosion;

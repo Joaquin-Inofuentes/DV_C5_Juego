@@ -236,7 +236,7 @@ namespace Game.Squad
             model.TakeDamage(cantidad, atacante);
             view.TriggerFlash();
 
-            Debug.Log($"<color=red>[Daño]</color> {name} recibió {cantidad} de {(atacante != null ? atacante.name : "desconocido")}. HP: {model.healthActual}/{model.healthMax}");
+            // Debug.Log($"<color=red>[Daño]</color> {name} recibió {cantidad} de {(atacante != null ? atacante.name : "desconocido")}. HP: {model.healthActual}/{model.healthMax}");
 
             if (atacante != null)
             {
@@ -298,7 +298,7 @@ namespace Game.Squad
                     if (!isDown)
                     {
                         EnterDamagedState();
-                        Debug.Log($"[RecibirDano] {name} fue derrotado. Entrando en estado caído");
+                        // Debug.Log($"[RecibirDano] {name} fue derrotado. Entrando en estado caído");
                         CheckAllPlayerUnitsDown();
                     }
                 }
@@ -359,7 +359,7 @@ namespace Game.Squad
         {
             string anterior = _currentStateLogic != null ? _currentStateLogic.GetType().Name : "null";
             string nuevo = nuevoEstado != null ? nuevoEstado.GetType().Name : "null";
-            Debug.Log($"<color=lime>[FSM]</color> {name}: {anterior} → {nuevo}");
+            // Debug.Log($"<color=lime>[FSM]</color> {name}: {anterior} → {nuevo}");
 
             _currentStateLogic?.Exit(this);
             _currentStateLogic = nuevoEstado;
@@ -473,7 +473,7 @@ namespace Game.Squad
                         bestTarget.model.AddHealth(amountToHeal);
                         bestTarget.OnHealPickup();
                         
-                        Debug.Log($"<color=lime>[Médico Curación]</color> {name} curó a {bestTarget.name} (+{amountToHeal} HP). Vida: {bestTarget.model.healthActual}/{bestTarget.model.healthMax}");
+                        // Debug.Log($"<color=lime>[Médico Curación]</color> {name} curó a {bestTarget.name} (+{amountToHeal} HP). Vida: {bestTarget.model.healthActual}/{bestTarget.model.healthMax}");
                     }
                 }
             }
