@@ -28,6 +28,31 @@ public class CursorManager : MonoBehaviour
         _hitFeedbackTimer = 0.25f;
     }
 
+    private Texture2D lastCursorTexture;
+    private SpriteRenderer _sr;
+    private UnityEngine.UI.Image _img;
+    private Color _lastColor;
+
+    private void SetVisualColor(Color c)
+    {
+        if (_sr == null && _img == null)
+        {
+            _sr = GetComponent<SpriteRenderer>();
+            if (_sr == null) _sr = GetComponentInChildren<SpriteRenderer>();
+            _img = GetComponent<UnityEngine.UI.Image>();
+            if (_img == null) _img = GetComponentInChildren<UnityEngine.UI.Image>();
+        }
+
+        if (c != _lastColor)
+        {
+            _lastColor = c;
+            Debug.Log($"[UI_DEBUG] Color del cursor cambiado a: {c}");
+        }
+
+        if (_sr != null) _sr.color = c;
+        if (_img != null) _img.color = c;
+    }
+
     void Update()
     {
         // 1. Detectar si el mouse esta FUERA de la ventana del juego o gameplay
@@ -41,12 +66,16 @@ public class CursorManager : MonoBehaviour
             return;
         }
 
+        Color targetColor = Color.white;
+
         // Si tenemos feedback de impacto, usar cursor de impacto
         if (_hitFeedbackTimer > 0f)
         {
             _hitFeedbackTimer -= Time.deltaTime;
             CambiarCursor(cursorImpacto != null ? cursorImpacto : cursorNormal);
             scaleBlinkTimer = 0.3f;
+            targetColor = Color.red;
+            SetVisualColor(targetColor);
             return;
         }
 
@@ -55,6 +84,8 @@ public class CursorManager : MonoBehaviour
         {
             _shootFeedbackTimer -= Time.deltaTime;
             CambiarCursor(cursorDisparar != null ? cursorDisparar : cursorNormal);
+            targetColor = Color.yellow;
+            SetVisualColor(targetColor);
             return;
         }
 
@@ -70,6 +101,7 @@ public class CursorManager : MonoBehaviour
             if (interactuable != null)
             {
                 CambiarCursor(cursorInteractuar);
+                SetVisualColor(targetColor);
 
                 if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
                 {
@@ -88,6 +120,7 @@ public class CursorManager : MonoBehaviour
         }
 
         CambiarCursor(cursorNormal);
+        SetVisualColor(targetColor);
     }
 
     private void FixedUpdate()
@@ -115,6 +148,11 @@ public class CursorManager : MonoBehaviour
     void CambiarCursor(Texture2D tex)
     {
         if (tex == null) return;
+        if (tex != lastCursorTexture)
+        {
+            lastCursorTexture = tex;
+            Debug.Log($"[UI_DEBUG] Textura de cursor cambiada a: {tex.name}");
+        }
         Vector2 centroReal = new Vector2(tex.width / 2f, tex.height / 2f);
         Cursor.SetCursor(tex, centroReal, CursorMode.Auto);
     }
