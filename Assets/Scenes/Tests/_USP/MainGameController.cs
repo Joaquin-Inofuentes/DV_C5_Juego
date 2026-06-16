@@ -23,7 +23,9 @@ public class MainGameController : MonoBehaviour
         transicionInicioPos = transform.position;
     }
 
-    void FixedUpdate()
+    private float lastLogTime;
+
+    void Update()
     {
         if (leaderManager == null) return;
 
@@ -61,6 +63,12 @@ public class MainGameController : MonoBehaviour
                 if (imgAmmo != null)
                 {
                     imgAmmo.fillAmount = Mathf.Clamp01((float)m.ammoActual / m.ammoMax);
+                }
+
+                if (Time.time - lastLogTime > 0.5f)
+                {
+                    lastLogTime = Time.time;
+                    Debug.Log($"[UI_DEBUG] Lider: {specName} | HP Fill: {(imgHP != null ? imgHP.fillAmount : 0):F2} | Ammo Fill: {(imgAmmo != null ? imgAmmo.fillAmount : 0):F2}");
                 }
             }
         }
