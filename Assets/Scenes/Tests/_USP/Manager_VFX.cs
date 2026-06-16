@@ -59,17 +59,20 @@ public class Manager_VFX : MonoBehaviour
     /// </summary>
     public GameObject SpawnVFX(string effectName, Vector3 position)
     {
-        if (string.IsNullOrEmpty(effectName)) return null;
         if (pooledObjects.Count == 0) return null;
 
-        // Buscar el prefab correspondiente por nombre
-        GameObject targetPrefab = vfxPrefabs.Find(p => p != null && p.name.Equals(effectName, System.StringComparison.OrdinalIgnoreCase));
-        if (targetPrefab == null)
+        GameObject targetPrefab = null;
+        if (!string.IsNullOrEmpty(effectName))
         {
-            Debug.LogError($"[Manager_VFX] ¡Error! No se encontró ningún prefab de VFX con el nombre '{effectName}'. Usando el primero por defecto.");
-            // Usamos el de respaldo (primer prefab)
+            targetPrefab = vfxPrefabs.Find(p => p != null && p.name.Equals(effectName, System.StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (targetPrefab == null && vfxPrefabs.Count > 0)
+        {
             targetPrefab = vfxPrefabs[0];
         }
+
+        if (targetPrefab == null) return null;
 
         // Obtener el siguiente objeto del pool circular
         GameObject obj = pooledObjects[currentPoolIndex];
