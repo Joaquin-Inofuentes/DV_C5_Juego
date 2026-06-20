@@ -177,6 +177,12 @@ public class UnitModel : MonoBehaviour, IHealth
 
     public void TakeDamage(float amount, GameObject attacker)
     {
+        if (gameObject.name.Contains("J_") && Destruible.ModoDios)
+        {
+            Debug.Log("Estas en modo dios. No recibes dano");
+            return;
+        }
+
         if (IsDown) return;
         healthActual -= amount;
         if (healthActual < 0) healthActual = 0;

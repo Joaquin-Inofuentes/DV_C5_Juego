@@ -361,6 +361,7 @@ MonoBehaviour:
   unitCollider: {fileID: 0}
   target: {fileID: 0}
   targetPos: {x: 0, y: 0, z: 0}
+  detector: {fileID: 0}
   isWaitingOrder: 0
   isDown: 0
   revivalInputTimer: 0
@@ -381,11 +382,12 @@ MonoBehaviour:
   unitName: Unit
   team: 1
   isPlayerControlled: 0
+  isCamper: 0
   specialization: 4
   healthMax: 100
   healthActual: 100
   reviveHealthPercent: 0.3
-  damage: 5
+  damage: 2
   fireRate: 0.1
   dispersionAngle: 12
   ammoActual: 300
@@ -397,10 +399,12 @@ MonoBehaviour:
   maxStamina: 3
   currentStamina: 3
   lastSpecialization: 4
-  lastDamage: 5
+  lastDamage: 2
   lastFireRate: 0.1
   lastHealthMax: 100
   lastDispersionAngle: 12
+  lastAttackRange: 7
+  lastDetectionRange: 12
 --- !u!114 &2983668425057584109
 MonoBehaviour:
   m_ObjectHideFlags: 0

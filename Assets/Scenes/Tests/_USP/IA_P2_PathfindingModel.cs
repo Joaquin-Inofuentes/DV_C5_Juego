@@ -14,6 +14,11 @@ public class IA_P2_PathfindingModel : MonoBehaviour
     [Header("Puntos del Grafo")]
     public List<IA_P2_PathNode> allNodes = new List<IA_P2_PathNode>();
 
+    [Header("Optimización")]
+    [Tooltip("Tiempo mínimo en segundos entre cada recálculo completo.")]
+    public float cooldownRecalculo = 1f;
+    private float ultimoRecalculo = -9999f; // Valor inicial bajo para que el primer cálculo ocurra inmediatamente
+
     public static IA_P2_PathfindingModel Instance;
 
 
@@ -25,6 +30,8 @@ public class IA_P2_PathfindingModel : MonoBehaviour
     public void OnEnable()
     {
         Instance = this;
+        // Forzamos el recalculo al habilitar ignorando el cooldown si es necesario
+        // O lo dejamos pasar por la validación
         ReCalcularVecinos();
     }
 
@@ -35,6 +42,14 @@ public class IA_P2_PathfindingModel : MonoBehaviour
     // ---------------------------------------------------------
     public void ReCalcularVecinos()
     {
+        // VERIFICACIÓN CLAVE: Si no ha pasado el tiempo suficiente, ignoramos la llamada
+        if (Time.time - ultimoRecalculo < cooldownRecalculo)
+        {
+            return;
+        }
+
+        ultimoRecalculo = Time.time; // Registramos el momento de este recálculo
+
         allNodes = new List<IA_P2_PathNode>(FindObjectsOfType<IA_P2_PathNode>());
         GenerateNeighbors();
     }
@@ -83,9 +98,4 @@ public class IA_P2_PathfindingModel : MonoBehaviour
             }
         }
     }
-
-
-
-
-
 }

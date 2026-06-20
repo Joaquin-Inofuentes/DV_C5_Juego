@@ -29,6 +29,10 @@ public class GEN_Inputs : MonoBehaviour
 
     public event Action<bool> OnCycleLeader;  // false = Q (izq), true = E (der)
     public event Action<int>  OnOrdenDirecta; // 0/1/2 → teclas 1/2/3
+
+
+    public GameObject ModoDiosActivo;
+
     public void Awake()
     {
         OnEnable();
@@ -89,6 +93,7 @@ public class GEN_Inputs : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1)) TriggerOrdenDirecta(0);
         if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2)) TriggerOrdenDirecta(1);
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) TriggerOrdenDirecta(2);
+        if (Input.GetKeyDown(KeyCode.G)) ActivarModoDios();
 
         // 7. Regresar a formación: Z
         RegresarAFormacion = Input.GetKeyDown(KeyCode.Z);
@@ -99,6 +104,13 @@ public class GEN_Inputs : MonoBehaviour
 
         // 9. Sprint
         SprintInput = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+    }
+
+    private void ActivarModoDios()
+    {
+        Debug.Log("Cambio a modo dios " + Destruible.ModoDios);
+        Destruible.ModoDios = !Destruible.ModoDios;
+        ModoDiosActivo.SetActive(Destruible.ModoDios);
     }
 
     private void TriggerOrdenDirecta(int index)

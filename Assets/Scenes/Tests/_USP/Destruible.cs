@@ -8,8 +8,16 @@ public class Destruible : MonoBehaviour, IDaniable
     public float vida = 100f;
     public float maxVida = 100f;
 
+    public static bool ModoDios = false;
+
     public void RecibirDano(int cantidad, GameObject atacante)
     {
+        if(gameObject.name.Contains("J_") && ModoDios)
+        {
+            Debug.Log("Estas en modo dios");
+            return;
+        }
+
         // 1. Si el objeto es una UNIDAD (Soldado o Enemigo unificado)
         UnitController unit = GetComponent<UnitController>();
         if (unit != null)
