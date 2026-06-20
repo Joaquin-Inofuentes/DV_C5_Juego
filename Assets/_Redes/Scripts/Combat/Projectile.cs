@@ -1,6 +1,7 @@
 using Fusion;
 using UnityEngine;
 using Redes.Core;
+using NetworkPlayer = Redes.Player.NetworkPlayer;
 
 namespace Redes.Combat
 {
@@ -25,15 +26,49 @@ namespace Redes.Combat
         // Server-side despawn timer.
         [Networked] public TickTimer Life { get; set; }
 
+        public int Damage { get => _damage; set => _damage = value; }
+
         public override void Spawned()
         {
-            // TODO (other agent): if (Object.HasStateAuthority) Life = TickTimer.CreateFromSeconds(Runner, _lifeTime);
+            if (Object.HasStateAuthority)
+            {
+                Life = TickTimer.CreateFromSeconds(Runner, _lifeTime);
+            }
         }
 
         public override void FixedUpdateNetwork()
         {
-            // TODO (other agent): move forward; on overlap with IDamageable -> TakeDamage(_damage, Owner);
-            // then Runner.Despawn(Object). Despawn when Life.Expired(Runner).
+            if (!Object.HasStateAuthority) return;
+
+            transform.position += transform.forward * _speed * Runner.DeltaTime;
+
+            if (Life.Expired(Runner))
+            {
+                Runner.Despawn(Object);
+                return;
+            }
+
+            Collider[] hits = new Collider[5];
+            int hitCount = Runner.GetPhysicsScene().OverlapSphere(transform.position, 0.3f, hits, -1, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < hitCount; i++)
+            {
+                var hit = hits[i];
+                if (hit == null || hit.isTrigger) continue;
+
+                var damageable = hit.GetComponentInParent<IDamageable>();
+                if (damageable != null && damageable.IsAlive)
+                {
+                    var netPlayer = hit.GetComponentInParent<NetworkPlayer>();
+                    if (netPlayer != null && netPlayer.Object.InputAuthority == Owner)
+                    {
+                        continue;
+                    }
+
+                    damageable.TakeDamage(_damage, Owner);
+                    Runner.Despawn(Object);
+                    return;
+                }
+            }
         }
     }
 }

@@ -18,14 +18,22 @@ namespace Redes.Controllers
         [Header("View (assigned by Tools > Redes > Link & Assign All)")]
         [SerializeField] private ResultView _resultView;
 
+        public event System.Action<MatchResult> OnMatchFinished;
+
         private void OnEnable()
         {
-            // TODO (other agent): _resultView.OnResultNotified += HandleResultNotified;
+            if (_resultView != null)
+            {
+                _resultView.OnResultNotified += HandleResultNotified;
+            }
         }
 
         private void OnDisable()
         {
-            // TODO (other agent): _resultView.OnResultNotified -= HandleResultNotified;
+            if (_resultView != null)
+            {
+                _resultView.OnResultNotified -= HandleResultNotified;
+            }
         }
 
         /// <summary>
@@ -34,12 +42,15 @@ namespace Redes.Controllers
         /// </summary>
         public void NotifyResult(MatchResult result)
         {
-            _resultView.ShowResult(result);
+            if (_resultView != null)
+            {
+                _resultView.ShowResult(result);
+            }
         }
 
         private void HandleResultNotified(MatchResult result)
         {
-            // TODO (other agent): tell GameFlowController/model the match finished.
+            OnMatchFinished?.Invoke(result);
         }
     }
 }

@@ -25,10 +25,37 @@ namespace Redes.Player
         public const string PARAM_SHOOT   = "Shoot";
         public const string PARAM_DEAD    = "Dead";
 
+        private PlayerMovement _movement;
+        private PlayerHealth _health;
+        private PlayerShooting _shooting;
+        private int _lastShootCount;
+
+        private void Awake()
+        {
+            _movement = GetComponent<PlayerMovement>();
+            _health = GetComponent<PlayerHealth>();
+            _shooting = GetComponent<PlayerShooting>();
+        }
+
         public override void Render()
         {
-            // TODO (other agent): read networked state and update _animator parameters,
-            // e.g. _animator.SetFloat(PARAM_SPEED, velocity);
+            if (_animator == null) return;
+
+            if (_movement != null)
+            {
+                _animator.SetFloat(PARAM_SPEED, _movement.NetworkVelocity.magnitude);
+            }
+
+            if (_health != null)
+            {
+                _animator.SetBool(PARAM_DEAD, !_health.IsAlive);
+            }
+
+            if (_shooting != null && _shooting.ShootCount != _lastShootCount)
+            {
+                _lastShootCount = _shooting.ShootCount;
+                _animator.SetTrigger(PARAM_SHOOT);
+            }
         }
     }
 }

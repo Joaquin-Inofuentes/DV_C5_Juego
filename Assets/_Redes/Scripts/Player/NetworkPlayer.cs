@@ -1,6 +1,7 @@
 using Fusion;
 using UnityEngine;
 using Redes.Core;
+using Redes.Network;
 
 namespace Redes.Player
 {
@@ -31,23 +32,70 @@ namespace Redes.Player
         public AmmoSystem Ammo => _ammo;
         public PlayerAnimationController Animation => _animation;
 
+        [Networked] private NetworkButtons _previousButtons { get; set; }
+
         public override void Spawned()
         {
             // REQUIRED LOG -> "Inicio el jugador A" / "Inicio el Jugador B"
             // (We tag with the InputAuthority; player 0 == A, player 1 == B.)
             RedesLog.Info(RedesLog.PLAYER, $"Inicio el jugador {Object.InputAuthority}");
 
+            Color playerColor = (Object.InputAuthority.PlayerId % 2 == 0) ? Color.blue : Color.red;
+            var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = playerColor;
+            }
+            else
+            {
+                var renderer = GetComponentInChildren<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material.color = playerColor;
+                }
+            }
+
             if (Object.HasInputAuthority)
             {
-                // TODO (other agent): find the scene PlayerController and call Bind(this);
-                // and set up the local camera follow.
+                var pc = FindFirstObjectByType<Redes.Controllers.PlayerController>();
+                pc?.Bind(this);
+
+                if (Camera.main != null)
+                {
+                    Camera.main.transform.position = transform.position + new Vector3(0, 15f, -10f);
+                    Camera.main.transform.rotation = Quaternion.Euler(60f, 0, 0);
+                }
+            }
+        }
+
+        public override void Render()
+        {
+            if (Object.HasInputAuthority && Camera.main != null)
+            {
+                Camera.main.transform.position = transform.position + new Vector3(0, 15f, -10f);
+                Camera.main.transform.rotation = Quaternion.Euler(60f, 0, 0);
             }
         }
 
         public override void FixedUpdateNetwork()
         {
-            // TODO (other agent): read GetInput() and drive _movement / _shooting / _ammo.
-            // Running here keeps server & clients in sync (no desfase).
+            if (GetInput(out NetworkInputData data))
+            {
+                _movement.SetInput(data);
+
+                var pressed = data.Buttons.GetPressed(_previousButtons);
+                _previousButtons = data.Buttons;
+
+                if (pressed.IsSet(InputButton.Fire))
+                {
+                    _shooting.Fire();
+                }
+
+                if (pressed.IsSet(InputButton.Reload))
+                {
+                    _ammo.StartReload();
+                }
+            }
         }
     }
 }

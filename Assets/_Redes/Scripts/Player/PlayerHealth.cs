@@ -24,13 +24,29 @@ namespace Redes.Player
         [SerializeField] private MatchNetworkController _matchNetwork;
 
         // Networked source of truth. OnChanged hook updates the HUD on every client.
-        [Networked] public int CurrentHealth { get; set; }
+        [Networked, OnChangedRender(nameof(OnHealthChangedRender))] public int CurrentHealth { get; set; }
 
         public bool IsAlive => CurrentHealth > 0;
 
+        public event System.Action<int> OnHealthChanged;
+
+        private void OnHealthChangedRender()
+        {
+            OnHealthChanged?.Invoke(CurrentHealth);
+        }
+
         public override void Spawned()
         {
-            // TODO (other agent): if (Object.HasStateAuthority) CurrentHealth = _maxHealth;
+            if (_matchNetwork == null)
+            {
+                _matchNetwork = FindFirstObjectByType<MatchNetworkController>();
+            }
+
+            if (Object.HasStateAuthority)
+            {
+                CurrentHealth = _maxHealth;
+            }
+            OnHealthChanged?.Invoke(CurrentHealth);
         }
 
         public void TakeDamage(int amount, PlayerRef attacker)
@@ -38,16 +54,19 @@ namespace Redes.Player
             // REQUIRED LOG -> "El jugador B recibio el impacto"
             RedesLog.Info(RedesLog.COMBAT, $"El jugador {Object.InputAuthority} recibio el impacto");
 
-            // TODO (other agent): only the State Authority mutates CurrentHealth.
-            // CurrentHealth -= amount;
+            if (!Object.HasStateAuthority) return;
+
+            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
 
             if (!IsAlive)
             {
                 // REQUIRED LOG -> "El jugador A Perdio"
                 RedesLog.Info(RedesLog.MATCH, $"El jugador {Object.InputAuthority} Perdio");
 
-                // TODO (other agent): announce to everyone who lost (and thus who won):
-                // _matchNetwork.AnnounceResult(loser: Object.InputAuthority, winner: attacker);
+                if (_matchNetwork != null)
+                {
+                    _matchNetwork.AnnounceResult(loser: Object.InputAuthority, winner: attacker);
+                }
             }
         }
     }

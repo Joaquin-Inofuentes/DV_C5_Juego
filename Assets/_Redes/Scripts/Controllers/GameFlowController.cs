@@ -37,48 +37,107 @@ namespace Redes.Controllers
         private void Awake()
         {
             _model = new GameStateModel();
-            // TODO (other agent): subscribe to _model.OnPhaseChanged -> update views.
+            _model.OnPhaseChanged += HandlePhaseChanged;
         }
 
         private void OnEnable()
         {
-            // TODO (other agent): subscribe to network events:
-            // NetworkService.OnHostStarted        += HandleHostStarted;
-            // NetworkService.OnPlayerCountChanged += HandlePlayerCountChanged;
-            // NetworkService.OnEnoughPlayersToStart += HandleEnoughPlayers;
-            // _lobbyView.HostButton.onClick.AddListener(StartHost);
+            if (NetworkService != null)
+            {
+                NetworkService.OnHostStarted        += HandleHostStarted;
+                NetworkService.OnPlayerCountChanged += HandlePlayerCountChanged;
+                NetworkService.OnEnoughPlayersToStart += HandleEnoughPlayers;
+            }
+            if (_lobbyView != null && _lobbyView.HostButton != null)
+            {
+                _lobbyView.HostButton.onClick.AddListener(StartHost);
+            }
+            if (_matchController != null)
+            {
+                _matchController.OnMatchFinished += HandleMatchFinished;
+            }
         }
 
         private void OnDisable()
         {
-            // TODO (other agent): unsubscribe everything subscribed in OnEnable.
+            if (NetworkService != null)
+            {
+                NetworkService.OnHostStarted        -= HandleHostStarted;
+                NetworkService.OnPlayerCountChanged -= HandlePlayerCountChanged;
+                NetworkService.OnEnoughPlayersToStart -= HandleEnoughPlayers;
+            }
+            if (_lobbyView != null && _lobbyView.HostButton != null)
+            {
+                _lobbyView.HostButton.onClick.RemoveListener(StartHost);
+            }
+            if (_matchController != null)
+            {
+                _matchController.OnMatchFinished -= HandleMatchFinished;
+            }
         }
 
         // ---- Intent: user pressed "Host" ----
         public void StartHost()
         {
-            // Required "Inicio el juego" log is emitted inside HostNetworkService.StartAsHost().
             NetworkService.StartAsHost();
             _model.SetPhase(GamePhase.SearchingSession);
         }
 
-        // ---- Handlers (stubs) ----
+        private void HandlePhaseChanged(GamePhase phase)
+        {
+            switch (phase)
+            {
+                case GamePhase.Booting:
+                case GamePhase.SearchingSession:
+                    if (_lobbyView != null)
+                    {
+                        _lobbyView.SetVisible(true);
+                        _lobbyView.ShowStatus("Buscando sala...");
+                    }
+                    if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    break;
+                case GamePhase.WaitingForPlayers:
+                    if (_lobbyView != null)
+                    {
+                        _lobbyView.SetVisible(true);
+                        _lobbyView.ShowStatus("Esperando jugadores...");
+                    }
+                    if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    break;
+                case GamePhase.Playing:
+                    if (_lobbyView != null) _lobbyView.SetVisible(false);
+                    if (_gameHudView != null) _gameHudView.SetVisible(true);
+                    break;
+                case GamePhase.Finished:
+                    if (_lobbyView != null) _lobbyView.SetVisible(false);
+                    if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    break;
+            }
+        }
+
+        // ---- Handlers ----
         private void HandleHostStarted()
         {
             _model.SetPhase(GamePhase.WaitingForPlayers);
-            // TODO (other agent): _lobbyView.ShowStatus("Esperando jugadores...");
+            if (_lobbyView != null) _lobbyView.ShowStatus("Esperando jugadores...");
         }
 
         private void HandlePlayerCountChanged(int count)
         {
             _model.SetPlayers(count);
-            // TODO (other agent): _lobbyView.ShowPlayerCount(count);
+            if (_lobbyView != null) _lobbyView.ShowPlayerCount(count);
         }
 
         private void HandleEnoughPlayers()
         {
             _model.SetPhase(GamePhase.Playing);
-            // TODO (other agent): _lobbyView.SetVisible(false); _gameHudView.SetVisible(true);
+            if (_lobbyView != null) _lobbyView.SetVisible(false);
+            if (_gameHudView != null) _gameHudView.SetVisible(true);
+        }
+
+        private void HandleMatchFinished(MatchResult result)
+        {
+            _model.SetPhase(GamePhase.Finished);
         }
     }
 }

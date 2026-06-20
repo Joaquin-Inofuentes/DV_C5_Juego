@@ -25,24 +25,37 @@ namespace Redes.Network
         public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab)
         {
             RedesLog.Info(RedesLog.NET, $"Spawneando jugador para PlayerRef={player}");
-            // TODO (other agent):
-            // Vector3 pos = GetSpawnPosition(player);
-            // var obj = runner.Spawn(prefab, pos, Quaternion.identity, player);
-            // _spawned[player] = obj;
+            Vector3 pos = GetSpawnPosition(player);
+            var obj = runner.Spawn(prefab, pos, Quaternion.identity, player);
+            _spawned[player] = obj;
         }
 
         public void DespawnPlayer(NetworkRunner runner, PlayerRef player)
         {
             RedesLog.Info(RedesLog.NET, $"Despawneando jugador PlayerRef={player}");
-            // TODO (other agent):
-            // if (_spawned.TryGetValue(player, out var obj)) { runner.Despawn(obj); _spawned.Remove(player); }
+            if (_spawned.TryGetValue(player, out var obj))
+            {
+                runner.Despawn(obj);
+                _spawned.Remove(player);
+            }
         }
 
         // Helper for the other agent to pick a spawn position.
         private Vector3 GetSpawnPosition(PlayerRef player)
         {
-            // TODO (other agent): use _spawnPoints if assigned.
-            return Vector3.zero;
+            Vector3 basePos = Vector3.zero;
+            if (_spawnPoints != null && _spawnPoints.Length > 0)
+            {
+                basePos = _spawnPoints[player.PlayerId % _spawnPoints.Length].position;
+            }
+            else
+            {
+                basePos = new Vector3(player.PlayerId * 3f, 0f, 0f);
+            }
+
+            // Always add a slight offset depending on player ID to guarantee no exact collision overlaps
+            basePos += new Vector3(player.PlayerId * 2f, 0f, player.PlayerId * 2f);
+            return basePos;
         }
     }
 }

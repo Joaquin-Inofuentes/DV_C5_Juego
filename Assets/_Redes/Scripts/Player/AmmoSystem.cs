@@ -19,37 +19,60 @@ namespace Redes.Player
         [SerializeField] private float _reloadTime = GameConstants.DEFAULT_RELOAD_TIME;
 
         // Networked state.
-        [Networked] public int CurrentAmmo { get; set; }
+        [Networked, OnChangedRender(nameof(OnAmmoChangedRender))] public int CurrentAmmo { get; set; }
         [Networked] public NetworkBool IsReloading { get; set; }
         // Server-authoritative timer for the reload duration.
         [Networked] public TickTimer ReloadTimer { get; set; }
 
         public bool HasAmmo => CurrentAmmo > 0;
 
+        public event System.Action<int> OnAmmoChanged;
+
+        private void OnAmmoChangedRender()
+        {
+            OnAmmoChanged?.Invoke(CurrentAmmo);
+        }
+
         public override void Spawned()
         {
-            // TODO (other agent): if (Object.HasStateAuthority) CurrentAmmo = _magazineSize;
+            if (Object.HasStateAuthority)
+            {
+                CurrentAmmo = _magazineSize;
+            }
+            OnAmmoChanged?.Invoke(CurrentAmmo);
         }
 
         /// <summary>Consume one round. Returns false if empty.</summary>
         public bool TryConsume()
         {
-            // TODO (other agent): decrement CurrentAmmo if > 0.
-            return HasAmmo;
+            if (IsReloading || CurrentAmmo <= 0) return false;
+            CurrentAmmo--;
+            return true;
         }
 
         /// <summary>Begin reloading.</summary>
         public void StartReload()
         {
+            if (IsReloading || CurrentAmmo == _magazineSize) return;
+
             // REQUIRED-STYLE FLAG LOG
             RedesLog.Info(RedesLog.AMMO, $"El jugador {Object.InputAuthority} esta recargando");
-            // TODO (other agent): set IsReloading = true; ReloadTimer = TickTimer.CreateFromSeconds(Runner, _reloadTime);
+            
+            if (Object.HasStateAuthority)
+            {
+                IsReloading = true;
+                ReloadTimer = TickTimer.CreateFromSeconds(Runner, _reloadTime);
+            }
         }
 
         public override void FixedUpdateNetwork()
         {
-            // TODO (other agent): when ReloadTimer.Expired(Runner) -> refill magazine,
-            // set IsReloading = false, log "Recarga completa".
+            if (Object.HasStateAuthority && IsReloading && ReloadTimer.Expired(Runner))
+            {
+                CurrentAmmo = _magazineSize;
+                IsReloading = false;
+                RedesLog.Info(RedesLog.AMMO, "Recarga completa");
+            }
         }
     }
 }

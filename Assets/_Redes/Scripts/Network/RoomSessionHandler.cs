@@ -7,53 +7,68 @@ namespace Redes.Network
     /// <summary>
     /// SOLID/SRP: the ONLY thing this class decides is
     /// "create a new room" vs. "join an existing one", based on the session list.
-    ///
-    /// It is a plain C# class (not a MonoBehaviour) so it is trivially testable.
-    /// It holds a reference to HostNetworkService to ask it to start a session.
-    ///
-    /// Logic is implemented by another agent; only the required logs + structure
-    /// are present here.
     /// </summary>
     public class RoomSessionHandler : ISessionListHandler
     {
         private readonly HostNetworkService _service;
+        private bool _starting = false;
 
         public RoomSessionHandler(HostNetworkService service)
         {
             _service = service;
         }
 
-        public void HandleSessionList(NetworkRunner runner, List<SessionInfo> sessionList)
+        public async void HandleSessionList(NetworkRunner runner, List<SessionInfo> sessionList)
         {
-            bool noSessions = sessionList == null || sessionList.Count == 0;
+            if (_starting) return;
+            _starting = true;
 
-            if (noSessions)
+            try
             {
-                // --- CREATE PATH ---
-                // REQUIRED LOG -> "Se creo una sala llamada X"
-                RedesLog.Info(RedesLog.LOBBY, $"Se creo una sala llamada {GameConstants.DEFAULT_ROOM_NAME}");
+                bool noSessions = sessionList == null || sessionList.Count == 0;
+                var sceneMgr = runner.GetComponent<NetworkSceneManagerDefault>() ?? runner.gameObject.AddComponent<NetworkSceneManagerDefault>();
 
-                // REQUIRED LOG -> "Se esta esperando al otro jugador"
-                RedesLog.Info(RedesLog.LOBBY, "Se esta esperando al otro jugador");
+                var currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+                var sceneRef = SceneRef.FromIndex(currentSceneIndex);
 
-                // TODO (other agent): create the host session, e.g.
-                // _service.Runner.StartGame(new StartGameArgs {
-                //     GameMode = GameMode.Host,
-                //     SessionName = GameConstants.DEFAULT_ROOM_NAME });
+                if (noSessions)
+                {
+                    // --- CREATE PATH ---
+                    // REQUIRED LOG -> "Se creo una sala llamada X"
+                    RedesLog.Info(RedesLog.LOBBY, $"Se creo una sala llamada {GameConstants.DEFAULT_ROOM_NAME}");
+
+                    // REQUIRED LOG -> "Se esta esperando al otro jugador"
+                    RedesLog.Info(RedesLog.LOBBY, "Se esta esperando al otro jugador");
+
+                    await runner.StartGame(new StartGameArgs {
+                        GameMode = GameMode.Host,
+                        SessionName = GameConstants.DEFAULT_ROOM_NAME,
+                        PlayerCount = GameConstants.MAX_PLAYERS,
+                        SceneManager = sceneMgr,
+                        Scene = sceneRef
+                    });
+                }
+                else
+                {
+                    // --- JOIN PATH ---
+                    SessionInfo target = sessionList[0];
+
+                    // REQUIRED LOG -> "Se unio a la sala de X nombre y X datos"
+                    RedesLog.Info(RedesLog.LOBBY,
+                        $"Se unio a la sala de {target.Name} nombre y {target.PlayerCount}/{target.MaxPlayers} datos");
+
+                    await runner.StartGame(new StartGameArgs {
+                        GameMode = GameMode.Client,
+                        SessionName = target.Name,
+                        SceneManager = sceneMgr,
+                        Scene = sceneRef
+                    });
+                }
             }
-            else
+            catch (System.Exception ex)
             {
-                // --- JOIN PATH ---
-                SessionInfo target = sessionList[0];
-
-                // REQUIRED LOG -> "Se unio a la sala de X nombre y X datos"
-                RedesLog.Info(RedesLog.LOBBY,
-                    $"Se unio a la sala de {target.Name} nombre y {target.PlayerCount}/{target.MaxPlayers} datos");
-
-                // TODO (other agent): join the session, e.g.
-                // _service.Runner.StartGame(new StartGameArgs {
-                //     GameMode = GameMode.Client,
-                //     SessionName = target.Name });
+                RedesLog.Error(RedesLog.LOBBY, $"[RoomSessionHandler.HandleSessionList] Excepción capturada en método. Mensaje: {ex.Message}\nCallstack:\n{ex.StackTrace}");
+                _starting = false; // Reset starting so it can try again
             }
         }
     }

@@ -25,7 +25,7 @@ namespace Redes.Gameplay
         public void AnnounceResult(PlayerRef loser, PlayerRef winner)
         {
             RedesLog.Info(RedesLog.MATCH, $"Anunciando resultado a todos. Perdedor={loser}, Ganador={winner}");
-            // TODO (other agent): RpcAnnounceResult(loser, winner);
+            RpcAnnounceResult(loser, winner);
         }
 
         /// <summary>
@@ -34,12 +34,16 @@ namespace Redes.Gameplay
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         public void RpcAnnounceResult(PlayerRef loser, PlayerRef winner)
         {
-            // TODO (other agent): determine result for THIS client:
-            // var result = (Runner.LocalPlayer == loser) ? MatchResult.Lose : MatchResult.Win;
-            // _matchController.NotifyResult(result);
-            //
-            // The required "...recibio la notificacion de q gano/perdio con action"
-            // logs are emitted inside ResultView.ShowResult, fired via the Action.
+            if (_matchController == null)
+            {
+                _matchController = FindFirstObjectByType<MatchController>();
+            }
+
+            var result = (Runner.LocalPlayer == loser) ? MatchResult.Lose : MatchResult.Win;
+            if (_matchController != null)
+            {
+                _matchController.NotifyResult(result);
+            }
         }
     }
 }
