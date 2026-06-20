@@ -1,111 +1,93 @@
 {
   "ok": true,
-  "level": 1,
+  "level": 0,
   "projectPath": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets",
   "outputPath": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados",
-  "startedAt": "2026-06-11T22:01:58",
-  "durationMs": 26960,
+  "startedAt": "2026-06-19T23:35:17",
+  "durationMs": 3175,
   "stats": {
-    "folders": 23,
-    "filesAnalyzed": 153,
+    "folders": 33,
+    "filesAnalyzed": 189,
     "filesSkipped": 0,
-    "totalLines": 43774,
-    "code": 32725,
-    "comments": 2989,
-    "blank": 8060,
-    "namespaces": 14,
-    "classes": 397,
-    "interfaces": 16,
-    "methods": 1569,
-    "fields": 1264,
-    "properties": 242,
+    "totalLines": 47376,
+    "code": 35204,
+    "comments": 3604,
+    "blank": 8568,
+    "namespaces": 23,
+    "classes": 428,
+    "interfaces": 19,
+    "methods": 1730,
+    "fields": 1434,
+    "properties": 273,
     "errorCount": 0
   },
   "artifacts": [
     {
       "name": "summary.md",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\summary.md"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\summary.md",
+      "elapsedMs": 3
     },
     {
       "name": "documentacion.md",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\documentacion.md"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\documentacion.md",
+      "elapsedMs": 23
     },
     {
       "name": "roslyn-completo.md / .json",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\roslyn-completo.md"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\roslyn-completo.md",
+      "elapsedMs": 72
     },
     {
       "name": "project.json",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\project.json"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\project.json",
+      "elapsedMs": 37
     },
     {
       "name": "IA Index (.txt/jsonl)",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\IA_index.txt"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\IA_index.txt",
+      "elapsedMs": 53
     },
     {
       "name": "IA Relaciones (sistemas)",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\IA_Relaciones.txt"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\IA_Relaciones.txt",
+      "elapsedMs": 6
     },
     {
       "name": "classes.csv / methods.csv / relations.csv",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\classes.csv"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\classes.csv",
+      "elapsedMs": 24
     },
     {
       "name": "file-index.txt",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\file-index.txt"
-    },
-    {
-      "name": "classDiagram.puml",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\classDiagram.puml"
-    },
-    {
-      "name": "namespaces.puml / namespaces.mmd",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\namespaces.puml"
-    },
-    {
-      "name": "flowchart.mmd / classDiagram.mmd",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\classDiagram.mmd"
-    },
-    {
-      "name": "project.dgml",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\project.dgml"
-    },
-    {
-      "name": "*.puml -> *.svg (PlantUML)",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\classDiagram.svg"
-    },
-    {
-      "name": "flowchart.svg / classDiagram-mermaid.svg",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\flowchart.svg"
-    },
-    {
-      "name": "index.html",
-      "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\index.html"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\file-index.txt",
+      "elapsedMs": 2
     },
     {
       "name": "REPORTE_GLOBAL.md",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\REPORTE_GLOBAL.md"
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\REPORTE_GLOBAL.md",
+      "elapsedMs": 46
     },
     {
-      "name": "reporte.pdf",
+      "name": "MermaidRepair",
       "status": "OK",
-      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\reporte.pdf"
+      "reason": "4 md, 3 bloques, 0 reparado/s",
+      "elapsedMs": 39
+    },
+    {
+      "name": "_agente_indice.txt",
+      "status": "OK",
+      "path": "C:\\Users\\PC_JOACO\\Documents\\DV_C5_Juego\\Assets\\_Documentos generados\\_agente_indice.txt",
+      "reason": "59 archivos indexados",
+      "elapsedMs": 168
     }
   ],
   "errors": []
