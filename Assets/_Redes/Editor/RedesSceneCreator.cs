@@ -110,16 +110,55 @@ namespace Redes.EditorTools
             // --- Lobby ---
             var lobby = NewUiPanel("LobbyView", canvasGo.transform);
             lobby.AddComponent<LobbyView>();
-            NewText("StatusText", lobby.transform, font, "¿Crear sala o unirse?", new Vector2(0, 140), 28);
-            NewText("PlayerCountText", lobby.transform, font, "Jugadores: 0/2", new Vector2(0, 90), 24);
+            NewText("StatusText", lobby.transform, font, "¿Crear sala o unirse?", new Vector2(0, 180), 28);
+            NewText("PlayerCountText", lobby.transform, font, "Jugadores: 0/2", new Vector2(0, 130), 24);
             
-            var inputField = NewInputField("UsernameInput", lobby.transform, font, "Username", new Vector2(0, 30));
+            // Ingrese nombre aqui (Label/Title above input)
+            NewText("InputLabelText", lobby.transform, font, "Ingrese nombre aqui", new Vector2(0, 75), 24);
+            
+            var inputField = NewInputField("UsernameInput", lobby.transform, font, "Username", new Vector2(0, 25));
+            
+            // Layout container for the 3 name buttons
+            var nameButtonsLayout = new GameObject("NameButtonsLayout", typeof(RectTransform));
+            nameButtonsLayout.transform.SetParent(lobby.transform, false);
+            var layoutRt = nameButtonsLayout.GetComponent<RectTransform>();
+            layoutRt.anchoredPosition = new Vector2(0, -35);
+            layoutRt.sizeDelta = new Vector2(400, 50);
+            var hlg = nameButtonsLayout.AddComponent<HorizontalLayoutGroup>();
+            hlg.spacing = 10;
+            hlg.childAlignment = TextAnchor.MiddleCenter;
+            hlg.childControlWidth = true; hlg.childControlHeight = true;
+            
+            // The 3 generic name buttons with eye-catching hover/normal colors
+            var rambo = NewButton("RamboButton", nameButtonsLayout.transform, font, "Rambo", Vector2.zero);
+            rambo.GetComponent<Image>().color = new Color(0.6f, 0.1f, 0.1f); // Dark Red
+            var rColors = rambo.colors;
+            rColors.normalColor = new Color(0.6f, 0.1f, 0.1f);
+            rColors.highlightedColor = new Color(1.0f, 0.2f, 0.2f); // Bright Neon Red
+            rColors.selectedColor = new Color(1.0f, 0.2f, 0.2f);
+            rambo.colors = rColors;
+            
+            var t600 = NewButton("T600Button", nameButtonsLayout.transform, font, "T-600", Vector2.zero);
+            t600.GetComponent<Image>().color = new Color(0.6f, 0.4f, 0.0f); // Dark Orange/Gold
+            var tColors = t600.colors;
+            tColors.normalColor = new Color(0.6f, 0.4f, 0.0f);
+            tColors.highlightedColor = new Color(1.0f, 0.7f, 0.0f); // Bright Neon Gold
+            tColors.selectedColor = new Color(1.0f, 0.7f, 0.0f);
+            t600.colors = tColors;
+            
+            var lion = NewButton("LionButton", nameButtonsLayout.transform, font, "Lion", Vector2.zero);
+            lion.GetComponent<Image>().color = new Color(0.0f, 0.5f, 0.5f); // Teal
+            var lColors = lion.colors;
+            lColors.normalColor = new Color(0.0f, 0.5f, 0.5f);
+            lColors.highlightedColor = new Color(0.0f, 0.9f, 0.9f); // Bright Neon Cyan
+            lColors.selectedColor = new Color(0.0f, 0.9f, 0.9f);
+            lion.colors = lColors;
             
             var roomList = NewUiPanel("RoomList", lobby.transform);
             var roomListRt = roomList.GetComponent<RectTransform>();
             roomListRt.anchorMin = new Vector2(0.5f, 0.5f); roomListRt.anchorMax = new Vector2(0.5f, 0.5f);
-            roomListRt.sizeDelta = new Vector2(400, 200);
-            roomListRt.anchoredPosition = new Vector2(0, -100);
+            roomListRt.sizeDelta = new Vector2(400, 120);
+            roomListRt.anchoredPosition = new Vector2(0, -135);
             roomList.AddComponent<Image>().color = new Color(0, 0, 0, 0.5f);
             var vlg = roomList.AddComponent<VerticalLayoutGroup>();
             vlg.padding = new RectOffset(10, 10, 10, 10);
@@ -269,9 +308,9 @@ namespace Redes.EditorTools
             
             var colors = btn.colors;
             colors.normalColor = new Color(0.12f, 0.16f, 0.24f, 0.9f);
-            colors.highlightedColor = new Color(0.24f, 0.36f, 0.54f, 1f); // Vibrant blue highlight
+            colors.highlightedColor = new Color(0.44f, 0.12f, 0.94f, 1f); // Vibrant neon magenta/purple highlight
             colors.pressedColor = new Color(0.08f, 0.10f, 0.16f, 1f); // Deep dark blue pressed
-            colors.selectedColor = new Color(0.24f, 0.36f, 0.54f, 1f);
+            colors.selectedColor = new Color(0.44f, 0.12f, 0.94f, 1f); // Match highlighted
             colors.disabledColor = new Color(0.15f, 0.15f, 0.15f, 0.5f);
             btn.colors = colors;
 

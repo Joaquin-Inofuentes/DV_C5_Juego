@@ -207,7 +207,7 @@ namespace Redes.Gameplay
             RedesLog.Info(RedesLog.MATCH, "   MatchNetworkController: Broadcasting first status...");
             try
             {
-                RpcBroadcastRematchStatus("El otro jugador tambien quiere re intentar. Iniciando partida");
+                RpcBroadcastRematchStatus("Por favor espere eta cargando");
             }
             catch (System.Exception ex)
             {

@@ -210,7 +210,7 @@ namespace Redes.Controllers
             {
                 if (_lobbyView != null)
                 {
-                    _lobbyView.ShowStatus("¡Error: Introduce un nombre de usuario válido!");
+                    _lobbyView.ShowStatus("Debe ingresar un nombre");
                     _lobbyView.ShowButtons();
                 }
                 return;
@@ -237,7 +237,7 @@ namespace Redes.Controllers
             {
                 if (_lobbyView != null)
                 {
-                    _lobbyView.ShowStatus("¡Error: Introduce un nombre de usuario válido primero!");
+                    _lobbyView.ShowStatus("Debe ingresar un nombre");
                 }
                 return;
             }

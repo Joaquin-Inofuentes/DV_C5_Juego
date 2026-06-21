@@ -24,10 +24,30 @@ namespace Redes.Views
         [SerializeField] private Button _hostButton;  // "Crear Sala"
         [SerializeField] private Button _joinButton;  // "Unirse a Sala"
 
+        [Header("Generic Name Buttons")]
+        [SerializeField] private Button _ramboButton;
+        [SerializeField] private Button _t600Button;
+        [SerializeField] private Button _lionButton;
+
         public Button HostButton => _hostButton;
         public Button JoinButton => _joinButton;
         
         public string Username => _usernameInput != null ? _usernameInput.text : "Player";
+
+        private void Start()
+        {
+            if (_ramboButton != null) _ramboButton.onClick.AddListener(() => SetUsername("Rambo"));
+            if (_t600Button != null) _t600Button.onClick.AddListener(() => SetUsername("T600"));
+            if (_lionButton != null) _lionButton.onClick.AddListener(() => SetUsername("Lion"));
+        }
+
+        private void SetUsername(string name)
+        {
+            if (_usernameInput != null)
+            {
+                _usernameInput.text = name;
+            }
+        }
 
         public void ShowStatus(string message)
         {
