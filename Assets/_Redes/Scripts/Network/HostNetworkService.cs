@@ -361,9 +361,17 @@ namespace Redes.Network
             }
             else if (runner == _gameRunner)
             {
+                RedesLog.Trace(RedesLog.NET, "HostNetworkService", "OnShutdown", null, $"Game runner shut down. Reason={shutdownReason}. Triggering local return to lobby.");
                 IsRunning = false;
                 _isInSession = false;
                 _gameRunner = null;
+                
+                var flow = FindFirstObjectByType<GameFlowController>();
+                if (flow != null)
+                {
+                    flow.TriggerReturnToLobby();
+                }
+
                 if (shutdownReason != ShutdownReason.Ok && shutdownReason != ShutdownReason.GameClosed)
                     OnConnectionFailed?.Invoke($"Sesion terminada: {shutdownReason}");
             }

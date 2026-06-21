@@ -174,12 +174,15 @@ namespace Redes.Gameplay
 
         private System.Collections.IEnumerator AutoReturnToLobbyCoroutine()
         {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "AutoReturnToLobbyCoroutine [IN]", Runner.LocalPlayer.ToString(), "Waiting before returning to lobby...");
             yield return new WaitForSeconds(1.5f);
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "AutoReturnToLobbyCoroutine", Runner.LocalPlayer.ToString(), "Timer elapsed. Finding GameFlowController to exit...");
             var flow = FindFirstObjectByType<GameFlowController>();
             if (flow != null)
             {
                 flow.TriggerReturnToLobby();
             }
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "AutoReturnToLobbyCoroutine [OUT]", Runner.LocalPlayer.ToString(), "AutoReturn sequence finished");
         }
 
         private System.Collections.IEnumerator RematchSequenceCoroutine()
