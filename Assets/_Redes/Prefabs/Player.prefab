@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _body: {fileID: 2340365164070402362}
+  _NetworkVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &6760933024892967536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +237,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 1849421110313875080, guid: 5b13455fdbadb5f429b0698f40a51977, type: 3}
   _ammo: {fileID: 3109412577341739674}
   _damage: 25
+  _ShootCount: 0
 --- !u!114 &427579071385923016
 MonoBehaviour:
   m_ObjectHideFlags: 0
