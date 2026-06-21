@@ -51,8 +51,30 @@ namespace Redes.Player
         [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
         private void RpcSetNickname(string nickname)
         {
-            NetNickname = nickname;
-            RedesLog.Info(RedesLog.PLAYER, $"[Server Nickname Set] Player {Object.InputAuthority} set to '{nickname}'");
+            string finalNickname = nickname;
+            
+            // Check for duplicates on the server among all currently spawned NetworkPlayers
+            int attempts = 1;
+            bool nameExists = true;
+            while (nameExists)
+            {
+                nameExists = false;
+                foreach (var otherPlayer in Runner.ActivePlayers)
+                {
+                    if (otherPlayer == Object.InputAuthority) continue;
+                    var otherNp = Runner.GetPlayerObject(otherPlayer)?.GetComponent<NetworkPlayer>();
+                    if (otherNp != null && otherNp != this && otherNp.Nickname == finalNickname)
+                    {
+                        nameExists = true;
+                        attempts++;
+                        finalNickname = $"{nickname} {attempts}";
+                        break;
+                    }
+                }
+            }
+
+            NetNickname = finalNickname;
+            RedesLog.Info(RedesLog.PLAYER, $"[Server Nickname Set] Player {Object.InputAuthority} set to '{finalNickname}'");
         }
 
         public override void Spawned()
