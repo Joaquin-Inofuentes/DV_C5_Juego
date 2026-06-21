@@ -60,7 +60,8 @@ namespace Redes.EditorTools
             Assign(lobby,
                 ("_statusText", ChildText(lobby, "StatusText")),
                 ("_playerCountText", ChildText(lobby, "PlayerCountText")),
-                ("_hostButton", ChildComp<Button>(lobby, "HostButton")));
+                ("_hostButton", ChildComp<Button>(lobby, "HostButton")),
+                ("_joinButton", ChildComp<Button>(lobby, "JoinButton")));
             Assign(hud,
                 ("_healthText", ChildText(hud, "HealthText")),
                 ("_ammoText", ChildText(hud, "AmmoText")));

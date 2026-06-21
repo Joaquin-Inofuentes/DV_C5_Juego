@@ -17,12 +17,12 @@ namespace Redes.Network
         int ConnectedPlayers { get; }
 
         // --- Lifecycle (Host architecture) ---
-        // Implemented by another agent. Should start a NetworkRunner in GameMode.Host.
-        void StartAsHost();
+        void StartAsHost();   // Crea sala en GameMode.Host
+        void StartAsClient(); // Se une a sala en GameMode.Client
         void Shutdown();
 
         // --- Events the rest of the game subscribes to (Observer pattern) ---
-        event Action OnHostStarted;            // Local host runner is up.
+        event Action OnHostStarted;            // Runner activo (host o client).
         event Action<int> OnPlayerCountChanged; // Fired when players join/leave.
         event Action OnEnoughPlayersToStart;    // >= MIN_PLAYERS_TO_START reached.
     }

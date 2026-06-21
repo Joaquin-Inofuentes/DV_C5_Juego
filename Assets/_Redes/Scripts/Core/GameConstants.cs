@@ -15,7 +15,7 @@ namespace Redes.Core
         public const string DEFAULT_ROOM_NAME = "RedesRoom";
 
         // Max players allowed in a single Host session.
-        public const int MAX_PLAYERS = 4;
+        public const int MAX_PLAYERS = 2;
 
         // --- Gameplay tuning (values only; logic is implemented by another agent) ---
         public const float DEFAULT_MOVE_SPEED   = 5f;

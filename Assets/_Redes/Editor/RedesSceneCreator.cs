@@ -100,9 +100,10 @@ namespace Redes.EditorTools
             // --- Lobby ---
             var lobby = NewUiPanel("LobbyView", canvasGo.transform);
             lobby.AddComponent<LobbyView>();
-            NewText("StatusText", lobby.transform, font, "Presiona HOST para empezar", new Vector2(0, 120), 28);
-            NewText("PlayerCountText", lobby.transform, font, "Jugadores: 0/2", new Vector2(0, 70), 24);
-            NewButton("HostButton", lobby.transform, font, "HOST", new Vector2(0, 0));
+            NewText("StatusText", lobby.transform, font, "¿Crear sala o unirse?", new Vector2(0, 140), 28);
+            NewText("PlayerCountText", lobby.transform, font, "Jugadores: 0/2", new Vector2(0, 90), 24);
+            NewButton("HostButton", lobby.transform, font, "CREAR SALA", new Vector2(-130, 20));
+            NewButton("JoinButton", lobby.transform, font, "UNIRSE A SALA", new Vector2(130, 20));
 
             // --- HUD ---
             var hud = NewUiPanel("GameHudView", canvasGo.transform);

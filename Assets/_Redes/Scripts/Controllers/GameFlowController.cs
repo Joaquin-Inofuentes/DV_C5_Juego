@@ -7,14 +7,11 @@ using Redes.Views;
 namespace Redes.Controllers
 {
     /// <summary>
-    /// MVC - CONTROLLER for the overall flow (boot -> lobby -> playing -> finished).
+    /// MVC - CONTROLLER para el flujo general (boot → lobby → playing → finished).
     ///
-    /// It is the glue: it owns the GameStateModel, listens to the INetworkService
-    /// (host events) and updates the LobbyView / HUD accordingly.
-    /// Depends on the INetworkService ABSTRACTION (DIP), referenced via the
-    /// concrete HostNetworkService for the inspector.
-    ///
-    /// Logic is implemented by another agent; here is the wiring + structure.
+    /// Boot:  muestra lobby con botones "Crear Sala" / "Unirse".
+    /// Crear: llama StartAsHost() → espera jugadores → Playing al llegar 2.
+    /// Unirse: llama StartAsClient() → Playing cuando entra.
     /// </summary>
     public class GameFlowController : MonoBehaviour
     {
@@ -28,10 +25,7 @@ namespace Redes.Controllers
         [Header("Sub-controllers (assigned by the Link tool)")]
         [SerializeField] private MatchController _matchController;
 
-        // MVC Model owned by this controller (created at runtime).
         private GameStateModel _model;
-
-        // Treat the concrete service through its abstraction.
         private INetworkService NetworkService => _hostService;
 
         private void Awake()
@@ -40,74 +34,114 @@ namespace Redes.Controllers
             _model.OnPhaseChanged += HandlePhaseChanged;
         }
 
+        private void Start()
+        {
+            // Inicializa la UI con la fase actual (Booting → muestra lobby con botones)
+            HandlePhaseChanged(_model.Phase);
+        }
+
         private void OnEnable()
         {
             if (NetworkService != null)
             {
-                NetworkService.OnHostStarted        += HandleHostStarted;
-                NetworkService.OnPlayerCountChanged += HandlePlayerCountChanged;
+                NetworkService.OnHostStarted          += HandleHostStarted;
+                NetworkService.OnPlayerCountChanged   += HandlePlayerCountChanged;
                 NetworkService.OnEnoughPlayersToStart += HandleEnoughPlayers;
             }
-            if (_lobbyView != null && _lobbyView.HostButton != null)
+            if (_lobbyView != null)
             {
-                _lobbyView.HostButton.onClick.AddListener(StartHost);
+                if (_lobbyView.HostButton != null)
+                    _lobbyView.HostButton.onClick.AddListener(CreateRoom);
+                if (_lobbyView.JoinButton != null)
+                    _lobbyView.JoinButton.onClick.AddListener(JoinRoom);
             }
             if (_matchController != null)
-            {
                 _matchController.OnMatchFinished += HandleMatchFinished;
-            }
         }
 
         private void OnDisable()
         {
             if (NetworkService != null)
             {
-                NetworkService.OnHostStarted        -= HandleHostStarted;
-                NetworkService.OnPlayerCountChanged -= HandlePlayerCountChanged;
+                NetworkService.OnHostStarted          -= HandleHostStarted;
+                NetworkService.OnPlayerCountChanged   -= HandlePlayerCountChanged;
                 NetworkService.OnEnoughPlayersToStart -= HandleEnoughPlayers;
             }
-            if (_lobbyView != null && _lobbyView.HostButton != null)
+            if (_lobbyView != null)
             {
-                _lobbyView.HostButton.onClick.RemoveListener(StartHost);
+                if (_lobbyView.HostButton != null)
+                    _lobbyView.HostButton.onClick.RemoveListener(CreateRoom);
+                if (_lobbyView.JoinButton != null)
+                    _lobbyView.JoinButton.onClick.RemoveListener(JoinRoom);
             }
             if (_matchController != null)
-            {
                 _matchController.OnMatchFinished -= HandleMatchFinished;
-            }
         }
 
-        // ---- Intent: user pressed "Host" ----
-        public void StartHost()
+        // ---- Acciones de botones ----
+
+        public void CreateRoom()
         {
+            if (_lobbyView != null)
+            {
+                _lobbyView.HideButtons();
+                _lobbyView.ShowStatus("Creando sala...");
+            }
             NetworkService.StartAsHost();
             _model.SetPhase(GamePhase.SearchingSession);
         }
+
+        public void JoinRoom()
+        {
+            if (_lobbyView != null)
+            {
+                _lobbyView.HideButtons();
+                _lobbyView.ShowStatus("Uniéndose a sala...");
+            }
+            NetworkService.StartAsClient();
+            _model.SetPhase(GamePhase.SearchingSession);
+        }
+
+        // ---- Phase handler ----
 
         private void HandlePhaseChanged(GamePhase phase)
         {
             switch (phase)
             {
                 case GamePhase.Booting:
+                    if (_lobbyView != null)
+                    {
+                        _lobbyView.SetVisible(true);
+                        _lobbyView.ShowButtons();
+                    }
+                    if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    break;
+
                 case GamePhase.SearchingSession:
                     if (_lobbyView != null)
                     {
                         _lobbyView.SetVisible(true);
-                        _lobbyView.ShowStatus("Buscando sala...");
+                        _lobbyView.HideButtons();
+                        _lobbyView.ShowStatus("Conectando...");
                     }
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
                     break;
+
                 case GamePhase.WaitingForPlayers:
                     if (_lobbyView != null)
                     {
                         _lobbyView.SetVisible(true);
+                        _lobbyView.HideButtons();
                         _lobbyView.ShowStatus("Esperando jugadores...");
                     }
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
                     break;
+
                 case GamePhase.Playing:
                     if (_lobbyView != null) _lobbyView.SetVisible(false);
                     if (_gameHudView != null) _gameHudView.SetVisible(true);
                     break;
+
                 case GamePhase.Finished:
                     if (_lobbyView != null) _lobbyView.SetVisible(false);
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
@@ -115,11 +149,11 @@ namespace Redes.Controllers
             }
         }
 
-        // ---- Handlers ----
+        // ---- Network event handlers ----
+
         private void HandleHostStarted()
         {
             _model.SetPhase(GamePhase.WaitingForPlayers);
-            if (_lobbyView != null) _lobbyView.ShowStatus("Esperando jugadores...");
         }
 
         private void HandlePlayerCountChanged(int count)

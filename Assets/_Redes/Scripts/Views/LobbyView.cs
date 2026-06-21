@@ -1,30 +1,30 @@
 using UnityEngine;
-using UnityEngine.UI; // Legacy Text (Text component), as requested.
+using UnityEngine.UI;
 using Redes.Core;
 
 namespace Redes.Views
 {
     /// <summary>
-    /// MVC - VIEW for the lobby / connection state. ONLY draws UI.
-    /// Uses legacy UnityEngine.UI.Text (requirement).
-    /// The Link tool assigns these Text references from the scene Canvas.
+    /// MVC - VIEW para el lobby.
+    /// Muestra dos botones explícitos: "Crear Sala" y "Unirse a Sala".
+    /// El GameFlowController decide cuál acción ejecutar.
     /// </summary>
     public class LobbyView : MonoBehaviour
     {
         [Header("Legacy Text refs (assigned by Tools > Redes > Link & Assign All)")]
-        [SerializeField] private Text _statusText;     // "Esperando jugadores...", etc.
-        [SerializeField] private Text _playerCountText; // "Jugadores: 1/2"
+        [SerializeField] private Text _statusText;
+        [SerializeField] private Text _playerCountText;
 
-        [Header("Buttons (optional, assigned by Link tool)")]
-        [SerializeField] private Button _hostButton;   // Starts the Host flow.
+        [Header("Buttons (assigned by the Link tool)")]
+        [SerializeField] private Button _hostButton;  // "Crear Sala"
+        [SerializeField] private Button _joinButton;  // "Unirse a Sala"
 
-        /// <summary>Exposed so GameFlowController can wire the click. Logic by other agent.</summary>
         public Button HostButton => _hostButton;
+        public Button JoinButton => _joinButton;
 
         public void ShowStatus(string message)
         {
             if (_statusText != null) _statusText.text = message;
-            // TODO (other agent): any animation / show-hide.
         }
 
         public void ShowPlayerCount(int current)
@@ -33,9 +33,32 @@ namespace Redes.Views
                 _playerCountText.text = $"Jugadores: {current}/{GameConstants.MIN_PLAYERS_TO_START}";
         }
 
+        /// <summary>
+        /// Muestra solo los botones de selección (estado inicial).
+        /// </summary>
+        public void ShowButtons()
+        {
+            SetButtons(host: true, join: true);
+            ShowStatus("¿Crear sala o unirse?");
+        }
+
+        /// <summary>
+        /// Oculta botones mientras se conecta / espera.
+        /// </summary>
+        public void HideButtons()
+        {
+            SetButtons(host: false, join: false);
+        }
+
         public void SetVisible(bool visible)
         {
             gameObject.SetActive(visible);
+        }
+
+        private void SetButtons(bool host, bool join)
+        {
+            if (_hostButton != null) _hostButton.gameObject.SetActive(host);
+            if (_joinButton != null) _joinButton.gameObject.SetActive(join);
         }
     }
 }
