@@ -50,6 +50,8 @@ namespace Redes.Controllers
         private GameStateModel _model;
         private INetworkService NetworkService => _hostService;
 
+        private static string _pendingStatusMessage = null;
+
         // ──────────────────────────────────────────────────────────────────
         private void Awake()
         {
@@ -71,7 +73,24 @@ namespace Redes.Controllers
             else
             {
                 HandlePhaseChanged(_model.Phase);
+                
+                // Show any pending message from previous session failure
+                if (!string.IsNullOrEmpty(_pendingStatusMessage))
+                {
+                    if (_lobbyView != null)
+                    {
+                        _lobbyView.ShowStatus(_pendingStatusMessage);
+                    }
+                    _pendingStatusMessage = null;
+                }
             }
+
+            // Ensure lobby watch is started if we are in booting (and after a scene reload)
+            if (_hostService != null && _model.Phase == GamePhase.Booting)
+            {
+                _hostService.StartLobbyWatch();
+            }
+
             RedesLog.Info(RedesLog.BOOT, "<< GameFlowController.Start()");
         }
 
@@ -168,11 +187,10 @@ namespace Redes.Controllers
                 RedesLog.Error(RedesLog.LOBBY, $"   GameFlowController: [ERROR] Exception in TriggerReturnToLobby: {ex.Message}");
             }
             _model.SetPhase(GamePhase.Booting);
-            // Re-trigger watch so we look for lobbies again
-            if (_hostService != null)
-            {
-                _hostService.StartLobbyWatch();
-            }
+            
+            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby", null, "Reloading scene to ensure clean state...");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+
             RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby [OUT]", null, "Return to lobby completed");
         }
 
@@ -329,14 +347,18 @@ namespace Redes.Controllers
                 _lobbyView.ShowButtons();           // restaura host (join sigue deshabilitado)
                 
                 // Friendly message if normal game end/shutdown from server
+                string msg = "";
                 if (reason.Contains("DisconnectedByPluginLogic") || reason.Contains("ShutdownReason.Ok"))
                 {
-                    _lobbyView.ShowStatus("Partida finalizada. De vuelta al lobby.");
+                    msg = "Partida finalizada. De vuelta al lobby.";
                 }
                 else
                 {
-                    _lobbyView.ShowStatus($"Error: {reason}");
+                    msg = $"Error: {reason}";
                 }
+                
+                _lobbyView.ShowStatus(msg);
+                _pendingStatusMessage = msg;
             }
             RedesLog.Error(RedesLog.NET, "<< HandleConnectionFailed() - vuelto a Booting");
         }
