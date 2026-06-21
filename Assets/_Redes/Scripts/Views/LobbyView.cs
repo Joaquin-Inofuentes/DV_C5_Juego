@@ -39,7 +39,21 @@ namespace Redes.Views
         public void ShowButtons()
         {
             SetButtons(host: true, join: true);
-            ShowStatus("¿Crear sala o unirse?");
+            // Join siempre arranca deshabilitado hasta que OnRoomAvailabilityChanged(true) llegue
+            SetJoinButtonEnabled(false);
+            ShowStatus("Buscando salas...");
+        }
+
+        /// <summary>
+        /// Habilita o deshabilita el botón "Unirse a Sala".
+        /// Llamado por GameFlowController cuando OnRoomAvailabilityChanged llega.
+        /// </summary>
+        public void SetJoinButtonEnabled(bool enabled)
+        {
+            if (_joinButton == null) return;
+            _joinButton.interactable = enabled;
+            RedesLog.Info(RedesLog.LOBBY,
+                $"   LobbyView: boton UNIRSE {(enabled ? "HABILITADO ✓ (sala disponible)" : "DESHABILITADO (no hay sala)")}");
         }
 
         /// <summary>

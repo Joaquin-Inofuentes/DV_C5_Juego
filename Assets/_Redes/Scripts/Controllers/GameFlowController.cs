@@ -72,11 +72,12 @@ namespace Redes.Controllers
             RedesLog.Info(RedesLog.BOOT, ">> GameFlowController.OnEnable()");
             if (NetworkService != null)
             {
-                NetworkService.OnHostStarted          += HandleHostStarted;
-                NetworkService.OnPlayerCountChanged   += HandlePlayerCountChanged;
-                NetworkService.OnEnoughPlayersToStart += HandleEnoughPlayers;
-                NetworkService.OnConnectionFailed     += HandleConnectionFailed;
-                RedesLog.Info(RedesLog.BOOT, "   eventos de red registrados");
+                NetworkService.OnHostStarted             += HandleHostStarted;
+                NetworkService.OnPlayerCountChanged      += HandlePlayerCountChanged;
+                NetworkService.OnEnoughPlayersToStart    += HandleEnoughPlayers;
+                NetworkService.OnConnectionFailed        += HandleConnectionFailed;
+                NetworkService.OnRoomAvailabilityChanged += HandleRoomAvailabilityChanged;
+                RedesLog.Info(RedesLog.BOOT, "   eventos de red registrados (incl. OnRoomAvailabilityChanged)");
             }
             else
             {
@@ -106,10 +107,11 @@ namespace Redes.Controllers
         {
             if (NetworkService != null)
             {
-                NetworkService.OnHostStarted          -= HandleHostStarted;
-                NetworkService.OnPlayerCountChanged   -= HandlePlayerCountChanged;
-                NetworkService.OnEnoughPlayersToStart -= HandleEnoughPlayers;
-                NetworkService.OnConnectionFailed     -= HandleConnectionFailed;
+                NetworkService.OnHostStarted             -= HandleHostStarted;
+                NetworkService.OnPlayerCountChanged      -= HandlePlayerCountChanged;
+                NetworkService.OnEnoughPlayersToStart    -= HandleEnoughPlayers;
+                NetworkService.OnConnectionFailed        -= HandleConnectionFailed;
+                NetworkService.OnRoomAvailabilityChanged -= HandleRoomAvailabilityChanged;
             }
             if (_lobbyView != null)
             {
@@ -224,18 +226,32 @@ namespace Redes.Controllers
             RedesLog.Info(RedesLog.MATCH, "<< HandleEnoughPlayers() - fase=Playing");
         }
 
+        private void HandleRoomAvailabilityChanged(bool available)
+        {
+            RedesLog.Info(RedesLog.LOBBY,
+                $">> HandleRoomAvailabilityChanged(available={available}) " +
+                $"→ boton UNIRSE {(available ? "HABILITADO" : "DESHABILITADO")}");
+
+            if (_lobbyView != null && _model.Phase == GamePhase.Booting)
+            {
+                _lobbyView.SetJoinButtonEnabled(available);
+                _lobbyView.ShowStatus(available
+                    ? "Sala disponible. ¿Crear o unirse?"
+                    : "Buscando salas...");
+            }
+        }
+
         private void HandleConnectionFailed(string reason)
         {
             RedesLog.Error(RedesLog.NET, $">> HandleConnectionFailed(reason={reason})");
-            // Volver al estado inicial para que el usuario pueda reintentar
             _model.SetPhase(GamePhase.Booting);
             if (_lobbyView != null)
             {
                 _lobbyView.SetVisible(true);
-                _lobbyView.ShowButtons();
+                _lobbyView.ShowButtons();           // restaura host (join sigue deshabilitado)
                 _lobbyView.ShowStatus($"Error: {reason}");
             }
-            RedesLog.Error(RedesLog.NET, $"<< HandleConnectionFailed() - vuelto a Booting");
+            RedesLog.Error(RedesLog.NET, "<< HandleConnectionFailed() - vuelto a Booting");
         }
 
         private void HandleMatchFinished(MatchResult result)
