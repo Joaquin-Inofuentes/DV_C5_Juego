@@ -6,6 +6,7 @@ using Fusion.Sockets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Redes.Core;
+using Redes.Controllers;
 
 namespace Redes.Network
 {
