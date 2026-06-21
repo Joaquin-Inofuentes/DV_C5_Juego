@@ -54,8 +54,10 @@ namespace Redes.EditorTools
             ground.transform.localScale = new Vector3(2, 1, 2);
 
             // ---- Network ----
-            var runnerGo = new GameObject("NetworkRunner");
-            runnerGo.AddComponent<NetworkRunner>();
+            // OJO: NO agregamos NetworkRunner aquí. HostNetworkService crea sus
+            // propios runners en runtime (lobbyRunner + gameRunner frescos) para
+            // evitar reutilizar un runner muerto tras un Shutdown (Fusion 2).
+            var runnerGo = new GameObject("NetworkManager");
             runnerGo.AddComponent<HostNetworkService>();
             runnerGo.AddComponent<PlayerSpawner>();
 
