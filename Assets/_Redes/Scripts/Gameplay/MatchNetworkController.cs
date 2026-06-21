@@ -122,6 +122,7 @@ namespace Redes.Gameplay
         [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
         private void RpcBroadcastOpponentReady(PlayerRef readyPlayer)
         {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcBroadcastOpponentReady", readyPlayer.ToString(), "Broadcast received");
             // Only update the screen for the player who is NOT readyPlayer
             if (Runner.LocalPlayer != readyPlayer)
             {
@@ -131,6 +132,53 @@ namespace Redes.Gameplay
                 {
                     matchCtrl.UpdateRematchStatus("El otro jugador ya puso q si quiere re intntear. Dale a re intentar para seguir la lucha");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Called by MatchController when this local player wants to return to the lobby.
+        /// Broadcasts to the other client so they know they are disconnected/returning to lobby.
+        /// </summary>
+        public void NotifyReturnToLobby()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "NotifyReturnToLobby", Runner.LocalPlayer.ToString(), "Notifying server and other players of lobby exit");
+            try
+            {
+                RpcNotifyLobbyClicked();
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.MATCH, $"Exception in NotifyReturnToLobby: {ex.Message}");
+            }
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        private void RpcNotifyLobbyClicked(RpcInfo info = default)
+        {
+            PlayerRef sender = info.Source;
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcNotifyLobbyClicked", sender.ToString(), $"Lobby exit notification received on client. LocalPlayer={Runner.LocalPlayer}");
+
+            // Notify local UI that the other player returned to lobby (if we are NOT the sender)
+            if (Runner.LocalPlayer != sender)
+            {
+                var matchCtrl = FindFirstObjectByType<MatchController>();
+                if (matchCtrl != null)
+                {
+                    matchCtrl.UpdateRematchStatus("El otro jugador volvio al lobby");
+                }
+
+                // Wait 1.5 seconds and return the client to the booting phase automatically so both end up in the lobby.
+                StartCoroutine(AutoReturnToLobbyCoroutine());
+            }
+        }
+
+        private System.Collections.IEnumerator AutoReturnToLobbyCoroutine()
+        {
+            yield return new WaitForSeconds(1.5f);
+            var flow = FindFirstObjectByType<GameFlowController>();
+            if (flow != null)
+            {
+                flow.TriggerReturnToLobby();
             }
         }
 

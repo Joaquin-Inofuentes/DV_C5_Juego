@@ -46,7 +46,22 @@ namespace Redes.Controllers
 
         private void HandleLobbyClicked()
         {
-            RedesLog.Trace(RedesLog.MATCH, "MatchController", "HandleLobbyClicked", null, "Forwarding lobby button click event");
+            RedesLog.Trace(RedesLog.MATCH, "MatchController", "HandleLobbyClicked", null, "Local player clicked return to lobby. Notifying other players...");
+            try
+            {
+                if (_matchNetworkController == null)
+                {
+                    _matchNetworkController = FindFirstObjectByType<Gameplay.MatchNetworkController>();
+                }
+                if (_matchNetworkController != null)
+                {
+                    _matchNetworkController.NotifyReturnToLobby();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.MATCH, $"MatchController: [ERROR] Exception in HandleLobbyClicked: {ex.Message}");
+            }
             OnLobbyClicked?.Invoke();
         }
 

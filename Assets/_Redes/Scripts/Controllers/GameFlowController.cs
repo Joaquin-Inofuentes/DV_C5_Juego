@@ -144,6 +144,12 @@ namespace Redes.Controllers
         private void HandleReturnToLobbyClicked()
         {
             RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "HandleReturnToLobbyClicked", null, "Shutting down network service and returning to lobby");
+            TriggerReturnToLobby();
+        }
+
+        public void TriggerReturnToLobby()
+        {
+            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby", null, "Performing return to lobby procedure");
             if (_hostService != null)
             {
                 _hostService.Shutdown();

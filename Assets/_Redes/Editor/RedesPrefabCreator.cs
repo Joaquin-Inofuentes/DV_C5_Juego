@@ -163,12 +163,12 @@ namespace Redes.EditorTools
             nicknameRect.anchorMin = new Vector2(0f, 1f);
             nicknameRect.anchorMax = new Vector2(1f, 1f);
             nicknameRect.pivot = new Vector2(0.5f, 0f);
-            nicknameRect.anchoredPosition = new Vector2(0f, 5f); // 5 pixels above health bar
-            nicknameRect.sizeDelta = new Vector2(120f, 20f);
+            nicknameRect.anchoredPosition = new Vector2(0f, 10f); // Adjust position slightly higher for larger font
+            nicknameRect.sizeDelta = new Vector2(240f, 40f);
 
             var nicknameTxt = nicknameGo.AddComponent<Text>();
             nicknameTxt.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
-            nicknameTxt.fontSize = 12;
+            nicknameTxt.fontSize = 24;
             nicknameTxt.color = Color.white;
             nicknameTxt.alignment = TextAnchor.MiddleCenter;
             nicknameTxt.fontStyle = FontStyle.Bold;
