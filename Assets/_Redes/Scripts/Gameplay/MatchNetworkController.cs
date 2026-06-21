@@ -41,7 +41,7 @@ namespace Redes.Gameplay
 
         private void HandlePlayerDied(PlayerRef victim, PlayerRef attacker)
         {
-            if (Object.HasStateAuthority)
+            if (Object != null && Object.IsValid && Object.HasStateAuthority)
             {
                 AnnounceResult(victim, attacker);
             }
