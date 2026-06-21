@@ -85,7 +85,10 @@ namespace Redes.EditorTools
             Assign(result,
                 ("_resultText", ChildText(result, "ResultText")),
                 ("_panelRoot", ChildGO(result, "ResultPanel")),
-                ("_retryButton", ChildComp<Button>(result, "RetryButton")));
+                ("_retryButton", ChildComp<Button>(result, "RetryButton")),
+                ("_lobbyButton", ChildComp<Button>(result, "LobbyButton")),
+                ("_winBackground", ChildComp<RawImage>(result, "WinBackground")),
+                ("_loseBackground", ChildComp<RawImage>(result, "LoseBackground")));
 
             // Link the global GameEventBus to everything that needs it
             var eventBus = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");

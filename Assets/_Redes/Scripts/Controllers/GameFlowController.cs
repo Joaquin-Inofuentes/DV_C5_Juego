@@ -111,7 +111,10 @@ namespace Redes.Controllers
             }
 
             if (_matchController != null)
+            {
                 _matchController.OnMatchFinished += HandleMatchFinished;
+                _matchController.OnLobbyClicked += HandleReturnToLobbyClicked;
+            }
 
             RedesLog.Info(RedesLog.BOOT, "<< GameFlowController.OnEnable()");
         }
@@ -132,7 +135,25 @@ namespace Redes.Controllers
                 // JoinRoom is handled dynamically by LobbyView now
             }
             if (_matchController != null)
+            {
                 _matchController.OnMatchFinished -= HandleMatchFinished;
+                _matchController.OnLobbyClicked -= HandleReturnToLobbyClicked;
+            }
+        }
+
+        private void HandleReturnToLobbyClicked()
+        {
+            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "HandleReturnToLobbyClicked", null, "Shutting down network service and returning to lobby");
+            if (_hostService != null)
+            {
+                _hostService.Shutdown();
+            }
+            _model.SetPhase(GamePhase.Booting);
+            // Re-trigger watch so we look for lobbies again
+            if (_hostService != null)
+            {
+                _hostService.StartLobbyWatch();
+            }
         }
 
         public static string LocalUsername = "Player";

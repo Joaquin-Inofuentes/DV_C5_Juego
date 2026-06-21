@@ -49,10 +49,10 @@ namespace Redes.Controllers
 
         private void Update()
         {
-            if (_localPlayer == null || _hudView == null) return;
+            if (_localPlayer == null || _localPlayer.Object == null || !_localPlayer.Object.IsValid || _hudView == null) return;
 
             string state = "Quieto";
-            if (_localPlayer.Ammo != null && _localPlayer.Ammo.IsReloading)
+            if (_localPlayer.Ammo != null && _localPlayer.Ammo.Object != null && _localPlayer.Ammo.Object.IsValid && _localPlayer.Ammo.IsReloading)
             {
                 state = "Recargando";
             }

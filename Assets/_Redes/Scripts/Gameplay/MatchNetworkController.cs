@@ -91,26 +91,47 @@ namespace Redes.Gameplay
         }
 
         [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-        public void RpcSetReadyForRematch()
+        public void RpcSetReadyForRematch(RpcInfo info = default)
         {
-            RedesLog.Info(RedesLog.MATCH, $">> MatchNetworkController.RpcSetReadyForRematch() [IN] - ReadyForRematchCount={ReadyForRematchCount}, IsServer={Object.HasStateAuthority}");
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcSetReadyForRematch", info.Source.ToString(), $"ReadyForRematchCount={ReadyForRematchCount}, IsServer={Object.HasStateAuthority}");
             try
             {
                 ReadyForRematchCount++;
-                RedesLog.Info(RedesLog.MATCH, $"   MatchNetworkController: Increment completed. ReadyForRematchCount={ReadyForRematchCount}/2");
+                RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcSetReadyForRematch", info.Source.ToString(), $"Increment completed. ReadyForRematchCount={ReadyForRematchCount}/2");
 
-                if (ReadyForRematchCount >= 2)
+                if (ReadyForRematchCount == 1)
                 {
-                    RedesLog.Info(RedesLog.MATCH, "   MatchNetworkController: Both players ready. [IN] Starting RematchSequenceCoroutine");
+                    // Find the player who sent this RPC and target the other player
+                    PlayerRef readyPlayer = info.Source;
+                    RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcSetReadyForRematch", readyPlayer.ToString(), "One player is ready, sending notification to the other");
+                    RpcBroadcastOpponentReady(readyPlayer);
+                }
+                else if (ReadyForRematchCount >= 2)
+                {
+                    RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcSetReadyForRematch", info.Source.ToString(), "Both players ready. Starting RematchSequenceCoroutine");
                     StartCoroutine(RematchSequenceCoroutine());
-                    RedesLog.Info(RedesLog.MATCH, "   MatchNetworkController: [OUT] RematchSequenceCoroutine successfully started");
                 }
             }
             catch (System.Exception ex)
             {
                 RedesLog.Error(RedesLog.MATCH, $"   MatchNetworkController: [ERROR] Exception in RpcSetReadyForRematch: {ex.Message}\n{ex.StackTrace}");
             }
-            RedesLog.Info(RedesLog.MATCH, "<< MatchNetworkController.RpcSetReadyForRematch() [OUT]");
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcSetReadyForRematch", info.Source.ToString(), "Completed SetReadyForRematch execution");
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+        private void RpcBroadcastOpponentReady(PlayerRef readyPlayer)
+        {
+            // Only update the screen for the player who is NOT readyPlayer
+            if (Runner.LocalPlayer != readyPlayer)
+            {
+                RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "RpcBroadcastOpponentReady", Runner.LocalPlayer.ToString(), "Opponent ready notification received. Updating ResultView text.");
+                var matchCtrl = FindFirstObjectByType<MatchController>();
+                if (matchCtrl != null)
+                {
+                    matchCtrl.UpdateRematchStatus("El otro jugador ya puso q si quiere re intntear. Dale a re intentar para seguir la lucha");
+                }
+            }
         }
 
         private System.Collections.IEnumerator RematchSequenceCoroutine()

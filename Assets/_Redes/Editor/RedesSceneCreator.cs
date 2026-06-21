@@ -160,9 +160,30 @@ namespace Redes.EditorTools
             // --- Result ---
             var result = NewUiPanel("ResultView", canvasGo.transform);
             result.AddComponent<ResultView>();
+            
+            // Backgrounds - occupying the full screen, placed first under ResultView so they are behind other UI
+            var winBgGo = new GameObject("WinBackground", typeof(RectTransform));
+            winBgGo.transform.SetParent(result.transform, false);
+            var winBgRt = winBgGo.GetComponent<RectTransform>();
+            winBgRt.anchorMin = Vector2.zero; winBgRt.anchorMax = Vector2.one;
+            winBgRt.offsetMin = Vector2.zero; winBgRt.offsetMax = Vector2.zero;
+            var winRaw = winBgGo.AddComponent<RawImage>();
+            winRaw.color = new Color(0.1f, 0.4f, 0.2f, 0.75f); // Transparent sleek green background for win
+            winBgGo.SetActive(false);
+
+            var loseBgGo = new GameObject("LoseBackground", typeof(RectTransform));
+            loseBgGo.transform.SetParent(result.transform, false);
+            var loseBgRt = loseBgGo.GetComponent<RectTransform>();
+            loseBgRt.anchorMin = Vector2.zero; loseBgRt.anchorMax = Vector2.one;
+            loseBgRt.offsetMin = Vector2.zero; loseBgRt.offsetMax = Vector2.zero;
+            var loseRaw = loseBgGo.AddComponent<RawImage>();
+            loseRaw.color = new Color(0.5f, 0.1f, 0.1f, 0.75f); // Transparent sleek red background for lose
+            loseBgGo.SetActive(false);
+
             var resultPanel = NewUiPanel("ResultPanel", result.transform);
-            NewText("ResultText", resultPanel.transform, font, "RESULTADO", new Vector2(0, 40), 48);
-            NewButton("RetryButton", resultPanel.transform, font, "REINTENTAR", new Vector2(0, -40));
+            NewText("ResultText", resultPanel.transform, font, "RESULTADO", new Vector2(0, 100), 48);
+            NewButton("RetryButton", resultPanel.transform, font, "REINTENTAR", new Vector2(0, 0));
+            NewButton("LobbyButton", resultPanel.transform, font, "VOLVER AL LOBBY", new Vector2(0, -80));
             resultPanel.SetActive(false); // hidden until match ends.
         }
 
@@ -238,8 +259,22 @@ namespace Redes.EditorTools
             var rt = (RectTransform)go.transform;
             rt.sizeDelta = new Vector2(220, 60);
             rt.anchoredPosition = anchoredPos;
-            go.AddComponent<Image>().color = new Color(0.15f, 0.45f, 0.85f);
+            
+            var img = go.AddComponent<Image>();
+            img.color = new Color(0.12f, 0.16f, 0.24f, 0.9f); // Sleek modern dark blue/slate color
+            
             var btn = go.AddComponent<Button>();
+            btn.targetGraphic = img;
+            btn.transition = Selectable.Transition.ColorTint;
+            
+            var colors = btn.colors;
+            colors.normalColor = new Color(0.12f, 0.16f, 0.24f, 0.9f);
+            colors.highlightedColor = new Color(0.24f, 0.36f, 0.54f, 1f); // Vibrant blue highlight
+            colors.pressedColor = new Color(0.08f, 0.10f, 0.16f, 1f); // Deep dark blue pressed
+            colors.selectedColor = new Color(0.24f, 0.36f, 0.54f, 1f);
+            colors.disabledColor = new Color(0.15f, 0.15f, 0.15f, 0.5f);
+            btn.colors = colors;
+
             var txt = NewText("Text", go.transform, font, label, Vector2.zero, 26);
             txt.color = Color.white;
             return btn;

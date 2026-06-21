@@ -22,6 +22,7 @@ namespace Redes.Controllers
         [SerializeField] private Gameplay.MatchNetworkController _matchNetworkController;
 
         public event System.Action<MatchResult> OnMatchFinished;
+        public event System.Action OnLobbyClicked;
 
         private void OnEnable()
         {
@@ -29,6 +30,7 @@ namespace Redes.Controllers
             {
                 _resultView.OnResultNotified += HandleResultNotified;
                 _resultView.OnRetryClicked += HandleRetryClicked;
+                _resultView.OnLobbyClicked += HandleLobbyClicked;
             }
         }
 
@@ -38,7 +40,14 @@ namespace Redes.Controllers
             {
                 _resultView.OnResultNotified -= HandleResultNotified;
                 _resultView.OnRetryClicked -= HandleRetryClicked;
+                _resultView.OnLobbyClicked -= HandleLobbyClicked;
             }
+        }
+
+        private void HandleLobbyClicked()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "MatchController", "HandleLobbyClicked", null, "Forwarding lobby button click event");
+            OnLobbyClicked?.Invoke();
         }
 
         private void HandleRetryClicked()

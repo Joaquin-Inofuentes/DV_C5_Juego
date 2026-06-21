@@ -23,18 +23,37 @@ namespace Redes.Views
         [Header("Retry Button")]
         [SerializeField] private Button _retryButton;
 
+        [Header("Lobby Button")]
+        [SerializeField] private Button _lobbyButton;
+
+        [Header("Aesthetic Fullscreen Backgrounds")]
+        [SerializeField] private RawImage _winBackground;
+        [SerializeField] private RawImage _loseBackground;
+
         /// <summary>
         /// REQUIRED: result is broadcast "con action". Other systems subscribe.
         /// </summary>
         public event Action<MatchResult> OnResultNotified;
 
         public event Action OnRetryClicked;
+        public event Action OnLobbyClicked;
 
         private void Awake()
         {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "Awake", null, "Subscribing button events");
             if (_retryButton != null)
             {
-                _retryButton.onClick.AddListener(() => OnRetryClicked?.Invoke());
+                _retryButton.onClick.AddListener(() => {
+                    RedesLog.Trace(RedesLog.MATCH, "ResultView", "OnRetryClicked", null, "Retry button clicked");
+                    OnRetryClicked?.Invoke();
+                });
+            }
+            if (_lobbyButton != null)
+            {
+                _lobbyButton.onClick.AddListener(() => {
+                    RedesLog.Trace(RedesLog.MATCH, "ResultView", "OnLobbyClicked", null, "Lobby button clicked");
+                    OnLobbyClicked?.Invoke();
+                });
             }
         }
 
@@ -43,17 +62,23 @@ namespace Redes.Views
         /// </summary>
         public void ShowResult(MatchResult result)
         {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "ShowResult", null, $"result={result}");
             if (_panelRoot != null) _panelRoot.SetActive(true);
+
+            if (_winBackground != null) _winBackground.gameObject.SetActive(false);
+            if (_loseBackground != null) _loseBackground.gameObject.SetActive(false);
 
             if (result == MatchResult.Win)
             {
                 if (_resultText != null) _resultText.text = "¡GANASTE!";
+                if (_winBackground != null) _winBackground.gameObject.SetActive(true);
                 // REQUIRED LOG -> "El jugador A recibio la notitifacion de q gano con action"
                 RedesLog.Info(RedesLog.MATCH, "El jugador A recibio la notitifacion de q gano con action");
             }
             else if (result == MatchResult.Lose)
             {
                 if (_resultText != null) _resultText.text = "PERDISTE";
+                if (_loseBackground != null) _loseBackground.gameObject.SetActive(true);
                 // REQUIRED LOG -> "El jugador B recibio la notificacion de q perdio con action"
                 RedesLog.Info(RedesLog.MATCH, "El jugador B recibio la notificacion de q perdio con action");
             }
@@ -64,11 +89,13 @@ namespace Redes.Views
 
         public void ShowRematchStatus(string status)
         {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "ShowRematchStatus", null, $"status='{status}'");
             if (_resultText != null) _resultText.text = status;
         }
 
         public void SetRetryButtonInteractable(bool interactable)
         {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "SetRetryButtonInteractable", null, $"interactable={interactable}");
             if (_retryButton != null) _retryButton.interactable = interactable;
         }
     }

@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Boid
   - Bala
+  - Obstacle
   layers:
   - Default
   - TransparentFX

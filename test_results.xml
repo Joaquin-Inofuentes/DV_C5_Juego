@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="17" result="Passed" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0,3267675">
+  <test-suite type="TestSuite" id="1026" name="Warzone_Inofuentes_Build" fullname="Warzone_Inofuentes_Build" runstate="Runnable" testcasecount="17" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.326768" total="17" passed="17" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties />
+    <test-suite type="Assembly" id="1043" name="Tests.dll" fullname="C:/Users/PC_JOACO/Documents/DV_C5_Juego/Library/ScriptAssemblies/Tests.dll" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.300015" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25748" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+      </properties>
+      <test-suite type="TestSuite" id="1044" name="DebugSystem" fullname="DebugSystem" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.299440" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1045" name="Tests" fullname="DebugSystem.Tests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.295841" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1027" name="GlobalLogicTests" fullname="DebugSystem.Tests.GlobalLogicTests" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.289349" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1039" name="Test_Animations_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Animations_Events" methodname="Test_Animations_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="2102186585" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.033030" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[ANIMATIONS] Animación disparada: actor 1, trigger "Shoot"
+[ANIMATIONS] Animación de daño: actor 1, tipo Hit, dirección (0,-1,0)
+[ANIMATIONS] Animación de muerte: actor 1, variante Explosion
+[ANIMATIONS] Animación de recarga: actor 1, tipo Tactical
+[ANIMATIONS] Efecto visual activado: prefab MuzzleFlash, posición (1,2,3), actor 1
+[ANIMATIONS] Efecto de sonido: clip ExplosionSound, actor 1, volumen 0,8
+[ANIMATIONS] Cámara sacudida: intensidad 0,5, duración 0,2
+[ANIMATIONS] Interfaz de daño activada: actor 1, dirección left
+[ANIMATIONS] Estado de arma en animación: actor 1, bool isAiming = True
+]]></output>
+            </test-case>
+            <test-case id="1029" name="Test_Auth_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Auth_Events" methodname="Test_Auth_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="1646091295" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.014234" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[AUTH] Nombre ingresado: Joaco
+[AUTH] Nombre vacío o inválido
+[AUTH] ID local asignado: UID-9999 (UID)
+[AUTH] Autenticación externa iniciada: Steam
+[AUTH] Error: Timeout
+]]></output>
+            </test-case>
+            <test-case id="1036" name="Test_Damage_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Damage_Events" methodname="Test_Damage_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="1841336864" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.018099" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[DAMAGE] Daño aplicado: objetivo 1, cantidad 20, HP 100 → 80, causante 2
+[DAMAGE] Vida sincronizada: actor 1, HP 80, escudo 50
+[DAMAGE] Muerte de jugador: actor 1, asesino 2, arma Pistol
+[DAMAGE] Causa: Zone
+[DAMAGE] Respawn solicitado: actor 1 en 5s
+[DAMAGE] Respawn ejecutado
+[DAMAGE] Invulnerabilidad activada: actor 1, duración 3s
+[DAMAGE] Curación recibida: actor 1, cantidad 15, fuente 2
+]]></output>
+            </test-case>
+            <test-case id="1042" name="Test_DebugTools_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_DebugTools_Events" methodname="Test_DebugTools_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="1813399822" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.016493" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[TEST] Seed de partida: 777
+[TEST] Bot creado: nombre Bot_Easy, dificultad 1
+[TEST] Bot eliminado
+[TEST] Comando debug: "speed" ejecutado, parámetro 2.0
+[TEST] Override de estado: GameState forzado
+[TEST] Simulación red: latencia 80ms, pérdida 2%
+[TEST] Log rendimiento: FPS=60, FrameTime=16,6ms, GC=500KB
+[TEST] Dump de sala: 4 jugadores, propiedades map=dust2;round=3
+]]></output>
+            </test-case>
+            <test-case id="1040" name="Test_Desync_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Desync_Events" methodname="Test_Desync_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="470105419" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.018213" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[DESYNC] Snapshot enviado (frame 100, tick 5000)
+[DESYNC] Snapshot recibido
+[DESYNC] Hash de estado: local 1111 vs remoto 2222 / DESYNC DETECTED
+[DESYNC] Diff en actor 1: propiedad Position, local=0,0,0 vs remoto=1,0,0
+[DESYNC] Corrección aplicada: actor 1, Position ajustado a 1,0,0
+[DESYNC] Resincronización forzada de objeto Player
+]]></output>
+            </test-case>
+            <test-case id="1041" name="Test_Fallbacks_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Fallbacks_Events" methodname="Test_Fallbacks_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="942247765" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.018196" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[FALLBACKS] Iniciando reconexión…
+[FALLBACKS] Éxito en sala Room_ABC
+[FALLBACKS] Denegado
+[FALLBACKS] Estado recuperado de host: actor 2
+[FALLBACKS] Host perdido (timeout 3s)
+[FALLBACKS] Nuevo host: actor 2
+[FALLBACKS] Partida abortada por: Host left
+]]></output>
+            </test-case>
+            <test-case id="1030" name="Test_Lobby_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Lobby_Events" methodname="Test_Lobby_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="214173811" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.017644" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[LOBBY] Sala creada: Room_ABC (ID)
+[LOBBY] Error al crear sala: Already exists
+[LOBBY] Lista de salas recibida: 5 salas
+[LOBBY] Unirse a sala: Room_ABC
+[LOBBY] Error al unirse: Room full
+[LOBBY] Jugador entró: 1 (actor), nombre Player_1
+[LOBBY] Jugador salió: 1
+[LOBBY] Propiedad de sala actualizada: map = dust2
+[LOBBY] Propiedad de jugador actualizada: actor 1, ready = true
+]]></output>
+            </test-case>
+            <test-case id="1031" name="Test_Matchmaking_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Matchmaking_Events" methodname="Test_Matchmaking_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="1417043965" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.016401" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[MATCHMAKING] Buscando partida (tipo: Casual)
+[MATCHMAKING] Matchmaking cancelado
+[MATCHMAKING] Partida encontrada: sala Room_ABC
+[MATCHMAKING] Timeout de búsqueda
+[MATCHMAKING] Entrando a partida...
+[MATCHMAKING] Error entrada: No servers available
+]]></output>
+            </test-case>
+            <test-case id="1032" name="Test_Network_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Network_Events" methodname="Test_Network_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="760674508" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.018658" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[NETWORK] Conectando a Master Server…
+[NETWORK] Conectado
+[NETWORK] Error: No Internet
+[NETWORK] Ping: 45 ms
+[NETWORK] Ping alto (> 150 ms)
+[NETWORK] Región: us-west
+[NETWORK] Cambio automático a: eu-central
+[NETWORK] Desconectado: Client disconnect
+[NETWORK] Reconectando (intento 2)
+[NETWORK] ActorID asignado: 1
+[NETWORK] ActorID removido: 1
+[NETWORK] Soy host: True
+[NETWORK] Host migrado: nuevo 2, anterior 1
+[NETWORK] RPC enviado: OnShot (destino: All)
+[NETWORK] RPC recibido: OnShot de 2
+[NETWORK] RPC ignorado: OnMove
+[NETWORK] RPC descartado (objeto null)
+[NETWORK] Evento de red enviado: código 200
+[NETWORK] Evento recibido: código 200 de 2
+[NETWORK] Buffer de mensajes: tamaño 1024
+[NETWORK] Paquete perdido (seq: 543)
+[NETWORK] Simulación activa: latencia 100 ms, pérdida 5%
+]]></output>
+            </test-case>
+            <test-case id="1038" name="Test_Notifications_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Notifications_Events" methodname="Test_Notifications_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="483136186" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.016697" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[NOTIFICATIONS] Notificación global: mensaje "Welcome!" (tipo System)
+[NOTIFICATIONS] Notificación personal: actor 1, mensaje "Quest Complete"
+[NOTIFICATIONS] Alerta mostrada: Warning (icono WarningIcon)
+[NOTIFICATIONS] Ocultada
+[NOTIFICATIONS] Anuncio de racha: actor 1, racha Triple Kill
+[NOTIFICATIONS] Tiempo restante aviso: 10s para Zone Shrink
+[NOTIFICATIONS] Objetivo de misión actualizado: Capture Flag = 1/2
+]]></output>
+            </test-case>
+            <test-case id="1034" name="Test_PlayerSync_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_PlayerSync_Events" methodname="Test_PlayerSync_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="36069237" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:15Z" duration="0.016455" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[PLAYER_SYNC] Jugador listo: actor 1, listo=True
+[PLAYER_SYNC] Timeout listo actor 1
+[PLAYER_SYNC] Escena cargada: actor 1, progreso 100%
+[PLAYER_SYNC] Spawn solicitado (local)
+[PLAYER_SYNC] Spawn confirmado: actor 1
+[PLAYER_SYNC] Denegado
+[PLAYER_SYNC] Input recibido: tipo Horizontal, frame 15
+[PLAYER_SYNC] Input descartado
+[PLAYER_SYNC] Avatar asignado: actor 1, prefab SoldierPrefab
+[PLAYER_SYNC] Jugador desconectado: actor 1 (timeout)
+[PLAYER_SYNC] Reconectado
+]]></output>
+            </test-case>
+            <test-case id="1033" name="Test_StateMachine_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_StateMachine_Events" methodname="Test_StateMachine_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="1284681486" result="Passed" start-time="2026-06-20 23:57:15Z" end-time="2026-06-20 23:57:16Z" duration="0.018923" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[STATE_MACHINE] Estado actual: LobbyState
+[STATE_MACHINE] Estado inválido: UnknownState
+[STATE_MACHINE] Transición: LobbyState → GameState
+[STATE_MACHINE] Bloqueada (condición: Not enough players)
+[STATE_MACHINE] Estado sincronizado en red: GameState
+]]></output>
+            </test-case>
+            <test-case id="1028" name="Test_System_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_System_Events" methodname="Test_System_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="766643305" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.016765" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[SYSTEM] Juego iniciado (versión 1.0.0 / seed 42)
+[SYSTEM] Juego cerrado correctamente
+[SYSTEM] Escena cargada: Scene_Game
+[SYSTEM] Error al cargar escena: Scene_Missing
+[SYSTEM] Modo de juego: Deathmatch (players: 4)
+[SYSTEM] Región: us-east
+[SYSTEM] TargetFrameRate: 60
+[SYSTEM] VSync: True
+[SYSTEM] Editor: True
+[SYSTEM] Plataforma: Windows
+[SYSTEM] Time.timeScale: 1
+[SYSTEM] Modo test activado: True
+]]></output>
+            </test-case>
+            <test-case id="1035" name="Test_Weapon_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_Weapon_Events" methodname="Test_Weapon_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="929040382" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.017705" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[WEAPON] Arma equipada: actor 1, arma Rifle (índice 2)
+[WEAPON] Disparo iniciado: actor 1, arma Rifle, balas restantes 29
+[WEAPON] Sin munición
+[WEAPON] Disparo confirmado (servidor): actor 1, timestamp 123,45
+[WEAPON] Proyectil creado: ID 10, actor 1, tipo Bullet, posición (0,1,2)
+[WEAPON] Impacto detectado (cliente): proyectil 10, objetivo 2, daño base 25
+[WEAPON] Impacto descartado (fuera de rango)
+[WEAPON] Impacto validado (host): proyectil 10, objetivo 2, daño final 20
+[WEAPON] Recarga iniciada: actor 1, arma Rifle
+[WEAPON] Recarga completada
+[WEAPON] Recarga cancelada: actor 1, arma Rifle
+[WEAPON] Munición actualizada: actor 1, arma Rifle, cargador 30/30, reserva 90
+]]></output>
+            </test-case>
+            <test-case id="1037" name="Test_WinLose_Events" fullname="DebugSystem.Tests.GlobalLogicTests.Test_WinLose_Events" methodname="Test_WinLose_Events" classname="DebugSystem.Tests.GlobalLogicTests" runstate="Runnable" seed="243704733" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.017665" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[WIN_LOSE] Condición de victoria alcanzada: TimeOut
+[WIN_LOSE] Equipo ganador: 1
+[WIN_LOSE] Jugador ganador: 1
+[WIN_LOSE] Partida finalizada: resultado Victory para jugador 1
+[WIN_LOSE] Tiempo total de partida: 300,5s
+[WIN_LOSE] Marcador final: equipo 1 = 10 puntos
+[WIN_LOSE] MVP: actor 1, estadística kills = 15
+[WIN_LOSE] Reinicio de partida solicitado
+[WIN_LOSE] Retorno al lobby
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1049" name="Tests1.dll" fullname="C:/Users/PC_JOACO/Documents/DV_C5_Juego/Library/ScriptAssemblies/Tests1.dll" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.014691" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25748" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+      </properties>
+      <test-suite type="TestFixture" id="1046" name="NewTestScript" fullname="NewTestScript" classname="NewTestScript" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.014389" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-case id="1047" name="NewTestScriptSimplePasses" fullname="NewTestScript.NewTestScriptSimplePasses" methodname="NewTestScriptSimplePasses" classname="NewTestScript" runstate="Runnable" seed="674336119" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.001623" asserts="0">
+          <properties />
+        </test-case>
+        <test-case id="1048" name="NewTestScriptWithEnumeratorPasses" fullname="NewTestScript.NewTestScriptWithEnumeratorPasses" methodname="NewTestScriptWithEnumeratorPasses" classname="NewTestScript" runstate="Runnable" seed="430939827" result="Passed" start-time="2026-06-20 23:57:16Z" end-time="2026-06-20 23:57:16Z" duration="0.008211" asserts="0">
+          <properties>
+            <property name="_JOINTYPE" value="UnityCombinatorial" />
+          </properties>
+        </test-case>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
