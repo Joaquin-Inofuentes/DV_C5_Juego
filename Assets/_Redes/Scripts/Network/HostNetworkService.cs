@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Redes.Core;
 using Redes.Controllers;
+using Redes.Views;
 
 namespace Redes.Network
 {
@@ -281,6 +282,10 @@ namespace Redes.Network
             IsRunning = false;
             _isInSession = false;
             ConnectedPlayers = 0;
+            if (_playerSpawner != null)
+            {
+                _playerSpawner.ClearSpawned();
+            }
         }
 
         // ──────────────────────────────────────────────────────────────────
@@ -331,6 +336,18 @@ namespace Redes.Network
             if (runner.IsServer && _playerSpawner != null)
                 _playerSpawner.DespawnPlayer(runner, player);
             RefreshPlayerCount();
+
+            // Fallback: If a player leaves and the match was already finished (ResultView active), return to lobby automatically
+            var resultView = FindFirstObjectByType<ResultView>();
+            if (resultView != null && resultView.gameObject.activeInHierarchy)
+            {
+                RedesLog.Info(RedesLog.NET, "   OnPlayerLeft Fallback: Match results are showing and player left. Triggering return to lobby.");
+                var flow = FindFirstObjectByType<GameFlowController>();
+                if (flow != null)
+                {
+                    flow.TriggerReturnToLobby();
+                }
+            }
         }
 
         public void OnConnectedToServer(NetworkRunner runner)

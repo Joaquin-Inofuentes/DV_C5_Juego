@@ -25,22 +25,37 @@ namespace Redes.Gameplay
 
         public override void Spawned()
         {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "Spawned", null, $"IsServer={Object.HasStateAuthority}");
             if (_eventBus != null && Object.HasStateAuthority)
             {
                 _eventBus.OnPlayerDied += HandlePlayerDied;
+                RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "Spawned", null, "Subscribed to OnPlayerDied");
             }
         }
 
         public override void Despawned(NetworkRunner runner, bool hasState)
         {
-            if (_eventBus != null && hasState)
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "Despawned", null, $"hasState={hasState}");
+            if (_eventBus != null)
             {
                 _eventBus.OnPlayerDied -= HandlePlayerDied;
+                RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "Despawned", null, "Unsubscribed from OnPlayerDied");
+            }
+        }
+
+        private void OnDestroy()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "OnDestroy", null, "Destroyed");
+            if (_eventBus != null)
+            {
+                _eventBus.OnPlayerDied -= HandlePlayerDied;
+                RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "OnDestroy", null, "Unsubscribed from OnPlayerDied on destroy");
             }
         }
 
         private void HandlePlayerDied(PlayerRef victim, PlayerRef attacker)
         {
+            RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "HandlePlayerDied", null, $"victim={victim}, attacker={attacker}");
             if (Object != null && Object.IsValid && Object.HasStateAuthority)
             {
                 AnnounceResult(victim, attacker);

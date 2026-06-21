@@ -327,7 +327,16 @@ namespace Redes.Controllers
             {
                 _lobbyView.SetVisible(true);
                 _lobbyView.ShowButtons();           // restaura host (join sigue deshabilitado)
-                _lobbyView.ShowStatus($"Error: {reason}");
+                
+                // Friendly message if normal game end/shutdown from server
+                if (reason.Contains("DisconnectedByPluginLogic") || reason.Contains("ShutdownReason.Ok"))
+                {
+                    _lobbyView.ShowStatus("Partida finalizada. De vuelta al lobby.");
+                }
+                else
+                {
+                    _lobbyView.ShowStatus($"Error: {reason}");
+                }
             }
             RedesLog.Error(RedesLog.NET, "<< HandleConnectionFailed() - vuelto a Booting");
         }

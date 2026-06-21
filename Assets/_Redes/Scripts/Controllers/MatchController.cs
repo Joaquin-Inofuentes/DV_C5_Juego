@@ -44,24 +44,48 @@ namespace Redes.Controllers
             }
         }
 
+        private Gameplay.MatchNetworkController ActiveNetworkController
+        {
+            get
+            {
+                if (_matchNetworkController == null || _matchNetworkController.Object == null || !_matchNetworkController.Object.IsValid)
+                {
+                    _matchNetworkController = FindFirstObjectByType<Gameplay.MatchNetworkController>();
+                    RedesLog.Trace(RedesLog.MATCH, "MatchController", "ActiveNetworkController", null, $"Found MatchNetworkController: {_matchNetworkController != null}");
+                }
+                return _matchNetworkController;
+            }
+        }
+
         private void HandleLobbyClicked()
         {
             RedesLog.Trace(RedesLog.MATCH, "MatchController", "HandleLobbyClicked", null, "Local player clicked return to lobby. Notifying other players...");
             try
             {
-                if (_matchNetworkController == null)
+                var netCtrl = ActiveNetworkController;
+                if (netCtrl != null)
                 {
-                    _matchNetworkController = FindFirstObjectByType<Gameplay.MatchNetworkController>();
+                    netCtrl.NotifyReturnToLobby();
                 }
-                if (_matchNetworkController != null)
+                else
                 {
-                    _matchNetworkController.NotifyReturnToLobby();
+                    RedesLog.Warn(RedesLog.MATCH, "MatchController: ActiveNetworkController not found when returning to lobby.");
                 }
             }
             catch (System.Exception ex)
             {
                 RedesLog.Error(RedesLog.MATCH, $"MatchController: [ERROR] Exception in HandleLobbyClicked: {ex.Message}");
             }
+            
+            // Delay local exit to allow network packages/RPCs to be successfully dispatched
+            StartCoroutine(DelayLobbyExitCoroutine());
+        }
+
+        private System.Collections.IEnumerator DelayLobbyExitCoroutine()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "MatchController", "DelayLobbyExitCoroutine [IN]", null, "Waiting 0.2s before local return to lobby...");
+            yield return new WaitForSeconds(0.2f);
+            RedesLog.Trace(RedesLog.MATCH, "MatchController", "DelayLobbyExitCoroutine [OUT]", null, "Invoking OnLobbyClicked");
             OnLobbyClicked?.Invoke();
         }
 
@@ -77,17 +101,12 @@ namespace Redes.Controllers
                     _resultView.ShowRematchStatus("Esperando al otro jugador...");
                 }
 
-                if (_matchNetworkController == null)
+                var netCtrl = ActiveNetworkController;
+                if (netCtrl != null)
                 {
-                    RedesLog.Info(RedesLog.MATCH, "   MatchController: _matchNetworkController is NULL. Finding in scene...");
-                    _matchNetworkController = FindFirstObjectByType<Gameplay.MatchNetworkController>();
-                }
-
-                if (_matchNetworkController != null)
-                {
-                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [IN] Calling _matchNetworkController.SetLocalPlayerReady()");
-                    _matchNetworkController.SetLocalPlayerReady();
-                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [OUT] Call to _matchNetworkController.SetLocalPlayerReady completed");
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [IN] Calling SetLocalPlayerReady()");
+                    netCtrl.SetLocalPlayerReady();
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [OUT] Call to SetLocalPlayerReady completed");
                 }
                 else
                 {
