@@ -2,6 +2,7 @@ using Fusion;
 using UnityEngine;
 using Redes.Core;
 using Redes.Network;
+using Redes.Controllers;
 
 namespace Redes.Player
 {
@@ -17,8 +18,21 @@ namespace Redes.Player
     /// Logic is implemented by another agent.
     /// </summary>
     [RequireComponent(typeof(NetworkObject))]
-    public class NetworkPlayer : NetworkBehaviour
+    public class NetworkPlayer : NetworkBehaviour, Models.IEntityDisplayModel
     {
+        // IEntityDisplayModel implementation
+        public Vector3 WorldPosition => transform.position;
+        public float HealthProgress => _health != null ? (float)_health.CurrentHealth / GameConstants.DEFAULT_MAX_HEALTH : 1f;
+        public bool IsActive => Object != null && Object.IsValid && _health != null && _health.IsAlive;
+        
+        [Networked, OnChangedRender(nameof(OnNicknameChangedRender))] private NetworkString<_16> NetNickname { get; set; }
+        public string Nickname => string.IsNullOrEmpty(NetNickname.ToString()) ? $"Player {Object.InputAuthority.PlayerId}" : NetNickname.ToString();
+
+        private void OnNicknameChangedRender()
+        {
+            RedesLog.Info(RedesLog.PLAYER, $"[Nickname Sync] Player {Object.InputAuthority} nickname synchronized: {NetNickname}");
+        }
+
         [Header("Player systems (auto-assigned by the Prefab tool on the same prefab)")]
         [SerializeField] private PlayerMovement _movement;
         [SerializeField] private PlayerShooting _shooting;
@@ -34,10 +48,23 @@ namespace Redes.Player
 
         [Networked] private NetworkButtons _previousButtons { get; set; }
 
+        [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+        private void RpcSetNickname(string nickname)
+        {
+            NetNickname = nickname;
+            RedesLog.Info(RedesLog.PLAYER, $"[Server Nickname Set] Player {Object.InputAuthority} set to '{nickname}'");
+        }
+
         public override void Spawned()
         {
             RedesLog.Info(RedesLog.PLAYER, $">> NetworkPlayer.Spawned() InputAuthority={Object.InputAuthority} HasInputAuthority={Object.HasInputAuthority} HasStateAuthority={Object.HasStateAuthority}");
             RedesLog.Info(RedesLog.PLAYER, $"   Inicio el jugador {Object.InputAuthority}");
+
+            if (Object.HasInputAuthority)
+            {
+                RedesLog.Info(RedesLog.PLAYER, $"[Nickname Setup] Sending RpcSetNickname for {Object.InputAuthority} to server with nickname '{GameFlowController.LocalUsername}'");
+                RpcSetNickname(GameFlowController.LocalUsername);
+            }
 
             Color playerColor = (Object.InputAuthority.PlayerId % 2 == 0) ? Color.blue : Color.red;
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -79,9 +106,14 @@ namespace Redes.Player
 
         public override void FixedUpdateNetwork()
         {
+            // Block movement or shooting until at least 2 players are connected in the session
+            if (Runner == null || !Runner.IsRunning || Runner.SessionInfo.PlayerCount < 2)
+            {
+                return;
+            }
+
             if (GetInput(out NetworkInputData data))
             {
-                _movement.SetInput(data);
 
                 var pressed = data.Buttons.GetPressed(_previousButtons);
                 _previousButtons = data.Buttons;

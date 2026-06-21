@@ -16,11 +16,15 @@ namespace Redes.Player
         [SerializeField] private Transform _muzzle;        // Where bullets spawn.
         [SerializeField] private NetworkObject _projectilePrefab; // Bullet prefab.
         [SerializeField] private AmmoSystem _ammo;         // Sibling system.
+        [SerializeField] private GameEventBus _eventBus;   // Global event bus.
 
         [Header("Tuning")]
         [SerializeField] private int _damage = GameConstants.DEFAULT_BULLET_DAMAGE;
 
         [Networked] public int ShootCount { get; set; }
+        [Networked] public TickTimer ShootTimer { get; set; }
+
+        public bool IsShooting => !ShootTimer.ExpiredOrNotRunning(Runner);
 
         /// <summary>Called from the player's input tick when the fire button is pressed.</summary>
         public void Fire()
@@ -34,19 +38,20 @@ namespace Redes.Player
 
                 if (_projectilePrefab != null && _muzzle != null)
                 {
-                    var bullet = Runner.Spawn(_projectilePrefab, _muzzle.position, _muzzle.rotation, Object.InputAuthority);
-                    if (bullet != null)
-                    {
-                        var proj = bullet.GetComponent<Combat.Projectile>();
+                    PlayerRef ownerRef = Object.InputAuthority;
+                    var bullet = Runner.Spawn(_projectilePrefab, _muzzle.position, _muzzle.rotation, PlayerRef.None, (runner, obj) => {
+                        var proj = obj.GetComponent<Combat.Projectile>();
                         if (proj != null)
                         {
-                            proj.Owner = Object.InputAuthority;
+                            proj.Owner = ownerRef;
                         }
-                    }
+                    });
                 }
 
                 ShootCount++;
-                RedesLog.Info(RedesLog.COMBAT, $"El jugador {Object.InputAuthority} disparo");
+                ShootTimer = TickTimer.CreateFromSeconds(Runner, 0.2f);
+                if (_eventBus != null) _eventBus.TriggerPlayerShooting(Object.InputAuthority);
+                RedesLog.Info(RedesLog.COMBAT, $"[Shooting] Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {_muzzle.position}");
             }
         }
     }

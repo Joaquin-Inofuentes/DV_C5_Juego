@@ -1,30 +1,27 @@
 using System;
+using System.Collections.Generic;
+using Fusion;
 
 namespace Redes.Network
 {
     /// <summary>
-    /// SOLID (DIP): controllers/views hablan con la red a través de esta abstracción.
+    /// Abstracción del servicio de red para desacoplar a los controladores
+    /// de la librería subyacente (Fusion 2).
     /// </summary>
     public interface INetworkService
     {
         bool IsRunning { get; }
         int ConnectedPlayers { get; }
 
-        void StartAsHost();
-        void StartAsClient();
+        void StartAsHost(string sessionName);
+        void StartAsClient(string sessionName);
         void Shutdown();
 
         // ── Eventos ──────────────────────────────────────────────────────
-        event Action OnHostStarted;
-        event Action<int> OnPlayerCountChanged;
-        event Action OnEnoughPlayersToStart;
+        event Action         OnHostStarted;
+        event Action<int>    OnPlayerCountChanged;
+        event Action         OnEnoughPlayersToStart;
         event Action<string> OnConnectionFailed;
-
-        /// <summary>
-        /// Fired cuando cambia la disponibilidad de la sala "RedesRoom".
-        /// true  = sala existe, tiene lugar y acepta conexiones  → habilitar botón Unirse.
-        /// false = sala no existe o está llena                   → deshabilitar botón Unirse.
-        /// </summary>
-        event Action<bool> OnRoomAvailabilityChanged;
+        event Action<List<SessionInfo>> OnRoomListUpdated;
     }
 }

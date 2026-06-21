@@ -30,6 +30,8 @@ namespace Redes.Combat
 
         public override void Spawned()
         {
+            RedesLog.Info(RedesLog.COMBAT, $"[Bullet Spawned] ObjetoId: {Object.Id}, HasStateAuthority: {Object.HasStateAuthority}, Owner: {Owner}, Posición: {transform.position}");
+            
             if (Object.HasStateAuthority)
             {
                 Life = TickTimer.CreateFromSeconds(Runner, _lifeTime);
@@ -38,12 +40,15 @@ namespace Redes.Combat
 
         public override void FixedUpdateNetwork()
         {
+            // Only the server/Host (State Authority) handles movement, collision logic and expiration despawning
             if (!Object.HasStateAuthority) return;
 
+            // Move forward on State Authority (Host)
             transform.position += transform.forward * _speed * Runner.DeltaTime;
 
             if (Life.Expired(Runner))
             {
+                RedesLog.Info(RedesLog.COMBAT, $"[Bullet Expired] ObjetoId: {Object.Id} expiró y se despawnea en tick {Runner.Tick}.");
                 Runner.Despawn(Object);
                 return;
             }
@@ -65,8 +70,27 @@ namespace Redes.Combat
                     }
 
                     RedesLog.Info(RedesLog.COMBAT, $">> Projectile.Hit: owner={Owner} target={hit.name} damage={_damage}");
-                    damageable.TakeDamage(_damage, Owner);
-                    Runner.Despawn(Object);
+                    try
+                    {
+                        RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [IN] Calling damageable.TakeDamage(amount={_damage}, Owner={Owner})");
+                        damageable.TakeDamage(_damage, Owner);
+                        RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [OUT] Call to damageable.TakeDamage completed successfully.");
+                    }
+                    catch (System.Exception ex)
+                    {
+                        RedesLog.Error(RedesLog.COMBAT, $">> Projectile: [ERROR] Exception during TakeDamage call: {ex.Message}\n{ex.StackTrace}");
+                    }
+                    
+                    try
+                    {
+                        RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [IN] Calling Runner.Despawn for bullet {Object.Id}");
+                        Runner.Despawn(Object);
+                        RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [OUT] Despawn completed successfully.");
+                    }
+                    catch (System.Exception ex)
+                    {
+                        RedesLog.Error(RedesLog.COMBAT, $">> Projectile: [ERROR] Exception during Despawn call: {ex.Message}\n{ex.StackTrace}");
+                    }
                     return;
                 }
             }

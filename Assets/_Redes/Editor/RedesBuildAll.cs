@@ -84,5 +84,20 @@ namespace Redes.EditorTools
             else
                 Debug.LogError("[REDES][BUILD] Build FALLO: " + report.summary.totalErrors + " errores");
         }
+
+        [MenuItem("Tools/Redes/5. Corregir", priority = 5)]
+        public static void Corregir()
+        {
+            Debug.Log("[REDES][CORREGIR] === Paso 1: Crear escena ===");
+            RedesSceneCreator.CreateScene();
+
+            Debug.Log("[REDES][CORREGIR] === Paso 2: Crear prefabs ===");
+            RedesPrefabCreator.CreatePrefabs();
+
+            Debug.Log("[REDES][CORREGIR] === Paso 3: Enlazar referencias ===");
+            RedesSceneLinker.LinkAll();
+
+            Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");
+        }
     }
 }

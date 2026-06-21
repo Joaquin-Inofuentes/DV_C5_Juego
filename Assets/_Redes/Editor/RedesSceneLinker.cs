@@ -56,18 +56,53 @@ namespace Redes.EditorTools
             Assign(player, ("_hudView", hud));
             Assign(matchNet, ("_matchController", match));
 
+            var displayManager = Find<EntityDisplayManager>();
+            var displayViewPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.EntityDisplayViewPrefabPath);
+            var displayViewPrefabComponent = displayViewPrefab != null ? displayViewPrefab.GetComponent<EntityDisplayView>() : null;
+            var canvas = GameObject.Find("Canvas");
+            Transform displayPanelTrans = null;
+            if (canvas != null)
+            {
+                displayPanelTrans = canvas.transform.Find("EntityDisplayPanel");
+            }
+            Assign(displayManager,
+                ("_viewPrefab", displayViewPrefabComponent),
+                ("_canvasParent", displayPanelTrans));
+
             // ---- Views (legacy Text) ----
             Assign(lobby,
                 ("_statusText", ChildText(lobby, "StatusText")),
                 ("_playerCountText", ChildText(lobby, "PlayerCountText")),
+                ("_usernameInput", ChildComp<InputField>(lobby, "UsernameInput")),
+                ("_roomListContainer", ChildGO(lobby, "RoomList")?.transform),
                 ("_hostButton", ChildComp<Button>(lobby, "HostButton")),
                 ("_joinButton", ChildComp<Button>(lobby, "JoinButton")));
             Assign(hud,
                 ("_healthText", ChildText(hud, "HealthText")),
-                ("_ammoText", ChildText(hud, "AmmoText")));
+                ("_ammoText", ChildText(hud, "AmmoText")),
+                ("_stateText", ChildText(hud, "StateText")),
+                ("_reloadSlider", ChildComp<Slider>(hud, "ReloadSlider")));
             Assign(result,
                 ("_resultText", ChildText(result, "ResultText")),
-                ("_panelRoot", ChildGO(result, "ResultPanel")));
+                ("_panelRoot", ChildGO(result, "ResultPanel")),
+                ("_retryButton", ChildComp<Button>(result, "RetryButton")));
+
+            // Link the global GameEventBus to everything that needs it
+            var eventBus = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
+            if (eventBus == null)
+            {
+                Debug.LogWarning("[REDES][LINK] GameEventBus not found! Need to create one in Assets/_Redes/Scripts/Core.");
+            }
+            else
+            {
+                Assign(matchNet, ("_eventBus", eventBus));
+                if (playerPrefab != null)
+                {
+                    Assign(playerPrefab.GetComponent<PlayerHealth>(), ("_eventBus", eventBus));
+                    Assign(playerPrefab.GetComponent<PlayerShooting>(), ("_eventBus", eventBus));
+                    Assign(playerPrefab.GetComponent<AmmoSystem>(), ("_eventBus", eventBus));
+                }
+            }
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);

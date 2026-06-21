@@ -52,6 +52,13 @@ namespace Redes.EditorTools
             var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
             ground.name = "Ground";
             ground.transform.localScale = new Vector3(2, 1, 2);
+            var groundRenderer = ground.GetComponent<Renderer>();
+            if (groundRenderer != null)
+            {
+                var mat = new Material(Shader.Find("Standard"));
+                mat.color = Color.black;
+                groundRenderer.sharedMaterial = mat;
+            }
 
             // ---- Network ----
             // OJO: NO agregamos NetworkRunner aquí. HostNetworkService crea sus
@@ -71,6 +78,7 @@ namespace Redes.EditorTools
             ctrlGo.AddComponent<GameFlowController>();
             ctrlGo.AddComponent<MatchController>();
             ctrlGo.AddComponent<PlayerController>();
+            ctrlGo.AddComponent<EntityDisplayManager>();
 
             // ---- UI (legacy Text) ----
             BuildUI();
@@ -104,24 +112,96 @@ namespace Redes.EditorTools
             lobby.AddComponent<LobbyView>();
             NewText("StatusText", lobby.transform, font, "¿Crear sala o unirse?", new Vector2(0, 140), 28);
             NewText("PlayerCountText", lobby.transform, font, "Jugadores: 0/2", new Vector2(0, 90), 24);
-            NewButton("HostButton", lobby.transform, font, "CREAR SALA", new Vector2(-130, 20));
-            NewButton("JoinButton", lobby.transform, font, "UNIRSE A SALA", new Vector2(130, 20));
+            
+            var inputField = NewInputField("UsernameInput", lobby.transform, font, "Username", new Vector2(0, 30));
+            
+            var roomList = NewUiPanel("RoomList", lobby.transform);
+            var roomListRt = roomList.GetComponent<RectTransform>();
+            roomListRt.anchorMin = new Vector2(0.5f, 0.5f); roomListRt.anchorMax = new Vector2(0.5f, 0.5f);
+            roomListRt.sizeDelta = new Vector2(400, 200);
+            roomListRt.anchoredPosition = new Vector2(0, -100);
+            roomList.AddComponent<Image>().color = new Color(0, 0, 0, 0.5f);
+            var vlg = roomList.AddComponent<VerticalLayoutGroup>();
+            vlg.padding = new RectOffset(10, 10, 10, 10);
+            vlg.spacing = 5;
+            vlg.childAlignment = TextAnchor.UpperCenter;
+            vlg.childControlHeight = false;
+            vlg.childControlWidth = true;
+            
+            NewButton("HostButton", lobby.transform, font, "CREAR SALA", new Vector2(0, -230));
 
             // --- HUD ---
             var hud = NewUiPanel("GameHudView", canvasGo.transform);
             hud.AddComponent<GameHudView>();
-            NewText("HealthText", hud.transform, font, "Vida: 100", new Vector2(-320, 200), 24, TextAnchor.MiddleLeft);
-            NewText("AmmoText", hud.transform, font, "Munición: 6/6", new Vector2(-320, 160), 24, TextAnchor.MiddleLeft);
+            
+            var hpText = NewText("HealthText", hud.transform, font, "Vida: 100", Vector2.zero, 24, TextAnchor.MiddleLeft);
+            var hpRt = hpText.rectTransform;
+            hpRt.anchorMin = new Vector2(0, 1); hpRt.anchorMax = new Vector2(0, 1); hpRt.pivot = new Vector2(0, 1);
+            hpRt.anchoredPosition = new Vector2(30, -30);
+
+            var amText = NewText("AmmoText", hud.transform, font, "Munición: 6/6", Vector2.zero, 24, TextAnchor.MiddleLeft);
+            var amRt = amText.rectTransform;
+            amRt.anchorMin = new Vector2(0, 1); amRt.anchorMax = new Vector2(0, 1); amRt.pivot = new Vector2(0, 1);
+            amRt.anchoredPosition = new Vector2(30, -70);
+
+            var stText = NewText("StateText", hud.transform, font, "Estado: Quieto", Vector2.zero, 24, TextAnchor.MiddleLeft);
+            var stRt = stText.rectTransform;
+            stRt.anchorMin = new Vector2(0, 1); stRt.anchorMax = new Vector2(0, 1); stRt.pivot = new Vector2(0, 1);
+            stRt.anchoredPosition = new Vector2(30, -110);
+
+            var reloadSlider = NewSlider("ReloadSlider", hud.transform, new Vector2(30, -160), new Vector2(200, 20));
+            var slRt = reloadSlider.GetComponent<RectTransform>();
+            slRt.anchorMin = new Vector2(0, 1); slRt.anchorMax = new Vector2(0, 1); slRt.pivot = new Vector2(0, 1);
+            slRt.anchoredPosition = new Vector2(30, -150);
+
+            // --- Entity Display Overlay Panel (for enemy/player overhead health bars) ---
+            NewUiPanel("EntityDisplayPanel", canvasGo.transform);
 
             // --- Result ---
             var result = NewUiPanel("ResultView", canvasGo.transform);
             result.AddComponent<ResultView>();
             var resultPanel = NewUiPanel("ResultPanel", result.transform);
-            NewText("ResultText", resultPanel.transform, font, "RESULTADO", new Vector2(0, 0), 48);
+            NewText("ResultText", resultPanel.transform, font, "RESULTADO", new Vector2(0, 40), 48);
+            NewButton("RetryButton", resultPanel.transform, font, "REINTENTAR", new Vector2(0, -40));
             resultPanel.SetActive(false); // hidden until match ends.
         }
 
         // ---------- small UI helpers ----------
+
+        private static Slider NewSlider(string name, Transform parent, Vector2 anchoredPos, Vector2 size)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var rect = go.GetComponent<RectTransform>();
+            rect.anchoredPosition = anchoredPos;
+            rect.sizeDelta = size;
+
+            var bg = new GameObject("Background", typeof(RectTransform));
+            bg.transform.SetParent(go.transform, false);
+            var bgRect = bg.GetComponent<RectTransform>();
+            bgRect.anchorMin = Vector2.zero; bgRect.anchorMax = Vector2.one; bgRect.sizeDelta = Vector2.zero;
+            bg.AddComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 0.7f);
+
+            var fillArea = new GameObject("Fill Area", typeof(RectTransform));
+            fillArea.transform.SetParent(go.transform, false);
+            var faRect = fillArea.GetComponent<RectTransform>();
+            faRect.anchorMin = Vector2.zero; faRect.anchorMax = Vector2.one; faRect.sizeDelta = Vector2.zero;
+
+            var fill = new GameObject("Fill", typeof(RectTransform));
+            fill.transform.SetParent(fillArea.transform, false);
+            var fRect = fill.GetComponent<RectTransform>();
+            fRect.anchorMin = Vector2.zero; fRect.anchorMax = Vector2.one; fRect.sizeDelta = Vector2.zero;
+            var fillImg = fill.AddComponent<Image>();
+            fillImg.color = Color.yellow;
+
+            var slider = go.AddComponent<Slider>();
+            slider.fillRect = fRect;
+            slider.targetGraphic = fillImg;
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.value = 0f;
+            return slider;
+        }
 
         private static GameObject NewUiPanel(string name, Transform parent)
         {
@@ -147,6 +227,7 @@ namespace Redes.EditorTools
             text.fontSize = size;
             text.alignment = align;
             text.color = Color.white;
+            text.raycastTarget = false; // Prevent text from intercepting UI clicks
             return text;
         }
 
@@ -164,12 +245,58 @@ namespace Redes.EditorTools
             return btn;
         }
 
+        private static InputField NewInputField(string name, Transform parent, Font font, string placeholderTxt, Vector2 anchoredPos)
+        {
+            var go = new GameObject(name, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var rt = (RectTransform)go.transform;
+            rt.sizeDelta = new Vector2(300, 40);
+            rt.anchoredPosition = anchoredPos;
+            
+            var img = go.AddComponent<Image>();
+            img.color = Color.white;
+            
+            var input = go.AddComponent<InputField>();
+            
+            var textGo = new GameObject("Text", typeof(RectTransform));
+            textGo.transform.SetParent(go.transform, false);
+            var textRt = (RectTransform)textGo.transform;
+            textRt.anchorMin = Vector2.zero; textRt.anchorMax = Vector2.one;
+            textRt.sizeDelta = Vector2.zero;
+            var textComp = textGo.AddComponent<Text>();
+            textComp.font = font;
+            textComp.fontSize = 20;
+            textComp.color = Color.black;
+            textComp.alignment = TextAnchor.MiddleCenter;
+            
+            input.textComponent = textComp;
+            
+            return input;
+        }
+
         private static Font GetLegacyFont()
         {
             // Unity 2022.3 ships the legacy font as LegacyRuntime.ttf.
             var f = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             if (f == null) f = Resources.GetBuiltinResource<Font>("Arial.ttf");
             return f;
+        }
+
+        [MenuItem("Tools/Redes/5. Corregir", priority = 5)]
+        public static void Corregir()
+        {
+            Debug.Log("[REDES][CORREGIR] Iniciando corrección completa...");
+            
+            // 1. Recrear prefabs
+            RedesPrefabCreator.CreatePrefabs();
+            
+            // 2. Recrear escena (incluye el terreno negro, nuevos paneles y controladores)
+            CreateScene();
+            
+            // 3. Re-vincular todas las referencias
+            RedesSceneLinker.LinkAll();
+            
+            Debug.Log("[REDES][CORREGIR] ¡Corrección completa finalizada con éxito!");
         }
 
         private static void EnsureFolder(string parent, string child)

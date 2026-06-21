@@ -56,6 +56,31 @@ namespace Redes.Network
             RedesLog.Info(RedesLog.NET, $"<< PlayerSpawner.DespawnPlayer(player={player})");
         }
 
+        public bool IsPlayerSpawned(PlayerRef player)
+        {
+            return _spawned.ContainsKey(player) && _spawned[player] != null;
+        }
+
+        public void DespawnAllActivePlayers(NetworkRunner runner)
+        {
+            RedesLog.Info(RedesLog.NET, ">> PlayerSpawner.DespawnAllActivePlayers()");
+            var list = new List<NetworkObject>(_spawned.Values);
+            foreach (var obj in list)
+            {
+                if (obj != null && obj.IsValid)
+                {
+                    runner.Despawn(obj);
+                }
+            }
+            _spawned.Clear();
+            RedesLog.Info(RedesLog.NET, "<< PlayerSpawner.DespawnAllActivePlayers()");
+        }
+
+        public void ClearSpawned()
+        {
+            _spawned.Clear();
+        }
+
         // Helper for the other agent to pick a spawn position.
         private Vector3 GetSpawnPosition(PlayerRef player)
         {

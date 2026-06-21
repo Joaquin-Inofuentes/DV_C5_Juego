@@ -46,5 +46,31 @@ namespace Redes.Controllers
                 _model.SetAmmo(_localPlayer.Ammo.CurrentAmmo);
             }
         }
+
+        private void Update()
+        {
+            if (_localPlayer == null || _hudView == null) return;
+
+            string state = "Quieto";
+            if (_localPlayer.Ammo != null && _localPlayer.Ammo.IsReloading)
+            {
+                state = "Recargando";
+            }
+            else if (_localPlayer.Shooting != null && _localPlayer.Shooting.IsShooting)
+            {
+                state = "Disparo";
+            }
+            else if (_localPlayer.Movement != null && _localPlayer.Movement.NetworkVelocity.sqrMagnitude > 0.01f)
+            {
+                state = "Moviendose";
+            }
+
+            _hudView.ShowState(state);
+
+            if (_localPlayer.Ammo != null)
+            {
+                _hudView.ShowReloadProgress(_localPlayer.Ammo.ReloadProgress);
+            }
+        }
     }
 }

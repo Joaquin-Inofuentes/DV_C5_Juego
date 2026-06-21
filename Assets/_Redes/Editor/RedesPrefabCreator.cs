@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using Fusion;
 using Redes.Player;
 using Redes.Combat;
@@ -19,17 +20,34 @@ namespace Redes.EditorTools
         private const string PrefabFolder = "Assets/_Redes/Prefabs";
         public const string PlayerPrefabPath = PrefabFolder + "/Player.prefab";
         public const string BulletPrefabPath = PrefabFolder + "/Bullet.prefab";
+        public const string EntityDisplayViewPrefabPath = PrefabFolder + "/EntityDisplayView.prefab";
 
         [MenuItem("Tools/Redes/2. Create Prefabs", priority = 2)]
         public static void CreatePrefabs()
         {
-            EnsureFolder();
-            CreatePlayerPrefab();
+            EnsureFolder("Assets/_Redes", "Prefabs");
+
+            CreateGameEventBusAsset();
             CreateBulletPrefab();
+            CreatePlayerPrefab();
+            CreateEntityDisplayViewPrefab();
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Prefabs creados (Player, Bullet). " +
-                      "Ahora ejecuta 'Tools > Redes > 3. Link & Assign All'.");
+            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Prefabs creados. Ahora ejecuta '3. Link & Assign All'.");
+        }
+
+        private static void CreateGameEventBusAsset()
+        {
+            string path = "Assets/_Redes/Scripts/Core/GameEventBus.asset";
+            var existing = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>(path);
+            if (existing == null)
+            {
+                EnsureFolder("Assets/_Redes/Scripts", "Core");
+                var asset = ScriptableObject.CreateInstance<Redes.Core.GameEventBus>();
+                AssetDatabase.CreateAsset(asset, path);
+                Debug.Log($"[REDES][PREFABS] GameEventBus asset created at {path}");
+            }
         }
 
         private static void CreatePlayerPrefab()
@@ -41,8 +59,10 @@ namespace Redes.EditorTools
             // Physics + Fusion identity.
             var rb = go.AddComponent<Rigidbody>();
             rb.useGravity = false;
+            rb.isKinematic = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             go.AddComponent<NetworkObject>();
+            go.AddComponent<NetworkTransform>();
 
             // Animation (PlayerAnimationController requires an Animator).
             go.AddComponent<Animator>();
@@ -85,9 +105,78 @@ namespace Redes.EditorTools
             rb.isKinematic = true;
 
             go.AddComponent<NetworkObject>();
+            go.AddComponent<NetworkTransform>();
             go.AddComponent<Projectile>();
 
             PrefabUtility.SaveAsPrefabAsset(go, BulletPrefabPath);
+            Object.DestroyImmediate(go);
+        }
+
+        private static void CreateEntityDisplayViewPrefab()
+        {
+            var go = new GameObject("EntityDisplayView", typeof(RectTransform));
+            var rect = go.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(100f, 15f);
+
+            var sliderGo = new GameObject("Slider", typeof(RectTransform));
+            sliderGo.transform.SetParent(go.transform, false);
+            var sliderRect = sliderGo.GetComponent<RectTransform>();
+            sliderRect.anchorMin = Vector2.zero;
+            sliderRect.anchorMax = Vector2.one;
+            sliderRect.sizeDelta = Vector2.zero;
+
+            var bgGo = new GameObject("Background", typeof(RectTransform));
+            bgGo.transform.SetParent(sliderGo.transform, false);
+            var bgRect = bgGo.GetComponent<RectTransform>();
+            bgRect.anchorMin = Vector2.zero;
+            bgRect.anchorMax = Vector2.one;
+            bgRect.sizeDelta = Vector2.zero;
+            var bgImg = bgGo.AddComponent<Image>();
+            bgImg.color = new Color(0.3f, 0.3f, 0.3f, 0.7f);
+
+            var fillAreaGo = new GameObject("Fill Area", typeof(RectTransform));
+            fillAreaGo.transform.SetParent(sliderGo.transform, false);
+            var fillAreaRect = fillAreaGo.GetComponent<RectTransform>();
+            fillAreaRect.anchorMin = Vector2.zero;
+            fillAreaRect.anchorMax = Vector2.one;
+            fillAreaRect.sizeDelta = Vector2.zero;
+
+            var fillGo = new GameObject("Fill", typeof(RectTransform));
+            fillGo.transform.SetParent(fillAreaGo.transform, false);
+            var fillRect = fillGo.GetComponent<RectTransform>();
+            fillRect.anchorMin = Vector2.zero;
+            fillRect.anchorMax = new Vector2(1f, 1f);
+            fillRect.sizeDelta = Vector2.zero;
+            var fillImg = fillGo.AddComponent<Image>();
+            fillImg.color = Color.green;
+
+            var slider = sliderGo.AddComponent<Slider>();
+            slider.fillRect = fillRect;
+            slider.targetGraphic = fillImg;
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.value = 1f;
+
+            var nicknameGo = new GameObject("NicknameText", typeof(RectTransform));
+            nicknameGo.transform.SetParent(go.transform, false);
+            var nicknameRect = nicknameGo.GetComponent<RectTransform>();
+            nicknameRect.anchorMin = new Vector2(0f, 1f);
+            nicknameRect.anchorMax = new Vector2(1f, 1f);
+            nicknameRect.pivot = new Vector2(0.5f, 0f);
+            nicknameRect.anchoredPosition = new Vector2(0f, 5f); // 5 pixels above health bar
+            nicknameRect.sizeDelta = new Vector2(120f, 20f);
+
+            var nicknameTxt = nicknameGo.AddComponent<Text>();
+            nicknameTxt.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+            nicknameTxt.fontSize = 12;
+            nicknameTxt.color = Color.white;
+            nicknameTxt.alignment = TextAnchor.MiddleCenter;
+            nicknameTxt.fontStyle = FontStyle.Bold;
+
+            var view = go.AddComponent<Views.EntityDisplayView>();
+            AssignRefs(view, ("_healthSlider", (Object)slider), ("_nicknameText", (Object)nicknameTxt));
+
+            PrefabUtility.SaveAsPrefabAsset(go, EntityDisplayViewPrefabPath);
             Object.DestroyImmediate(go);
         }
 
@@ -104,10 +193,10 @@ namespace Redes.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        private static void EnsureFolder()
+        private static void EnsureFolder(string parent, string child)
         {
-            if (!AssetDatabase.IsValidFolder(PrefabFolder))
-                AssetDatabase.CreateFolder("Assets/_Redes", "Prefabs");
+            if (!AssetDatabase.IsValidFolder(parent + "/" + child))
+                AssetDatabase.CreateFolder(parent, child);
         }
     }
 }

@@ -38,5 +38,18 @@ namespace Redes.Core
         {
             Debug.LogError($"{flag} {message}");
         }
+
+        public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info")
+        {
+            string contextStr = string.IsNullOrEmpty(playerContext) ? "System" : $"Player:{playerContext}";
+            string formatted = $"[{className}::{methodName}] ({contextStr}) -> {content}";
+            
+            if (type == "Warn")
+                Warn(flag, formatted);
+            else if (type == "Error")
+                Error(flag, formatted);
+            else
+                Info(flag, formatted);
+        }
     }
 }

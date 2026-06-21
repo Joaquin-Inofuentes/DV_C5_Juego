@@ -18,6 +18,9 @@ namespace Redes.Controllers
         [Header("View (assigned by Tools > Redes > Link & Assign All)")]
         [SerializeField] private ResultView _resultView;
 
+        [Header("Network Controller")]
+        [SerializeField] private Gameplay.MatchNetworkController _matchNetworkController;
+
         public event System.Action<MatchResult> OnMatchFinished;
 
         private void OnEnable()
@@ -25,6 +28,7 @@ namespace Redes.Controllers
             if (_resultView != null)
             {
                 _resultView.OnResultNotified += HandleResultNotified;
+                _resultView.OnRetryClicked += HandleRetryClicked;
             }
         }
 
@@ -33,7 +37,67 @@ namespace Redes.Controllers
             if (_resultView != null)
             {
                 _resultView.OnResultNotified -= HandleResultNotified;
+                _resultView.OnRetryClicked -= HandleRetryClicked;
             }
+        }
+
+        private void HandleRetryClicked()
+        {
+            RedesLog.Info(RedesLog.MATCH, ">> MatchController.HandleRetryClicked() [IN] - No arguments");
+            try
+            {
+                if (_resultView != null)
+                {
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: Disabling retry button and showing status");
+                    _resultView.SetRetryButtonInteractable(false);
+                    _resultView.ShowRematchStatus("Esperando al otro jugador...");
+                }
+
+                if (_matchNetworkController == null)
+                {
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: _matchNetworkController is NULL. Finding in scene...");
+                    _matchNetworkController = FindFirstObjectByType<Gameplay.MatchNetworkController>();
+                }
+
+                if (_matchNetworkController != null)
+                {
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [IN] Calling _matchNetworkController.SetLocalPlayerReady()");
+                    _matchNetworkController.SetLocalPlayerReady();
+                    RedesLog.Info(RedesLog.MATCH, "   MatchController: [OUT] Call to _matchNetworkController.SetLocalPlayerReady completed");
+                }
+                else
+                {
+                    RedesLog.Error(RedesLog.MATCH, "   MatchController: [ERROR] Could not find MatchNetworkController in scene!");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.MATCH, $"   MatchController: [ERROR] Exception in HandleRetryClicked: {ex.Message}\n{ex.StackTrace}");
+            }
+            RedesLog.Info(RedesLog.MATCH, "<< MatchController.HandleRetryClicked() [OUT]");
+        }
+
+        public void UpdateRematchStatus(string text)
+        {
+            RedesLog.Info(RedesLog.MATCH, $">> MatchController.UpdateRematchStatus() [IN] - text='{text}'");
+            try
+            {
+                RedesLog.Info(RedesLog.MATCH, $"[Rematch Status Broadcast Received] '{text}'");
+                if (_resultView != null)
+                {
+                    _resultView.ShowRematchStatus(text);
+                    RedesLog.Info(RedesLog.MATCH, $"   MatchController: ResultView text successfully updated to '{text}'");
+                }
+                else
+                {
+                    RedesLog.Warn(RedesLog.MATCH, "   MatchController: _resultView is NULL, cannot update status UI text.");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.MATCH, $"   MatchController: [ERROR] Exception in UpdateRematchStatus: {ex.Message}\n{ex.StackTrace}");
+            }
+            RedesLog.Info(RedesLog.MATCH, "<< MatchController.UpdateRematchStatus() [OUT]");
         }
 
         /// <summary>

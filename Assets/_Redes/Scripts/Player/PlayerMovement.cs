@@ -20,39 +20,30 @@ namespace Redes.Player
 
         [Networked] public Vector3 NetworkVelocity { get; set; }
 
-        private NetworkInputData _lastInput;
-
-        public void SetInput(NetworkInputData data)
-        {
-            _lastInput = data;
-        }
-
         public override void FixedUpdateNetwork()
         {
-            Vector3 dir = new Vector3(_lastInput.Move.x, 0, _lastInput.Move.y);
-            Vector3 moveVelocity = dir.normalized * _moveSpeed;
-
-            if (_body != null)
+            if (Runner == null || !Runner.IsRunning || Runner.SessionInfo.PlayerCount < 2)
             {
-                _body.velocity = moveVelocity;
+                NetworkVelocity = Vector3.zero;
+                return;
             }
-            else
+
+            if (GetInput(out NetworkInputData data))
             {
+                Vector3 dir = new Vector3(data.Move.x, 0, data.Move.y);
+                Vector3 moveVelocity = dir.normalized * _moveSpeed;
+
+                // Move transform directly. Rigidbody is set to kinematic.
                 transform.position += moveVelocity * Runner.DeltaTime;
-            }
-            NetworkVelocity = moveVelocity;
+                NetworkVelocity = moveVelocity;
 
-            if (moveVelocity.sqrMagnitude > 0.01f)
-            {
-                RedesLog.Info(RedesLog.PLAYER, "El jugador se movio");
-            }
-
-            Vector3 lookPos = new Vector3(_lastInput.AimDirection.x, transform.position.y, _lastInput.AimDirection.y);
-            Vector3 lookDir = lookPos - transform.position;
-            lookDir.y = 0;
-            if (lookDir.sqrMagnitude > 0.01f)
-            {
-                transform.rotation = Quaternion.LookRotation(lookDir);
+                Vector3 lookPos = new Vector3(data.AimDirection.x, transform.position.y, data.AimDirection.y);
+                Vector3 lookDir = lookPos - transform.position;
+                lookDir.y = 0;
+                if (lookDir.sqrMagnitude > 0.01f)
+                {
+                    transform.rotation = Quaternion.LookRotation(lookDir);
+                }
             }
         }
     }

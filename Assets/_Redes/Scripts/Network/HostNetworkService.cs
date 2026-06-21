@@ -66,14 +66,24 @@ namespace Redes.Network
         public event Action<int>    OnPlayerCountChanged;
         public event Action         OnEnoughPlayersToStart;
         public event Action<string> OnConnectionFailed;
-        public event Action<bool>   OnRoomAvailabilityChanged;
+        public event Action<List<SessionInfo>> OnRoomListUpdated;
 
         public NetworkRunner Runner       => _gameRunner;
         public NetworkObject PlayerPrefab => _playerPrefab;
 
         // ──────────────────────────────────────────────────────────────────
+        public static HostNetworkService Instance { get; private set; }
+
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
             RedesLog.Info(RedesLog.NET, ">> HostNetworkService.Awake() - arquitectura 2 runners");
             StartLobbyWatch();
             RedesLog.Info(RedesLog.NET, "<< HostNetworkService.Awake()");
@@ -150,9 +160,9 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         //  JUGADOR 1 — "CREAR SALA"
         // ──────────────────────────────────────────────────────────────────
-        public async void StartAsHost()
+        public async void StartAsHost(string sessionName)
         {
-            RedesLog.Info(RedesLog.NET, ">> StartAsHost() - crear sala");
+            RedesLog.Info(RedesLog.NET, $">> StartAsHost() - crear sala {sessionName}");
             if (_isInSession) { RedesLog.Warn(RedesLog.NET, "<< StartAsHost ABORTADO - ya en sesion"); return; }
 
             _isInSession = true;
@@ -164,12 +174,12 @@ namespace Redes.Network
                 int buildIdx = SceneManager.GetActiveScene().buildIndex;
                 var sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
 
-                RedesLog.Info(RedesLog.LOBBY, $"   Creando sala '{GameConstants.DEFAULT_ROOM_NAME}' (maxPlayers={GameConstants.MAX_PLAYERS})...");
+                RedesLog.Info(RedesLog.LOBBY, $"   Creando sala '{sessionName}' (maxPlayers={GameConstants.MAX_PLAYERS})...");
 
                 var result = await _gameRunner.StartGame(new StartGameArgs
                 {
                     GameMode     = GameMode.Host,
-                    SessionName  = GameConstants.DEFAULT_ROOM_NAME,
+                    SessionName  = sessionName,
                     PlayerCount  = GameConstants.MAX_PLAYERS,
                     SceneManager = sceneMgr,
                     Scene        = SceneRef.FromIndex(buildIdx)
@@ -179,7 +189,7 @@ namespace Redes.Network
                 if (result.Ok)
                 {
                     IsRunning = true;
-                    RedesLog.Info(RedesLog.LOBBY, $"   Sala '{GameConstants.DEFAULT_ROOM_NAME}' creada. Esperando al otro jugador.");
+                    RedesLog.Info(RedesLog.LOBBY, $"   Sala '{sessionName}' creada. Esperando al otro jugador.");
                     RedesLog.Info(RedesLog.NET, "<< StartAsHost() OK");
                     OnHostStarted?.Invoke();
                 }
@@ -199,9 +209,9 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         //  JUGADOR 2 — "UNIRSE A SALA"
         // ──────────────────────────────────────────────────────────────────
-        public async void StartAsClient()
+        public async void StartAsClient(string sessionName)
         {
-            RedesLog.Info(RedesLog.NET, ">> StartAsClient() - unirse a sala");
+            RedesLog.Info(RedesLog.NET, $">> StartAsClient() - unirse a sala {sessionName}");
             if (_isInSession) { RedesLog.Warn(RedesLog.NET, "<< StartAsClient ABORTADO - ya en sesion"); return; }
 
             _isInSession = true;
@@ -213,12 +223,12 @@ namespace Redes.Network
                 int buildIdx = SceneManager.GetActiveScene().buildIndex;
                 var sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
 
-                RedesLog.Info(RedesLog.LOBBY, $"   Uniéndose a sala '{GameConstants.DEFAULT_ROOM_NAME}'...");
+                RedesLog.Info(RedesLog.LOBBY, $"   Uniéndose a sala '{sessionName}'...");
 
                 var result = await _gameRunner.StartGame(new StartGameArgs
                 {
                     GameMode     = GameMode.Client,
-                    SessionName  = GameConstants.DEFAULT_ROOM_NAME,
+                    SessionName  = sessionName,
                     SceneManager = sceneMgr,
                     Scene        = SceneRef.FromIndex(buildIdx)
                 });
@@ -227,7 +237,7 @@ namespace Redes.Network
                 if (result.Ok)
                 {
                     IsRunning = true;
-                    RedesLog.Info(RedesLog.LOBBY, $"   Unido a sala '{GameConstants.DEFAULT_ROOM_NAME}' correctamente.");
+                    RedesLog.Info(RedesLog.LOBBY, $"   Unido a sala '{sessionName}' correctamente.");
                     RedesLog.Info(RedesLog.NET, "<< StartAsClient() OK");
                     OnHostStarted?.Invoke();
                 }
@@ -282,25 +292,7 @@ namespace Redes.Network
             int count = sessionList?.Count ?? 0;
             RedesLog.Info(RedesLog.LOBBY, $">> OnSessionListUpdated: {count} sala(s)");
 
-            bool available = false;
-            if (sessionList != null)
-            {
-                foreach (var s in sessionList)
-                {
-                    bool ours = s.Name == GameConstants.DEFAULT_ROOM_NAME;
-                    bool open = s.IsOpen && s.IsVisible;
-                    bool room = s.PlayerCount < s.MaxPlayers;
-                    RedesLog.Info(RedesLog.LOBBY, $"   '{s.Name}' {s.PlayerCount}/{s.MaxPlayers} open={s.IsOpen} [ours={ours} lugar={room}]");
-                    if (ours && open && room) available = true;
-                }
-            }
-
-            if (available != _lastRoomAvailable)
-            {
-                _lastRoomAvailable = available;
-                RedesLog.Info(RedesLog.LOBBY, $"<< OnSessionListUpdated → UNIRSE {(available ? "HABILITADO" : "DESHABILITADO")}");
-                OnRoomAvailabilityChanged?.Invoke(available);
-            }
+            OnRoomListUpdated?.Invoke(sessionList);
         }
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -315,7 +307,16 @@ namespace Redes.Network
                 else if (_playerSpawner == null)
                     RedesLog.Error(RedesLog.NET, "   _playerSpawner NULL - corre Link & Assign All");
                 else
-                    _playerSpawner.SpawnPlayer(runner, player, _playerPrefab);
+                {
+                    if (!_playerSpawner.IsPlayerSpawned(player))
+                    {
+                        _playerSpawner.SpawnPlayer(runner, player, _playerPrefab);
+                    }
+                    else
+                    {
+                        RedesLog.Info(RedesLog.NET, $"   OnPlayerJoined: Jugador {player} ya estaba spawneado. Omitiendo spawn.");
+                    }
+                }
             }
 
             RefreshPlayerCount();
@@ -420,7 +421,33 @@ namespace Redes.Network
         public void OnReliableDataProgress(NetworkRunner r, PlayerRef p, ReliableKey k, float prog) { }
         public void OnObjectExitAOI(NetworkRunner r, NetworkObject o, PlayerRef p) { }
         public void OnObjectEnterAOI(NetworkRunner r, NetworkObject o, PlayerRef p) { }
-        public void OnSceneLoadDone(NetworkRunner r) { }
+        public void OnSceneLoadDone(NetworkRunner runner)
+        {
+            if (runner != _gameRunner) return;
+            int activeCount = runner.ActivePlayers.Count();
+            RedesLog.Info(RedesLog.NET, $">> OnSceneLoadDone. IsServer={runner.IsServer} ActivePlayers={activeCount}");
+
+            if (runner.IsServer)
+            {
+                if (_playerSpawner != null)
+                {
+                    _playerSpawner.DespawnAllActivePlayers(runner);
+                    
+                    foreach (var playerRef in runner.ActivePlayers)
+                    {
+                        _playerSpawner.SpawnPlayer(runner, playerRef, _playerPrefab);
+                    }
+                }
+            }
+
+            // Force evaluate player count and trigger transition for both host and clients!
+            OnPlayerCountChanged?.Invoke(activeCount);
+            if (activeCount >= GameConstants.MIN_PLAYERS_TO_START)
+            {
+                RedesLog.Info(RedesLog.NET, $"   OnSceneLoadDone: {activeCount} jugadores conectados. Iniciando juego.");
+                OnEnoughPlayersToStart?.Invoke();
+            }
+        }
         public void OnSceneLoadStart(NetworkRunner r) { }
     }
 }

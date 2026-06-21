@@ -20,8 +20,8 @@ namespace Redes.Player
         [Header("Tuning")]
         [SerializeField] private int _maxHealth = GameConstants.DEFAULT_MAX_HEALTH;
 
-        [Header("Refs (assigned by the Link tool: the scene match controller)")]
-        [SerializeField] private MatchNetworkController _matchNetwork;
+        [Header("Refs (assigned by the Prefab tool)")]
+        [SerializeField] private GameEventBus _eventBus;
 
         // Networked source of truth. OnChanged hook updates the HUD on every client.
         [Networked, OnChangedRender(nameof(OnHealthChangedRender))] public int CurrentHealth { get; set; }
@@ -32,42 +32,88 @@ namespace Redes.Player
 
         private void OnHealthChangedRender()
         {
-            OnHealthChanged?.Invoke(CurrentHealth);
+            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] OnHealthChangedRender: Player {Object.InputAuthority} (LocalPlayer={Runner.LocalPlayer}) health updated to {CurrentHealth}");
+            try
+            {
+                OnHealthChanged?.Invoke(CurrentHealth);
+                RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] OnHealthChangedRender completed successfully.");
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.COMBAT, $">> PlayerHealth: [ERROR] OnHealthChangedRender exception: {ex.Message}\n{ex.StackTrace}");
+            }
         }
 
         public override void Spawned()
         {
-            if (_matchNetwork == null)
+            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] Spawned: Player {Object.InputAuthority}");
+            try
             {
-                _matchNetwork = FindFirstObjectByType<MatchNetworkController>();
+                if (Object.HasStateAuthority)
+                {
+                    CurrentHealth = _maxHealth;
+                    RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: Spawned initialized CurrentHealth to {CurrentHealth} on Server.");
+                }
+                OnHealthChanged?.Invoke(CurrentHealth);
+                RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] Spawned completed successfully.");
             }
-
-            if (Object.HasStateAuthority)
+            catch (System.Exception ex)
             {
-                CurrentHealth = _maxHealth;
+                RedesLog.Error(RedesLog.COMBAT, $">> PlayerHealth: [ERROR] Spawned exception: {ex.Message}\n{ex.StackTrace}");
             }
-            OnHealthChanged?.Invoke(CurrentHealth);
         }
 
         public void TakeDamage(int amount, PlayerRef attacker)
         {
+            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] TakeDamage: target={Object.InputAuthority}, amount={amount}, attacker={attacker}");
+            
             // REQUIRED LOG -> "El jugador B recibio el impacto"
             RedesLog.Info(RedesLog.COMBAT, $"El jugador {Object.InputAuthority} recibio el impacto");
 
-            if (!Object.HasStateAuthority) return;
+            if (!Object.HasStateAuthority)
+            {
+                RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TakeDamage skipped since this client is NOT StateAuthority.");
+                return;
+            }
 
-            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            try
+            {
+                CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+                RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: CurrentHealth updated to {CurrentHealth}");
+                
+                if (_eventBus != null)
+                {
+                    RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] TriggerPlayerTookDamage event bus");
+                    _eventBus.TriggerPlayerTookDamage(Object.InputAuthority, CurrentHealth, attacker);
+                    RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TriggerPlayerTookDamage completed");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.COMBAT, $">> PlayerHealth: [ERROR] Exception during TakeDamage calculations: {ex.Message}\n{ex.StackTrace}");
+            }
 
             if (!IsAlive)
             {
                 // REQUIRED LOG -> "El jugador A Perdio"
                 RedesLog.Info(RedesLog.MATCH, $"El jugador {Object.InputAuthority} Perdio");
-
-                if (_matchNetwork != null)
+                
+                try
                 {
-                    _matchNetwork.AnnounceResult(loser: Object.InputAuthority, winner: attacker);
+                    if (_eventBus != null)
+                    {
+                        RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] TriggerPlayerDied event bus");
+                        _eventBus.TriggerPlayerDied(Object.InputAuthority, attacker);
+                        RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TriggerPlayerDied completed");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    RedesLog.Error(RedesLog.COMBAT, $">> PlayerHealth: [ERROR] Exception during TriggerPlayerDied: {ex.Message}\n{ex.StackTrace}");
                 }
             }
+            
+            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TakeDamage completed");
         }
     }
 }

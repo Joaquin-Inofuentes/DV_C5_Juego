@@ -20,10 +20,23 @@ namespace Redes.Views
         [Header("Root panel toggled on game end (assigned by the Link tool)")]
         [SerializeField] private GameObject _panelRoot;
 
+        [Header("Retry Button")]
+        [SerializeField] private Button _retryButton;
+
         /// <summary>
         /// REQUIRED: result is broadcast "con action". Other systems subscribe.
         /// </summary>
         public event Action<MatchResult> OnResultNotified;
+
+        public event Action OnRetryClicked;
+
+        private void Awake()
+        {
+            if (_retryButton != null)
+            {
+                _retryButton.onClick.AddListener(() => OnRetryClicked?.Invoke());
+            }
+        }
 
         /// <summary>
         /// Called by MatchController when the match ends. Shows text AND fires the Action.
@@ -47,6 +60,16 @@ namespace Redes.Views
 
             // Fire the Action so any subscriber reacts to the outcome.
             OnResultNotified?.Invoke(result);
+        }
+
+        public void ShowRematchStatus(string status)
+        {
+            if (_resultText != null) _resultText.text = status;
+        }
+
+        public void SetRetryButtonInteractable(bool interactable)
+        {
+            if (_retryButton != null) _retryButton.interactable = interactable;
         }
     }
 }

@@ -17,12 +17,23 @@ namespace Redes.Player
         [Header("Tuning")]
         [SerializeField] private int _magazineSize = GameConstants.DEFAULT_MAGAZINE_SIZE;
         [SerializeField] private float _reloadTime = GameConstants.DEFAULT_RELOAD_TIME;
+        [SerializeField] private GameEventBus _eventBus;
 
         // Networked state.
         [Networked, OnChangedRender(nameof(OnAmmoChangedRender))] public int CurrentAmmo { get; set; }
         [Networked] public NetworkBool IsReloading { get; set; }
         // Server-authoritative timer for the reload duration.
         [Networked] public TickTimer ReloadTimer { get; set; }
+
+        public float ReloadProgress
+        {
+            get
+            {
+                if (!IsReloading) return 1f;
+                float remaining = ReloadTimer.RemainingTime(Runner) ?? 0f;
+                return Mathf.Clamp01(1f - (remaining / _reloadTime));
+            }
+        }
 
         public bool HasAmmo => CurrentAmmo > 0;
 
@@ -57,6 +68,7 @@ namespace Redes.Player
 
             // REQUIRED-STYLE FLAG LOG
             RedesLog.Info(RedesLog.AMMO, $"El jugador {Object.InputAuthority} esta recargando");
+            if (_eventBus != null) _eventBus.TriggerPlayerReloadStarted(Object.InputAuthority);
             
             if (Object.HasStateAuthority)
             {
