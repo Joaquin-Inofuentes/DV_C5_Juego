@@ -7,11 +7,33 @@ using Redes.Views;
 namespace Redes.Controllers
 {
     /// <summary>
-    /// MVC - CONTROLLER para el flujo general (boot → lobby → playing → finished).
+    /// CALLSTACK COMPLETO:
     ///
-    /// Boot:  muestra lobby con botones "Crear Sala" / "Unirse".
-    /// Crear: llama StartAsHost() → espera jugadores → Playing al llegar 2.
-    /// Unirse: llama StartAsClient() → Playing cuando entra.
+    /// ── INICIO (ambos jugadores) ──────────────────────────────────────────
+    /// Awake()  → crea GameStateModel, subscribe OnPhaseChanged
+    /// OnEnable()→ subscribe eventos de red + listeners de botones
+    /// Start()  → HandlePhaseChanged(Booting) → LobbyView visible, botones visibles
+    ///
+    /// ── USER 1: CREAR SALA ───────────────────────────────────────────────
+    /// CreateRoom()
+    ///   → LobbyView.HideButtons(), ShowStatus("Creando sala...")
+    ///   → NetworkService.StartAsHost()          [async, espera Photon]
+    ///   → _model.SetPhase(SearchingSession)
+    /// ¿StartGame OK?
+    ///   SÍ  → OnHostStarted → HandleHostStarted → WaitingForPlayers → "Esperando..."
+    ///   NO  → OnConnectionFailed → HandleConnectionFailed → Booting → ShowError
+    /// OnPlayerCountChanged(1) → LobbyView.ShowPlayerCount(1)
+    /// OnEnoughPlayersToStart  → HandleEnoughPlayers → Playing → HUD visible
+    ///
+    /// ── USER 2: UNIRSE ───────────────────────────────────────────────────
+    /// JoinRoom()
+    ///   → LobbyView.HideButtons(), ShowStatus("Uniéndose...")
+    ///   → NetworkService.StartAsClient()         [async, busca sesion "RedesRoom"]
+    ///   → _model.SetPhase(SearchingSession)
+    /// ¿StartGame OK?
+    ///   SÍ  → OnHostStarted → HandleHostStarted → WaitingForPlayers
+    ///   NO  → OnConnectionFailed → vuelve a Booting + error
+    /// OnEnoughPlayersToStart  → Playing
     /// </summary>
     public class GameFlowController : MonoBehaviour
     {
@@ -28,35 +50,56 @@ namespace Redes.Controllers
         private GameStateModel _model;
         private INetworkService NetworkService => _hostService;
 
+        // ──────────────────────────────────────────────────────────────────
         private void Awake()
         {
+            RedesLog.Info(RedesLog.BOOT, ">> GameFlowController.Awake()");
             _model = new GameStateModel();
             _model.OnPhaseChanged += HandlePhaseChanged;
+            RedesLog.Info(RedesLog.BOOT, $"<< GameFlowController.Awake() - fase inicial={_model.Phase}");
         }
 
         private void Start()
         {
-            // Inicializa la UI con la fase actual (Booting → muestra lobby con botones)
+            RedesLog.Info(RedesLog.BOOT, ">> GameFlowController.Start()");
+            LogReferenceStatus();
             HandlePhaseChanged(_model.Phase);
+            RedesLog.Info(RedesLog.BOOT, "<< GameFlowController.Start()");
         }
 
         private void OnEnable()
         {
+            RedesLog.Info(RedesLog.BOOT, ">> GameFlowController.OnEnable()");
             if (NetworkService != null)
             {
                 NetworkService.OnHostStarted          += HandleHostStarted;
                 NetworkService.OnPlayerCountChanged   += HandlePlayerCountChanged;
                 NetworkService.OnEnoughPlayersToStart += HandleEnoughPlayers;
+                NetworkService.OnConnectionFailed     += HandleConnectionFailed;
+                RedesLog.Info(RedesLog.BOOT, "   eventos de red registrados");
             }
+            else
+            {
+                RedesLog.Error(RedesLog.BOOT, "   _hostService es NULL! Asignalo con Link & Assign All");
+            }
+
             if (_lobbyView != null)
             {
                 if (_lobbyView.HostButton != null)
                     _lobbyView.HostButton.onClick.AddListener(CreateRoom);
                 if (_lobbyView.JoinButton != null)
                     _lobbyView.JoinButton.onClick.AddListener(JoinRoom);
+                RedesLog.Info(RedesLog.BOOT, "   listeners de botones registrados");
             }
+            else
+            {
+                RedesLog.Error(RedesLog.BOOT, "   _lobbyView es NULL!");
+            }
+
             if (_matchController != null)
                 _matchController.OnMatchFinished += HandleMatchFinished;
+
+            RedesLog.Info(RedesLog.BOOT, "<< GameFlowController.OnEnable()");
         }
 
         private void OnDisable()
@@ -66,22 +109,26 @@ namespace Redes.Controllers
                 NetworkService.OnHostStarted          -= HandleHostStarted;
                 NetworkService.OnPlayerCountChanged   -= HandlePlayerCountChanged;
                 NetworkService.OnEnoughPlayersToStart -= HandleEnoughPlayers;
+                NetworkService.OnConnectionFailed     -= HandleConnectionFailed;
             }
             if (_lobbyView != null)
             {
-                if (_lobbyView.HostButton != null)
-                    _lobbyView.HostButton.onClick.RemoveListener(CreateRoom);
-                if (_lobbyView.JoinButton != null)
-                    _lobbyView.JoinButton.onClick.RemoveListener(JoinRoom);
+                if (_lobbyView.HostButton != null) _lobbyView.HostButton.onClick.RemoveListener(CreateRoom);
+                if (_lobbyView.JoinButton != null) _lobbyView.JoinButton.onClick.RemoveListener(JoinRoom);
             }
             if (_matchController != null)
                 _matchController.OnMatchFinished -= HandleMatchFinished;
         }
 
-        // ---- Acciones de botones ----
+        // ──────────────────────────────────────────────────────────────────
+        //  ACCIONES DE BOTONES
+        // ──────────────────────────────────────────────────────────────────
 
         public void CreateRoom()
         {
+            RedesLog.Info(RedesLog.LOBBY, ">> CreateRoom() - Jugador 1 quiere crear sala");
+            if (NetworkService == null) { RedesLog.Error(RedesLog.LOBBY, "   NetworkService NULL"); return; }
+
             if (_lobbyView != null)
             {
                 _lobbyView.HideButtons();
@@ -89,10 +136,14 @@ namespace Redes.Controllers
             }
             NetworkService.StartAsHost();
             _model.SetPhase(GamePhase.SearchingSession);
+            RedesLog.Info(RedesLog.LOBBY, "<< CreateRoom() - fase=SearchingSession, esperando StartGame...");
         }
 
         public void JoinRoom()
         {
+            RedesLog.Info(RedesLog.LOBBY, ">> JoinRoom() - Jugador 2 quiere unirse");
+            if (NetworkService == null) { RedesLog.Error(RedesLog.LOBBY, "   NetworkService NULL"); return; }
+
             if (_lobbyView != null)
             {
                 _lobbyView.HideButtons();
@@ -100,78 +151,119 @@ namespace Redes.Controllers
             }
             NetworkService.StartAsClient();
             _model.SetPhase(GamePhase.SearchingSession);
+            RedesLog.Info(RedesLog.LOBBY, "<< JoinRoom() - fase=SearchingSession, esperando StartGame...");
         }
 
-        // ---- Phase handler ----
+        // ──────────────────────────────────────────────────────────────────
+        //  HANDLERS DE FASE
+        // ──────────────────────────────────────────────────────────────────
 
         private void HandlePhaseChanged(GamePhase phase)
         {
+            RedesLog.Info(RedesLog.BOOT, $">> HandlePhaseChanged({phase})");
             switch (phase)
             {
                 case GamePhase.Booting:
-                    if (_lobbyView != null)
-                    {
-                        _lobbyView.SetVisible(true);
-                        _lobbyView.ShowButtons();
-                    }
+                    if (_lobbyView != null) { _lobbyView.SetVisible(true); _lobbyView.ShowButtons(); }
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    RedesLog.Info(RedesLog.BOOT, "   BOOTING → lobby visible, botones visibles");
                     break;
 
                 case GamePhase.SearchingSession:
-                    if (_lobbyView != null)
-                    {
-                        _lobbyView.SetVisible(true);
-                        _lobbyView.HideButtons();
-                        _lobbyView.ShowStatus("Conectando...");
-                    }
+                    if (_lobbyView != null) { _lobbyView.SetVisible(true); _lobbyView.HideButtons(); _lobbyView.ShowStatus("Conectando..."); }
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    RedesLog.Info(RedesLog.BOOT, "   SEARCHING → 'Conectando...'");
                     break;
 
                 case GamePhase.WaitingForPlayers:
-                    if (_lobbyView != null)
-                    {
-                        _lobbyView.SetVisible(true);
-                        _lobbyView.HideButtons();
-                        _lobbyView.ShowStatus("Esperando jugadores...");
-                    }
+                    if (_lobbyView != null) { _lobbyView.SetVisible(true); _lobbyView.HideButtons(); _lobbyView.ShowStatus("Esperando jugadores..."); }
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    RedesLog.Info(RedesLog.BOOT, "   WAITING → 'Esperando jugadores...'");
                     break;
 
                 case GamePhase.Playing:
                     if (_lobbyView != null) _lobbyView.SetVisible(false);
                     if (_gameHudView != null) _gameHudView.SetVisible(true);
+                    RedesLog.Info(RedesLog.BOOT, "   PLAYING → lobby oculto, HUD visible");
                     break;
 
                 case GamePhase.Finished:
                     if (_lobbyView != null) _lobbyView.SetVisible(false);
                     if (_gameHudView != null) _gameHudView.SetVisible(false);
+                    RedesLog.Info(RedesLog.BOOT, "   FINISHED → todo oculto");
                     break;
             }
+            RedesLog.Info(RedesLog.BOOT, $"<< HandlePhaseChanged({phase})");
         }
 
-        // ---- Network event handlers ----
+        // ──────────────────────────────────────────────────────────────────
+        //  HANDLERS DE EVENTOS DE RED
+        // ──────────────────────────────────────────────────────────────────
 
         private void HandleHostStarted()
         {
+            RedesLog.Info(RedesLog.NET, ">> HandleHostStarted() - runner activo, esperando jugadores");
             _model.SetPhase(GamePhase.WaitingForPlayers);
+            RedesLog.Info(RedesLog.NET, "<< HandleHostStarted()");
         }
 
         private void HandlePlayerCountChanged(int count)
         {
+            RedesLog.Info(RedesLog.NET, $">> HandlePlayerCountChanged(count={count})");
             _model.SetPlayers(count);
             if (_lobbyView != null) _lobbyView.ShowPlayerCount(count);
+            RedesLog.Info(RedesLog.NET, $"<< HandlePlayerCountChanged(count={count})");
         }
 
         private void HandleEnoughPlayers()
         {
+            RedesLog.Info(RedesLog.MATCH, ">> HandleEnoughPlayers() - 2 jugadores conectados, INICIANDO JUEGO");
             _model.SetPhase(GamePhase.Playing);
             if (_lobbyView != null) _lobbyView.SetVisible(false);
             if (_gameHudView != null) _gameHudView.SetVisible(true);
+            RedesLog.Info(RedesLog.MATCH, "<< HandleEnoughPlayers() - fase=Playing");
+        }
+
+        private void HandleConnectionFailed(string reason)
+        {
+            RedesLog.Error(RedesLog.NET, $">> HandleConnectionFailed(reason={reason})");
+            // Volver al estado inicial para que el usuario pueda reintentar
+            _model.SetPhase(GamePhase.Booting);
+            if (_lobbyView != null)
+            {
+                _lobbyView.SetVisible(true);
+                _lobbyView.ShowButtons();
+                _lobbyView.ShowStatus($"Error: {reason}");
+            }
+            RedesLog.Error(RedesLog.NET, $"<< HandleConnectionFailed() - vuelto a Booting");
         }
 
         private void HandleMatchFinished(MatchResult result)
         {
+            RedesLog.Info(RedesLog.MATCH, $">> HandleMatchFinished(result={result})");
             _model.SetPhase(GamePhase.Finished);
+            RedesLog.Info(RedesLog.MATCH, "<< HandleMatchFinished()");
+        }
+
+        // ──────────────────────────────────────────────────────────────────
+        private void LogReferenceStatus()
+        {
+            RedesLog.Info(RedesLog.BOOT, "=== REFERENCIAS GameFlowController ===");
+            RedesLog.Info(RedesLog.BOOT, $"  _hostService:   {(_hostService   != null ? "OK" : "NULL ⚠️")}");
+            RedesLog.Info(RedesLog.BOOT, $"  _lobbyView:     {(_lobbyView     != null ? "OK" : "NULL ⚠️")}");
+            RedesLog.Info(RedesLog.BOOT, $"  _gameHudView:   {(_gameHudView   != null ? "OK" : "NULL ⚠️")}");
+            RedesLog.Info(RedesLog.BOOT, $"  _matchController:{(_matchController != null ? "OK" : "NULL ⚠️")}");
+            if (_lobbyView != null)
+            {
+                RedesLog.Info(RedesLog.BOOT, $"  _lobbyView._hostButton: {(_lobbyView.HostButton != null ? "OK" : "NULL ⚠️")}");
+                RedesLog.Info(RedesLog.BOOT, $"  _lobbyView._joinButton: {(_lobbyView.JoinButton != null ? "OK" : "NULL ⚠️")}");
+            }
+            if (_hostService != null)
+            {
+                RedesLog.Info(RedesLog.BOOT, $"  _hostService._playerPrefab:  {(_hostService.PlayerPrefab  != null ? "OK" : "NULL ⚠️")}");
+                RedesLog.Info(RedesLog.BOOT, $"  _hostService._playerSpawner: (ver log NET)");
+            }
+            RedesLog.Info(RedesLog.BOOT, "======================================");
         }
     }
 }

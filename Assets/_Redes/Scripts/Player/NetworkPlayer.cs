@@ -36,9 +36,8 @@ namespace Redes.Player
 
         public override void Spawned()
         {
-            // REQUIRED LOG -> "Inicio el jugador A" / "Inicio el Jugador B"
-            // (We tag with the InputAuthority; player 0 == A, player 1 == B.)
-            RedesLog.Info(RedesLog.PLAYER, $"Inicio el jugador {Object.InputAuthority}");
+            RedesLog.Info(RedesLog.PLAYER, $">> NetworkPlayer.Spawned() InputAuthority={Object.InputAuthority} HasInputAuthority={Object.HasInputAuthority} HasStateAuthority={Object.HasStateAuthority}");
+            RedesLog.Info(RedesLog.PLAYER, $"   Inicio el jugador {Object.InputAuthority}");
 
             Color playerColor = (Object.InputAuthority.PlayerId % 2 == 0) ? Color.blue : Color.red;
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -57,6 +56,7 @@ namespace Redes.Player
 
             if (Object.HasInputAuthority)
             {
+                RedesLog.Info(RedesLog.PLAYER, $"   [LOCAL PLAYER] Bindando controles para jugador {Object.InputAuthority}");
                 var pc = FindFirstObjectByType<Redes.Controllers.PlayerController>();
                 pc?.Bind(this);
 

@@ -52,7 +52,22 @@ namespace Redes.Views
 
         public void SetVisible(bool visible)
         {
+            RedesLog.Info(RedesLog.BOOT, $">> LobbyView.SetVisible({visible})");
             gameObject.SetActive(visible);
+        }
+
+        public void ShowError(string message)
+        {
+            SetButtons(false, false);
+            ShowStatus($"[ERROR] {message}");
+            RedesLog.Error(RedesLog.BOOT, $"LobbyView.ShowError: {message}");
+            // Re-show buttons after a moment so user can retry
+            Invoke(nameof(RestoreButtons), 3f);
+        }
+
+        private void RestoreButtons()
+        {
+            ShowButtons();
         }
 
         private void SetButtons(bool host, bool join)

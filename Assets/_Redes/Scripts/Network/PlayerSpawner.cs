@@ -24,20 +24,36 @@ namespace Redes.Network
         /// <summary>Spawns one player. Called by HostNetworkService.OnPlayerJoined (server only).</summary>
         public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab)
         {
-            RedesLog.Info(RedesLog.NET, $"Spawneando jugador para PlayerRef={player}");
+            RedesLog.Info(RedesLog.NET, $">> PlayerSpawner.SpawnPlayer(player={player})");
             Vector3 pos = GetSpawnPosition(player);
+            RedesLog.Info(RedesLog.NET, $"   spawnPos={pos}  prefab={prefab.name}");
             var obj = runner.Spawn(prefab, pos, Quaternion.identity, player);
-            _spawned[player] = obj;
+            if (obj != null)
+            {
+                _spawned[player] = obj;
+                RedesLog.Info(RedesLog.PLAYER, $"   Inicio el jugador {player} en {pos}");
+            }
+            else
+            {
+                RedesLog.Error(RedesLog.NET, $"   runner.Spawn devolvio NULL para player={player}. Verifica que el prefab este registrado en NetworkProjectConfig.");
+            }
+            RedesLog.Info(RedesLog.NET, $"<< PlayerSpawner.SpawnPlayer(player={player}) total_spawned={_spawned.Count}");
         }
 
         public void DespawnPlayer(NetworkRunner runner, PlayerRef player)
         {
-            RedesLog.Info(RedesLog.NET, $"Despawneando jugador PlayerRef={player}");
+            RedesLog.Info(RedesLog.NET, $">> PlayerSpawner.DespawnPlayer(player={player})");
             if (_spawned.TryGetValue(player, out var obj))
             {
                 runner.Despawn(obj);
                 _spawned.Remove(player);
+                RedesLog.Info(RedesLog.NET, $"   Despawneado. total_spawned={_spawned.Count}");
             }
+            else
+            {
+                RedesLog.Warn(RedesLog.NET, $"   player={player} no estaba en _spawned");
+            }
+            RedesLog.Info(RedesLog.NET, $"<< PlayerSpawner.DespawnPlayer(player={player})");
         }
 
         // Helper for the other agent to pick a spawn position.

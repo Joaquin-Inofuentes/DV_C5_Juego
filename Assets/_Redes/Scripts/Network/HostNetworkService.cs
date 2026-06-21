@@ -10,9 +10,21 @@ using Redes.Core;
 namespace Redes.Network
 {
     /// <summary>
-    /// CORE OF THE HOST ARCHITECTURE.
-    /// StartAsHost()   -> crea sala en GameMode.Host  (botón "Crear Sala")
-    /// StartAsClient() -> se une en GameMode.Client   (botón "Unirse a Sala")
+    /// CALLSTACK USER 1 (HOST):
+    ///   Awake → AddCallbacks
+    ///   StartAsHost() → StartGame(Host) → [await Photon]
+    ///     OK  → OnHostStarted fired → GameFlowController.HandleHostStarted → WaitingForPlayers
+    ///     FAIL→ OnConnectionFailed fired → GameFlowController vuelve a Booting + muestra error
+    ///   OnPlayerJoined(p1=host)  → SpawnPlayer(p1) → RefreshPlayerCount(1) → aun esperando
+    ///   OnPlayerJoined(p2=client)→ SpawnPlayer(p2) → RefreshPlayerCount(2) → OnEnoughPlayersToStart
+    ///
+    /// CALLSTACK USER 2 (CLIENT):
+    ///   Awake → AddCallbacks
+    ///   StartAsClient() → StartGame(Client) → [await Photon, find session "RedesRoom"]
+    ///     OK  → OnHostStarted fired → WaitingForPlayers
+    ///     FAIL→ OnConnectionFailed fired → vuelve a Booting
+    ///   OnConnectedToServer → log
+    ///   OnPlayerJoined(p1), OnPlayerJoined(p2) → RefreshPlayerCount → OnEnoughPlayersToStart
     /// </summary>
     [RequireComponent(typeof(NetworkRunner))]
     public class HostNetworkService : MonoBehaviour, INetworkService, INetworkRunnerCallbacks
@@ -20,7 +32,7 @@ namespace Redes.Network
         [Header("Spawning (assigned by Tools > Redes > Link & Assign All)")]
         [SerializeField] private PlayerSpawner _playerSpawner;
 
-        [Header("Networked Player Prefab (Fusion). Assigned by the Link tool.")]
+        [Header("Networked Player Prefab. Assigned by the Link tool.")]
         [SerializeField] private NetworkObject _playerPrefab;
 
         private NetworkRunner _runner;
@@ -31,232 +43,272 @@ namespace Redes.Network
         public event Action OnHostStarted;
         public event Action<int> OnPlayerCountChanged;
         public event Action OnEnoughPlayersToStart;
+        public event Action<string> OnConnectionFailed;
 
         public NetworkRunner Runner => _runner;
         public NetworkObject PlayerPrefab => _playerPrefab;
 
+        // ──────────────────────────────────────────────────────────────────
         private void Awake()
         {
+            RedesLog.Info(RedesLog.NET, ">> HostNetworkService.Awake()");
             _runner = GetComponent<NetworkRunner>();
             _runner.ProvideInput = true;
-            _runner.AddCallbacks(this); // Solo se registra UNA vez aquí
+            _runner.AddCallbacks(this); // una sola vez
+            RedesLog.Info(RedesLog.NET, "<< HostNetworkService.Awake() - callbacks registrados");
         }
 
-        // ------------------------------------------------------------------ //
-        //  CREAR SALA  (Player 1 - Botón "Crear Sala")
-        // ------------------------------------------------------------------ //
+        // ──────────────────────────────────────────────────────────────────
+        //  JUGADOR 1 — "CREAR SALA"
+        // ──────────────────────────────────────────────────────────────────
         public async void StartAsHost()
         {
+            RedesLog.Info(RedesLog.NET, ">> StartAsHost() - intentando crear sala");
+
             if (IsRunning || (_runner != null && _runner.IsRunning))
             {
-                RedesLog.Warn(RedesLog.NET, "[HostNetworkService.StartAsHost] Runner ya está corriendo, ignorado.");
+                RedesLog.Warn(RedesLog.NET, "<< StartAsHost() ABORTADO - runner ya corriendo");
                 return;
             }
 
             try
             {
-                RedesLog.Info(RedesLog.NET, "Inicio el juego");
+                var sceneMgr = GetComponent<NetworkSceneManagerDefault>()
+                               ?? gameObject.AddComponent<NetworkSceneManagerDefault>();
+                int buildIdx = SceneManager.GetActiveScene().buildIndex;
+                var sceneRef = SceneRef.FromIndex(buildIdx);
 
-                var sceneMgr = GetComponent<NetworkSceneManagerDefault>() ?? gameObject.AddComponent<NetworkSceneManagerDefault>();
-                var sceneRef = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+                RedesLog.Info(RedesLog.LOBBY, $"Se creara una sala llamada '{GameConstants.DEFAULT_ROOM_NAME}' (buildIdx={buildIdx})");
 
-                // REQUIRED LOG -> "Se creo una sala llamada X"
-                RedesLog.Info(RedesLog.LOBBY, $"Se creo una sala llamada {GameConstants.DEFAULT_ROOM_NAME}");
-                // REQUIRED LOG -> "Se esta esperando al otro jugador"
-                RedesLog.Info(RedesLog.LOBBY, "Se esta esperando al otro jugador");
-
-                var result = await _runner.StartGame(new StartGameArgs
+                var args = new StartGameArgs
                 {
-                    GameMode   = GameMode.Host,
+                    GameMode    = GameMode.Host,
                     SessionName = GameConstants.DEFAULT_ROOM_NAME,
                     PlayerCount = GameConstants.MAX_PLAYERS,
                     SceneManager = sceneMgr,
-                    Scene = sceneRef
-                });
+                    Scene       = sceneRef
+                };
+                RedesLog.Info(RedesLog.NET, $"   StartGame(Host, session={args.SessionName}, maxPlayers={args.PlayerCount})...");
 
-                if (this == null || _runner == null) return;
+                var result = await _runner.StartGame(args);
+
+                if (this == null || _runner == null)
+                {
+                    RedesLog.Warn(RedesLog.NET, "<< StartAsHost() - objeto destruido durante await, ignorado");
+                    return;
+                }
 
                 if (result.Ok)
                 {
                     IsRunning = true;
+                    RedesLog.Info(RedesLog.LOBBY, $"Se creo la sala '{GameConstants.DEFAULT_ROOM_NAME}' correctamente. Se esta esperando al otro jugador.");
+                    RedesLog.Info(RedesLog.NET, "<< StartAsHost() OK - OnHostStarted fired");
                     OnHostStarted?.Invoke();
                 }
                 else
                 {
-                    RedesLog.Warn(RedesLog.NET, $"Error creando sala: {result.ShutdownReason}");
+                    string reason = result.ShutdownReason.ToString();
+                    RedesLog.Error(RedesLog.NET, $"<< StartAsHost() FALLO - ShutdownReason={reason}");
+                    OnConnectionFailed?.Invoke($"Crear sala fallo: {reason}");
                 }
             }
             catch (Exception ex)
             {
-                RedesLog.Error(RedesLog.NET, $"[StartAsHost] {ex.Message}\n{ex.StackTrace}");
+                RedesLog.Error(RedesLog.NET, $"<< StartAsHost() EXCEPCION: {ex.Message}\n{ex.StackTrace}");
+                OnConnectionFailed?.Invoke($"Excepcion: {ex.Message}");
             }
         }
 
-        // ------------------------------------------------------------------ //
-        //  UNIRSE A SALA  (Player 2 - Botón "Unirse a Sala")
-        // ------------------------------------------------------------------ //
+        // ──────────────────────────────────────────────────────────────────
+        //  JUGADOR 2 — "UNIRSE A SALA"
+        // ──────────────────────────────────────────────────────────────────
         public async void StartAsClient()
         {
+            RedesLog.Info(RedesLog.NET, ">> StartAsClient() - intentando unirse a sala");
+
             if (IsRunning || (_runner != null && _runner.IsRunning))
             {
-                RedesLog.Warn(RedesLog.NET, "[HostNetworkService.StartAsClient] Runner ya está corriendo, ignorado.");
+                RedesLog.Warn(RedesLog.NET, "<< StartAsClient() ABORTADO - runner ya corriendo");
                 return;
             }
 
             try
             {
-                RedesLog.Info(RedesLog.NET, "Uniéndose a sala como cliente");
+                var sceneMgr = GetComponent<NetworkSceneManagerDefault>()
+                               ?? gameObject.AddComponent<NetworkSceneManagerDefault>();
+                int buildIdx = SceneManager.GetActiveScene().buildIndex;
+                var sceneRef = SceneRef.FromIndex(buildIdx);
 
-                var sceneMgr = GetComponent<NetworkSceneManagerDefault>() ?? gameObject.AddComponent<NetworkSceneManagerDefault>();
-                var sceneRef = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+                RedesLog.Info(RedesLog.LOBBY, $"Buscando sala '{GameConstants.DEFAULT_ROOM_NAME}' para unirse (buildIdx={buildIdx})...");
 
-                // REQUIRED LOG -> "Se unio a la sala de X nombre"
-                RedesLog.Info(RedesLog.LOBBY,
-                    $"Se unio a la sala de {GameConstants.DEFAULT_ROOM_NAME} nombre y modo Client");
-
-                var result = await _runner.StartGame(new StartGameArgs
+                var args = new StartGameArgs
                 {
                     GameMode    = GameMode.Client,
                     SessionName = GameConstants.DEFAULT_ROOM_NAME,
                     SceneManager = sceneMgr,
-                    Scene = sceneRef
-                });
+                    Scene       = sceneRef
+                };
+                RedesLog.Info(RedesLog.NET, $"   StartGame(Client, session={args.SessionName})...");
 
-                if (this == null || _runner == null) return;
+                var result = await _runner.StartGame(args);
+
+                if (this == null || _runner == null)
+                {
+                    RedesLog.Warn(RedesLog.NET, "<< StartAsClient() - objeto destruido durante await");
+                    return;
+                }
 
                 if (result.Ok)
                 {
                     IsRunning = true;
+                    RedesLog.Info(RedesLog.LOBBY, $"Se unio a la sala '{GameConstants.DEFAULT_ROOM_NAME}' correctamente.");
+                    RedesLog.Info(RedesLog.NET, "<< StartAsClient() OK - OnHostStarted fired");
                     OnHostStarted?.Invoke();
                 }
                 else
                 {
-                    RedesLog.Warn(RedesLog.NET, $"Error uniéndose a sala: {result.ShutdownReason}");
+                    string reason = result.ShutdownReason.ToString();
+                    RedesLog.Error(RedesLog.NET, $"<< StartAsClient() FALLO - ShutdownReason={reason}");
+                    OnConnectionFailed?.Invoke($"Unirse fallo: {reason} (la sala existe? el Host inicio primero?)");
                 }
             }
             catch (Exception ex)
             {
-                RedesLog.Error(RedesLog.NET, $"[StartAsClient] {ex.Message}\n{ex.StackTrace}");
+                RedesLog.Error(RedesLog.NET, $"<< StartAsClient() EXCEPCION: {ex.Message}\n{ex.StackTrace}");
+                OnConnectionFailed?.Invoke($"Excepcion: {ex.Message}");
             }
         }
 
         public void Shutdown()
         {
-            RedesLog.Info(RedesLog.NET, "Cerrando el runner (Shutdown solicitado)");
-            _runner.Shutdown();
+            RedesLog.Info(RedesLog.NET, ">> Shutdown() solicitado");
+            if (_runner != null) _runner.Shutdown();
             IsRunning = false;
+            ConnectedPlayers = 0;
+            RedesLog.Info(RedesLog.NET, "<< Shutdown() OK");
         }
 
-        private void RefreshPlayerCount()
-        {
-            ConnectedPlayers = _runner.ActivePlayers.Count();
-            OnPlayerCountChanged?.Invoke(ConnectedPlayers);
-
-            if (ConnectedPlayers >= GameConstants.MIN_PLAYERS_TO_START)
-            {
-                // REQUIRED LOG -> "se inicio el juego por q se tienen 2 jugadores"
-                RedesLog.Info(RedesLog.NET, "se inicio el juego por q se tienen 2 jugadores");
-                OnEnoughPlayersToStart?.Invoke();
-            }
-        }
-
-        // ---- Fusion Callbacks ----
+        // ──────────────────────────────────────────────────────────────────
+        //  FUSION CALLBACKS
+        // ──────────────────────────────────────────────────────────────────
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            RedesLog.Info(RedesLog.NET, $"Un jugador se unio (PlayerRef={player})");
+            RedesLog.Info(RedesLog.NET, $">> OnPlayerJoined(player={player}) IsServer={runner.IsServer}");
 
             if (runner.IsServer)
             {
                 if (_playerPrefab == null)
                 {
-                    RedesLog.Error(RedesLog.NET, "[OnPlayerJoined] _playerPrefab es null. Asignalo con Tools > Redes > 3. Link & Assign All");
-                    return;
+                    RedesLog.Error(RedesLog.NET, "   _playerPrefab es NULL. Asignalo con Tools > Redes > 3. Link & Assign All");
                 }
-                if (_playerSpawner == null)
+                else if (_playerSpawner == null)
                 {
-                    RedesLog.Error(RedesLog.NET, "[OnPlayerJoined] _playerSpawner es null. Asignalo con Tools > Redes > 3. Link & Assign All");
-                    return;
+                    RedesLog.Error(RedesLog.NET, "   _playerSpawner es NULL. Asignalo con Tools > Redes > 3. Link & Assign All");
                 }
-                _playerSpawner.SpawnPlayer(runner, player, _playerPrefab);
+                else
+                {
+                    RedesLog.Info(RedesLog.NET, $"   [HOST] Spawneando player para PlayerRef={player}");
+                    _playerSpawner.SpawnPlayer(runner, player, _playerPrefab);
+                }
+            }
+            else
+            {
+                RedesLog.Info(RedesLog.NET, $"   [CLIENT] player={player} joineó, no spawneamos (solo el host spawna)");
             }
 
             RefreshPlayerCount();
+            RedesLog.Info(RedesLog.NET, $"<< OnPlayerJoined(player={player}) - count={ConnectedPlayers}");
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
-            RedesLog.Info(RedesLog.NET, $"Un jugador se fue (PlayerRef={player})");
+            RedesLog.Info(RedesLog.NET, $">> OnPlayerLeft(player={player})");
             if (runner.IsServer && _playerSpawner != null)
-            {
                 _playerSpawner.DespawnPlayer(runner, player);
-            }
             RefreshPlayerCount();
+            RedesLog.Info(RedesLog.NET, $"<< OnPlayerLeft(player={player}) - count={ConnectedPlayers}");
         }
 
         public void OnConnectedToServer(NetworkRunner runner)
         {
-            RedesLog.Info(RedesLog.NET, "Conectado al servidor");
+            RedesLog.Info(RedesLog.NET, ">> OnConnectedToServer() - cliente conectado al servidor de Fusion");
         }
 
         public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
         {
-            RedesLog.Warn(RedesLog.NET, $"Desconectado del servidor: {reason}");
+            RedesLog.Warn(RedesLog.NET, $">> OnDisconnectedFromServer(reason={reason})");
+            IsRunning = false;
+            OnConnectionFailed?.Invoke($"Desconectado: {reason}");
         }
 
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
-            RedesLog.Warn(RedesLog.NET, $"Runner apagado: {shutdownReason}");
+            RedesLog.Warn(RedesLog.NET, $">> OnShutdown(reason={shutdownReason})");
             IsRunning = false;
+            ConnectedPlayers = 0;
+            if (shutdownReason != ShutdownReason.Ok && shutdownReason != ShutdownReason.GameClosed)
+                OnConnectionFailed?.Invoke($"Runner apagado: {shutdownReason}");
+        }
+
+        public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
+        {
+            RedesLog.Error(RedesLog.NET, $">> OnConnectFailed(addr={remoteAddress}, reason={reason})");
+            OnConnectionFailed?.Invoke($"Fallo de conexion: {reason}");
         }
 
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
             var data = new NetworkInputData();
+            data.Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
-            data.Move = new Vector2(moveX, moveY);
-
-            Vector2 aimDir = Vector2.zero;
             if (Camera.main != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-                if (groundPlane.Raycast(ray, out float rayDistance))
+                if (groundPlane.Raycast(ray, out float dist))
                 {
-                    Vector3 worldPos = ray.GetPoint(rayDistance);
-                    aimDir = new Vector2(worldPos.x, worldPos.z);
+                    Vector3 worldPos = ray.GetPoint(dist);
+                    data.AimDirection = new Vector2(worldPos.x, worldPos.z);
                 }
             }
-            data.AimDirection = aimDir;
 
-            data.Buttons.Set(InputButton.Fire, Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space));
-            data.Buttons.Set(InputButton.Reload, Input.GetKey(KeyCode.R));
-
+            data.Buttons.Set(InputButton.Fire,   Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space));
+            data.Buttons.Set(InputButton.Reload,  Input.GetKey(KeyCode.R));
             input.Set(data);
         }
 
-        // Unused / stub callbacks (Fusion interface requirement)
-        public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+        // ──────────────────────────────────────────────────────────────────
+        private void RefreshPlayerCount()
         {
-            int count = sessionList != null ? sessionList.Count : 0;
-            RedesLog.Info(RedesLog.LOBBY, $"Se encontraron {count} salas");
+            RedesLog.Info(RedesLog.NET, ">> RefreshPlayerCount()");
+            ConnectedPlayers = _runner.ActivePlayers.Count();
+            RedesLog.Info(RedesLog.NET, $"   ConnectedPlayers={ConnectedPlayers} / MIN={GameConstants.MIN_PLAYERS_TO_START}");
+            OnPlayerCountChanged?.Invoke(ConnectedPlayers);
+
+            if (ConnectedPlayers >= GameConstants.MIN_PLAYERS_TO_START)
+            {
+                RedesLog.Info(RedesLog.NET, "   se inicio el juego porque se tienen 2 jugadores");
+                OnEnoughPlayersToStart?.Invoke();
+            }
+            RedesLog.Info(RedesLog.NET, "<< RefreshPlayerCount()");
         }
-        public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
-        public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
-        public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
+
+        // Stubs de la interfaz
+        public void OnSessionListUpdated(NetworkRunner r, List<SessionInfo> list)
         {
-            RedesLog.Warn(RedesLog.NET, $"Fallo al conectar a {remoteAddress}: {reason}");
+            RedesLog.Info(RedesLog.LOBBY, $"OnSessionListUpdated: {list?.Count ?? 0} salas encontradas");
         }
-        public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
-        public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
-        public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
-        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
-        public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
-        public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
-        public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
-        public void OnSceneLoadDone(NetworkRunner runner) { }
-        public void OnSceneLoadStart(NetworkRunner runner) { }
+        public void OnInputMissing(NetworkRunner r, PlayerRef p, NetworkInput i) { }
+        public void OnConnectRequest(NetworkRunner r, NetworkRunnerCallbackArgs.ConnectRequest req, byte[] token) { }
+        public void OnUserSimulationMessage(NetworkRunner r, SimulationMessagePtr m) { }
+        public void OnCustomAuthenticationResponse(NetworkRunner r, Dictionary<string, object> d) { }
+        public void OnHostMigration(NetworkRunner r, HostMigrationToken t) { }
+        public void OnReliableDataReceived(NetworkRunner r, PlayerRef p, ReliableKey k, ArraySegment<byte> d) { }
+        public void OnReliableDataProgress(NetworkRunner r, PlayerRef p, ReliableKey k, float prog) { }
+        public void OnObjectExitAOI(NetworkRunner r, NetworkObject o, PlayerRef p) { }
+        public void OnObjectEnterAOI(NetworkRunner r, NetworkObject o, PlayerRef p) { }
+        public void OnSceneLoadDone(NetworkRunner r) { RedesLog.Info(RedesLog.NET, "OnSceneLoadDone"); }
+        public void OnSceneLoadStart(NetworkRunner r) { RedesLog.Info(RedesLog.NET, "OnSceneLoadStart"); }
     }
 }

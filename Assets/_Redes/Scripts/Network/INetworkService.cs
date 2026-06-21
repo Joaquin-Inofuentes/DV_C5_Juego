@@ -1,29 +1,22 @@
 using System;
-using Fusion;
 
 namespace Redes.Network
 {
     /// <summary>
-    /// SOLID (Dependency Inversion): controllers/views talk to the network
-    /// through this abstraction instead of the concrete HostNetworkService /
-    /// Photon Fusion types. Makes the flow testable and swappable.
+    /// SOLID (DIP): controllers/views hablan con la red a través de esta abstracción.
     /// </summary>
     public interface INetworkService
     {
-        /// <summary>True once a NetworkRunner has been started as Host.</summary>
         bool IsRunning { get; }
-
-        /// <summary>How many players are currently connected to the session.</summary>
         int ConnectedPlayers { get; }
 
-        // --- Lifecycle (Host architecture) ---
-        void StartAsHost();   // Crea sala en GameMode.Host
-        void StartAsClient(); // Se une a sala en GameMode.Client
+        void StartAsHost();   // Jugador 1: crea sala GameMode.Host
+        void StartAsClient(); // Jugador 2: se une a sala GameMode.Client
         void Shutdown();
 
-        // --- Events the rest of the game subscribes to (Observer pattern) ---
-        event Action OnHostStarted;            // Runner activo (host o client).
-        event Action<int> OnPlayerCountChanged; // Fired when players join/leave.
-        event Action OnEnoughPlayersToStart;    // >= MIN_PLAYERS_TO_START reached.
+        event Action OnHostStarted;
+        event Action<int> OnPlayerCountChanged;
+        event Action OnEnoughPlayersToStart;
+        event Action<string> OnConnectionFailed; // startGame fallo -> motivo
     }
 }

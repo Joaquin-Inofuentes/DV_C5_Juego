@@ -64,6 +64,7 @@ namespace Redes.Combat
                         continue;
                     }
 
+                    RedesLog.Info(RedesLog.COMBAT, $">> Projectile.Hit: owner={Owner} target={hit.name} damage={_damage}");
                     damageable.TakeDamage(_damage, Owner);
                     Runner.Despawn(Object);
                     return;
