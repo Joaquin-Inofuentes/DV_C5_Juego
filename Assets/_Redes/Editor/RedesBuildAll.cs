@@ -16,6 +16,7 @@ namespace Redes.EditorTools
     /// </summary>
     public static class RedesBuildAll
     {
+        private const string ScenePath = "Assets/_Redes/Scenes/RedesGame.unity";
         private const string BuildPath = "Builds/RedesGame_Win64/RedesGame.exe";
 
         [MenuItem("Tools/Redes/4. Full Build (Scene + Prefabs + Link + Build)", priority = 4)]
@@ -30,8 +31,8 @@ namespace Redes.EditorTools
             Debug.Log("[REDES][BUILD] === Paso 3: Enlazar referencias ===");
             RedesSceneLinker.LinkAll();
 
-            Debug.Log("[REDES][BUILD] === Paso 4: Agregar a Build Settings ===");
-            AddSceneToBuildSettings("Assets/_Redes/Scenes/RedesGame.unity");
+            Debug.Log("[REDES][BUILD] === Paso 4: RedesGame PRIMERA en Build Settings ===");
+            EnsureRedesSceneIsFirst();
 
             Debug.Log("[REDES][BUILD] === Paso 5: Build Windows x64 ===");
             DoBuild();
@@ -54,18 +55,15 @@ namespace Redes.EditorTools
             EditorApplication.Exit(0);
         }
 
-        private static void AddSceneToBuildSettings(string scenePath)
+        /// <summary>
+        /// Asegura que RedesGame sea la ÚNICA escena del build dedicado de Redes,
+        /// cargada en índice 0.  No toca el orden del proyecto principal.
+        /// </summary>
+        private static void EnsureRedesSceneIsFirst()
         {
-            var scenes = EditorBuildSettings.scenes;
-            foreach (var s in scenes)
-                if (s.path == scenePath) { Debug.Log("[REDES][BUILD] Escena ya esta en BuildSettings"); return; }
-
-            var list = new System.Collections.Generic.List<EditorBuildSettingsScene>(scenes)
-            {
-                new EditorBuildSettingsScene(scenePath, true)
-            };
-            EditorBuildSettings.scenes = list.ToArray();
-            Debug.Log("[REDES][BUILD] Escena agregada a BuildSettings: " + scenePath);
+            // El build de Redes solo incluye su propia escena para garantizar
+            // que sea la escena de inicio (build index 0).
+            Debug.Log("[REDES][BUILD] Build dedicado: solo RedesGame.unity (index 0)");
         }
 
         private static void DoBuild()
@@ -73,12 +71,9 @@ namespace Redes.EditorTools
             string dir = Path.GetDirectoryName(BuildPath);
             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
-            var scenes = new System.Collections.Generic.List<string>();
-            foreach (var s in EditorBuildSettings.scenes)
-                if (s.enabled) scenes.Add(s.path);
-
+            // Build DEDICADO: solo RedesGame.unity — garantiza que sea la startup scene.
             var report = BuildPipeline.BuildPlayer(
-                scenes.ToArray(),
+                new[] { ScenePath },
                 BuildPath,
                 BuildTarget.StandaloneWindows64,
                 BuildOptions.None
