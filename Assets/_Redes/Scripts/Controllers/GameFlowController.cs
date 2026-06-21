@@ -149,10 +149,23 @@ namespace Redes.Controllers
 
         public void TriggerReturnToLobby()
         {
-            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby", null, "Performing return to lobby procedure");
-            if (_hostService != null)
+            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby [IN]", null, "Performing return to lobby procedure");
+            try
             {
-                _hostService.Shutdown();
+                if (_hostService != null)
+                {
+                    _hostService.Shutdown();
+                }
+                
+                var resultView = FindFirstObjectByType<ResultView>();
+                if (resultView != null)
+                {
+                    resultView.HideResult();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.LOBBY, $"   GameFlowController: [ERROR] Exception in TriggerReturnToLobby: {ex.Message}");
             }
             _model.SetPhase(GamePhase.Booting);
             // Re-trigger watch so we look for lobbies again
@@ -160,6 +173,7 @@ namespace Redes.Controllers
             {
                 _hostService.StartLobbyWatch();
             }
+            RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby [OUT]", null, "Return to lobby completed");
         }
 
         public static string LocalUsername = "Player";

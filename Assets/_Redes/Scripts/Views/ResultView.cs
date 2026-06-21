@@ -93,10 +93,21 @@ namespace Redes.Views
             if (_resultText != null) _resultText.text = status;
         }
 
+        public void HideResult()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "HideResult [IN]", null, "Hiding results panel and resetting states");
+            if (_panelRoot != null) _panelRoot.SetActive(false);
+            if (_winBackground != null) _winBackground.gameObject.SetActive(false);
+            if (_loseBackground != null) _loseBackground.gameObject.SetActive(false);
+            if (_retryButton != null) _retryButton.interactable = true;
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "HideResult [OUT]", null, "Results panel hidden");
+        }
+
         public void SetRetryButtonInteractable(bool interactable)
         {
-            RedesLog.Trace(RedesLog.MATCH, "ResultView", "SetRetryButtonInteractable", null, $"interactable={interactable}");
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "SetRetryButtonInteractable [IN]", null, $"interactable={interactable}");
             if (_retryButton != null) _retryButton.interactable = interactable;
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "SetRetryButtonInteractable [OUT]", null, "Completed");
         }
     }
 }
