@@ -243,41 +243,32 @@ namespace Redes.Network
 
                 if (!result.Ok && result.ShutdownReason == ShutdownReason.IncompatibleConfiguration)
                 {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] [FALLBACK_TRIGGERED] HostMode failed with IncompatibleConfiguration! " +
-                                     $"This usually means your Photon AppID is configured for 'Shared Mode only' on the dashboard. " +
-                                     $"Attempting fallback to GameMode.Shared...");
-                    
-                    DestroyRunnerGameObject(_gameRunner);
-                    _gameRunner = CreateRunner("GameRunner_SharedFallback", provideInput: true);
-                    sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
-                    
-                    var fallbackArgs = new StartGameArgs
-                    {
-                        GameMode     = GameMode.Shared,
-                        SessionName  = sessionName,
-                        PlayerCount  = GameConstants.MAX_PLAYERS,
-                        SceneManager = sceneMgr,
-                        Scene        = SceneRef.FromIndex(buildIdx)
-                    };
-                    
-                    Debug.Log($"[CONNECTION_DEBUG] >>> [7A] Re-starting as Shared Mode...");
-                    result = await _gameRunner.StartGame(fallbackArgs);
-                    
-                    if (this == null || _gameRunner == null) return;
-                    Debug.Log($"[CONNECTION_DEBUG] >>> [7B] Shared Mode fallback finished. Result Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
+                    Debug.LogError("========================================================================\n" +
+                                   "❌ ERROR CRÍTICO DE FUSION: IncompatibleConfiguration\n" +
+                                   "========================================================================\n" +
+                                   "Tu AppID de Photon Fusion actual está configurado como 'Shared Mode' únicamente en el Dashboard de Photon. " +
+                                   "El modo Host-Client NO está permitido por Photon con este AppID.\n\n" +
+                                   "CÓMO SOLUCIONARLO:\n" +
+                                   "1. Ve al Dashboard de Photon: https://dashboard.photonengine.com/\n" +
+                                   "2. Crea una nueva aplicación (o edita la existente) y asegúrate de elegir:\n" +
+                                   "   - SDK: 'Photon Fusion'\n" +
+                                   "   - Fusion Topology (Modo de Juego): Selecciona 'Client/Server' o 'All' (¡NO elijas 'Shared'!).\n" +
+                                   "3. Copia el nuevo AppID de Fusion generado.\n" +
+                                   "4. Abre Unity, ve a 'Assets/Photon/Fusion/Resources/PhotonAppSettings.asset' y pega el nuevo AppID en el campo 'AppIdFusion'.\n" +
+                                   "========================================================================");
                 }
 
                 if (result.Ok)
                 {
                     IsRunning = true;
-                    Debug.Log($"[CONNECTION_DEBUG] <<< [8] Host/Shared started successfully. Waiting for Player 2...");
+                    Debug.Log($"[CONNECTION_DEBUG] <<< [8] Host started successfully. Waiting for Player 2...");
                     RedesLog.Info(RedesLog.LOBBY, $"   Sala '{sessionName}' creada. Esperando al otro jugador.");
                     RedesLog.Info(RedesLog.NET, "<< StartAsHost() OK");
                     OnHostStarted?.Invoke();
                 }
                 else
                 {
-                    Debug.LogError($"[CONNECTION_DEBUG] <<< [8] Host/Shared start failed con razón: {result.ShutdownReason}");
+                    Debug.LogError($"[CONNECTION_DEBUG] <<< [8] Host start failed con razón: {result.ShutdownReason}");
                     RedesLog.Error(RedesLog.NET, $"<< StartAsHost() FALLO - {result.ShutdownReason}");
                     FailAndReturnToLobby($"Crear sala fallo: {result.ShutdownReason}");
                 }
@@ -359,28 +350,19 @@ namespace Redes.Network
 
                 if (!result.Ok && result.ShutdownReason == ShutdownReason.IncompatibleConfiguration)
                 {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] [FALLBACK_TRIGGERED] ClientMode failed with IncompatibleConfiguration! " +
-                                     $"This usually means your Photon AppID is configured for 'Shared Mode only' on the dashboard. " +
-                                     $"Attempting fallback to GameMode.Shared...");
-                    
-                    DestroyRunnerGameObject(_gameRunner);
-                    _gameRunner = CreateRunner("GameRunner_SharedFallback", provideInput: true);
-                    sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
-                    
-                    var fallbackArgs = new StartGameArgs
-                    {
-                        GameMode     = GameMode.Shared,
-                        SessionName  = sessionName,
-                        PlayerCount  = GameConstants.MAX_PLAYERS,
-                        SceneManager = sceneMgr,
-                        Scene        = SceneRef.FromIndex(buildIdx)
-                    };
-                    
-                    Debug.Log($"[CONNECTION_DEBUG] >>> [7A] Re-starting as Shared Mode (Client fallback)...");
-                    result = await _gameRunner.StartGame(fallbackArgs);
-                    
-                    if (this == null || _gameRunner == null) return;
-                    Debug.Log($"[CONNECTION_DEBUG] >>> [7B] Shared Mode fallback finished. Result Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
+                    Debug.LogError("========================================================================\n" +
+                                   "❌ ERROR CRÍTICO DE FUSION: IncompatibleConfiguration\n" +
+                                   "========================================================================\n" +
+                                   "Tu AppID de Photon Fusion actual está configurado como 'Shared Mode' únicamente en el Dashboard de Photon. " +
+                                   "El modo Host-Client NO está permitido por Photon con este AppID.\n\n" +
+                                   "CÓMO SOLUCIONARLO:\n" +
+                                   "1. Ve al Dashboard de Photon: https://dashboard.photonengine.com/\n" +
+                                   "2. Crea una nueva aplicación (o edita la existente) y asegúrate de elegir:\n" +
+                                   "   - SDK: 'Photon Fusion'\n" +
+                                   "   - Fusion Topology (Modo de Juego): Selecciona 'Client/Server' o 'All' (¡NO elijas 'Shared'!).\n" +
+                                   "3. Copia el nuevo AppID de Fusion generado.\n" +
+                                   "4. Abre Unity, ve a 'Assets/Photon/Fusion/Resources/PhotonAppSettings.asset' y pega el nuevo AppID en el campo 'AppIdFusion'.\n" +
+                                   "========================================================================");
                 }
 
                 if (result.Ok)
@@ -389,7 +371,6 @@ namespace Redes.Network
                     Debug.Log($"[CONNECTION_DEBUG] <<< [8] Client started successfully. Joined room {sessionName}.");
                     RedesLog.Info(RedesLog.LOBBY, $"   Unido a sala '{sessionName}'!");
                     RedesLog.Info(RedesLog.NET, "<< StartAsClient() OK");
-                    // No hay evento OnClientJoined explícito en HostNetworkService en este script
                 }
                 else
                 {
