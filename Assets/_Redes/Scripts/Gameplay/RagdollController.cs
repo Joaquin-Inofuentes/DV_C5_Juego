@@ -56,49 +56,49 @@ namespace Redes.Gameplay
                 {
                     isKeyBone = true;
                     mass = 15f;
-                    radius = 0.25f;
+                    radius = 0.125f;
                 }
                 else if (name.Contains("spine") || name.Contains("chest"))
                 {
                     isKeyBone = true;
                     mass = 20f;
-                    radius = 0.22f;
-                    height = 0.4f;
+                    radius = 0.11f;
+                    height = 0.2f;
                 }
                 else if (name.Contains("head"))
                 {
                     isKeyBone = true;
                     mass = 10f;
-                    radius = 0.18f;
+                    radius = 0.09f;
                 }
                 else if (name.Contains("thigh") || name.Contains("upperleg") || name.Contains("upleg"))
                 {
                     isKeyBone = true;
                     mass = 10f;
-                    radius = 0.06f;
-                    height = 0.225f;
+                    radius = 0.03f;
+                    height = 0.1125f;
                 }
                 else if (name.Contains("calf") || name.Contains("lowerleg") || name.Contains("shin") || (name.Contains("leg") && !name.Contains("upleg") && !name.Contains("upperleg") && !name.Contains("foot")))
                 {
                     isKeyBone = true;
                     mass = 8f;
-                    radius = 0.05f;
-                    height = 0.2f;
+                    radius = 0.025f;
+                    height = 0.1f;
                 }
                 else if (name.Contains("upperarm") || (name.Contains("arm") && !name.Contains("forearm") && !name.Contains("lowerarm") && !name.Contains("hand")))
                 {
                     isKeyBone = true;
                     mass = 7f;
-                    radius = 0.045f;
-                    height = 0.175f;
+                    radius = 0.0225f;
+                    height = 0.0875f;
                     direction = 2; // Z or X depending on skeleton alignment
                 }
                 else if (name.Contains("forearm") || name.Contains("lowerarm"))
                 {
                     isKeyBone = true;
                     mass = 5f;
-                    radius = 0.04f;
-                    height = 0.15f;
+                    radius = 0.02f;
+                    height = 0.075f;
                     direction = 2;
                 }
 

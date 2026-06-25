@@ -165,7 +165,7 @@ namespace Redes.Test
 
         private System.Collections.IEnumerator RespawnCoroutine()
         {
-            yield return new WaitForSeconds(5.0f); // Let the ragdoll rest on the floor for 5.0s
+            yield return new WaitForSeconds(10.0f); // Let the ragdoll rest on the floor for 10.0s
 
             // Reset player position and health
             transform.position = Vector3.zero;

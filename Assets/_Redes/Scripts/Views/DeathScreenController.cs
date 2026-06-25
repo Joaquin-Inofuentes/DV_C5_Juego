@@ -39,7 +39,7 @@ namespace Redes.Views
 
         private void HandleDied(Vector3 hitDirection)
         {
-            StartDeathCountdown(5f);
+            StartDeathCountdown(10f);
         }
 
         private void HandleSpawned()
@@ -51,7 +51,7 @@ namespace Redes.Views
         {
             if (actorId == DebugSystem.LocalNetworkMock.LocalActorID)
             {
-                StartDeathCountdown(5f);
+                StartDeathCountdown(10f);
             }
         }
 

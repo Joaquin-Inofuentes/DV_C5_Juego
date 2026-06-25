@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_DebugTests.unity
     guid: 35a03b45d73d3d844ba16565cac9e50f
   - enabled: 1
-    path: Assets/_Redes/Scenes/RedesGame.unity
+    path: Assets/_Redes/Scenes/__Redes_RedesGame.unity
     guid: 006abe69f7e322e4cab2465604a20a34
   - enabled: 1
     path: Assets/Scenes/Tests/_USP.unity

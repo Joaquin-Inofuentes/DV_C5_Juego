@@ -285,6 +285,60 @@ namespace Redes.EditorTools
             NewButton("RetryButton", resultPanel.transform, font, "REINTENTAR", new Vector2(0, 0));
             NewButton("LobbyButton", resultPanel.transform, font, "VOLVER AL LOBBY", new Vector2(0, -80));
             resultPanel.SetActive(false); // hidden until match ends.
+
+            // --- PREMIUM DEATH SCREEN UI (MVC) ---
+            var deathPanel = NewUiPanel("DeathScreenPanel", canvasGo.transform);
+            deathPanel.SetActive(false);
+            
+            // Background tint
+            var dpImg = deathPanel.AddComponent<Image>();
+            dpImg.color = new Color(0.08f, 0.01f, 0.01f, 0.88f);
+
+            // Background Ring (radial guide)
+            var bgRingGo = new GameObject("BgRing", typeof(RectTransform));
+            bgRingGo.transform.SetParent(deathPanel.transform, false);
+            var bgRingRt = bgRingGo.GetComponent<RectTransform>();
+            bgRingRt.sizeDelta = new Vector2(500, 500); // Enorme
+            bgRingRt.anchoredPosition = new Vector2(0, 50);
+            var bgRingImg = bgRingGo.AddComponent<Image>();
+            bgRingImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            bgRingImg.color = new Color(0.2f, 0.05f, 0.05f, 0.5f);
+
+            // Active Radial Circle
+            var radialGo = new GameObject("RadialCircle", typeof(RectTransform));
+            radialGo.transform.SetParent(deathPanel.transform, false);
+            var radialRt = radialGo.GetComponent<RectTransform>();
+            radialRt.sizeDelta = new Vector2(500, 500); // Enorme
+            radialRt.anchoredPosition = new Vector2(0, 50);
+            var radialImg = radialGo.AddComponent<Image>();
+            radialImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            radialImg.color = new Color(0.85f, 0.15f, 0.15f, 0.9f);
+            radialImg.type = Image.Type.Filled;
+            radialImg.fillMethod = Image.FillMethod.Radial360;
+            radialImg.fillOrigin = (int)Image.Origin360.Top;
+            radialImg.fillClockwise = true;
+            radialImg.fillAmount = 0f;
+
+            // Countdown Text (inside the circle)
+            var countTxt = NewText("CountdownText", deathPanel.transform, font, "10.0s", new Vector2(0, 50), 64);
+            countTxt.fontStyle = FontStyle.Bold;
+
+            // Subtitle text below the circle
+            var subTxt = NewText("SubtitleText", deathPanel.transform, font, "RAGDOLL DECAY & RESPAWNING...", new Vector2(0, -250), 28);
+            subTxt.color = new Color(0.9f, 0.7f, 0.7f);
+
+            // MVC Components wire up
+            var deathView = deathPanel.AddComponent<Views.DeathScreenView>();
+            var soDeathView = new SerializedObject(deathView);
+            soDeathView.FindProperty("_panel").objectReferenceValue = deathPanel;
+            soDeathView.FindProperty("_radialCircle").objectReferenceValue = radialImg;
+            soDeathView.FindProperty("_countdownText").objectReferenceValue = countTxt;
+            soDeathView.ApplyModifiedPropertiesWithoutUndo();
+
+            var deathCtrl = deathPanel.AddComponent<Views.DeathScreenController>();
+            var soDeathCtrl = new SerializedObject(deathCtrl);
+            soDeathCtrl.FindProperty("_view").objectReferenceValue = deathView;
+            soDeathCtrl.ApplyModifiedPropertiesWithoutUndo();
         }
 
         // ---------- small UI helpers ----------

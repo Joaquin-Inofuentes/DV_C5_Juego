@@ -11,7 +11,7 @@ namespace Redes.Test
     {
         [Header("Config")]
         [SerializeField] private int _maxHealth = 100;
-        [SerializeField] private float _respawnDelay = 5.0f;
+        [SerializeField] private float _respawnDelay = 10.0f;
 
         [Header("Visual")]
         [SerializeField] private Renderer _bodyRenderer;
