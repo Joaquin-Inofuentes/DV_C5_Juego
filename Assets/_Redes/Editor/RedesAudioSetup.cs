@@ -1,7 +1,8 @@
 using UnityEditor;
-using UnityEditor.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
+using System;
+using System.Reflection;
 
 namespace Redes.EditorTools
 {
@@ -19,34 +20,82 @@ namespace Redes.EditorTools
                 AssetDatabase.CreateFolder("Assets/_Redes/Art", "Audio");
             }
 
-            AudioMixerController mixer = AssetDatabase.LoadAssetAtPath<AudioMixerController>(MixerPath);
+            AudioMixer mixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(MixerPath);
             if (mixer == null)
             {
-                mixer = AudioMixerController.CreateAudioMixerControllerAtPath(MixerPath);
-                Debug.Log($"[AUDIO] GameMixer created at {MixerPath}");
+                // Create AudioMixer using Reflection to call internal AudioMixerController
+                Type controllerType = Type.GetType("UnityEditor.Audio.AudioMixerController, UnityEditor");
+                if (controllerType != null)
+                {
+                    var createMethod = controllerType.GetMethod("CreateAudioMixerControllerAtPath", BindingFlags.Public | BindingFlags.Static);
+                    if (createMethod != null)
+                    {
+                        mixer = (AudioMixer)createMethod.Invoke(null, new object[] { MixerPath });
+                        Debug.Log($"[AUDIO] GameMixer created at {MixerPath} via reflection.");
+                    }
+                }
             }
 
-            // Create groups if they don't exist
-            var masterGroup = mixer.masterGroup;
-            
-            var sfxGroup = FindGroup(mixer, "SFX");
-            if (sfxGroup == null)
+            if (mixer != null)
             {
-                mixer.AddChildToParent(mixer.masterGroup, new AudioMixerGroupController(mixer) { name = "SFX" });
-                sfxGroup = FindGroup(mixer, "SFX");
-                Debug.Log("[AUDIO] SFX Group added to GameMixer");
-            }
+                // Add Groups "SFX" and "Music" via Reflection
+                Type controllerType = Type.GetType("UnityEditor.Audio.AudioMixerController, UnityEditor");
+                Type groupType = Type.GetType("UnityEditor.Audio.AudioMixerGroupController, UnityEditor");
 
-            var musicGroup = FindGroup(mixer, "Music");
-            if (musicGroup == null)
-            {
-                mixer.AddChildToParent(mixer.masterGroup, new AudioMixerGroupController(mixer) { name = "Music" });
-                musicGroup = FindGroup(mixer, "Music");
-                Debug.Log("[AUDIO] Music Group added to GameMixer");
+                if (controllerType != null && groupType != null)
+                {
+                    // Find master group
+                    var masterGroupProp = controllerType.GetProperty("masterGroup", BindingFlags.Public | BindingFlags.Instance);
+                    var masterGroup = masterGroupProp.GetValue(mixer);
+
+                    // AddChildToParent method
+                    var addChildMethod = controllerType.GetMethod("AddChildToParent", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+
+                    if (masterGroup != null && addChildMethod != null)
+                    {
+                        EnsureGroupExists(mixer, controllerType, groupType, masterGroup, addChildMethod, "SFX");
+                        EnsureGroupExists(mixer, controllerType, groupType, masterGroup, addChildMethod, "Music");
+                    }
+                }
             }
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+
+        private static void EnsureGroupExists(AudioMixer mixer, Type controllerType, Type groupType, object masterGroup, MethodInfo addChildMethod, string name)
+        {
+            var groups = mixer.FindMatchingGroups(name);
+            bool exists = false;
+            foreach (var g in groups)
+            {
+                if (g.name == name) { exists = true; break; }
+            }
+
+            if (!exists)
+            {
+                // Instantiate AudioMixerGroupController(mixer)
+                var constructor = groupType.GetConstructor(new Type[] { controllerType });
+                if (constructor != null)
+                {
+                    var newGroup = constructor.Invoke(new object[] { mixer });
+                    // set name
+                    var nameProp = groupType.GetProperty("name", BindingFlags.Public | BindingFlags.Instance);
+                    if (nameProp != null)
+                    {
+                        nameProp.SetValue(newGroup, name);
+                    }
+                    else
+                    {
+                        var nameField = groupType.GetField("m_Name", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (nameField != null) nameField.SetValue(newGroup, name);
+                    }
+
+                    // Add to master group
+                    addChildMethod.Invoke(mixer, new object[] { masterGroup, newGroup });
+                    Debug.Log($"[AUDIO] Group {name} added to GameMixer via reflection");
+                }
+            }
         }
 
         public static AudioMixerGroup GetGroup(string name)
@@ -54,16 +103,11 @@ namespace Redes.EditorTools
             var mixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(MixerPath);
             if (mixer == null) return null;
             var groups = mixer.FindMatchingGroups(name);
-            return groups.Length > 0 ? groups[0] : null;
-        }
-
-        private static AudioMixerGroupController FindGroup(AudioMixerController mixer, string name)
-        {
-            foreach (var group in mixer.FindMatchingGroups(name))
+            foreach (var g in groups)
             {
-                if (group.name == name) return group as AudioMixerGroupController;
+                if (g.name == name) return g;
             }
-            return null;
+            return groups.Length > 0 ? groups[0] : null;
         }
     }
 }
