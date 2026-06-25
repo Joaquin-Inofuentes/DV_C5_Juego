@@ -24,6 +24,8 @@ namespace Redes.Player
         public Vector3 WorldPosition => transform.position;
         public float HealthProgress => _health != null ? (float)_health.CurrentHealth / GameConstants.DEFAULT_MAX_HEALTH : 1f;
         public bool IsActive => Object != null && Object.IsValid && _health != null && _health.IsAlive;
+        public float ReloadProgress => _ammo != null ? _ammo.ReloadProgress : 1f;
+        public bool IsReloading => _ammo != null && _ammo.IsReloading;
         
         [Networked, OnChangedRender(nameof(OnNicknameChangedRender))] private NetworkString<_16> NetNickname { get; set; }
         public string Nickname => string.IsNullOrEmpty(NetNickname.ToString()) ? $"Player {Object.InputAuthority.PlayerId}" : NetNickname.ToString();

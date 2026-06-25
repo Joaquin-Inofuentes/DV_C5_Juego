@@ -365,8 +365,45 @@ namespace Redes.EditorTools
             nicknameTxt.alignment = TextAnchor.MiddleCenter;
             nicknameTxt.fontStyle = FontStyle.Bold;
 
+            // --- Reload Area ---
+            var reloadAreaGo = new GameObject("ReloadArea", typeof(RectTransform));
+            reloadAreaGo.transform.SetParent(go.transform, false);
+            var reloadAreaRect = reloadAreaGo.GetComponent<RectTransform>();
+            reloadAreaRect.anchorMin = new Vector2(0.5f, 1f);
+            reloadAreaRect.anchorMax = new Vector2(0.5f, 1f);
+            reloadAreaRect.pivot = new Vector2(0.5f, 0f);
+            reloadAreaRect.anchoredPosition = new Vector2(0f, 40f); // slightly above nickname
+            reloadAreaRect.sizeDelta = new Vector2(40f, 40f);
+
+            var reloadBgGo = new GameObject("ReloadBackground", typeof(RectTransform));
+            reloadBgGo.transform.SetParent(reloadAreaGo.transform, false);
+            var reloadBgRect = reloadBgGo.GetComponent<RectTransform>();
+            reloadBgRect.anchorMin = Vector2.zero;
+            reloadBgRect.anchorMax = Vector2.one;
+            reloadBgRect.sizeDelta = Vector2.zero;
+            var reloadBgImg = reloadBgGo.AddComponent<Image>();
+            reloadBgImg.color = new Color(0.1f, 0.1f, 0.1f, 0.6f);
+            reloadBgImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            reloadBgImg.type = Image.Type.Simple;
+
+            var reloadFillGo = new GameObject("ReloadFill", typeof(RectTransform));
+            reloadFillGo.transform.SetParent(reloadAreaGo.transform, false);
+            var reloadFillRect = reloadFillGo.GetComponent<RectTransform>();
+            reloadFillRect.anchorMin = Vector2.zero;
+            reloadFillRect.anchorMax = Vector2.one;
+            reloadFillRect.sizeDelta = Vector2.zero;
+            var reloadFillImg = reloadFillGo.AddComponent<Image>();
+            reloadFillImg.color = Color.yellow;
+            reloadFillImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            reloadFillImg.type = Image.Type.Filled;
+            reloadFillImg.fillMethod = Image.FillMethod.Radial360;
+            reloadFillImg.fillOrigin = (int)Image.Origin360.Top;
+            reloadFillImg.fillAmount = 0f;
+            reloadFillImg.fillClockwise = true;
+
             var view = go.AddComponent<Views.EntityDisplayView>();
-            AssignRefs(view, ("_healthSlider", (Object)slider), ("_nicknameText", (Object)nicknameTxt));
+            AssignRefs(view, ("_healthSlider", (Object)slider), ("_nicknameText", (Object)nicknameTxt), 
+                             ("_reloadFillImage", (Object)reloadFillImg), ("_reloadArea", (Object)reloadAreaGo));
 
             PrefabUtility.SaveAsPrefabAsset(go, EntityDisplayViewPrefabPath);
             Object.DestroyImmediate(go);

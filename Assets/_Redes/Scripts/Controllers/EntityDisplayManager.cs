@@ -91,6 +91,7 @@ namespace Redes.Controllers
                             view.SetPosition(screenPos);
                             view.SetHealth(entity.HealthProgress);
                             view.SetNickname(entity.Nickname);
+                            view.SetReloadProgress(entity.ReloadProgress, entity.IsReloading);
 
                             if (Time.frameCount % 30 == 0)
                             {

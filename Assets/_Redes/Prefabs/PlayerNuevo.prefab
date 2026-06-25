@@ -1130,11 +1130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23995f2ea5a26fa48b0f953b0d44bc9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputMode: 1
+  _inputMode: 0
   _moveSpeed: 5
   _damage: 25
   _fireRate: 0.2
-  _muzzle: {fileID: 2914326135070386013}
+  _muzzle: {fileID: 4676364132275080613}
   _maxAmmo: 10
   _reloadDuration: 1.5
   _eventBus: {fileID: 3824843972535735678}
@@ -1143,6 +1143,8 @@ MonoBehaviour:
   _reloadSound: {fileID: 0}
   _bulletPrefab: {fileID: 7910457710983336344, guid: 5b13455fdbadb5f429b0698f40a51977, type: 3}
   _debugText: {fileID: 0}
+  _displayView: {fileID: 0}
+  _maxHealth: 100
 --- !u!136 &2708179977004161942
 CapsuleCollider:
   m_ObjectHideFlags: 0

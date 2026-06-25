@@ -11,6 +11,8 @@ namespace Redes.Views
     {
         [SerializeField] private Slider _healthSlider;
         [SerializeField] private Text _nicknameText;
+        [SerializeField] private Image _reloadFillImage;
+        [SerializeField] private GameObject _reloadArea;
 
         public void SetHealth(float progress)
         {
@@ -46,6 +48,22 @@ namespace Redes.Views
             if (gameObject.activeSelf != visible)
             {
                 gameObject.SetActive(visible);
+            }
+        }
+
+        public void SetReloadProgress(float progress, bool isReloading)
+        {
+            if (_reloadArea != null)
+            {
+                if (_reloadArea.activeSelf != isReloading)
+                {
+                    _reloadArea.SetActive(isReloading);
+                }
+            }
+
+            if (isReloading && _reloadFillImage != null)
+            {
+                _reloadFillImage.fillAmount = Mathf.Clamp01(progress);
             }
         }
     }

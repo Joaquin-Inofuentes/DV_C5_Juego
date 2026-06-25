@@ -12,5 +12,7 @@ namespace Redes.Models
         float HealthProgress { get; } // Value between 0 and 1
         string Nickname { get; }
         bool IsActive { get; }
+        float ReloadProgress { get; } // Value between 0 and 1
+        bool IsReloading { get; }
     }
 }

@@ -118,6 +118,8 @@ namespace Redes.Test
                 {
                     _displayView.SetVisible(true);
                     _displayView.SetPosition(screenPos);
+                    float reloadProgress = _isReloading ? 1f - (_reloadTimer / _reloadDuration) : 0f;
+                    _displayView.SetReloadProgress(reloadProgress, _isReloading);
                 }
                 else
                 {
