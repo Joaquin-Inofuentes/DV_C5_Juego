@@ -66,7 +66,7 @@ namespace Redes.EditorTools
                     Debug.LogWarning("[TEST][BUILDER] Muzzle no encontrado en el player — asignar manualmente.");
 
                 // Wire shoot sound if available
-                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Sounds/Shoot.wav");
+                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
                 if (shootSound != null)
                     Assign(tester, "_shootSound", shootSound);
             }
@@ -134,11 +134,11 @@ namespace Redes.EditorTools
                 modelObj.name = "Model";
                 modelObj.transform.localPosition = Vector3.zero;
                 modelObj.transform.localRotation = Quaternion.identity;
-                // Scale: the FBX is in cm, Unity expects meters → 0.01 scale gives ~1.8m
-                modelObj.transform.localScale = Vector3.one * 0.01f;
+                modelObj.transform.localScale = Vector3.one * 1.5f;
 
                 animator = modelObj.GetComponent<Animator>();
                 if (animator == null) animator = modelObj.AddComponent<Animator>();
+                animator.applyRootMotion = false;
 
                 // Assign or create animator controller
                 var ctrl = GetOrCreatePlayerAnimator();
@@ -196,7 +196,7 @@ namespace Redes.EditorTools
                 var model = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset, dummy.transform);
                 model.name = "Model";
                 model.transform.localPosition = Vector3.zero;
-                model.transform.localScale = Vector3.one * 0.01f;
+                model.transform.localScale = Vector3.one * 1.5f;
 
                 // Tint red so it's clearly an enemy
                 var renderers = model.GetComponentsInChildren<Renderer>();
@@ -223,11 +223,13 @@ namespace Redes.EditorTools
             var dummyComp = dummy.AddComponent<DummyEnemy>();
 
             // Health bar above head (world-space canvas)
-            var canvasGo = new GameObject("HealthBarCanvas");
+            var canvasGo = new GameObject("HealthBarCanvas", typeof(RectTransform));
             canvasGo.transform.SetParent(dummy.transform, false);
             canvasGo.transform.localPosition = new Vector3(0, 2.5f, 0);
             var canvas = canvasGo.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.WorldSpace;
+            var canvasRect = canvasGo.GetComponent<RectTransform>();
+            canvasRect.sizeDelta = new Vector2(200, 30);
             canvasGo.transform.localScale = Vector3.one * 0.01f;
 
             var bg = new GameObject("BG", typeof(RectTransform));
@@ -269,7 +271,12 @@ namespace Redes.EditorTools
             var canvasGo = new GameObject("TestHUD");
             var canvas = canvasGo.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGo.AddComponent<CanvasScaler>();
+            
+            var scaler = canvasGo.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.matchWidthOrHeight = 0.5f;
+
             canvasGo.AddComponent<GraphicRaycaster>();
 
             // Background panel
