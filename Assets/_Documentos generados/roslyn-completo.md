@@ -1,76 +1,84 @@
 # Volcado completo de Roslyn — Assets
 
-Generado: 2026-06-19 23:35:20
+Generado: 2026-06-23 16:17:35
 
-Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
+Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 ## Directivas using por archivo
 
-- **FusionEditorConfigImporter.cs**: `System.IO`, `UnityEditor.AssetImporters`, `UnityEngine`
-- **Fusion.Unity.Editor.cs**: `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `Fusion.Internal`, `Unity.Collections.LowLevel.Unsafe`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditorInternal`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.IO`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor`, `System.Int32`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEngine.Object`, `System.Int32`, `UnityEditor.HierarchyProperty`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Object`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Reflection`, `System.Text.RegularExpressions`, `System.Xml`, `UnityEditor`, `UnityEngine`, `System`, `System.Diagnostics`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.IO`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `System.Reflection`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `ReflectionUtils`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `Unity.Profiling`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `UnityEngine`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`, `System`, `JetBrains.Annotations`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEngine.Scripting`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `Fusion.Analyzer`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `System.Text.RegularExpressions`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System`, `Internal`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEditor.Compilation`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor.Experimental.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`, `Photon.Realtime`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Runtime.CompilerServices`, `System.Text`, `UnityEngine`, `UnityEngine`, `UnityEditor`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor.Animations`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditor.Experimental.SceneManagement`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `System`, `System.Text`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `Fusion.Photon.Realtime`, `System.Linq`, `System.IO`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`
-- **FusionStatsWorldAnchor.cs**: `System`, `UnityEngine`
-- **FusionStatsPanelHeader.cs**: `UnityEngine`, `UnityEngine.UI`, `System`, `System.Collections.Generic`
-- **FusionStatsGraphDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
-- **FusionStatsConfig.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Serialization`, `UnityEngine.UI`
-- **FusionStatsCanvas.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Events`, `UnityEngine.EventSystems`, `UnityEngine.UI`
-- **InteractableItem.cs**: `UnityEngine`, `System.Linq`, `Game.Squad`, `Game.Core`
-- **IA_P2_PathNode.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
-- **IA_P2_PathfindingModel.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
-- **IA_P2_AgentIA.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `TMPro`, `UnityEngine`
-- **GlobalHUD.cs**: `Game.Squad`, `UnityEngine`
-- **GlobalData.cs**: `USP.Entities`, `UnityEngine`, `Game.Squad`
+- **Fusion.Unity.cs**: `System`, `System.Runtime.ExceptionServices`, `UnityEngine`, `UnityEngine.Object`, `UnityEngine.Resources`, `System`, `UnityEngine.Serialization`, `System`, `UnityEngine`, `UnityEngine.Serialization`, `System`, `UnityEngine.Scripting`, `InternalLogStreams`, `System`, `System.IO`, `System.Reflection`, `UnityEngine`, `UnityEngine.Scripting`, `UnityEngine.Object`, `InternalLogStreams`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Runtime.ExceptionServices`, `System.Text`, `System.Threading`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Diagnostics`, `System.Linq`, `Unity.Collections.LowLevel.Unsafe`, `Unity.Profiling`, `Unity.Profiling.LowLevel`, `Unity.Profiling.LowLevel.Unsafe`, `UnityEngine`, `System.Object`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Text`, `System.Text.RegularExpressions`, `UnityEngine`, `System`, `UnityEngine`, `System`, `System.Diagnostics`, `JetBrains.Annotations`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEngine`, `System`, `UnityEngine.Object`, `System`, `UnityEngine`, `UnityEngine`, `UnityEngine.UI`, `System`, `System.Globalization`, `UnityEngine`, `System.Reflection`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `Analyzer`
+- **VfxController.cs**: `System.Collections.Generic`, `UnityEngine`
+- **DropdownController.cs**: `System.Collections.Generic`, `TMPro`, `UnityEngine`
+- **DebugColisionesFull.cs**: `UnityEngine`
+- **CollisionDetector.cs**: `UnityEngine`
+- **ShotImpactBus.cs**: `System`, `UnityEngine`
+- **IInteractable.cs**: `UnityEngine`
+- **DesactivarPorTimer.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **UnitView.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`
+- **TriggerCorregir.cs**: `UnityEditor`, `UnityEngine`
+- **Physics2DMigrator.cs**: `UnityEngine`, `UnityEditor`, `System.IO`, `System.Collections.Generic`
+- **HierarchyToClipboardMenu.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Text`
+- **CreateTestSceneMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `DebugSystem`
+- **CreateScenesAndPrefabsMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `DebugSystem`
+- **ComponentPropertiesCopierTestMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
+- **ComponentPropertiesCopier.cs**: `System.Text`, `UnityEditor`, `UnityEngine`
+- **FloatingHealthBar.cs**: `UnityEngine`, `UnityEngine.UI`
+- **EventBus.cs**: `System`
+- **EffectPool.cs**: `UnityEngine`, `System.Collections.Generic`
+- **DebugLogger.cs**: `System.Collections.Generic`, `UnityEngine`
+- **BulletPool.cs**: `System.Collections.Generic`, `UnityEngine`
+- **Bullet.cs**: `UnityEngine`
+- **DetectableEntity.cs**: `UnityEngine`
+- **SquadEventBus.cs**: `UnityEngine`, `System`, `Game.Squad`
+- **WeaponControllerMVC.cs**: `USP.Core`, `USP.Weapons`, `UnityEngine`
+- **UnityWeaponInput.cs**: `UnityEngine`
+- **UnityCharacterInput.cs**: `UnityEngine`
+- **IWeaponInput.cs**: `UnityEngine`
+- **IMovementHandler.cs**: `UnityEngine`
+- **FusionNetworkObjectStatistics.cs**: `UnityEngine`
+- **RunnerVisibilityLinksRoot.cs**: `UnityEngine`
+- **RunnerVisibilityLink.cs**: `System`, `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
+- **RunnerLagCompensationGizmos.cs**: `LagCompensation`, `UnityEngine`
+- **RunnerEnableVisibility.cs**: `System`, `System.Collections.Generic`, `Sockets`, `UnityEngine`
+- **RunnerAOIGizmos.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
+- **EnableOnSingleRunner.cs**: `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
+- **NetworkSceneManagerDefault.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `UnityEngine.SceneManagement`
+- **NetworkObjectProviderDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.Serialization`
+- **NetworkCharacterController.cs**: `System.Runtime.CompilerServices`, `System.Runtime.InteropServices`, `UnityEngine`
+- **FusionBootstrapDebugGUI.cs**: `System`, `UnityEngine`, `System.Collections.Generic`
+- **FusionBootstrap.cs**: `System`, `Fusion.Sockets`, `System.Collections`, `System.Threading.Tasks`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `Statistics`, `UnityEngine.Serialization`
+- **FusionBasicBillboard.cs**: `UnityEngine`
+- **FusionAddressablePrefabsPreloader.cs**: `System.Collections.Generic`, `UnityEngine`
+- **GlobalLogicTests.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.TestTools`, `NUnit.Framework`, `DebugSystem`
+- **NewTestScript.cs**: `System.Collections`, `System.Collections.Generic`, `NUnit.Framework`, `UnityEngine`, `UnityEngine.TestTools`
 - **RedesSceneLinker.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`, `Redes.Player`
 - **RedesSceneCreator.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.UI`, `UnityEngine.EventSystems`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`
-- **RedesPrefabCreator.cs**: `UnityEditor`, `UnityEngine`, `Fusion`, `Redes.Player`, `Redes.Combat`
-- **Projectile.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
+- **RedesPrefabCreator.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Player`, `Redes.Combat`
+- **RedesBuildAll.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
+- **Projectile.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Player.NetworkPlayer`
 - **IDamageable.cs**: `Fusion`
-- **PlayerController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Player`, `Redes.Views`, `Redes.Player.NetworkPlayer`
+- **TerrainController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Views`
+- **PlayerController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Player`, `Redes.Views`, `Redes.Core`, `Redes.Player.NetworkPlayer`
 - **MatchController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Views`
-- **Tanque.cs**: `USP.Weapons`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
-- **Puntero_Tanque.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **PlayerController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `Game.MVC`, `USP.Core`, `USP.Services`
-- **EntrarAlTanque.cs**: `UnityEngine`
-- **Enemigo.cs**: `USP.Services`, `UnityEngine`, `System.Collections`, `UnityEngine.UI`
-- **ControladorTanque.cs**: `USP.Weapons`, `UnityEngine`, `TMPro`
-- **CharacterView.cs**: `UnityEngine`
-- **IA_P2_ST_SearchingState.cs**: `UnityEngine`
-- **IA_P2_ST_ReturningToPatrolState.cs**: `UnityEngine`
-- **IA_P2_ST_PatrolState.cs**: `UnityEngine`, `System.Collections.Generic`
-- **IA_P2_ST_ChaseState.cs**: `UnityEngine`
-- **GEN_Inputs.cs**: `UnityEngine`, `System`
-- **GenericDetector.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
-- **GameManager.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `USP.Entities`
-- **FormationRelocator.cs**: `UnityEngine`, `System.Collections.Generic`
-- **EnemyView.cs**: `UnityEngine`, `USP.Core`
-- **EnemyModel.cs**: `UnityEngine`
-- **Disparador.cs**: `UnityEngine`, `Game.Squad`
-- **Destruible.cs**: `UnityEngine`, `Game.Squad`
-- **DamagedState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
-- **ConfiguracionGlobal.cs**: `UnityEngine`
-- **CodigoDeInicio.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **Camara.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **BD_Audios.cs**: `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
 - **GameFlowController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Models`, `Redes.Network`, `Redes.Views`
+- **EntityDisplayManager.cs**: `System.Collections.Generic`, `UnityEngine`, `Redes.Models`, `Redes.Views`, `Redes.Player`, `Redes.Core`
 - **RedesLog.cs**: `UnityEngine`
-- **MatchNetworkController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Controllers`
-- **PlayerModel.cs**: `System`, `Redes.Core`
-- **GameStateModel.cs**: `System`, `Redes.Core`
-- **RoomSessionHandler.cs**: `System.Collections.Generic`, `Fusion`, `Redes.Core`
-- **PlayerSpawner.cs**: `System.Collections.Generic`, `Fusion`, `UnityEngine`, `Redes.Core`
-- **ISessionListHandler.cs**: `System.Collections.Generic`, `Fusion`
-- **INetworkService.cs**: `System`, `Fusion`
-- **ComponentPropertiesCopier.cs**: `System.Text`, `UnityEditor`, `UnityEngine`
-- **CentralizadorScripts.cs**: `UnityEngine`, `UnityEditor`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.IO`
-- **Fusion.CodeGen.cs**: `System`, `System.Diagnostics`
-- **NetworkProjectConfigImporterEditor.cs**: `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
-- **NetworkProjectConfigImporter.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEditor.PackageManager`, `UnityEngine`
-- **NetworkPrefabsInspector.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`
-- **FusionWeaverTriggerImporter.cs**: `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
-- **FusionRunnerVisibilityControlsWindow.cs**: `System`, `System.Collections.Generic`, `Statistics`, `UnityEngine`, `UnityEditor`
-- **FusionEditorSkin.cs**: `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`
-- **IA_P2_PathfindingManager.cs**: `System.Collections.Generic`, `UnityEngine`, `System.Linq`
-- **IA_P2_LineOfSight3D.cs**: `UnityEngine`
-- **IA_P2_FSM.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
+- **UnitPathRenderer.cs**: `UnityEngine`, `Game.Squad`
+- **UnitModel.cs**: `Game.Core`, `UnityEngine`, `USP.Core`
+- **UnitIndicatorSetup.cs**: `UnityEngine`, `System`
+- **UnitController_Revival.cs**: `UnityEngine`, `Game.Sensors`, `Game.Core`
+- **UnitController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections`, `Game.Sensors`, `Game.Core`
+- **UnitCommander.cs**: `Game.Core`, `Game.Squad`, `System.Linq`, `UnityEngine`
+- **TickManager.cs**: `UnityEngine`, `System`
+- **ShotSensor.cs**: `UnityEngine`, `Game.Squad`
+- **RevivingState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`
+- **RevivalSystemSetup.cs**: `UnityEngine`, `Game.Squad`
+- **RevivalBarView.cs**: `UnityEngine`
+- **RehenBruto.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
+- **PositionManager.cs**: `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `Game.Squad`, `Game.Core`
+- **Municion.cs**: `UnityEngine`
+- **Rigidbody2DMovementHandler.cs**: `UnityEngine`
+- **ProxiesUSP.cs**: `UnityEngine`, `USP.Core`, `USP.Entities`, `USP.Weapons`
 - **PersecucionEnemigo.cs**: `USP.Entities`, `UnityEngine`
 - **IA_P2_BusEvent_Manager.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `UnityEngine`
 - **CrearYDestruir.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
@@ -82,31 +90,34 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - **Proyectil2.cs**: `UnityEngine`
 - **Proyectil.cs**: `USP.Core`, `USP.Entities`, `USP.Services`, `UnityEngine`, `UnityEngine.UI.GridLayoutGroup`
 - **Cohete.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **Manager_VFX.cs**: `UnityEngine`, `System.Collections.Generic`, `System.IO`
-- **MainGameController.cs**: `Game.Squad`, `UnityEngine`, `TMPro`, `UnityEngine.UI`
-- **LiderandoState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
-- **LeaderManager.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`, `Game.Core`, `UnityEngine.UI`
+- **VibracionCamara.cs**: `UnityEngine`
 - **UnitFSM.cs**: `UnityEngine`, `System.Collections.Generic`, `Game.Squad`
 - **CambioDeLider.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **DetectableEntity.cs**: `UnityEngine`
-- **SquadEventBus.cs**: `UnityEngine`, `System`, `Game.Squad`
-- **WeaponControllerMVC.cs**: `USP.Core`, `USP.Weapons`, `UnityEngine`
-- **UnityWeaponInput.cs**: `UnityEngine`
-- **ShotImpactBus.cs**: `System`, `UnityEngine`
-- **IInteractable.cs**: `UnityEngine`
-- **DesactivarPorTimer.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **UnitView.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`
-- **UnitPathRenderer.cs**: `UnityEngine`, `Game.Squad`
-- **UnitModel.cs**: `Game.Core`, `UnityEngine`, `USP.Core`
-- **UnitIndicatorSetup.cs**: `UnityEngine`, `System`
-- **UnitController_Revival.cs**: `UnityEngine`, `Game.Sensors`, `Game.Core`
-- **ControlDerrota.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
-- **BalaPool.cs**: `UnityEngine`, `System.Collections.Generic`
-- **Bala.cs**: `UnityEngine`, `System.Collections`, `System`, `Game.Sensors`, `Game.Squad`, `Game.Core`
-- **AmmoManager.cs**: `UnityEngine`, `Game.Squad`, `System.Linq`
-- **UnityCharacterInput.cs**: `UnityEngine`
-- **IWeaponInput.cs**: `UnityEngine`
-- **IMovementHandler.cs**: `UnityEngine`
+- **Weapon.cs**: `System.Collections`, `UnityEngine`
+- **SimpleEnemyAI.cs**: `UnityEngine`
+- **SimpleAnimator.cs**: `UnityEngine`, `System.Collections`
+- **ScreenManager.cs**: `UnityEngine`, `UnityEngine.UI`, `System.Collections.Generic`
+- **ProceduralAudioGenerator.cs**: `UnityEngine`, `System.Collections.Generic`
+- **PlayerView.cs**: `UnityEngine`
+- **PlayerModel.cs**: `System`, `UnityEngine`
+- **PlayerController.cs**: `UnityEngine`
+- **LocalNetworkMock.cs**: `System`, `System.IO`, `UnityEngine`
+- **ImpactEffect.cs**: `UnityEngine`
+- **GameManager.cs**: `System.Collections`, `UnityEngine`
+- **GameLoopReferee.cs**: `UnityEngine`
+- **CharacterView.cs**: `UnityEngine`
+- **IA_P2_ST_SearchingState.cs**: `UnityEngine`
+- **IA_P2_ST_ReturningToPatrolState.cs**: `UnityEngine`
+- **IA_P2_ST_PatrolState.cs**: `UnityEngine`, `System.Collections.Generic`
+- **IA_P2_ST_ChaseState.cs**: `UnityEngine`
+- **IA_P2_PathfindingManager.cs**: `System.Collections.Generic`, `UnityEngine`, `System.Linq`
+- **IA_P2_LineOfSight3D.cs**: `UnityEngine`
+- **IA_P2_FSM.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
+- **IA_P2_FOV.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_PathFanding_Theta.cs**: `System.Collections.Generic`, `UnityEngine`
+- **IA_F_EnemyCercanos.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_ControllerSeguidor.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_ChangeMode.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `CustomInspector`
 - **ICharacterInput.cs**: `UnityEngine`
 - **CharacterControllerMVC.cs**: `USP.Core`, `USP.Entities`, `UnityEngine`
 - **SelectedSoldierUIFeedback.cs**: `UnityEngine`, `Game.Squad`
@@ -115,32 +126,67 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - **InformacionPersonaje.cs**: `System.Collections`, `System.Linq`, `UnityEngine`, `UnityEngine.UI`, `USP.Weapons`, `USP.Services`
 - **IDaniable.cs**: `UnityEngine`
 - **CharacterModel.cs**: `System.Collections`, `UnityEngine`
-- **IA_P2_FOV.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_PathFanding_Theta.cs**: `System.Collections.Generic`, `UnityEngine`
-- **IA_F_EnemyCercanos.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_ControllerSeguidor.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_ChangeMode.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `CustomInspector`
-- **Rigidbody2DMovementHandler.cs**: `UnityEngine`
-- **ProxiesUSP.cs**: `UnityEngine`, `USP.Core`, `USP.Entities`, `USP.Weapons`
-- **RunnerVisibilityLink.cs**: `System`, `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
-- **RunnerLagCompensationGizmos.cs**: `LagCompensation`, `UnityEngine`
-- **RunnerEnableVisibility.cs**: `System`, `System.Collections.Generic`, `Sockets`, `UnityEngine`
-- **RunnerAOIGizmos.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
-- **EnableOnSingleRunner.cs**: `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
-- **NetworkSceneManagerDefault.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `UnityEngine.SceneManagement`
-- **NetworkObjectProviderDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.Serialization`
-- **NetworkCharacterController.cs**: `System.Runtime.CompilerServices`, `System.Runtime.InteropServices`, `UnityEngine`
-- **RevivalSystemSetup.cs**: `UnityEngine`, `Game.Squad`
-- **RevivalBarView.cs**: `UnityEngine`
-- **RehenBruto.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
-- **PositionManager.cs**: `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `Game.Squad`, `Game.Core`
-- **Municion.cs**: `UnityEngine`
+- **Tanque.cs**: `USP.Weapons`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
+- **Puntero_Tanque.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **PlayerController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `Game.MVC`, `USP.Core`, `USP.Services`
+- **EntrarAlTanque.cs**: `UnityEngine`
+- **Enemigo.cs**: `USP.Services`, `UnityEngine`, `System.Collections`, `UnityEngine.UI`
+- **ControladorTanque.cs**: `USP.Weapons`, `UnityEngine`, `TMPro`
+- **GenericDetector.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
+- **GameManager.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `USP.Entities`
+- **FormationRelocator.cs**: `UnityEngine`, `System.Collections.Generic`
+- **EnemyView.cs**: `UnityEngine`, `USP.Core`
+- **EnemyModel.cs**: `UnityEngine`
+- **Disparador.cs**: `UnityEngine`, `Game.Squad`
+- **Destruible.cs**: `UnityEngine`, `Game.Squad`
+- **DamagedState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
+- **CursorManager.cs**: `UnityEngine`
+- **ControlDerrota.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
+- **BalaPool.cs**: `UnityEngine`, `System.Collections.Generic`
+- **Bala.cs**: `UnityEngine`, `System.Collections`, `System`, `Game.Sensors`, `Game.Squad`, `Game.Core`
+- **AmmoManager.cs**: `UnityEngine`, `Game.Squad`, `System.Linq`
+- **PlayerShooting.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
+- **PlayerMovement.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Network`
+- **PlayerHealth.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Combat`, `Redes.Gameplay`, `Redes.Views`
+- **PlayerEventBus.cs**: `System`, `UnityEngine`
+- **PlayerAnimationController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Views`
+- **NetworkPlayer.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Network`, `Redes.Controllers`
+- **AmmoSystem.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
+- **VFXManager.cs**: `UnityEngine`
+- **TerrainView.cs**: `UnityEngine`
+- **ResultView.cs**: `System`, `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
+- **LobbyView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
+- **GameHudView.cs**: `UnityEngine`, `UnityEngine.UI`
+- **EntityDisplayView.cs**: `UnityEngine`, `UnityEngine.UI`
+- **TriggerEventAndDestroy.cs**: `UnityEngine`, `UnityEngine.Events`
 - **MenuPausa.cs**: `UnityEngine`
 - **MarkerAnim.cs**: `UnityEngine`
-- **Physics2DMigrator.cs**: `UnityEngine`, `UnityEditor`, `System.IO`, `System.Collections.Generic`
-- **ComponentPropertiesCopierTestMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
-- **FusionNetworkObjectStatistics.cs**: `UnityEngine`
-- **RunnerVisibilityLinksRoot.cs**: `UnityEngine`
+- **Manager_VFX.cs**: `UnityEngine`, `System.Collections.Generic`, `System.IO`
+- **MainGameController.cs**: `Game.Squad`, `UnityEngine`, `TMPro`, `UnityEngine.UI`
+- **LiderandoState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
+- **LeaderManager.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`, `Game.Core`, `UnityEngine.UI`
+- **InteractableItem.cs**: `UnityEngine`, `System.Linq`, `Game.Squad`, `Game.Core`
+- **IA_P2_PathNode.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
+- **IA_P2_PathfindingModel.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
+- **IA_P2_AgentIA.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `TMPro`, `UnityEngine`
+- **GlobalHUD.cs**: `Game.Squad`, `UnityEngine`
+- **GlobalData.cs**: `USP.Entities`, `UnityEngine`, `Game.Squad`
+- **GEN_Inputs.cs**: `UnityEngine`, `System`
+- **FusionRunnerVisibilityControlsWindow.cs**: `System`, `System.Collections.Generic`, `Statistics`, `UnityEngine`, `UnityEditor`
+- **FusionEditorSkin.cs**: `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`
+- **FusionEditorConfigImporter.cs**: `System.IO`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **Fusion.Unity.Editor.cs**: `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `Fusion.Internal`, `Unity.Collections.LowLevel.Unsafe`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditorInternal`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.IO`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor`, `System.Int32`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEngine.Object`, `System.Int32`, `UnityEditor.HierarchyProperty`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Object`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Reflection`, `System.Text.RegularExpressions`, `System.Xml`, `UnityEditor`, `UnityEngine`, `System`, `System.Diagnostics`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.IO`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `System.Reflection`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `ReflectionUtils`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `Unity.Profiling`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `UnityEngine`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`, `System`, `JetBrains.Annotations`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEngine.Scripting`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `Fusion.Analyzer`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `System.Text.RegularExpressions`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System`, `Internal`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEditor.Compilation`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor.Experimental.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`, `Photon.Realtime`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Runtime.CompilerServices`, `System.Text`, `UnityEngine`, `UnityEngine`, `UnityEditor`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor.Animations`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditor.Experimental.SceneManagement`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `System`, `System.Text`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `Fusion.Photon.Realtime`, `System.Linq`, `System.IO`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`
+- **FusionStatsWorldAnchor.cs**: `System`, `UnityEngine`
+- **FusionStatsPanelHeader.cs**: `UnityEngine`, `UnityEngine.UI`, `System`, `System.Collections.Generic`
+- **FusionStatsGraphDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
+- **FusionStatsConfig.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Serialization`, `UnityEngine.UI`
+- **FusionStatsCanvas.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Events`, `UnityEngine.EventSystems`, `UnityEngine.UI`
+- **FusionStatistics.cs**: `System`, `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `UnityEngine.EventSystems`, `UnityEngine.Profiling`, `UnityEngine.Serialization`
+- **FusionNetworkObjectStatsGraphCombine.cs**: `UnityEngine`, `System.Collections.Generic`, `UnityEngine.UI`, `System`
+- **FusionNetworkObjectStatsGraph.cs**: `System`, `UnityEngine`, `UnityEngine.UI`
+- **Torreta.cs**: `USP.Services`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **SistemaPuntaje.cs**: `UnityEngine`, `UnityEngine.UI`
+- **SenalisacionAEnemigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
 - **Prueba_de_color.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
 - **PickUp.cs**: `UnityEngine`, `Game.Squad`
 - **Obstaculo.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
@@ -148,39 +194,28 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - **IndicadorEnemigos.cs**: `USP.Services`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
 - **Ideas y pseudocodigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
 - **GestorTexto.cs**: `UnityEngine`, `UnityEngine.UI`
-- **FusionBootstrap.cs**: `System`, `Fusion.Sockets`, `System.Collections`, `System.Threading.Tasks`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `Statistics`, `UnityEngine.Serialization`
-- **FusionBasicBillboard.cs**: `UnityEngine`
-- **FusionAddressablePrefabsPreloader.cs**: `System.Collections.Generic`, `UnityEngine`
-- **Fusion.Unity.cs**: `System`, `System.Runtime.ExceptionServices`, `UnityEngine`, `UnityEngine.Object`, `UnityEngine.Resources`, `System`, `UnityEngine.Serialization`, `System`, `UnityEngine`, `UnityEngine.Serialization`, `System`, `UnityEngine.Scripting`, `InternalLogStreams`, `System`, `System.IO`, `System.Reflection`, `UnityEngine`, `UnityEngine.Scripting`, `UnityEngine.Object`, `InternalLogStreams`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Runtime.ExceptionServices`, `System.Text`, `System.Threading`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Diagnostics`, `System.Linq`, `Unity.Collections.LowLevel.Unsafe`, `Unity.Profiling`, `Unity.Profiling.LowLevel`, `Unity.Profiling.LowLevel.Unsafe`, `UnityEngine`, `System.Object`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Text`, `System.Text.RegularExpressions`, `UnityEngine`, `System`, `UnityEngine`, `System`, `System.Diagnostics`, `JetBrains.Annotations`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEngine`, `System`, `UnityEngine.Object`, `System`, `UnityEngine`, `UnityEngine`, `UnityEngine.UI`, `System`, `System.Globalization`, `UnityEngine`, `System.Reflection`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `Analyzer`
-- **UnitCommander.cs**: `Game.Core`, `Game.Squad`, `System.Linq`, `UnityEngine`
-- **TickManager.cs**: `UnityEngine`, `System`
-- **ShotSensor.cs**: `UnityEngine`, `Game.Squad`
-- **RevivingState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`
-- **VibracionCamara.cs**: `UnityEngine`
-- **Torreta.cs**: `USP.Services`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **SistemaPuntaje.cs**: `UnityEngine`, `UnityEngine.UI`
-- **SenalisacionAEnemigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **HostNetworkService.cs**: `System`, `System.Collections.Generic`, `Fusion`, `Fusion.Sockets`, `UnityEngine`, `Redes.Core`
-- **PlayerShooting.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **PlayerMovement.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **PlayerHealth.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Combat`, `Redes.Gameplay`
-- **PlayerAnimationController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **NetworkPlayer.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **AmmoSystem.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **ResultView.cs**: `System`, `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
-- **LobbyView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
-- **GameHudView.cs**: `UnityEngine`, `UnityEngine.UI`
-- **TriggerEventAndDestroy.cs**: `UnityEngine`, `UnityEngine.Events`
-- **VfxController.cs**: `System.Collections.Generic`, `UnityEngine`
-- **DropdownController.cs**: `System.Collections.Generic`, `TMPro`, `UnityEngine`
-- **DebugColisionesFull.cs**: `UnityEngine`
-- **CollisionDetector.cs**: `UnityEngine`
-- **FusionStatistics.cs**: `System`, `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `UnityEngine.EventSystems`, `UnityEngine.Profiling`, `UnityEngine.Serialization`
-- **FusionNetworkObjectStatsGraphCombine.cs**: `UnityEngine`, `System.Collections.Generic`, `UnityEngine.UI`, `System`
-- **FusionNetworkObjectStatsGraph.cs**: `System`, `UnityEngine`, `UnityEngine.UI`
-- **FusionBootstrapDebugGUI.cs**: `System`, `UnityEngine`, `System.Collections.Generic`
-- **CursorManager.cs**: `UnityEngine`
-- **UnitController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections`, `Game.Sensors`, `Game.Core`
+- **ConfiguracionGlobal.cs**: `UnityEngine`
+- **CodigoDeInicio.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **Camara.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **BD_Audios.cs**: `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
+- **GameEventBus.cs**: `System`, `UnityEngine`, `Fusion`
+- **MatchNetworkController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Controllers`
+- **TerrainModel.cs**: `UnityEngine`
+- **PlayerModel.cs**: `System`, `Redes.Core`
+- **IEntityDisplayModel.cs**: `UnityEngine`
+- **GameStateModel.cs**: `System`, `Redes.Core`
+- **RoomSessionHandler.cs**: `System.Collections.Generic`, `Fusion`, `Redes.Core`
+- **PlayerSpawner.cs**: `System.Collections.Generic`, `Fusion`, `UnityEngine`, `Redes.Core`
+- **NetworkInputData.cs**: `Fusion`, `UnityEngine`
+- **ISessionListHandler.cs**: `System.Collections.Generic`, `Fusion`
+- **INetworkService.cs**: `System`, `System.Collections.Generic`, `Fusion`
+- **HostNetworkService.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `Fusion`, `Fusion.Sockets`, `UnityEngine`, `UnityEngine.SceneManagement`, `Redes.Core`, `Redes.Controllers`, `Redes.Views`
+- **CentralizadorScripts.cs**: `UnityEngine`, `UnityEditor`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.IO`
+- **Fusion.CodeGen.cs**: `System`, `System.Diagnostics`
+- **NetworkProjectConfigImporterEditor.cs**: `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **NetworkProjectConfigImporter.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEditor.PackageManager`, `UnityEngine`
+- **NetworkPrefabsInspector.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`
+- **FusionWeaverTriggerImporter.cs**: `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
 
 ## Namespace `(global)`
 
@@ -1678,6 +1713,20 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 | public void GastarBala() | 2 | 2 | 4 |  |
 
 
+### class NewTestScript
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `NewTestScript.cs` · líneas 7-25 (19)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void NewTestScriptSimplePasses() | 1 | 0 | 5 |  |
+| public IEnumerator NewTestScriptWithEnumeratorPasses() | 1 | 1 | 7 |  |
+
+
 ### class NodeDistance
 
 - Accesibilidad: `private`
@@ -2416,6 +2465,922 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 |-------|:-----:|:----:|:-----:|----------|
 | public void Play(int index) | 2 | 4 | 9 | Destroy, Instantiate |
 | public void Stop() | 2 | 3 | 7 | Destroy |
+
+
+## Namespace `DebugSystem`
+
+### class Bullet
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `Bullet.cs` · líneas 5-63 (59)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `EventBus`, `PlayerModel`, `EffectPool`, `BulletPool`
+
+**Campos:**
+
+- public float **Speed** (inicializado)
+- public float **Damage** (inicializado)
+- public float **Lifetime** (inicializado)
+- private Vector3 **direction**
+- private int **shooterActorID**
+- private int **projectileID**
+- private float **spawnTime**
+- private static int **nextProjectileID** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Setup(int shooterID, Vector3 dir) | 1 | 5 | 9 | TriggerProjectileCreated |
+| private void Update() | 2 | 4 | 9 | Recycle |
+| private void OnTriggerEnter2D(Collider2D collision) | 6 | 16 | 20 | GetComponent, SpawnImpact, TriggerImpactClient, TriggerImpactHost, ApplyDamage, Recycle, CompareTag |
+| private void Recycle() | 1 | 1 | 4 | ReturnToPool |
+
+
+### class BulletPool
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `BulletPool.cs` · líneas 6-52 (47)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `Bullet`
+
+**Campos:**
+
+- private Bullet **bulletPrefab** `[SerializeField]`
+- private int **initialSize** (inicializado) `[SerializeField]`
+- private Queue<Bullet> **pool** (inicializado)
+
+**Propiedades:**
+
+- public static BulletPool **Instance** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 2 | 5 | InitializePool |
+| private void InitializePool() | 2 | 5 | 9 | Instantiate, SetActive, Enqueue |
+| public Bullet Get() | 2 | 8 | 14 | Dequeue, Instantiate, SetActive |
+| public void ReturnToPool(Bullet b) | 1 | 3 | 6 | SetActive, SetParent, Enqueue |
+
+
+### class DebugLogger
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DebugLogger.cs` · líneas 33-268 (236)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `LogEntry`, `LogCategory`, `EventBus`
+
+**Campos:**
+
+- public bool **IsTestMode** (inicializado)
+- public List<LogEntry> **LoggedEvents** (inicializado)
+
+**Propiedades:**
+
+- public static DebugLogger **Instance** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Awake() | 4 | 13 | 23 | DontDestroyOnLoad, SubscribeEvents, Destroy, DestroyImmediate |
+| private void OnDestroy() | 2 | 3 | 7 |  |
+| public void ClearLogs() | 1 | 1 | 4 | Clear |
+| private void Log(LogCategory category, string eventKey, string formattedMsg) | 2 | 5 | 17 | Add, Log |
+| private void SubscribeEvents() | 2 | 140 | 173 | Log |
+
+
+### class EffectPool
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `EffectPool.cs` · líneas 6-95 (90)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `ImpactEffect`, `ProceduralAudioGenerator`
+
+**Campos:**
+
+- public int **initialSize** (inicializado)
+- private List<ImpactEffect> **pool** (inicializado)
+- private GameObject **impactPrefab**
+
+**Propiedades:**
+
+- public static EffectPool **Instance** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 2 | 7 | 13 | CreatePrefab, InitializePool, Destroy |
+| private void CreatePrefab() | 4 | 18 | 28 | SetActive, AddComponent, Distance, SetPixel, Apply, Create, SetParent |
+| private void InitializePool() | 2 | 3 | 7 | CreateNewEffect |
+| private ImpactEffect CreateNewEffect() | 1 | 5 | 8 | Instantiate, SetActive, GetComponent, Add |
+| public ImpactEffect GetEffect() | 3 | 6 | 11 | CreateNewEffect |
+| public void SpawnImpact(Vector3 position, Color color) | 1 | 4 | 9 | GetEffect, PlayEffect, GetImpactSound, PlayClipAtPoint |
+
+
+### static class EventBus
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `EventBus.cs` · líneas 5-482 (478)
+
+**Eventos:**
+
+- public event Action<string, int> **OnGameStarted**
+- public event Action **OnGameClosed**
+- public event Action<string> **OnSceneLoaded**
+- public event Action<string> **OnSceneLoadError**
+- public event Action<string, int> **OnGameMode**
+- public event Action<string> **OnRegion**
+- public event Action<int> **OnTargetFrameRate**
+- public event Action<bool> **OnVSync**
+- public event Action<bool> **OnEditor**
+- public event Action<string> **OnPlatform**
+- public event Action<float> **OnTimeScale**
+- public event Action<bool> **OnTestMode**
+- public event Action<string> **OnNameEntered**
+- public event Action **OnNameEmptyOrInvalid**
+- public event Action<string> **OnLocalIDAssigned**
+- public event Action<string> **OnExternalAuthStarted**
+- public event Action<string> **OnExternalAuthError**
+- public event Action<string> **OnRoomCreated**
+- public event Action<string> **OnRoomCreateError**
+- public event Action<int> **OnRoomListReceived**
+- public event Action<string> **OnRoomJoin**
+- public event Action<string> **OnRoomJoinError**
+- public event Action<int, string> **OnPlayerEntered**
+- public event Action<int> **OnPlayerLeft**
+- public event Action<string, string> **OnRoomPropUpdated**
+- public event Action<int, string, string> **OnPlayerPropUpdated**
+- public event Action<string> **OnMatchmakingSearching**
+- public event Action **OnMatchmakingCancelled**
+- public event Action<string> **OnMatchFound**
+- public event Action **OnMatchmakingTimeout**
+- public event Action **OnEnteringMatch**
+- public event Action<string> **OnMatchmakingError**
+- public event Action **OnConnectingMaster**
+- public event Action **OnConnectedMaster**
+- public event Action<string> **OnConnectMasterError**
+- public event Action<int> **OnPing**
+- public event Action<int> **OnPingHigh**
+- public event Action<string> **OnNetworkRegion**
+- public event Action<string> **OnNetworkRegionAutoChanged**
+- public event Action<string> **OnDisconnected**
+- public event Action<int> **OnReconnecting**
+- public event Action<int> **OnActorIDAssigned**
+- public event Action<int> **OnActorIDRemoved**
+- public event Action<bool> **OnIsHost**
+- public event Action<int, int> **OnHostMigrated**
+- public event Action<string, string> **OnRPCSent**
+- public event Action<string, int> **OnRPCReceived**
+- public event Action<string> **OnRPCIgnored**
+- public event Action **OnRPCDiscarded**
+- public event Action<int> **OnNetEventSent**
+- public event Action<int, int> **OnNetEventReceived**
+- public event Action<int> **OnMsgBuffer**
+- public event Action<int> **OnPacketLost**
+- public event Action<int, int> **OnNetSimActive**
+- public event Action<string> **OnStateCurrent**
+- public event Action<string> **OnStateInvalid**
+- public event Action<string, string> **OnStateTransition**
+- public event Action<string, string, string> **OnStateBlocked**
+- public event Action<string> **OnStateSynced**
+- public event Action<int, bool> **OnPlayerReady**
+- public event Action<int> **OnPlayerReadyTimeout**
+- public event Action<int, float> **OnPlayerSceneLoaded**
+- public event Action **OnSpawnRequested**
+- public event Action<int> **OnSpawnConfirmed**
+- public event Action **OnSpawnDenied**
+- public event Action<string, int> **OnInputReceived**
+- public event Action **OnInputDiscarded**
+- public event Action<int, string> **OnAvatarAssigned**
+- public event Action<int> **OnPlayerDisconnected**
+- public event Action **OnPlayerReconnected**
+- public event Action<int, string, int> **OnWeaponEquipped**
+- public event Action<int, string, int> **OnShootStart**
+- public event Action **OnShootNoAmmo**
+- public event Action<int, float> **OnShootConfirmed**
+- public event Action<int, int, string, float, float, float> **OnProjectileCreated**
+- public event Action<int, int, float> **OnImpactClient**
+- public event Action **OnImpactDiscarded**
+- public event Action<int, int, float> **OnImpactHost**
+- public event Action<int, string> **OnReloadStart**
+- public event Action **OnReloadComplete**
+- public event Action<int, string> **OnReloadCancel**
+- public event Action<int, string, int, int, int> **OnAmmoUpdated**
+- public event Action<int, float, float, float, int> **OnDamageApplied**
+- public event Action<int, float, float> **OnHealthSynced**
+- public event Action<int, int, string> **OnPlayerDeath**
+- public event Action<string> **OnPlayerDeathCause**
+- public event Action<int, float> **OnRespawnRequested**
+- public event Action **OnRespawnExecuted**
+- public event Action<int, float> **OnInvulnerability**
+- public event Action<int, float, int> **OnHealReceived**
+- public event Action<string> **OnWinCondition**
+- public event Action<int> **OnTeamWin**
+- public event Action<int> **OnPlayerWin**
+- public event Action<string, int> **OnMatchFinished**
+- public event Action<float> **OnTotalTime**
+- public event Action<int, int> **OnFinalScore**
+- public event Action<int, string, float> **OnMVP**
+- public event Action **OnMatchRestartReq**
+- public event Action **OnReturnToLobby**
+- public event Action<string, string> **OnGlobalNotif**
+- public event Action<int, string> **OnPersonalNotif**
+- public event Action<string, string> **OnAlertShow**
+- public event Action **OnAlertHide**
+- public event Action<int, string> **OnStreakAnnounce**
+- public event Action<float, string> **OnTimeWarning**
+- public event Action<string, int, int> **OnObjectiveUpdate**
+- public event Action<int, string> **OnAnimTrigger**
+- public event Action<int, string, float, float, float> **OnAnimDamage**
+- public event Action<int, string> **OnAnimDeath**
+- public event Action<int, string> **OnAnimReload**
+- public event Action<string, float, float, float, int> **OnVFX**
+- public event Action<string, int, float> **OnSFX**
+- public event Action<float, float> **OnCameraShake**
+- public event Action<int, string> **OnDamageUI**
+- public event Action<int, string, bool> **OnWeaponAnimBool**
+- public event Action<int, int> **OnSnapshotSent**
+- public event Action **OnSnapshotReceived**
+- public event Action<int, int> **OnHashDesync**
+- public event Action<int, string, string, string> **OnDiffActor**
+- public event Action<int, string, string> **OnCorrectionActor**
+- public event Action<string> **OnForceResync**
+- public event Action **OnReconnectStart**
+- public event Action<string> **OnReconnectSuccess**
+- public event Action **OnReconnectDenied**
+- public event Action<int> **OnStateRecoverHost**
+- public event Action<float> **OnHostLost**
+- public event Action<int> **OnNewHost**
+- public event Action<string> **OnMatchAborted**
+- public event Action<int> **OnTestSeed**
+- public event Action<string, int> **OnTestBotCreate**
+- public event Action **OnTestBotRemove**
+- public event Action<string, string> **OnTestCmd**
+- public event Action<string> **OnTestOverrideState**
+- public event Action<int, int> **OnTestSimNet**
+- public event Action<float, float, float> **OnTestPerf**
+- public event Action<int, string> **OnTestDumpRoom**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void TriggerGameStarted(string v, int s) | 1 | 1 | 1 |  |
+| public static void TriggerGameClosed() | 1 | 1 | 1 |  |
+| public static void TriggerSceneLoaded(string s) | 1 | 1 | 1 |  |
+| public static void TriggerSceneLoadError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerGameMode(string s, int i) | 1 | 1 | 1 |  |
+| public static void TriggerRegion(string s) | 1 | 1 | 1 |  |
+| public static void TriggerTargetFrameRate(int i) | 1 | 1 | 1 |  |
+| public static void TriggerVSync(bool b) | 1 | 1 | 1 |  |
+| public static void TriggerEditor(bool b) | 1 | 1 | 1 |  |
+| public static void TriggerPlatform(string s) | 1 | 1 | 1 |  |
+| public static void TriggerTimeScale(float f) | 1 | 1 | 1 |  |
+| public static void TriggerTestMode(bool b) | 1 | 1 | 1 |  |
+| public static void TriggerNameEntered(string s) | 1 | 1 | 1 |  |
+| public static void TriggerNameEmptyOrInvalid() | 1 | 1 | 1 |  |
+| public static void TriggerLocalIDAssigned(string s) | 1 | 1 | 1 |  |
+| public static void TriggerExternalAuthStarted(string s) | 1 | 1 | 1 |  |
+| public static void TriggerExternalAuthError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRoomCreated(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRoomCreateError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRoomListReceived(int i) | 1 | 1 | 1 |  |
+| public static void TriggerRoomJoin(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRoomJoinError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerEntered(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerLeft(int i) | 1 | 1 | 1 |  |
+| public static void TriggerRoomPropUpdated(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerPropUpdated(int i, string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerMatchmakingSearching(string s) | 1 | 1 | 1 |  |
+| public static void TriggerMatchmakingCancelled() | 1 | 1 | 1 |  |
+| public static void TriggerMatchFound(string s) | 1 | 1 | 1 |  |
+| public static void TriggerMatchmakingTimeout() | 1 | 1 | 1 |  |
+| public static void TriggerEnteringMatch() | 1 | 1 | 1 |  |
+| public static void TriggerMatchmakingError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerConnectingMaster() | 1 | 1 | 1 |  |
+| public static void TriggerConnectedMaster() | 1 | 1 | 1 |  |
+| public static void TriggerConnectMasterError(string s) | 1 | 1 | 1 |  |
+| public static void TriggerPing(int i) | 1 | 1 | 1 |  |
+| public static void TriggerPingHigh(int i) | 1 | 1 | 1 |  |
+| public static void TriggerNetworkRegion(string s) | 1 | 1 | 1 |  |
+| public static void TriggerNetworkRegionAutoChanged(string s) | 1 | 1 | 1 |  |
+| public static void TriggerDisconnected(string s) | 1 | 1 | 1 |  |
+| public static void TriggerReconnecting(int i) | 1 | 1 | 1 |  |
+| public static void TriggerActorIDAssigned(int i) | 1 | 1 | 1 |  |
+| public static void TriggerActorIDRemoved(int i) | 1 | 1 | 1 |  |
+| public static void TriggerIsHost(bool b) | 1 | 1 | 1 |  |
+| public static void TriggerHostMigrated(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerRPCSent(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerRPCReceived(string s, int i) | 1 | 1 | 1 |  |
+| public static void TriggerRPCIgnored(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRPCDiscarded() | 1 | 1 | 1 |  |
+| public static void TriggerNetEventSent(int i) | 1 | 1 | 1 |  |
+| public static void TriggerNetEventReceived(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerMsgBuffer(int i) | 1 | 1 | 1 |  |
+| public static void TriggerPacketLost(int i) | 1 | 1 | 1 |  |
+| public static void TriggerNetSimActive(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerStateCurrent(string s) | 1 | 1 | 1 |  |
+| public static void TriggerStateInvalid(string s) | 1 | 1 | 1 |  |
+| public static void TriggerStateTransition(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerStateBlocked(string s1, string s2, string s3) | 1 | 1 | 1 |  |
+| public static void TriggerStateSynced(string s) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerReady(int i, bool b) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerReadyTimeout(int i) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerSceneLoaded(int i, float f) | 1 | 1 | 1 |  |
+| public static void TriggerSpawnRequestedLocal() | 1 | 1 | 1 |  |
+| public static void TriggerSpawnConfirmed(int i) | 1 | 1 | 1 |  |
+| public static void TriggerSpawnDenied() | 1 | 1 | 1 |  |
+| public static void TriggerInputReceived(string s, int i) | 1 | 1 | 1 |  |
+| public static void TriggerInputDiscarded() | 1 | 1 | 1 |  |
+| public static void TriggerAvatarAssigned(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerDisconnected(int i) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerReconnected() | 1 | 1 | 1 |  |
+| public static void TriggerWeaponEquipped(int i1, string s, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerShootStart(int i1, string s, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerShootNoAmmo() | 1 | 1 | 1 |  |
+| public static void TriggerShootConfirmed(int i, float f) | 1 | 1 | 1 |  |
+| public static void TriggerProjectileCreated(int i1, int i2, string s, float f1, float f2, float f3) | 1 | 1 | 1 |  |
+| public static void TriggerImpactClient(int i1, int i2, float f) | 1 | 1 | 1 |  |
+| public static void TriggerImpactDiscarded() | 1 | 1 | 1 |  |
+| public static void TriggerImpactHost(int i1, int i2, float f) | 1 | 1 | 1 |  |
+| public static void TriggerReloadStart(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerReloadComplete() | 1 | 1 | 1 |  |
+| public static void TriggerReloadCancel(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerAmmoUpdated(int i1, string s, int i2, int i3, int i4) | 1 | 1 | 1 |  |
+| public static void TriggerDamageApplied(int i1, float f1, float f2, float f3, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerHealthSynced(int i, float f1, float f2) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerDeath(int i1, int i2, string s) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerDeathCause(string s) | 1 | 1 | 1 |  |
+| public static void TriggerRespawnRequested(int i, float f) | 1 | 1 | 1 |  |
+| public static void TriggerRespawnExecuted() | 1 | 1 | 1 |  |
+| public static void TriggerInvulnerability(int i, float f) | 1 | 1 | 1 |  |
+| public static void TriggerHealReceived(int i1, float f, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerWinCondition(string s) | 1 | 1 | 1 |  |
+| public static void TriggerTeamWin(int i) | 1 | 1 | 1 |  |
+| public static void TriggerPlayerWin(int i) | 1 | 1 | 1 |  |
+| public static void TriggerMatchFinished(string s, int i) | 1 | 1 | 1 |  |
+| public static void TriggerTotalTime(float f) | 1 | 1 | 1 |  |
+| public static void TriggerFinalScore(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerMVP(int i, string s, float f) | 1 | 1 | 1 |  |
+| public static void TriggerMatchRestartReq() | 1 | 1 | 1 |  |
+| public static void TriggerReturnToLobby() | 1 | 1 | 1 |  |
+| public static void TriggerGlobalNotif(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerPersonalNotif(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerAlertShow(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerAlertHide() | 1 | 1 | 1 |  |
+| public static void TriggerStreakAnnounce(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerTimeWarning(float f, string s) | 1 | 1 | 1 |  |
+| public static void TriggerObjectiveUpdate(string s, int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerAnimTrigger(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerAnimDamage(int i, string s, float f1, float f2, float f3) | 1 | 1 | 1 |  |
+| public static void TriggerAnimDeath(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerAnimReload(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerVFX(string s, float f1, float f2, float f3, int i) | 1 | 1 | 1 |  |
+| public static void TriggerSFX(string s, int i, float f) | 1 | 1 | 1 |  |
+| public static void TriggerCameraShake(float f1, float f2) | 1 | 1 | 1 |  |
+| public static void TriggerDamageUI(int i, string s) | 1 | 1 | 1 |  |
+| public static void TriggerWeaponAnimBool(int i, string s, bool b) | 1 | 1 | 1 |  |
+| public static void TriggerSnapshotSent(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerSnapshotReceived() | 1 | 1 | 1 |  |
+| public static void TriggerHashDesync(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerDiffActor(int i, string s1, string s2, string s3) | 1 | 1 | 1 |  |
+| public static void TriggerCorrectionActor(int i, string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerForceResync(string s) | 1 | 1 | 1 |  |
+| public static void TriggerReconnectStart() | 1 | 1 | 1 |  |
+| public static void TriggerReconnectSuccess(string s) | 1 | 1 | 1 |  |
+| public static void TriggerReconnectDenied() | 1 | 1 | 1 |  |
+| public static void TriggerStateRecoverHost(int i) | 1 | 1 | 1 |  |
+| public static void TriggerHostLost(float f) | 1 | 1 | 1 |  |
+| public static void TriggerNewHost(int i) | 1 | 1 | 1 |  |
+| public static void TriggerMatchAborted(string s) | 1 | 1 | 1 |  |
+| public static void TriggerTestSeed(int i) | 1 | 1 | 1 |  |
+| public static void TriggerTestBotCreate(string s, int i) | 1 | 1 | 1 |  |
+| public static void TriggerTestBotRemove() | 1 | 1 | 1 |  |
+| public static void TriggerTestCmd(string s1, string s2) | 1 | 1 | 1 |  |
+| public static void TriggerTestOverrideState(string s) | 1 | 1 | 1 |  |
+| public static void TriggerTestSimNet(int i1, int i2) | 1 | 1 | 1 |  |
+| public static void TriggerTestPerf(float f1, float f2, float f3) | 1 | 1 | 1 |  |
+| public static void TriggerTestDumpRoom(int i, string s) | 1 | 1 | 1 |  |
+| public static void ClearAllEvents() | 1 | 136 | 153 |  |
+
+
+### class FloatingHealthBar
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `FloatingHealthBar.cs` · líneas 6-150 (145)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`
+
+**Campos:**
+
+- private PlayerModel **targetModel**
+- private Image **fillImage**
+- private Text **nameText**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Setup(PlayerModel model, string username) | 9 | 65 | 93 | AddComponent, GetComponent, SetParent, GetBuiltinResource, FindObjectsOfTypeAll |
+| private void OnDestroy() | 2 | 3 | 7 |  |
+| private void HandleHealthChanged(float hp, float shield) | 3 | 4 | 8 | Clamp01, StartCoroutine, SmoothFill |
+| private System.Collections.IEnumerator SmoothFill(float targetFill) | 3 | 12 | 21 | Lerp |
+| private void LateUpdate() | 1 | 1 | 5 |  |
+
+
+### class GameLoopReferee
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `GameLoopReferee.cs` · líneas 5-33 (29)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`, `PlayerController`, `SimpleEnemyAI`, `GameManager`
+
+**Campos:**
+
+- private PlayerModel **player**
+- private PlayerModel **enemy**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Start() | 3 | 8 | 15 | FindObjectOfType, GetComponent |
+| private void Update() | 4 | 3 | 7 | CheckGameOver |
+
+
+### class GameManager
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `GameManager.cs` · líneas 6-133 (128)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `EventBus`, `PlayerModel`, `LocalNetworkMock`, `FloatingHealthBar`
+
+**Campos:**
+
+- public GameObject **playerPrefab**
+- public Transform **spawnPoint1**
+- public Transform **spawnPoint2**
+
+**Propiedades:**
+
+- public static GameManager **Instance** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 3 | 6 | 10 | Destroy |
+| private void OnDestroy() | 2 | 5 | 9 | ClearAllEvents |
+| private IEnumerator Start() | 1 | 10 | 18 | TriggerGameStarted, TriggerTargetFrameRate, TriggerTimeScale, TriggerTestSeed, TriggerConnectingMaster, TriggerConnectedMaster, TriggerNetworkRegion, TriggerPing… |
+| private void HandleStateTransition(string from, string to) | 2 | 3 | 7 | SpawnPlayers |
+| private void SpawnPlayers() | 11 | 28 | 38 | Instantiate, GetComponent, Initialize, GetRoomData, GetComponentInChildren, Setup, TriggerGlobalNotif |
+| private IEnumerator PeriodicalSystemSimulations() | 2 | 6 | 11 | TriggerPing, Range, TriggerSnapshotSent, TriggerSnapshotReceived |
+| public void CheckGameOver(PlayerModel player1, PlayerModel player2) | 3 | 6 | 11 | DeclareWinner |
+| private void DeclareWinner(int winningActor, int losingActor) | 3 | 5 | 8 | TriggerWinCondition, TriggerTeamWin, TriggerMatchFinished, TriggerMVP, TriggerGlobalNotif |
+
+
+### class ImpactEffect
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `ImpactEffect.cs` · líneas 5-50 (46)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private SpriteRenderer **spr**
+- private float **lifeTime** (inicializado)
+- private float **timer** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| public void PlayEffect(Vector3 position, Color color) | 2 | 7 | 11 | SetActive |
+| private void Update() | 4 | 13 | 22 | SetActive |
+
+
+### static class LocalNetworkMock
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `LocalNetworkMock.cs` · líneas 7-109 (103)
+- Tipos anidados: `RoomData`
+- Usa: `RoomData`
+
+**Propiedades:**
+
+- private static string **FilePath** `=> expr`
+- public static bool **IsHost** `{ get; set; }`
+- public static int **LocalActorID** `{ get; set; }`
+- public static string **LocalPlayerName** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static bool RoomExists() | 1 | 1 | 4 | Exists |
+| public static void CreateRoom(string playerName) | 1 | 6 | 17 | WriteAllText, ToJson, Log |
+| public static void JoinRoom(string playerName) | 2 | 12 | 18 | RoomExists, ReadAllText, FromJson, WriteAllText, ToJson, Log |
+| public static RoomData GetRoomData() | 3 | 11 | 18 | RoomExists, Open, ReadToEnd, FromJson |
+| public static void StartGame() | 3 | 7 | 11 | GetRoomData, WriteAllText, ToJson |
+| public static void ClearRoom() | 3 | 6 | 11 | Exists, Delete |
+
+
+### enum LogCategory
+
+- Accesibilidad: `public`
+- Archivo: `DebugLogger.cs` · líneas 6-23 (18)
+
+**Valores del enum:**
+
+- `SYSTEM` = 1
+- `AUTH` = 2
+- `LOBBY` = 3
+- `MATCHMAKING` = 4
+- `NETWORK` = 5
+- `STATE_MACHINE` = 6
+- `PLAYER_SYNC` = 7
+- `WEAPON` = 8
+- `DAMAGE` = 9
+- `WIN_LOSE` = 10
+- `NOTIFICATIONS` = 11
+- `ANIMATIONS` = 12
+- `DESYNC` = 13
+- `FALLBACKS` = 14
+- `TEST` = 15
+
+### struct LogEntry
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DebugLogger.cs` · líneas 25-31 (7)
+- Usa: `LogCategory`
+
+**Campos:**
+
+- public LogCategory **Category**
+- public string **EventKey**
+- public string **FormattedMessage**
+- public float **TimeStamp**
+
+### class PlayerController
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerController.cs` · líneas 5-75 (71)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`, `PlayerView`, `Weapon`, `LocalNetworkMock`, `EventBus`
+
+**Campos:**
+
+- private PlayerModel **model**
+- private PlayerView **view**
+- private Weapon **weapon**
+- public float **MoveSpeed** (inicializado) `[Header]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 3 | 6 | GetComponent, GetComponentInChildren |
+| private void Start() | 3 | 3 | 7 |  |
+| private void Update() | 9 | 29 | 46 | GetAxisRaw, TriggerInputReceived, ScreenToWorldPoint, Atan2, Euler, GetMouseButtonDown, TryShoot, PlayShootVFX… |
+
+
+### class PlayerModel
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerModel.cs` · líneas 6-56 (51)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `EventBus`
+
+**Eventos:**
+
+- public event Action<float, float> **OnHealthChanged**
+
+**Campos:**
+
+- public int **ActorID** (inicializado)
+- public string **Username** (inicializado)
+- private float **maxHP** (inicializado) `[Header][SerializeField]`
+- private float **currentHP** (inicializado) `[SerializeField]`
+- private float **shield** (inicializado) `[SerializeField]`
+
+**Propiedades:**
+
+- public float **MaxHP** `=> expr`
+- public float **CurrentHP** `=> expr`
+- public float **Shield** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Initialize(int actorID, string username) | 1 | 4 | 7 |  |
+| public void ApplyDamage(float amount, int attackerID) | 3 | 10 | 16 | Max, TriggerDamageApplied, TriggerHealthSynced, TriggerPlayerDeath |
+| public void Heal(float amount, int healerID) | 2 | 6 | 9 | Min, TriggerHealReceived, TriggerHealthSynced |
+
+
+### class PlayerView
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerView.cs` · líneas 5-78 (74)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`, `SimpleAnimator`, `EventBus`, `ProceduralAudioGenerator`
+
+**Campos:**
+
+- private PlayerModel **model**
+- private SimpleAnimator **anim**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 2 | 6 | GetComponent, GetComponentInChildren |
+| private void OnEnable() | 2 | 3 | 7 |  |
+| private void OnDisable() | 2 | 3 | 7 |  |
+| private void HandleHealthChanged(float hp, float shield) | 4 | 14 | 19 | TriggerHit, TriggerAnimTrigger, TriggerAnimDamage, TriggerDamageUI, TriggerSFX, TriggerAnimDeath |
+| public void PlayShootVFX(Vector3 weaponPos) | 2 | 8 | 12 | TriggerShoot, TriggerAnimTrigger, TriggerVFX, TriggerSFX, GetShootSound, PlayClipAtPoint |
+| public void PlayReloadVFX() | 1 | 4 | 7 | TriggerAnimTrigger, TriggerAnimReload, TriggerWeaponAnimBool, TriggerSFX |
+| public void StopReloadVFX() | 1 | 1 | 4 | TriggerWeaponAnimBool |
+
+
+### static class ProceduralAudioGenerator
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `ProceduralAudioGenerator.cs` · líneas 6-77 (72)
+
+**Campos:**
+
+- private static Dictionary<string, AudioClip> **cache** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static AudioClip GetShootSound() | 3 | 18 | 27 | ContainsKey, Exp, Lerp, Sign, Sin, Range, Create, SetData |
+| public static AudioClip GetImpactSound() | 3 | 17 | 26 | ContainsKey, Exp, Range, Create, SetData |
+| public static void PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f) | 2 | 10 | 12 | AddComponent, Play, Destroy |
+
+
+### class RoomData
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `LocalNetworkMock.cs` · líneas 100-108 (9)
+- Atributos: `[Serializable]`
+
+**Campos:**
+
+- public string **HostName**
+- public string **Player2Name**
+- public bool **Player1Ready**
+- public bool **Player2Ready**
+- public bool **GameStarted**
+
+### class ScreenManager
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `ScreenManager.cs` · líneas 7-263 (257)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `EventBus`, `LocalNetworkMock`, `RoomData`
+
+**Campos:**
+
+- public GameObject **lobbyPanel** `[Header]`
+- public GameObject **hudPanel**
+- public GameObject **gameOverPanel**
+- public Text **gameOverTitleText** `[Header]`
+- public Text **gameOverDetailsText**
+- public Button **restartButton**
+- public InputField **usernameInput** `[Header]`
+- public Button **createRoomButton**
+- public Button **joinRoomButton**
+- public Transform **roomListContainer**
+- public GameObject **roomButtonPrefab**
+- public Text **playerHpText** `[Header]`
+- public Text **playerAmmoText**
+- public Text **currentStatusText**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Start() | 4 | 15 | 26 | ShowLobby, AddListener, StartCoroutine, LobbyUpdateLoop |
+| private void OnDestroy() | 4 | 13 | 22 | RemoveListener |
+| private System.Collections.IEnumerator LobbyUpdateLoop() | 5 | 9 | 17 | UpdateLobbyUI, GetRoomData, SimulateGameStart |
+| private void UpdateLobbyUI() | 11 | 31 | 41 | GetComponentInChildren, SetActive, GetRoomData, RoomExists |
+| public void ShowLobby() | 4 | 6 | 6 | SetActive |
+| public void ShowHUD() | 4 | 6 | 6 | SetActive |
+| public void ShowGameOver(string result, int winningActor) | 9 | 16 | 23 | SetActive, ClearRoom |
+| private void RestartGame() | 2 | 4 | 8 | ClearRoom, LoadScene, GetActiveScene |
+| private string GetPlayerName() | 3 | 4 | 8 | IsNullOrEmpty, Range |
+| private void OnCreateRoomClicked() | 2 | 6 | 15 | GetPlayerName, StartGame, CreateRoom |
+| private void OnJoinRoomClicked() | 2 | 4 | 9 | GetPlayerName, RoomExists, JoinRoom |
+| private void SimulateGameStart(string localName, string hostName, string clientName) | 1 | 8 | 16 | Log, TriggerNameEntered, TriggerRoomCreated, TriggerPlayerEntered, TriggerStateCurrent, TriggerStateTransition, ShowHUD |
+| private void UpdateHealthHUD(int actorId, float hp, float shield) | 3 | 3 | 7 |  |
+| private void UpdateAmmoHUD(int actorId, string weaponName, int clip, int maxClip, int reserve) | 3 | 3 | 7 |  |
+| private void UpdateStatusHUD(string state) | 2 | 3 | 7 |  |
+
+
+### class SimpleAnimator
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `SimpleAnimator.cs` · líneas 6-59 (54)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private SpriteRenderer **spr**
+- private Color **originalColor**
+- private Vector3 **originalLocalPosition**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 2 | 5 | 9 | GetComponent |
+| public void TriggerHit() | 1 | 2 | 5 | StopCoroutine, StartCoroutine |
+| public void TriggerShoot(Vector3 direction) | 1 | 2 | 5 | StopCoroutine, StartCoroutine |
+| private IEnumerator HitCoroutine() | 2 | 7 | 10 |  |
+| private IEnumerator RecoilCoroutine(Vector3 direction) | 2 | 8 | 14 | Distance, Lerp |
+
+
+### class SimpleEnemyAI
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `SimpleEnemyAI.cs` · líneas 5-60 (56)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`, `Weapon`, `PlayerView`, `PlayerController`, `EventBus`
+
+**Campos:**
+
+- private PlayerModel **target**
+- private PlayerModel **selfModel**
+- private Weapon **weapon**
+- private PlayerView **view**
+- public float **AttackRange** (inicializado)
+- public float **ShootCooldown** (inicializado)
+- private float **lastShootTime**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 3 | 6 | GetComponent, GetComponentInChildren |
+| private void Start() | 2 | 4 | 9 | FindObjectOfType, GetComponent |
+| private void Update() | 9 | 17 | 27 | Atan2, Euler, Distance, TriggerInputReceived, TryShoot, PlayShootVFX |
+
+
+### class Weapon
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `Weapon.cs` · líneas 6-98 (93)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerModel`, `PlayerView`, `EventBus`, `Bullet`, `BulletPool`
+
+**Campos:**
+
+- public string **WeaponName** (inicializado)
+- public int **WeaponIndex** (inicializado)
+- public int **ClipSize** (inicializado)
+- public int **MaxReserve** (inicializado)
+- private int **currentClip** `[Header][SerializeField]`
+- private int **currentReserve** `[SerializeField]`
+- private bool **isReloading** (inicializado) `[SerializeField]`
+- private PlayerModel **playerModel**
+- private PlayerView **playerView**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 4 | 7 | GetComponentInParent |
+| private void Start() | 2 | 4 | 8 | TriggerWeaponEquipped, TriggerAmmoUpdate |
+| public bool TryShoot() | 3 | 15 | 22 | TriggerShootNoAmmo, TriggerShootStart, TriggerShootConfirmed, TriggerAmmoUpdate, Get, Setup |
+| public bool CanReload() | 3 | 1 | 4 |  |
+| public void Reload() | 2 | 3 | 5 | CanReload, StartCoroutine, ReloadRoutine |
+| private IEnumerator ReloadRoutine() | 2 | 13 | 21 | TriggerReloadStart, Min, StopReloadVFX, TriggerReloadComplete, TriggerAmmoUpdate |
+| private void TriggerAmmoUpdate() | 1 | 1 | 4 | TriggerAmmoUpdated |
+
+
+## Namespace `DebugSystem.Editor`
+
+### class CreateScenesAndPrefabsMenu
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `CreateScenesAndPrefabsMenu.cs` · líneas 13-697 (685)
+- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `SerializedProperty`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private static Font GetDefaultFont() | 7 | 18 | 28 | GetBuiltinResource, FindObjectsOfTypeAll |
+| public static void GenerateProjectSetup() | 2 | 94 | 133 | Log, EnsureTagExists, EnsureDirectory, SetActive, AddComponent, GetBuiltinExtraResource, SaveAsPrefabAsset, DestroyImmediate… |
+| public static void FixAndConfigureScene() | 8 | 29 | 45 | Log, EnsureTagExists, LoadAssetAtPath, LogWarning, GenerateProjectSetup, GetActiveScene, GetRootGameObjects, DestroyImmediate… |
+| private static void EnsureDirectory(string path) | 2 | 5 | 9 | IsValidFolder, Replace, GetDirectoryName, GetFileName, CreateFolder |
+| private static void CreateGameScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) | 1 | 6 | 11 | NewScene, SetupBaseScene, MarkSceneDirty, SaveScene, Log |
+| private static void CreateTestScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) | 1 | 6 | 11 | NewScene, SetupBaseScene, MarkSceneDirty, SaveScene, Log |
+| private static void SetupBaseScene(Scene scene, GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, bool isTestScene) | 6 | 273 | 334 | Find, GetComponent, AddComponent, SetParent, FindProperty, ApplyModifiedProperties, GetBuiltinExtraResource, FindObjectOfType… |
+| private static void EnsureTagExists(string tag) | 5 | 13 | 19 | LoadAllAssetsAtPath, FindProperty, GetArrayElementAtIndex, InsertArrayElementAtIndex, ApplyModifiedProperties |
+| public static void BuildStandalonePlayer() | 9 | 50 | 84 | Log, GetActiveScene, IsNullOrEmpty, Add, ToLower, Replace, Exists, ToArray… |
+
+
+### class CreateTestSceneMenu
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `CreateTestSceneMenu.cs` · líneas 9-158 (150)
+- Usa: `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `Weapon`, `SimpleEnemyAI`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void CreateScene() | 4 | 98 | 147 | NewScene, Find, GetComponent, AddComponent, SetParent, SetActive, GetBuiltinExtraResource, FindProperty… |
+
+
+### class HierarchyToClipboardMenu
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `HierarchyToClipboardMenu.cs` · líneas 8-133 (126)
+- Usa: `EditorUtility`, `SerializedProperty`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void CopyHierarchyToClipboard() | 3 | 18 | 31 | GetActiveScene, AppendLine, GetRootGameObjects, DumpGameObject, ToString, Log, DisplayDialog, LogError |
+| private static void DumpGameObject(GameObject go, StringBuilder sb, int indentLevel) | 14 | 29 | 52 | AppendLine, LayerToName, GetComponents, GetType, GetIterator, NextVisible, GetPropertyValueAsString, DumpGameObject… |
+| private static string GetPropertyValueAsString(SerializedProperty prop) | 17 | 18 | 38 | ToString, GetType |
+
+
+## Namespace `DebugSystem.Tests`
+
+### class GlobalLogicTests
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `GlobalLogicTests.cs` · líneas 10-642 (633)
+- Usa: `DebugLogger`, `GameManager`, `EventBus`, `GameLoopReferee`, `BulletPool`, `Bullet`, `LocalNetworkMock`, `PlayerModel`, `PlayerView`, `PlayerController`
+
+**Campos:**
+
+- private DebugLogger **logger**
+- private GameManager **gameManager**
+- private GameObject **testHarness**
+- private GameObject **poolManagerGo**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public IEnumerator SetUp() | 2 | 26 | 43 | ClearAllEvents, DestroyImmediate, AddComponent, Awake, ClearLogs, SetActive, SetParent, FindProperty… |
+| public IEnumerator TearDown() | 2 | 4 | 9 | DestroyImmediate |
+| private void AssertLogExists(string eventKey) | 1 | 2 | 5 | Exists, IsTrue |
+| private void AssertLogExistsWithMessage(string eventKey, string partialMsg) | 2 | 2 | 5 | Exists, Contains, IsTrue |
+| public IEnumerator Test_System_Events() | 1 | 25 | 31 | TriggerGameStarted, TriggerGameClosed, TriggerSceneLoaded, TriggerSceneLoadError, TriggerGameMode, TriggerRegion, TriggerTargetFrameRate, TriggerVSync… |
+| public IEnumerator Test_Auth_Events() | 1 | 11 | 17 | TriggerNameEntered, TriggerNameEmptyOrInvalid, TriggerLocalIDAssigned, TriggerExternalAuthStarted, TriggerExternalAuthError, AssertLogExists |
+| public IEnumerator Test_Lobby_Events() | 1 | 19 | 25 | TriggerRoomCreated, TriggerRoomCreateError, TriggerRoomListReceived, TriggerRoomJoin, TriggerRoomJoinError, TriggerPlayerEntered, TriggerPlayerLeft, TriggerRoomPropUpdated… |
+| public IEnumerator Test_Matchmaking_Events() | 1 | 13 | 19 | TriggerMatchmakingSearching, TriggerMatchmakingCancelled, TriggerMatchFound, TriggerMatchmakingTimeout, TriggerEnteringMatch, TriggerMatchmakingError, AssertLogExists |
+| public IEnumerator Test_Network_Events() | 1 | 45 | 51 | TriggerConnectingMaster, TriggerConnectedMaster, TriggerConnectMasterError, TriggerPing, TriggerPingHigh, TriggerNetworkRegion, TriggerNetworkRegionAutoChanged, TriggerDisconnected… |
+| public IEnumerator Test_StateMachine_Events() | 1 | 11 | 17 | TriggerStateCurrent, TriggerStateInvalid, TriggerStateTransition, TriggerStateBlocked, TriggerStateSynced, AssertLogExists |
+| public IEnumerator Test_PlayerSync_Events() | 1 | 23 | 29 | TriggerPlayerReady, TriggerPlayerReadyTimeout, TriggerPlayerSceneLoaded, TriggerSpawnRequestedLocal, TriggerSpawnConfirmed, TriggerSpawnDenied, TriggerInputReceived, TriggerInputDiscarded… |
+| public IEnumerator Test_Weapon_Events() | 1 | 25 | 31 | TriggerWeaponEquipped, TriggerShootStart, TriggerShootNoAmmo, TriggerShootConfirmed, TriggerProjectileCreated, TriggerImpactClient, TriggerImpactDiscarded, TriggerImpactHost… |
+| public IEnumerator Test_Damage_Events() | 1 | 17 | 23 | TriggerDamageApplied, TriggerHealthSynced, TriggerPlayerDeath, TriggerPlayerDeathCause, TriggerRespawnRequested, TriggerRespawnExecuted, TriggerInvulnerability, TriggerHealReceived… |
+| public IEnumerator Test_WinLose_Events() | 1 | 19 | 25 | TriggerWinCondition, TriggerTeamWin, TriggerPlayerWin, TriggerMatchFinished, TriggerTotalTime, TriggerFinalScore, TriggerMVP, TriggerMatchRestartReq… |
+| public IEnumerator Test_Notifications_Events() | 1 | 15 | 21 | TriggerGlobalNotif, TriggerPersonalNotif, TriggerAlertShow, TriggerAlertHide, TriggerStreakAnnounce, TriggerTimeWarning, TriggerObjectiveUpdate, AssertLogExists |
+| public IEnumerator Test_Animations_Events() | 1 | 19 | 25 | TriggerAnimTrigger, TriggerAnimDamage, TriggerAnimDeath, TriggerAnimReload, TriggerVFX, TriggerSFX, TriggerCameraShake, TriggerDamageUI… |
+| public IEnumerator Test_Desync_Events() | 1 | 13 | 19 | TriggerSnapshotSent, TriggerSnapshotReceived, TriggerHashDesync, TriggerDiffActor, TriggerCorrectionActor, TriggerForceResync, AssertLogExists |
+| public IEnumerator Test_Fallbacks_Events() | 1 | 15 | 21 | TriggerReconnectStart, TriggerReconnectSuccess, TriggerReconnectDenied, TriggerStateRecoverHost, TriggerHostLost, TriggerNewHost, TriggerMatchAborted, AssertLogExists |
+| public IEnumerator Test_DebugTools_Events() | 1 | 17 | 23 | TriggerTestSeed, TriggerTestBotCreate, TriggerTestBotRemove, TriggerTestCmd, TriggerTestOverrideState, TriggerTestSimNet, TriggerTestPerf, TriggerTestDumpRoom… |
+| public IEnumerator Test_LocalNetworkMock() | 1 | 18 | 28 | ClearRoom, IsFalse, RoomExists, CreateRoom, IsTrue, JoinRoom, GetRoomData, IsNotNull… |
+| public IEnumerator Test_FullMatch_Simulation() | 1 | 29 | 48 | TriggerNameEntered, ClearRoom, CreateRoom, IsTrue, JoinRoom, GetRoomData, TriggerStateTransition, TriggerSpawnConfirmed… |
+| public IEnumerator Test_Player_Instantiation_On_Playing_State() | 3 | 25 | 40 | AddComponent, TriggerStateTransition, Find, IsNotNull, DestroyImmediate |
 
 
 ## Namespace `Fusion`
@@ -8576,7 +9541,7 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Implementa: `IDragHandler`, `IEndDragHandler`, `IBeginDragHandler`
 - Tipos anidados: `DragMode`
-- Usa: `FusionStatsPanelHeader`, `FusionStatsConfig`, `CanvasAnchor`, `DragMode`, `FusionStatistics`, `FusionStatisticsHelper`
+- Usa: `FusionStatsPanelHeader`, `FusionStatsConfig`, `CanvasAnchor`, `DragMode`, `FusionStatistics`, `FusionStatisticsHelper`, `InputButton`
 
 **Campos:**
 
@@ -9643,10 +10608,10 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `Projectile.cs` · líneas 14-38 (25)
+- Archivo: `Projectile.cs` · líneas 15-98 (84)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Atributos: `[RequireComponent]`
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`
 
 **Campos:**
 
@@ -9658,26 +10623,55 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - public PlayerRef **Owner** `{ get; set; }`
 - public TickTimer **Life** `{ get; set; }`
+- public int **Damage** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void Spawned() | 1 | 0 | 4 |  |
-| public override void FixedUpdateNetwork() | 1 | 0 | 5 |  |
+| public override void Spawned() | 2 | 4 | 9 | Info, CreateFromSeconds |
+| public override void FixedUpdateNetwork() | 12 | 38 | 57 | Expired, Info, Despawn, OverlapSphere, GetPhysicsScene, GetComponentInParent, TakeDamage, Error |
 
 
 ## Namespace `Redes.Controllers`
 
-### class GameFlowController
+### class EntityDisplayManager
 
-> MVC - CONTROLLER for the overall flow (boot -> lobby -> playing -> finished). It is the glue: it owns the GameStateModel, listens to the INetworkService (host events) and updates the LobbyView / HUD accordingly. Depends on the INetworkService ABSTRACTION (DIP), referenced via the concrete HostNetworkService for the inspector. Logic is implemented by another agent; here is the wiring + structure.
+> MVC - CONTROLLER that manages a pool of 20 health sliders on the Canvas, converting the world positions of active entities (players/enemies) to screen space. Scalable and decoupled from concrete player implementations via IEntityDisplayModel.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `GameFlowController.cs` · líneas 19-83 (65)
+- Archivo: `EntityDisplayManager.cs` · líneas 15-126 (112)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `GamePhase`
+- Usa: `EntityDisplayView`, `NetworkPlayer`, `IEntityDisplayModel`, `RedesLog`
+
+**Campos:**
+
+- private EntityDisplayView **_viewPrefab** `[Header][SerializeField]`
+- private RectTransform **_canvasParent** `[SerializeField]`
+- private int **_poolSize** (inicializado) `[Header][SerializeField]`
+- private Vector3 **_worldOffset** (inicializado) `[SerializeField]`
+- private List<EntityDisplayView> **_pool** (inicializado)
+- private Camera **_mainCamera**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 2 | 5 | InitializePool |
+| private void InitializePool() | 4 | 7 | 11 | Instantiate, SetVisible, Add |
+| private void LateUpdate() | 13 | 45 | 80 | FindObjectsByType, Add, WorldToScreenPoint, SetVisible, SetPosition, SetHealth, SetNickname, Info… |
+
+
+### class GameFlowController
+
+> CALLSTACK COMPLETO: ── INICIO (ambos jugadores) ────────────────────────────────────────── Awake() → crea GameStateModel, subscribe OnPhaseChanged OnEnable()→ subscribe eventos de red + listeners de botones Start() → HandlePhaseChanged(Booting) → LobbyView visible, botones visibles ── USER 1: CREAR SALA ─────────────────────────────────────────────── CreateRoom() → LobbyView.HideButtons(), ShowStatus("Creando sala...") → NetworkService.StartAsHost() [async, espera Photon] → _model.SetPhase(SearchingSession) ¿StartGame OK? SÍ → OnHostStarted → HandleHostStarted → WaitingForPlayers → "Esperando..." NO → OnConnectionFailed → HandleConnectionFailed → Booting → ShowError OnPlayerCountChanged(1) → LobbyView.ShowPlayerCount(1) OnEnoughPlayersToStart → HandleEnoughPlayers → Playing → HUD visible ── USER 2: UNIRSE ─────────────────────────────────────────────────── JoinRoom() → LobbyView.HideButtons(), ShowStatus("Uniéndose...") → NetworkService.StartAsClient() [async, busca sesion "RedesRoom"] → _model.SetPhase(SearchingSession) ¿StartGame OK? SÍ → OnHostStarted → HandleHostStarted → WaitingForPlayers NO → OnConnectionFailed → vuelve a Booting + error OnEnoughPlayersToStart → Playing
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `GameFlowController.cs` · líneas 38-393 (356)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `MatchResult`
 
 **Campos:**
 
@@ -9686,6 +10680,8 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - private GameHudView **_gameHudView** `[SerializeField]`
 - private MatchController **_matchController** `[Header][SerializeField]`
 - private GameStateModel **_model**
+- private static string **_pendingStatusMessage** (inicializado)
+- public static string **LocalUsername** (inicializado)
 
 **Propiedades:**
 
@@ -9695,13 +10691,22 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 1 | 1 | 5 |  |
-| private void OnEnable() | 1 | 0 | 8 |  |
-| private void OnDisable() | 1 | 0 | 4 |  |
-| public void StartHost() | 1 | 2 | 6 | StartAsHost, SetPhase |
-| private void HandleHostStarted() | 1 | 1 | 5 | SetPhase |
-| private void HandlePlayerCountChanged(int count) | 1 | 1 | 5 | SetPlayers |
-| private void HandleEnoughPlayers() | 1 | 1 | 5 | SetPhase |
+| private void Awake() | 1 | 4 | 7 | Info |
+| private void Start() | 8 | 17 | 32 | Info, LogReferenceStatus, SetPhase, HandlePhaseChanged, IsNullOrEmpty, ShowStatus, StartLobbyWatch |
+| private void OnEnable() | 6 | 27 | 43 | Info, Error, AddListener |
+| private void OnDisable() | 5 | 15 | 21 | RemoveListener |
+| private void HandleReturnToLobbyClicked() | 1 | 2 | 5 | Trace, TriggerReturnToLobby |
+| public void TriggerReturnToLobby() | 4 | 16 | 27 | Trace, Shutdown, FindFirstObjectByType, HideResult, Error, SetPhase, LoadScene, GetActiveScene |
+| public void CreateRoom() | 8 | 21 | 26 | Info, Error, IsNullOrWhiteSpace, Trim, ShowStatus, ShowButtons, HideButtons, StartAsHost… |
+| public void JoinRoom(string sessionName) | 8 | 20 | 25 | Info, Error, IsNullOrWhiteSpace, Trim, ShowStatus, HideButtons, StartAsClient, SetPhase |
+| private void HandlePhaseChanged(GamePhase phase) | 16 | 41 | 37 | Info, SetVisible, ShowButtons, HideButtons, ShowStatus |
+| private void HandleHostStarted() | 1 | 3 | 6 | Info, SetPhase |
+| private void HandlePlayerCountChanged(int count) | 2 | 5 | 7 | Info, SetPlayers, ShowPlayerCount |
+| private void HandleEnoughPlayers() | 3 | 7 | 8 | Info, SetPhase, SetVisible |
+| private void HandleRoomListUpdated(System.Collections.Generic.List&lt;Fusion.SessionInfo&gt; sessions) | 5 | 5 | 13 | Info, PopulateRooms, ShowStatus |
+| private void HandleConnectionFailed(string reason) | 4 | 15 | 25 | Error, SetPhase, SetVisible, ShowButtons, Contains, ShowStatus |
+| private void HandleMatchFinished(MatchResult result) | 1 | 3 | 6 | Info, SetPhase |
+| private void LogReferenceStatus() | 10 | 14 | 19 | Info |
 
 
 ### class MatchController
@@ -9710,22 +10715,36 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `MatchController.cs` · líneas 16-44 (29)
+- Archivo: `MatchController.cs` · líneas 16-162 (147)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `ResultView`, `MatchResult`
+- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`
+
+**Eventos:**
+
+- public event System.Action<MatchResult> **OnMatchFinished**
+- public event System.Action **OnLobbyClicked**
 
 **Campos:**
 
 - private ResultView **_resultView** `[Header][SerializeField]`
+- private Gameplay.MatchNetworkController **_matchNetworkController** `[Header][SerializeField]`
+
+**Propiedades:**
+
+- private Gameplay.MatchNetworkController **ActiveNetworkController** `{ get; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void OnEnable() | 1 | 0 | 4 |  |
-| private void OnDisable() | 1 | 0 | 4 |  |
-| public void NotifyResult(MatchResult result) | 1 | 1 | 4 | ShowResult |
-| private void HandleResultNotified(MatchResult result) | 1 | 0 | 4 |  |
+| private void OnEnable() | 2 | 5 | 9 |  |
+| private void OnDisable() | 2 | 5 | 9 |  |
+| private void HandleLobbyClicked() | 3 | 12 | 23 | Trace, NotifyReturnToLobby, Warn, Error, StartCoroutine, DelayLobbyExitCoroutine |
+| private System.Collections.IEnumerator DelayLobbyExitCoroutine() | 1 | 4 | 7 | Trace |
+| private void HandleRetryClicked() | 4 | 19 | 30 | Info, SetRetryButtonInteractable, ShowRematchStatus, SetLocalPlayerReady, Error |
+| public void UpdateRematchStatus(string text) | 3 | 13 | 22 | Info, ShowRematchStatus, Warn, Error |
+| public void NotifyResult(MatchResult result) | 2 | 3 | 7 | ShowResult |
+| private void HandleResultNotified(MatchResult result) | 1 | 1 | 4 |  |
 
 - `NotifyResult`: Entry point called per-client with this client's outcome. Shows the view (which also fires the Action + the required logs).
 
@@ -9735,9 +10754,9 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerController.cs` · líneas 18-34 (17)
+- Archivo: `PlayerController.cs` · líneas 19-75 (57)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`
+- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`
 
 **Campos:**
 
@@ -9749,9 +10768,33 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void Bind(NetworkPlayer player) | 1 | 2 | 6 |  |
+| public void Bind(NetworkPlayer player) | 5 | 18 | 20 | ShowHealth, ShowAmmo, SetHealth, SetAmmo |
+| private void Update() | 14 | 16 | 25 | ShowState, ShowReloadProgress |
 
 - `Bind`: Called by the local NetworkPlayer when it spawns.
+
+### class TerrainController
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `TerrainController.cs` · líneas 7-26 (20)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Atributos: `[RequireComponent]`, `[RequireComponent]`
+- Usa: `TerrainModel`, `TerrainView`
+
+**Campos:**
+
+- private TerrainModel **_model**
+- private TerrainView **_view**
+- private Texture2D **_terrainTexture** `[SerializeField]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 2 | 5 | GetComponent |
+| private void Start() | 1 | 1 | 4 | Initialize |
+
 
 ## Namespace `Redes.Core`
 
@@ -9773,6 +10816,33 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - public const int **DEFAULT_BULLET_DAMAGE** (inicializado)
 - public const int **DEFAULT_MAGAZINE_SIZE** (inicializado)
 - public const float **DEFAULT_RELOAD_TIME** (inicializado)
+
+### class GameEventBus
+
+> GLOBAL EVENT BUS Desacopla la lógica de red de las respuestas visuales/auditivas, permitiendo que cualquier sistema (como la UI, Audio o el GameManager) se entere de eventos clave sin necesidad de referencias cruzadas directas.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `GameEventBus.cs` · líneas 13-65 (53)
+- Hereda de: `ScriptableObject` (profundidad 0)
+- Atributos: `[CreateAssetMenu]`
+
+**Eventos:**
+
+- public event Action<PlayerRef> **OnPlayerShooting**
+- public event Action<PlayerRef> **OnPlayerReloadStarted**
+- public event Action<PlayerRef, int, PlayerRef> **OnPlayerTookDamage**
+- public event Action<PlayerRef, PlayerRef> **OnPlayerDied**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void TriggerPlayerShooting(PlayerRef player) | 1 | 1 | 4 |  |
+| public void TriggerPlayerReloadStarted(PlayerRef player) | 1 | 1 | 4 |  |
+| public void TriggerPlayerTookDamage(PlayerRef victim, int newHealth, PlayerRef attacker) | 1 | 1 | 4 |  |
+| public void TriggerPlayerDied(PlayerRef victim, PlayerRef attacker) | 1 | 1 | 4 |  |
+
 
 ### enum GamePhase
 
@@ -9808,7 +10878,7 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesLog.cs` · líneas 16-41 (26)
+- Archivo: `RedesLog.cs` · líneas 16-54 (39)
 
 **Campos:**
 
@@ -9824,12 +10894,39 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void Info(string flag, string message) | 1 | 1 | 4 | Log |
-| public static void Warn(string flag, string message) | 1 | 1 | 4 | LogWarning |
-| public static void Error(string flag, string message) | 1 | 1 | 4 | LogError |
+| public static void Info(string flag, string message) | 1 | 0 | 4 |  |
+| public static void Warn(string flag, string message) | 1 | 0 | 4 |  |
+| public static void Error(string flag, string message) | 1 | 0 | 4 |  |
+| public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info") | 1 | 0 | 12 |  |
 
 
 ## Namespace `Redes.EditorTools`
+
+### static class RedesBuildAll
+
+> Invocado desde línea de comandos por BuildAndTest.bat Hace en un solo proceso de Unity: 1. Crea/regenera la escena RedesGame 2. Crea los prefabs Player y Bullet 3. Enlaza todas las referencias 4. Agrega RedesGame a BuildSettings 5. Compila y construye el juego para Windows x64
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `RedesBuildAll.cs` · líneas 17-102 (86)
+- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`
+
+**Campos:**
+
+- private const string **ScenePath** (inicializado)
+- private const string **BuildPath** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void FullBuild() | 1 | 11 | 20 | Log, CreateScene, CreatePrefabs, LinkAll, EnsureRedesSceneIsFirst, DoBuild |
+| public static void FullBuildCLI() | 2 | 8 | 14 | FullBuild, LogError, Exit |
+| private static void EnsureRedesSceneIsFirst() | 1 | 1 | 6 | Log |
+| private static void DoBuild() | 3 | 7 | 18 | GetDirectoryName, Exists, CreateDirectory, BuildPlayer, Log, LogError |
+| public static void Corregir() | 1 | 7 | 14 | Log, CreateScene, CreatePrefabs, LinkAll |
+
+- `EnsureRedesSceneIsFirst`: Asegura que RedesGame sea la ÚNICA escena del build dedicado de Redes, cargada en índice 0. No toca el orden del proyecto principal.
 
 ### static class RedesPrefabCreator
 
@@ -9837,24 +10934,27 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesPrefabCreator.cs` · líneas 17-112 (96)
-- Usa: `AssetDatabase`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `Projectile`
+- Archivo: `RedesPrefabCreator.cs` · líneas 18-237 (220)
+- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `Projectile`, `EntityDisplayView`
 
 **Campos:**
 
 - private const string **PrefabFolder** (inicializado)
 - public const string **PlayerPrefabPath** (inicializado)
 - public const string **BulletPrefabPath** (inicializado)
+- public const string **EntityDisplayViewPrefabPath** (inicializado)
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CreatePrefabs() | 1 | 6 | 11 | EnsureFolder, CreatePlayerPrefab, CreateBulletPrefab, SaveAssets, Refresh, Log |
-| private static void CreatePlayerPrefab() | 1 | 22 | 38 | CreatePrimitive, AddComponent, SetParent, AssignRefs, GetComponent, SaveAsPrefabAsset, DestroyImmediate |
-| private static void CreateBulletPrefab() | 1 | 12 | 19 | CreatePrimitive, GetComponent, AddComponent, SaveAsPrefabAsset, DestroyImmediate |
+| public static void CreatePrefabs() | 1 | 8 | 14 | EnsureFolder, CreateGameEventBusAsset, CreateBulletPrefab, CreatePlayerPrefab, CreateEntityDisplayViewPrefab, SaveAssets, Refresh, Log |
+| private static void CreateGameEventBusAsset() | 2 | 8 | 12 | LoadAssetAtPath, EnsureFolder, CreateInstance, CreateAsset, Log |
+| private static void CreatePlayerPrefab() | 2 | 39 | 60 | AddComponent, LoadAssetAtPath, InstantiatePrefab, SetParent, CreatePrimitive, DestroyImmediate, GetComponent, AssignRefs… |
+| private static void CreateBulletPrefab() | 2 | 25 | 36 | LoadAssetAtPath, InstantiatePrefab, SetParent, CreatePrimitive, DestroyImmediate, GetComponent, AddComponent, SaveAsPrefabAsset |
+| private static void CreateEntityDisplayViewPrefab() | 1 | 55 | 67 | GetComponent, SetParent, AddComponent, GetBuiltinResource, AssignRefs, SaveAsPrefabAsset, DestroyImmediate |
 | private static void AssignRefs(Object target, params (string field, Object value)[] pairs) | 2 | 8 | 11 | FindProperty, LogWarning, GetType, ApplyModifiedPropertiesWithoutUndo |
-| private static void EnsureFolder() | 2 | 2 | 5 | IsValidFolder, CreateFolder |
+| private static void EnsureFolder(string parent, string child) | 2 | 2 | 5 | IsValidFolder, CreateFolder |
 
 
 ### static class RedesSceneCreator
@@ -9863,8 +10963,8 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesSceneCreator.cs` · líneas 23-177 (155)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `AssetDatabase`, `LobbyView`, `GameHudView`, `ResultView`
+- Archivo: `RedesSceneCreator.cs` · líneas 23-442 (420)
+- Usa: `TerrainController`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `LobbyView`, `GameHudView`, `ResultView`, `RedesPrefabCreator`, `RedesSceneLinker`
 
 **Campos:**
 
@@ -9875,12 +10975,15 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CreateScene() | 1 | 33 | 55 | EnsureFolder, NewScene, AddComponent, Euler, CreatePrimitive, BuildUI, MarkSceneDirty, SaveScene… |
-| private static void BuildUI() | 1 | 23 | 36 | AddComponent, GetLegacyFont, NewUiPanel, NewText, NewButton, SetActive |
+| public static void CreateScene() | 6 | 90 | 126 | EnsureFolder, NewScene, AddComponent, Euler, LoadAssetAtPath, FindProperty, ApplyModifiedPropertiesWithoutUndo, SetParent… |
+| private static void BuildUI() | 1 | 114 | 134 | AddComponent, GetLegacyFont, NewUiPanel, NewText, NewInputField, SetParent, GetComponent, NewButton… |
+| private static Slider NewSlider(string name, Transform parent, Vector2 anchoredPos, Vector2 size) | 1 | 33 | 34 | SetParent, GetComponent, AddComponent |
 | private static GameObject NewUiPanel(string name, Transform parent) | 1 | 8 | 9 | SetParent |
-| private static Text NewText(string name, Transform parent, Font font, string content, Vector2 anchoredPos, int size, TextAnchor align = TextAnchor.MiddleCenter) | 1 | 12 | 16 | SetParent, AddComponent |
-| private static Button NewButton(string name, Transform parent, Font font, string label, Vector2 anchoredPos) | 1 | 10 | 13 | SetParent, AddComponent, NewText |
+| private static Text NewText(string name, Transform parent, Font font, string content, Vector2 anchoredPos, int size, TextAnchor align = TextAnchor.MiddleCenter) | 1 | 13 | 17 | SetParent, AddComponent |
+| private static Button NewButton(string name, Transform parent, Font font, string label, Vector2 anchoredPos) | 1 | 20 | 27 | SetParent, AddComponent, NewText |
+| private static InputField NewInputField(string name, Transform parent, Font font, string placeholderTxt, Vector2 anchoredPos) | 1 | 21 | 28 | SetParent, AddComponent |
 | private static Font GetLegacyFont() | 2 | 4 | 7 | GetBuiltinResource |
+| public static void Corregir() | 1 | 5 | 16 | Log, CreatePrefabs, CreateScene, LinkAll |
 | private static void EnsureFolder(string parent, string child) | 2 | 2 | 5 | IsValidFolder, CreateFolder |
 
 
@@ -9890,8 +10993,8 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesSceneLinker.cs` · líneas 23-137 (115)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `PlayerShooting`, `EditorUtility`
+- Archivo: `RedesSceneLinker.cs` · líneas 23-190 (168)
+- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationController`, `EditorUtility`
 
 **Campos:**
 
@@ -9901,7 +11004,7 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void LinkAll() | 5 | 31 | 63 | OpenScene, Find, LoadAssetAtPath, GetComponent, Assign, ChildText, ChildComp, ChildGO… |
+| public static void LinkAll() | 9 | 57 | 116 | OpenScene, Find, LoadAssetAtPath, GetComponent, Assign, ChildText, ChildComp, ChildGO… |
 | private static T Find&lt;T&gt;() | 3 | 6 | 10 | FindObjectsByType, LogWarning |
 | private static Text ChildText(Component root, string name) | 1 | 1 | 1 | ChildComp |
 | private static TC ChildComp&lt;TC&gt;(Component root, string name) | 4 | 7 | 8 | GetComponentsInChildren, LogWarning |
@@ -9909,32 +11012,66 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 | private static void Assign(Object target, params (string field, Object value)[] pairs) | 3 | 13 | 13 | FindProperty, LogWarning, GetType, ApplyModifiedPropertiesWithoutUndo, SetDirty |
 
 
-## Namespace `Redes.Gameplay`
-
-### class MatchNetworkController
-
-> NETWORKED win/lose broadcaster. Lives on a scene "GameManager" Network Object. When a player dies (PlayerHealth), the host calls AnnounceResult, which sends an RPC to ALL clients. Each client compares the loser to its own local player and shows WIN or LOSE through its MatchController -> ResultView ("con action"). This guarantees every user is notified and there is NO desfase (single RPC, resolved locally and identically). Logic is implemented by another agent.
+### static class TriggerCorregir
 
 - Accesibilidad: `public`
-- Modificadores: `public`
-- Archivo: `MatchNetworkController.cs` · líneas 18-44 (27)
-- Hereda de: `NetworkBehaviour` (profundidad 0)
-- Atributos: `[RequireComponent]`
-- Usa: `MatchController`, `RedesLog`
-
-**Campos:**
-
-- private MatchController **_matchController** `[Header][SerializeField]`
+- Modificadores: `public`, `static`
+- Archivo: `TriggerCorregir.cs` · líneas 6-13 (8)
+- Usa: `RedesSceneCreator`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void AnnounceResult(PlayerRef loser, PlayerRef winner) | 1 | 1 | 5 | Info |
-| public void RpcAnnounceResult(PlayerRef loser, PlayerRef winner) | 1 | 0 | 10 |  |
+| public static void Run() | 1 | 1 | 5 | Corregir |
 
-- `AnnounceResult`: Called on the host when the match is decided.
-- `RpcAnnounceResult`: RPC delivered to EVERY client. Each one resolves win/lose locally.
+
+## Namespace `Redes.Gameplay`
+
+### class MatchNetworkController
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `MatchNetworkController.cs` · líneas 8-292 (285)
+- Hereda de: `NetworkBehaviour` (profundidad 0)
+- Atributos: `[RequireComponent]`
+- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `GameFlowController`
+
+**Campos:**
+
+- private MatchController **_matchController** `[Header][SerializeField]`
+- private GameEventBus **_eventBus** `[Header][SerializeField]`
+- private AudioClip **_winSound** `[Header][SerializeField]`
+- private AudioClip **_loseSound** `[SerializeField]`
+- private AudioClip **_bgmSound** `[SerializeField]`
+- private AudioSource **_audioSource**
+
+**Propiedades:**
+
+- public int **ReadyForRematchCount** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 3 | 6 | AddComponent |
+| public override void Spawned() | 5 | 9 | 15 | Trace, Play |
+| public override void Despawned(NetworkRunner runner, bool hasState) | 2 | 5 | 9 | Trace |
+| private void OnDestroy() | 2 | 5 | 9 | Trace |
+| private void HandlePlayerDied(PlayerRef victim, PlayerRef attacker) | 4 | 4 | 8 | Trace, AnnounceResult |
+| public void AnnounceResult(PlayerRef loser, PlayerRef winner) | 1 | 2 | 5 | Info, RpcAnnounceResult |
+| public void RpcAnnounceResult(PlayerRef loser, PlayerRef winner) | 10 | 11 | 20 | FindFirstObjectByType, PlayClipAtPoint, NotifyResult |
+| public void SetLocalPlayerReady() | 2 | 9 | 15 | Info, RpcSetReadyForRematch, Error |
+| public void RpcSetReadyForRematch(RpcInfo info = default) | 4 | 17 | 28 | Trace, ToString, RpcBroadcastOpponentReady, StartCoroutine, RematchSequenceCoroutine, Error |
+| private void RpcBroadcastOpponentReady(PlayerRef readyPlayer) | 3 | 8 | 15 | Trace, ToString, FindFirstObjectByType, UpdateRematchStatus |
+| public void NotifyReturnToLobby() | 2 | 6 | 12 | Trace, ToString, RpcNotifyLobbyClicked, Error |
+| private void RpcNotifyLobbyClicked(RpcInfo info = default) | 3 | 9 | 19 | Trace, ToString, FindFirstObjectByType, UpdateRematchStatus, StartCoroutine, AutoReturnToLobbyCoroutine |
+| private System.Collections.IEnumerator AutoReturnToLobbyCoroutine() | 2 | 8 | 12 | Trace, ToString, FindFirstObjectByType, TriggerReturnToLobby |
+| private System.Collections.IEnumerator RematchSequenceCoroutine() | 4 | 29 | 46 | Info, RpcBroadcastRematchStatus, Error, GetActiveScene, LoadScene, FromIndex |
+| private void RpcBroadcastRematchStatus(string text) | 3 | 14 | 24 | Info, FindFirstObjectByType, UpdateRematchStatus, Warn, Error |
+
+- `SetLocalPlayerReady`: Called by MatchController when the local player clicks "Retry". Sends to the server that we are ready.
+- `NotifyReturnToLobby`: Called by MatchController when this local player wants to return to the lobby. Broadcasts to the other client so they know they are disconnected/returning to lobby.
 
 ## Namespace `Redes.Models`
 
@@ -9965,6 +11102,21 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 | public void SetPlayers(int count) | 1 | 2 | 5 |  |
 
 
+### interface IEntityDisplayModel
+
+> Model interface representing an entity whose status/health can be displayed in the UI overlay. Scalable to support other properties in the future (e.g. ammo, name, energy).
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `IEntityDisplayModel.cs` · líneas 9-15 (7)
+
+**Propiedades:**
+
+- public Vector3 **WorldPosition** `{ get; }`
+- public float **HealthProgress** `{ get; }`
+- public string **Nickname** `{ get; }`
+- public bool **IsActive** `{ get; }`
+
 ### class PlayerModel
 
 > MVC - MODEL for a single player's gameplay data (health + ammo). Pure data; the networked source of truth lives in the NetworkBehaviours, this is the local view-model the HUD binds to.
@@ -9993,32 +11145,53 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 | public void SetAmmo(int value) | 1 | 2 | 5 |  |
 
 
+### class TerrainModel
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `TerrainModel.cs` · líneas 5-12 (8)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private Vector3 **_size** (inicializado) `[SerializeField]`
+- private Color **_terrainColor** (inicializado) `[SerializeField]`
+
+**Propiedades:**
+
+- public Vector3 **Size** `=> expr`
+- public Color **TerrainColor** `=> expr`
+
 ## Namespace `Redes.Network`
 
 ### class HostNetworkService
 
-> CORE OF THE HOST ARCHITECTURE. Responsibilities (kept narrow on purpose - SOLID/SRP): 1. Own the Photon Fusion NetworkRunner. 2. Start it in GameMode.Host. 3. Receive every INetworkRunnerCallbacks event. 4. Translate raw Fusion events into clean C# events (Observer pattern) that the MVC controllers subscribe to. It does NOT decide create-vs-join (delegated to ISessionListHandler) and it does NOT spawn players (delegated to PlayerSpawner). This keeps each class single-purpose. NOTE: method BODIES are intentionally left as stubs (logs + TODO). Another agent implements the actual Fusion logic.
+> ARQUITECTURA DE DOS RUNNERS (robusta). PROBLEMA QUE RESUELVE: En Fusion 2 un NetworkRunner que hizo Shutdown queda MUERTO y no se puede reutilizar. El log mostraba que el runner se apagaba solo tras conectarse al lobby (DisconnectByClientLogic), y cualquier StartGame posterior tiraba excepcion vacia -> ni Host ni Unirse funcionaban. SOLUCION: - _lobbyRunner: runner DEDICADO solo a escuchar la lista de salas. Si se cae mientras seguimos en el menu, se RECREA automaticamente. - _gameRunner: runner FRESCO creado en el momento de Crear/Unirse. Nunca se reutiliza uno muerto. CALLSTACK USER 1 (HOST): Awake → StartLobbyWatch() → CreateRunner("LobbyRunner") → JoinSessionLobby OnSessionListUpdated(lobbyRunner) → 0 salas → OnRoomAvailabilityChanged(false) [click CREAR SALA] StartAsHost() → ShutdownLobbyRunner() (intencional) → CreateRunner("GameRunner") → StartGame(Host) → OK → OnHostStarted → WaitingForPlayers OnPlayerJoined(gameRunner, p1=host) → SpawnPlayer → count=1 OnPlayerJoined(gameRunner, p2) → SpawnPlayer → count=2 → OnEnoughPlayersToStart CALLSTACK USER 2 (CLIENT): Awake → StartLobbyWatch() → JoinSessionLobby OnSessionListUpdated → 0 salas → Join DESHABILITADO ...User1 crea sala... OnSessionListUpdated → "RedesRoom" open → OnRoomAvailabilityChanged(true) → Join HABILITADO [click UNIRSE] StartAsClient() → ShutdownLobbyRunner() → CreateRunner("GameRunner") → StartGame(Client) → OK → OnHostStarted → OnConnectedToServer → ambos players spawneados por el host
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `HostNetworkService.cs` · líneas 27-169 (143)
+- Archivo: `HostNetworkService.cs` · líneas 49-478 (430)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Implementa: `INetworkService`, `INetworkRunnerCallbacks`
-- Atributos: `[RequireComponent]`
-- Usa: `PlayerSpawner`, `ISessionListHandler`, `RoomSessionHandler`, `RedesLog`, `GameConstants`
+- Usa: `PlayerSpawner`, `RedesLog`, `NetworkSceneManagerDefault`, `GameConstants`, `ResultView`, `GameFlowController`, `NetworkInputData`, `InputButton`
 
 **Eventos:**
 
 - public event Action **OnHostStarted**
 - public event Action<int> **OnPlayerCountChanged**
 - public event Action **OnEnoughPlayersToStart**
+- public event Action<string> **OnConnectionFailed**
+- public event Action<List<SessionInfo>> **OnRoomListUpdated**
 
 **Campos:**
 
-- private PlayerSpawner **_playerSpawner** `[Header][Tooltip][SerializeField]`
-- private NetworkObject **_playerPrefab** `[Header][Tooltip][SerializeField]`
-- private NetworkRunner **_runner**
-- private ISessionListHandler **_sessionHandler**
+- private PlayerSpawner **_playerSpawner** `[Header][SerializeField]`
+- private NetworkObject **_playerPrefab** `[Header][SerializeField]`
+- private NetworkRunner **_lobbyRunner**
+- private NetworkRunner **_gameRunner**
+- private bool **_isInSession** (inicializado)
+- private bool **_lobbyShutdownIntentional** (inicializado)
+- private bool **_lastRoomAvailable** (inicializado)
 
 **Propiedades:**
 
@@ -10026,63 +11199,83 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - public int **ConnectedPlayers** `{ get; set; }`
 - public NetworkRunner **Runner** `=> expr`
 - public NetworkObject **PlayerPrefab** `=> expr`
+- public static HostNetworkService **Instance** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 1 | 2 | 7 | GetComponent |
-| public void StartAsHost() | 1 | 1 | 15 | Info |
-| public void Shutdown() | 1 | 2 | 6 | Info |
-| private void RefreshPlayerCount() | 2 | 5 | 12 | Info |
-| public void OnSessionListUpdated(NetworkRunner runner, List&lt;SessionInfo&gt; sessionList) | 2 | 3 | 10 | Info |
-| public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) | 2 | 4 | 12 | Info, RefreshPlayerCount |
-| public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) | 1 | 2 | 6 | Info, RefreshPlayerCount |
-| public void OnConnectedToServer(NetworkRunner runner) | 1 | 1 | 4 | Info |
-| public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) | 1 | 1 | 4 | Warn |
-| public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) | 1 | 2 | 5 | Warn |
-| public void OnInput(NetworkRunner runner, NetworkInput input) | 1 | 0 | 1 |  |
-| public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) | 1 | 0 | 1 |  |
-| public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) | 1 | 0 | 1 |  |
-| public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) | 1 | 0 | 1 |  |
-| public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) | 1 | 0 | 1 |  |
-| public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary&lt;string, object&gt; data) | 1 | 0 | 1 |  |
-| public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) | 1 | 0 | 1 |  |
-| public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment&lt;byte&gt; data) | 1 | 0 | 1 |  |
-| public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) | 1 | 0 | 1 |  |
-| public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) | 1 | 0 | 1 |  |
-| public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) | 1 | 0 | 1 |  |
-| public void OnSceneLoadDone(NetworkRunner runner) | 1 | 0 | 1 |  |
-| public void OnSceneLoadStart(NetworkRunner runner) | 1 | 0 | 1 |  |
+| private void Awake() | 3 | 9 | 14 | Destroy, DontDestroyOnLoad, Info, StartLobbyWatch |
+| private NetworkRunner CreateRunner(string goName, bool provideInput) | 1 | 7 | 10 | SetParent, AddComponent, AddCallbacks, Info |
+| private void DestroyRunnerGameObject(NetworkRunner runner) | 3 | 5 | 6 | Destroy |
+| public async void StartLobbyWatch() | 6 | 21 | 32 | Info, CreateRunner, JoinSessionLobby, Warn, Error |
+| private void ShutdownLobbyRunner() | 2 | 8 | 10 | Info, Shutdown, DestroyRunnerGameObject |
+| public async void StartAsHost(string sessionName) | 6 | 28 | 45 | Info, Warn, ShutdownLobbyRunner, CreateRunner, GetActiveScene, AddComponent, StartGame, FromIndex… |
+| public async void StartAsClient(string sessionName) | 6 | 28 | 44 | Info, Warn, ShutdownLobbyRunner, CreateRunner, GetActiveScene, AddComponent, StartGame, FromIndex… |
+| private void FailAndReturnToLobby(string reason) | 2 | 10 | 15 | Shutdown, DestroyRunnerGameObject, Invoke, nameof |
+| public void Shutdown() | 4 | 18 | 14 | Info, Shutdown, DestroyRunnerGameObject, ClearSpawned |
+| public void OnSessionListUpdated(NetworkRunner runner, List&lt;SessionInfo&gt; sessionList) | 2 | 5 | 8 | Info |
+| public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) | 6 | 17 | 27 | Info, Error, IsPlayerSpawned, SpawnPlayer, RefreshPlayerCount |
+| public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) | 7 | 14 | 20 | Info, DespawnPlayer, RefreshPlayerCount, FindFirstObjectByType, TriggerReturnToLobby |
+| public void OnConnectedToServer(NetworkRunner runner) | 2 | 3 | 5 | Info |
+| public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) | 2 | 4 | 6 | Warn, FailAndReturnToLobby |
+| public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) | 8 | 21 | 31 | Warn, Info, Invoke, nameof, Trace, FindFirstObjectByType, TriggerReturnToLobby |
+| public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) | 2 | 4 | 6 | Error, FailAndReturnToLobby |
+| public void OnInput(NetworkRunner runner, NetworkInput input) | 5 | 14 | 20 | GetAxisRaw, ScreenPointToRay, Raycast, GetPoint, Set, GetButton, GetKey |
+| private void RefreshPlayerCount() | 3 | 7 | 12 | Count, Info |
+| public void OnInputMissing(NetworkRunner r, PlayerRef p, NetworkInput i) | 1 | 0 | 1 |  |
+| public void OnConnectRequest(NetworkRunner r, NetworkRunnerCallbackArgs.ConnectRequest req, byte[] t) | 1 | 0 | 1 |  |
+| public void OnUserSimulationMessage(NetworkRunner r, SimulationMessagePtr m) | 1 | 0 | 1 |  |
+| public void OnCustomAuthenticationResponse(NetworkRunner r, Dictionary&lt;string, object&gt; d) | 1 | 0 | 1 |  |
+| public void OnHostMigration(NetworkRunner r, HostMigrationToken t) | 1 | 0 | 1 |  |
+| public void OnReliableDataReceived(NetworkRunner r, PlayerRef p, ReliableKey k, ArraySegment&lt;byte&gt; d) | 1 | 0 | 1 |  |
+| public void OnReliableDataProgress(NetworkRunner r, PlayerRef p, ReliableKey k, float prog) | 1 | 0 | 1 |  |
+| public void OnObjectExitAOI(NetworkRunner r, NetworkObject o, PlayerRef p) | 1 | 0 | 1 |  |
+| public void OnObjectEnterAOI(NetworkRunner r, NetworkObject o, PlayerRef p) | 1 | 0 | 1 |  |
+| public void OnSceneLoadDone(NetworkRunner runner) | 6 | 17 | 27 | Count, Info, DespawnAllActivePlayers, SpawnPlayer |
+| public void OnSceneLoadStart(NetworkRunner r) | 1 | 0 | 1 |  |
 
-- `StartAsHost`: Entry point of the Host flow. Required log: "Inicio el juego".
+- `FailAndReturnToLobby`: Limpia el runner de juego fallido y vuelve a mirar el lobby.
 
 ### interface INetworkService
 
-> SOLID (Dependency Inversion): controllers/views talk to the network through this abstraction instead of the concrete HostNetworkService / Photon Fusion types. Makes the flow testable and swappable.
+> Abstracción del servicio de red para desacoplar a los controladores de la librería subyacente (Fusion 2).
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `INetworkService.cs` · líneas 11-28 (18)
+- Archivo: `INetworkService.cs` · líneas 11-26 (16)
 
 **Eventos:**
 
 - public event Action **OnHostStarted**
 - public event Action<int> **OnPlayerCountChanged**
 - public event Action **OnEnoughPlayersToStart**
+- public event Action<string> **OnConnectionFailed**
+- public event Action<List<SessionInfo>> **OnRoomListUpdated**
 
 **Propiedades:**
 
-- public bool **IsRunning** `{ get; }`  — True once a NetworkRunner has been started as Host.
-- public int **ConnectedPlayers** `{ get; }`  — How many players are currently connected to the session.
+- public bool **IsRunning** `{ get; }`
+- public int **ConnectedPlayers** `{ get; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void StartAsHost() | 1 | 0 | 1 |  |
+| public void StartAsHost(string sessionName) | 1 | 0 | 1 |  |
+| public void StartAsClient(string sessionName) | 1 | 0 | 1 |  |
 | public void Shutdown() | 1 | 0 | 1 |  |
 
+
+### enum InputButton
+
+- Accesibilidad: `public`
+- Archivo: `NetworkInputData.cs` · líneas 13-17 (5)
+
+**Valores del enum:**
+
+- `Fire` = 0
+- `Reload` = 1
 
 ### interface ISessionListHandler
 
@@ -10100,13 +11293,26 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - `HandleSessionList`: Called whenever Fusion reports the available sessions. Decides whether to CREATE a room (0 sessions) or JOIN one (X sessions).
 
+### struct NetworkInputData
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `NetworkInputData.cs` · líneas 6-11 (6)
+- Implementa: `INetworkInput`
+
+**Campos:**
+
+- public Vector2 **Move**
+- public Vector2 **AimDirection**
+- public NetworkButtons **Buttons**
+
 ### class PlayerSpawner
 
 > SOLID/SRP: only responsibility = spawn / despawn the player NetworkObject. In a HOST architecture, ONLY the server (host) is allowed to Spawn. Keeps a map of PlayerRef -> spawned NetworkObject so it can despawn on leave. Logic is implemented by another agent.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerSpawner.cs` · líneas 15-47 (33)
+- Archivo: `PlayerSpawner.cs` · líneas 15-101 (87)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `RedesLog`
 
@@ -10119,32 +11325,36 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab) | 1 | 1 | 8 | Info |
-| public void DespawnPlayer(NetworkRunner runner, PlayerRef player) | 1 | 1 | 6 | Info |
-| private Vector3 GetSpawnPosition(PlayerRef player) | 1 | 1 | 5 |  |
+| public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab) | 2 | 11 | 17 | Info, GetSpawnPosition, Spawn, Error |
+| public void DespawnPlayer(NetworkRunner runner, PlayerRef player) | 2 | 9 | 15 | Info, TryGetValue, Despawn, Remove, Warn |
+| public bool IsPlayerSpawned(PlayerRef player) | 2 | 1 | 4 | ContainsKey |
+| public void DespawnAllActivePlayers(NetworkRunner runner) | 4 | 9 | 14 | Info, Despawn, Clear |
+| public void ClearSpawned() | 1 | 1 | 4 | Clear |
+| private Vector3 GetSpawnPosition(PlayerRef player) | 3 | 8 | 16 |  |
 
 - `SpawnPlayer`: Spawns one player. Called by HostNetworkService.OnPlayerJoined (server only).
 
 ### class RoomSessionHandler
 
-> SOLID/SRP: the ONLY thing this class decides is "create a new room" vs. "join an existing one", based on the session list. It is a plain C# class (not a MonoBehaviour) so it is trivially testable. It holds a reference to HostNetworkService to ask it to start a session. Logic is implemented by another agent; only the required logs + structure are present here.
+> SOLID/SRP: the ONLY thing this class decides is "create a new room" vs. "join an existing one", based on the session list.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `RoomSessionHandler.cs` · líneas 17-59 (43)
+- Archivo: `RoomSessionHandler.cs` · líneas 11-74 (64)
 - Implementa: `ISessionListHandler`
-- Usa: `HostNetworkService`, `RedesLog`, `GameConstants`
+- Usa: `HostNetworkService`, `NetworkSceneManagerDefault`, `RedesLog`, `GameConstants`
 
 **Campos:**
 
 - private readonly HostNetworkService **_service**
+- private bool **_starting** (inicializado)
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | public (ctor) RoomSessionHandler(HostNetworkService service) | 1 | 1 | 4 |  |
-| public void HandleSessionList(NetworkRunner runner, List&lt;SessionInfo&gt; sessionList) | 3 | 8 | 33 | Info |
+| public async void HandleSessionList(NetworkRunner runner, List&lt;SessionInfo&gt; sessionList) | 5 | 21 | 53 | GetComponent, AddComponent, GetActiveScene, FromIndex, Info, StartGame, Error |
 
 
 ## Namespace `Redes.Player`
@@ -10155,30 +11365,39 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `AmmoSystem.cs` · líneas 15-54 (40)
+- Archivo: `AmmoSystem.cs` · líneas 15-97 (83)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Usa: `GameConstants`, `RedesLog`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`
+
+**Eventos:**
+
+- public event System.Action<int> **OnAmmoChanged**
 
 **Campos:**
 
 - private int **_magazineSize** (inicializado) `[Header][SerializeField]`
 - private float **_reloadTime** (inicializado) `[SerializeField]`
+- private GameEventBus **_eventBus** `[SerializeField]`
+- private PlayerEventBus **_playerEventBus**
 
 **Propiedades:**
 
 - public int **CurrentAmmo** `{ get; set; }`
 - public NetworkBool **IsReloading** `{ get; set; }`
 - public TickTimer **ReloadTimer** `{ get; set; }`
+- public float **ReloadProgress** `{ get; }`
 - public bool **HasAmmo** `=> expr`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void Spawned() | 1 | 0 | 4 |  |
-| public bool TryConsume() | 1 | 1 | 5 |  |
-| public void StartReload() | 1 | 1 | 6 | Info |
-| public override void FixedUpdateNetwork() | 1 | 0 | 5 |  |
+| private void OnAmmoChangedRender() | 1 | 1 | 4 |  |
+| public override void Spawned() | 2 | 4 | 8 |  |
+| public bool TryConsume() | 3 | 4 | 6 |  |
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| public void StartReload() | 6 | 11 | 15 | Info, TriggerPlayerReloadStarted, TriggerReload, CreateFromSeconds |
+| public override void FixedUpdateNetwork() | 4 | 5 | 9 | Expired, Info |
 
 - `TryConsume`: Consume one round. Returns false if empty.
 - `StartReload`: Begin reloading.
@@ -10189,10 +11408,11 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `NetworkPlayer.cs` · líneas 18-52 (35)
+- Archivo: `NetworkPlayer.cs` · líneas 20-161 (142)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
+- Implementa: `IEntityDisplayModel`
 - Atributos: `[RequireComponent]`
-- Usa: `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `RedesLog`
+- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
 
 **Campos:**
 
@@ -10201,45 +11421,91 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 - private PlayerHealth **_health** `[SerializeField]`
 - private AmmoSystem **_ammo** `[SerializeField]`
 - private PlayerAnimationController **_animation** `[SerializeField]`
+- private PlayerEventBus **_eventBus** `[SerializeField]`
 
 **Propiedades:**
 
+- public Vector3 **WorldPosition** `=> expr`
+- public float **HealthProgress** `=> expr`
+- public bool **IsActive** `=> expr`
+- private NetworkString<_16> **NetNickname** `{ get; set; }`
+- public string **Nickname** `=> expr`
 - public PlayerMovement **Movement** `=> expr`
 - public PlayerShooting **Shooting** `=> expr`
 - public PlayerHealth **Health** `=> expr`
 - public AmmoSystem **Ammo** `=> expr`
 - public PlayerAnimationController **Animation** `=> expr`
+- public PlayerEventBus **EventBus** `=> expr`
+- private NetworkButtons **_previousButtons** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void Spawned() | 2 | 3 | 12 | Info |
-| public override void FixedUpdateNetwork() | 1 | 0 | 5 |  |
+| private void OnNicknameChangedRender() | 1 | 1 | 4 | Info |
+| private void RpcSetNickname(string nickname) | 7 | 19 | 28 | GetPlayerObject, Info |
+| public override void Spawned() | 8 | 28 | 44 | Info, TriggerSpawned, RpcSetNickname, GetComponentInChildren, FindFirstObjectByType, Euler |
+| public override void Render() | 3 | 4 | 8 | Euler |
+| public override void FixedUpdateNetwork() | 7 | 13 | 25 | GetInput, GetPressed, IsSet, Fire, StartReload |
 
 
 ### class PlayerAnimationController
 
-> ANIMATION CONTROL (assignment requirement). Reads the networked player state (moving, shooting, dead) and drives the Animator parameters. Because it reads networked values, the animation is consistent on every client. Use Render() (visual, runs every frame) rather than the simulation tick for smooth animation. Logic is implemented by another agent.
-
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerAnimationController.cs` · líneas 16-33 (18)
+- Archivo: `PlayerAnimationController.cs` · líneas 8-89 (82)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Atributos: `[RequireComponent]`
+- Usa: `PlayerMovement`, `PlayerHealth`, `PlayerShooting`, `VFXManager`
 
 **Campos:**
 
-- private Animator **_animator** `[Header][SerializeField]`
-- public const string **PARAM_SPEED** (inicializado)
-- public const string **PARAM_SHOOT** (inicializado)
-- public const string **PARAM_DEAD** (inicializado)
+- private Transform **_visuals** `[Header][SerializeField]`
+- private AudioClip **_shootSound** `[SerializeField]`
+- private PlayerMovement **_movement**
+- private PlayerHealth **_health**
+- private PlayerShooting **_shooting**
+- private int **_lastShootCount**
+- private float **_bobTimer**
+- private Vector3 **_originalScale** (inicializado)
+- private float **_recoilTimer**
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void Render() | 1 | 0 | 5 |  |
+| private void Awake() | 1 | 3 | 6 | GetComponent |
+| public override void Render() | 12 | 34 | 58 | Lerp, Euler, Sin, PlayClipAtPoint, Find, PlayMuzzleFlash |
+
+
+### class PlayerEventBus
+
+> Mini Event Bus for a single player instance to decouple player logic from views. Each player prefab has this script, which acts as a dispatcher for player-specific actions.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerEventBus.cs` · líneas 10-60 (51)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Atributos: `[DisallowMultipleComponent]`
+
+**Campos:**
+
+- public Action<int, GameObject> **OnTookDamage**
+- public Action **OnShoot**
+- public Action<Vector3> **OnMove**
+- public Action **OnSpawned**
+- public Action **OnDied**
+- public Action **OnReload**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void TriggerTookDamage(int attackerId, GameObject bulletObj) | 1 | 1 | 4 |  |
+| public void TriggerShoot() | 1 | 1 | 4 |  |
+| public void TriggerMove(Vector3 velocity) | 1 | 1 | 4 |  |
+| public void TriggerSpawned() | 1 | 1 | 4 |  |
+| public void TriggerDied() | 1 | 1 | 4 |  |
+| public void TriggerReload() | 1 | 1 | 4 |  |
 
 
 ### class PlayerHealth
@@ -10248,15 +11514,22 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerHealth.cs` · líneas 18-53 (36)
+- Archivo: `PlayerHealth.cs` · líneas 19-151 (133)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Implementa: `IDamageable`
-- Usa: `GameConstants`, `MatchNetworkController`, `RedesLog`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`
+
+**Eventos:**
+
+- public event System.Action<int> **OnHealthChanged**
 
 **Campos:**
 
 - private int **_maxHealth** (inicializado) `[Header][SerializeField]`
-- private MatchNetworkController **_matchNetwork** `[Header][SerializeField]`
+- private GameEventBus **_eventBus** `[Header][SerializeField]`
+- private AudioClip **_hitSound** `[SerializeField]`
+- private PlayerEventBus **_playerEventBus**
+- private int **_lastHealth** (inicializado)
 
 **Propiedades:**
 
@@ -10267,8 +11540,10 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void Spawned() | 1 | 0 | 4 |  |
-| public void TakeDamage(int amount, PlayerRef attacker) | 2 | 4 | 17 | Info |
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| private void OnHealthChangedRender() | 5 | 16 | 26 | Info, PlayClipAtPoint, PlayHit, Error |
+| public override void Spawned() | 3 | 11 | 18 | Info, Error |
+| public void TakeDamage(int amount, PlayerRef attacker) | 9 | 36 | 62 | Info, TriggerTookDamage, Max, TriggerPlayerTookDamage, Error, TriggerDied, TriggerPlayerDied |
 
 
 ### class PlayerMovement
@@ -10277,20 +11552,26 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerMovement.cs` · líneas 12-26 (15)
+- Archivo: `PlayerMovement.cs` · líneas 13-60 (48)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`
 
 **Campos:**
 
 - private float **_moveSpeed** (inicializado) `[Header][SerializeField]`
 - private Rigidbody **_body** `[SerializeField]`
+- private PlayerEventBus **_eventBus**
+
+**Propiedades:**
+
+- public Vector3 **NetworkVelocity** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public override void FixedUpdateNetwork() | 1 | 0 | 6 |  |
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| public override void FixedUpdateNetwork() | 8 | 19 | 31 | GetInput, TriggerMove, LookRotation |
 
 
 ### class PlayerShooting
@@ -10299,26 +11580,59 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerShooting.cs` · líneas 13-31 (19)
+- Archivo: `PlayerShooting.cs` · líneas 13-65 (53)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Usa: `AmmoSystem`, `GameConstants`, `RedesLog`
+- Usa: `AmmoSystem`, `GameEventBus`, `GameConstants`, `PlayerEventBus`, `Projectile`, `RedesLog`
 
 **Campos:**
 
 - private Transform **_muzzle** `[Header][SerializeField]`
 - private NetworkObject **_projectilePrefab** `[SerializeField]`
 - private AmmoSystem **_ammo** `[SerializeField]`
+- private GameEventBus **_eventBus** `[SerializeField]`
 - private int **_damage** (inicializado) `[Header][SerializeField]`
+- private PlayerEventBus **_playerEventBus**
+
+**Propiedades:**
+
+- public int **ShootCount** `{ get; set; }`
+- public TickTimer **ShootTimer** `{ get; set; }`
+- public bool **IsShooting** `=> expr`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void Fire() | 1 | 1 | 7 | Info |
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| public void Fire() | 9 | 21 | 28 | TryConsume, Spawn, GetComponent, CreateFromSeconds, TriggerPlayerShooting, TriggerShoot, Info |
 
 - `Fire`: Called from the player's input tick when the fire button is pressed.
 
 ## Namespace `Redes.Views`
+
+### class EntityDisplayView
+
+> MVC - VIEW representing a single UI overlay element (health bar slider). Scalable to display additional information in the future (e.g. name, ammunition).
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `EntityDisplayView.cs` · líneas 10-51 (42)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private Slider **_healthSlider** `[SerializeField]`
+- private Text **_nicknameText** `[SerializeField]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void SetHealth(float progress) | 2 | 3 | 7 | Clamp01 |
+| public void SetNickname(string nickname) | 2 | 3 | 7 |  |
+| public void SetPosition(Vector2 screenPos) | 2 | 6 | 12 |  |
+| public void SetVisible(bool visible) | 2 | 3 | 7 | SetActive |
+
 
 ### class GameHudView
 
@@ -10326,13 +11640,15 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `GameHudView.cs` · líneas 11-31 (21)
+- Archivo: `GameHudView.cs` · líneas 11-49 (39)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 
 **Campos:**
 
 - private Text **_healthText** `[Header][SerializeField]`
 - private Text **_ammoText** `[SerializeField]`
+- private Text **_stateText** `[SerializeField]`
+- private Slider **_reloadSlider** `[SerializeField]`
 
 **Métodos:**
 
@@ -10340,37 +11656,60 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 |-------|:-----:|:----:|:-----:|----------|
 | public void ShowHealth(int health) | 2 | 2 | 4 |  |
 | public void ShowAmmo(int ammo, int magazineSize) | 2 | 2 | 4 |  |
+| public void ShowState(string state) | 2 | 2 | 4 |  |
+| public void ShowReloadProgress(float progress) | 2 | 4 | 10 | Clamp01, SetActive |
 | public void SetVisible(bool visible) | 1 | 1 | 4 | SetActive |
 
 
 ### class LobbyView
 
-> MVC - VIEW for the lobby / connection state. ONLY draws UI. Uses legacy UnityEngine.UI.Text (requirement). The Link tool assigns these Text references from the scene Canvas.
+> MVC - VIEW para el lobby. Muestra dos botones explícitos: "Crear Sala" y "Unirse a Sala". El GameFlowController decide cuál acción ejecutar.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `LobbyView.cs` · líneas 12-40 (29)
+- Archivo: `LobbyView.cs` · líneas 12-183 (172)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `RedesLog`
 
 **Campos:**
 
 - private Text **_statusText** `[Header][SerializeField]`
 - private Text **_playerCountText** `[SerializeField]`
+- private InputField **_usernameInput** `[Header][SerializeField]`
+- private Transform **_roomListContainer** `[SerializeField]`
+- private GameObject **_roomButtonPrefab** `[SerializeField]`
 - private Button **_hostButton** `[Header][SerializeField]`
+- private Button **_joinButton** `[SerializeField]`
+- private Button **_ramboButton** `[Header][SerializeField]`
+- private Button **_t600Button** `[SerializeField]`
+- private Button **_lionButton** `[SerializeField]`
 
 **Propiedades:**
 
-- public Button **HostButton** `=> expr`  — Exposed so GameFlowController can wire the click. Logic by other agent.
+- public Button **HostButton** `=> expr`
+- public Button **JoinButton** `=> expr`
+- public string **Username** `=> expr`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void ShowStatus(string message) | 2 | 2 | 5 |  |
+| private void Start() | 4 | 6 | 6 | AddListener, SetUsername |
+| private void SetUsername(string name) | 2 | 3 | 7 |  |
+| public void ShowStatus(string message) | 2 | 2 | 4 |  |
 | public void ShowPlayerCount(int current) | 2 | 2 | 5 |  |
-| public void SetVisible(bool visible) | 1 | 1 | 4 | SetActive |
+| public void ShowButtons() | 1 | 3 | 7 | SetButtons, SetJoinButtonEnabled, ShowStatus |
+| public void SetJoinButtonEnabled(bool enabled) | 3 | 4 | 7 | Info |
+| public void HideButtons() | 2 | 3 | 5 | SetButtons, SetActive |
+| public void PopulateRooms(System.Collections.Generic.List&lt;Fusion.SessionInfo&gt; sessions, System.Action&lt;string&gt; onJoinClicked) | 8 | 46 | 62 | SetActive, Destroy, SetParent, AddComponent, GetBuiltinResource, SetJoinButtonEnabled, GetComponent, AddListener |
+| public void SetVisible(bool visible) | 1 | 2 | 5 | Info, SetActive |
+| public void ShowError(string message) | 1 | 4 | 8 | SetButtons, ShowStatus, Error, Invoke, nameof |
+| private void RestoreButtons() | 1 | 1 | 4 | ShowButtons |
+| private void SetButtons(bool host, bool join) | 3 | 4 | 5 | SetActive |
 
+- `ShowButtons`: Muestra solo los botones de selección (estado inicial).
+- `SetJoinButtonEnabled`: Habilita o deshabilita el botón "Unirse a Sala". Llamado por GameFlowController cuando OnRoomAvailabilityChanged llega.
+- `HideButtons`: Oculta botones mientras se conecta / espera.
 
 ### class ResultView
 
@@ -10378,26 +11717,79 @@ Tipos: 467 · Métodos: 1730 · Propiedades: 273 · Campos: 1434 · Eventos: 32
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `ResultView.cs` · líneas 15-51 (37)
+- Archivo: `ResultView.cs` · líneas 15-112 (98)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `MatchResult`, `RedesLog`
 
 **Eventos:**
 
 - public event Action<MatchResult> **OnResultNotified**
+- public event Action **OnRetryClicked**
+- public event Action **OnLobbyClicked**
 
 **Campos:**
 
 - private Text **_resultText** `[Header][SerializeField]`
 - private GameObject **_panelRoot** `[Header][SerializeField]`
+- private Button **_retryButton** `[Header][SerializeField]`
+- private Button **_lobbyButton** `[Header][SerializeField]`
+- private RawImage **_winBackground** `[Header][SerializeField]`
+- private RawImage **_loseBackground** `[SerializeField]`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void ShowResult(MatchResult result) | 6 | 13 | 20 | SetActive, Info |
+| private void Awake() | 3 | 13 | 18 | Trace, AddListener |
+| public void ShowResult(MatchResult result) | 10 | 22 | 26 | Trace, SetActive, Info |
+| public void ShowRematchStatus(string status) | 2 | 3 | 5 | Trace |
+| public void HideResult() | 5 | 10 | 9 | Trace, SetActive |
+| public void SetRetryButtonInteractable(bool interactable) | 2 | 4 | 6 | Trace |
 
 - `ShowResult`: Called by MatchController when the match ends. Shows text AND fires the Action.
+
+### class TerrainView
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `TerrainView.cs` · líneas 5-25 (21)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private Renderer **_terrainRenderer** `[SerializeField]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Initialize(Vector3 size, Color color, Texture2D texture) | 3 | 10 | 16 | Find |
+
+
+### class VFXManager
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `VFXManager.cs` · líneas 5-35 (31)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private ParticleSystem **_hitVfxPrefab** `[SerializeField]`
+- private ParticleSystem **_muzzleFlashPrefab** `[SerializeField]`
+
+**Propiedades:**
+
+- public static VFXManager **Instance** `{ get; set; }`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 2 | 3 | 5 | Destroy |
+| public void PlayHit(Vector3 position) | 2 | 4 | 8 | Instantiate, Destroy |
+| public void PlayMuzzleFlash(Transform muzzlePoint) | 2 | 4 | 8 | Instantiate, Destroy |
+
 
 ## Namespace `USP.Core`
 

@@ -26,6 +26,13 @@ namespace Redes.Player
 
         public bool IsShooting => !ShootTimer.ExpiredOrNotRunning(Runner);
 
+        private PlayerEventBus _playerEventBus;
+
+        private void Awake()
+        {
+            _playerEventBus = GetComponent<PlayerEventBus>();
+        }
+
         /// <summary>Called from the player's input tick when the fire button is pressed.</summary>
         public void Fire()
         {
@@ -51,6 +58,7 @@ namespace Redes.Player
                 ShootCount++;
                 ShootTimer = TickTimer.CreateFromSeconds(Runner, 0.2f);
                 if (_eventBus != null) _eventBus.TriggerPlayerShooting(Object.InputAuthority);
+                if (_playerEventBus != null) _playerEventBus.TriggerShoot();
                 RedesLog.Info(RedesLog.COMBAT, $"[Shooting] Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {_muzzle.position}");
             }
         }

@@ -48,16 +48,19 @@ namespace Redes.EditorTools
             light.type = LightType.Directional;
             lightGo.transform.rotation = Quaternion.Euler(50, -30, 0);
 
-            // ---- Ground (primitive plane so the top-down arena is visible) ----
-            var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            ground.name = "Ground";
-            ground.transform.localScale = new Vector3(2, 1, 2);
-            var groundRenderer = ground.GetComponent<Renderer>();
-            if (groundRenderer != null)
+            // ---- Ground (TerrainController MVC) ----
+            var ground = new GameObject("Ground");
+            var terrainController = ground.AddComponent<Redes.Controllers.TerrainController>();
+            // Since it requires TerrainModel and TerrainView, they are added automatically.
+            
+            // Try to assign the downloaded terrain texture via SerializedObject since the field is private serialized
+            var texAsset = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/Terrain.png");
+            if (texAsset != null)
             {
-                var mat = new Material(Shader.Find("Standard"));
-                mat.color = Color.black;
-                groundRenderer.sharedMaterial = mat;
+                var so = new SerializedObject(terrainController);
+                var texProp = so.FindProperty("_terrainTexture");
+                if (texProp != null) texProp.objectReferenceValue = texAsset;
+                so.ApplyModifiedPropertiesWithoutUndo();
             }
 
             // ---- Network ----
@@ -79,6 +82,64 @@ namespace Redes.EditorTools
             ctrlGo.AddComponent<MatchController>();
             ctrlGo.AddComponent<PlayerController>();
             ctrlGo.AddComponent<EntityDisplayManager>();
+            
+            // ---- VFX Manager ----
+            var vfxGo = new GameObject("VFXManager");
+            var vfxManager = vfxGo.AddComponent<VFXManager>();
+            
+            // Create Hit VFX Prefab
+            var hitGo = new GameObject("HitVFXPrefab");
+            hitGo.transform.SetParent(vfxGo.transform, false);
+            hitGo.SetActive(false); // keep it as a prefab
+            var hitPs = hitGo.AddComponent<ParticleSystem>();
+            var hitMain = hitPs.main;
+            hitMain.duration = 0.5f;
+            hitMain.loop = false;
+            hitMain.startLifetime = 0.5f;
+            hitMain.startSpeed = 5f;
+            hitMain.startSize = 0.3f;
+            hitMain.startColor = Color.red;
+            var hitEmission = hitPs.emission;
+            hitEmission.rateOverTime = 0;
+            hitEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 20) });
+            var hitShape = hitPs.shape;
+            hitShape.shapeType = ParticleSystemShapeType.Sphere;
+
+            // Create Muzzle VFX Prefab
+            var muzzleGo = new GameObject("MuzzleVFXPrefab");
+            muzzleGo.transform.SetParent(vfxGo.transform, false);
+            muzzleGo.SetActive(false);
+            var muzzlePs = muzzleGo.AddComponent<ParticleSystem>();
+            var muzzleMain = muzzlePs.main;
+            muzzleMain.duration = 0.1f;
+            muzzleMain.loop = false;
+            muzzleMain.startLifetime = 0.1f;
+            muzzleMain.startSpeed = 10f;
+            muzzleMain.startSize = 0.2f;
+            muzzleMain.startColor = Color.yellow;
+            var muzzleEmission = muzzlePs.emission;
+            muzzleEmission.rateOverTime = 0;
+            muzzleEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 10) });
+            var muzzleShape = muzzlePs.shape;
+            muzzleShape.shapeType = ParticleSystemShapeType.Cone;
+            muzzleShape.angle = 15f;
+
+            // Try to assign the particle texture
+            var partTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/Particle.png");
+            if (partTex != null)
+            {
+                var mat = new Material(Shader.Find("Particles/Standard Unlit"));
+                mat.mainTexture = partTex;
+                var hitRenderer = hitPs.GetComponent<ParticleSystemRenderer>();
+                var muzzleRenderer = muzzlePs.GetComponent<ParticleSystemRenderer>();
+                if (hitRenderer != null) hitRenderer.sharedMaterial = mat;
+                if (muzzleRenderer != null) muzzleRenderer.sharedMaterial = mat;
+            }
+
+            var soVfx = new SerializedObject(vfxManager);
+            soVfx.FindProperty("_hitVfxPrefab").objectReferenceValue = hitPs;
+            soVfx.FindProperty("_muzzleFlashPrefab").objectReferenceValue = muzzlePs;
+            soVfx.ApplyModifiedPropertiesWithoutUndo();
 
             // ---- UI (legacy Text) ----
             BuildUI();

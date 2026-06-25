@@ -1,22 +1,706 @@
 # Documentación de Assets
 
-Generado: 2026-06-19 23:35:20
+Generado: 2026-06-23 16:17:35
 
 ## Resumen
 
-- Archivos: 189
-- Carpetas: 33
-- Namespaces: 23
-- Clases: 428
-- Interfaces: 19
-- Enums: 20
-- Métodos: 1730
-- Propiedades: 273
-- Campos: 1434
-- Líneas totales: 47376 (código 35204, comentarios 3604, blancos 8568)
+- Archivos: 224
+- Carpetas: 36
+- Namespaces: 26
+- Clases: 464
+- Interfaces: 20
+- Enums: 22
+- Métodos: 2090
+- Propiedades: 309
+- Campos: 1603
+- Líneas totales: 54052 (código 40724, comentarios 3891, blancos 9437)
 
 ## Mapa de relaciones
 
+- **FusionGlobalScriptableObjectAddressAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
+- **FusionGlobalScriptableObjectResourceAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
+- **FusionCoroutine** implementa **ICoroutine**
+- **FusionCoroutine** implementa **IDisposable**
+- **FusionLogInitializer** usa **FusionUnityLogger**
+- **FusionUnityLogger** hereda de **FusionUnityLoggerBase**
+- **FusionUnityLogger** usa **Stage**
+- **JsonUtilityExtensions** usa **TypeNameWrapper**
+- **FusionMppm** usa **FusionMppmStatus**
+- **FusionMppm** usa **FusionMppmCommand**
+- **NetworkObjectBaker** usa **TransformPath**
+- **NetworkObjectBaker** usa **TransformPathCache**
+- **NetworkObjectBaker** usa **Result**
+- **NetworkObjectBaker** usa **_Indices**
+- **TransformPath** usa **_Indices**
+- **TransformPathCache** implementa **IComparer**
+- **TransformPathCache** implementa **IEqualityComparer**
+- **TransformPathCache** usa **TransformPath**
+- **NetworkPrefabSourceStatic** hereda de **NetworkAssetSourceStatic**
+- **NetworkPrefabSourceStatic** implementa **INetworkPrefabSource**
+- **NetworkPrefabSourceStaticLazy** hereda de **NetworkAssetSourceStaticLazy**
+- **NetworkPrefabSourceStaticLazy** implementa **INetworkPrefabSource**
+- **NetworkPrefabSourceResource** hereda de **NetworkAssetSourceResource**
+- **NetworkPrefabSourceResource** implementa **INetworkPrefabSource**
+- **FusionStatisticsHelper** usa **RenderSimStats**
+- **FusionStatsGraphBase** hereda de **MonoBehaviour**
+- **FusionStatsGraphBase** usa **FusionStatBuffer**
+- **FusionStatsGraphBase** usa **FusionStatistics**
+- **SceneEqualityComparer** implementa **IEqualityComparer**
+- **NetworkRunnerVisibilityExtensions** usa **IRunnerVisibilityRecognizedType**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibility**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLink**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLinksRoot**
+- **NetworkRunnerVisibilityExtensions** usa **EnableOnSingleRunner**
+- **NetworkRunnerVisibilityExtensions** usa **PreferredRunners**
+- **RunnerVisibility** usa **RunnerVisibilityLink**
+- **VfxController** hereda de **MonoBehaviour**
+- **DropdownController** hereda de **MonoBehaviour**
+- **DropdownController** usa **VfxController**
+- **DebugColisionesFull** hereda de **MonoBehaviour**
+- **CollisionDetector** hereda de **MonoBehaviour**
+- **DesactivarPorTimer** hereda de **MonoBehaviour**
+- **UnitView** hereda de **MonoBehaviour**
+- **UnitView** usa **UnitModel**
+- **UnitView** usa **IndicatorEntry**
+- **UnitView** usa **IndicatorType**
+- **UnitView** usa **UnitSpecialization**
+- **IUnitState** usa **UnitController**
+- **TriggerCorregir** usa **RedesSceneCreator**
+- **Physics2DMigrator** usa **AssetDatabase**
+- **Physics2DMigrator** usa **EditorApplication**
+- **HierarchyToClipboardMenu** usa **EditorUtility**
+- **HierarchyToClipboardMenu** usa **SerializedProperty**
+- **CreateTestSceneMenu** usa **GameManager**
+- **CreateTestSceneMenu** usa **DebugLogger**
+- **CreateTestSceneMenu** usa **GameLoopReferee**
+- **CreateTestSceneMenu** usa **BulletPool**
+- **CreateTestSceneMenu** usa **AssetDatabase**
+- **CreateTestSceneMenu** usa **Bullet**
+- **CreateTestSceneMenu** usa **PlayerModel**
+- **CreateTestSceneMenu** usa **PlayerView**
+- **CreateTestSceneMenu** usa **PlayerController**
+- **CreateTestSceneMenu** usa **Weapon**
+- **CreateTestSceneMenu** usa **SimpleEnemyAI**
+- **CreateScenesAndPrefabsMenu** usa **AssetDatabase**
+- **CreateScenesAndPrefabsMenu** usa **Bullet**
+- **CreateScenesAndPrefabsMenu** usa **PlayerModel**
+- **CreateScenesAndPrefabsMenu** usa **PlayerView**
+- **CreateScenesAndPrefabsMenu** usa **PlayerController**
+- **CreateScenesAndPrefabsMenu** usa **SimpleAnimator**
+- **CreateScenesAndPrefabsMenu** usa **FloatingHealthBar**
+- **CreateScenesAndPrefabsMenu** usa **Weapon**
+- **CreateScenesAndPrefabsMenu** usa **GameManager**
+- **CreateScenesAndPrefabsMenu** usa **DebugLogger**
+- **CreateScenesAndPrefabsMenu** usa **GameLoopReferee**
+- **CreateScenesAndPrefabsMenu** usa **BulletPool**
+- **CreateScenesAndPrefabsMenu** usa **EffectPool**
+- **CreateScenesAndPrefabsMenu** usa **ScreenManager**
+- **CreateScenesAndPrefabsMenu** usa **SerializedProperty**
+- **ComponentPropertiesCopierTestMenu** usa **ComponentPropertiesCopier**
+- **ComponentPropertiesCopier** usa **SerializedProperty**
+- **FloatingHealthBar** hereda de **MonoBehaviour**
+- **FloatingHealthBar** usa **PlayerModel**
+- **EffectPool** hereda de **MonoBehaviour**
+- **EffectPool** usa **ImpactEffect**
+- **EffectPool** usa **ProceduralAudioGenerator**
+- **LogEntry** usa **LogCategory**
+- **DebugLogger** hereda de **MonoBehaviour**
+- **DebugLogger** usa **LogEntry**
+- **DebugLogger** usa **LogCategory**
+- **DebugLogger** usa **EventBus**
+- **BulletPool** hereda de **MonoBehaviour**
+- **BulletPool** usa **Bullet**
+- **Bullet** hereda de **MonoBehaviour**
+- **Bullet** usa **EventBus**
+- **Bullet** usa **PlayerModel**
+- **Bullet** usa **EffectPool**
+- **Bullet** usa **BulletPool**
+- **IDetectable** usa **DetectableType**
+- **DetectableEntity** hereda de **MonoBehaviour**
+- **DetectableEntity** implementa **IDetectable**
+- **DetectableEntity** usa **DetectableType**
+- **SquadEventBus** usa **UnitController**
+- **WeaponControllerMVC** usa **WeaponModel**
+- **WeaponControllerMVC** usa **WeaponView**
+- **WeaponControllerMVC** usa **IWeaponInput**
+- **UnityWeaponInput** implementa **IWeaponInput**
+- **UnityCharacterInput** implementa **ICharacterInput**
+- **FusionNetworkObjectStatistics** hereda de **MonoBehaviour**
+- **FusionNetworkObjectStatistics** usa **FusionStatistics**
+- **RunnerVisibilityLinksRoot** hereda de **MonoBehaviour**
+- **RunnerVisibilityLink** hereda de **MonoBehaviour**
+- **RunnerVisibilityLink** usa **PreferredRunners**
+- **RunnerVisibilityLink** usa **ComponentType**
+- **RunnerVisibilityLink** usa **NetworkRunnerVisibilityExtensions**
+- **RunnerLagCompensationGizmos** hereda de **Behaviour**
+- **RunnerEnableVisibility** hereda de **Behaviour**
+- **RunnerEnableVisibility** implementa **INetworkRunnerCallbacks**
+- **RunnerAOIGizmos** hereda de **SimulationBehaviour**
+- **EnableOnSingleRunner** hereda de **Behaviour**
+- **EnableOnSingleRunner** usa **RunnerVisibilityLink**
+- **EnableOnSingleRunner** usa **PreferredRunners**
+- **NetworkSceneManagerDefault** hereda de **Behaviour**
+- **NetworkSceneManagerDefault** implementa **INetworkSceneManager**
+- **NetworkSceneManagerDefault** usa **FusionUnitySceneManagerUtils**
+- **NetworkSceneManagerDefault** usa **SceneEqualityComparer**
+- **NetworkSceneManagerDefault** usa **MultiPeerSceneRoot**
+- **NetworkSceneManagerDefault** usa **FusionCoroutine**
+- **NetworkSceneManagerDefault** usa **LoadingScope**
+- **MultiPeerSceneRoot** hereda de **MonoBehaviour**
+- **LoadingScope** implementa **IDisposable**
+- **LoadingScope** usa **NetworkSceneManagerDefault**
+- **NetworkObjectProviderDefault** hereda de **Behaviour**
+- **NetworkObjectProviderDefault** implementa **INetworkObjectProvider**
+- **NetworkCCData** implementa **INetworkStruct**
+- **NetworkCharacterController** hereda de **NetworkTRSP**
+- **NetworkCharacterController** implementa **INetworkTRSPTeleport**
+- **NetworkCharacterController** implementa **IBeforeAllTicks**
+- **NetworkCharacterController** implementa **IAfterAllTicks**
+- **NetworkCharacterController** implementa **IBeforeCopyPreviousState**
+- **NetworkCharacterController** usa **NetworkCCData**
+- **FusionBootstrapDebugGUI** hereda de **Behaviour**
+- **FusionBootstrapDebugGUI** usa **FusionBootstrap**
+- **FusionBootstrapDebugGUI** usa **Stage**
+- **FusionBootstrapDebugGUI** usa **FusionScalableIMGUI**
+- **FusionBootstrap** hereda de **Behaviour**
+- **FusionBootstrap** usa **FusionMppmCommand**
+- **FusionBootstrap** usa **StartCommand**
+- **FusionBootstrap** usa **StartModes**
+- **FusionBootstrap** usa **Stage**
+- **FusionBootstrap** usa **State**
+- **FusionBootstrap** usa **FusionBootstrapDebugGUI**
+- **FusionBootstrap** usa **FusionMppm**
+- **FusionBootstrap** usa **FusionMppmStatus**
+- **FusionBootstrap** usa **NetworkSceneManagerDefault**
+- **FusionBootstrap** usa **NetworkObjectProviderDefault**
+- **StartCommand** hereda de **FusionMppmCommand**
+- **FusionBasicBillboard** hereda de **Behaviour**
+- **FusionAddressablePrefabsPreloader** hereda de **MonoBehaviour**
+- **GlobalLogicTests** usa **DebugLogger**
+- **GlobalLogicTests** usa **GameManager**
+- **GlobalLogicTests** usa **EventBus**
+- **GlobalLogicTests** usa **GameLoopReferee**
+- **GlobalLogicTests** usa **BulletPool**
+- **GlobalLogicTests** usa **Bullet**
+- **GlobalLogicTests** usa **LocalNetworkMock**
+- **GlobalLogicTests** usa **PlayerModel**
+- **GlobalLogicTests** usa **PlayerView**
+- **GlobalLogicTests** usa **PlayerController**
+- **RedesSceneLinker** usa **HostNetworkService**
+- **RedesSceneLinker** usa **PlayerSpawner**
+- **RedesSceneLinker** usa **GameFlowController**
+- **RedesSceneLinker** usa **MatchController**
+- **RedesSceneLinker** usa **PlayerController**
+- **RedesSceneLinker** usa **MatchNetworkController**
+- **RedesSceneLinker** usa **LobbyView**
+- **RedesSceneLinker** usa **GameHudView**
+- **RedesSceneLinker** usa **ResultView**
+- **RedesSceneLinker** usa **AssetDatabase**
+- **RedesSceneLinker** usa **RedesPrefabCreator**
+- **RedesSceneLinker** usa **EntityDisplayManager**
+- **RedesSceneLinker** usa **EntityDisplayView**
+- **RedesSceneLinker** usa **GameEventBus**
+- **RedesSceneLinker** usa **PlayerHealth**
+- **RedesSceneLinker** usa **PlayerShooting**
+- **RedesSceneLinker** usa **AmmoSystem**
+- **RedesSceneLinker** usa **PlayerAnimationController**
+- **RedesSceneLinker** usa **EditorUtility**
+- **RedesSceneCreator** usa **TerrainController**
+- **RedesSceneCreator** usa **AssetDatabase**
+- **RedesSceneCreator** usa **HostNetworkService**
+- **RedesSceneCreator** usa **PlayerSpawner**
+- **RedesSceneCreator** usa **MatchNetworkController**
+- **RedesSceneCreator** usa **GameFlowController**
+- **RedesSceneCreator** usa **MatchController**
+- **RedesSceneCreator** usa **PlayerController**
+- **RedesSceneCreator** usa **EntityDisplayManager**
+- **RedesSceneCreator** usa **VFXManager**
+- **RedesSceneCreator** usa **LobbyView**
+- **RedesSceneCreator** usa **GameHudView**
+- **RedesSceneCreator** usa **ResultView**
+- **RedesSceneCreator** usa **RedesPrefabCreator**
+- **RedesSceneCreator** usa **RedesSceneLinker**
+- **RedesPrefabCreator** usa **AssetDatabase**
+- **RedesPrefabCreator** usa **GameEventBus**
+- **RedesPrefabCreator** usa **NetworkPlayer**
+- **RedesPrefabCreator** usa **PlayerMovement**
+- **RedesPrefabCreator** usa **PlayerShooting**
+- **RedesPrefabCreator** usa **PlayerHealth**
+- **RedesPrefabCreator** usa **AmmoSystem**
+- **RedesPrefabCreator** usa **PlayerAnimationController**
+- **RedesPrefabCreator** usa **PlayerEventBus**
+- **RedesPrefabCreator** usa **Projectile**
+- **RedesPrefabCreator** usa **EntityDisplayView**
+- **RedesBuildAll** usa **RedesSceneCreator**
+- **RedesBuildAll** usa **RedesPrefabCreator**
+- **RedesBuildAll** usa **RedesSceneLinker**
+- **RedesBuildAll** usa **EditorApplication**
+- **Projectile** hereda de **NetworkBehaviour**
+- **Projectile** usa **GameConstants**
+- **Projectile** usa **RedesLog**
+- **Projectile** usa **IDamageable**
+- **Projectile** usa **NetworkPlayer**
+- **TerrainController** hereda de **MonoBehaviour**
+- **TerrainController** usa **TerrainModel**
+- **TerrainController** usa **TerrainView**
+- **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **GameHudView**
+- **PlayerController** usa **PlayerModel**
+- **PlayerController** usa **NetworkPlayer**
+- **PlayerController** usa **GameConstants**
+- **MatchController** hereda de **MonoBehaviour**
+- **MatchController** usa **ResultView**
+- **MatchController** usa **MatchNetworkController**
+- **MatchController** usa **MatchResult**
+- **MatchController** usa **RedesLog**
+- **GameFlowController** hereda de **MonoBehaviour**
+- **GameFlowController** usa **HostNetworkService**
+- **GameFlowController** usa **LobbyView**
+- **GameFlowController** usa **GameHudView**
+- **GameFlowController** usa **MatchController**
+- **GameFlowController** usa **GameStateModel**
+- **GameFlowController** usa **INetworkService**
+- **GameFlowController** usa **RedesLog**
+- **GameFlowController** usa **GameConstants**
+- **GameFlowController** usa **GamePhase**
+- **GameFlowController** usa **ResultView**
+- **GameFlowController** usa **MatchResult**
+- **EntityDisplayManager** hereda de **MonoBehaviour**
+- **EntityDisplayManager** usa **EntityDisplayView**
+- **EntityDisplayManager** usa **NetworkPlayer**
+- **EntityDisplayManager** usa **IEntityDisplayModel**
+- **EntityDisplayManager** usa **RedesLog**
+- **UnitPathRenderer** hereda de **MonoBehaviour**
+- **UnitPathRenderer** usa **UnitController**
+- **UnitPathRenderer** usa **UnitFSM**
+- **UnitPathRenderer** usa **State**
+- **UnitModel** hereda de **MonoBehaviour**
+- **UnitModel** implementa **IHealth**
+- **UnitModel** usa **UnitTeam**
+- **UnitModel** usa **UnitSpecialization**
+- **UnitModel** usa **Destruible**
+- **UnitController** hereda de **MonoBehaviour**
+- **UnitController** implementa **IDaniable**
+- **UnitController** implementa **IDetectable**
+- **UnitController** usa **RevivalBarView**
+- **UnitController** usa **DamagedState**
+- **UnitController** usa **GEN_Inputs**
+- **UnitController** usa **SeguirFormacionState**
+- **UnitController** usa **AtacarState**
+- **UnitController** usa **PerseguirState**
+- **UnitController** usa **RevivingState**
+- **UnitController** hereda de **MonoBehaviour**
+- **UnitController** implementa **IDaniable**
+- **UnitController** implementa **IDetectable**
+- **UnitController** usa **UnitModel**
+- **UnitController** usa **UnitView**
+- **UnitController** usa **IA_P2_AgentIA**
+- **UnitController** usa **Disparador**
+- **UnitController** usa **GenericDetector**
+- **UnitController** usa **DetectableType**
+- **UnitController** usa **UnitTeam**
+- **UnitController** usa **Enemigo**
+- **UnitController** usa **EsperandoState**
+- **UnitController** usa **UnitSpecialization**
+- **UnitController** usa **SquadEventBus**
+- **UnitController** usa **AtacarState**
+- **UnitController** usa **PerseguirState**
+- **UnitController** usa **IndicatorType**
+- **UnitController** usa **IrADestinoState**
+- **UnitController** usa **IUnitState**
+- **UnitController** usa **LiderandoState**
+- **UnitController** usa **RevivingState**
+- **UnitController** usa **GlobalData**
+- **UnitController** usa **SeguirFormacionState**
+- **UnitController** usa **DamagedState**
+- **UnitCommander** hereda de **MonoBehaviour**
+- **UnitCommander** usa **GEN_Inputs**
+- **UnitCommander** usa **LeaderManager**
+- **UnitCommander** usa **UnitController**
+- **UnitCommander** usa **SeguirFormacionState**
+- **UnitCommander** usa **UnitTeam**
+- **UnitCommander** usa **IrADestinoState**
+- **UnitCommander** usa **EsperandoState**
+- **UnitCommander** usa **PerseguirState**
+- **TickManager** hereda de **MonoBehaviour**
+- **ShotSensor** hereda de **MonoBehaviour**
+- **ShotSensor** usa **UnitController**
+- **ShotSensor** usa **Bala**
+- **RevivingState** implementa **IUnitState**
+- **RevivingState** usa **UnitController**
+- **RevivingState** usa **IndicatorType**
+- **RevivingState** usa **SeguirFormacionState**
+- **RevivalSystemSetup** hereda de **MonoBehaviour**
+- **RevivalBarView** hereda de **MonoBehaviour**
+- **RevivalBarView** usa **UnitController**
+- **RehenBruto** hereda de **MonoBehaviour**
+- **RehenBruto** usa **IA_P2_AgentIA**
+- **RehenBruto** usa **GlobalData**
+- **PositionManager** hereda de **MonoBehaviour**
+- **PositionManager** usa **GlobalData**
+- **PositionManager** usa **UnitController**
+- **PositionManager** usa **UnitTeam**
+- **PositionManager** usa **EsperandoState**
+- **PositionManager** usa **SeguirFormacionState**
+- **Municion** hereda de **MonoBehaviour**
+- **Rigidbody2DMovementHandler** hereda de **MonoBehaviour**
+- **Rigidbody2DMovementHandler** implementa **IMovementHandler**
+- **Rigidbody2DMovementHandler** usa **BD_Audios**
+- **MovementProxy** usa **IMovable**
+- **ShootingProxy** usa **IAttackable**
+- **PersecucionEnemigo** hereda de **MonoBehaviour**
+- **PersecucionEnemigo** usa **Enemigo**
+- **IA_P2_BusEvent_Manager** hereda de **MonoBehaviour**
+- **IA_P2_BusEvent_Manager** usa **IA_P2_FSM**
+- **CrearYDestruir** hereda de **MonoBehaviour**
+- **AutoDestruccionSegura** hereda de **MonoBehaviour**
+- **Soldado_Anim** hereda de **MonoBehaviour**
+- **Soldado_Anim** usa **BD_Audios**
+- **CambiarOpacidad** hereda de **MonoBehaviour**
+- **WeaponView** hereda de **MonoBehaviour**
+- **WeaponView** usa **CambiarOpacidad**
+- **WeaponView** usa **Proyectil**
+- **WeaponView** usa **InformacionPersonaje**
+- **WeaponView** usa **WeaponModel**
+- **WeaponView** usa **Bala**
+- **WeaponView** usa **BD_Audios**
+- **WeaponController** hereda de **MonoBehaviour**
+- **WeaponController** usa **WeaponModel**
+- **WeaponController** usa **WeaponView**
+- **WeaponController** usa **IWeaponInput**
+- **WeaponController** usa **WeaponControllerMVC**
+- **WeaponController** usa **UnityWeaponInput**
+- **Proyectil2** hereda de **MonoBehaviour**
+- **Proyectil** hereda de **MonoBehaviour**
+- **Proyectil** usa **Manager_VFX**
+- **Proyectil** usa **IDaniable**
+- **Proyectil** usa **InformacionPersonaje**
+- **Proyectil** usa **Enemigo**
+- **Cohete** hereda de **MonoBehaviour**
+- **Cohete** usa **IDaniable**
+- **VibracionCamara** hereda de **MonoBehaviour**
+- **VibracionCamara** usa **ConfiguracionGlobal**
+- **UnitFSM** hereda de **MonoBehaviour**
+- **UnitFSM** usa **State**
+- **UnitFSM** usa **UnitController**
+- **UnitFSM** usa **TickManager**
+- **CambioDeLider** hereda de **MonoBehaviour**
+- **Weapon** hereda de **MonoBehaviour**
+- **Weapon** usa **PlayerModel**
+- **Weapon** usa **PlayerView**
+- **Weapon** usa **EventBus**
+- **Weapon** usa **Bullet**
+- **Weapon** usa **BulletPool**
+- **SimpleEnemyAI** hereda de **MonoBehaviour**
+- **SimpleEnemyAI** usa **PlayerModel**
+- **SimpleEnemyAI** usa **Weapon**
+- **SimpleEnemyAI** usa **PlayerView**
+- **SimpleEnemyAI** usa **PlayerController**
+- **SimpleEnemyAI** usa **EventBus**
+- **SimpleAnimator** hereda de **MonoBehaviour**
+- **ScreenManager** hereda de **MonoBehaviour**
+- **ScreenManager** usa **EventBus**
+- **ScreenManager** usa **LocalNetworkMock**
+- **ScreenManager** usa **RoomData**
+- **PlayerView** hereda de **MonoBehaviour**
+- **PlayerView** usa **PlayerModel**
+- **PlayerView** usa **SimpleAnimator**
+- **PlayerView** usa **EventBus**
+- **PlayerView** usa **ProceduralAudioGenerator**
+- **PlayerModel** hereda de **MonoBehaviour**
+- **PlayerModel** usa **EventBus**
+- **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **PlayerModel**
+- **PlayerController** usa **PlayerView**
+- **PlayerController** usa **Weapon**
+- **PlayerController** usa **LocalNetworkMock**
+- **PlayerController** usa **EventBus**
+- **LocalNetworkMock** usa **RoomData**
+- **ImpactEffect** hereda de **MonoBehaviour**
+- **GameManager** hereda de **MonoBehaviour**
+- **GameManager** usa **EventBus**
+- **GameManager** usa **PlayerModel**
+- **GameManager** usa **LocalNetworkMock**
+- **GameManager** usa **FloatingHealthBar**
+- **GameLoopReferee** hereda de **MonoBehaviour**
+- **GameLoopReferee** usa **PlayerModel**
+- **GameLoopReferee** usa **PlayerController**
+- **GameLoopReferee** usa **SimpleEnemyAI**
+- **GameLoopReferee** usa **GameManager**
+- **CharacterView** hereda de **MonoBehaviour**
+- **IA_P2_ST_SearchingState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_SearchingState** usa **IA_P2_FSM**
+- **IA_P2_ST_SearchingState** usa **AgentState**
+- **IA_P2_ST_SearchingState** usa **IA_P2_LineOfSight3D**
+- **IA_P2_ST_ReturningToPatrolState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_ReturningToPatrolState** usa **IA_P2_FSM**
+- **IA_P2_ST_ReturningToPatrolState** usa **AgentState**
+- **IA_P2_ST_PatrolState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_PatrolState** usa **IA_P2_FSM**
+- **IA_P2_ST_PatrolState** usa **AgentState**
+- **IA_P2_ST_ChaseState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_ChaseState** usa **IA_P2_FSM**
+- **IA_P2_ST_ChaseState** usa **AgentState**
+- **IA_P2_ST_ChaseState** usa **IA_P2_LineOfSight3D**
+- **IA_P2_PathfindingManager** usa **IA_P2_PathNode**
+- **IA_P2_PathfindingManager** usa **IA_P2_PathfindingModel**
+- **IA_P2_PathfindingManager** usa **FinalPathResult**
+- **IA_P2_PathfindingManager** usa **NodeDistance**
+- **IA_P2_PathfindingManager** usa **IA_P2_LineOfSight3D**
+- **IA_P2_PathfindingManager** usa **AStarResult**
+- **IA_P2_PathfindingManager** usa **ThetaStarResult**
+- **AStarResult** usa **IA_P2_PathNode**
+- **NodeDistance** usa **IA_P2_PathNode**
+- **IA_P2_INT_gentState** usa **IA_P2_FSM**
+- **IA_P2_FSM** hereda de **MonoBehaviour**
+- **IA_P2_FSM** usa **IA_P2_AgentIA**
+- **IA_P2_FSM** usa **AgentState**
+- **IA_P2_FSM** usa **IA_P2_INT_gentState**
+- **IA_P2_FSM** usa **IA_P2_FOV**
+- **IA_P2_FSM** usa **IA_P2_ST_PatrolState**
+- **IA_P2_FSM** usa **IA_P2_ST_ChaseState**
+- **IA_P2_FSM** usa **IA_P2_ST_SearchingState**
+- **IA_P2_FSM** usa **IA_P2_ST_ReturningToPatrolState**
+- **IA_P2_FSM** usa **IA_P2_BusEvent_Manager**
+- **IA_P2_FOV** hereda de **MonoBehaviour**
+- **IA_P2_FOV** usa **IA_P2_LineOfSight3D**
+- **IA_F_PathFinding_Theta** usa **IA_P2_LineOfSight3D**
+- **IA_F_EnemyCercanos** hereda de **MonoBehaviour**
+- **IA_F_ControllerSeguidor** hereda de **MonoBehaviour**
+- **IA_F_ControllerSeguidor** usa **IA_P2_AgentIA**
+- **IA_F_ControllerSeguidor** usa **IA_F_EnemyCercanos**
+- **IA_F_ChangeMode** hereda de **MonoBehaviour**
+- **IA_F_ChangeMode** usa **IA_P2_AgentIA**
+- **IA_F_ChangeMode** usa **IA_P2_BusEvent_Manager**
+- **CharacterControllerMVC** usa **CharacterModel**
+- **CharacterControllerMVC** usa **CharacterView**
+- **CharacterControllerMVC** usa **ICharacterInput**
+- **CharacterControllerMVC** usa **IMovementHandler**
+- **SelectedSoldierUIFeedback** hereda de **MonoBehaviour**
+- **SelectedSoldierUIFeedback** usa **UnitController**
+- **WeaponModel** hereda de **MonoBehaviour**
+- **InformacionPersonaje** hereda de **MonoBehaviour**
+- **InformacionPersonaje** implementa **IHealth**
+- **InformacionPersonaje** usa **WeaponController**
+- **InformacionPersonaje** usa **GameManager**
+- **CharacterModel** hereda de **MonoBehaviour**
+- **CharacterModel** usa **InformacionPersonaje**
+- **Tanque** hereda de **MonoBehaviour**
+- **Tanque** usa **Puntero_Tanque**
+- **Tanque** usa **Cohete**
+- **Tanque** usa **ObjetoColisionado**
+- **Puntero_Tanque** hereda de **MonoBehaviour**
+- **Puntero_Tanque** usa **Tanque**
+- **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **CharacterModel**
+- **PlayerController** usa **CharacterView**
+- **PlayerController** usa **Rigidbody2DMovementHandler**
+- **PlayerController** usa **ICharacterInput**
+- **PlayerController** usa **UnityCharacterInput**
+- **PlayerController** usa **BD_Audios**
+- **EntrarAlTanque** hereda de **MonoBehaviour**
+- **EntrarAlTanque** usa **ControladorTanque**
+- **Enemigo** hereda de **MonoBehaviour**
+- **Enemigo** usa **GameManager**
+- **ControladorTanque** hereda de **MonoBehaviour**
+- **ControladorTanque** usa **EntrarAlTanque**
+- **ControladorTanque** usa **Proyectil**
+- **ControladorTanque** usa **Bala**
+- **ControladorTanque** usa **BD_Audios**
+- **GenericDetector** hereda de **MonoBehaviour**
+- **GenericDetector** usa **DetectableType**
+- **GenericDetector** usa **IDetectable**
+- **GameManager** hereda de **MonoBehaviour**
+- **GameManager** usa **Enemigo**
+- **FormationRelocator** hereda de **MonoBehaviour**
+- **FormationRelocator** usa **GlobalData**
+- **EnemyView** hereda de **MonoBehaviour**
+- **EnemyView** usa **EnemyModel**
+- **EnemyModel** hereda de **MonoBehaviour**
+- **EnemyModel** implementa **IHealth**
+- **Disparador** hereda de **MonoBehaviour**
+- **Disparador** usa **Manager_VFX**
+- **Disparador** usa **BD_Audios**
+- **Disparador** usa **BalaPool**
+- **Disparador** usa **Bala**
+- **Destruible** hereda de **MonoBehaviour**
+- **Destruible** implementa **IDaniable**
+- **Destruible** usa **UnitController**
+- **DamagedState** implementa **IUnitState**
+- **DamagedState** usa **DamagedStateHandler**
+- **DamagedState** usa **UnitController**
+- **DamagedState** usa **IDetectable**
+- **DamagedStateHandler** hereda de **MonoBehaviour**
+- **DamagedStateHandler** usa **UnitController**
+- **CursorManager** hereda de **MonoBehaviour**
+- **CursorManager** usa **IInteractable**
+- **CursorManager** usa **IDaniable**
+- **ControlDerrota** hereda de **MonoBehaviour**
+- **ControlDerrota** usa **LeaderManager**
+- **BalaPool** hereda de **MonoBehaviour**
+- **BalaPool** usa **Bala**
+- **Bala** hereda de **MonoBehaviour**
+- **Bala** implementa **IDetectable**
+- **Bala** usa **DetectableType**
+- **Bala** usa **Proyectil**
+- **Bala** usa **CursorManager**
+- **Bala** usa **IDaniable**
+- **Bala** usa **UnitController**
+- **Bala** usa **CoroutineHelper**
+- **Bala** usa **Manager_VFX**
+- **Bala** usa **BD_Audios**
+- **Bala** usa **UnitTeam**
+- **Bala** usa **BalaPool**
+- **AmmoManager** hereda de **MonoBehaviour**
+- **AmmoManager** usa **UnitController**
+- **AmmoManager** usa **UnitModel**
+- **PlayerShooting** hereda de **NetworkBehaviour**
+- **PlayerShooting** usa **AmmoSystem**
+- **PlayerShooting** usa **GameEventBus**
+- **PlayerShooting** usa **GameConstants**
+- **PlayerShooting** usa **PlayerEventBus**
+- **PlayerShooting** usa **Projectile**
+- **PlayerShooting** usa **RedesLog**
+- **PlayerMovement** hereda de **NetworkBehaviour**
+- **PlayerMovement** usa **GameConstants**
+- **PlayerMovement** usa **PlayerEventBus**
+- **PlayerMovement** usa **NetworkInputData**
+- **PlayerHealth** hereda de **NetworkBehaviour**
+- **PlayerHealth** implementa **IDamageable**
+- **PlayerHealth** usa **GameConstants**
+- **PlayerHealth** usa **GameEventBus**
+- **PlayerHealth** usa **PlayerEventBus**
+- **PlayerHealth** usa **RedesLog**
+- **PlayerHealth** usa **VFXManager**
+- **PlayerEventBus** hereda de **MonoBehaviour**
+- **PlayerAnimationController** hereda de **NetworkBehaviour**
+- **PlayerAnimationController** usa **PlayerMovement**
+- **PlayerAnimationController** usa **PlayerHealth**
+- **PlayerAnimationController** usa **PlayerShooting**
+- **PlayerAnimationController** usa **VFXManager**
+- **NetworkPlayer** hereda de **NetworkBehaviour**
+- **NetworkPlayer** implementa **IEntityDisplayModel**
+- **NetworkPlayer** usa **GameConstants**
+- **NetworkPlayer** usa **RedesLog**
+- **NetworkPlayer** usa **PlayerMovement**
+- **NetworkPlayer** usa **PlayerShooting**
+- **NetworkPlayer** usa **PlayerHealth**
+- **NetworkPlayer** usa **AmmoSystem**
+- **NetworkPlayer** usa **PlayerAnimationController**
+- **NetworkPlayer** usa **PlayerEventBus**
+- **NetworkPlayer** usa **GameFlowController**
+- **NetworkPlayer** usa **PlayerController**
+- **NetworkPlayer** usa **NetworkInputData**
+- **NetworkPlayer** usa **InputButton**
+- **AmmoSystem** hereda de **NetworkBehaviour**
+- **AmmoSystem** usa **GameConstants**
+- **AmmoSystem** usa **GameEventBus**
+- **AmmoSystem** usa **PlayerEventBus**
+- **AmmoSystem** usa **RedesLog**
+- **VFXManager** hereda de **MonoBehaviour**
+- **TerrainView** hereda de **MonoBehaviour**
+- **ResultView** hereda de **MonoBehaviour**
+- **ResultView** usa **MatchResult**
+- **ResultView** usa **RedesLog**
+- **LobbyView** hereda de **MonoBehaviour**
+- **LobbyView** usa **GameConstants**
+- **LobbyView** usa **RedesLog**
+- **GameHudView** hereda de **MonoBehaviour**
+- **EntityDisplayView** hereda de **MonoBehaviour**
+- **TriggerEventAndDestroy** hereda de **MonoBehaviour**
+- **MenuPausa** hereda de **MonoBehaviour**
+- **MarkerAnim** hereda de **MonoBehaviour**
+- **Manager_VFX** hereda de **MonoBehaviour**
+- **MainGameController** hereda de **MonoBehaviour**
+- **MainGameController** usa **LeaderManager**
+- **MainGameController** usa **GlobalData**
+- **MainGameController** usa **UnitModel**
+- **MainGameController** usa **UnitSpecialization**
+- **MainGameController** usa **UnitFSM**
+- **LiderandoState** implementa **IUnitState**
+- **LiderandoState** usa **UnitController**
+- **LiderandoState** usa **UnitSpecialization**
+- **LiderandoState** usa **LeaderManager**
+- **LiderandoState** usa **GEN_Inputs**
+- **LiderandoState** usa **CursorManager**
+- **SeguirFormacionState** implementa **IUnitState**
+- **SeguirFormacionState** usa **UnitController**
+- **SeguirFormacionState** usa **GlobalData**
+- **SeguirFormacionState** usa **EsperandoState**
+- **SeguirFormacionState** usa **DetectableType**
+- **SeguirFormacionState** usa **Enemigo**
+- **SeguirFormacionState** usa **AtacarState**
+- **AtacarState** implementa **IUnitState**
+- **AtacarState** usa **UnitController**
+- **AtacarState** usa **IndicatorType**
+- **AtacarState** usa **UnitTeam**
+- **AtacarState** usa **SeguirFormacionState**
+- **AtacarState** usa **EsperandoState**
+- **AtacarState** usa **PerseguirState**
+- **PerseguirState** implementa **IUnitState**
+- **PerseguirState** usa **UnitController**
+- **PerseguirState** usa **IndicatorType**
+- **PerseguirState** usa **UnitTeam**
+- **PerseguirState** usa **SeguirFormacionState**
+- **PerseguirState** usa **EsperandoState**
+- **PerseguirState** usa **AtacarState**
+- **EsperandoState** implementa **IUnitState**
+- **EsperandoState** usa **UnitController**
+- **EsperandoState** usa **IndicatorType**
+- **EsperandoState** usa **SeguirFormacionState**
+- **HuirDetrasLiderState** implementa **IUnitState**
+- **HuirDetrasLiderState** usa **UnitController**
+- **HuirDetrasLiderState** usa **GlobalData**
+- **HuirDetrasLiderState** usa **SeguirFormacionState**
+- **IrADestinoState** implementa **IUnitState**
+- **IrADestinoState** usa **UnitController**
+- **IrADestinoState** usa **IndicatorType**
+- **IrADestinoState** usa **EsperandoState**
+- **LeaderManager** hereda de **MonoBehaviour**
+- **LeaderManager** usa **UnitController**
+- **LeaderManager** usa **UnitSpecialization**
+- **LeaderManager** usa **GEN_Inputs**
+- **LeaderManager** usa **GlobalData**
+- **LeaderManager** usa **MainGameController**
+- **LeaderManager** usa **SeguirFormacionState**
+- **LeaderManager** usa **LiderandoState**
+- **InteractableItem** hereda de **MonoBehaviour**
+- **InteractableItem** implementa **IInteractable**
+- **InteractableItem** usa **UnitController**
+- **InteractableItem** usa **UnitTeam**
+- **InteractableItem** usa **BD_Audios**
+- **IA_P2_PathNode** hereda de **MonoBehaviour**
+- **IA_P2_PathNode** usa **IA_P2_PathfindingModel**
+- **IA_P2_PathfindingModel** hereda de **MonoBehaviour**
+- **IA_P2_PathfindingModel** usa **IA_P2_PathNode**
+- **IA_P2_PathfindingModel** usa **IA_P2_LineOfSight3D**
+- **IA_P2_AgentIA** hereda de **MonoBehaviour**
+- **IA_P2_AgentIA** usa **UnitModel**
+- **IA_P2_AgentIA** usa **IA_P2_PathfindingModel**
+- **IA_P2_AgentIA** usa **IA_P2_PathfindingManager**
+- **IA_P2_AgentIA** usa **IA_F_PathFinding_Theta**
+- **GlobalHUD** hereda de **MonoBehaviour**
+- **GlobalHUD** usa **LeaderManager**
+- **GlobalData** usa **UnitController**
+- **GEN_Inputs** hereda de **MonoBehaviour**
+- **GEN_Inputs** usa **Destruible**
+- **FusionRunnerVisibilityControlsWindow** hereda de **EditorWindow**
+- **FusionRunnerVisibilityControlsWindow** usa **RunnerEnableVisibility**
+- **FusionRunnerVisibilityControlsWindow** usa **NetworkRunnerVisibilityExtensions**
+- **FusionRunnerVisibilityControlsWindow** usa **EditorGUIUtility**
+- **FusionRunnerVisibilityControlsWindow** usa **Labels**
+- **FusionRunnerVisibilityControlsWindow** usa **FusionEditorSkin**
+- **FusionRunnerVisibilityControlsWindow** usa **FusionStatistics**
+- **FusionRunnerVisibilityControlsWindow** usa **EditorGUI**
+- **FusionRunnerVisibilityControlsWindow** usa **DisabledGroupScope**
+- **FusionRunnerVisibilityControlsWindow** usa **Event**
+- **FusionRunnerVisibilityControlsWindow** usa **CanvasAnchor**
+- **Labels** usa **RunnerEnableVisibility**
+- **Labels** usa **NetworkRunnerVisibilityExtensions**
+- **FusionEditorSkin** hereda de **ScriptableObject**
+- **FusionEditorSkin** usa **EditorGUIUtility**
+- **FusionEditorSkin** usa **LazyAsset**
+- **FusionEditorSkin** usa **LazyGUIStyle**
 - **FusionEditorConfigImporter** hereda de **ScriptedImporter**
 - **AssetObjectEditor** hereda de **Editor**
 - **BehaviourEditor** hereda de **FusionEditor**
@@ -694,154 +1378,78 @@ Generado: 2026-06-19 23:35:20
 - **FusionStatsCanvas** usa **DragMode**
 - **FusionStatsCanvas** usa **FusionStatistics**
 - **FusionStatsCanvas** usa **FusionStatisticsHelper**
-- **InteractableItem** hereda de **MonoBehaviour**
-- **InteractableItem** implementa **IInteractable**
-- **InteractableItem** usa **UnitController**
-- **InteractableItem** usa **UnitTeam**
-- **InteractableItem** usa **BD_Audios**
-- **IA_P2_PathNode** hereda de **MonoBehaviour**
-- **IA_P2_PathNode** usa **IA_P2_PathfindingModel**
-- **IA_P2_PathfindingModel** hereda de **MonoBehaviour**
-- **IA_P2_PathfindingModel** usa **IA_P2_PathNode**
-- **IA_P2_PathfindingModel** usa **IA_P2_LineOfSight3D**
-- **IA_P2_AgentIA** hereda de **MonoBehaviour**
-- **IA_P2_AgentIA** usa **UnitModel**
-- **IA_P2_AgentIA** usa **IA_P2_PathfindingModel**
-- **IA_P2_AgentIA** usa **IA_P2_PathfindingManager**
-- **IA_P2_AgentIA** usa **IA_F_PathFinding_Theta**
-- **GlobalHUD** hereda de **MonoBehaviour**
-- **GlobalHUD** usa **LeaderManager**
-- **GlobalData** usa **UnitController**
-- **RedesSceneLinker** usa **HostNetworkService**
-- **RedesSceneLinker** usa **PlayerSpawner**
-- **RedesSceneLinker** usa **GameFlowController**
-- **RedesSceneLinker** usa **MatchController**
-- **RedesSceneLinker** usa **PlayerController**
-- **RedesSceneLinker** usa **MatchNetworkController**
-- **RedesSceneLinker** usa **LobbyView**
-- **RedesSceneLinker** usa **GameHudView**
-- **RedesSceneLinker** usa **ResultView**
-- **RedesSceneLinker** usa **AssetDatabase**
-- **RedesSceneLinker** usa **RedesPrefabCreator**
-- **RedesSceneLinker** usa **PlayerShooting**
-- **RedesSceneLinker** usa **EditorUtility**
-- **RedesSceneCreator** usa **HostNetworkService**
-- **RedesSceneCreator** usa **PlayerSpawner**
-- **RedesSceneCreator** usa **MatchNetworkController**
-- **RedesSceneCreator** usa **GameFlowController**
-- **RedesSceneCreator** usa **MatchController**
-- **RedesSceneCreator** usa **PlayerController**
-- **RedesSceneCreator** usa **AssetDatabase**
-- **RedesSceneCreator** usa **LobbyView**
-- **RedesSceneCreator** usa **GameHudView**
-- **RedesSceneCreator** usa **ResultView**
-- **RedesPrefabCreator** usa **AssetDatabase**
-- **RedesPrefabCreator** usa **NetworkPlayer**
-- **RedesPrefabCreator** usa **PlayerMovement**
-- **RedesPrefabCreator** usa **PlayerShooting**
-- **RedesPrefabCreator** usa **PlayerHealth**
-- **RedesPrefabCreator** usa **AmmoSystem**
-- **RedesPrefabCreator** usa **PlayerAnimationController**
-- **RedesPrefabCreator** usa **Projectile**
-- **Projectile** hereda de **NetworkBehaviour**
-- **Projectile** usa **GameConstants**
-- **PlayerController** hereda de **MonoBehaviour**
-- **PlayerController** usa **GameHudView**
-- **PlayerController** usa **PlayerModel**
-- **PlayerController** usa **NetworkPlayer**
-- **MatchController** hereda de **MonoBehaviour**
-- **MatchController** usa **ResultView**
-- **MatchController** usa **MatchResult**
-- **Tanque** hereda de **MonoBehaviour**
-- **Tanque** usa **Puntero_Tanque**
-- **Tanque** usa **Cohete**
-- **Tanque** usa **ObjetoColisionado**
-- **Puntero_Tanque** hereda de **MonoBehaviour**
-- **Puntero_Tanque** usa **Tanque**
-- **PlayerController** hereda de **MonoBehaviour**
-- **PlayerController** usa **CharacterModel**
-- **PlayerController** usa **CharacterView**
-- **PlayerController** usa **Rigidbody2DMovementHandler**
-- **PlayerController** usa **ICharacterInput**
-- **PlayerController** usa **UnityCharacterInput**
-- **PlayerController** usa **BD_Audios**
-- **EntrarAlTanque** hereda de **MonoBehaviour**
-- **EntrarAlTanque** usa **ControladorTanque**
-- **Enemigo** hereda de **MonoBehaviour**
-- **Enemigo** usa **GameManager**
-- **ControladorTanque** hereda de **MonoBehaviour**
-- **ControladorTanque** usa **EntrarAlTanque**
-- **ControladorTanque** usa **Proyectil**
-- **ControladorTanque** usa **Bala**
-- **ControladorTanque** usa **BD_Audios**
-- **CharacterView** hereda de **MonoBehaviour**
-- **IA_P2_ST_SearchingState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_SearchingState** usa **IA_P2_FSM**
-- **IA_P2_ST_SearchingState** usa **AgentState**
-- **IA_P2_ST_SearchingState** usa **IA_P2_LineOfSight3D**
-- **IA_P2_ST_ReturningToPatrolState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_ReturningToPatrolState** usa **IA_P2_FSM**
-- **IA_P2_ST_ReturningToPatrolState** usa **AgentState**
-- **IA_P2_ST_PatrolState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_PatrolState** usa **IA_P2_FSM**
-- **IA_P2_ST_PatrolState** usa **AgentState**
-- **IA_P2_ST_ChaseState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_ChaseState** usa **IA_P2_FSM**
-- **IA_P2_ST_ChaseState** usa **AgentState**
-- **IA_P2_ST_ChaseState** usa **IA_P2_LineOfSight3D**
-- **GEN_Inputs** hereda de **MonoBehaviour**
-- **GEN_Inputs** usa **Destruible**
-- **GenericDetector** hereda de **MonoBehaviour**
-- **GenericDetector** usa **DetectableType**
-- **GenericDetector** usa **IDetectable**
-- **GameManager** hereda de **MonoBehaviour**
-- **GameManager** usa **Enemigo**
-- **FormationRelocator** hereda de **MonoBehaviour**
-- **FormationRelocator** usa **GlobalData**
-- **EnemyView** hereda de **MonoBehaviour**
-- **EnemyView** usa **EnemyModel**
-- **EnemyModel** hereda de **MonoBehaviour**
-- **EnemyModel** implementa **IHealth**
-- **Disparador** hereda de **MonoBehaviour**
-- **Disparador** usa **Manager_VFX**
-- **Disparador** usa **BD_Audios**
-- **Disparador** usa **BalaPool**
-- **Disparador** usa **Bala**
-- **Destruible** hereda de **MonoBehaviour**
-- **Destruible** implementa **IDaniable**
-- **Destruible** usa **UnitController**
-- **DamagedState** implementa **IUnitState**
-- **DamagedState** usa **DamagedStateHandler**
-- **DamagedState** usa **UnitController**
-- **DamagedState** usa **IDetectable**
-- **DamagedStateHandler** hereda de **MonoBehaviour**
-- **DamagedStateHandler** usa **UnitController**
+- **FusionStatsCanvas** usa **InputButton**
+- **FusionStatistics** hereda de **SimulationBehaviour**
+- **FusionStatistics** implementa **ISpawned**
+- **FusionStatistics** usa **FusionStatsGraphBase**
+- **FusionStatistics** usa **FusionNetworkObjectStatsGraphCombine**
+- **FusionStatistics** usa **FusionStatsPanelHeader**
+- **FusionStatistics** usa **FusionStatsConfig**
+- **FusionStatistics** usa **FusionStatsCanvas**
+- **FusionStatistics** usa **FusionNetworkObjectStatistics**
+- **FusionStatistics** usa **RenderSimStats**
+- **FusionStatistics** usa **CanvasAnchor**
+- **FusionStatistics** usa **FusionStatisticsStatCustomConfig**
+- **FusionStatistics** usa **FusionBasicBillboard**
+- **FusionStatistics** usa **FusionStatsWorldAnchor**
+- **FusionStatisticsStatCustomConfig** usa **RenderSimStats**
+- **FusionNetworkObjectStatsGraphCombine** hereda de **MonoBehaviour**
+- **FusionNetworkObjectStatsGraphCombine** usa **NetworkObjectStat**
+- **FusionNetworkObjectStatsGraphCombine** usa **FusionNetworkObjectStatsGraph**
+- **FusionNetworkObjectStatsGraphCombine** usa **FusionStatistics**
+- **FusionNetworkObjectStatsGraphCombine** usa **FusionNetworkObjectStatistics**
+- **FusionNetworkObjectStatsGraph** hereda de **FusionStatsGraphBase**
+- **FusionNetworkObjectStatsGraph** usa **NetworkObjectStat**
+- **FusionNetworkObjectStatsGraph** usa **FusionNetworkObjectStatsGraphCombine**
+- **Torreta** hereda de **MonoBehaviour**
+- **Torreta** usa **GameManager**
+- **SistemaPuntaje** hereda de **MonoBehaviour**
+- **SenalizacionDeEnemigos** hereda de **MonoBehaviour**
+- **Prueba_de_color** hereda de **MonoBehaviour**
+- **PickUp** hereda de **MonoBehaviour**
+- **PickUp** usa **UnitController**
+- **PickUp** usa **UnitTeam**
+- **Obstaculo** hereda de **MonoBehaviour**
+- **MenuVictoria** hereda de **MonoBehaviour**
+- **IndicadorEnemigos** hereda de **MonoBehaviour**
+- **IndicadorEnemigos** usa **GameManager**
+- **Ideasypseudocodigos** hereda de **MonoBehaviour**
+- **GestorTexto** hereda de **MonoBehaviour**
 - **CodigoDeInicio** hereda de **MonoBehaviour**
 - **CodigoDeInicio** usa **BD_Audios**
 - **Camara** hereda de **MonoBehaviour**
 - **BD_Audios** hereda de **MonoBehaviour**
 - **BD_Audios** usa **CoroutineHelper**
 - **CoroutineHelper** hereda de **MonoBehaviour**
-- **GameFlowController** hereda de **MonoBehaviour**
-- **GameFlowController** usa **HostNetworkService**
-- **GameFlowController** usa **LobbyView**
-- **GameFlowController** usa **GameHudView**
-- **GameFlowController** usa **MatchController**
-- **GameFlowController** usa **GameStateModel**
-- **GameFlowController** usa **INetworkService**
-- **GameFlowController** usa **GamePhase**
+- **GameEventBus** hereda de **ScriptableObject**
 - **MatchNetworkController** hereda de **NetworkBehaviour**
 - **MatchNetworkController** usa **MatchController**
+- **MatchNetworkController** usa **GameEventBus**
 - **MatchNetworkController** usa **RedesLog**
+- **MatchNetworkController** usa **MatchResult**
+- **MatchNetworkController** usa **GameFlowController**
+- **TerrainModel** hereda de **MonoBehaviour**
 - **PlayerModel** usa **GameConstants**
 - **GameStateModel** usa **GamePhase**
 - **RoomSessionHandler** implementa **ISessionListHandler**
 - **RoomSessionHandler** usa **HostNetworkService**
+- **RoomSessionHandler** usa **NetworkSceneManagerDefault**
 - **RoomSessionHandler** usa **RedesLog**
 - **RoomSessionHandler** usa **GameConstants**
 - **PlayerSpawner** hereda de **MonoBehaviour**
 - **PlayerSpawner** usa **RedesLog**
-- **ComponentPropertiesCopier** usa **SerializedProperty**
+- **NetworkInputData** implementa **INetworkInput**
+- **HostNetworkService** hereda de **MonoBehaviour**
+- **HostNetworkService** implementa **INetworkService**
+- **HostNetworkService** implementa **INetworkRunnerCallbacks**
+- **HostNetworkService** usa **PlayerSpawner**
+- **HostNetworkService** usa **RedesLog**
+- **HostNetworkService** usa **NetworkSceneManagerDefault**
+- **HostNetworkService** usa **GameConstants**
+- **HostNetworkService** usa **ResultView**
+- **HostNetworkService** usa **GameFlowController**
+- **HostNetworkService** usa **NetworkInputData**
+- **HostNetworkService** usa **InputButton**
 - **CentralizadorScripts** hereda de **EditorWindow**
 - **CentralizadorScripts** usa **AssetDatabase**
 - **CentralizadorScripts** usa **EditorUtility**
@@ -901,444 +1509,6 @@ Generado: 2026-06-19 23:35:20
 - **FusionWeaverTriggerImporter** usa **NetworkProjectConfigUtilities**
 - **Postprocessor** hereda de **AssetPostprocessor**
 - **Postprocessor** usa **NetworkProjectConfigImporter**
-- **FusionRunnerVisibilityControlsWindow** hereda de **EditorWindow**
-- **FusionRunnerVisibilityControlsWindow** usa **RunnerEnableVisibility**
-- **FusionRunnerVisibilityControlsWindow** usa **NetworkRunnerVisibilityExtensions**
-- **FusionRunnerVisibilityControlsWindow** usa **EditorGUIUtility**
-- **FusionRunnerVisibilityControlsWindow** usa **Labels**
-- **FusionRunnerVisibilityControlsWindow** usa **FusionEditorSkin**
-- **FusionRunnerVisibilityControlsWindow** usa **FusionStatistics**
-- **FusionRunnerVisibilityControlsWindow** usa **EditorGUI**
-- **FusionRunnerVisibilityControlsWindow** usa **DisabledGroupScope**
-- **FusionRunnerVisibilityControlsWindow** usa **Event**
-- **FusionRunnerVisibilityControlsWindow** usa **CanvasAnchor**
-- **Labels** usa **RunnerEnableVisibility**
-- **Labels** usa **NetworkRunnerVisibilityExtensions**
-- **FusionEditorSkin** hereda de **ScriptableObject**
-- **FusionEditorSkin** usa **EditorGUIUtility**
-- **FusionEditorSkin** usa **LazyAsset**
-- **FusionEditorSkin** usa **LazyGUIStyle**
-- **IA_P2_PathfindingManager** usa **IA_P2_PathNode**
-- **IA_P2_PathfindingManager** usa **IA_P2_PathfindingModel**
-- **IA_P2_PathfindingManager** usa **FinalPathResult**
-- **IA_P2_PathfindingManager** usa **NodeDistance**
-- **IA_P2_PathfindingManager** usa **IA_P2_LineOfSight3D**
-- **IA_P2_PathfindingManager** usa **AStarResult**
-- **IA_P2_PathfindingManager** usa **ThetaStarResult**
-- **AStarResult** usa **IA_P2_PathNode**
-- **NodeDistance** usa **IA_P2_PathNode**
-- **IA_P2_INT_gentState** usa **IA_P2_FSM**
-- **IA_P2_FSM** hereda de **MonoBehaviour**
-- **IA_P2_FSM** usa **IA_P2_AgentIA**
-- **IA_P2_FSM** usa **AgentState**
-- **IA_P2_FSM** usa **IA_P2_INT_gentState**
-- **IA_P2_FSM** usa **IA_P2_FOV**
-- **IA_P2_FSM** usa **IA_P2_ST_PatrolState**
-- **IA_P2_FSM** usa **IA_P2_ST_ChaseState**
-- **IA_P2_FSM** usa **IA_P2_ST_SearchingState**
-- **IA_P2_FSM** usa **IA_P2_ST_ReturningToPatrolState**
-- **IA_P2_FSM** usa **IA_P2_BusEvent_Manager**
-- **PersecucionEnemigo** hereda de **MonoBehaviour**
-- **PersecucionEnemigo** usa **Enemigo**
-- **IA_P2_BusEvent_Manager** hereda de **MonoBehaviour**
-- **IA_P2_BusEvent_Manager** usa **IA_P2_FSM**
-- **CrearYDestruir** hereda de **MonoBehaviour**
-- **AutoDestruccionSegura** hereda de **MonoBehaviour**
-- **Soldado_Anim** hereda de **MonoBehaviour**
-- **Soldado_Anim** usa **BD_Audios**
-- **CambiarOpacidad** hereda de **MonoBehaviour**
-- **WeaponView** hereda de **MonoBehaviour**
-- **WeaponView** usa **CambiarOpacidad**
-- **WeaponView** usa **Proyectil**
-- **WeaponView** usa **InformacionPersonaje**
-- **WeaponView** usa **WeaponModel**
-- **WeaponView** usa **Bala**
-- **WeaponView** usa **BD_Audios**
-- **WeaponController** hereda de **MonoBehaviour**
-- **WeaponController** usa **WeaponModel**
-- **WeaponController** usa **WeaponView**
-- **WeaponController** usa **IWeaponInput**
-- **WeaponController** usa **WeaponControllerMVC**
-- **WeaponController** usa **UnityWeaponInput**
-- **Proyectil2** hereda de **MonoBehaviour**
-- **Proyectil** hereda de **MonoBehaviour**
-- **Proyectil** usa **Manager_VFX**
-- **Proyectil** usa **IDaniable**
-- **Proyectil** usa **InformacionPersonaje**
-- **Proyectil** usa **Enemigo**
-- **Cohete** hereda de **MonoBehaviour**
-- **Cohete** usa **IDaniable**
-- **Manager_VFX** hereda de **MonoBehaviour**
-- **MainGameController** hereda de **MonoBehaviour**
-- **MainGameController** usa **LeaderManager**
-- **MainGameController** usa **GlobalData**
-- **MainGameController** usa **UnitModel**
-- **MainGameController** usa **UnitSpecialization**
-- **MainGameController** usa **UnitFSM**
-- **LiderandoState** implementa **IUnitState**
-- **LiderandoState** usa **UnitController**
-- **LiderandoState** usa **UnitSpecialization**
-- **LiderandoState** usa **LeaderManager**
-- **LiderandoState** usa **GEN_Inputs**
-- **LiderandoState** usa **CursorManager**
-- **SeguirFormacionState** implementa **IUnitState**
-- **SeguirFormacionState** usa **UnitController**
-- **SeguirFormacionState** usa **GlobalData**
-- **SeguirFormacionState** usa **EsperandoState**
-- **SeguirFormacionState** usa **DetectableType**
-- **SeguirFormacionState** usa **Enemigo**
-- **SeguirFormacionState** usa **AtacarState**
-- **AtacarState** implementa **IUnitState**
-- **AtacarState** usa **UnitController**
-- **AtacarState** usa **IndicatorType**
-- **AtacarState** usa **UnitTeam**
-- **AtacarState** usa **SeguirFormacionState**
-- **AtacarState** usa **EsperandoState**
-- **AtacarState** usa **PerseguirState**
-- **PerseguirState** implementa **IUnitState**
-- **PerseguirState** usa **UnitController**
-- **PerseguirState** usa **IndicatorType**
-- **PerseguirState** usa **UnitTeam**
-- **PerseguirState** usa **SeguirFormacionState**
-- **PerseguirState** usa **EsperandoState**
-- **PerseguirState** usa **AtacarState**
-- **EsperandoState** implementa **IUnitState**
-- **EsperandoState** usa **UnitController**
-- **EsperandoState** usa **IndicatorType**
-- **EsperandoState** usa **SeguirFormacionState**
-- **HuirDetrasLiderState** implementa **IUnitState**
-- **HuirDetrasLiderState** usa **UnitController**
-- **HuirDetrasLiderState** usa **GlobalData**
-- **HuirDetrasLiderState** usa **SeguirFormacionState**
-- **IrADestinoState** implementa **IUnitState**
-- **IrADestinoState** usa **UnitController**
-- **IrADestinoState** usa **IndicatorType**
-- **IrADestinoState** usa **EsperandoState**
-- **LeaderManager** hereda de **MonoBehaviour**
-- **LeaderManager** usa **UnitController**
-- **LeaderManager** usa **UnitSpecialization**
-- **LeaderManager** usa **GEN_Inputs**
-- **LeaderManager** usa **GlobalData**
-- **LeaderManager** usa **MainGameController**
-- **LeaderManager** usa **SeguirFormacionState**
-- **LeaderManager** usa **LiderandoState**
-- **UnitFSM** hereda de **MonoBehaviour**
-- **UnitFSM** usa **State**
-- **UnitFSM** usa **UnitController**
-- **UnitFSM** usa **TickManager**
-- **CambioDeLider** hereda de **MonoBehaviour**
-- **IDetectable** usa **DetectableType**
-- **DetectableEntity** hereda de **MonoBehaviour**
-- **DetectableEntity** implementa **IDetectable**
-- **DetectableEntity** usa **DetectableType**
-- **SquadEventBus** usa **UnitController**
-- **WeaponControllerMVC** usa **WeaponModel**
-- **WeaponControllerMVC** usa **WeaponView**
-- **WeaponControllerMVC** usa **IWeaponInput**
-- **UnityWeaponInput** implementa **IWeaponInput**
-- **DesactivarPorTimer** hereda de **MonoBehaviour**
-- **UnitView** hereda de **MonoBehaviour**
-- **UnitView** usa **UnitModel**
-- **UnitView** usa **IndicatorEntry**
-- **UnitView** usa **IndicatorType**
-- **UnitView** usa **UnitSpecialization**
-- **IUnitState** usa **UnitController**
-- **UnitPathRenderer** hereda de **MonoBehaviour**
-- **UnitPathRenderer** usa **UnitController**
-- **UnitPathRenderer** usa **UnitFSM**
-- **UnitPathRenderer** usa **State**
-- **UnitModel** hereda de **MonoBehaviour**
-- **UnitModel** implementa **IHealth**
-- **UnitModel** usa **UnitTeam**
-- **UnitModel** usa **UnitSpecialization**
-- **UnitModel** usa **Destruible**
-- **UnitController** hereda de **MonoBehaviour**
-- **UnitController** implementa **IDaniable**
-- **UnitController** implementa **IDetectable**
-- **UnitController** usa **RevivalBarView**
-- **UnitController** usa **DamagedState**
-- **UnitController** usa **GEN_Inputs**
-- **UnitController** usa **SeguirFormacionState**
-- **UnitController** usa **AtacarState**
-- **UnitController** usa **PerseguirState**
-- **UnitController** usa **RevivingState**
-- **ControlDerrota** hereda de **MonoBehaviour**
-- **ControlDerrota** usa **LeaderManager**
-- **BalaPool** hereda de **MonoBehaviour**
-- **BalaPool** usa **Bala**
-- **Bala** hereda de **MonoBehaviour**
-- **Bala** implementa **IDetectable**
-- **Bala** usa **DetectableType**
-- **Bala** usa **Proyectil**
-- **Bala** usa **CursorManager**
-- **Bala** usa **IDaniable**
-- **Bala** usa **UnitController**
-- **Bala** usa **CoroutineHelper**
-- **Bala** usa **Manager_VFX**
-- **Bala** usa **BD_Audios**
-- **Bala** usa **UnitTeam**
-- **Bala** usa **BalaPool**
-- **AmmoManager** hereda de **MonoBehaviour**
-- **AmmoManager** usa **UnitController**
-- **AmmoManager** usa **UnitModel**
-- **UnityCharacterInput** implementa **ICharacterInput**
-- **CharacterControllerMVC** usa **CharacterModel**
-- **CharacterControllerMVC** usa **CharacterView**
-- **CharacterControllerMVC** usa **ICharacterInput**
-- **CharacterControllerMVC** usa **IMovementHandler**
-- **SelectedSoldierUIFeedback** hereda de **MonoBehaviour**
-- **SelectedSoldierUIFeedback** usa **UnitController**
-- **WeaponModel** hereda de **MonoBehaviour**
-- **InformacionPersonaje** hereda de **MonoBehaviour**
-- **InformacionPersonaje** implementa **IHealth**
-- **InformacionPersonaje** usa **WeaponController**
-- **InformacionPersonaje** usa **GameManager**
-- **CharacterModel** hereda de **MonoBehaviour**
-- **CharacterModel** usa **InformacionPersonaje**
-- **IA_P2_FOV** hereda de **MonoBehaviour**
-- **IA_P2_FOV** usa **IA_P2_LineOfSight3D**
-- **IA_F_PathFinding_Theta** usa **IA_P2_LineOfSight3D**
-- **IA_F_EnemyCercanos** hereda de **MonoBehaviour**
-- **IA_F_ControllerSeguidor** hereda de **MonoBehaviour**
-- **IA_F_ControllerSeguidor** usa **IA_P2_AgentIA**
-- **IA_F_ControllerSeguidor** usa **IA_F_EnemyCercanos**
-- **IA_F_ChangeMode** hereda de **MonoBehaviour**
-- **IA_F_ChangeMode** usa **IA_P2_AgentIA**
-- **IA_F_ChangeMode** usa **IA_P2_BusEvent_Manager**
-- **Rigidbody2DMovementHandler** hereda de **MonoBehaviour**
-- **Rigidbody2DMovementHandler** implementa **IMovementHandler**
-- **Rigidbody2DMovementHandler** usa **BD_Audios**
-- **MovementProxy** usa **IMovable**
-- **ShootingProxy** usa **IAttackable**
-- **RunnerVisibilityLink** hereda de **MonoBehaviour**
-- **RunnerVisibilityLink** usa **PreferredRunners**
-- **RunnerVisibilityLink** usa **ComponentType**
-- **RunnerVisibilityLink** usa **NetworkRunnerVisibilityExtensions**
-- **RunnerLagCompensationGizmos** hereda de **Behaviour**
-- **RunnerEnableVisibility** hereda de **Behaviour**
-- **RunnerEnableVisibility** implementa **INetworkRunnerCallbacks**
-- **RunnerAOIGizmos** hereda de **SimulationBehaviour**
-- **EnableOnSingleRunner** hereda de **Behaviour**
-- **EnableOnSingleRunner** usa **RunnerVisibilityLink**
-- **EnableOnSingleRunner** usa **PreferredRunners**
-- **NetworkSceneManagerDefault** hereda de **Behaviour**
-- **NetworkSceneManagerDefault** implementa **INetworkSceneManager**
-- **NetworkSceneManagerDefault** usa **FusionUnitySceneManagerUtils**
-- **NetworkSceneManagerDefault** usa **SceneEqualityComparer**
-- **NetworkSceneManagerDefault** usa **MultiPeerSceneRoot**
-- **NetworkSceneManagerDefault** usa **FusionCoroutine**
-- **NetworkSceneManagerDefault** usa **LoadingScope**
-- **MultiPeerSceneRoot** hereda de **MonoBehaviour**
-- **LoadingScope** implementa **IDisposable**
-- **LoadingScope** usa **NetworkSceneManagerDefault**
-- **NetworkObjectProviderDefault** hereda de **Behaviour**
-- **NetworkObjectProviderDefault** implementa **INetworkObjectProvider**
-- **NetworkCCData** implementa **INetworkStruct**
-- **NetworkCharacterController** hereda de **NetworkTRSP**
-- **NetworkCharacterController** implementa **INetworkTRSPTeleport**
-- **NetworkCharacterController** implementa **IBeforeAllTicks**
-- **NetworkCharacterController** implementa **IAfterAllTicks**
-- **NetworkCharacterController** implementa **IBeforeCopyPreviousState**
-- **NetworkCharacterController** usa **NetworkCCData**
-- **RevivalSystemSetup** hereda de **MonoBehaviour**
-- **RevivalBarView** hereda de **MonoBehaviour**
-- **RevivalBarView** usa **UnitController**
-- **RehenBruto** hereda de **MonoBehaviour**
-- **RehenBruto** usa **IA_P2_AgentIA**
-- **RehenBruto** usa **GlobalData**
-- **PositionManager** hereda de **MonoBehaviour**
-- **PositionManager** usa **GlobalData**
-- **PositionManager** usa **UnitController**
-- **PositionManager** usa **UnitTeam**
-- **PositionManager** usa **EsperandoState**
-- **PositionManager** usa **SeguirFormacionState**
-- **Municion** hereda de **MonoBehaviour**
-- **MenuPausa** hereda de **MonoBehaviour**
-- **MarkerAnim** hereda de **MonoBehaviour**
-- **Physics2DMigrator** usa **AssetDatabase**
-- **Physics2DMigrator** usa **EditorApplication**
-- **ComponentPropertiesCopierTestMenu** usa **ComponentPropertiesCopier**
-- **FusionNetworkObjectStatistics** hereda de **MonoBehaviour**
-- **FusionNetworkObjectStatistics** usa **FusionStatistics**
-- **RunnerVisibilityLinksRoot** hereda de **MonoBehaviour**
-- **Prueba_de_color** hereda de **MonoBehaviour**
-- **PickUp** hereda de **MonoBehaviour**
-- **PickUp** usa **UnitController**
-- **PickUp** usa **UnitTeam**
-- **Obstaculo** hereda de **MonoBehaviour**
-- **MenuVictoria** hereda de **MonoBehaviour**
-- **IndicadorEnemigos** hereda de **MonoBehaviour**
-- **IndicadorEnemigos** usa **GameManager**
-- **Ideasypseudocodigos** hereda de **MonoBehaviour**
-- **GestorTexto** hereda de **MonoBehaviour**
-- **FusionBootstrap** hereda de **Behaviour**
-- **FusionBootstrap** usa **FusionMppmCommand**
-- **FusionBootstrap** usa **StartCommand**
-- **FusionBootstrap** usa **StartModes**
-- **FusionBootstrap** usa **Stage**
-- **FusionBootstrap** usa **State**
-- **FusionBootstrap** usa **FusionBootstrapDebugGUI**
-- **FusionBootstrap** usa **FusionMppm**
-- **FusionBootstrap** usa **FusionMppmStatus**
-- **FusionBootstrap** usa **NetworkSceneManagerDefault**
-- **FusionBootstrap** usa **NetworkObjectProviderDefault**
-- **StartCommand** hereda de **FusionMppmCommand**
-- **FusionBasicBillboard** hereda de **Behaviour**
-- **FusionAddressablePrefabsPreloader** hereda de **MonoBehaviour**
-- **FusionGlobalScriptableObjectAddressAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
-- **FusionGlobalScriptableObjectResourceAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
-- **FusionCoroutine** implementa **ICoroutine**
-- **FusionCoroutine** implementa **IDisposable**
-- **FusionLogInitializer** usa **FusionUnityLogger**
-- **FusionUnityLogger** hereda de **FusionUnityLoggerBase**
-- **FusionUnityLogger** usa **Stage**
-- **JsonUtilityExtensions** usa **TypeNameWrapper**
-- **FusionMppm** usa **FusionMppmStatus**
-- **FusionMppm** usa **FusionMppmCommand**
-- **NetworkObjectBaker** usa **TransformPath**
-- **NetworkObjectBaker** usa **TransformPathCache**
-- **NetworkObjectBaker** usa **Result**
-- **NetworkObjectBaker** usa **_Indices**
-- **TransformPath** usa **_Indices**
-- **TransformPathCache** implementa **IComparer**
-- **TransformPathCache** implementa **IEqualityComparer**
-- **TransformPathCache** usa **TransformPath**
-- **NetworkPrefabSourceStatic** hereda de **NetworkAssetSourceStatic**
-- **NetworkPrefabSourceStatic** implementa **INetworkPrefabSource**
-- **NetworkPrefabSourceStaticLazy** hereda de **NetworkAssetSourceStaticLazy**
-- **NetworkPrefabSourceStaticLazy** implementa **INetworkPrefabSource**
-- **NetworkPrefabSourceResource** hereda de **NetworkAssetSourceResource**
-- **NetworkPrefabSourceResource** implementa **INetworkPrefabSource**
-- **FusionStatisticsHelper** usa **RenderSimStats**
-- **FusionStatsGraphBase** hereda de **MonoBehaviour**
-- **FusionStatsGraphBase** usa **FusionStatBuffer**
-- **FusionStatsGraphBase** usa **FusionStatistics**
-- **SceneEqualityComparer** implementa **IEqualityComparer**
-- **NetworkRunnerVisibilityExtensions** usa **IRunnerVisibilityRecognizedType**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibility**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLink**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLinksRoot**
-- **NetworkRunnerVisibilityExtensions** usa **EnableOnSingleRunner**
-- **NetworkRunnerVisibilityExtensions** usa **PreferredRunners**
-- **RunnerVisibility** usa **RunnerVisibilityLink**
-- **UnitCommander** hereda de **MonoBehaviour**
-- **UnitCommander** usa **GEN_Inputs**
-- **UnitCommander** usa **LeaderManager**
-- **UnitCommander** usa **UnitController**
-- **UnitCommander** usa **SeguirFormacionState**
-- **UnitCommander** usa **UnitTeam**
-- **UnitCommander** usa **IrADestinoState**
-- **UnitCommander** usa **EsperandoState**
-- **UnitCommander** usa **PerseguirState**
-- **TickManager** hereda de **MonoBehaviour**
-- **ShotSensor** hereda de **MonoBehaviour**
-- **ShotSensor** usa **UnitController**
-- **ShotSensor** usa **Bala**
-- **RevivingState** implementa **IUnitState**
-- **RevivingState** usa **UnitController**
-- **RevivingState** usa **IndicatorType**
-- **RevivingState** usa **SeguirFormacionState**
-- **VibracionCamara** hereda de **MonoBehaviour**
-- **VibracionCamara** usa **ConfiguracionGlobal**
-- **Torreta** hereda de **MonoBehaviour**
-- **Torreta** usa **GameManager**
-- **SistemaPuntaje** hereda de **MonoBehaviour**
-- **SenalizacionDeEnemigos** hereda de **MonoBehaviour**
-- **HostNetworkService** hereda de **MonoBehaviour**
-- **HostNetworkService** implementa **INetworkService**
-- **HostNetworkService** implementa **INetworkRunnerCallbacks**
-- **HostNetworkService** usa **PlayerSpawner**
-- **HostNetworkService** usa **ISessionListHandler**
-- **HostNetworkService** usa **RoomSessionHandler**
-- **HostNetworkService** usa **RedesLog**
-- **HostNetworkService** usa **GameConstants**
-- **PlayerShooting** hereda de **NetworkBehaviour**
-- **PlayerShooting** usa **AmmoSystem**
-- **PlayerShooting** usa **GameConstants**
-- **PlayerShooting** usa **RedesLog**
-- **PlayerMovement** hereda de **NetworkBehaviour**
-- **PlayerMovement** usa **GameConstants**
-- **PlayerHealth** hereda de **NetworkBehaviour**
-- **PlayerHealth** implementa **IDamageable**
-- **PlayerHealth** usa **GameConstants**
-- **PlayerHealth** usa **MatchNetworkController**
-- **PlayerHealth** usa **RedesLog**
-- **PlayerAnimationController** hereda de **NetworkBehaviour**
-- **NetworkPlayer** hereda de **NetworkBehaviour**
-- **NetworkPlayer** usa **PlayerMovement**
-- **NetworkPlayer** usa **PlayerShooting**
-- **NetworkPlayer** usa **PlayerHealth**
-- **NetworkPlayer** usa **AmmoSystem**
-- **NetworkPlayer** usa **PlayerAnimationController**
-- **NetworkPlayer** usa **RedesLog**
-- **AmmoSystem** hereda de **NetworkBehaviour**
-- **AmmoSystem** usa **GameConstants**
-- **AmmoSystem** usa **RedesLog**
-- **ResultView** hereda de **MonoBehaviour**
-- **ResultView** usa **MatchResult**
-- **ResultView** usa **RedesLog**
-- **LobbyView** hereda de **MonoBehaviour**
-- **LobbyView** usa **GameConstants**
-- **GameHudView** hereda de **MonoBehaviour**
-- **TriggerEventAndDestroy** hereda de **MonoBehaviour**
-- **VfxController** hereda de **MonoBehaviour**
-- **DropdownController** hereda de **MonoBehaviour**
-- **DropdownController** usa **VfxController**
-- **DebugColisionesFull** hereda de **MonoBehaviour**
-- **CollisionDetector** hereda de **MonoBehaviour**
-- **FusionStatistics** hereda de **SimulationBehaviour**
-- **FusionStatistics** implementa **ISpawned**
-- **FusionStatistics** usa **FusionStatsGraphBase**
-- **FusionStatistics** usa **FusionNetworkObjectStatsGraphCombine**
-- **FusionStatistics** usa **FusionStatsPanelHeader**
-- **FusionStatistics** usa **FusionStatsConfig**
-- **FusionStatistics** usa **FusionStatsCanvas**
-- **FusionStatistics** usa **FusionNetworkObjectStatistics**
-- **FusionStatistics** usa **RenderSimStats**
-- **FusionStatistics** usa **CanvasAnchor**
-- **FusionStatistics** usa **FusionStatisticsStatCustomConfig**
-- **FusionStatistics** usa **FusionBasicBillboard**
-- **FusionStatistics** usa **FusionStatsWorldAnchor**
-- **FusionStatisticsStatCustomConfig** usa **RenderSimStats**
-- **FusionNetworkObjectStatsGraphCombine** hereda de **MonoBehaviour**
-- **FusionNetworkObjectStatsGraphCombine** usa **NetworkObjectStat**
-- **FusionNetworkObjectStatsGraphCombine** usa **FusionNetworkObjectStatsGraph**
-- **FusionNetworkObjectStatsGraphCombine** usa **FusionStatistics**
-- **FusionNetworkObjectStatsGraphCombine** usa **FusionNetworkObjectStatistics**
-- **FusionNetworkObjectStatsGraph** hereda de **FusionStatsGraphBase**
-- **FusionNetworkObjectStatsGraph** usa **NetworkObjectStat**
-- **FusionNetworkObjectStatsGraph** usa **FusionNetworkObjectStatsGraphCombine**
-- **FusionBootstrapDebugGUI** hereda de **Behaviour**
-- **FusionBootstrapDebugGUI** usa **FusionBootstrap**
-- **FusionBootstrapDebugGUI** usa **Stage**
-- **FusionBootstrapDebugGUI** usa **FusionScalableIMGUI**
-- **CursorManager** hereda de **MonoBehaviour**
-- **CursorManager** usa **IInteractable**
-- **CursorManager** usa **IDaniable**
-- **UnitController** hereda de **MonoBehaviour**
-- **UnitController** implementa **IDaniable**
-- **UnitController** implementa **IDetectable**
-- **UnitController** usa **UnitModel**
-- **UnitController** usa **UnitView**
-- **UnitController** usa **IA_P2_AgentIA**
-- **UnitController** usa **Disparador**
-- **UnitController** usa **GenericDetector**
-- **UnitController** usa **DetectableType**
-- **UnitController** usa **UnitTeam**
-- **UnitController** usa **Enemigo**
-- **UnitController** usa **EsperandoState**
-- **UnitController** usa **UnitSpecialization**
-- **UnitController** usa **SquadEventBus**
-- **UnitController** usa **AtacarState**
-- **UnitController** usa **PerseguirState**
-- **UnitController** usa **IndicatorType**
-- **UnitController** usa **IrADestinoState**
-- **UnitController** usa **IUnitState**
-- **UnitController** usa **LiderandoState**
-- **UnitController** usa **RevivingState**
-- **UnitController** usa **GlobalData**
-- **UnitController** usa **SeguirFormacionState**
-- **UnitController** usa **DamagedState**
 
 ## Tipos
 
@@ -2517,6 +2687,15 @@ Generado: 2026-06-19 23:35:20
 - public PuedeDisparar() : bool
 - public GastarBala() : void
 
+#### class NewTestScript
+
+- Archivo: `NewTestScript.cs` (19 líneas)
+
+**Métodos:**
+
+- public NewTestScriptSimplePasses() : void
+- public NewTestScriptWithEnumeratorPasses() : IEnumerator
+
 #### class NodeDistance
 
 - Archivo: `IA_P2_PathfindingManager.cs` (5 líneas)
@@ -3076,6 +3255,662 @@ Generado: 2026-06-19 23:35:20
 
 - public Play(int index) : void
 - public Stop() : void
+
+### Namespace `DebugSystem`
+
+#### class Bullet
+
+- Archivo: `Bullet.cs` (59 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EventBus`, `PlayerModel`, `EffectPool`, `BulletPool`
+
+**Campos:**
+
+- Speed : float
+- Damage : float
+- Lifetime : float
+- direction : Vector3
+- shooterActorID : int
+- projectileID : int
+- spawnTime : float
+- nextProjectileID : int
+
+**Métodos:**
+
+- public Setup(int shooterID, Vector3 dir) : void
+- private Update() : void
+- private OnTriggerEnter2D(Collider2D collision) : void
+- private Recycle() : void
+
+#### class BulletPool
+
+- Archivo: `BulletPool.cs` (47 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `Bullet`
+
+**Propiedades:**
+
+- Instance : BulletPool
+
+**Campos:**
+
+- bulletPrefab : Bullet
+- initialSize : int
+- pool : Queue<Bullet>
+
+**Métodos:**
+
+- private Awake() : void
+- private InitializePool() : void
+- public Get() : Bullet
+- public ReturnToPool(Bullet b) : void
+
+#### class DebugLogger
+
+- Archivo: `DebugLogger.cs` (236 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `LogEntry`, `LogCategory`, `EventBus`
+
+**Propiedades:**
+
+- Instance : DebugLogger
+
+**Campos:**
+
+- IsTestMode : bool
+- LoggedEvents : List<LogEntry>
+
+**Métodos:**
+
+- public Awake() : void
+- private OnDestroy() : void
+- public ClearLogs() : void
+- private Log(LogCategory category, string eventKey, string formattedMsg) : void
+- private SubscribeEvents() : void
+
+#### class EffectPool
+
+- Archivo: `EffectPool.cs` (90 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `ImpactEffect`, `ProceduralAudioGenerator`
+
+**Propiedades:**
+
+- Instance : EffectPool
+
+**Campos:**
+
+- initialSize : int
+- pool : List<ImpactEffect>
+- impactPrefab : GameObject
+
+**Métodos:**
+
+- private Awake() : void
+- private CreatePrefab() : void
+- private InitializePool() : void
+- private CreateNewEffect() : ImpactEffect
+- public GetEffect() : ImpactEffect
+- public SpawnImpact(Vector3 position, Color color) : void
+
+#### static class EventBus
+
+- Archivo: `EventBus.cs` (478 líneas)
+
+**Métodos:**
+
+- public static TriggerGameStarted(string v, int s) : void
+- public static TriggerGameClosed() : void
+- public static TriggerSceneLoaded(string s) : void
+- public static TriggerSceneLoadError(string s) : void
+- public static TriggerGameMode(string s, int i) : void
+- public static TriggerRegion(string s) : void
+- public static TriggerTargetFrameRate(int i) : void
+- public static TriggerVSync(bool b) : void
+- public static TriggerEditor(bool b) : void
+- public static TriggerPlatform(string s) : void
+- public static TriggerTimeScale(float f) : void
+- public static TriggerTestMode(bool b) : void
+- public static TriggerNameEntered(string s) : void
+- public static TriggerNameEmptyOrInvalid() : void
+- public static TriggerLocalIDAssigned(string s) : void
+- public static TriggerExternalAuthStarted(string s) : void
+- public static TriggerExternalAuthError(string s) : void
+- public static TriggerRoomCreated(string s) : void
+- public static TriggerRoomCreateError(string s) : void
+- public static TriggerRoomListReceived(int i) : void
+- public static TriggerRoomJoin(string s) : void
+- public static TriggerRoomJoinError(string s) : void
+- public static TriggerPlayerEntered(int i, string s) : void
+- public static TriggerPlayerLeft(int i) : void
+- public static TriggerRoomPropUpdated(string s1, string s2) : void
+- public static TriggerPlayerPropUpdated(int i, string s1, string s2) : void
+- public static TriggerMatchmakingSearching(string s) : void
+- public static TriggerMatchmakingCancelled() : void
+- public static TriggerMatchFound(string s) : void
+- public static TriggerMatchmakingTimeout() : void
+- public static TriggerEnteringMatch() : void
+- public static TriggerMatchmakingError(string s) : void
+- public static TriggerConnectingMaster() : void
+- public static TriggerConnectedMaster() : void
+- public static TriggerConnectMasterError(string s) : void
+- public static TriggerPing(int i) : void
+- public static TriggerPingHigh(int i) : void
+- public static TriggerNetworkRegion(string s) : void
+- public static TriggerNetworkRegionAutoChanged(string s) : void
+- public static TriggerDisconnected(string s) : void
+- public static TriggerReconnecting(int i) : void
+- public static TriggerActorIDAssigned(int i) : void
+- public static TriggerActorIDRemoved(int i) : void
+- public static TriggerIsHost(bool b) : void
+- public static TriggerHostMigrated(int i1, int i2) : void
+- public static TriggerRPCSent(string s1, string s2) : void
+- public static TriggerRPCReceived(string s, int i) : void
+- public static TriggerRPCIgnored(string s) : void
+- public static TriggerRPCDiscarded() : void
+- public static TriggerNetEventSent(int i) : void
+- public static TriggerNetEventReceived(int i1, int i2) : void
+- public static TriggerMsgBuffer(int i) : void
+- public static TriggerPacketLost(int i) : void
+- public static TriggerNetSimActive(int i1, int i2) : void
+- public static TriggerStateCurrent(string s) : void
+- public static TriggerStateInvalid(string s) : void
+- public static TriggerStateTransition(string s1, string s2) : void
+- public static TriggerStateBlocked(string s1, string s2, string s3) : void
+- public static TriggerStateSynced(string s) : void
+- public static TriggerPlayerReady(int i, bool b) : void
+- public static TriggerPlayerReadyTimeout(int i) : void
+- public static TriggerPlayerSceneLoaded(int i, float f) : void
+- public static TriggerSpawnRequestedLocal() : void
+- public static TriggerSpawnConfirmed(int i) : void
+- public static TriggerSpawnDenied() : void
+- public static TriggerInputReceived(string s, int i) : void
+- public static TriggerInputDiscarded() : void
+- public static TriggerAvatarAssigned(int i, string s) : void
+- public static TriggerPlayerDisconnected(int i) : void
+- public static TriggerPlayerReconnected() : void
+- public static TriggerWeaponEquipped(int i1, string s, int i2) : void
+- public static TriggerShootStart(int i1, string s, int i2) : void
+- public static TriggerShootNoAmmo() : void
+- public static TriggerShootConfirmed(int i, float f) : void
+- public static TriggerProjectileCreated(int i1, int i2, string s, float f1, float f2, float f3) : void
+- public static TriggerImpactClient(int i1, int i2, float f) : void
+- public static TriggerImpactDiscarded() : void
+- public static TriggerImpactHost(int i1, int i2, float f) : void
+- public static TriggerReloadStart(int i, string s) : void
+- public static TriggerReloadComplete() : void
+- public static TriggerReloadCancel(int i, string s) : void
+- public static TriggerAmmoUpdated(int i1, string s, int i2, int i3, int i4) : void
+- public static TriggerDamageApplied(int i1, float f1, float f2, float f3, int i2) : void
+- public static TriggerHealthSynced(int i, float f1, float f2) : void
+- public static TriggerPlayerDeath(int i1, int i2, string s) : void
+- public static TriggerPlayerDeathCause(string s) : void
+- public static TriggerRespawnRequested(int i, float f) : void
+- public static TriggerRespawnExecuted() : void
+- public static TriggerInvulnerability(int i, float f) : void
+- public static TriggerHealReceived(int i1, float f, int i2) : void
+- public static TriggerWinCondition(string s) : void
+- public static TriggerTeamWin(int i) : void
+- public static TriggerPlayerWin(int i) : void
+- public static TriggerMatchFinished(string s, int i) : void
+- public static TriggerTotalTime(float f) : void
+- public static TriggerFinalScore(int i1, int i2) : void
+- public static TriggerMVP(int i, string s, float f) : void
+- public static TriggerMatchRestartReq() : void
+- public static TriggerReturnToLobby() : void
+- public static TriggerGlobalNotif(string s1, string s2) : void
+- public static TriggerPersonalNotif(int i, string s) : void
+- public static TriggerAlertShow(string s1, string s2) : void
+- public static TriggerAlertHide() : void
+- public static TriggerStreakAnnounce(int i, string s) : void
+- public static TriggerTimeWarning(float f, string s) : void
+- public static TriggerObjectiveUpdate(string s, int i1, int i2) : void
+- public static TriggerAnimTrigger(int i, string s) : void
+- public static TriggerAnimDamage(int i, string s, float f1, float f2, float f3) : void
+- public static TriggerAnimDeath(int i, string s) : void
+- public static TriggerAnimReload(int i, string s) : void
+- public static TriggerVFX(string s, float f1, float f2, float f3, int i) : void
+- public static TriggerSFX(string s, int i, float f) : void
+- public static TriggerCameraShake(float f1, float f2) : void
+- public static TriggerDamageUI(int i, string s) : void
+- public static TriggerWeaponAnimBool(int i, string s, bool b) : void
+- public static TriggerSnapshotSent(int i1, int i2) : void
+- public static TriggerSnapshotReceived() : void
+- public static TriggerHashDesync(int i1, int i2) : void
+- public static TriggerDiffActor(int i, string s1, string s2, string s3) : void
+- public static TriggerCorrectionActor(int i, string s1, string s2) : void
+- public static TriggerForceResync(string s) : void
+- public static TriggerReconnectStart() : void
+- public static TriggerReconnectSuccess(string s) : void
+- public static TriggerReconnectDenied() : void
+- public static TriggerStateRecoverHost(int i) : void
+- public static TriggerHostLost(float f) : void
+- public static TriggerNewHost(int i) : void
+- public static TriggerMatchAborted(string s) : void
+- public static TriggerTestSeed(int i) : void
+- public static TriggerTestBotCreate(string s, int i) : void
+- public static TriggerTestBotRemove() : void
+- public static TriggerTestCmd(string s1, string s2) : void
+- public static TriggerTestOverrideState(string s) : void
+- public static TriggerTestSimNet(int i1, int i2) : void
+- public static TriggerTestPerf(float f1, float f2, float f3) : void
+- public static TriggerTestDumpRoom(int i, string s) : void
+- public static ClearAllEvents() : void
+
+#### class FloatingHealthBar
+
+- Archivo: `FloatingHealthBar.cs` (145 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`
+
+**Campos:**
+
+- targetModel : PlayerModel
+- fillImage : Image
+- nameText : Text
+
+**Métodos:**
+
+- public Setup(PlayerModel model, string username) : void
+- private OnDestroy() : void
+- private HandleHealthChanged(float hp, float shield) : void
+- private SmoothFill(float targetFill) : System.Collections.IEnumerator
+- private LateUpdate() : void
+
+#### class GameLoopReferee
+
+- Archivo: `GameLoopReferee.cs` (29 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`, `PlayerController`, `SimpleEnemyAI`, `GameManager`
+
+**Campos:**
+
+- player : PlayerModel
+- enemy : PlayerModel
+
+**Métodos:**
+
+- private Start() : void
+- private Update() : void
+
+#### class GameManager
+
+- Archivo: `GameManager.cs` (128 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EventBus`, `PlayerModel`, `LocalNetworkMock`, `FloatingHealthBar`
+
+**Propiedades:**
+
+- Instance : GameManager
+
+**Campos:**
+
+- playerPrefab : GameObject
+- spawnPoint1 : Transform
+- spawnPoint2 : Transform
+
+**Métodos:**
+
+- private Awake() : void
+- private OnDestroy() : void
+- private Start() : IEnumerator
+- private HandleStateTransition(string from, string to) : void
+- private SpawnPlayers() : void
+- private PeriodicalSystemSimulations() : IEnumerator
+- public CheckGameOver(PlayerModel player1, PlayerModel player2) : void
+- private DeclareWinner(int winningActor, int losingActor) : void
+
+#### class ImpactEffect
+
+- Archivo: `ImpactEffect.cs` (46 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- spr : SpriteRenderer
+- lifeTime : float
+- timer : float
+
+**Métodos:**
+
+- private Awake() : void
+- public PlayEffect(Vector3 position, Color color) : void
+- private Update() : void
+
+#### static class LocalNetworkMock
+
+- Archivo: `LocalNetworkMock.cs` (103 líneas)
+- Usa: `RoomData`
+
+**Propiedades:**
+
+- FilePath : string
+- IsHost : bool
+- LocalActorID : int
+- LocalPlayerName : string
+
+**Métodos:**
+
+- public static RoomExists() : bool
+- public static CreateRoom(string playerName) : void
+- public static JoinRoom(string playerName) : void
+- public static GetRoomData() : RoomData
+- public static StartGame() : void
+- public static ClearRoom() : void
+
+#### enum LogCategory
+
+- Archivo: `DebugLogger.cs` (18 líneas)
+
+**Campos:**
+
+- SYSTEM : enum
+- AUTH : enum
+- LOBBY : enum
+- MATCHMAKING : enum
+- NETWORK : enum
+- STATE_MACHINE : enum
+- PLAYER_SYNC : enum
+- WEAPON : enum
+- DAMAGE : enum
+- WIN_LOSE : enum
+- NOTIFICATIONS : enum
+- ANIMATIONS : enum
+- DESYNC : enum
+- FALLBACKS : enum
+- TEST : enum
+
+#### struct LogEntry
+
+- Archivo: `DebugLogger.cs` (7 líneas)
+- Usa: `LogCategory`
+
+**Campos:**
+
+- Category : LogCategory
+- EventKey : string
+- FormattedMessage : string
+- TimeStamp : float
+
+#### class PlayerController
+
+- Archivo: `PlayerController.cs` (71 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`, `PlayerView`, `Weapon`, `LocalNetworkMock`, `EventBus`
+
+**Campos:**
+
+- model : PlayerModel
+- view : PlayerView
+- weapon : Weapon
+- MoveSpeed : float
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
+- private Update() : void
+
+#### class PlayerModel
+
+- Archivo: `PlayerModel.cs` (51 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EventBus`
+
+**Propiedades:**
+
+- MaxHP : float
+- CurrentHP : float
+- Shield : float
+
+**Campos:**
+
+- ActorID : int
+- Username : string
+- maxHP : float
+- currentHP : float
+- shield : float
+
+**Métodos:**
+
+- public Initialize(int actorID, string username) : void
+- public ApplyDamage(float amount, int attackerID) : void
+- public Heal(float amount, int healerID) : void
+
+#### class PlayerView
+
+- Archivo: `PlayerView.cs` (74 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`, `SimpleAnimator`, `EventBus`, `ProceduralAudioGenerator`
+
+**Campos:**
+
+- model : PlayerModel
+- anim : SimpleAnimator
+
+**Métodos:**
+
+- private Awake() : void
+- private OnEnable() : void
+- private OnDisable() : void
+- private HandleHealthChanged(float hp, float shield) : void
+- public PlayShootVFX(Vector3 weaponPos) : void
+- public PlayReloadVFX() : void
+- public StopReloadVFX() : void
+
+#### static class ProceduralAudioGenerator
+
+- Archivo: `ProceduralAudioGenerator.cs` (72 líneas)
+
+**Campos:**
+
+- cache : Dictionary<string, AudioClip>
+
+**Métodos:**
+
+- public static GetShootSound() : AudioClip
+- public static GetImpactSound() : AudioClip
+- public static PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f) : void
+
+#### class RoomData
+
+- Archivo: `LocalNetworkMock.cs` (9 líneas)
+
+**Campos:**
+
+- HostName : string
+- Player2Name : string
+- Player1Ready : bool
+- Player2Ready : bool
+- GameStarted : bool
+
+#### class ScreenManager
+
+- Archivo: `ScreenManager.cs` (257 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EventBus`, `LocalNetworkMock`, `RoomData`
+
+**Campos:**
+
+- lobbyPanel : GameObject
+- hudPanel : GameObject
+- gameOverPanel : GameObject
+- gameOverTitleText : Text
+- gameOverDetailsText : Text
+- restartButton : Button
+- usernameInput : InputField
+- createRoomButton : Button
+- joinRoomButton : Button
+- roomListContainer : Transform
+- roomButtonPrefab : GameObject
+- playerHpText : Text
+- playerAmmoText : Text
+- currentStatusText : Text
+
+**Métodos:**
+
+- private Start() : void
+- private OnDestroy() : void
+- private LobbyUpdateLoop() : System.Collections.IEnumerator
+- private UpdateLobbyUI() : void
+- public ShowLobby() : void
+- public ShowHUD() : void
+- public ShowGameOver(string result, int winningActor) : void
+- private RestartGame() : void
+- private GetPlayerName() : string
+- private OnCreateRoomClicked() : void
+- private OnJoinRoomClicked() : void
+- private SimulateGameStart(string localName, string hostName, string clientName) : void
+- private UpdateHealthHUD(int actorId, float hp, float shield) : void
+- private UpdateAmmoHUD(int actorId, string weaponName, int clip, int maxClip, int reserve) : void
+- private UpdateStatusHUD(string state) : void
+
+#### class SimpleAnimator
+
+- Archivo: `SimpleAnimator.cs` (54 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- spr : SpriteRenderer
+- originalColor : Color
+- originalLocalPosition : Vector3
+
+**Métodos:**
+
+- private Awake() : void
+- public TriggerHit() : void
+- public TriggerShoot(Vector3 direction) : void
+- private HitCoroutine() : IEnumerator
+- private RecoilCoroutine(Vector3 direction) : IEnumerator
+
+#### class SimpleEnemyAI
+
+- Archivo: `SimpleEnemyAI.cs` (56 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`, `Weapon`, `PlayerView`, `PlayerController`, `EventBus`
+
+**Campos:**
+
+- target : PlayerModel
+- selfModel : PlayerModel
+- weapon : Weapon
+- view : PlayerView
+- AttackRange : float
+- ShootCooldown : float
+- lastShootTime : float
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
+- private Update() : void
+
+#### class Weapon
+
+- Archivo: `Weapon.cs` (93 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerModel`, `PlayerView`, `EventBus`, `Bullet`, `BulletPool`
+
+**Campos:**
+
+- WeaponName : string
+- WeaponIndex : int
+- ClipSize : int
+- MaxReserve : int
+- currentClip : int
+- currentReserve : int
+- isReloading : bool
+- playerModel : PlayerModel
+- playerView : PlayerView
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
+- public TryShoot() : bool
+- public CanReload() : bool
+- public Reload() : void
+- private ReloadRoutine() : IEnumerator
+- private TriggerAmmoUpdate() : void
+
+### Namespace `DebugSystem.Editor`
+
+#### class CreateScenesAndPrefabsMenu
+
+- Archivo: `CreateScenesAndPrefabsMenu.cs` (685 líneas)
+- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `SerializedProperty`
+
+**Métodos:**
+
+- private static GetDefaultFont() : Font
+- public static GenerateProjectSetup() : void
+- public static FixAndConfigureScene() : void
+- private static EnsureDirectory(string path) : void
+- private static CreateGameScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) : void
+- private static CreateTestScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) : void
+- private static SetupBaseScene(Scene scene, GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, bool isTestScene) : void
+- private static EnsureTagExists(string tag) : void
+- public static BuildStandalonePlayer() : void
+
+#### class CreateTestSceneMenu
+
+- Archivo: `CreateTestSceneMenu.cs` (150 líneas)
+- Usa: `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `Weapon`, `SimpleEnemyAI`
+
+**Métodos:**
+
+- public static CreateScene() : void
+
+#### class HierarchyToClipboardMenu
+
+- Archivo: `HierarchyToClipboardMenu.cs` (126 líneas)
+- Usa: `EditorUtility`, `SerializedProperty`
+
+**Métodos:**
+
+- public static CopyHierarchyToClipboard() : void
+- private static DumpGameObject(GameObject go, StringBuilder sb, int indentLevel) : void
+- private static GetPropertyValueAsString(SerializedProperty prop) : string
+
+### Namespace `DebugSystem.Tests`
+
+#### class GlobalLogicTests
+
+- Archivo: `GlobalLogicTests.cs` (633 líneas)
+- Usa: `DebugLogger`, `GameManager`, `EventBus`, `GameLoopReferee`, `BulletPool`, `Bullet`, `LocalNetworkMock`, `PlayerModel`, `PlayerView`, `PlayerController`
+
+**Campos:**
+
+- logger : DebugLogger
+- gameManager : GameManager
+- testHarness : GameObject
+- poolManagerGo : GameObject
+
+**Métodos:**
+
+- public SetUp() : IEnumerator
+- public TearDown() : IEnumerator
+- private AssertLogExists(string eventKey) : void
+- private AssertLogExistsWithMessage(string eventKey, string partialMsg) : void
+- public Test_System_Events() : IEnumerator
+- public Test_Auth_Events() : IEnumerator
+- public Test_Lobby_Events() : IEnumerator
+- public Test_Matchmaking_Events() : IEnumerator
+- public Test_Network_Events() : IEnumerator
+- public Test_StateMachine_Events() : IEnumerator
+- public Test_PlayerSync_Events() : IEnumerator
+- public Test_Weapon_Events() : IEnumerator
+- public Test_Damage_Events() : IEnumerator
+- public Test_WinLose_Events() : IEnumerator
+- public Test_Notifications_Events() : IEnumerator
+- public Test_Animations_Events() : IEnumerator
+- public Test_Desync_Events() : IEnumerator
+- public Test_Fallbacks_Events() : IEnumerator
+- public Test_DebugTools_Events() : IEnumerator
+- public Test_LocalNetworkMock() : IEnumerator
+- public Test_FullMatch_Simulation() : IEnumerator
+- public Test_Player_Instantiation_On_Playing_State() : IEnumerator
 
 ### Namespace `Fusion`
 
@@ -7738,7 +8573,7 @@ Generado: 2026-06-19 23:35:20
 - Archivo: `FusionStatsCanvas.cs` (192 líneas)
 - Hereda de: `MonoBehaviour`
 - Implementa: `IDragHandler`, `IEndDragHandler`, `IBeginDragHandler`
-- Usa: `FusionStatsPanelHeader`, `FusionStatsConfig`, `CanvasAnchor`, `DragMode`, `FusionStatistics`, `FusionStatisticsHelper`
+- Usa: `FusionStatsPanelHeader`, `FusionStatsConfig`, `CanvasAnchor`, `DragMode`, `FusionStatistics`, `FusionStatisticsHelper`, `InputButton`
 
 **Propiedades:**
 
@@ -8587,14 +9422,15 @@ Generado: 2026-06-19 23:35:20
 
 #### class Projectile
 
-- Archivo: `Projectile.cs` (25 líneas)
+- Archivo: `Projectile.cs` (84 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`
 
 **Propiedades:**
 
 - Owner : PlayerRef
 - Life : TickTimer
+- Damage : int
 
 **Campos:**
 
@@ -8609,11 +9445,32 @@ Generado: 2026-06-19 23:35:20
 
 ### Namespace `Redes.Controllers`
 
+#### class EntityDisplayManager
+
+- Archivo: `EntityDisplayManager.cs` (112 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EntityDisplayView`, `NetworkPlayer`, `IEntityDisplayModel`, `RedesLog`
+
+**Campos:**
+
+- _viewPrefab : EntityDisplayView
+- _canvasParent : RectTransform
+- _poolSize : int
+- _worldOffset : Vector3
+- _pool : List<EntityDisplayView>
+- _mainCamera : Camera
+
+**Métodos:**
+
+- private Awake() : void
+- private InitializePool() : void
+- private LateUpdate() : void
+
 #### class GameFlowController
 
-- Archivo: `GameFlowController.cs` (65 líneas)
+- Archivo: `GameFlowController.cs` (356 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `GamePhase`
+- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `MatchResult`
 
 **Propiedades:**
 
@@ -8626,39 +9483,59 @@ Generado: 2026-06-19 23:35:20
 - _gameHudView : GameHudView
 - _matchController : MatchController
 - _model : GameStateModel
+- _pendingStatusMessage : string
+- LocalUsername : string
 
 **Métodos:**
 
 - private Awake() : void
+- private Start() : void
 - private OnEnable() : void
 - private OnDisable() : void
-- public StartHost() : void
+- private HandleReturnToLobbyClicked() : void
+- public TriggerReturnToLobby() : void
+- public CreateRoom() : void
+- public JoinRoom(string sessionName) : void
+- private HandlePhaseChanged(GamePhase phase) : void
 - private HandleHostStarted() : void
 - private HandlePlayerCountChanged(int count) : void
 - private HandleEnoughPlayers() : void
+- private HandleRoomListUpdated(System.Collections.Generic.List<Fusion.SessionInfo> sessions) : void
+- private HandleConnectionFailed(string reason) : void
+- private HandleMatchFinished(MatchResult result) : void
+- private LogReferenceStatus() : void
 
 #### class MatchController
 
-- Archivo: `MatchController.cs` (29 líneas)
+- Archivo: `MatchController.cs` (147 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `ResultView`, `MatchResult`
+- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`
+
+**Propiedades:**
+
+- ActiveNetworkController : Gameplay.MatchNetworkController
 
 **Campos:**
 
 - _resultView : ResultView
+- _matchNetworkController : Gameplay.MatchNetworkController
 
 **Métodos:**
 
 - private OnEnable() : void
 - private OnDisable() : void
+- private HandleLobbyClicked() : void
+- private DelayLobbyExitCoroutine() : System.Collections.IEnumerator
+- private HandleRetryClicked() : void
+- public UpdateRematchStatus(string text) : void
 - public NotifyResult(MatchResult result) : void
 - private HandleResultNotified(MatchResult result) : void
 
 #### class PlayerController
 
-- Archivo: `PlayerController.cs` (17 líneas)
+- Archivo: `PlayerController.cs` (57 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`
+- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`
 
 **Campos:**
 
@@ -8669,6 +9546,24 @@ Generado: 2026-06-19 23:35:20
 **Métodos:**
 
 - public Bind(NetworkPlayer player) : void
+- private Update() : void
+
+#### class TerrainController
+
+- Archivo: `TerrainController.cs` (20 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `TerrainModel`, `TerrainView`
+
+**Campos:**
+
+- _model : TerrainModel
+- _view : TerrainView
+- _terrainTexture : Texture2D
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
 
 ### Namespace `Redes.Core`
 
@@ -8686,6 +9581,18 @@ Generado: 2026-06-19 23:35:20
 - DEFAULT_BULLET_DAMAGE : int
 - DEFAULT_MAGAZINE_SIZE : int
 - DEFAULT_RELOAD_TIME : float
+
+#### class GameEventBus
+
+- Archivo: `GameEventBus.cs` (53 líneas)
+- Hereda de: `ScriptableObject`
+
+**Métodos:**
+
+- public TriggerPlayerShooting(PlayerRef player) : void
+- public TriggerPlayerReloadStarted(PlayerRef player) : void
+- public TriggerPlayerTookDamage(PlayerRef victim, int newHealth, PlayerRef attacker) : void
+- public TriggerPlayerDied(PlayerRef victim, PlayerRef attacker) : void
 
 #### enum GamePhase
 
@@ -8711,7 +9618,7 @@ Generado: 2026-06-19 23:35:20
 
 #### static class RedesLog
 
-- Archivo: `RedesLog.cs` (26 líneas)
+- Archivo: `RedesLog.cs` (39 líneas)
 
 **Campos:**
 
@@ -8728,32 +9635,54 @@ Generado: 2026-06-19 23:35:20
 - public static Info(string flag, string message) : void
 - public static Warn(string flag, string message) : void
 - public static Error(string flag, string message) : void
+- public static Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info") : void
 
 ### Namespace `Redes.EditorTools`
 
+#### static class RedesBuildAll
+
+- Archivo: `RedesBuildAll.cs` (86 líneas)
+- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`
+
+**Campos:**
+
+- ScenePath : string
+- BuildPath : string
+
+**Métodos:**
+
+- public static FullBuild() : void
+- public static FullBuildCLI() : void
+- private static EnsureRedesSceneIsFirst() : void
+- private static DoBuild() : void
+- public static Corregir() : void
+
 #### static class RedesPrefabCreator
 
-- Archivo: `RedesPrefabCreator.cs` (96 líneas)
-- Usa: `AssetDatabase`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `Projectile`
+- Archivo: `RedesPrefabCreator.cs` (220 líneas)
+- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `Projectile`, `EntityDisplayView`
 
 **Campos:**
 
 - PrefabFolder : string
 - PlayerPrefabPath : string
 - BulletPrefabPath : string
+- EntityDisplayViewPrefabPath : string
 
 **Métodos:**
 
 - public static CreatePrefabs() : void
+- private static CreateGameEventBusAsset() : void
 - private static CreatePlayerPrefab() : void
 - private static CreateBulletPrefab() : void
+- private static CreateEntityDisplayViewPrefab() : void
 - private static AssignRefs(Object target, params (string field, Object value)[] pairs) : void
-- private static EnsureFolder() : void
+- private static EnsureFolder(string parent, string child) : void
 
 #### static class RedesSceneCreator
 
-- Archivo: `RedesSceneCreator.cs` (155 líneas)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `AssetDatabase`, `LobbyView`, `GameHudView`, `ResultView`
+- Archivo: `RedesSceneCreator.cs` (420 líneas)
+- Usa: `TerrainController`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `LobbyView`, `GameHudView`, `ResultView`, `RedesPrefabCreator`, `RedesSceneLinker`
 
 **Campos:**
 
@@ -8764,16 +9693,19 @@ Generado: 2026-06-19 23:35:20
 
 - public static CreateScene() : void
 - private static BuildUI() : void
+- private static NewSlider(string name, Transform parent, Vector2 anchoredPos, Vector2 size) : Slider
 - private static NewUiPanel(string name, Transform parent) : GameObject
 - private static NewText(string name, Transform parent, Font font, string content, Vector2 anchoredPos, int size, TextAnchor align = TextAnchor.MiddleCenter) : Text
 - private static NewButton(string name, Transform parent, Font font, string label, Vector2 anchoredPos) : Button
+- private static NewInputField(string name, Transform parent, Font font, string placeholderTxt, Vector2 anchoredPos) : InputField
 - private static GetLegacyFont() : Font
+- public static Corregir() : void
 - private static EnsureFolder(string parent, string child) : void
 
 #### static class RedesSceneLinker
 
-- Archivo: `RedesSceneLinker.cs` (115 líneas)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `PlayerShooting`, `EditorUtility`
+- Archivo: `RedesSceneLinker.cs` (168 líneas)
+- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationController`, `EditorUtility`
 
 **Campos:**
 
@@ -8788,22 +9720,53 @@ Generado: 2026-06-19 23:35:20
 - private static ChildGO(Component root, string name) : GameObject
 - private static Assign(Object target, params (string field, Object value)[] pairs) : void
 
+#### static class TriggerCorregir
+
+- Archivo: `TriggerCorregir.cs` (8 líneas)
+- Usa: `RedesSceneCreator`
+
+**Métodos:**
+
+- public static Run() : void
+
 ### Namespace `Redes.Gameplay`
 
 #### class MatchNetworkController
 
-- Archivo: `MatchNetworkController.cs` (27 líneas)
+- Archivo: `MatchNetworkController.cs` (285 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `MatchController`, `RedesLog`
+- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `GameFlowController`
+
+**Propiedades:**
+
+- ReadyForRematchCount : int
 
 **Campos:**
 
 - _matchController : MatchController
+- _eventBus : GameEventBus
+- _winSound : AudioClip
+- _loseSound : AudioClip
+- _bgmSound : AudioClip
+- _audioSource : AudioSource
 
 **Métodos:**
 
+- private Awake() : void
+- public Spawned() : void
+- public Despawned(NetworkRunner runner, bool hasState) : void
+- private OnDestroy() : void
+- private HandlePlayerDied(PlayerRef victim, PlayerRef attacker) : void
 - public AnnounceResult(PlayerRef loser, PlayerRef winner) : void
 - public RpcAnnounceResult(PlayerRef loser, PlayerRef winner) : void
+- public SetLocalPlayerReady() : void
+- public RpcSetReadyForRematch(RpcInfo info = default) : void
+- private RpcBroadcastOpponentReady(PlayerRef readyPlayer) : void
+- public NotifyReturnToLobby() : void
+- private RpcNotifyLobbyClicked(RpcInfo info = default) : void
+- private AutoReturnToLobbyCoroutine() : System.Collections.IEnumerator
+- private RematchSequenceCoroutine() : System.Collections.IEnumerator
+- private RpcBroadcastRematchStatus(string text) : void
 
 ### Namespace `Redes.Models`
 
@@ -8822,6 +9785,17 @@ Generado: 2026-06-19 23:35:20
 - public SetPhase(GamePhase phase) : void
 - public SetPlayers(int count) : void
 
+#### interface IEntityDisplayModel
+
+- Archivo: `IEntityDisplayModel.cs` (7 líneas)
+
+**Propiedades:**
+
+- WorldPosition : Vector3
+- HealthProgress : float
+- Nickname : string
+- IsActive : bool
+
 #### class PlayerModel
 
 - Archivo: `PlayerModel.cs` (21 líneas)
@@ -8838,14 +9812,29 @@ Generado: 2026-06-19 23:35:20
 - public SetHealth(int value) : void
 - public SetAmmo(int value) : void
 
+#### class TerrainModel
+
+- Archivo: `TerrainModel.cs` (8 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Propiedades:**
+
+- Size : Vector3
+- TerrainColor : Color
+
+**Campos:**
+
+- _size : Vector3
+- _terrainColor : Color
+
 ### Namespace `Redes.Network`
 
 #### class HostNetworkService
 
-- Archivo: `HostNetworkService.cs` (143 líneas)
+- Archivo: `HostNetworkService.cs` (430 líneas)
 - Hereda de: `MonoBehaviour`
 - Implementa: `INetworkService`, `INetworkRunnerCallbacks`
-- Usa: `PlayerSpawner`, `ISessionListHandler`, `RoomSessionHandler`, `RedesLog`, `GameConstants`
+- Usa: `PlayerSpawner`, `RedesLog`, `NetworkSceneManagerDefault`, `GameConstants`, `ResultView`, `GameFlowController`, `NetworkInputData`, `InputButton`
 
 **Propiedades:**
 
@@ -8853,43 +9842,53 @@ Generado: 2026-06-19 23:35:20
 - ConnectedPlayers : int
 - Runner : NetworkRunner
 - PlayerPrefab : NetworkObject
+- Instance : HostNetworkService
 
 **Campos:**
 
 - _playerSpawner : PlayerSpawner
 - _playerPrefab : NetworkObject
-- _runner : NetworkRunner
-- _sessionHandler : ISessionListHandler
+- _lobbyRunner : NetworkRunner
+- _gameRunner : NetworkRunner
+- _isInSession : bool
+- _lobbyShutdownIntentional : bool
+- _lastRoomAvailable : bool
 
 **Métodos:**
 
 - private Awake() : void
-- public StartAsHost() : void
+- private CreateRunner(string goName, bool provideInput) : NetworkRunner
+- private DestroyRunnerGameObject(NetworkRunner runner) : void
+- public async StartLobbyWatch() : void
+- private ShutdownLobbyRunner() : void
+- public async StartAsHost(string sessionName) : void
+- public async StartAsClient(string sessionName) : void
+- private FailAndReturnToLobby(string reason) : void
 - public Shutdown() : void
-- private RefreshPlayerCount() : void
 - public OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) : void
 - public OnPlayerJoined(NetworkRunner runner, PlayerRef player) : void
 - public OnPlayerLeft(NetworkRunner runner, PlayerRef player) : void
 - public OnConnectedToServer(NetworkRunner runner) : void
 - public OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) : void
 - public OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) : void
-- public OnInput(NetworkRunner runner, NetworkInput input) : void
-- public OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) : void
-- public OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) : void
 - public OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) : void
-- public OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) : void
-- public OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) : void
-- public OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) : void
-- public OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) : void
-- public OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) : void
-- public OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) : void
-- public OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) : void
+- public OnInput(NetworkRunner runner, NetworkInput input) : void
+- private RefreshPlayerCount() : void
+- public OnInputMissing(NetworkRunner r, PlayerRef p, NetworkInput i) : void
+- public OnConnectRequest(NetworkRunner r, NetworkRunnerCallbackArgs.ConnectRequest req, byte[] t) : void
+- public OnUserSimulationMessage(NetworkRunner r, SimulationMessagePtr m) : void
+- public OnCustomAuthenticationResponse(NetworkRunner r, Dictionary<string, object> d) : void
+- public OnHostMigration(NetworkRunner r, HostMigrationToken t) : void
+- public OnReliableDataReceived(NetworkRunner r, PlayerRef p, ReliableKey k, ArraySegment<byte> d) : void
+- public OnReliableDataProgress(NetworkRunner r, PlayerRef p, ReliableKey k, float prog) : void
+- public OnObjectExitAOI(NetworkRunner r, NetworkObject o, PlayerRef p) : void
+- public OnObjectEnterAOI(NetworkRunner r, NetworkObject o, PlayerRef p) : void
 - public OnSceneLoadDone(NetworkRunner runner) : void
-- public OnSceneLoadStart(NetworkRunner runner) : void
+- public OnSceneLoadStart(NetworkRunner r) : void
 
 #### interface INetworkService
 
-- Archivo: `INetworkService.cs` (18 líneas)
+- Archivo: `INetworkService.cs` (16 líneas)
 
 **Propiedades:**
 
@@ -8898,8 +9897,18 @@ Generado: 2026-06-19 23:35:20
 
 **Métodos:**
 
-- public StartAsHost() : void
+- public StartAsHost(string sessionName) : void
+- public StartAsClient(string sessionName) : void
 - public Shutdown() : void
+
+#### enum InputButton
+
+- Archivo: `NetworkInputData.cs` (5 líneas)
+
+**Campos:**
+
+- Fire : enum
+- Reload : enum
 
 #### interface ISessionListHandler
 
@@ -8909,9 +9918,20 @@ Generado: 2026-06-19 23:35:20
 
 - public HandleSessionList(NetworkRunner runner, List<SessionInfo> sessionList) : void
 
+#### struct NetworkInputData
+
+- Archivo: `NetworkInputData.cs` (6 líneas)
+- Implementa: `INetworkInput`
+
+**Campos:**
+
+- Move : Vector2
+- AimDirection : Vector2
+- Buttons : NetworkButtons
+
 #### class PlayerSpawner
 
-- Archivo: `PlayerSpawner.cs` (33 líneas)
+- Archivo: `PlayerSpawner.cs` (87 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `RedesLog`
 
@@ -8924,63 +9944,80 @@ Generado: 2026-06-19 23:35:20
 
 - public SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab) : void
 - public DespawnPlayer(NetworkRunner runner, PlayerRef player) : void
+- public IsPlayerSpawned(PlayerRef player) : bool
+- public DespawnAllActivePlayers(NetworkRunner runner) : void
+- public ClearSpawned() : void
 - private GetSpawnPosition(PlayerRef player) : Vector3
 
 #### class RoomSessionHandler
 
-- Archivo: `RoomSessionHandler.cs` (43 líneas)
+- Archivo: `RoomSessionHandler.cs` (64 líneas)
 - Implementa: `ISessionListHandler`
-- Usa: `HostNetworkService`, `RedesLog`, `GameConstants`
+- Usa: `HostNetworkService`, `NetworkSceneManagerDefault`, `RedesLog`, `GameConstants`
 
 **Campos:**
 
 - _service : HostNetworkService
+- _starting : bool
 
 **Métodos:**
 
 - public RoomSessionHandler(HostNetworkService service) : (constructor)
-- public HandleSessionList(NetworkRunner runner, List<SessionInfo> sessionList) : void
+- public async HandleSessionList(NetworkRunner runner, List<SessionInfo> sessionList) : void
 
 ### Namespace `Redes.Player`
 
 #### class AmmoSystem
 
-- Archivo: `AmmoSystem.cs` (40 líneas)
+- Archivo: `AmmoSystem.cs` (83 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `GameConstants`, `RedesLog`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`
 
 **Propiedades:**
 
 - CurrentAmmo : int
 - IsReloading : NetworkBool
 - ReloadTimer : TickTimer
+- ReloadProgress : float
 - HasAmmo : bool
 
 **Campos:**
 
 - _magazineSize : int
 - _reloadTime : float
+- _eventBus : GameEventBus
+- _playerEventBus : PlayerEventBus
 
 **Métodos:**
 
+- private OnAmmoChangedRender() : void
 - public Spawned() : void
 - public TryConsume() : bool
+- private Awake() : void
 - public StartReload() : void
 - public FixedUpdateNetwork() : void
 
 #### class NetworkPlayer
 
-- Archivo: `NetworkPlayer.cs` (35 líneas)
+- Archivo: `NetworkPlayer.cs` (142 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `RedesLog`
+- Implementa: `IEntityDisplayModel`
+- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
 
 **Propiedades:**
 
+- WorldPosition : Vector3
+- HealthProgress : float
+- IsActive : bool
+- NetNickname : NetworkString<_16>
+- Nickname : string
 - Movement : PlayerMovement
 - Shooting : PlayerShooting
 - Health : PlayerHealth
 - Ammo : AmmoSystem
 - Animation : PlayerAnimationController
+- EventBus : PlayerEventBus
+- _previousButtons : NetworkButtons
 
 **Campos:**
 
@@ -8989,34 +10026,68 @@ Generado: 2026-06-19 23:35:20
 - _health : PlayerHealth
 - _ammo : AmmoSystem
 - _animation : PlayerAnimationController
+- _eventBus : PlayerEventBus
 
 **Métodos:**
 
+- private OnNicknameChangedRender() : void
+- private RpcSetNickname(string nickname) : void
 - public Spawned() : void
+- public Render() : void
 - public FixedUpdateNetwork() : void
 
 #### class PlayerAnimationController
 
-- Archivo: `PlayerAnimationController.cs` (18 líneas)
+- Archivo: `PlayerAnimationController.cs` (82 líneas)
 - Hereda de: `NetworkBehaviour`
+- Usa: `PlayerMovement`, `PlayerHealth`, `PlayerShooting`, `VFXManager`
 
 **Campos:**
 
-- _animator : Animator
-- PARAM_SPEED : string
-- PARAM_SHOOT : string
-- PARAM_DEAD : string
+- _visuals : Transform
+- _shootSound : AudioClip
+- _movement : PlayerMovement
+- _health : PlayerHealth
+- _shooting : PlayerShooting
+- _lastShootCount : int
+- _bobTimer : float
+- _originalScale : Vector3
+- _recoilTimer : float
 
 **Métodos:**
 
+- private Awake() : void
 - public Render() : void
+
+#### class PlayerEventBus
+
+- Archivo: `PlayerEventBus.cs` (51 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- OnTookDamage : Action<int, GameObject>
+- OnShoot : Action
+- OnMove : Action<Vector3>
+- OnSpawned : Action
+- OnDied : Action
+- OnReload : Action
+
+**Métodos:**
+
+- public TriggerTookDamage(int attackerId, GameObject bulletObj) : void
+- public TriggerShoot() : void
+- public TriggerMove(Vector3 velocity) : void
+- public TriggerSpawned() : void
+- public TriggerDied() : void
+- public TriggerReload() : void
 
 #### class PlayerHealth
 
-- Archivo: `PlayerHealth.cs` (36 líneas)
+- Archivo: `PlayerHealth.cs` (133 líneas)
 - Hereda de: `NetworkBehaviour`
 - Implementa: `IDamageable`
-- Usa: `GameConstants`, `MatchNetworkController`, `RedesLog`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`
 
 **Propiedades:**
 
@@ -9026,88 +10097,147 @@ Generado: 2026-06-19 23:35:20
 **Campos:**
 
 - _maxHealth : int
-- _matchNetwork : MatchNetworkController
+- _eventBus : GameEventBus
+- _hitSound : AudioClip
+- _playerEventBus : PlayerEventBus
+- _lastHealth : int
 
 **Métodos:**
 
+- private Awake() : void
+- private OnHealthChangedRender() : void
 - public Spawned() : void
 - public TakeDamage(int amount, PlayerRef attacker) : void
 
 #### class PlayerMovement
 
-- Archivo: `PlayerMovement.cs` (15 líneas)
+- Archivo: `PlayerMovement.cs` (48 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`
+
+**Propiedades:**
+
+- NetworkVelocity : Vector3
 
 **Campos:**
 
 - _moveSpeed : float
 - _body : Rigidbody
+- _eventBus : PlayerEventBus
 
 **Métodos:**
 
+- private Awake() : void
 - public FixedUpdateNetwork() : void
 
 #### class PlayerShooting
 
-- Archivo: `PlayerShooting.cs` (19 líneas)
+- Archivo: `PlayerShooting.cs` (53 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `AmmoSystem`, `GameConstants`, `RedesLog`
+- Usa: `AmmoSystem`, `GameEventBus`, `GameConstants`, `PlayerEventBus`, `Projectile`, `RedesLog`
+
+**Propiedades:**
+
+- ShootCount : int
+- ShootTimer : TickTimer
+- IsShooting : bool
 
 **Campos:**
 
 - _muzzle : Transform
 - _projectilePrefab : NetworkObject
 - _ammo : AmmoSystem
+- _eventBus : GameEventBus
 - _damage : int
+- _playerEventBus : PlayerEventBus
 
 **Métodos:**
 
+- private Awake() : void
 - public Fire() : void
 
 ### Namespace `Redes.Views`
 
+#### class EntityDisplayView
+
+- Archivo: `EntityDisplayView.cs` (42 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- _healthSlider : Slider
+- _nicknameText : Text
+
+**Métodos:**
+
+- public SetHealth(float progress) : void
+- public SetNickname(string nickname) : void
+- public SetPosition(Vector2 screenPos) : void
+- public SetVisible(bool visible) : void
+
 #### class GameHudView
 
-- Archivo: `GameHudView.cs` (21 líneas)
+- Archivo: `GameHudView.cs` (39 líneas)
 - Hereda de: `MonoBehaviour`
 
 **Campos:**
 
 - _healthText : Text
 - _ammoText : Text
+- _stateText : Text
+- _reloadSlider : Slider
 
 **Métodos:**
 
 - public ShowHealth(int health) : void
 - public ShowAmmo(int ammo, int magazineSize) : void
+- public ShowState(string state) : void
+- public ShowReloadProgress(float progress) : void
 - public SetVisible(bool visible) : void
 
 #### class LobbyView
 
-- Archivo: `LobbyView.cs` (29 líneas)
+- Archivo: `LobbyView.cs` (172 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `GameConstants`
+- Usa: `GameConstants`, `RedesLog`
 
 **Propiedades:**
 
 - HostButton : Button
+- JoinButton : Button
+- Username : string
 
 **Campos:**
 
 - _statusText : Text
 - _playerCountText : Text
+- _usernameInput : InputField
+- _roomListContainer : Transform
+- _roomButtonPrefab : GameObject
 - _hostButton : Button
+- _joinButton : Button
+- _ramboButton : Button
+- _t600Button : Button
+- _lionButton : Button
 
 **Métodos:**
 
+- private Start() : void
+- private SetUsername(string name) : void
 - public ShowStatus(string message) : void
 - public ShowPlayerCount(int current) : void
+- public ShowButtons() : void
+- public SetJoinButtonEnabled(bool enabled) : void
+- public HideButtons() : void
+- public PopulateRooms(System.Collections.Generic.List<Fusion.SessionInfo> sessions, System.Action<string> onJoinClicked) : void
 - public SetVisible(bool visible) : void
+- public ShowError(string message) : void
+- private RestoreButtons() : void
+- private SetButtons(bool host, bool join) : void
 
 #### class ResultView
 
-- Archivo: `ResultView.cs` (37 líneas)
+- Archivo: `ResultView.cs` (98 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `MatchResult`, `RedesLog`
 
@@ -9115,10 +10245,51 @@ Generado: 2026-06-19 23:35:20
 
 - _resultText : Text
 - _panelRoot : GameObject
+- _retryButton : Button
+- _lobbyButton : Button
+- _winBackground : RawImage
+- _loseBackground : RawImage
 
 **Métodos:**
 
+- private Awake() : void
 - public ShowResult(MatchResult result) : void
+- public ShowRematchStatus(string status) : void
+- public HideResult() : void
+- public SetRetryButtonInteractable(bool interactable) : void
+
+#### class TerrainView
+
+- Archivo: `TerrainView.cs` (21 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- _terrainRenderer : Renderer
+
+**Métodos:**
+
+- public Initialize(Vector3 size, Color color, Texture2D texture) : void
+
+#### class VFXManager
+
+- Archivo: `VFXManager.cs` (31 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Propiedades:**
+
+- Instance : VFXManager
+
+**Campos:**
+
+- _hitVfxPrefab : ParticleSystem
+- _muzzleFlashPrefab : ParticleSystem
+
+**Métodos:**
+
+- private Awake() : void
+- public PlayHit(Vector3 position) : void
+- public PlayMuzzleFlash(Transform muzzlePoint) : void
 
 ### Namespace `USP.Core`
 

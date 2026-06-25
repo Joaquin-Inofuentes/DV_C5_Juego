@@ -1,9 +1,11 @@
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
 using Redes.Player;
 using Redes.Combat;
+using Redes.Views;
 
 namespace Redes.EditorTools
 {
@@ -52,20 +54,22 @@ namespace Redes.EditorTools
 
         private static void CreatePlayerPrefab()
         {
-            // Primitive body (capsule).
-            var go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            go.name = "Player";
+            // Root
+            var go = new GameObject("Player");
 
             // Physics + Fusion identity.
             var rb = go.AddComponent<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
+            
+            var col = go.AddComponent<CapsuleCollider>();
+            col.height = 1.8f;
+            col.radius = 0.35f;
+            col.center = new Vector3(0, 0.9f, 0); // pivot at feet, center at mid-body
+
             go.AddComponent<NetworkObject>();
             go.AddComponent<NetworkTransform>();
-
-            // Animation (PlayerAnimationController requires an Animator).
-            go.AddComponent<Animator>();
 
             // Player systems.
             var net   = go.AddComponent<Player.NetworkPlayer>();
@@ -73,32 +77,150 @@ namespace Redes.EditorTools
             var shoot = go.AddComponent<PlayerShooting>();
             var hp    = go.AddComponent<PlayerHealth>();
             var ammo  = go.AddComponent<AmmoSystem>();
-            var anim  = go.AddComponent<PlayerAnimationController>();
+            var peb   = go.AddComponent<PlayerEventBus>();
+            var animV = go.AddComponent<PlayerAnimationView>();
+
+            // Visual Model
+            var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ToonSoldiers_demo/models/ToonSoldier_demo.FBX");
+            GameObject modelObj;
+            Animator animator = null;
+
+            if (modelAsset != null)
+            {
+                modelObj = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset);
+                modelObj.name = "Model";
+                modelObj.transform.SetParent(go.transform, false);
+                modelObj.transform.localPosition = Vector3.zero; // pivot already at feet in FBX
+                modelObj.transform.localRotation = Quaternion.identity;
+                modelObj.transform.localScale = Vector3.one * 0.01f; // FBX is in cm, Unity uses meters
+
+                animator = modelObj.GetComponent<Animator>();
+                if (animator == null) animator = modelObj.AddComponent<Animator>();
+                animator.runtimeAnimatorController = GetOrCreatePlayerAnimator();
+            }
+            else
+            {
+                modelObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                modelObj.name = "Model";
+                modelObj.transform.SetParent(go.transform, false);
+                 UnityEngine.Object.DestroyImmediate(modelObj.GetComponent<BoxCollider>());
+            }
 
             // Muzzle (where bullets will spawn).
+            // Muzzle is a SIBLING of the model on the root, so its position is in world-space relative to the player root.
             var muzzle = new GameObject("Muzzle");
             muzzle.transform.SetParent(go.transform, false);
-            muzzle.transform.localPosition = new Vector3(0, 0, 0.8f);
+            muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f); // ~chest height, forward
 
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
-                              ("_ammo", ammo), ("_animation", anim));
+                              ("_ammo", ammo), ("_eventBus", peb));
             AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform));
             AssignRefs(move,  ("_body", rb));
-            AssignRefs(anim,  ("_animator", go.GetComponent<Animator>()));
+            AssignRefs(animV, ("_animator", animator), ("_eventBus", peb));
 
             PrefabUtility.SaveAsPrefabAsset(go, PlayerPrefabPath);
             Object.DestroyImmediate(go);
         }
 
+        /// <summary>Public entry-point so the test scene builder can reuse this.</summary>
+        public static AnimatorController GetOrCreateAnimator(string path = null)
+        {
+            return GetOrCreatePlayerAnimator(path);
+        }
+
+        private static AnimatorController GetOrCreatePlayerAnimator(string overridePath = null)
+        {
+            string path = overridePath ?? "Assets/_Redes/Art/PlayerAnimator.controller";
+            var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(path);
+            if (controller != null) return controller;
+
+            if (!AssetDatabase.IsValidFolder("Assets/_Redes/Art"))
+            {
+                AssetDatabase.CreateFolder("Assets/_Redes", "Art");
+            }
+
+            controller = AnimatorController.CreateAnimatorControllerAtPath(path);
+
+            // Parameters
+            controller.AddParameter("MoveSpeed", AnimatorControllerParameterType.Float);
+            controller.AddParameter("Shoot", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("IsDead", AnimatorControllerParameterType.Bool);
+
+            var rootStateMachine = controller.layers[0].stateMachine;
+
+            // Load clips
+            var idleClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_idle.FBX");
+            var runClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_run.FBX");
+            var shootClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_shoot.FBX");
+
+            // States
+            var stateIdle = rootStateMachine.AddState("Idle");
+            stateIdle.motion = idleClip;
+
+            var stateRun = rootStateMachine.AddState("Run");
+            stateRun.motion = runClip;
+
+            var stateShoot = rootStateMachine.AddState("Shoot");
+            stateShoot.motion = shootClip;
+
+            var stateDead = rootStateMachine.AddState("Dead");
+
+            rootStateMachine.defaultState = stateIdle;
+
+            // Transitions
+            var idleToRun = stateIdle.AddTransition(stateRun);
+            idleToRun.hasExitTime = false;
+            idleToRun.AddCondition(AnimatorConditionMode.Greater, 0.1f, "MoveSpeed");
+
+            var runToIdle = stateRun.AddTransition(stateIdle);
+            runToIdle.hasExitTime = false;
+            runToIdle.AddCondition(AnimatorConditionMode.Less, 0.1f, "MoveSpeed");
+
+            var anyToShoot = rootStateMachine.AddAnyStateTransition(stateShoot);
+            anyToShoot.hasExitTime = false;
+            anyToShoot.AddCondition(AnimatorConditionMode.If, 0, "Shoot");
+
+            var shootToIdle = stateShoot.AddTransition(stateIdle);
+            shootToIdle.hasExitTime = true;
+            shootToIdle.exitTime = 1f; // wait for anim to finish
+
+            var anyToDead = rootStateMachine.AddAnyStateTransition(stateDead);
+            anyToDead.hasExitTime = false;
+            anyToDead.AddCondition(AnimatorConditionMode.If, 0, "IsDead");
+
+            var deadToIdle = stateDead.AddTransition(stateIdle);
+            deadToIdle.hasExitTime = false;
+            deadToIdle.AddCondition(AnimatorConditionMode.IfNot, 0, "IsDead");
+
+            AssetDatabase.SaveAssets();
+            return controller;
+        }
+
         private static void CreateBulletPrefab()
         {
-            var go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            go.name = "Bullet";
-            go.transform.localScale = Vector3.one * 0.3f;
+            var go = new GameObject("Bullet");
 
-            var col = go.GetComponent<SphereCollider>();
+            var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Redes/Art/Models/BulletModel.obj");
+            if (modelAsset != null)
+            {
+                var modelObj = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset);
+                modelObj.name = "Model";
+                modelObj.transform.SetParent(go.transform, false);
+                modelObj.transform.localScale = Vector3.one * 0.5f;
+            }
+            else
+            {
+                var modelObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                modelObj.name = "Model";
+                modelObj.transform.SetParent(go.transform, false);
+                modelObj.transform.localScale = Vector3.one * 0.3f;
+                UnityEngine.Object.DestroyImmediate(modelObj.GetComponent<SphereCollider>());
+            }
+
+            var col = go.AddComponent<SphereCollider>();
             col.isTrigger = true;
+            col.radius = 0.3f;
 
             var rb = go.AddComponent<Rigidbody>();
             rb.useGravity = false;

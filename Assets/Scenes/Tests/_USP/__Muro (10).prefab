@@ -112,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.976, y: 0.235, z: 0}
-  m_LocalScale: {x: 2.38523, y: 2.8917913, z: 1}
+  m_LocalScale: {x: 30.284182, y: 5.1220393, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 979822528749098858}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 1678158642418876351}
   - component: {fileID: 2133902348255928028}
   m_Layer: 12
-  m_Name: Muro (17)
+  m_Name: MiniMapa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,9 +372,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 7428079610f074ba484c046f3cc92512, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.34901962}
+  m_SortingOrder: -5
+  m_Sprite: {fileID: 21300000, guid: 3a16dbbbdc479d747b98cd3133f8ecc7, type: 3}
+  m_Color: {r: 0.4433962, g: 0.36601102, b: 0.36601102, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

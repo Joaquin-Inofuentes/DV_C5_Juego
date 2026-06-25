@@ -38,13 +38,13 @@ namespace Redes.Player
         [SerializeField] private PlayerShooting _shooting;
         [SerializeField] private PlayerHealth _health;
         [SerializeField] private AmmoSystem _ammo;
-        [SerializeField] private PlayerAnimationController _animation;
+        [SerializeField] private PlayerEventBus _eventBus;
 
         public PlayerMovement Movement => _movement;
         public PlayerShooting Shooting => _shooting;
         public PlayerHealth Health => _health;
         public AmmoSystem Ammo => _ammo;
-        public PlayerAnimationController Animation => _animation;
+        public PlayerEventBus EventBus => _eventBus;
 
         [Networked] private NetworkButtons _previousButtons { get; set; }
 
@@ -81,6 +81,11 @@ namespace Redes.Player
         {
             RedesLog.Info(RedesLog.PLAYER, $">> NetworkPlayer.Spawned() InputAuthority={Object.InputAuthority} HasInputAuthority={Object.HasInputAuthority} HasStateAuthority={Object.HasStateAuthority}");
             RedesLog.Info(RedesLog.PLAYER, $"   Inicio el jugador {Object.InputAuthority}");
+
+            if (_eventBus != null)
+            {
+                _eventBus.TriggerSpawned();
+            }
 
             if (Object.HasInputAuthority)
             {

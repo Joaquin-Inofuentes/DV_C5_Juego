@@ -17,8 +17,14 @@ namespace Redes.Player
 
         // Optional cached refs (assigned by the Prefab tool).
         [SerializeField] private Rigidbody _body;
+        private PlayerEventBus _eventBus;
 
         [Networked] public Vector3 NetworkVelocity { get; set; }
+
+        private void Awake()
+        {
+            _eventBus = GetComponent<PlayerEventBus>();
+        }
 
         public override void FixedUpdateNetwork()
         {
@@ -36,6 +42,11 @@ namespace Redes.Player
                 // Move transform directly. Rigidbody is set to kinematic.
                 transform.position += moveVelocity * Runner.DeltaTime;
                 NetworkVelocity = moveVelocity;
+
+                if (_eventBus != null && moveVelocity.sqrMagnitude > 0.01f)
+                {
+                    _eventBus.TriggerMove(moveVelocity);
+                }
 
                 Vector3 lookPos = new Vector3(data.AimDirection.x, transform.position.y, data.AimDirection.y);
                 Vector3 lookDir = lookPos - transform.position;

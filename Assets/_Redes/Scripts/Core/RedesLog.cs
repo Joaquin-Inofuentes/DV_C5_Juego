@@ -26,30 +26,30 @@ namespace Redes.Core
 
         public static void Info(string flag, string message)
         {
-            Debug.Log($"{flag} {message}");
+            // Debug.Log($"{flag} {message}");
         }
 
         public static void Warn(string flag, string message)
         {
-            Debug.LogWarning($"{flag} {message}");
+            // Debug.LogWarning($"{flag} {message}");
         }
 
         public static void Error(string flag, string message)
         {
-            Debug.LogError($"{flag} {message}");
+            // Debug.LogError($"{flag} {message}");
         }
 
         public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info")
         {
-            string contextStr = string.IsNullOrEmpty(playerContext) ? "System" : $"Player:{playerContext}";
-            string formatted = $"[{className}::{methodName}] ({contextStr}) -> {content}";
-            
-            if (type == "Warn")
-                Warn(flag, formatted);
-            else if (type == "Error")
-                Error(flag, formatted);
-            else
-                Info(flag, formatted);
+            // string contextStr = string.IsNullOrEmpty(playerContext) ? "System" : $"Player:{playerContext}";
+            // string formatted = $"[{className}::{methodName}] ({contextStr}) -> {content}";
+            // 
+            // if (type == "Warn")
+            //     Warn(flag, formatted);
+            // else if (type == "Error")
+            //     Error(flag, formatted);
+            // else
+            //     Info(flag, formatted);
         }
     }
 }

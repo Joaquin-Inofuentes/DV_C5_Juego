@@ -46,6 +46,13 @@ namespace Redes.EditorTools
             var playerPrefabNo = playerPrefab != null ? playerPrefab.GetComponent<NetworkObject>() : null;
             var bulletPrefabNo = bulletPrefab != null ? bulletPrefab.GetComponent<NetworkObject>() : null;
 
+            // ---- Load AudioClips ----
+            var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
+            var hitSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
+            var winSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Win.wav");
+            var loseSound  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+            var bgmSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/BGM.wav");
+
             // ---- Network ----
             Assign(host, ("_playerSpawner", spawner), ("_playerPrefab", playerPrefabNo));
 
@@ -54,7 +61,10 @@ namespace Redes.EditorTools
                          ("_gameHudView", hud), ("_matchController", match));
             Assign(match, ("_resultView", result));
             Assign(player, ("_hudView", hud));
-            Assign(matchNet, ("_matchController", match));
+            Assign(matchNet, ("_matchController", match), 
+                             ("_winSound", winSound), 
+                             ("_loseSound", loseSound), 
+                             ("_bgmSound", bgmSound));
 
             var displayManager = Find<EntityDisplayManager>();
             var displayViewPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.EntityDisplayViewPrefabPath);
@@ -104,9 +114,10 @@ namespace Redes.EditorTools
                 Assign(matchNet, ("_eventBus", eventBus));
                 if (playerPrefab != null)
                 {
-                    Assign(playerPrefab.GetComponent<PlayerHealth>(), ("_eventBus", eventBus));
+                    Assign(playerPrefab.GetComponent<PlayerHealth>(), ("_eventBus", eventBus), ("_hitSound", hitSound));
                     Assign(playerPrefab.GetComponent<PlayerShooting>(), ("_eventBus", eventBus));
                     Assign(playerPrefab.GetComponent<AmmoSystem>(), ("_eventBus", eventBus));
+                    Assign(playerPrefab.GetComponent<Redes.Views.PlayerAnimationView>(), ("_shootSound", shootSound));
                 }
             }
 

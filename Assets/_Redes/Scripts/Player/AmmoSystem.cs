@@ -61,6 +61,13 @@ namespace Redes.Player
             return true;
         }
 
+        private PlayerEventBus _playerEventBus;
+
+        private void Awake()
+        {
+            _playerEventBus = GetComponent<PlayerEventBus>();
+        }
+
         /// <summary>Begin reloading.</summary>
         public void StartReload()
         {
@@ -69,6 +76,7 @@ namespace Redes.Player
             // REQUIRED-STYLE FLAG LOG
             RedesLog.Info(RedesLog.AMMO, $"El jugador {Object.InputAuthority} esta recargando");
             if (_eventBus != null) _eventBus.TriggerPlayerReloadStarted(Object.InputAuthority);
+            if (_playerEventBus != null) _playerEventBus.TriggerReload();
             
             if (Object.HasStateAuthority)
             {

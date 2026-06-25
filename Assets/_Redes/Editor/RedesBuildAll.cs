@@ -88,7 +88,7 @@ namespace Redes.EditorTools
         [MenuItem("Tools/Redes/5. Corregir", priority = 5)]
         public static void Corregir()
         {
-            Debug.Log("[REDES][CORREGIR] === Paso 1: Crear escena ===");
+            Debug.Log("[REDES][CORREGIR] === Paso 1: Crear escena de juego ===");
             RedesSceneCreator.CreateScene();
 
             Debug.Log("[REDES][CORREGIR] === Paso 2: Crear prefabs ===");
@@ -96,6 +96,9 @@ namespace Redes.EditorTools
 
             Debug.Log("[REDES][CORREGIR] === Paso 3: Enlazar referencias ===");
             RedesSceneLinker.LinkAll();
+
+            Debug.Log("[REDES][CORREGIR] === Paso 4: Crear escena de test offline ===");
+            RedesTestSceneBuilder.BuildTestScene();
 
             Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");
         }

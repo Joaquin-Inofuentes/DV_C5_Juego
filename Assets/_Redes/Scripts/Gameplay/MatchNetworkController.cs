@@ -5,13 +5,6 @@ using Redes.Controllers;
 
 namespace Redes.Gameplay
 {
-    /// <summary>
-    /// NETWORKED win/lose broadcaster. Lives on a scene "GameManager" Network Object.
-    ///
-    /// When a player dies, GameEventBus fires OnPlayerDied. Host listens to this
-    /// and sends an RPC to ALL clients to announce the result.
-    /// Also handles the Rematch logic.
-    /// </summary>
     [RequireComponent(typeof(NetworkObject))]
     public class MatchNetworkController : NetworkBehaviour
     {
@@ -21,7 +14,20 @@ namespace Redes.Gameplay
         [Header("Event Bus")]
         [SerializeField] private GameEventBus _eventBus;
 
+        [Header("Audio")]
+        [SerializeField] private AudioClip _winSound;
+        [SerializeField] private AudioClip _loseSound;
+        [SerializeField] private AudioClip _bgmSound;
+        private AudioSource _audioSource;
+
         [Networked] public int ReadyForRematchCount { get; set; }
+
+        private void Awake()
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.loop = true;
+            _audioSource.volume = 0.5f;
+        }
 
         public override void Spawned()
         {
@@ -30,6 +36,12 @@ namespace Redes.Gameplay
             {
                 _eventBus.OnPlayerDied += HandlePlayerDied;
                 RedesLog.Trace(RedesLog.MATCH, "MatchNetworkController", "Spawned", null, "Subscribed to OnPlayerDied");
+            }
+            
+            if (_bgmSound != null && _audioSource != null)
+            {
+                _audioSource.clip = _bgmSound;
+                _audioSource.Play();
             }
         }
 
@@ -77,6 +89,12 @@ namespace Redes.Gameplay
             }
 
             var result = (Runner.LocalPlayer == loser) ? MatchResult.Lose : MatchResult.Win;
+            
+            if (result == MatchResult.Win && _winSound != null && Camera.main != null) 
+                AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
+            if (result == MatchResult.Lose && _loseSound != null && Camera.main != null) 
+                AudioSource.PlayClipAtPoint(_loseSound, Camera.main.transform.position);
+
             if (_matchController != null)
             {
                 _matchController.NotifyResult(result);

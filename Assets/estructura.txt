@@ -1,0 +1,4283 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es D631-D23B
+C:.
+³   Animations.meta
+³   BauerVision.meta
+³   Docs.meta
+³   Editor.meta
+³   estructura.txt
+³   INICIO_RAPIDO.txt
+³   INICIO_RAPIDO.txt.meta
+³   INSTALACION_REVIVIMIENTO.txt
+³   INSTALACION_REVIVIMIENTO.txt.meta
+³   Materials.meta
+³   Otros.meta
+³   PASO_A_PASO_IMPLEMENTACION.txt
+³   PASO_A_PASO_IMPLEMENTACION.txt.meta
+³   Photon.meta
+³   Plugins.meta
+³   Prefabs.meta
+³   reorganize_assets.ps1
+³   reorganize_assets.ps1.meta
+³   Resources.meta
+³   RESUMEN_ARCHIVOS_CREADOS.txt
+³   RESUMEN_ARCHIVOS_CREADOS.txt.meta
+³   Scenes.meta
+³   Scripts.meta
+³   Shaders.meta
+³   SISTEMA_REVIVIMIENTO.md
+³   SISTEMA_REVIVIMIENTO.md.meta
+³   Testeos.meta
+³   Tests 1.meta
+³   Tests.meta
+³   Textures.meta
+³   TriggerEventAndDestroy.cs
+³   TriggerEventAndDestroy.cs.meta
+³   UI.meta
+³   VERIFICADOR_IMPLEMENTACION.txt
+³   VERIFICADOR_IMPLEMENTACION.txt.meta
+³   _Documentos generados.meta
+³   _Imagenes.meta
+³   _Redes.meta
+³   _Redes.rar
+³   _Redes.rar.meta
+³   _Textos.meta
+³   
+ÃÄÄÄ.claude
+³       settings.local.json
+³       
+ÃÄÄÄAnimations
+³       CL_Accion de disparo.anim
+³       CL_Accion de disparo.anim.meta
+³       CL_Dano general.anim
+³       CL_Dano general.anim.meta
+³       E_DPR_P1_Arma.controller
+³       E_DPR_P1_Arma.controller.meta
+³       E_DPR_P1_Cuerpo.controller
+³       E_DPR_P1_Cuerpo.controller.meta
+³       Soldado_Anim.controller
+³       Soldado_Anim.controller.meta
+³       Soldado_Caminar.anim
+³       Soldado_Caminar.anim.meta
+³       Soldado_Idle.anim
+³       Soldado_Idle.anim.meta
+³       
+ÃÄÄÄBauerVision
+³   ³   Texture Stock Pile.meta
+³   ³   
+³   ÀÄÄÄTexture Stock Pile
+³       ³   MaterialExamples.unity
+³       ³   MaterialExamples.unity.meta
+³       ³   MaterialExamplesSettings.lighting
+³       ³   MaterialExamplesSettings.lighting.meta
+³       ³   Materials.meta
+³       ³   Plane.prefab
+³       ³   Plane.prefab.meta
+³       ³   Textures.meta
+³       ³   
+³       ÃÄÄÄMaterials
+³       ³       AllLeaves.mat
+³       ³       AllLeaves.mat.meta
+³       ³       Asphalt.mat
+³       ³       Asphalt.mat.meta
+³       ³       Asphalt2.mat
+³       ³       Asphalt2.mat.meta
+³       ³       CliffSide.mat
+³       ³       CliffSide.mat.meta
+³       ³       CliffVegetation.mat
+³       ³       CliffVegetation.mat.meta
+³       ³       ClumpyGrassAndRocks.mat
+³       ³       ClumpyGrassAndRocks.mat.meta
+³       ³       CobblePath.mat
+³       ³       CobblePath.mat.meta
+³       ³       CobblestonePath.mat
+³       ³       CobblestonePath.mat.meta
+³       ³       ConcreteBasic.mat
+³       ³       ConcreteBasic.mat.meta
+³       ³       CrackedCliff.mat
+³       ³       CrackedCliff.mat.meta
+³       ³       Dirt.mat
+³       ³       Dirt.mat.meta
+³       ³       DirtPath.mat
+³       ³       DirtPath.mat.meta
+³       ³       DirtyGround.mat
+³       ³       DirtyGround.mat.meta
+³       ³       DirtySnow.mat
+³       ³       DirtySnow.mat.meta
+³       ³       DriedMud.mat
+³       ³       DriedMud.mat.meta
+³       ³       DryCrackedPlaster.mat
+³       ³       DryCrackedPlaster.mat.meta
+³       ³       DryGrass.mat
+³       ³       DryGrass.mat.meta
+³       ³       Grass.mat
+³       ³       Grass.mat.meta
+³       ³       GrassLeaves.mat
+³       ³       GrassLeaves.mat.meta
+³       ³       Gravel.mat
+³       ³       Gravel.mat.meta
+³       ³       GreenCobbleStoneWall.mat
+³       ³       GreenCobbleStoneWall.mat.meta
+³       ³       GreenWall.mat
+³       ³       GreenWall.mat.meta
+³       ³       Hedge.mat
+³       ³       Hedge.mat.meta
+³       ³       JaggedCliff.mat
+³       ³       JaggedCliff.mat.meta
+³       ³       Leaves.mat
+³       ³       Leaves.mat.meta
+³       ³       LightGround.mat
+³       ³       LightGround.mat.meta
+³       ³       LooseDirt.mat
+³       ³       LooseDirt.mat.meta
+³       ³       LooseGravel.mat
+³       ³       LooseGravel.mat.meta
+³       ³       Meadow.mat
+³       ³       Meadow.mat.meta
+³       ³       MossyPath.mat
+³       ³       MossyPath.mat.meta
+³       ³       Mulch.mat
+³       ³       Mulch.mat.meta
+³       ³       OldBuilding.mat
+³       ³       OldBuilding.mat.meta
+³       ³       OldPath.mat
+³       ³       OldPath.mat.meta
+³       ³       OldRockWall.mat
+³       ³       OldRockWall.mat.meta
+³       ³       OldStucco.mat
+³       ³       OldStucco.mat.meta
+³       ³       PaintedFlaky.mat
+³       ³       PaintedFlaky.mat.meta
+³       ³       PaintedScratched.mat
+³       ³       PaintedScratched.mat.meta
+³       ³       Pebbles.mat
+³       ³       Pebbles.mat.meta
+³       ³       PlainStucco.mat
+³       ³       PlainStucco.mat.meta
+³       ³       RockWall.mat
+³       ³       RockWall.mat.meta
+³       ³       RockyHillSide.mat
+³       ³       RockyHillSide.mat.meta
+³       ³       RoughSnow.mat
+³       ³       RoughSnow.mat.meta
+³       ³       RoughSteel.mat
+³       ³       RoughSteel.mat.meta
+³       ³       RoughStucco.mat
+³       ³       RoughStucco.mat.meta
+³       ³       RustySteel.mat
+³       ³       RustySteel.mat.meta
+³       ³       Sidewalk.mat
+³       ³       Sidewalk.mat.meta
+³       ³       SmoothSnow.mat
+³       ³       SmoothSnow.mat.meta
+³       ³       StackedWall.mat
+³       ³       StackedWall.mat.meta
+³       ³       ThinBricks.mat
+³       ³       ThinBricks.mat.meta
+³       ³       Woodland.mat
+³       ³       Woodland.mat.meta
+³       ³       
+³       ÀÄÄÄTextures
+³           ³   Concrete.meta
+³           ³   Grasses.meta
+³           ³   Ground.meta
+³           ³   Metals.meta
+³           ³   Stone.meta
+³           ³   Tiles.meta
+³           ³   Walls.meta
+³           ³   
+³           ÃÄÄÄConcrete
+³           ³       Asphalt_Ambient_Occlusion.png
+³           ³       Asphalt_Ambient_Occlusion.png.meta
+³           ³       Asphalt_Base_Color.png
+³           ³       Asphalt_Base_Color.png.meta
+³           ³       Asphalt_Height.png
+³           ³       Asphalt_Height.png.meta
+³           ³       Asphalt_Normal.png
+³           ³       Asphalt_Normal.png.meta
+³           ³       Asphalt_Roughness.png
+³           ³       Asphalt_Roughness.png.meta
+³           ³       ConcreteBasic_Ambient_Occlusion.png
+³           ³       ConcreteBasic_Ambient_Occlusion.png.meta
+³           ³       ConcreteBasic_Base_Color.png
+³           ³       ConcreteBasic_Base_Color.png.meta
+³           ³       ConcreteBasic_Height.png
+³           ³       ConcreteBasic_Height.png.meta
+³           ³       ConcreteBasic_Normal.png
+³           ³       ConcreteBasic_Normal.png.meta
+³           ³       ConcreteBasic_Roughness.png
+³           ³       ConcreteBasic_Roughness.png.meta
+³           ³       DryCrackedPlasterl_Ambient_Occlusion.png
+³           ³       DryCrackedPlasterl_Ambient_Occlusion.png.meta
+³           ³       DryCrackedPlasterl_Base_Color.png
+³           ³       DryCrackedPlasterl_Base_Color.png.meta
+³           ³       DryCrackedPlasterl_Height.png
+³           ³       DryCrackedPlasterl_Height.png.meta
+³           ³       DryCrackedPlasterl_Normal.png
+³           ³       DryCrackedPlasterl_Normal.png.meta
+³           ³       DryCrackedPlasterl_Roughness.png
+³           ³       DryCrackedPlasterl_Roughness.png.meta
+³           ³       Sidewalk_Ambient_Occlusion.png
+³           ³       Sidewalk_Ambient_Occlusion.png.meta
+³           ³       Sidewalk_Base_Color.png
+³           ³       Sidewalk_Base_Color.png.meta
+³           ³       Sidewalk_Height.png
+³           ³       Sidewalk_Height.png.meta
+³           ³       Sidewalk_Normal.png
+³           ³       Sidewalk_Normal.png.meta
+³           ³       Sidewalk_Roughness.png
+³           ³       Sidewalk_Roughness.png.meta
+³           ³       
+³           ÃÄÄÄGrasses
+³           ³       GrassLeaves_Ambient_Occlusion.png
+³           ³       GrassLeaves_Ambient_Occlusion.png.meta
+³           ³       GrassLeaves_Base_Color.png
+³           ³       GrassLeaves_Base_Color.png.meta
+³           ³       GrassLeaves_Height.png
+³           ³       GrassLeaves_Height.png.meta
+³           ³       GrassLeaves_Normal.png
+³           ³       GrassLeaves_Normal.png.meta
+³           ³       GrassLeaves_Roughness.png
+³           ³       GrassLeaves_Roughness.png.meta
+³           ³       Grass_Ambient_Occlusion.png
+³           ³       Grass_Ambient_Occlusion.png.meta
+³           ³       Grass_Base_Color.png
+³           ³       Grass_Base_Color.png.meta
+³           ³       Grass_Height.png
+³           ³       Grass_Height.png.meta
+³           ³       Grass_Normal.png
+³           ³       Grass_Normal.png.meta
+³           ³       Grass_Roughness.png
+³           ³       Grass_Roughness.png.meta
+³           ³       Hedge_Ambient_Occlusion.png
+³           ³       Hedge_Ambient_Occlusion.png.meta
+³           ³       Hedge_Base_Color.png
+³           ³       Hedge_Base_Color.png.meta
+³           ³       Hedge_Height.png
+³           ³       Hedge_Height.png.meta
+³           ³       Hedge_Normal.png
+³           ³       Hedge_Normal.png.meta
+³           ³       Hedge_Roughness.png
+³           ³       Hedge_Roughness.png.meta
+³           ³       Leaves_Ambient_Occlusion.png
+³           ³       Leaves_Ambient_Occlusion.png.meta
+³           ³       Leaves_Base_Color.png
+³           ³       Leaves_Base_Color.png.meta
+³           ³       Leaves_Height.png
+³           ³       Leaves_Height.png.meta
+³           ³       Leaves_Normal.png
+³           ³       Leaves_Normal.png.meta
+³           ³       Leaves_Roughness.png
+³           ³       Leaves_Roughness.png.meta
+³           ³       Meadow_Ambient_Occlusion.png
+³           ³       Meadow_Ambient_Occlusion.png.meta
+³           ³       Meadow_Base_Color.png
+³           ³       Meadow_Base_Color.png.meta
+³           ³       Meadow_Height.png
+³           ³       Meadow_Height.png.meta
+³           ³       Meadow_Normal.png
+³           ³       Meadow_Normal.png.meta
+³           ³       Meadow_Roughness.png
+³           ³       Meadow_Roughness.png.meta
+³           ³       
+³           ÃÄÄÄGround
+³           ³       AllLeaves_Ambient_Occlusion.png
+³           ³       AllLeaves_Ambient_Occlusion.png.meta
+³           ³       AllLeaves_Base_Color.png
+³           ³       AllLeaves_Base_Color.png.meta
+³           ³       AllLeaves_Height.png
+³           ³       AllLeaves_Height.png.meta
+³           ³       AllLeaves_Normal.png
+³           ³       AllLeaves_Normal.png.meta
+³           ³       AllLeaves_Roughness.png
+³           ³       AllLeaves_Roughness.png.meta
+³           ³       ClumpyGrassAndRocks_Ambient_Occlusion.png
+³           ³       ClumpyGrassAndRocks_Ambient_Occlusion.png.meta
+³           ³       ClumpyGrassAndRocks_Base_Color.png
+³           ³       ClumpyGrassAndRocks_Base_Color.png.meta
+³           ³       ClumpyGrassAndRocks_Height.png
+³           ³       ClumpyGrassAndRocks_Height.png.meta
+³           ³       ClumpyGrassAndRocks_Normal.png
+³           ³       ClumpyGrassAndRocks_Normal.png.meta
+³           ³       ClumpyGrassAndRocks_Roughness.png
+³           ³       ClumpyGrassAndRocks_Roughness.png.meta
+³           ³       DirtPath_Ambient_Occlusion.png
+³           ³       DirtPath_Ambient_Occlusion.png.meta
+³           ³       DirtPath_Base_Color.png
+³           ³       DirtPath_Base_Color.png.meta
+³           ³       DirtPath_Height.png
+³           ³       DirtPath_Height.png.meta
+³           ³       DirtPath_Normal.png
+³           ³       DirtPath_Normal.png.meta
+³           ³       DirtPath_Roughness.png
+³           ³       DirtPath_Roughness.png.meta
+³           ³       DirtyGround_Ambient_Occlusion.png
+³           ³       DirtyGround_Ambient_Occlusion.png.meta
+³           ³       DirtyGround_Base_Color.png
+³           ³       DirtyGround_Base_Color.png.meta
+³           ³       DirtyGround_Height.png
+³           ³       DirtyGround_Height.png.meta
+³           ³       DirtyGround_Normal.png
+³           ³       DirtyGround_Normal.png.meta
+³           ³       DirtyGround_Roughness.png
+³           ³       DirtyGround_Roughness.png.meta
+³           ³       DirtySnow_Ambient_Occlusion.png
+³           ³       DirtySnow_Ambient_Occlusion.png.meta
+³           ³       DirtySnow_Base_Color.png
+³           ³       DirtySnow_Base_Color.png.meta
+³           ³       DirtySnow_Height.png
+³           ³       DirtySnow_Height.png.meta
+³           ³       DirtySnow_Normal.png
+³           ³       DirtySnow_Normal.png.meta
+³           ³       DirtySnow_Roughness.png
+³           ³       DirtySnow_Roughness.png.meta
+³           ³       Dirt_Ambient_Occlusion.png
+³           ³       Dirt_Ambient_Occlusion.png.meta
+³           ³       Dirt_Base_Color.png
+³           ³       Dirt_Base_Color.png.meta
+³           ³       Dirt_Height.png
+³           ³       Dirt_Height.png.meta
+³           ³       Dirt_Normal.png
+³           ³       Dirt_Normal.png.meta
+³           ³       Dirt_Roughness.png
+³           ³       Dirt_Roughness.png.meta
+³           ³       DriedMud_Ambient_Occlusion.png
+³           ³       DriedMud_Ambient_Occlusion.png.meta
+³           ³       DriedMud_Base_Color.png
+³           ³       DriedMud_Base_Color.png.meta
+³           ³       DriedMud_Height.png
+³           ³       DriedMud_Height.png.meta
+³           ³       DriedMud_Normal.png
+³           ³       DriedMud_Normal.png.meta
+³           ³       DriedMud_Roughness.png
+³           ³       DriedMud_Roughness.png.meta
+³           ³       DryGrass_Ambient_Occlusion.png
+³           ³       DryGrass_Ambient_Occlusion.png.meta
+³           ³       DryGrass_Base_Color.png
+³           ³       DryGrass_Base_Color.png.meta
+³           ³       DryGrass_Height.png
+³           ³       DryGrass_Height.png.meta
+³           ³       DryGrass_Normal.png
+³           ³       DryGrass_Normal.png.meta
+³           ³       DryGrass_Roughness.png
+³           ³       DryGrass_Roughness.png.meta
+³           ³       Gravel_Ambient_Occlusion.png
+³           ³       Gravel_Ambient_Occlusion.png.meta
+³           ³       Gravel_Base_Color.png
+³           ³       Gravel_Base_Color.png.meta
+³           ³       Gravel_Height.png
+³           ³       Gravel_Height.png.meta
+³           ³       Gravel_Normal.png
+³           ³       Gravel_Normal.png.meta
+³           ³       Gravel_Roughness.png
+³           ³       Gravel_Roughness.png.meta
+³           ³       LightGround_Ambient_Occlusion.png
+³           ³       LightGround_Ambient_Occlusion.png.meta
+³           ³       LightGround_Base_Color.png
+³           ³       LightGround_Base_Color.png.meta
+³           ³       LightGround_Height.png
+³           ³       LightGround_Height.png.meta
+³           ³       LightGround_Normal.png
+³           ³       LightGround_Normal.png.meta
+³           ³       LightGround_Roughness.png
+³           ³       LightGround_Roughness.png.meta
+³           ³       LooseDirt_Ambient_Occlusion.png
+³           ³       LooseDirt_Ambient_Occlusion.png.meta
+³           ³       LooseDirt_Base_Color.png
+³           ³       LooseDirt_Base_Color.png.meta
+³           ³       LooseDirt_Height.png
+³           ³       LooseDirt_Height.png.meta
+³           ³       LooseDirt_Normal.png
+³           ³       LooseDirt_Normal.png.meta
+³           ³       LooseDirt_Roughness.png
+³           ³       LooseDirt_Roughness.png.meta
+³           ³       LooseGravel_Ambient_Occlusion.png
+³           ³       LooseGravel_Ambient_Occlusion.png.meta
+³           ³       LooseGravel_Base_Color.png
+³           ³       LooseGravel_Base_Color.png.meta
+³           ³       LooseGravel_Height.png
+³           ³       LooseGravel_Height.png.meta
+³           ³       LooseGravel_Normal.png
+³           ³       LooseGravel_Normal.png.meta
+³           ³       LooseGravel_Roughness.png
+³           ³       LooseGravel_Roughness.png.meta
+³           ³       MossyPath_Ambient_Occlusion.png
+³           ³       MossyPath_Ambient_Occlusion.png.meta
+³           ³       MossyPath_Base_Color.png
+³           ³       MossyPath_Base_Color.png.meta
+³           ³       MossyPath_Height.png
+³           ³       MossyPath_Height.png.meta
+³           ³       MossyPath_Normal.png
+³           ³       MossyPath_Normal.png.meta
+³           ³       MossyPath_Roughness.png
+³           ³       MossyPath_Roughness.png.meta
+³           ³       Mulch_Ambient_Occlusion.png
+³           ³       Mulch_Ambient_Occlusion.png.meta
+³           ³       Mulch_Base_Color.png
+³           ³       Mulch_Base_Color.png.meta
+³           ³       Mulch_Height.png
+³           ³       Mulch_Height.png.meta
+³           ³       Mulch_Normal.png
+³           ³       Mulch_Normal.png.meta
+³           ³       Mulch_Roughness.png
+³           ³       Mulch_Roughness.png.meta
+³           ³       Pebbles_Ambient_Occlusion.png
+³           ³       Pebbles_Ambient_Occlusion.png.meta
+³           ³       Pebbles_Base_Color.png
+³           ³       Pebbles_Base_Color.png.meta
+³           ³       Pebbles_Height.png
+³           ³       Pebbles_Height.png.meta
+³           ³       Pebbles_Normal.png
+³           ³       Pebbles_Normal.png.meta
+³           ³       Pebbles_Roughness.png
+³           ³       Pebbles_Roughness.png.meta
+³           ³       RockyHillside_Ambient_Occlusion.png
+³           ³       RockyHillside_Ambient_Occlusion.png.meta
+³           ³       RockyHillside_Base_Color.png
+³           ³       RockyHillside_Base_Color.png.meta
+³           ³       RockyHillside_Height.png
+³           ³       RockyHillside_Height.png.meta
+³           ³       RockyHillside_Normal.png
+³           ³       RockyHillside_Normal.png.meta
+³           ³       RockyHillside_Roughness.png
+³           ³       RockyHillside_Roughness.png.meta
+³           ³       RoughSnow_Ambient_Occlusion.png
+³           ³       RoughSnow_Ambient_Occlusion.png.meta
+³           ³       RoughSnow_Base_Color.png
+³           ³       RoughSnow_Base_Color.png.meta
+³           ³       RoughSnow_Height.png
+³           ³       RoughSnow_Height.png.meta
+³           ³       RoughSnow_Normal.png
+³           ³       RoughSnow_Normal.png.meta
+³           ³       RoughSnow_Roughness.png
+³           ³       RoughSnow_Roughness.png.meta
+³           ³       SmoothSnow_Ambient_Occlusion.png
+³           ³       SmoothSnow_Ambient_Occlusion.png.meta
+³           ³       SmoothSnow_Base_Color.png
+³           ³       SmoothSnow_Base_Color.png.meta
+³           ³       SmoothSnow_Height.png
+³           ³       SmoothSnow_Height.png.meta
+³           ³       SmoothSnow_Normal.png
+³           ³       SmoothSnow_Normal.png.meta
+³           ³       SmoothSnow_Roughness.png
+³           ³       SmoothSnow_Roughness.png.meta
+³           ³       Woodland_Ambient_Occlusion.png
+³           ³       Woodland_Ambient_Occlusion.png.meta
+³           ³       Woodland_Base_Color.png
+³           ³       Woodland_Base_Color.png.meta
+³           ³       Woodland_Height.png
+³           ³       Woodland_Height.png.meta
+³           ³       Woodland_Normal.png
+³           ³       Woodland_Normal.png.meta
+³           ³       Woodland_Roughness.png
+³           ³       Woodland_Roughness.png.meta
+³           ³       
+³           ÃÄÄÄMetals
+³           ³       PaintedFlaky_Ambient_Occlusion.png
+³           ³       PaintedFlaky_Ambient_Occlusion.png.meta
+³           ³       PaintedFlaky_Base_Color.png
+³           ³       PaintedFlaky_Base_Color.png.meta
+³           ³       PaintedFlaky_Height.png
+³           ³       PaintedFlaky_Height.png.meta
+³           ³       PaintedFlaky_Metallic.tga
+³           ³       PaintedFlaky_Metallic.tga.meta
+³           ³       PaintedFlaky_Normal.png
+³           ³       PaintedFlaky_Normal.png.meta
+³           ³       PaintedFlaky_Roughness.png
+³           ³       PaintedFlaky_Roughness.png.meta
+³           ³       PaintedScratched_Metallic.tga
+³           ³       PaintedScratched_Metallic.tga.meta
+³           ³       PaintedSratched_Ambient_Occlusion.png
+³           ³       PaintedSratched_Ambient_Occlusion.png.meta
+³           ³       PaintedSratched_Base_Color.png
+³           ³       PaintedSratched_Base_Color.png.meta
+³           ³       PaintedSratched_Height.png
+³           ³       PaintedSratched_Height.png.meta
+³           ³       PaintedSratched_Normal.png
+³           ³       PaintedSratched_Normal.png.meta
+³           ³       PaintedSratched_Roughness.png
+³           ³       PaintedSratched_Roughness.png.meta
+³           ³       RoughSteel_Ambient_Occlusion.png
+³           ³       RoughSteel_Ambient_Occlusion.png.meta
+³           ³       RoughSteel_Base_Color.png
+³           ³       RoughSteel_Base_Color.png.meta
+³           ³       RoughSteel_Height.png
+³           ³       RoughSteel_Height.png.meta
+³           ³       RoughSteel_Metallic.tga
+³           ³       RoughSteel_Metallic.tga.meta
+³           ³       RoughSteel_Normal.png
+³           ³       RoughSteel_Normal.png.meta
+³           ³       RoughSteel_Roughness.png
+³           ³       RoughSteel_Roughness.png.meta
+³           ³       RustySteel_Ambient_Occlusion.png
+³           ³       RustySteel_Ambient_Occlusion.png.meta
+³           ³       RustySteel_Base_Color.png
+³           ³       RustySteel_Base_Color.png.meta
+³           ³       RustySteel_Height.png
+³           ³       RustySteel_Height.png.meta
+³           ³       RustySteel_Metallic.tga
+³           ³       RustySteel_Metallic.tga.meta
+³           ³       RustySteel_Normal.png
+³           ³       RustySteel_Normal.png.meta
+³           ³       RustySteel_Roughness.png
+³           ³       RustySteel_Roughness.png.meta
+³           ³       
+³           ÃÄÄÄStone
+³           ³       Asphalt_Ambient_Occlusion.png
+³           ³       Asphalt_Ambient_Occlusion.png.meta
+³           ³       Asphalt_Base_Color.png
+³           ³       Asphalt_Base_Color.png.meta
+³           ³       Asphalt_Height.png
+³           ³       Asphalt_Height.png.meta
+³           ³       Asphalt_Normal.png
+³           ³       Asphalt_Normal.png.meta
+³           ³       Asphalt_Roughness.png
+³           ³       Asphalt_Roughness.png.meta
+³           ³       Cliffside_Ambient_Occlusion.png
+³           ³       Cliffside_Ambient_Occlusion.png.meta
+³           ³       Cliffside_Base_Color.png
+³           ³       Cliffside_Base_Color.png.meta
+³           ³       Cliffside_Height.png
+³           ³       Cliffside_Height.png.meta
+³           ³       Cliffside_Normal.png
+³           ³       Cliffside_Normal.png.meta
+³           ³       Cliffside_Roughness.png
+³           ³       Cliffside_Roughness.png.meta
+³           ³       CliffVegetation_Ambient_Occlusion.png
+³           ³       CliffVegetation_Ambient_Occlusion.png.meta
+³           ³       CliffVegetation_Base_Color.png
+³           ³       CliffVegetation_Base_Color.png.meta
+³           ³       CliffVegetation_Height.png
+³           ³       CliffVegetation_Height.png.meta
+³           ³       CliffVegetation_Normal.png
+³           ³       CliffVegetation_Normal.png.meta
+³           ³       CliffVegetation_Roughness.png
+³           ³       CliffVegetation_Roughness.png.meta
+³           ³       CobblestonePath_Ambient_Occlusion.png
+³           ³       CobblestonePath_Ambient_Occlusion.png.meta
+³           ³       CobblestonePath_Base_Color.png
+³           ³       CobblestonePath_Base_Color.png.meta
+³           ³       CobblestonePath_Height.png
+³           ³       CobblestonePath_Height.png.meta
+³           ³       CobblestonePath_Normal.png
+³           ³       CobblestonePath_Normal.png.meta
+³           ³       CobblestonePath_Roughness.png
+³           ³       CobblestonePath_Roughness.png.meta
+³           ³       CrackedCliff_Ambient_Occlusion.png
+³           ³       CrackedCliff_Ambient_Occlusion.png.meta
+³           ³       CrackedCliff_Base_Color.png
+³           ³       CrackedCliff_Base_Color.png.meta
+³           ³       CrackedCliff_Height.png
+³           ³       CrackedCliff_Height.png.meta
+³           ³       CrackedCliff_Normal.png
+³           ³       CrackedCliff_Normal.png.meta
+³           ³       CrackedCliff_Roughness.png
+³           ³       CrackedCliff_Roughness.png.meta
+³           ³       JaggedCliff_Ambient_Occlusion.png
+³           ³       JaggedCliff_Ambient_Occlusion.png.meta
+³           ³       JaggedCliff_Base_Color.png
+³           ³       JaggedCliff_Base_Color.png.meta
+³           ³       JaggedCliff_Height.png
+³           ³       JaggedCliff_Height.png.meta
+³           ³       JaggedCliff_Normal.png
+³           ³       JaggedCliff_Normal.png.meta
+³           ³       JaggedCliff_Roughness.png
+³           ³       JaggedCliff_Roughness.png.meta
+³           ³       OldPath_Ambient_Occlusion.png
+³           ³       OldPath_Ambient_Occlusion.png.meta
+³           ³       OldPath_Base_Color.png
+³           ³       OldPath_Base_Color.png.meta
+³           ³       OldPath_Height.png
+³           ³       OldPath_Height.png.meta
+³           ³       OldPath_Normal.png
+³           ³       OldPath_Normal.png.meta
+³           ³       OldPath_Roughness.png
+³           ³       OldPath_Roughness.png.meta
+³           ³       OldRockWall_Ambient_Occlusion.png
+³           ³       OldRockWall_Ambient_Occlusion.png.meta
+³           ³       OldRockWall_Base_Color.png
+³           ³       OldRockWall_Base_Color.png.meta
+³           ³       OldRockWall_Height.png
+³           ³       OldRockWall_Height.png.meta
+³           ³       OldRockWall_Normal.png
+³           ³       OldRockWall_Normal.png.meta
+³           ³       OldRockWall_Roughness.png
+³           ³       OldRockWall_Roughness.png.meta
+³           ³       OldStucco_Ambient_Occlusion.png
+³           ³       OldStucco_Ambient_Occlusion.png.meta
+³           ³       OldStucco_Base_Color.png
+³           ³       OldStucco_Base_Color.png.meta
+³           ³       OldStucco_Height.png
+³           ³       OldStucco_Height.png.meta
+³           ³       OldStucco_Normal.png
+³           ³       OldStucco_Normal.png.meta
+³           ³       OldStucco_Roughness.png
+³           ³       OldStucco_Roughness.png.meta
+³           ³       Old_Building_Ambient_Occlusion.png
+³           ³       Old_Building_Ambient_Occlusion.png.meta
+³           ³       Old_Building_Base_Color.png
+³           ³       Old_Building_Base_Color.png.meta
+³           ³       Old_Building_Height.png
+³           ³       Old_Building_Height.png.meta
+³           ³       Old_Building_Normal.png
+³           ³       Old_Building_Normal.png.meta
+³           ³       Old_Building_Roughness.png
+³           ³       Old_Building_Roughness.png.meta
+³           ³       PlainStucco_Ambient_Occlusion.png
+³           ³       PlainStucco_Ambient_Occlusion.png.meta
+³           ³       PlainStucco_Base_Color.png
+³           ³       PlainStucco_Base_Color.png.meta
+³           ³       PlainStucco_Height.png
+³           ³       PlainStucco_Height.png.meta
+³           ³       PlainStucco_Normal.png
+³           ³       PlainStucco_Normal.png.meta
+³           ³       PlainStucco_Roughness.png
+³           ³       PlainStucco_Roughness.png.meta
+³           ³       RockWall_Ambient_Occlusion.png
+³           ³       RockWall_Ambient_Occlusion.png.meta
+³           ³       RockWall_Base_Color.png
+³           ³       RockWall_Base_Color.png.meta
+³           ³       RockWall_Height.png
+³           ³       RockWall_Height.png.meta
+³           ³       RockWall_Normal.png
+³           ³       RockWall_Normal.png.meta
+³           ³       RockWall_Roughness.png
+³           ³       RockWall_Roughness.png.meta
+³           ³       RoughStucco_Ambient_Occlusion.png
+³           ³       RoughStucco_Ambient_Occlusion.png.meta
+³           ³       RoughStucco_Base_Color.png
+³           ³       RoughStucco_Base_Color.png.meta
+³           ³       RoughStucco_Height.png
+³           ³       RoughStucco_Height.png.meta
+³           ³       RoughStucco_Normal.png
+³           ³       RoughStucco_Normal.png.meta
+³           ³       RoughStucco_Roughness.png
+³           ³       RoughStucco_Roughness.png.meta
+³           ³       StackedWall_Ambient_Occlusion.png
+³           ³       StackedWall_Ambient_Occlusion.png.meta
+³           ³       StackedWall_Base_Color.png
+³           ³       StackedWall_Base_Color.png.meta
+³           ³       StackedWall_Height.png
+³           ³       StackedWall_Height.png.meta
+³           ³       StackedWall_Normal.png
+³           ³       StackedWall_Normal.png.meta
+³           ³       StackedWall_Roughness.png
+³           ³       StackedWall_Roughness.png.meta
+³           ³       
+³           ÃÄÄÄTiles
+³           ³       CobblePath_Ambient_Occlusion.png
+³           ³       CobblePath_Ambient_Occlusion.png.meta
+³           ³       CobblePath_Base_Color.png
+³           ³       CobblePath_Base_Color.png.meta
+³           ³       CobblePath_Height.png
+³           ³       CobblePath_Height.png.meta
+³           ³       CobblePath_Normal.png
+³           ³       CobblePath_Normal.png.meta
+³           ³       CobblePath_Roughness.png
+³           ³       CobblePath_Roughness.png.meta
+³           ³       
+³           ÀÄÄÄWalls
+³                   GreenCobbleStoneWall_Ambient_Occlusion.png
+³                   GreenCobbleStoneWall_Ambient_Occlusion.png.meta
+³                   GreenCobbleStoneWall_Base_Color.png
+³                   GreenCobbleStoneWall_Base_Color.png.meta
+³                   GreenCobbleStoneWall_Height.png
+³                   GreenCobbleStoneWall_Height.png.meta
+³                   GreenCobbleStoneWall_Normal.png
+³                   GreenCobbleStoneWall_Normal.png.meta
+³                   GreenCobbleStoneWall_Roughness.png
+³                   GreenCobbleStoneWall_Roughness.png.meta
+³                   GreenWall_Ambient_Occlusion.png
+³                   GreenWall_Ambient_Occlusion.png.meta
+³                   GreenWall_Base_Color.png
+³                   GreenWall_Base_Color.png.meta
+³                   GreenWall_Height.png
+³                   GreenWall_Height.png.meta
+³                   GreenWall_Normal.png
+³                   GreenWall_Normal.png.meta
+³                   GreenWall_Roughness.png
+³                   GreenWall_Roughness.png.meta
+³                   ThinBricks_Ambient_Occlusion.png
+³                   ThinBricks_Ambient_Occlusion.png.meta
+³                   ThinBricks_Base_Color.png
+³                   ThinBricks_Base_Color.png.meta
+³                   ThinBricks_Height.png
+³                   ThinBricks_Height.png.meta
+³                   ThinBricks_Normal.png
+³                   ThinBricks_Normal.png.meta
+³                   ThinBricks_Roughness.png
+³                   ThinBricks_Roughness.png.meta
+³                   
+ÃÄÄÄDocs
+³   ³   AgentInstructions.md
+³   ³   AgentInstructions.md.meta
+³   ³   Architecture.md
+³   ³   Architecture.md.meta
+³   ³   AuditReport_2026-05-31.md
+³   ³   AuditReport_2026-05-31.md.meta
+³   ³   ContextPack.md
+³   ³   ContextPack.md.meta
+³   ³   FileIndex.meta
+³   ³   ProjectInventory.md
+³   ³   ProjectInventory.md.meta
+³   ³   
+³   ÀÄÄÄFileIndex
+³           AmmoManager.md
+³           AmmoManager.md.meta
+³           AutoDestruccionSegura.md
+³           AutoDestruccionSegura.md.meta
+³           Bala.md
+³           Bala.md.meta
+³           BalaPool.md
+³           BalaPool.md.meta
+³           BD_Audios.md
+³           BD_Audios.md.meta
+³           Camara.md
+³           Camara.md.meta
+³           CambiarOpacidad.md
+³           CambiarOpacidad.md.meta
+³           CambioDeLider.md
+³           CambioDeLider.md.meta
+³           CentralizadorScripts.md
+³           CentralizadorScripts.md.meta
+³           CharacterControllerMVC.md
+³           CharacterControllerMVC.md.meta
+³           CharacterModel.md
+³           CharacterModel.md.meta
+³           CharacterView.md
+³           CharacterView.md.meta
+³           CodigoDeInicio.md
+³           CodigoDeInicio.md.meta
+³           Cohete.md
+³           Cohete.md.meta
+³           CollisionDetector.md
+³           CollisionDetector.md.meta
+³           ConfiguracionGlobal.md
+³           ConfiguracionGlobal.md.meta
+³           ControladorTanque.md
+³           ControladorTanque.md.meta
+³           ControlDerrota.md
+³           ControlDerrota.md.meta
+³           CrearYDestruir.md
+³           CrearYDestruir.md.meta
+³           CursorManager.md
+³           CursorManager.md.meta
+³           DebugColisionesFull.md
+³           DebugColisionesFull.md.meta
+³           DesactivarPorTimer.md
+³           DesactivarPorTimer.md.meta
+³           Destruible.md
+³           Destruible.md.meta
+³           DetectableEntity.md
+³           DetectableEntity.md.meta
+³           Disparador.md
+³           Disparador.md.meta
+³           Enemigo.md
+³           Enemigo.md.meta
+³           EnemyController.md
+³           EnemyController.md.meta
+³           EnemyDetector.md
+³           EnemyDetector.md.meta
+³           EnemyModel.md
+³           EnemyModel.md.meta
+³           EnemySensors.md
+³           EnemySensors.md.meta
+³           EnemyView.md
+³           EnemyView.md.meta
+³           EntrarAlTanque.md
+³           EntrarAlTanque.md.meta
+³           FormationRelocator.md
+³           FormationRelocator.md.meta
+³           FSMController.md
+³           FSMController.md.meta
+³           GameManager.md
+³           GameManager.md.meta
+³           GenericDetector.md
+³           GenericDetector.md.meta
+³           GEN_Inputs.md
+³           GEN_Inputs.md.meta
+³           GestorTexto.md
+³           GestorTexto.md.meta
+³           GlobalData.md
+³           GlobalData.md.meta
+³           GlobalHUD.md
+³           GlobalHUD.md.meta
+³           IA_F_ChangeMode.md
+³           IA_F_ChangeMode.md.meta
+³           IA_F_ControllerSeguidor.md
+³           IA_F_ControllerSeguidor.md.meta
+³           IA_F_EnemyCercanos.md
+³           IA_F_EnemyCercanos.md.meta
+³           IA_F_PathFanding_Theta.md
+³           IA_F_PathFanding_Theta.md.meta
+³           IA_P2_AgentIA.md
+³           IA_P2_AgentIA.md.meta
+³           IA_P2_BusEvent_Manager.md
+³           IA_P2_BusEvent_Manager.md.meta
+³           IA_P2_FOV.md
+³           IA_P2_FOV.md.meta
+³           IA_P2_FSM.md
+³           IA_P2_FSM.md.meta
+³           IA_P2_INT_gentState.md
+³           IA_P2_INT_gentState.md.meta
+³           IA_P2_LineOfSight3D.md
+³           IA_P2_LineOfSight3D.md.meta
+³           IA_P2_PathfindingManager.md
+³           IA_P2_PathfindingManager.md.meta
+³           IA_P2_PathfindingModel.md
+³           IA_P2_PathfindingModel.md.meta
+³           IA_P2_PathNode.md
+³           IA_P2_PathNode.md.meta
+³           IA_P2_ST_ChaseState.md
+³           IA_P2_ST_ChaseState.md.meta
+³           IA_P2_ST_PatrolState.md
+³           IA_P2_ST_PatrolState.md.meta
+³           IA_P2_ST_ReturningToPatrolState.md
+³           IA_P2_ST_ReturningToPatrolState.md.meta
+³           IA_P2_ST_SearchingState.md
+³           IA_P2_ST_SearchingState.md.meta
+³           ICharacterInput.md
+³           ICharacterInput.md.meta
+³           IDaniable.md
+³           IDaniable.md.meta
+³           Ideas y pseudocodigos.md
+³           Ideas y pseudocodigos.md.meta
+³           IDetectable.md
+³           IDetectable.md.meta
+³           IInteractable.md
+³           IInteractable.md.meta
+³           IMovementHandler.md
+³           IMovementHandler.md.meta
+³           IndicadorEnemigos.md
+³           IndicadorEnemigos.md.meta
+³           InformacionPersonaje.md
+³           InformacionPersonaje.md.meta
+³           InteractableItem.md
+³           InteractableItem.md.meta
+³           Interfaces.md
+³           Interfaces.md.meta
+³           ISoldierState.md
+³           ISoldierState.md.meta
+³           IWeaponInput.md
+³           IWeaponInput.md.meta
+³           LeaderManager.md
+³           LeaderManager.md.meta
+³           LiderandoState.md
+³           LiderandoState.md.meta
+³           MainGameController.md
+³           MainGameController.md.meta
+³           Manager_VFX.md
+³           Manager_VFX.md.meta
+³           MarkerAnim.md
+³           MarkerAnim.md.meta
+³           MenuPausa.md
+³           MenuPausa.md.meta
+³           MenuVictoria.md
+³           MenuVictoria.md.meta
+³           Municion.md
+³           Municion.md.meta
+³           Obstaculo.md
+³           Obstaculo.md.meta
+³           PersecucionEnemigo.md
+³           PersecucionEnemigo.md.meta
+³           Physics2DMigrator.md
+³           Physics2DMigrator.md.meta
+³           PickUp.md
+³           PickUp.md.meta
+³           PlayerController.md
+³           PlayerController.md.meta
+³           PositionManager.md
+³           PositionManager.md.meta
+³           ProxiesUSP.md
+³           ProxiesUSP.md.meta
+³           Proyectil.md
+³           Proyectil.md.meta
+³           Proyectil2.md
+³           Proyectil2.md.meta
+³           Prueba_de_color.md
+³           Prueba_de_color.md.meta
+³           Puntero_Tanque.md
+³           Puntero_Tanque.md.meta
+³           RehenBruto.md
+³           RehenBruto.md.meta
+³           Rigidbody2DMovementHandler.md
+³           Rigidbody2DMovementHandler.md.meta
+³           SceneFixer.md
+³           SceneFixer.md.meta
+³           SelectedSoldierUIFeedback.md
+³           SelectedSoldierUIFeedback.md.meta
+³           SenalisacionAEnemigos.md
+³           SenalisacionAEnemigos.md.meta
+³           ShotImpactBus.md
+³           ShotImpactBus.md.meta
+³           ShotSensor.md
+³           ShotSensor.md.meta
+³           SistemaPuntaje.md
+³           SistemaPuntaje.md.meta
+³           Soldado_Anim.md
+³           Soldado_Anim.md.meta
+³           SoldierController.md
+³           SoldierController.md.meta
+³           SoldierModel.md
+³           SoldierModel.md.meta
+³           SoldierStates.md
+³           SoldierStates.md.meta
+³           SoldierView.md
+³           SoldierView.md.meta
+³           SquadEventBus.md
+³           SquadEventBus.md.meta
+³           Tanque.md
+³           Tanque.md.meta
+³           TickManager.md
+³           TickManager.md.meta
+³           Torreta.md
+³           Torreta.md.meta
+³           UnitCommander.md
+³           UnitCommander.md.meta
+³           UnitController.md
+³           UnitController.md.meta
+³           UnitFSM.md
+³           UnitFSM.md.meta
+³           UnitIndicatorSetup.md
+³           UnitIndicatorSetup.md.meta
+³           UnitModel.md
+³           UnitModel.md.meta
+³           UnitPathRenderer.md
+³           UnitPathRenderer.md.meta
+³           UnitStates.md
+³           UnitStates.md.meta
+³           UnitTeam.md
+³           UnitTeam.md.meta
+³           UnitView.md
+³           UnitView.md.meta
+³           UnityCharacterInput.md
+³           UnityCharacterInput.md.meta
+³           UnityWeaponInput.md
+³           UnityWeaponInput.md.meta
+³           VibracionCamara.md
+³           VibracionCamara.md.meta
+³           WeaponController.md
+³           WeaponController.md.meta
+³           WeaponControllerMVC.md
+³           WeaponControllerMVC.md.meta
+³           WeaponModel.md
+³           WeaponModel.md.meta
+³           WeaponView.md
+³           WeaponView.md.meta
+³           
+ÃÄÄÄEditor
+³       CentralizadorScripts.cs
+³       CentralizadorScripts.cs.meta
+³       ComponentPropertiesCopier.cs
+³       ComponentPropertiesCopier.cs.meta
+³       ComponentPropertiesCopierTestMenu.cs
+³       ComponentPropertiesCopierTestMenu.cs.meta
+³       CreateScenesAndPrefabsMenu.cs
+³       CreateScenesAndPrefabsMenu.cs.meta
+³       CreateTestSceneMenu.cs
+³       CreateTestSceneMenu.cs.meta
+³       HierarchyToClipboardMenu.cs
+³       HierarchyToClipboardMenu.cs.meta
+³       Physics2DMigrator.cs
+³       Physics2DMigrator.cs.meta
+³       TriggerCorregir.cs
+³       TriggerCorregir.cs.meta
+³       
+ÃÄÄÄMaterials
+³       Boids.mat
+³       Boids.mat.meta
+³       Direccion.mat
+³       Direccion.mat.meta
+³       M_Amarillo.mat
+³       M_Amarillo.mat.meta
+³       M_Azul.mat
+³       M_Azul.mat.meta
+³       M_Blanco.mat
+³       M_Blanco.mat.meta
+³       M_Food.mat
+³       M_Food.mat.meta
+³       M_Green.mat
+³       M_Green.mat.meta
+³       M_negro.mat
+³       M_negro.mat.meta
+³       M_Plateado.mat
+³       M_Plateado.mat.meta
+³       M_Rojo.mat
+³       M_Rojo.mat.meta
+³       M_WayPoints.mat
+³       M_WayPoints.mat.meta
+³       Negro.mat
+³       Negro.mat.meta
+³       Transparente.mat
+³       Transparente.mat.meta
+³       
+ÃÄÄÄOtros
+³   ³   E_DPR.meta
+³   ³   E_IA.meta
+³   ³   Resources.meta
+³   ³   Settings.meta
+³   ³   UniversalRenderPipelineGlobalSettings.asset
+³   ³   UniversalRenderPipelineGlobalSettings.asset.meta
+³   ³   
+³   ÃÄÄÄE_DPR
+³   ³   ³   Parcial 1.meta
+³   ³   ³   
+³   ³   ÀÄÄÄParcial 1
+³   ³       ³   Scripts.meta
+³   ³       ³   
+³   ³       ÀÄÄÄScripts
+³   ³               Concatenado.txt
+³   ³               Concatenado.txt.meta
+³   ³               Unificador.bat
+³   ³               Unificador.bat.meta
+³   ³               
+³   ÃÄÄÄE_IA
+³   ³   ³   Parcial 2.meta
+³   ³   ³   
+³   ³   ÀÄÄÄParcial 2
+³   ³       ³   Scripts.meta
+³   ³       ³   
+³   ³       ÀÄÄÄScripts
+³   ³               Concatenado.txt
+³   ³               Concatenado.txt.meta
+³   ³               Concatenar scripts.bat
+³   ³               Concatenar scripts.bat.meta
+³   ³               
+³   ÃÄÄÄResources
+³   ³   ³   Nuevos recursos.meta
+³   ³   ³   Prefabs.meta
+³   ³   ³   tiles 1.meta
+³   ³   ³   Tiles 2.meta
+³   ³   ³   
+³   ³   ÃÄÄÄNuevos recursos
+³   ³   ³   ³   Imagenes.meta
+³   ³   ³   ³   Minimapa.asset
+³   ³   ³   ³   Minimapa.asset.meta
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄImagenes
+³   ³   ³           TileMap - copia (2).jpeg
+³   ³   ³           TileMap - copia (2).jpeg.meta
+³   ³   ³           TileMap - copia (3).jpeg
+³   ³   ³           TileMap - copia (3).jpeg.meta
+³   ³   ³           TileMap - copia.jpeg
+³   ³   ³           TileMap - copia.jpeg.meta
+³   ³   ³           
+³   ³   ÃÄÄÄPrefabs
+³   ³   ÃÄÄÄtiles 1
+³   ³   ³       tile_0.asset
+³   ³   ³       tile_0.asset.meta
+³   ³   ³       tile_1.asset
+³   ³   ³       tile_1.asset.meta
+³   ³   ³       tile_10.asset
+³   ³   ³       tile_10.asset.meta
+³   ³   ³       tile_11.asset
+³   ³   ³       tile_11.asset.meta
+³   ³   ³       tile_12.asset
+³   ³   ³       tile_12.asset.meta
+³   ³   ³       tile_13.asset
+³   ³   ³       tile_13.asset.meta
+³   ³   ³       tile_14.asset
+³   ³   ³       tile_14.asset.meta
+³   ³   ³       tile_15.asset
+³   ³   ³       tile_15.asset.meta
+³   ³   ³       tile_16.asset
+³   ³   ³       tile_16.asset.meta
+³   ³   ³       tile_17.asset
+³   ³   ³       tile_17.asset.meta
+³   ³   ³       tile_18.asset
+³   ³   ³       tile_18.asset.meta
+³   ³   ³       tile_19.asset
+³   ³   ³       tile_19.asset.meta
+³   ³   ³       tile_2.asset
+³   ³   ³       tile_2.asset.meta
+³   ³   ³       tile_20.asset
+³   ³   ³       tile_20.asset.meta
+³   ³   ³       tile_21.asset
+³   ³   ³       tile_21.asset.meta
+³   ³   ³       tile_22.asset
+³   ³   ³       tile_22.asset.meta
+³   ³   ³       tile_23.asset
+³   ³   ³       tile_23.asset.meta
+³   ³   ³       tile_24.asset
+³   ³   ³       tile_24.asset.meta
+³   ³   ³       tile_25.asset
+³   ³   ³       tile_25.asset.meta
+³   ³   ³       tile_26.asset
+³   ³   ³       tile_26.asset.meta
+³   ³   ³       tile_27.asset
+³   ³   ³       tile_27.asset.meta
+³   ³   ³       tile_28.asset
+³   ³   ³       tile_28.asset.meta
+³   ³   ³       tile_29.asset
+³   ³   ³       tile_29.asset.meta
+³   ³   ³       tile_3.asset
+³   ³   ³       tile_3.asset.meta
+³   ³   ³       tile_30.asset
+³   ³   ³       tile_30.asset.meta
+³   ³   ³       tile_31.asset
+³   ³   ³       tile_31.asset.meta
+³   ³   ³       tile_32.asset
+³   ³   ³       tile_32.asset.meta
+³   ³   ³       tile_33.asset
+³   ³   ³       tile_33.asset.meta
+³   ³   ³       tile_34.asset
+³   ³   ³       tile_34.asset.meta
+³   ³   ³       tile_35.asset
+³   ³   ³       tile_35.asset.meta
+³   ³   ³       tile_36.asset
+³   ³   ³       tile_36.asset.meta
+³   ³   ³       tile_37.asset
+³   ³   ³       tile_37.asset.meta
+³   ³   ³       tile_38.asset
+³   ³   ³       tile_38.asset.meta
+³   ³   ³       tile_39.asset
+³   ³   ³       tile_39.asset.meta
+³   ³   ³       tile_4.asset
+³   ³   ³       tile_4.asset.meta
+³   ³   ³       tile_40.asset
+³   ³   ³       tile_40.asset.meta
+³   ³   ³       tile_41.asset
+³   ³   ³       tile_41.asset.meta
+³   ³   ³       tile_42.asset
+³   ³   ³       tile_42.asset.meta
+³   ³   ³       tile_43.asset
+³   ³   ³       tile_43.asset.meta
+³   ³   ³       tile_44.asset
+³   ³   ³       tile_44.asset.meta
+³   ³   ³       tile_45.asset
+³   ³   ³       tile_45.asset.meta
+³   ³   ³       tile_46.asset
+³   ³   ³       tile_46.asset.meta
+³   ³   ³       tile_47.asset
+³   ³   ³       tile_47.asset.meta
+³   ³   ³       tile_5.asset
+³   ³   ³       tile_5.asset.meta
+³   ³   ³       tile_6.asset
+³   ³   ³       tile_6.asset.meta
+³   ³   ³       tile_7.asset
+³   ³   ³       tile_7.asset.meta
+³   ³   ³       tile_8.asset
+³   ³   ³       tile_8.asset.meta
+³   ³   ³       tile_9.asset
+³   ³   ³       tile_9.asset.meta
+³   ³   ³       
+³   ³   ÀÄÄÄTiles 2
+³   ³           Overworld Tilesheet_0.asset
+³   ³           Overworld Tilesheet_0.asset.meta
+³   ³           Overworld Tilesheet_1.asset
+³   ³           Overworld Tilesheet_1.asset.meta
+³   ³           Overworld Tilesheet_10.asset
+³   ³           Overworld Tilesheet_10.asset.meta
+³   ³           Overworld Tilesheet_11.asset
+³   ³           Overworld Tilesheet_11.asset.meta
+³   ³           Overworld Tilesheet_12.asset
+³   ³           Overworld Tilesheet_12.asset.meta
+³   ³           Overworld Tilesheet_13.asset
+³   ³           Overworld Tilesheet_13.asset.meta
+³   ³           Overworld Tilesheet_14.asset
+³   ³           Overworld Tilesheet_14.asset.meta
+³   ³           Overworld Tilesheet_15.asset
+³   ³           Overworld Tilesheet_15.asset.meta
+³   ³           Overworld Tilesheet_16.asset
+³   ³           Overworld Tilesheet_16.asset.meta
+³   ³           Overworld Tilesheet_17.asset
+³   ³           Overworld Tilesheet_17.asset.meta
+³   ³           Overworld Tilesheet_18.asset
+³   ³           Overworld Tilesheet_18.asset.meta
+³   ³           Overworld Tilesheet_19.asset
+³   ³           Overworld Tilesheet_19.asset.meta
+³   ³           Overworld Tilesheet_2.asset
+³   ³           Overworld Tilesheet_2.asset.meta
+³   ³           Overworld Tilesheet_20.asset
+³   ³           Overworld Tilesheet_20.asset.meta
+³   ³           Overworld Tilesheet_21.asset
+³   ³           Overworld Tilesheet_21.asset.meta
+³   ³           Overworld Tilesheet_22.asset
+³   ³           Overworld Tilesheet_22.asset.meta
+³   ³           Overworld Tilesheet_23.asset
+³   ³           Overworld Tilesheet_23.asset.meta
+³   ³           Overworld Tilesheet_24.asset
+³   ³           Overworld Tilesheet_24.asset.meta
+³   ³           Overworld Tilesheet_25.asset
+³   ³           Overworld Tilesheet_25.asset.meta
+³   ³           Overworld Tilesheet_26.asset
+³   ³           Overworld Tilesheet_26.asset.meta
+³   ³           Overworld Tilesheet_27.asset
+³   ³           Overworld Tilesheet_27.asset.meta
+³   ³           Overworld Tilesheet_28.asset
+³   ³           Overworld Tilesheet_28.asset.meta
+³   ³           Overworld Tilesheet_29.asset
+³   ³           Overworld Tilesheet_29.asset.meta
+³   ³           Overworld Tilesheet_3.asset
+³   ³           Overworld Tilesheet_3.asset.meta
+³   ³           Overworld Tilesheet_30.asset
+³   ³           Overworld Tilesheet_30.asset.meta
+³   ³           Overworld Tilesheet_31.asset
+³   ³           Overworld Tilesheet_31.asset.meta
+³   ³           Overworld Tilesheet_32.asset
+³   ³           Overworld Tilesheet_32.asset.meta
+³   ³           Overworld Tilesheet_33.asset
+³   ³           Overworld Tilesheet_33.asset.meta
+³   ³           Overworld Tilesheet_34.asset
+³   ³           Overworld Tilesheet_34.asset.meta
+³   ³           Overworld Tilesheet_35.asset
+³   ³           Overworld Tilesheet_35.asset.meta
+³   ³           Overworld Tilesheet_36.asset
+³   ³           Overworld Tilesheet_36.asset.meta
+³   ³           Overworld Tilesheet_37.asset
+³   ³           Overworld Tilesheet_37.asset.meta
+³   ³           Overworld Tilesheet_38.asset
+³   ³           Overworld Tilesheet_38.asset.meta
+³   ³           Overworld Tilesheet_39.asset
+³   ³           Overworld Tilesheet_39.asset.meta
+³   ³           Overworld Tilesheet_4.asset
+³   ³           Overworld Tilesheet_4.asset.meta
+³   ³           Overworld Tilesheet_40.asset
+³   ³           Overworld Tilesheet_40.asset.meta
+³   ³           Overworld Tilesheet_41.asset
+³   ³           Overworld Tilesheet_41.asset.meta
+³   ³           Overworld Tilesheet_42.asset
+³   ³           Overworld Tilesheet_42.asset.meta
+³   ³           Overworld Tilesheet_43.asset
+³   ³           Overworld Tilesheet_43.asset.meta
+³   ³           Overworld Tilesheet_44.asset
+³   ³           Overworld Tilesheet_44.asset.meta
+³   ³           Overworld Tilesheet_45.asset
+³   ³           Overworld Tilesheet_45.asset.meta
+³   ³           Overworld Tilesheet_46.asset
+³   ³           Overworld Tilesheet_46.asset.meta
+³   ³           Overworld Tilesheet_47.asset
+³   ³           Overworld Tilesheet_47.asset.meta
+³   ³           Overworld Tilesheet_48.asset
+³   ³           Overworld Tilesheet_48.asset.meta
+³   ³           Overworld Tilesheet_49.asset
+³   ³           Overworld Tilesheet_49.asset.meta
+³   ³           Overworld Tilesheet_5.asset
+³   ³           Overworld Tilesheet_5.asset.meta
+³   ³           Overworld Tilesheet_50.asset
+³   ³           Overworld Tilesheet_50.asset.meta
+³   ³           Overworld Tilesheet_51.asset
+³   ³           Overworld Tilesheet_51.asset.meta
+³   ³           Overworld Tilesheet_52.asset
+³   ³           Overworld Tilesheet_52.asset.meta
+³   ³           Overworld Tilesheet_53.asset
+³   ³           Overworld Tilesheet_53.asset.meta
+³   ³           Overworld Tilesheet_54.asset
+³   ³           Overworld Tilesheet_54.asset.meta
+³   ³           Overworld Tilesheet_55.asset
+³   ³           Overworld Tilesheet_55.asset.meta
+³   ³           Overworld Tilesheet_56.asset
+³   ³           Overworld Tilesheet_56.asset.meta
+³   ³           Overworld Tilesheet_57.asset
+³   ³           Overworld Tilesheet_57.asset.meta
+³   ³           Overworld Tilesheet_58.asset
+³   ³           Overworld Tilesheet_58.asset.meta
+³   ³           Overworld Tilesheet_59.asset
+³   ³           Overworld Tilesheet_59.asset.meta
+³   ³           Overworld Tilesheet_6.asset
+³   ³           Overworld Tilesheet_6.asset.meta
+³   ³           Overworld Tilesheet_60.asset
+³   ³           Overworld Tilesheet_60.asset.meta
+³   ³           Overworld Tilesheet_61.asset
+³   ³           Overworld Tilesheet_61.asset.meta
+³   ³           Overworld Tilesheet_62.asset
+³   ³           Overworld Tilesheet_62.asset.meta
+³   ³           Overworld Tilesheet_63.asset
+³   ³           Overworld Tilesheet_63.asset.meta
+³   ³           Overworld Tilesheet_64.asset
+³   ³           Overworld Tilesheet_64.asset.meta
+³   ³           Overworld Tilesheet_65.asset
+³   ³           Overworld Tilesheet_65.asset.meta
+³   ³           Overworld Tilesheet_66.asset
+³   ³           Overworld Tilesheet_66.asset.meta
+³   ³           Overworld Tilesheet_7.asset
+³   ³           Overworld Tilesheet_7.asset.meta
+³   ³           Overworld Tilesheet_8.asset
+³   ³           Overworld Tilesheet_8.asset.meta
+³   ³           Overworld Tilesheet_9.asset
+³   ³           Overworld Tilesheet_9.asset.meta
+³   ³           
+³   ÀÄÄÄSettings
+³       ³   Lit2DSceneTemplate.scenetemplate
+³       ³   Lit2DSceneTemplate.scenetemplate.meta
+³       ³   Renderer2D.asset
+³       ³   Renderer2D.asset.meta
+³       ³   Scenes.meta
+³       ³   UniversalRP.asset
+³       ³   UniversalRP.asset.meta
+³       ³   
+³       ÀÄÄÄScenes
+ÃÄÄÄPhoton
+³   ³   Fusion.meta
+³   ³   FusionDemos.meta
+³   ³   FusionMenu.meta
+³   ³   PhotonLibs.meta
+³   ³   
+³   ÃÄÄÄFusion
+³   ³   ³   Assemblies.meta
+³   ³   ³   build_info.txt
+³   ³   ³   build_info.txt.meta
+³   ³   ³   CodeGen.meta
+³   ³   ³   Editor.meta
+³   ³   ³   package.json
+³   ³   ³   package.json.meta
+³   ³   ³   Plugins.meta
+³   ³   ³   release_history.txt
+³   ³   ³   release_history.txt.meta
+³   ³   ³   Resources.meta
+³   ³   ³   Runtime.meta
+³   ³   ³   
+³   ³   ÃÄÄÄAssemblies
+³   ³   ³   ³   Debug.meta
+³   ³   ³   ³   Fusion.Common.dll
+³   ³   ³   ³   Fusion.Common.dll.meta
+³   ³   ³   ³   Fusion.Common.xml
+³   ³   ³   ³   Fusion.Common.xml.meta
+³   ³   ³   ³   Fusion.Log.dll
+³   ³   ³   ³   Fusion.Log.dll.meta
+³   ³   ³   ³   Fusion.Log.xml
+³   ³   ³   ³   Fusion.Log.xml.meta
+³   ³   ³   ³   Fusion.Realtime.dll
+³   ³   ³   ³   Fusion.Realtime.dll.meta
+³   ³   ³   ³   Fusion.Realtime.xml
+³   ³   ³   ³   Fusion.Realtime.xml.meta
+³   ³   ³   ³   Fusion.Runtime.dll
+³   ³   ³   ³   Fusion.Runtime.dll.meta
+³   ³   ³   ³   Fusion.Runtime.xml
+³   ³   ³   ³   Fusion.Runtime.xml.meta
+³   ³   ³   ³   Fusion.Sockets.dll
+³   ³   ³   ³   Fusion.Sockets.dll.meta
+³   ³   ³   ³   Fusion.Sockets.xml
+³   ³   ³   ³   Fusion.Sockets.xml.meta
+³   ³   ³   ³   Release.meta
+³   ³   ³   ³   
+³   ³   ³   ÃÄÄÄDebug
+³   ³   ³   ³       Fusion.Common.dll.debug
+³   ³   ³   ³       Fusion.Common.dll.debug.meta
+³   ³   ³   ³       Fusion.Log.dll.debug
+³   ³   ³   ³       Fusion.Log.dll.debug.meta
+³   ³   ³   ³       Fusion.Realtime.dll.debug
+³   ³   ³   ³       Fusion.Realtime.dll.debug.meta
+³   ³   ³   ³       Fusion.Runtime.dll.debug
+³   ³   ³   ³       Fusion.Runtime.dll.debug.meta
+³   ³   ³   ³       Fusion.Sockets.dll.debug
+³   ³   ³   ³       Fusion.Sockets.dll.debug.meta
+³   ³   ³   ³       
+³   ³   ³   ÀÄÄÄRelease
+³   ³   ³           Fusion.Common.dll.release
+³   ³   ³           Fusion.Common.dll.release.meta
+³   ³   ³           Fusion.Log.dll.release
+³   ³   ³           Fusion.Log.dll.release.meta
+³   ³   ³           Fusion.Realtime.dll.release
+³   ³   ³           Fusion.Realtime.dll.release.meta
+³   ³   ³           Fusion.Runtime.dll.release
+³   ³   ³           Fusion.Runtime.dll.release.meta
+³   ³   ³           Fusion.Sockets.dll.release
+³   ³   ³           Fusion.Sockets.dll.release.meta
+³   ³   ³           
+³   ³   ÃÄÄÄCodeGen
+³   ³   ³       Fusion.CodeGen.asmdef
+³   ³   ³       Fusion.CodeGen.asmdef.meta
+³   ³   ³       Fusion.CodeGen.cs
+³   ³   ³       Fusion.CodeGen.cs.meta
+³   ³   ³       Fusion.CodeGen.Trigger.fusionweavertrigger
+³   ³   ³       Fusion.CodeGen.Trigger.fusionweavertrigger.meta
+³   ³   ³       Fusion.CodeGen.User.cs
+³   ³   ³       Fusion.CodeGen.User.cs.meta
+³   ³   ³       
+³   ³   ÃÄÄÄEditor
+³   ³   ³   ³   EditorResources.meta
+³   ³   ³   ³   Fusion.Unity.Editor.asmdef
+³   ³   ³   ³   Fusion.Unity.Editor.asmdef.meta
+³   ³   ³   ³   Fusion.Unity.Editor.AssemblyAttributes.cs
+³   ³   ³   ³   Fusion.Unity.Editor.AssemblyAttributes.cs.meta
+³   ³   ³   ³   Fusion.Unity.Editor.cs
+³   ³   ³   ³   Fusion.Unity.Editor.cs.meta
+³   ³   ³   ³   FusionEditorConfigImporter.cs
+³   ³   ³   ³   FusionEditorConfigImporter.cs.meta
+³   ³   ³   ³   FusionEditorSkin.cs
+³   ³   ³   ³   FusionEditorSkin.cs.meta
+³   ³   ³   ³   FusionHubWindow.cs
+³   ³   ³   ³   FusionHubWindow.cs.meta
+³   ³   ³   ³   FusionRunnerVisibilityControlsWindow.cs
+³   ³   ³   ³   FusionRunnerVisibilityControlsWindow.cs.meta
+³   ³   ³   ³   FusionWeaverTriggerImporter.cs
+³   ³   ³   ³   FusionWeaverTriggerImporter.cs.meta
+³   ³   ³   ³   NetworkPrefabsInspector.cs
+³   ³   ³   ³   NetworkPrefabsInspector.cs.meta
+³   ³   ³   ³   NetworkProjectConfigImporter.cs
+³   ³   ³   ³   NetworkProjectConfigImporter.cs.meta
+³   ³   ³   ³   NetworkProjectConfigImporterEditor.cs
+³   ³   ³   ³   NetworkProjectConfigImporterEditor.cs.meta
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄEditorResources
+³   ³   ³       ³   Fonts.meta
+³   ³   ³       ³   Fusion-dark-help-button-off.png
+³   ³   ³       ³   Fusion-dark-help-button-off.png.meta
+³   ³   ³       ³   Fusion-dark-help-button-on.png
+³   ³   ³       ³   Fusion-dark-help-button-on.png.meta
+³   ³   ³       ³   Fusion-inline-box-2x.png
+³   ³   ³       ³   Fusion-inline-box-2x.png.meta
+³   ³   ³       ³   Fusion-inline-box-no-vertical-borders.png
+³   ³   ³       ³   Fusion-inline-box-no-vertical-borders.png.meta
+³   ³   ³       ³   Fusion-inline-box.png
+³   ³   ³       ³   Fusion-inline-box.png.meta
+³   ³   ³       ³   Fusion-inline-help-box.png
+³   ³   ³       ³   Fusion-inline-help-box.png.meta
+³   ³   ³       ³   Fusion-inline-selector.png
+³   ³   ³       ³   Fusion-inline-selector.png.meta
+³   ³   ³       ³   Fusion-light-help-button-off.png
+³   ³   ³       ³   Fusion-light-help-button-off.png.meta
+³   ³   ³       ³   Fusion-light-help-button-on.png
+³   ³   ³       ³   Fusion-light-help-button-on.png.meta
+³   ³   ³       ³   Fusion-logo-2x.png
+³   ³   ³       ³   Fusion-logo-2x.png.meta
+³   ³   ³       ³   Fusion-logo.png
+³   ³   ³       ³   Fusion-logo.png.meta
+³   ³   ³       ³   Fusion-outline-box.png
+³   ³   ³       ³   Fusion-outline-box.png.meta
+³   ³   ³       ³   Fusion-script-header-2x.png
+³   ³   ³       ³   Fusion-script-header-2x.png.meta
+³   ³   ³       ³   Fusion-script-header.png
+³   ³   ³       ³   Fusion-script-header.png.meta
+³   ³   ³       ³   Fusion.Unity.xml
+³   ³   ³       ³   Fusion.Unity.xml.meta
+³   ³   ³       ³   FusionEditorSkin.guiskin
+³   ³   ³       ³   FusionEditorSkin.guiskin.meta
+³   ³   ³       ³   FusionHub.meta
+³   ³   ³       ³   
+³   ³   ³       ÃÄÄÄFonts
+³   ³   ³       ³       OFL.txt
+³   ³   ³       ³       OFL.txt.meta
+³   ³   ³       ³       Oswald-Header.ttf
+³   ³   ³       ³       Oswald-Header.ttf.meta
+³   ³   ³       ³       
+³   ³   ³       ÀÄÄÄFusionHub
+³   ³   ³               Fusion-hub-community.png
+³   ³   ³               Fusion-hub-community.png.meta
+³   ³   ³               Fusion-hub-correct-icon.png
+³   ³   ³               Fusion-hub-correct-icon.png.meta
+³   ³   ³               Fusion-hub-documentation.png
+³   ³   ³               Fusion-hub-documentation.png.meta
+³   ³   ³               Fusion-hub-icon.png
+³   ³   ³               Fusion-hub-icon.png.meta
+³   ³   ³               Fusion-hub-information.png
+³   ³   ³               Fusion-hub-information.png.meta
+³   ³   ³               Fusion-hub-logo.png
+³   ³   ³               Fusion-hub-logo.png.meta
+³   ³   ³               Fusion-hub-photon-cloud-32-dark.png
+³   ³   ³               Fusion-hub-photon-cloud-32-dark.png.meta
+³   ³   ³               Fusion-hub-samples.png
+³   ³   ³               Fusion-hub-samples.png.meta
+³   ³   ³               Fusion-hub-skin-box.png
+³   ³   ³               Fusion-hub-skin-box.png.meta
+³   ³   ³               Fusion-hub-skin-button-active.png
+³   ³   ³               Fusion-hub-skin-button-active.png.meta
+³   ³   ³               Fusion-hub-skin-button-hover.png
+³   ³   ³               Fusion-hub-skin-button-hover.png.meta
+³   ³   ³               Fusion-hub-skin-button.png
+³   ³   ³               Fusion-hub-skin-button.png.meta
+³   ³   ³               Fusion-hub-skin-sand.png
+³   ³   ³               Fusion-hub-skin-sand.png.meta
+³   ³   ³               Fusion-hub-skin-steel.png
+³   ³   ³               Fusion-hub-skin-steel.png.meta
+³   ³   ³               Fusion-hub-skin-window.png
+³   ³   ³               Fusion-hub-skin-window.png.meta
+³   ³   ³               Fusion-hub-tanknarok-logo.png
+³   ³   ³               Fusion-hub-tanknarok-logo.png.meta
+³   ³   ³               FusionHubSkin.guiskin
+³   ³   ³               FusionHubSkin.guiskin.meta
+³   ³   ³               
+³   ³   ÃÄÄÄPlugins
+³   ³   ³   ³   NanoSockets.meta
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄNanoSockets
+³   ³   ³       ³   Android.meta
+³   ³   ³       ³   iOS.meta
+³   ³   ³       ³   libnanosockets_LICENSE.txt
+³   ³   ³       ³   libnanosockets_LICENSE.txt.meta
+³   ³   ³       ³   Linux.meta
+³   ³   ³       ³   macOS.meta
+³   ³   ³       ³   Metro.meta
+³   ³   ³       ³   NanoSockets.meta
+³   ³   ³       ³   tvOS.meta
+³   ³   ³       ³   visionOS.meta
+³   ³   ³       ³   WebGL.meta
+³   ³   ³       ³   Windows.meta
+³   ³   ³       ³   
+³   ³   ³       ÃÄÄÄAndroid
+³   ³   ³       ³   ³   arm64-v8a.meta
+³   ³   ³       ³   ³   armeabi-v7a.meta
+³   ³   ³       ³   ³   x86.meta
+³   ³   ³       ³   ³   x86_64.meta
+³   ³   ³       ³   ³   
+³   ³   ³       ³   ÃÄÄÄarm64-v8a
+³   ³   ³       ³   ³       libnanosockets.so
+³   ³   ³       ³   ³       libnanosockets.so.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÃÄÄÄarmeabi-v7a
+³   ³   ³       ³   ³       libnanosockets.so
+³   ³   ³       ³   ³       libnanosockets.so.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÃÄÄÄx86
+³   ³   ³       ³   ³       libnanosockets.so
+³   ³   ³       ³   ³       libnanosockets.so.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÀÄÄÄx86_64
+³   ³   ³       ³           libnanosockets.so
+³   ³   ³       ³           libnanosockets.so.meta
+³   ³   ³       ³           
+³   ³   ³       ÃÄÄÄiOS
+³   ³   ³       ³       libnanosockets.a
+³   ³   ³       ³       libnanosockets.a.meta
+³   ³   ³       ³       
+³   ³   ³       ÃÄÄÄLinux
+³   ³   ³       ³       libnanosockets.so
+³   ³   ³       ³       libnanosockets.so.meta
+³   ³   ³       ³       
+³   ³   ³       ÃÄÄÄmacOS
+³   ³   ³       ³       libnanosockets.dylib
+³   ³   ³       ³       libnanosockets.dylib.meta
+³   ³   ³       ³       
+³   ³   ³       ÃÄÄÄMetro
+³   ³   ³       ³   ³   ARM.meta
+³   ³   ³       ³   ³   ARM64.meta
+³   ³   ³       ³   ³   NanoSockets.dll
+³   ³   ³       ³   ³   NanoSockets.dll.meta
+³   ³   ³       ³   ³   x64.meta
+³   ³   ³       ³   ³   x86.meta
+³   ³   ³       ³   ³   
+³   ³   ³       ³   ÃÄÄÄARM
+³   ³   ³       ³   ³       libnanosockets.dll
+³   ³   ³       ³   ³       libnanosockets.dll.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÃÄÄÄARM64
+³   ³   ³       ³   ³       libnanosockets.dll
+³   ³   ³       ³   ³       libnanosockets.dll.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÃÄÄÄx64
+³   ³   ³       ³   ³       libnanosockets.dll
+³   ³   ³       ³   ³       libnanosockets.dll.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÀÄÄÄx86
+³   ³   ³       ³           libnanosockets.dll
+³   ³   ³       ³           libnanosockets.dll.meta
+³   ³   ³       ³           
+³   ³   ³       ÃÄÄÄNanoSockets
+³   ³   ³       ³   ³   Dynamic.meta
+³   ³   ³       ³   ³   Static.meta
+³   ³   ³       ³   ³   
+³   ³   ³       ³   ÃÄÄÄDynamic
+³   ³   ³       ³   ³       NanoSockets.dll
+³   ³   ³       ³   ³       NanoSockets.dll.meta
+³   ³   ³       ³   ³       
+³   ³   ³       ³   ÀÄÄÄStatic
+³   ³   ³       ³           NanoSockets.dll
+³   ³   ³       ³           NanoSockets.dll.meta
+³   ³   ³       ³           
+³   ³   ³       ÃÄÄÄtvOS
+³   ³   ³       ³       libnanosockets.a
+³   ³   ³       ³       libnanosockets.a.meta
+³   ³   ³       ³       
+³   ³   ³       ÃÄÄÄvisionOS
+³   ³   ³       ³       libnanosockets.a
+³   ³   ³       ³       libnanosockets.a.meta
+³   ³   ³       ³       
+³   ³   ³       ÃÄÄÄWebGL
+³   ³   ³       ³       NanoSockets.dll
+³   ³   ³       ³       NanoSockets.dll.meta
+³   ³   ³       ³       
+³   ³   ³       ÀÄÄÄWindows
+³   ³   ³               nanosockets.dll
+³   ³   ³               nanosockets.dll.meta
+³   ³   ³               
+³   ³   ÃÄÄÄResources
+³   ³   ³       NetworkProjectConfig.fusion
+³   ³   ³       NetworkProjectConfig.fusion.meta
+³   ³   ³       PhotonAppSettings.asset
+³   ³   ³       PhotonAppSettings.asset.meta
+³   ³   ³       
+³   ³   ÀÄÄÄRuntime
+³   ³       ³   Fusion.Unity.asmdef
+³   ³       ³   Fusion.Unity.asmdef.meta
+³   ³       ³   Fusion.Unity.AssemblyAttributes.cs
+³   ³       ³   Fusion.Unity.AssemblyAttributes.cs.meta
+³   ³       ³   Fusion.Unity.cs
+³   ³       ³   Fusion.Unity.cs.meta
+³   ³       ³   FusionAddressablePrefabsPreloader.cs
+³   ³       ³   FusionAddressablePrefabsPreloader.cs.meta
+³   ³       ³   FusionBasicBillboard.cs
+³   ³       ³   FusionBasicBillboard.cs.meta
+³   ³       ³   FusionBootstrap.cs
+³   ³       ³   FusionBootstrap.cs.meta
+³   ³       ³   FusionBootstrapDebugGUI.cs
+³   ³       ³   FusionBootstrapDebugGUI.cs.meta
+³   ³       ³   FusionBootstrapDebugGUISkin.guiskin
+³   ³       ³   FusionBootstrapDebugGUISkin.guiskin.meta
+³   ³       ³   FusionBootstrapDebugGUIStartButton.png
+³   ³       ³   FusionBootstrapDebugGUIStartButton.png.meta
+³   ³       ³   FusionBootstrapDebugGUIStartButtonDown.png
+³   ³       ³   FusionBootstrapDebugGUIStartButtonDown.png.meta
+³   ³       ³   FusionBootstrapDebugGUIStartButtonOver.png
+³   ³       ³   FusionBootstrapDebugGUIStartButtonOver.png.meta
+³   ³       ³   FusionBootstrapDebugGUIStartWindow.png
+³   ³       ³   FusionBootstrapDebugGUIStartWindow.png.meta
+³   ³       ³   NetworkCharacterController.cs
+³   ³       ³   NetworkCharacterController.cs.meta
+³   ³       ³   NetworkObjectProviderDefault.cs
+³   ³       ³   NetworkObjectProviderDefault.cs.meta
+³   ³       ³   NetworkSceneManagerDefault.cs
+³   ³       ³   NetworkSceneManagerDefault.cs.meta
+³   ³       ³   RuntimeAssets.meta
+³   ³       ³   Statistics.meta
+³   ³       ³   Utilities.meta
+³   ³       ³   
+³   ³       ÃÄÄÄRuntimeAssets
+³   ³       ³       JetBrainsMono OFL.txt
+³   ³       ³       JetBrainsMono OFL.txt.meta
+³   ³       ³       JetBrainsMono-Regular.ttf
+³   ³       ³       JetBrainsMono-Regular.ttf.meta
+³   ³       ³       Roboto-Regular.ttf
+³   ³       ³       Roboto-Regular.ttf.meta
+³   ³       ³       
+³   ³       ÃÄÄÄStatistics
+³   ³       ³   ³   FusionNetworkObjectStatistics.cs
+³   ³       ³   ³   FusionNetworkObjectStatistics.cs.meta
+³   ³       ³   ³   FusionNetworkObjectStatsGraph.cs
+³   ³       ³   ³   FusionNetworkObjectStatsGraph.cs.meta
+³   ³       ³   ³   FusionNetworkObjectStatsGraphCombine.cs
+³   ³       ³   ³   FusionNetworkObjectStatsGraphCombine.cs.meta
+³   ³       ³   ³   FusionStatistics.cs
+³   ³       ³   ³   FusionStatistics.cs.meta
+³   ³       ³   ³   FusionStatsCanvas.cs
+³   ³       ³   ³   FusionStatsCanvas.cs.meta
+³   ³       ³   ³   FusionStatsConfig.cs
+³   ³       ³   ³   FusionStatsConfig.cs.meta
+³   ³       ³   ³   FusionStatsGraphDefault.cs
+³   ³       ³   ³   FusionStatsGraphDefault.cs.meta
+³   ³       ³   ³   FusionStatsGraphMaterial.mat
+³   ³       ³   ³   FusionStatsGraphMaterial.mat.meta
+³   ³       ³   ³   FusionStatsGraphShader.shader
+³   ³       ³   ³   FusionStatsGraphShader.shader.meta
+³   ³       ³   ³   FusionStatsPanelHeader.cs
+³   ³       ³   ³   FusionStatsPanelHeader.cs.meta
+³   ³       ³   ³   FusionStatsWorldAnchor.cs
+³   ³       ³   ³   FusionStatsWorldAnchor.cs.meta
+³   ³       ³   ³   Prefabs.meta
+³   ³       ³   ³   Resources.meta
+³   ³       ³   ³   StatsIcons.meta
+³   ³       ³   ³   
+³   ³       ³   ÃÄÄÄPrefabs
+³   ³       ³   ³       FusionStatsSimpleButton.prefab
+³   ³       ³   ³       FusionStatsSimpleButton.prefab.meta
+³   ³       ³   ³       NOStatGraph.prefab
+³   ³       ³   ³       NOStatGraph.prefab.meta
+³   ³       ³   ³       SingleStatistics.prefab
+³   ³       ³   ³       SingleStatistics.prefab.meta
+³   ³       ³   ³       StatisticsRenderGraph.prefab
+³   ³       ³   ³       StatisticsRenderGraph.prefab.meta
+³   ³       ³   ³       
+³   ³       ³   ÃÄÄÄResources
+³   ³       ³   ³   ³   FusionStatsResources.meta
+³   ³       ³   ³   ³   
+³   ³       ³   ³   ÀÄÄÄFusionStatsResources
+³   ³       ³   ³           FusionStatsRenderPanel.prefab
+³   ³       ³   ³           FusionStatsRenderPanel.prefab.meta
+³   ³       ³   ³           NetworkObjectStatistics.prefab
+³   ³       ³   ³           NetworkObjectStatistics.prefab.meta
+³   ³       ³   ³           
+³   ³       ³   ÀÄÄÄStatsIcons
+³   ³       ³           FusionStatsCancelIcon.png
+³   ³       ³           FusionStatsCancelIcon.png.meta
+³   ³       ³           FusionStatsGearIcon.png
+³   ³       ³           FusionStatsGearIcon.png.meta
+³   ³       ³           FusionStatsResetIcon.png
+³   ³       ³           FusionStatsResetIcon.png.meta
+³   ³       ³           FusionStatsToggleArrowIcon.png
+³   ³       ³           FusionStatsToggleArrowIcon.png.meta
+³   ³       ³           
+³   ³       ÀÄÄÄUtilities
+³   ³           ³   RunnerVisibility.meta
+³   ³           ³   
+³   ³           ÀÄÄÄRunnerVisibility
+³   ³                   EnableOnSingleRunner.cs
+³   ³                   EnableOnSingleRunner.cs.meta
+³   ³                   RunnerAOIGizmos.cs
+³   ³                   RunnerAOIGizmos.cs.meta
+³   ³                   RunnerEnableVisibility.cs
+³   ³                   RunnerEnableVisibility.cs.meta
+³   ³                   RunnerLagCompensationGizmos.cs
+³   ³                   RunnerLagCompensationGizmos.cs.meta
+³   ³                   RunnerVisibilityLink.cs
+³   ³                   RunnerVisibilityLink.cs.meta
+³   ³                   RunnerVisibilityLinksRoot.cs
+³   ³                   RunnerVisibilityLinksRoot.cs.meta
+³   ³                   
+³   ÃÄÄÄFusionDemos
+³   ÃÄÄÄFusionMenu
+³   ÀÄÄÄPhotonLibs
+³       ³   changes-library.txt
+³       ³   changes-library.txt.meta
+³       ³   netstandard2.0.meta
+³       ³   WebSocket.meta
+³       ³   
+³       ÃÄÄÄnetstandard2.0
+³       ³       Photon3Unity3D.dll
+³       ³       Photon3Unity3D.dll.meta
+³       ³       Photon3Unity3D.xml
+³       ³       Photon3Unity3D.xml.meta
+³       ³       
+³       ÀÄÄÄWebSocket
+³               PhotonWebSocket.asmdef
+³               PhotonWebSocket.asmdef.meta
+³               SocketWebTcp.cs
+³               SocketWebTcp.cs.meta
+³               websocket-sharp.dll
+³               websocket-sharp.dll.meta
+³               websocket-sharp.README
+³               websocket-sharp.README.meta
+³               WebSocket.cs
+³               WebSocket.cs.meta
+³               WebSocket.jslib
+³               WebSocket.jslib.meta
+³               
+ÃÄÄÄPlugins
+³   ³   Custom Inspector.meta
+³   ³   ParrelSync.meta
+³   ³   TextMesh Pro.meta
+³   ³   VFXPACK_IMPACT_WALLCOEUR_FreeVersion.meta
+³   ³   
+³   ÃÄÄÄCustom Inspector
+³   ³   ³   CI-Logo-transparent.png
+³   ³   ³   CI-Logo-transparent.png.meta
+³   ³   ³   Demo.meta
+³   ³   ³   Documentation.meta
+³   ³   ³   License.txt
+³   ³   ³   License.txt.meta
+³   ³   ³   Modules.meta
+³   ³   ³   
+³   ³   ÃÄÄÄDemo
+³   ³   ³       CI_DemoScene.unity
+³   ³   ³       CI_DemoScene.unity.meta
+³   ³   ³       CI_ExampleScene.cs
+³   ³   ³       CI_ExampleScene.cs.meta
+³   ³   ³       CustomInspector.Demo.asmdef
+³   ³   ³       CustomInspector.Demo.asmdef.meta
+³   ³   ³       DocumentationInfo.cs
+³   ³   ³       DocumentationInfo.cs.meta
+³   ³   ³       
+³   ³   ÃÄÄÄDocumentation
+³   ³   ³   ³   Editor.meta
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄEditor
+³   ³   ³       ³   CustomInspector_Manual.pdf
+³   ³   ³       ³   CustomInspector_Manual.pdf.meta
+³   ³   ³       ³   Implementation.meta
+³   ³   ³       ³   README.txt
+³   ³   ³       ³   README.txt.meta
+³   ³   ³       ³   
+³   ³   ³       ÀÄÄÄImplementation
+³   ³   ³               CodeSnippets.cs
+³   ³   ³               CodeSnippets.cs.meta
+³   ³   ³               CustomInspector.Documentation.Editor.asmdef
+³   ³   ³               CustomInspector.Documentation.Editor.asmdef.meta
+³   ³   ³               Descriptions.cs
+³   ³   ³               Descriptions.cs.meta
+³   ³   ³               DocWelcomeSite.cs
+³   ³   ³               DocWelcomeSite.cs.meta
+³   ³   ³               GuidanceWindow.cs
+³   ³   ³               GuidanceWindow.cs.meta
+³   ³   ³               PropertyDList.cs
+³   ³   ³               PropertyDList.cs.meta
+³   ³   ³               SnippetsReader.asset
+³   ³   ³               SnippetsReader.asset.meta
+³   ³   ³               SnippetsReader.cs
+³   ³   ³               SnippetsReader.cs.meta
+³   ³   ³               TestClass.cs
+³   ³   ³               TestClass.cs.meta
+³   ³   ³               
+³   ³   ÀÄÄÄModules
+³   ³       ³   Attributes.meta
+³   ³       ³   CustomInspector.asmdef
+³   ³       ³   CustomInspector.asmdef.meta
+³   ³       ³   Editor.meta
+³   ³       ³   Helpers.meta
+³   ³       ³   Types.meta
+³   ³       ³   
+³   ³       ÃÄÄÄAttributes
+³   ³       ³   ³   AttributeStyles.cs
+³   ³       ³   ³   AttributeStyles.cs.meta
+³   ³       ³   ³   ComparablePropertyAttribute.cs
+³   ³       ³   ³   ComparablePropertyAttribute.cs.meta
+³   ³       ³   ³   PropertyAttribute.meta
+³   ³       ³   ³   
+³   ³       ³   ÀÄÄÄPropertyAttribute
+³   ³       ³           AnimatorParameterAttribute.cs
+³   ³       ³           AnimatorParameterAttribute.cs.meta
+³   ³       ³           AsButtonAttribute.cs
+³   ³       ³           AsButtonAttribute.cs.meta
+³   ³       ³           AsRangeAttribute.cs
+³   ³       ³           AsRangeAttribute.cs.meta
+³   ³       ³           AssetsOnlyAttribute.cs
+³   ³       ³           AssetsOnlyAttribute.cs.meta
+³   ³       ³           BackgroundColorAttribute.cs
+³   ³       ³           BackgroundColorAttribute.cs.meta
+³   ³       ³           ButtonAttribute.cs
+³   ³       ³           ButtonAttribute.cs.meta
+³   ³       ³           ColorPaletteAttribute.cs
+³   ³       ³           ColorPaletteAttribute.cs.meta
+³   ³       ³           CopyPasteAttribute.cs
+³   ³       ³           CopyPasteAttribute.cs.meta
+³   ³       ³           DecimalsAttribute.cs
+³   ³       ³           DecimalsAttribute.cs.meta
+³   ³       ³           Delayed2Attribute.cs
+³   ³       ³           Delayed2Attribute.cs.meta
+³   ³       ³           DisplayAutoPropertyAttribute.cs
+³   ³       ³           DisplayAutoPropertyAttribute.cs.meta
+³   ³       ³           FixedValuesAttribute.cs
+³   ³       ³           FixedValuesAttribute.cs.meta
+³   ³       ³           FoldoutAttribute.cs
+³   ³       ³           FoldoutAttribute.cs.meta
+³   ³       ³           ForceFillAttribute.cs
+³   ³       ³           ForceFillAttribute.cs.meta
+³   ³       ³           FromChildrenAttribute.cs
+³   ³       ³           FromChildrenAttribute.cs.meta
+³   ³       ³           GetSetAttribute.cs
+³   ³       ³           GetSetAttribute.cs.meta
+³   ³       ³           GUIColorAttribute.cs
+³   ³       ³           GUIColorAttribute.cs.meta
+³   ³       ³           Header2Attribute.cs
+³   ³       ³           Header2Attribute.cs.meta
+³   ³       ³           HideFieldAttribute.cs
+³   ³       ³           HideFieldAttribute.cs.meta
+³   ³       ³           HookAttribute.cs
+³   ³       ³           HookAttribute.cs.meta
+³   ³       ³           HorizontalGroupAttribute.cs
+³   ³       ³           HorizontalGroupAttribute.cs.meta
+³   ³       ³           HorizontalLineAttribute.cs
+³   ³       ³           HorizontalLineAttribute.cs.meta
+³   ³       ³           IMinMaxAttribute.cs
+³   ³       ³           IMinMaxAttribute.cs.meta
+³   ³       ³           IndentAttribute.cs
+³   ³       ³           IndentAttribute.cs.meta
+³   ³       ³           InspectorIconAttribute.cs
+³   ³       ³           InspectorIconAttribute.cs.meta
+³   ³       ³           LabelSettingsAttribute.cs
+³   ³       ³           LabelSettingsAttribute.cs.meta
+³   ³       ³           LayerAttribute.cs
+³   ³       ³           LayerAttribute.cs.meta
+³   ³       ³           MaskAttribute.cs
+³   ³       ³           MaskAttribute.cs.meta
+³   ³       ³           MaxAttribute.cs
+³   ³       ³           MaxAttribute.cs.meta
+³   ³       ³           MessageBoxAttribute.cs
+³   ³       ³           MessageBoxAttribute.cs.meta
+³   ³       ³           Min2Attribute.cs
+³   ³       ³           Min2Attribute.cs.meta
+³   ³       ³           MultipleOfAttribute.cs
+³   ³       ³           MultipleOfAttribute.cs.meta
+³   ³       ³           PreviewAttribute.cs
+³   ³       ³           PreviewAttribute.cs.meta
+³   ³       ³           ProgressBarAttribute.cs
+³   ³       ³           ProgressBarAttribute.cs.meta
+³   ³       ³           README.txt
+³   ³       ³           README.txt.meta
+³   ³       ³           ReadOnlyAttribute.cs
+³   ³       ³           ReadOnlyAttribute.cs.meta
+³   ³       ³           RequireHasComponentAttribute.cs
+³   ³       ³           RequireHasComponentAttribute.cs.meta
+³   ³       ³           RequireTypeAttribute.cs
+³   ³       ³           RequireTypeAttribute.cs.meta
+³   ³       ³           RichTextAttribute.cs
+³   ³       ³           RichTextAttribute.cs.meta
+³   ³       ³           SceneAttribute.cs
+³   ³       ³           SceneAttribute.cs.meta
+³   ³       ³           SelfFillAttribute.cs
+³   ³       ³           SelfFillAttribute.cs.meta
+³   ³       ³           ShowAssetReferenceAttribute.cs
+³   ³       ³           ShowAssetReferenceAttribute.cs.meta
+³   ³       ³           ShowIfAttribute.cs
+³   ³       ³           ShowIfAttribute.cs.meta
+³   ³       ³           ShowIfIsAttribute.cs
+³   ³       ³           ShowIfIsAttribute.cs.meta
+³   ³       ³           ShowMethodAttribute.cs
+³   ³       ³           ShowMethodAttribute.cs.meta
+³   ³       ³           ShowPropertyAttribute.cs
+³   ³       ³           ShowPropertyAttribute.cs.meta
+³   ³       ³           Space2Attribute.cs
+³   ³       ³           Space2Attribute.cs.meta
+³   ³       ³           TabAttribute.cs
+³   ³       ³           TabAttribute.cs.meta
+³   ³       ³           TagAttribute.cs
+³   ³       ³           TagAttribute.cs.meta
+³   ³       ³           ToolbarAttribute.cs
+³   ³       ³           ToolbarAttribute.cs.meta
+³   ³       ³           TooltipBoxAttribute.cs
+³   ³       ³           TooltipBoxAttribute.cs.meta
+³   ³       ³           UnfoldAttribute.cs
+³   ³       ³           UnfoldAttribute.cs.meta
+³   ³       ³           UnitAttribute.cs
+³   ³       ³           UnitAttribute.cs.meta
+³   ³       ³           UnwrapAttribute.cs
+³   ³       ³           UnwrapAttribute.cs.meta
+³   ³       ³           URLAttribute.cs
+³   ³       ³           URLAttribute.cs.meta
+³   ³       ³           ValidateAttribute.cs
+³   ³       ³           ValidateAttribute.cs.meta
+³   ³       ³           
+³   ³       ÃÄÄÄEditor
+³   ³       ³   ³   Attributes.meta
+³   ³       ³   ³   CustomEditors.cs
+³   ³       ³   ³   CustomEditors.cs.meta
+³   ³       ³   ³   CustomInspector.Editor.asmdef
+³   ³       ³   ³   CustomInspector.Editor.asmdef.meta
+³   ³       ³   ³   Types.meta
+³   ³       ³   ³   
+³   ³       ³   ÃÄÄÄAttributes
+³   ³       ³   ³   ³   PropertyDrawer.meta
+³   ³       ³   ³   ³   
+³   ³       ³   ³   ÀÄÄÄPropertyDrawer
+³   ³       ³   ³           AnimatorParameterAttributeDrawer.cs
+³   ³       ³   ³           AnimatorParameterAttributeDrawer.cs.meta
+³   ³       ³   ³           AsButtonAttributeDrawer.cs
+³   ³       ³   ³           AsButtonAttributeDrawer.cs.meta
+³   ³       ³   ³           AsRangeAttributeDrawer.cs
+³   ³       ³   ³           AsRangeAttributeDrawer.cs.meta
+³   ³       ³   ³           AssetsOnlyAttributeDrawer.cs
+³   ³       ³   ³           AssetsOnlyAttributeDrawer.cs.meta
+³   ³       ³   ³           BackgroundColorAttributeDrawer.cs
+³   ³       ³   ³           BackgroundColorAttributeDrawer.cs.meta
+³   ³       ³   ³           ButtonAttributeDrawer.cs
+³   ³       ³   ³           ButtonAttributeDrawer.cs.meta
+³   ³       ³   ³           ColorPaletteAttributeDrawer.cs
+³   ³       ³   ³           ColorPaletteAttributeDrawer.cs.meta
+³   ³       ³   ³           CopyPasteAttributeDrawer.cs
+³   ³       ³   ³           CopyPasteAttributeDrawer.cs.meta
+³   ³       ³   ³           DecimalsAttributeDrawer.cs
+³   ³       ³   ³           DecimalsAttributeDrawer.cs.meta
+³   ³       ³   ³           Delayed2AttributeDrawer.cs
+³   ³       ³   ³           Delayed2AttributeDrawer.cs.meta
+³   ³       ³   ³           DisplayAutoPropertyDrawer.cs
+³   ³       ³   ³           DisplayAutoPropertyDrawer.cs.meta
+³   ³       ³   ³           FixedValuesAttributeDrawer.cs
+³   ³       ³   ³           FixedValuesAttributeDrawer.cs.meta
+³   ³       ³   ³           FoldoutAttributeDrawer.cs
+³   ³       ³   ³           FoldoutAttributeDrawer.cs.meta
+³   ³       ³   ³           ForceFillAttributeDrawer.cs
+³   ³       ³   ³           ForceFillAttributeDrawer.cs.meta
+³   ³       ³   ³           FromChildrenAttributeDrawer.cs
+³   ³       ³   ³           FromChildrenAttributeDrawer.cs.meta
+³   ³       ³   ³           GetSetAttributeDrawer.cs
+³   ³       ³   ³           GetSetAttributeDrawer.cs.meta
+³   ³       ³   ³           GUIColorAttributeDrawer.cs
+³   ³       ³   ³           GUIColorAttributeDrawer.cs.meta
+³   ³       ³   ³           Header2AttributeDrawer.cs
+³   ³       ³   ³           Header2AttributeDrawer.cs.meta
+³   ³       ³   ³           HideFieldAttributeDrawer.cs
+³   ³       ³   ³           HideFieldAttributeDrawer.cs.meta
+³   ³       ³   ³           HookAttributeDrawer.cs
+³   ³       ³   ³           HookAttributeDrawer.cs.meta
+³   ³       ³   ³           HorizontalGroupAttributeDrawer.cs
+³   ³       ³   ³           HorizontalGroupAttributeDrawer.cs.meta
+³   ³       ³   ³           HorizontalLineAttributeDrawer.cs
+³   ³       ³   ³           HorizontalLineAttributeDrawer.cs.meta
+³   ³       ³   ³           IndentAttributeDrawer.cs
+³   ³       ³   ³           IndentAttributeDrawer.cs.meta
+³   ³       ³   ³           InspectorIconAttributeDrawer.cs
+³   ³       ³   ³           InspectorIconAttributeDrawer.cs.meta
+³   ³       ³   ³           LabelSettingsAttributeDrawer.cs
+³   ³       ³   ³           LabelSettingsAttributeDrawer.cs.meta
+³   ³       ³   ³           LayerAttributeEditorDrawer.cs
+³   ³       ³   ³           LayerAttributeEditorDrawer.cs.meta
+³   ³       ³   ³           MaskAttributeDrawer.cs
+³   ³       ³   ³           MaskAttributeDrawer.cs.meta
+³   ³       ³   ³           MessageBoxDrawer.cs
+³   ³       ³   ³           MessageBoxDrawer.cs.meta
+³   ³       ³   ³           MinMaxAttributeDrawer.cs
+³   ³       ³   ³           MinMaxAttributeDrawer.cs.meta
+³   ³       ³   ³           MultipleOfAttributeDrawer.cs
+³   ³       ³   ³           MultipleOfAttributeDrawer.cs.meta
+³   ³       ³   ³           PreviewAttributeDrawer.cs
+³   ³       ³   ³           PreviewAttributeDrawer.cs.meta
+³   ³       ³   ³           ProgressBarAttributeDrawer.cs
+³   ³       ³   ³           ProgressBarAttributeDrawer.cs.meta
+³   ³       ³   ³           ReadOnlyAttributeDrawer.cs
+³   ³       ³   ³           ReadOnlyAttributeDrawer.cs.meta
+³   ³       ³   ³           RequireHasComponentAttributeDrawer.cs
+³   ³       ³   ³           RequireHasComponentAttributeDrawer.cs.meta
+³   ³       ³   ³           RequireTypeAttributeDrawer.cs
+³   ³       ³   ³           RequireTypeAttributeDrawer.cs.meta
+³   ³       ³   ³           RichTextAttributeDrawer.cs
+³   ³       ³   ³           RichTextAttributeDrawer.cs.meta
+³   ³       ³   ³           SceneAttributeDrawer.cs
+³   ³       ³   ³           SceneAttributeDrawer.cs.meta
+³   ³       ³   ³           SelfFillAttributeDrawer.cs
+³   ³       ³   ³           SelfFillAttributeDrawer.cs.meta
+³   ³       ³   ³           ShowAssetReferenceAttributeDrawer.cs
+³   ³       ³   ³           ShowAssetReferenceAttributeDrawer.cs.meta
+³   ³       ³   ³           ShowIfAttributeDrawer.cs
+³   ³       ³   ³           ShowIfAttributeDrawer.cs.meta
+³   ³       ³   ³           ShowIfIsAttributeDrawer.cs
+³   ³       ³   ³           ShowIfIsAttributeDrawer.cs.meta
+³   ³       ³   ³           ShowMethodDrawer.cs
+³   ³       ³   ³           ShowMethodDrawer.cs.meta
+³   ³       ³   ³           ShowPropertyAttributeDrawer.cs
+³   ³       ³   ³           ShowPropertyAttributeDrawer.cs.meta
+³   ³       ³   ³           Space2AttributeDrawer.cs
+³   ³       ³   ³           Space2AttributeDrawer.cs.meta
+³   ³       ³   ³           TabAttributeDrawer.cs
+³   ³       ³   ³           TabAttributeDrawer.cs.meta
+³   ³       ³   ³           TagAttributeDrawer.cs
+³   ³       ³   ³           TagAttributeDrawer.cs.meta
+³   ³       ³   ³           ToolbarAttributeDrawer.cs
+³   ³       ³   ³           ToolbarAttributeDrawer.cs.meta
+³   ³       ³   ³           TooltipBoxAttributeDrawer.cs
+³   ³       ³   ³           TooltipBoxAttributeDrawer.cs.meta
+³   ³       ³   ³           UnfoldAttributeDrawer.cs
+³   ³       ³   ³           UnfoldAttributeDrawer.cs.meta
+³   ³       ³   ³           UnitAttributeDrawer.cs
+³   ³       ³   ³           UnitAttributeDrawer.cs.meta
+³   ³       ³   ³           UnwrapAttributeDrawer.cs
+³   ³       ³   ³           UnwrapAttributeDrawer.cs.meta
+³   ³       ³   ³           URLAttributeDrawer.cs
+³   ³       ³   ³           URLAttributeDrawer.cs.meta
+³   ³       ³   ³           ValidateAttributeDrawer.cs
+³   ³       ³   ³           ValidateAttributeDrawer.cs.meta
+³   ³       ³   ³           
+³   ³       ³   ÀÄÄÄTypes
+³   ³       ³       ³   Array2DDrawer.cs
+³   ³       ³       ³   Array2DDrawer.cs.meta
+³   ³       ³       ³   AssetPathDrawer.cs
+³   ³       ³       ³   AssetPathDrawer.cs.meta
+³   ³       ³       ³   DynamicSliderDrawer.cs
+³   ³       ³       ³   DynamicSliderDrawer.cs.meta
+³   ³       ³       ³   LineGraphDrawer.cs
+³   ³       ³       ³   LineGraphDrawer.cs.meta
+³   ³       ³       ³   ListContainerDrawer.cs
+³   ³       ³       ³   ListContainerDrawer.cs.meta
+³   ³       ³       ³   MessageDrawerDrawer.cs
+³   ³       ³       ³   MessageDrawerDrawer.cs.meta
+³   ³       ³       ³   SerializableDateTimeDrawer.cs
+³   ³       ³       ³   SerializableDateTimeDrawer.cs.meta
+³   ³       ³       ³   SerializableInterfaceDrawer.cs
+³   ³       ³       ³   SerializableInterfaceDrawer.cs.meta
+³   ³       ³       ³   SerializableNullableDrawer.cs
+³   ³       ³       ³   SerializableNullableDrawer.cs.meta
+³   ³       ³       ³   Sets.meta
+³   ³       ³       ³   StaticsDrawerDrawer.cs
+³   ³       ³       ³   StaticsDrawerDrawer.cs.meta
+³   ³       ³       ³   TupleDrawer.cs
+³   ³       ³       ³   TupleDrawer.cs.meta
+³   ³       ³       ³   
+³   ³       ³       ÀÄÄÄSets
+³   ³       ³               DictionaryDrawer.cs
+³   ³       ³               DictionaryDrawer.cs.meta
+³   ³       ³               SetDrawer.cs
+³   ³       ³               SetDrawer.cs.meta
+³   ³       ³               
+³   ³       ÃÄÄÄHelpers
+³   ³       ³   ³   CustomInspector.Helpers.asmdef
+³   ³       ³   ³   CustomInspector.Helpers.asmdef.meta
+³   ³       ³   ³   DebugTest.cs
+³   ³       ³   ³   DebugTest.cs.meta
+³   ³       ³   ³   Editor.meta
+³   ³       ³   ³   InternalStyles.cs
+³   ³       ³   ³   InternalStyles.cs.meta
+³   ³       ³   ³   UnityParsing.cs
+³   ³       ³   ³   UnityParsing.cs.meta
+³   ³       ³   ³   
+³   ³       ³   ÀÄÄÄEditor
+³   ³       ³           Common.cs
+³   ³       ³           Common.cs.meta
+³   ³       ³           CustomInspector.Helpers.Editor.asmdef
+³   ³       ³           CustomInspector.Helpers.Editor.asmdef.meta
+³   ³       ³           DirtyValue.cs
+³   ³       ³           DirtyValue.cs.meta
+³   ³       ³           DrawProperties.cs
+³   ³       ³           DrawProperties.cs.meta
+³   ³       ³           EditProperties.cs
+³   ³       ³           EditProperties.cs.meta
+³   ³       ³           Exceptions.cs
+³   ³       ³           Exceptions.cs.meta
+³   ³       ³           GUIColorScope.cs
+³   ³       ³           GUIColorScope.cs.meta
+³   ³       ³           InternalEditorStylesConvert.cs
+³   ³       ³           InternalEditorStylesConvert.cs.meta
+³   ³       ³           InvokableMethod.cs
+³   ³       ³           InvokableMethod.cs.meta
+³   ³       ³           LabelContent.cs
+³   ³       ³           LabelContent.cs.meta
+³   ³       ³           LabelWidthScope.cs
+³   ³       ³           LabelWidthScope.cs.meta
+³   ³       ³           NewIndentLevel.cs
+³   ³       ³           NewIndentLevel.cs.meta
+³   ³       ³           NewWideModeScope.cs
+³   ³       ³           NewWideModeScope.cs.meta
+³   ³       ³           PropertyConversions.cs
+³   ³       ³           PropertyConversions.cs.meta
+³   ³       ³           PropertyIdentifiers.cs
+³   ³       ³           PropertyIdentifiers.cs.meta
+³   ³       ³           PropertyValues.cs
+³   ³       ³           PropertyValues.cs.meta
+³   ³       ³           PropInfoCache.cs
+³   ³       ³           PropInfoCache.cs.meta
+³   ³       ³           TypedPropertyDrawer.cs
+³   ³       ³           TypedPropertyDrawer.cs.meta
+³   ³       ³           
+³   ³       ÀÄÄÄTypes
+³   ³           ³   Array2D.cs
+³   ³           ³   Array2D.cs.meta
+³   ³           ³   ArrayContainer.cs
+³   ³           ³   ArrayContainer.cs.meta
+³   ³           ³   AssetPath.meta
+³   ³           ³   DynamicSlider.cs
+³   ³           ³   DynamicSlider.cs.meta
+³   ³           ³   LineGraph.cs
+³   ³           ³   LineGraph.cs.meta
+³   ³           ³   ListContainer.cs
+³   ³           ³   ListContainer.cs.meta
+³   ³           ³   MessageDrawer.cs
+³   ³           ³   MessageDrawer.cs.meta
+³   ³           ³   SerializableDateTime.cs
+³   ³           ³   SerializableDateTime.cs.meta
+³   ³           ³   SerializableInterface.cs
+³   ³           ³   SerializableInterface.cs.meta
+³   ³           ³   SerializableNullable.cs
+³   ³           ³   SerializableNullable.cs.meta
+³   ³           ³   SerializableTuple.cs
+³   ³           ³   SerializableTuple.cs.meta
+³   ³           ³   Sets.meta
+³   ³           ³   StaticsDrawer.cs
+³   ³           ³   StaticsDrawer.cs.meta
+³   ³           ³   
+³   ³           ÃÄÄÄAssetPath
+³   ³           ³       AssetPath.cs
+³   ³           ³       AssetPath.cs.meta
+³   ³           ³       FilePath.cs
+³   ³           ³       FilePath.cs.meta
+³   ³           ³       FolderPath.cs
+³   ³           ³       FolderPath.cs.meta
+³   ³           ³       
+³   ³           ÀÄÄÄSets
+³   ³                   ReorderableDictionary.cs
+³   ³                   ReorderableDictionary.cs.meta
+³   ³                   SerializableDictionary.cs
+³   ³                   SerializableDictionary.cs.meta
+³   ³                   SerializableSet.cs
+³   ³                   SerializableSet.cs.meta
+³   ³                   SerializableSortedDictionary.cs
+³   ³                   SerializableSortedDictionary.cs.meta
+³   ³                   SerializableSortedSet.cs
+³   ³                   SerializableSortedSet.cs.meta
+³   ³                   
+³   ÃÄÄÄParrelSync
+³   ³   ³   Editor.meta
+³   ³   ³   package.json
+³   ³   ³   package.json.meta
+³   ³   ³   projectCloner.asmdef
+³   ³   ³   projectCloner.asmdef.meta
+³   ³   ³   ScriptableObjects.meta
+³   ³   ³   
+³   ³   ÃÄÄÄEditor
+³   ³   ³   ³   AssetModBlock.meta
+³   ³   ³   ³   ClonesManager.cs
+³   ³   ³   ³   ClonesManager.cs.meta
+³   ³   ³   ³   ClonesManagerWindow.cs
+³   ³   ³   ³   ClonesManagerWindow.cs.meta
+³   ³   ³   ³   ExternalLinks.cs
+³   ³   ³   ³   ExternalLinks.cs.meta
+³   ³   ³   ³   FileUtilities.cs
+³   ³   ³   ³   FileUtilities.cs.meta
+³   ³   ³   ³   NonCore.meta
+³   ³   ³   ³   ParrelSyncProjectSettings.cs
+³   ³   ³   ³   ParrelSyncProjectSettings.cs.meta
+³   ³   ³   ³   Preferences.cs
+³   ³   ³   ³   Preferences.cs.meta
+³   ³   ³   ³   Project.cs
+³   ³   ³   ³   Project.cs.meta
+³   ³   ³   ³   UpdateChecker.cs
+³   ³   ³   ³   UpdateChecker.cs.meta
+³   ³   ³   ³   ValidateCopiedFoldersIntegrity.cs
+³   ³   ³   ³   ValidateCopiedFoldersIntegrity.cs.meta
+³   ³   ³   ³   
+³   ³   ³   ÃÄÄÄAssetModBlock
+³   ³   ³   ³       EditorQuit.cs
+³   ³   ³   ³       EditorQuit.cs.meta
+³   ³   ³   ³       ParrelSyncAssetModificationProcessor.cs
+³   ³   ³   ³       ParrelSyncAssetModificationProcessor.cs.meta
+³   ³   ³   ³       
+³   ³   ³   ÀÄÄÄNonCore
+³   ³   ³           AskFeedbackDialog.cs
+³   ³   ³           AskFeedbackDialog.cs.meta
+³   ³   ³           OtherMenuItem.cs
+³   ³   ³           OtherMenuItem.cs.meta
+³   ³   ³           
+³   ³   ÀÄÄÄScriptableObjects
+³   ³           ParrelSyncProjectSettings.asset
+³   ³           ParrelSyncProjectSettings.asset.meta
+³   ³           
+³   ÃÄÄÄTextMesh Pro
+³   ³   ³   Documentation.meta
+³   ³   ³   Fonts.meta
+³   ³   ³   Resources.meta
+³   ³   ³   Shaders.meta
+³   ³   ³   Sprites.meta
+³   ³   ³   
+³   ³   ÃÄÄÄDocumentation
+³   ³   ³       TextMesh Pro User Guide 2016.pdf
+³   ³   ³       TextMesh Pro User Guide 2016.pdf.meta
+³   ³   ³       
+³   ³   ÃÄÄÄFonts
+³   ³   ³       LiberationSans - OFL.txt
+³   ³   ³       LiberationSans - OFL.txt.meta
+³   ³   ³       LiberationSans.ttf
+³   ³   ³       LiberationSans.ttf.meta
+³   ³   ³       Military Poster.ttf
+³   ³   ³       Military Poster.ttf.meta
+³   ³   ³       
+³   ³   ÃÄÄÄResources
+³   ³   ³   ³   Fonts & Materials.meta
+³   ³   ³   ³   LineBreaking Following Characters.txt
+³   ³   ³   ³   LineBreaking Following Characters.txt.meta
+³   ³   ³   ³   LineBreaking Leading Characters.txt
+³   ³   ³   ³   LineBreaking Leading Characters.txt.meta
+³   ³   ³   ³   Sprite Assets.meta
+³   ³   ³   ³   Style Sheets.meta
+³   ³   ³   ³   TMP Settings.asset
+³   ³   ³   ³   TMP Settings.asset.meta
+³   ³   ³   ³   
+³   ³   ³   ÃÄÄÄFonts & Materials
+³   ³   ³   ³       LiberationSans SDF - Drop Shadow.mat
+³   ³   ³   ³       LiberationSans SDF - Drop Shadow.mat.meta
+³   ³   ³   ³       LiberationSans SDF - Fallback.asset
+³   ³   ³   ³       LiberationSans SDF - Fallback.asset.meta
+³   ³   ³   ³       LiberationSans SDF - Outline.mat
+³   ³   ³   ³       LiberationSans SDF - Outline.mat.meta
+³   ³   ³   ³       LiberationSans SDF.asset
+³   ³   ³   ³       LiberationSans SDF.asset.meta
+³   ³   ³   ³       _Oblivion.asset
+³   ³   ³   ³       _Oblivion.asset.meta
+³   ³   ³   ³       
+³   ³   ³   ÃÄÄÄSprite Assets
+³   ³   ³   ³       EmojiOne.asset
+³   ³   ³   ³       EmojiOne.asset.meta
+³   ³   ³   ³       
+³   ³   ³   ÀÄÄÄStyle Sheets
+³   ³   ³           Default Style Sheet.asset
+³   ³   ³           Default Style Sheet.asset.meta
+³   ³   ³           
+³   ³   ÃÄÄÄShaders
+³   ³   ³       SDFFunctions.hlsl
+³   ³   ³       SDFFunctions.hlsl.meta
+³   ³   ³       TMPro.cginc
+³   ³   ³       TMPro.cginc.meta
+³   ³   ³       TMPro_Mobile.cginc
+³   ³   ³       TMPro_Mobile.cginc.meta
+³   ³   ³       TMPro_Properties.cginc
+³   ³   ³       TMPro_Properties.cginc.meta
+³   ³   ³       TMPro_Surface.cginc
+³   ³   ³       TMPro_Surface.cginc.meta
+³   ³   ³       TMP_Bitmap-Custom-Atlas.shader
+³   ³   ³       TMP_Bitmap-Custom-Atlas.shader.meta
+³   ³   ³       TMP_Bitmap-Mobile.shader
+³   ³   ³       TMP_Bitmap-Mobile.shader.meta
+³   ³   ³       TMP_Bitmap.shader
+³   ³   ³       TMP_Bitmap.shader.meta
+³   ³   ³       TMP_SDF Overlay.shader
+³   ³   ³       TMP_SDF Overlay.shader.meta
+³   ³   ³       TMP_SDF SSD.shader
+³   ³   ³       TMP_SDF SSD.shader.meta
+³   ³   ³       TMP_SDF-HDRP LIT.shadergraph
+³   ³   ³       TMP_SDF-HDRP LIT.shadergraph.meta
+³   ³   ³       TMP_SDF-HDRP UNLIT.shadergraph
+³   ³   ³       TMP_SDF-HDRP UNLIT.shadergraph.meta
+³   ³   ³       TMP_SDF-Mobile Masking.shader
+³   ³   ³       TMP_SDF-Mobile Masking.shader.meta
+³   ³   ³       TMP_SDF-Mobile Overlay.shader
+³   ³   ³       TMP_SDF-Mobile Overlay.shader.meta
+³   ³   ³       TMP_SDF-Mobile SSD.shader
+³   ³   ³       TMP_SDF-Mobile SSD.shader.meta
+³   ³   ³       TMP_SDF-Mobile-2-Pass.shader
+³   ³   ³       TMP_SDF-Mobile-2-Pass.shader.meta
+³   ³   ³       TMP_SDF-Mobile.shader
+³   ³   ³       TMP_SDF-Mobile.shader.meta
+³   ³   ³       TMP_SDF-Surface-Mobile.shader
+³   ³   ³       TMP_SDF-Surface-Mobile.shader.meta
+³   ³   ³       TMP_SDF-Surface.shader
+³   ³   ³       TMP_SDF-Surface.shader.meta
+³   ³   ³       TMP_SDF-URP Lit.shadergraph
+³   ³   ³       TMP_SDF-URP Lit.shadergraph.meta
+³   ³   ³       TMP_SDF-URP Unlit.shadergraph
+³   ³   ³       TMP_SDF-URP Unlit.shadergraph.meta
+³   ³   ³       TMP_SDF.shader
+³   ³   ³       TMP_SDF.shader.meta
+³   ³   ³       TMP_Sprite.shader
+³   ³   ³       TMP_Sprite.shader.meta
+³   ³   ³       
+³   ³   ÀÄÄÄSprites
+³   ³           EmojiOne Attribution.txt
+³   ³           EmojiOne Attribution.txt.meta
+³   ³           EmojiOne.json
+³   ³           EmojiOne.json.meta
+³   ³           EmojiOne.png
+³   ³           EmojiOne.png.meta
+³   ³           
+³   ÀÄÄÄVFXPACK_IMPACT_WALLCOEUR_FreeVersion
+³       ³   00_Prefab.meta
+³       ³   01_Material.meta
+³       ³   03_Texture.meta
+³       ³   04_Model.meta
+³       ³   Scripts.meta
+³       ³   VFXPlayerScene.unity
+³       ³   VFXPlayerScene.unity.meta
+³       ³   
+³       ÃÄÄÄ00_Prefab
+³       ³   ³   0_Classic.meta
+³       ³   ³   1_Critical.meta
+³       ³   ³   2_Impact_1.1.0.meta
+³       ³   ³   
+³       ³   ÃÄÄÄ0_Classic
+³       ³   ³       VFX_Arcade_01.prefab
+³       ³   ³       VFX_Arcade_01.prefab.meta
+³       ³   ³       VFX_Arcade_02.prefab
+³       ³   ³       VFX_Arcade_02.prefab.meta
+³       ³   ³       VFX_Arcade_03.prefab
+³       ³   ³       VFX_Arcade_03.prefab.meta
+³       ³   ³       VFX_Blood_01.prefab
+³       ³   ³       VFX_Blood_01.prefab.meta
+³       ³   ³       VFX_Blood_02.prefab
+³       ³   ³       VFX_Blood_02.prefab.meta
+³       ³   ³       VFX_Classic_01.prefab
+³       ³   ³       VFX_Classic_01.prefab.meta
+³       ³   ³       VFX_Classic_02.prefab
+³       ³   ³       VFX_Classic_02.prefab.meta
+³       ³   ³       VFX_Classic_03.prefab
+³       ³   ³       VFX_Classic_03.prefab.meta
+³       ³   ³       VFX_Classic_04.prefab
+³       ³   ³       VFX_Classic_04.prefab.meta
+³       ³   ³       VFX_Poison_01.prefab
+³       ³   ³       VFX_Poison_01.prefab.meta
+³       ³   ³       VFX_Poison_02.prefab
+³       ³   ³       VFX_Poison_02.prefab.meta
+³       ³   ³       
+³       ³   ÃÄÄÄ1_Critical
+³       ³   ³       VFX_Critical_01.prefab
+³       ³   ³       VFX_Critical_01.prefab.meta
+³       ³   ³       VFX_Critical_02.prefab
+³       ³   ³       VFX_Critical_02.prefab.meta
+³       ³   ³       
+³       ³   ÀÄÄÄ2_Impact_1.1.0
+³       ³           VFX_ImpactClassic01_1.1.0.prefab
+³       ³           VFX_ImpactClassic01_1.1.0.prefab.meta
+³       ³           VFX_ImpactCritical_1.1.0_Pink.prefab
+³       ³           VFX_ImpactCritical_1.1.0_Pink.prefab.meta
+³       ³           VFX_ImpactCross_1.1.0.prefab
+³       ³           VFX_ImpactCross_1.1.0.prefab.meta
+³       ³           VFX_ImpactToon_1.1.0.prefab
+³       ³           VFX_ImpactToon_1.1.0.prefab.meta
+³       ³           
+³       ÃÄÄÄ01_Material
+³       ³   ³   Carr‚Add.mat
+³       ³   ³   Carr‚Add.mat.meta
+³       ³   ³   Carr‚Alpha.mat
+³       ³   ³   Carr‚Alpha.mat.meta
+³       ³   ³   Circle.meta
+³       ³   ³   Cross.mat
+³       ³   ³   Cross.mat.meta
+³       ³   ³   Flam_Alpha 4.mat
+³       ³   ³   Flam_Alpha 4.mat.meta
+³       ³   ³   Flam_Alpha 8.mat
+³       ³   ³   Flam_Alpha 8.mat.meta
+³       ³   ³   Flare.meta
+³       ³   ³   GrifassAdd.mat
+³       ³   ³   GrifassAdd.mat.meta
+³       ³   ³   GrifassAlpha.mat
+³       ³   ³   GrifassAlpha.mat.meta
+³       ³   ³   Impact 1.mat
+³       ³   ³   Impact 1.mat.meta
+³       ³   ³   Impact 2.mat
+³       ³   ³   Impact 2.mat.meta
+³       ³   ³   Impact 3.mat
+³       ³   ³   Impact 3.mat.meta
+³       ³   ³   Impact 5.mat
+³       ³   ³   Impact 5.mat.meta
+³       ³   ³   Impact 6.mat
+³       ³   ³   Impact 6.mat.meta
+³       ³   ³   Impact.mat
+³       ³   ³   Impact.mat.meta
+³       ³   ³   ImpactAdd 1.mat
+³       ³   ³   ImpactAdd 1.mat.meta
+³       ³   ³   ImpactAdd 2.mat
+³       ³   ³   ImpactAdd 2.mat.meta
+³       ³   ³   ImpactAdd 3.mat
+³       ³   ³   ImpactAdd 3.mat.meta
+³       ³   ³   ImpactAdd 4.mat
+³       ³   ³   ImpactAdd 4.mat.meta
+³       ³   ³   ImpactAdd 5.mat
+³       ³   ³   ImpactAdd 5.mat.meta
+³       ³   ³   ImpactAdd 6.mat
+³       ³   ³   ImpactAdd 6.mat.meta
+³       ³   ³   ImpactAdd 7.mat
+³       ³   ³   ImpactAdd 7.mat.meta
+³       ³   ³   ImpactAdd 8.mat
+³       ³   ³   ImpactAdd 8.mat.meta
+³       ³   ³   ImpactAdd.mat
+³       ³   ³   ImpactAdd.mat.meta
+³       ³   ³   ImpactAlpha.mat
+³       ³   ³   ImpactAlpha.mat.meta
+³       ³   ³   ImpactValo 1.mat
+³       ³   ³   ImpactValo 1.mat.meta
+³       ³   ³   ImpactValo 2.mat
+³       ³   ³   ImpactValo 2.mat.meta
+³       ³   ³   ImpactValo 3.mat
+³       ³   ³   ImpactValo 3.mat.meta
+³       ³   ³   ImpactValo 4.mat
+³       ³   ³   ImpactValo 4.mat.meta
+³       ³   ³   ImpactValo 5.mat
+³       ³   ³   ImpactValo 5.mat.meta
+³       ³   ³   ImpactValo 6.mat
+³       ³   ³   ImpactValo 6.mat.meta
+³       ³   ³   ImpactValo 8.mat
+³       ³   ³   ImpactValo 8.mat.meta
+³       ³   ³   ImpactValo.mat
+³       ³   ³   ImpactValo.mat.meta
+³       ³   ³   ImpactValoAlpha.mat
+³       ³   ³   ImpactValoAlpha.mat.meta
+³       ³   ³   Impact_1.1.0.meta
+³       ³   ³   Liquid.meta
+³       ³   ³   Muzzle1 10.mat
+³       ³   ³   Muzzle1 10.mat.meta
+³       ³   ³   Muzzle1 11.mat
+³       ³   ³   Muzzle1 11.mat.meta
+³       ³   ³   Muzzle1 12.mat
+³       ³   ³   Muzzle1 12.mat.meta
+³       ³   ³   Muzzle1 12Alpha 1.mat
+³       ³   ³   Muzzle1 12Alpha 1.mat.meta
+³       ³   ³   Muzzle1 12Alpha.mat
+³       ³   ³   Muzzle1 12Alpha.mat.meta
+³       ³   ³   Muzzle1 13.mat
+³       ³   ³   Muzzle1 13.mat.meta
+³       ³   ³   Muzzle1 14.mat
+³       ³   ³   Muzzle1 14.mat.meta
+³       ³   ³   Muzzle1 2.mat
+³       ³   ³   Muzzle1 2.mat.meta
+³       ³   ³   Muzzle1 3.mat
+³       ³   ³   Muzzle1 3.mat.meta
+³       ³   ³   Muzzle1 4.mat
+³       ³   ³   Muzzle1 4.mat.meta
+³       ³   ³   Muzzle1 5.mat
+³       ³   ³   Muzzle1 5.mat.meta
+³       ³   ³   Muzzle1 6.mat
+³       ³   ³   Muzzle1 6.mat.meta
+³       ³   ³   Muzzle1 7.mat
+³       ³   ³   Muzzle1 7.mat.meta
+³       ³   ³   Muzzle1 8.mat
+³       ³   ³   Muzzle1 8.mat.meta
+³       ³   ³   Muzzle1 9.mat
+³       ³   ³   Muzzle1 9.mat.meta
+³       ³   ³   Pixel.meta
+³       ³   ³   SlashAdd.mat
+³       ³   ³   SlashAdd.mat.meta
+³       ³   ³   SlashAlpha 1.mat
+³       ³   ³   SlashAlpha 1.mat.meta
+³       ³   ³   SlashAlpha.mat
+³       ³   ³   SlashAlpha.mat.meta
+³       ³   ³   Smoke 1.mat
+³       ³   ³   Smoke 1.mat.meta
+³       ³   ³   Smoke 2.mat
+³       ³   ³   Smoke 2.mat.meta
+³       ³   ³   Smoke 3.mat
+³       ³   ³   Smoke 3.mat.meta
+³       ³   ³   Smoke 4.mat
+³       ³   ³   Smoke 4.mat.meta
+³       ³   ³   Smoke.mat
+³       ³   ³   Smoke.mat.meta
+³       ³   ³   t_Add.mat
+³       ³   ³   t_Add.mat.meta
+³       ³   ³   
+³       ³   ÃÄÄÄCircle
+³       ³   ³       Impact 11.mat
+³       ³   ³       Impact 11.mat.meta
+³       ³   ³       Impact 12.mat
+³       ³   ³       Impact 12.mat.meta
+³       ³   ³       Impact 13.mat
+³       ³   ³       Impact 13.mat.meta
+³       ³   ³       Impact 9.mat
+³       ³   ³       Impact 9.mat.meta
+³       ³   ³       
+³       ³   ÃÄÄÄFlare
+³       ³   ³       Impact 1.mat
+³       ³   ³       Impact 1.mat.meta
+³       ³   ³       Impact 10.mat
+³       ³   ³       Impact 10.mat.meta
+³       ³   ³       Impact 3.mat
+³       ³   ³       Impact 3.mat.meta
+³       ³   ³       Impact 4.mat
+³       ³   ³       Impact 4.mat.meta
+³       ³   ³       Impact 7.mat
+³       ³   ³       Impact 7.mat.meta
+³       ³   ³       Impact 8.mat
+³       ³   ³       Impact 8.mat.meta
+³       ³   ³       ImpactALPHA.mat
+³       ³   ³       ImpactALPHA.mat.meta
+³       ³   ³       
+³       ³   ÃÄÄÄImpact_1.1.0
+³       ³   ³       Impact01_1.1.0.mat
+³       ³   ³       Impact01_1.1.0.mat.meta
+³       ³   ³       Impact02_1.1.0.mat
+³       ³   ³       Impact02_1.1.0.mat.meta
+³       ³   ³       Impact03_1.1.0.mat
+³       ³   ³       Impact03_1.1.0.mat.meta
+³       ³   ³       Impact04_1.1.0.mat
+³       ³   ³       Impact04_1.1.0.mat.meta
+³       ³   ³       Impact05_1.1.0.mat
+³       ³   ³       Impact05_1.1.0.mat.meta
+³       ³   ³       Impact06_1.1.0.mat
+³       ³   ³       Impact06_1.1.0.mat.meta
+³       ³   ³       Impact07_1.1.0.mat
+³       ³   ³       Impact07_1.1.0.mat.meta
+³       ³   ³       Impact08_1.1.0.mat
+³       ³   ³       Impact08_1.1.0.mat.meta
+³       ³   ³       Impact09_1.1.0.mat
+³       ³   ³       Impact09_1.1.0.mat.meta
+³       ³   ³       Impact10_1.1.0.mat
+³       ³   ³       Impact10_1.1.0.mat.meta
+³       ³   ³       
+³       ³   ÃÄÄÄLiquid
+³       ³   ³       BLOOD.mat
+³       ³   ³       BLOOD.mat.meta
+³       ³   ³       Liquid.mat
+³       ³   ³       Liquid.mat.meta
+³       ³   ³       
+³       ³   ÀÄÄÄPixel
+³       ³           ImpactPixel 1.mat
+³       ³           ImpactPixel 1.mat.meta
+³       ³           ImpactPixel.mat
+³       ³           ImpactPixel.mat.meta
+³       ³           LiquidPixel.mat
+³       ³           LiquidPixel.mat.meta
+³       ³           
+³       ÃÄÄÄ03_Texture
+³       ³   ³   1024BLUR_vfx.png
+³       ³   ³   1024BLUR_vfx.png.meta
+³       ³   ³   Akmul_VFX_Circle_vfx.png
+³       ³   ³   Akmul_VFX_Circle_vfx.png.meta
+³       ³   ³   A_ImpactCircle_vfx.png
+³       ³   ³   A_ImpactCircle_vfx.png.meta
+³       ³   ³   Blood_vfx.png
+³       ³   ³   Blood_vfx.png.meta
+³       ³   ³   Circle2_vfx.png
+³       ³   ³   Circle2_vfx.png.meta
+³       ³   ³   Circle3_vfx.png
+³       ³   ³   Circle3_vfx.png.meta
+³       ³   ³   CircleDeep - Copy_vfx.png
+³       ³   ³   CircleDeep - Copy_vfx.png.meta
+³       ³   ³   CircleImpact02_vfx.png
+³       ³   ³   CircleImpact02_vfx.png.meta
+³       ³   ³   CircleImpact03_vfx.png
+³       ³   ³   CircleImpact03_vfx.png.meta
+³       ³   ³   CircleImpact04_vfx.png
+³       ³   ³   CircleImpact04_vfx.png.meta
+³       ³   ³   Circle_vfx.png
+³       ³   ³   Circle_vfx.png.meta
+³       ³   ³   CrossImpact_vfx.png
+³       ³   ³   CrossImpact_vfx.png.meta
+³       ³   ³   CrossShoot_vfx.png
+³       ³   ³   CrossShoot_vfx.png.meta
+³       ³   ³   Flare2_vfx.png
+³       ³   ³   Flare2_vfx.png.meta
+³       ³   ³   Flare_vfx.png
+³       ³   ³   Flare_vfx.png.meta
+³       ³   ³   FP_BasicsImpact_vfx.png
+³       ³   ³   FP_BasicsImpact_vfx.png.meta
+³       ³   ³   FP_BwImpact_vfx.png
+³       ³   ³   FP_BwImpact_vfx.png.meta
+³       ³   ³   FP_CircleImpact_vfx.png
+³       ³   ³   FP_CircleImpact_vfx.png.meta
+³       ³   ³   FP_SmkImpact_vfx.png
+³       ³   ³   FP_SmkImpact_vfx.png.meta
+³       ³   ³   Grid_01_Emissive_vfx.png
+³       ³   ³   Grid_01_Emissive_vfx.png.meta
+³       ³   ³   GRIFFASS_vfx.png
+³       ³   ³   GRIFFASS_vfx.png.meta
+³       ³   ³   ImpactCircle_vfx.png
+³       ³   ³   ImpactCircle_vfx.png.meta
+³       ³   ³   ImpactFrame_vfx.png
+³       ³   ³   ImpactFrame_vfx.png.meta
+³       ³   ³   ImpactShotValo2_vfx.png
+³       ³   ³   ImpactShotValo2_vfx.png.meta
+³       ³   ³   ImpactShotValo_vfx.png
+³       ³   ³   ImpactShotValo_vfx.png.meta
+³       ³   ³   ImpactValo2_vfx.png
+³       ³   ³   ImpactValo2_vfx.png.meta
+³       ³   ³   ImpactValo3_vfx.png
+³       ³   ³   ImpactValo3_vfx.png.meta
+³       ³   ³   ImpactValo4_vfx.png
+³       ³   ³   ImpactValo4_vfx.png.meta
+³       ³   ³   ImpactValo5_vfx.png
+³       ³   ³   ImpactValo5_vfx.png.meta
+³       ³   ³   ImpactValo6_vfx.png
+³       ³   ³   ImpactValo6_vfx.png.meta
+³       ³   ³   ImpactValo7 1_vfx.png
+³       ³   ³   ImpactValo7 1_vfx.png.meta
+³       ³   ³   ImpactValo7_vfx.png
+³       ³   ³   ImpactValo7_vfx.png.meta
+³       ³   ³   ImpactValo8_vfx.png
+³       ³   ³   ImpactValo8_vfx.png.meta
+³       ³   ³   ImpactValoPixel2_vfx.png
+³       ³   ³   ImpactValoPixel2_vfx.png.meta
+³       ³   ³   ImpactValoPixel_vfx.png
+³       ³   ³   ImpactValoPixel_vfx.png.meta
+³       ³   ³   ImpactValo_vfx.png
+³       ³   ³   ImpactValo_vfx.png.meta
+³       ³   ³   impact_1.1.0.meta
+³       ³   ³   ImpatcValo8_vfx.png
+³       ³   ³   ImpatcValo8_vfx.png.meta
+³       ³   ³   LiquidPixel_vfx.png
+³       ³   ³   LiquidPixel_vfx.png.meta
+³       ³   ³   Liquid_vfx.png
+³       ³   ³   Liquid_vfx.png.meta
+³       ³   ³   Muzzle2p2_vfx.png
+³       ³   ³   Muzzle2p2_vfx.png.meta
+³       ³   ³   MuzzleCanonNeo_vfx.png
+³       ³   ³   MuzzleCanonNeo_vfx.png.meta
+³       ³   ³   MuzzleV3_vfx.png
+³       ³   ³   MuzzleV3_vfx.png.meta
+³       ³   ³   MuzzleV7_vfx.png
+³       ³   ³   MuzzleV7_vfx.png.meta
+³       ³   ³   NoiseHack8_Paint_vfx.png
+³       ³   ³   NoiseHack8_Paint_vfx.png.meta
+³       ³   ³   SlashOne_vfx.png
+³       ³   ³   SlashOne_vfx.png.meta
+³       ³   ³   SlashV3_vfx.png
+³       ³   ³   SlashV3_vfx.png.meta
+³       ³   ³   SlashV4_vfx.png
+³       ³   ³   SlashV4_vfx.png.meta
+³       ³   ³   SlashV5_vfx.png
+³       ³   ³   SlashV5_vfx.png.meta
+³       ³   ³   SllashV2_vfx.png
+³       ³   ³   SllashV2_vfx.png.meta
+³       ³   ³   SllashV3_vfx.png
+³       ³   ³   SllashV3_vfx.png.meta
+³       ³   ³   SplashV2_vfx.png
+³       ³   ³   SplashV2_vfx.png.meta
+³       ³   ³   TrailShot_vfx.png
+³       ³   ³   TrailShot_vfx.png.meta
+³       ³   ³   Triangle_vfx.png
+³       ³   ³   Triangle_vfx.png.meta
+³       ³   ³   VFX_FP_SmokeCircleGround_vfx.png
+³       ³   ³   VFX_FP_SmokeCircleGround_vfx.png.meta
+³       ³   ³   VFX_ImpactArcade2_vfx.png
+³       ³   ³   VFX_ImpactArcade2_vfx.png.meta
+³       ³   ³   VFX_ImpactArcade_vfx.png
+³       ³   ³   VFX_ImpactArcade_vfx.png.meta
+³       ³   ³   VFX_Impactv1_vfx.png
+³       ³   ³   VFX_Impactv1_vfx.png.meta
+³       ³   ³   VFX_Impactv2_vfx.png
+³       ³   ³   VFX_Impactv2_vfx.png.meta
+³       ³   ³   VFX_Impactv3_vfx.png
+³       ³   ³   VFX_Impactv3_vfx.png.meta
+³       ³   ³   VFX_Impactv4_vfx.png
+³       ³   ³   VFX_Impactv4_vfx.png.meta
+³       ³   ³   VFX_Impactv5_vfx.png
+³       ³   ³   VFX_Impactv5_vfx.png.meta
+³       ³   ³   VFX_Impactv6_vfx.png
+³       ³   ³   VFX_Impactv6_vfx.png.meta
+³       ³   ³   VFX_Impactv7_vfx.png
+³       ³   ³   VFX_Impactv7_vfx.png.meta
+³       ³   ³   Zbam2_vfx.png
+³       ³   ³   Zbam2_vfx.png.meta
+³       ³   ³   Zbam3_vfx.png
+³       ³   ³   Zbam3_vfx.png.meta
+³       ³   ³   Zbam4_vfx.png
+³       ³   ³   Zbam4_vfx.png.meta
+³       ³   ³   Zbam_vfx.png
+³       ³   ³   Zbam_vfx.png.meta
+³       ³   ³   
+³       ³   ÀÄÄÄimpact_1.1.0
+³       ³           Impact01_vfx.png
+³       ³           Impact01_vfx.png.meta
+³       ³           Impact02_vfx.png
+³       ³           Impact02_vfx.png.meta
+³       ³           Impact03_vfx.png
+³       ³           Impact03_vfx.png.meta
+³       ³           Impact04_vfx.png
+³       ³           Impact04_vfx.png.meta
+³       ³           Impact05_vfx.png
+³       ³           Impact05_vfx.png.meta
+³       ³           Impact06_vfx.png
+³       ³           Impact06_vfx.png.meta
+³       ³           Impact07_vfx.png
+³       ³           Impact07_vfx.png.meta
+³       ³           Impact08_vfx.png
+³       ³           Impact08_vfx.png.meta
+³       ³           Impact09_vfx.png
+³       ³           Impact09_vfx.png.meta
+³       ³           Impact10_vfx.png
+³       ³           Impact10_vfx.png.meta
+³       ³           
+³       ÃÄÄÄ04_Model
+³       ³       ImpactPlane.fbx
+³       ³       ImpactPlane.fbx.meta
+³       ³       ImpactPlane.prefab
+³       ³       ImpactPlane.prefab.meta
+³       ³       
+³       ÀÄÄÄScripts
+³               DropdownController.cs
+³               DropdownController.cs.meta
+³               VfxController.cs
+³               VfxController.cs.meta
+³               
+ÃÄÄÄPrefabs
+³   ³   BulletPrefab.prefab
+³   ³   BulletPrefab.prefab.meta
+³   ³   Otros.meta
+³   ³   PlayerPrefab.prefab
+³   ³   PlayerPrefab.prefab.meta
+³   ³   RoomButtonPrefab.prefab
+³   ³   RoomButtonPrefab.prefab.meta
+³   ³   _USP.meta
+³   ³   
+³   ÃÄÄÄOtros
+³   ³       Bala.prefab
+³   ³       Bala.prefab.meta
+³   ³       Boid.prefab
+³   ³       Boid.prefab.meta
+³   ³       Botiquin (3).prefab
+³   ³       Botiquin (3).prefab.meta
+³   ³       Cajon.prefab
+³   ³       Cajon.prefab.meta
+³   ³       Cohete.prefab
+³   ³       Cohete.prefab.meta
+³   ³       Enemy.prefab
+³   ³       Enemy.prefab.meta
+³   ³       Flecha.prefab
+³   ³       Flecha.prefab.meta
+³   ³       Food.prefab
+³   ³       Food.prefab.meta
+³   ³       GranadaImpactoNormal 1.prefab
+³   ³       GranadaImpactoNormal 1.prefab.meta
+³   ³       Hojas.prefab
+³   ³       Hojas.prefab.meta
+³   ³       ImpactoNormal.prefab
+³   ³       ImpactoNormal.prefab.meta
+³   ³       ImpactoSangre.prefab
+³   ³       ImpactoSangre.prefab.meta
+³   ³       ItemRecogible.prefab
+³   ³       ItemRecogible.prefab.meta
+³   ³       Main menu.prefab
+³   ³       Main menu.prefab.meta
+³   ³       map.prefab
+³   ³       map.prefab.meta
+³   ³       Obs_Auto.prefab
+³   ³       Obs_Auto.prefab.meta
+³   ³       Obs_Barril.prefab
+³   ³       Obs_Barril.prefab.meta
+³   ³       Obs_Muro.prefab
+³   ³       Obs_Muro.prefab.meta
+³   ³       Overload.prefab
+³   ³       Overload.prefab.meta
+³   ³       PoolDeBalas.prefab
+³   ³       PoolDeBalas.prefab.meta
+³   ³       Proyectil_Bala.prefab
+³   ³       Proyectil_Bala.prefab.meta
+³   ³       Proyectil_Granada.prefab
+³   ³       Proyectil_Granada.prefab.meta
+³   ³       Proyectil_TanqueTripulado.prefab
+³   ³       Proyectil_TanqueTripulado.prefab.meta
+³   ³       Puntero_Tanque.prefab
+³   ³       Puntero_Tanque.prefab.meta
+³   ³       Sangre.prefab
+³   ³       Sangre.prefab.meta
+³   ³       Soldado_Enemigo.prefab
+³   ³       Soldado_Enemigo.prefab.meta
+³   ³       Soldado_Jugador.prefab
+³   ³       Soldado_Jugador.prefab.meta
+³   ³       S_Enemigo.prefab
+³   ³       S_Enemigo.prefab.meta
+³   ³       S_Propio.prefab
+³   ³       S_Propio.prefab.meta
+³   ³       Tanque Variant.prefab
+³   ³       Tanque Variant.prefab.meta
+³   ³       TanqueAccesible (2).prefab
+³   ³       TanqueAccesible (2).prefab.meta
+³   ³       T_TileMap1.prefab
+³   ³       T_TileMap1.prefab.meta
+³   ³       _Agente.prefab
+³   ³       _Agente.prefab.meta
+³   ³       _Nodos.prefab
+³   ³       _Nodos.prefab.meta
+³   ³       _Obstaculos.prefab
+³   ³       _Obstaculos.prefab.meta
+³   ³       
+³   ÀÄÄÄ_USP
+³           _Muro.prefab
+³           _Muro.prefab.meta
+³           
+ÃÄÄÄResources
+³   ³   Audios.meta
+³   ³   
+³   ÀÄÄÄAudios
+³           Bienvenido.mp3
+³           Bienvenido.mp3.meta
+³           Caminar (1).mp3
+³           Caminar (1).mp3.meta
+³           Caminar (2).mp3
+³           Caminar (2).mp3.meta
+³           Caminar (3).mp3
+³           Caminar (3).mp3.meta
+³           Caminar (4).mp3
+³           Caminar (4).mp3.meta
+³           Caminar (5).mp3
+³           Caminar (5).mp3.meta
+³           Caminar (6).mp3
+³           Caminar (6).mp3.meta
+³           Caminar (7).mp3
+³           Caminar (7).mp3.meta
+³           Caminar (8).mp3
+³           Caminar (8).mp3.meta
+³           Caminar.mp3
+³           Caminar.mp3.meta
+³           Disparo de ametralladora.mp3
+³           Disparo de ametralladora.mp3.meta
+³           Disparo de escopeta (1).mp3
+³           Disparo de escopeta (1).mp3.meta
+³           Disparo de Escopeta (2).mp3
+³           Disparo de Escopeta (2).mp3.meta
+³           Disparo de escopeta (4).mp3
+³           Disparo de escopeta (4).mp3.meta
+³           Disparo de escopeta (5).mp3
+³           Disparo de escopeta (5).mp3.meta
+³           Disparo de escopeta (6).mp3
+³           Disparo de escopeta (6).mp3.meta
+³           Disparo de Metralleta (1).mp3
+³           Disparo de Metralleta (1).mp3.meta
+³           Disparo de Metralleta (2).mp3
+³           Disparo de Metralleta (2).mp3.meta
+³           Disparo de Metralleta (3).mp3
+³           Disparo de Metralleta (3).mp3.meta
+³           Disparo de Pistola (1).mp3
+³           Disparo de Pistola (1).mp3.meta
+³           Disparo de Pistola (2).mp3
+³           Disparo de Pistola (2).mp3.meta
+³           DisparoDeCanon 1.mp3
+³           DisparoDeCanon 1.mp3.meta
+³           Musica de fondo Audiomachine - The Last Stand (No Vocal).mp3
+³           Musica de fondo Audiomachine - The Last Stand (No Vocal).mp3.meta
+³           Musica de intro.mp3
+³           Musica de intro.mp3.meta
+³           Recarga de escopeta.mp3
+³           Recarga de escopeta.mp3.meta
+³           Recarga de Metralleta.mp3
+³           Recarga de Metralleta.mp3.meta
+³           Recarga de pistola.mp3
+³           Recarga de pistola.mp3.meta
+³           Recoje la municion.mp3
+³           Recoje la municion.mp3.meta
+³           usa WASD.mp3
+³           usa WASD.mp3.meta
+³           Voz_Bienvenido.mp3
+³           Voz_Bienvenido.mp3.meta
+³           Voz_Recoje la municion.mp3
+³           Voz_Recoje la municion.mp3.meta
+³           Voz_usa WASD.mp3
+³           Voz_usa WASD.mp3.meta
+³           
+ÃÄÄÄScenes
+³   ³   Base.meta
+³   ³   Juego V5.meta
+³   ³   Menus.meta
+³   ³   Prefabs.meta
+³   ³   Scene_DebugTests.unity
+³   ³   Scene_DebugTests.unity.meta
+³   ³   Scene_Game.unity
+³   ³   Scene_Game.unity.meta
+³   ³   Tests.meta
+³   ³   
+³   ÃÄÄÄBase
+³   ³   ³   Balas.meta
+³   ³   ³   Botiquin (3).prefab
+³   ³   ³   Botiquin (3).prefab.meta
+³   ³   ³   Concatenar scripts.bat
+³   ³   ³   Concatenar scripts.bat.meta
+³   ³   ³   DesactivarPorTimer.cs
+³   ³   ³   DesactivarPorTimer.cs.meta
+³   ³   ³   Enemy.prefab
+³   ³   ³   Enemy.prefab.meta
+³   ³   ³   Enemy2.prefab
+³   ³   ³   Enemy2.prefab.meta
+³   ³   ³   IInteractable.cs
+³   ³   ³   IInteractable.cs.meta
+³   ³   ³   image-removebg-preview.png
+³   ³   ³   image-removebg-preview.png.meta
+³   ³   ³   Movimiento de grupos.meta
+³   ³   ³   Negro.mat
+³   ³   ³   Negro.mat.meta
+³   ³   ³   ShotImpactBus.cs
+³   ³   ³   ShotImpactBus.cs.meta
+³   ³   ³   
+³   ³   ÃÄÄÄBalas
+³   ³   ³       Bala.prefab
+³   ³   ³       Bala.prefab.meta
+³   ³   ³       CollisionDetector.cs
+³   ³   ³       CollisionDetector.cs.meta
+³   ³   ³       DebugColisionesFull.cs
+³   ³   ³       DebugColisionesFull.cs.meta
+³   ³   ³       M_Amarillo.mat
+³   ³   ³       M_Amarillo.mat.meta
+³   ³   ³       PoolDeBalas.prefab
+³   ³   ³       PoolDeBalas.prefab.meta
+³   ³   ³       
+³   ³   ÀÄÄÄMovimiento de grupos
+³   ³           NavMesh-Square 1.asset
+³   ³           NavMesh-Square 1.asset.meta
+³   ³           NavMesh-Square.asset
+³   ³           NavMesh-Square.asset.meta
+³   ³           
+³   ÃÄÄÄJuego V5
+³   ³       NavMesh-Terreno.asset
+³   ³       NavMesh-Terreno.asset.meta
+³   ³       
+³   ÃÄÄÄMenus
+³   ³       MenuDeVictoria Grupos USP.unity
+³   ³       MenuDeVictoria Grupos USP.unity.meta
+³   ³       MenuDeVictoria.unity
+³   ³       MenuDeVictoria.unity.meta
+³   ³       MenuInicial.unity
+³   ³       MenuInicial.unity.meta
+³   ³       
+³   ÃÄÄÄPrefabs
+³   ³       Enemy2.prefab
+³   ³       Enemy2.prefab.meta
+³   ³       Jugador.prefab
+³   ³       Jugador.prefab.meta
+³   ³       Proyectil.prefab
+³   ³       Proyectil.prefab.meta
+³   ³       _Nodos 1.prefab
+³   ³       _Nodos 1.prefab.meta
+³   ³       _Obstaculos 1.prefab
+³   ³       _Obstaculos 1.prefab.meta
+³   ³       
+³   ÀÄÄÄTests
+³       ³   DPR_P1.unity
+³       ³   DPR_P1.unity.meta
+³       ³   E1.prefab
+³       ³   E1.prefab.meta
+³       ³   Enemigo (11).prefab
+³       ³   Enemigo (11).prefab.meta
+³       ³   EscenaPerdiste.unity
+³       ³   EscenaPerdiste.unity.meta
+³       ³   IA.unity
+³       ³   IA.unity.meta
+³       ³   IA_P2.unity
+³       ³   IA_P2.unity.meta
+³       ³   Interactuable (2).prefab
+³       ³   Interactuable (2).prefab.meta
+³       ³   PickUp.prefab
+³       ³   PickUp.prefab.meta
+³       ³   URP2DSceneTemplate.unity
+³       ³   URP2DSceneTemplate.unity.meta
+³       ³   _Juego.unity
+³       ³   _Juego.unity.meta
+³       ³   _Pruebas de colision.unity
+³       ³   _Pruebas de colision.unity.meta
+³       ³   _USP.meta
+³       ³   _USP.unity
+³       ³   _USP.unity.meta
+³       ³   _WP_Node.prefab
+³       ³   _WP_Node.prefab.meta
+³       ³   
+³       ÀÄÄÄ_USP
+³           ³   AmmoManager.cs
+³           ³   AmmoManager.cs.meta
+³           ³   Bala.cs
+³           ³   Bala.cs.meta
+³           ³   BalaPool.cs
+³           ³   BalaPool.cs.meta
+³           ³   ControlDerrota.cs
+³           ³   ControlDerrota.cs.meta
+³           ³   CursorManager.cs
+³           ³   CursorManager.cs.meta
+³           ³   DamagedState.cs
+³           ³   DamagedState.cs.meta
+³           ³   Destruible.cs
+³           ³   Destruible.cs.meta
+³           ³   Disparador.cs
+³           ³   Disparador.cs.meta
+³           ³   EnemyModel.cs
+³           ³   EnemyModel.cs.meta
+³           ³   EnemyView.cs
+³           ³   EnemyView.cs.meta
+³           ³   EsperandoState.cs
+³           ³   EsperandoState.cs.meta
+³           ³   FormationRelocator.cs
+³           ³   FormationRelocator.cs.meta
+³           ³   GameManager.cs
+³           ³   GameManager.cs.meta
+³           ³   GenericDetector.cs
+³           ³   GenericDetector.cs.meta
+³           ³   GEN_Inputs.cs
+³           ³   GEN_Inputs.cs.meta
+³           ³   GlobalData.cs
+³           ³   GlobalData.cs.meta
+³           ³   GlobalHUD.cs
+³           ³   GlobalHUD.cs.meta
+³           ³   IA_P2_AgentIA.cs
+³           ³   IA_P2_AgentIA.cs.meta
+³           ³   IA_P2_PathfindingModel.cs
+³           ³   IA_P2_PathfindingModel.cs.meta
+³           ³   IA_P2_PathNode.cs
+³           ³   IA_P2_PathNode.cs.meta
+³           ³   InteractableItem.cs
+³           ³   InteractableItem.cs.meta
+³           ³   IUnitState.cs
+³           ³   IUnitState.cs.meta
+³           ³   LeaderManager.cs
+³           ³   LeaderManager.cs.meta
+³           ³   LiderandoState.cs
+³           ³   LiderandoState.cs.meta
+³           ³   MainGameController.cs
+³           ³   MainGameController.cs.meta
+³           ³   Manager_VFX.cs
+³           ³   Manager_VFX.cs.meta
+³           ³   MarkerAnim.cs
+³           ³   MarkerAnim.cs.meta
+³           ³   MenuPausa.cs
+³           ³   MenuPausa.cs.meta
+³           ³   Municion.cs
+³           ³   Municion.cs.meta
+³           ³   Nuevo.meta
+³           ³   PositionManager.cs
+³           ³   PositionManager.cs.meta
+³           ³   RehenBruto.cs
+³           ³   RehenBruto.cs.meta
+³           ³   RevivalBarView.cs
+³           ³   RevivalBarView.cs.meta
+³           ³   RevivalSystemSetup.cs
+³           ³   RevivalSystemSetup.cs.meta
+³           ³   RevivingState.cs
+³           ³   RevivingState.cs.meta
+³           ³   ShotSensor.cs
+³           ³   ShotSensor.cs.meta
+³           ³   TickManager.cs
+³           ³   TickManager.cs.meta
+³           ³   UnitCommander.cs
+³           ³   UnitCommander.cs.meta
+³           ³   UnitController.cs
+³           ³   UnitController.cs.meta
+³           ³   UnitController_Revival.cs
+³           ³   UnitController_Revival.cs.meta
+³           ³   UnitIndicatorSetup.cs
+³           ³   UnitIndicatorSetup.cs.meta
+³           ³   UnitModel.cs
+³           ³   UnitModel.cs.meta
+³           ³   UnitPathRenderer.cs
+³           ³   UnitPathRenderer.cs.meta
+³           ³   UnitStates.cs
+³           ³   UnitStates.cs.meta
+³           ³   UnitTeam.cs
+³           ³   UnitTeam.cs.meta
+³           ³   UnitView.cs
+³           ³   UnitView.cs.meta
+³           ³   _Choza (1).prefab
+³           ³   _Choza (1).prefab.meta
+³           ³   _Concatenado.txt
+³           ³   _Concatenado.txt.meta
+³           ³   _Concatenar scripts completos mejorado.bat
+³           ³   _Concatenar scripts completos mejorado.bat.meta
+³           ³   _Invisible.mat
+³           ³   _Invisible.mat.meta
+³           ³   _J1.prefab
+³           ³   _J1.prefab.meta
+³           ³   __Cobertura (1).prefab
+³           ³   __Cobertura (1).prefab.meta
+³           ³   __Muro (10).prefab
+³           ³   __Muro (10).prefab.meta
+³           ³   Û       Esquema         Û.prefab
+³           ³   Û       Esquema         Û.prefab.meta
+³           ³   
+³           ÀÄÄÄNuevo
+³               ³   MiniMapa 2.renderTexture
+³               ³   MiniMapa 2.renderTexture.meta
+³               ³   Science_Gothic (1).meta
+³               ³   
+³               ÀÄÄÄScience_Gothic (1)
+³                   ³   OFL.txt
+³                   ³   OFL.txt.meta
+³                   ³   README.txt
+³                   ³   README.txt.meta
+³                   ³   ScienceGothic-VariableFont_CTRS,slnt,wdth,wght.ttf
+³                   ³   ScienceGothic-VariableFont_CTRS,slnt,wdth,wght.ttf.meta
+³                   ³   static.meta
+³                   ³   
+³                   ÀÄÄÄstatic
+³                           ScienceGothic-Black.ttf
+³                           ScienceGothic-Black.ttf.meta
+³                           ScienceGothic-Bold.ttf
+³                           ScienceGothic-Bold.ttf.meta
+³                           ScienceGothic-ExtraBold.ttf
+³                           ScienceGothic-ExtraBold.ttf.meta
+³                           ScienceGothic-ExtraLight.ttf
+³                           ScienceGothic-ExtraLight.ttf.meta
+³                           ScienceGothic-Light.ttf
+³                           ScienceGothic-Light.ttf.meta
+³                           ScienceGothic-Medium.ttf
+³                           ScienceGothic-Medium.ttf.meta
+³                           ScienceGothic-Regular.ttf
+³                           ScienceGothic-Regular.ttf.meta
+³                           ScienceGothic-SemiBold.ttf
+³                           ScienceGothic-SemiBold.ttf.meta
+³                           ScienceGothic-Thin.ttf
+³                           ScienceGothic-Thin.ttf.meta
+³                           ScienceGothic_Condensed-Black.ttf
+³                           ScienceGothic_Condensed-Black.ttf.meta
+³                           ScienceGothic_Condensed-Bold.ttf
+³                           ScienceGothic_Condensed-Bold.ttf.meta
+³                           ScienceGothic_Condensed-ExtraBold.ttf
+³                           ScienceGothic_Condensed-ExtraBold.ttf.meta
+³                           ScienceGothic_Condensed-ExtraLight.ttf
+³                           ScienceGothic_Condensed-ExtraLight.ttf.meta
+³                           ScienceGothic_Condensed-Light.ttf
+³                           ScienceGothic_Condensed-Light.ttf.meta
+³                           ScienceGothic_Condensed-Medium.ttf
+³                           ScienceGothic_Condensed-Medium.ttf.meta
+³                           ScienceGothic_Condensed-Regular.ttf
+³                           ScienceGothic_Condensed-Regular.ttf.meta
+³                           ScienceGothic_Condensed-SemiBold.ttf
+³                           ScienceGothic_Condensed-SemiBold.ttf.meta
+³                           ScienceGothic_Condensed-Thin.ttf
+³                           ScienceGothic_Condensed-Thin.ttf.meta
+³                           ScienceGothic_Expanded-Black.ttf
+³                           ScienceGothic_Expanded-Black.ttf.meta
+³                           ScienceGothic_Expanded-Bold.ttf
+³                           ScienceGothic_Expanded-Bold.ttf.meta
+³                           ScienceGothic_Expanded-ExtraBold.ttf
+³                           ScienceGothic_Expanded-ExtraBold.ttf.meta
+³                           ScienceGothic_Expanded-ExtraLight.ttf
+³                           ScienceGothic_Expanded-ExtraLight.ttf.meta
+³                           ScienceGothic_Expanded-Light.ttf
+³                           ScienceGothic_Expanded-Light.ttf.meta
+³                           ScienceGothic_Expanded-Medium.ttf
+³                           ScienceGothic_Expanded-Medium.ttf.meta
+³                           ScienceGothic_Expanded-Regular.ttf
+³                           ScienceGothic_Expanded-Regular.ttf.meta
+³                           ScienceGothic_Expanded-SemiBold.ttf
+³                           ScienceGothic_Expanded-SemiBold.ttf.meta
+³                           ScienceGothic_Expanded-Thin.ttf
+³                           ScienceGothic_Expanded-Thin.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Black.ttf
+³                           ScienceGothic_ExtraCondensed-Black.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Bold.ttf
+³                           ScienceGothic_ExtraCondensed-Bold.ttf.meta
+³                           ScienceGothic_ExtraCondensed-ExtraBold.ttf
+³                           ScienceGothic_ExtraCondensed-ExtraBold.ttf.meta
+³                           ScienceGothic_ExtraCondensed-ExtraLight.ttf
+³                           ScienceGothic_ExtraCondensed-ExtraLight.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Light.ttf
+³                           ScienceGothic_ExtraCondensed-Light.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Medium.ttf
+³                           ScienceGothic_ExtraCondensed-Medium.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Regular.ttf
+³                           ScienceGothic_ExtraCondensed-Regular.ttf.meta
+³                           ScienceGothic_ExtraCondensed-SemiBold.ttf
+³                           ScienceGothic_ExtraCondensed-SemiBold.ttf.meta
+³                           ScienceGothic_ExtraCondensed-Thin.ttf
+³                           ScienceGothic_ExtraCondensed-Thin.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Black.ttf
+³                           ScienceGothic_ExtraExpanded-Black.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Bold.ttf
+³                           ScienceGothic_ExtraExpanded-Bold.ttf.meta
+³                           ScienceGothic_ExtraExpanded-ExtraBold.ttf
+³                           ScienceGothic_ExtraExpanded-ExtraBold.ttf.meta
+³                           ScienceGothic_ExtraExpanded-ExtraLight.ttf
+³                           ScienceGothic_ExtraExpanded-ExtraLight.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Light.ttf
+³                           ScienceGothic_ExtraExpanded-Light.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Medium.ttf
+³                           ScienceGothic_ExtraExpanded-Medium.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Regular.ttf
+³                           ScienceGothic_ExtraExpanded-Regular.ttf.meta
+³                           ScienceGothic_ExtraExpanded-SemiBold.ttf
+³                           ScienceGothic_ExtraExpanded-SemiBold.ttf.meta
+³                           ScienceGothic_ExtraExpanded-Thin.ttf
+³                           ScienceGothic_ExtraExpanded-Thin.ttf.meta
+³                           ScienceGothic_SemiCondensed-Black.ttf
+³                           ScienceGothic_SemiCondensed-Black.ttf.meta
+³                           ScienceGothic_SemiCondensed-Bold.ttf
+³                           ScienceGothic_SemiCondensed-Bold.ttf.meta
+³                           ScienceGothic_SemiCondensed-ExtraBold.ttf
+³                           ScienceGothic_SemiCondensed-ExtraBold.ttf.meta
+³                           ScienceGothic_SemiCondensed-ExtraLight.ttf
+³                           ScienceGothic_SemiCondensed-ExtraLight.ttf.meta
+³                           ScienceGothic_SemiCondensed-Light.ttf
+³                           ScienceGothic_SemiCondensed-Light.ttf.meta
+³                           ScienceGothic_SemiCondensed-Medium.ttf
+³                           ScienceGothic_SemiCondensed-Medium.ttf.meta
+³                           ScienceGothic_SemiCondensed-Regular.ttf
+³                           ScienceGothic_SemiCondensed-Regular.ttf.meta
+³                           ScienceGothic_SemiCondensed-SemiBold.ttf
+³                           ScienceGothic_SemiCondensed-SemiBold.ttf.meta
+³                           ScienceGothic_SemiCondensed-Thin.ttf
+³                           ScienceGothic_SemiCondensed-Thin.ttf.meta
+³                           ScienceGothic_SemiExpanded-Black.ttf
+³                           ScienceGothic_SemiExpanded-Black.ttf.meta
+³                           ScienceGothic_SemiExpanded-Bold.ttf
+³                           ScienceGothic_SemiExpanded-Bold.ttf.meta
+³                           ScienceGothic_SemiExpanded-ExtraBold.ttf
+³                           ScienceGothic_SemiExpanded-ExtraBold.ttf.meta
+³                           ScienceGothic_SemiExpanded-ExtraLight.ttf
+³                           ScienceGothic_SemiExpanded-ExtraLight.ttf.meta
+³                           ScienceGothic_SemiExpanded-Light.ttf
+³                           ScienceGothic_SemiExpanded-Light.ttf.meta
+³                           ScienceGothic_SemiExpanded-Medium.ttf
+³                           ScienceGothic_SemiExpanded-Medium.ttf.meta
+³                           ScienceGothic_SemiExpanded-Regular.ttf
+³                           ScienceGothic_SemiExpanded-Regular.ttf.meta
+³                           ScienceGothic_SemiExpanded-SemiBold.ttf
+³                           ScienceGothic_SemiExpanded-SemiBold.ttf.meta
+³                           ScienceGothic_SemiExpanded-Thin.ttf
+³                           ScienceGothic_SemiExpanded-Thin.ttf.meta
+³                           ScienceGothic_UltraCondensed-Black.ttf
+³                           ScienceGothic_UltraCondensed-Black.ttf.meta
+³                           ScienceGothic_UltraCondensed-Bold.ttf
+³                           ScienceGothic_UltraCondensed-Bold.ttf.meta
+³                           ScienceGothic_UltraCondensed-ExtraBold.ttf
+³                           ScienceGothic_UltraCondensed-ExtraBold.ttf.meta
+³                           ScienceGothic_UltraCondensed-ExtraLight.ttf
+³                           ScienceGothic_UltraCondensed-ExtraLight.ttf.meta
+³                           ScienceGothic_UltraCondensed-Light.ttf
+³                           ScienceGothic_UltraCondensed-Light.ttf.meta
+³                           ScienceGothic_UltraCondensed-Medium.ttf
+³                           ScienceGothic_UltraCondensed-Medium.ttf.meta
+³                           ScienceGothic_UltraCondensed-Regular.ttf
+³                           ScienceGothic_UltraCondensed-Regular.ttf.meta
+³                           ScienceGothic_UltraCondensed-SemiBold.ttf
+³                           ScienceGothic_UltraCondensed-SemiBold.ttf.meta
+³                           ScienceGothic_UltraCondensed-Thin.ttf
+³                           ScienceGothic_UltraCondensed-Thin.ttf.meta
+³                           ScienceGothic_UltraExpanded-Black.ttf
+³                           ScienceGothic_UltraExpanded-Black.ttf.meta
+³                           ScienceGothic_UltraExpanded-Bold.ttf
+³                           ScienceGothic_UltraExpanded-Bold.ttf.meta
+³                           ScienceGothic_UltraExpanded-ExtraBold.ttf
+³                           ScienceGothic_UltraExpanded-ExtraBold.ttf.meta
+³                           ScienceGothic_UltraExpanded-ExtraLight.ttf
+³                           ScienceGothic_UltraExpanded-ExtraLight.ttf.meta
+³                           ScienceGothic_UltraExpanded-Light.ttf
+³                           ScienceGothic_UltraExpanded-Light.ttf.meta
+³                           ScienceGothic_UltraExpanded-Medium.ttf
+³                           ScienceGothic_UltraExpanded-Medium.ttf.meta
+³                           ScienceGothic_UltraExpanded-Regular.ttf
+³                           ScienceGothic_UltraExpanded-Regular.ttf.meta
+³                           ScienceGothic_UltraExpanded-SemiBold.ttf
+³                           ScienceGothic_UltraExpanded-SemiBold.ttf.meta
+³                           ScienceGothic_UltraExpanded-Thin.ttf
+³                           ScienceGothic_UltraExpanded-Thin.ttf.meta
+³                           
+ÃÄÄÄScripts
+³   ³   BD_Audios.cs
+³   ³   BD_Audios.cs.meta
+³   ³   Camara.cs
+³   ³   Camara.cs.meta
+³   ³   CambioDeSoldado.meta
+³   ³   CodigoDeInicio.cs
+³   ³   CodigoDeInicio.cs.meta
+³   ³   Concatenado.txt
+³   ³   Concatenado.txt.meta
+³   ³   Concatenar scripts.bat
+³   ³   Concatenar scripts.bat.meta
+³   ³   ConfiguracionGlobal.cs
+³   ³   ConfiguracionGlobal.cs.meta
+³   ³   DebugSystem.meta
+³   ³   GestorTexto.cs
+³   ³   GestorTexto.cs.meta
+³   ³   Ideas y pseudocodigos.cs
+³   ³   Ideas y pseudocodigos.cs.meta
+³   ³   IndicadorEnemigos.cs
+³   ³   IndicadorEnemigos.cs.meta
+³   ³   MenuVictoria.cs
+³   ³   MenuVictoria.cs.meta
+³   ³   MVC.meta
+³   ³   Nuevos.meta
+³   ³   Obstaculo.cs
+³   ³   Obstaculo.cs.meta
+³   ³   PickUp.cs
+³   ³   PickUp.cs.meta
+³   ³   Prueba_de_color.cs
+³   ³   Prueba_de_color.cs.meta
+³   ³   SC_USP.meta
+³   ³   SenalisacionAEnemigos.cs
+³   ³   SenalisacionAEnemigos.cs.meta
+³   ³   SistemaPuntaje.cs
+³   ³   SistemaPuntaje.cs.meta
+³   ³   Torreta.cs
+³   ³   Torreta.cs.meta
+³   ³   VibracionCamara.cs
+³   ³   VibracionCamara.cs.meta
+³   ³   
+³   ÃÄÄÄCambioDeSoldado
+³   ³       CambioDeLider.cs
+³   ³       CambioDeLider.cs.meta
+³   ³       UnitFSM.cs
+³   ³       UnitFSM.cs.meta
+³   ³       
+³   ÃÄÄÄDebugSystem
+³   ³       Bullet.cs
+³   ³       Bullet.cs.meta
+³   ³       BulletPool.cs
+³   ³       BulletPool.cs.meta
+³   ³       DebugLogger.cs
+³   ³       DebugLogger.cs.meta
+³   ³       DebugSystem.asmdef
+³   ³       DebugSystem.asmdef.meta
+³   ³       EffectPool.cs
+³   ³       EffectPool.cs.meta
+³   ³       EventBus.cs
+³   ³       EventBus.cs.meta
+³   ³       FloatingHealthBar.cs
+³   ³       FloatingHealthBar.cs.meta
+³   ³       GameLoopReferee.cs
+³   ³       GameLoopReferee.cs.meta
+³   ³       GameManager.cs
+³   ³       GameManager.cs.meta
+³   ³       ImpactEffect.cs
+³   ³       ImpactEffect.cs.meta
+³   ³       LocalNetworkMock.cs
+³   ³       LocalNetworkMock.cs.meta
+³   ³       PlayerController.cs
+³   ³       PlayerController.cs.meta
+³   ³       PlayerModel.cs
+³   ³       PlayerModel.cs.meta
+³   ³       PlayerView.cs
+³   ³       PlayerView.cs.meta
+³   ³       ProceduralAudioGenerator.cs
+³   ³       ProceduralAudioGenerator.cs.meta
+³   ³       README.md
+³   ³       README.md.meta
+³   ³       ScreenManager.cs
+³   ³       ScreenManager.cs.meta
+³   ³       SimpleAnimator.cs
+³   ³       SimpleAnimator.cs.meta
+³   ³       SimpleEnemyAI.cs
+³   ³       SimpleEnemyAI.cs.meta
+³   ³       Weapon.cs
+³   ³       Weapon.cs.meta
+³   ³       
+³   ÃÄÄÄMVC
+³   ³   ³   CharacterControllerMVC.cs
+³   ³   ³   CharacterControllerMVC.cs.meta
+³   ³   ³   Enemy.meta
+³   ³   ³   ICharacterInput.cs
+³   ³   ³   ICharacterInput.cs.meta
+³   ³   ³   IMovementHandler.cs
+³   ³   ³   IMovementHandler.cs.meta
+³   ³   ³   IWeaponInput.cs
+³   ³   ³   IWeaponInput.cs.meta
+³   ³   ³   Sensors.meta
+³   ³   ³   Squad.meta
+³   ³   ³   UnityCharacterInput.cs
+³   ³   ³   UnityCharacterInput.cs.meta
+³   ³   ³   UnityWeaponInput.cs
+³   ³   ³   UnityWeaponInput.cs.meta
+³   ³   ³   WeaponControllerMVC.cs
+³   ³   ³   WeaponControllerMVC.cs.meta
+³   ³   ³   
+³   ³   ÃÄÄÄEnemy
+³   ³   ÃÄÄÄSensors
+³   ³   ³       DetectableEntity.cs
+³   ³   ³       DetectableEntity.cs.meta
+³   ³   ³       IDetectable.cs
+³   ³   ³       IDetectable.cs.meta
+³   ³   ³       
+³   ³   ÀÄÄÄSquad
+³   ³           SquadEventBus.cs
+³   ³           SquadEventBus.cs.meta
+³   ³           
+³   ÃÄÄÄNuevos
+³   ³       GranadaImpactoNormal 1.prefab
+³   ³       GranadaImpactoNormal 1.prefab.meta
+³   ³       ImpactoNormal.prefab
+³   ³       ImpactoNormal.prefab.meta
+³   ³       ImpactoSangre.prefab
+³   ³       ImpactoSangre.prefab.meta
+³   ³       Sangre.prefab
+³   ³       Sangre.prefab.meta
+³   ³       SelectedSoldierUIFeedback.cs
+³   ³       SelectedSoldierUIFeedback.cs.meta
+³   ³       
+³   ÀÄÄÄSC_USP
+³       ³   Core.meta
+³       ³   Entities.meta
+³       ³   IA.meta
+³       ³   Services.meta
+³       ³   UI.meta
+³       ³   Weapons.meta
+³       ³   
+³       ÃÄÄÄCore
+³       ³       CharacterModel.cs
+³       ³       CharacterModel.cs.meta
+³       ³       IDaniable.cs
+³       ³       IDaniable.cs.meta
+³       ³       InformacionPersonaje.cs
+³       ³       InformacionPersonaje.cs.meta
+³       ³       Interfaces.cs
+³       ³       Interfaces.cs.meta
+³       ³       WeaponModel.cs
+³       ³       WeaponModel.cs.meta
+³       ³       
+³       ÃÄÄÄEntities
+³       ³       CharacterView.cs
+³       ³       CharacterView.cs.meta
+³       ³       ControladorTanque.cs
+³       ³       ControladorTanque.cs.meta
+³       ³       Enemigo.cs
+³       ³       Enemigo.cs.meta
+³       ³       EntrarAlTanque.cs
+³       ³       EntrarAlTanque.cs.meta
+³       ³       PlayerController.cs
+³       ³       PlayerController.cs.meta
+³       ³       Puntero_Tanque.cs
+³       ³       Puntero_Tanque.cs.meta
+³       ³       Tanque.cs
+³       ³       Tanque.cs.meta
+³       ³       
+³       ÃÄÄÄIA
+³       ³       IA_F_ChangeMode.cs
+³       ³       IA_F_ChangeMode.cs.meta
+³       ³       IA_F_ControllerSeguidor.cs
+³       ³       IA_F_ControllerSeguidor.cs.meta
+³       ³       IA_F_EnemyCercanos.cs
+³       ³       IA_F_EnemyCercanos.cs.meta
+³       ³       IA_F_PathFanding_Theta.cs
+³       ³       IA_F_PathFanding_Theta.cs.meta
+³       ³       IA_P2_FOV.cs
+³       ³       IA_P2_FOV.cs.meta
+³       ³       IA_P2_FSM.cs
+³       ³       IA_P2_FSM.cs.meta
+³       ³       IA_P2_INT_gentState.cs
+³       ³       IA_P2_INT_gentState.cs.meta
+³       ³       IA_P2_LineOfSight3D.cs
+³       ³       IA_P2_LineOfSight3D.cs.meta
+³       ³       IA_P2_PathfindingManager.cs
+³       ³       IA_P2_PathfindingManager.cs.meta
+³       ³       IA_P2_ST_ChaseState.cs
+³       ³       IA_P2_ST_ChaseState.cs.meta
+³       ³       IA_P2_ST_PatrolState.cs
+³       ³       IA_P2_ST_PatrolState.cs.meta
+³       ³       IA_P2_ST_ReturningToPatrolState.cs
+³       ³       IA_P2_ST_ReturningToPatrolState.cs.meta
+³       ³       IA_P2_ST_SearchingState.cs
+³       ³       IA_P2_ST_SearchingState.cs.meta
+³       ³       
+³       ÃÄÄÄServices
+³       ³       AutoDestruccionSegura.cs
+³       ³       AutoDestruccionSegura.cs.meta
+³       ³       CrearYDestruir.cs
+³       ³       CrearYDestruir.cs.meta
+³       ³       IA_P2_BusEvent_Manager.cs
+³       ³       IA_P2_BusEvent_Manager.cs.meta
+³       ³       PersecucionEnemigo.cs
+³       ³       PersecucionEnemigo.cs.meta
+³       ³       ProxiesUSP.cs
+³       ³       ProxiesUSP.cs.meta
+³       ³       Rigidbody2DMovementHandler.cs
+³       ³       Rigidbody2DMovementHandler.cs.meta
+³       ³       
+³       ÃÄÄÄUI
+³       ³       CambiarOpacidad.cs
+³       ³       CambiarOpacidad.cs.meta
+³       ³       Soldado_Anim.cs
+³       ³       Soldado_Anim.cs.meta
+³       ³       
+³       ÀÄÄÄWeapons
+³               Cohete.cs
+³               Cohete.cs.meta
+³               Proyectil.cs
+³               Proyectil.cs.meta
+³               Proyectil2.cs
+³               Proyectil2.cs.meta
+³               WeaponController.cs
+³               WeaponController.cs.meta
+³               WeaponView.cs
+³               WeaponView.cs.meta
+³               
+ÃÄÄÄShaders
+ÃÄÄÄTesteos
+³       IA2_P2_Pruebas.cs
+³       IA2_P2_Pruebas.cs.meta
+³       IState.cs
+³       
+ÃÄÄÄTests
+³       GlobalLogicTests.cs
+³       GlobalLogicTests.cs.meta
+³       Tests.asmdef
+³       Tests.asmdef.meta
+³       Tests.rar
+³       Tests.rar.meta
+³       
+ÃÄÄÄTests 1
+³       NewTestScript.cs
+³       NewTestScript.cs.meta
+³       Tests 1.asmdef
+³       Tests 1.asmdef.meta
+³       
+ÃÄÄÄTextures
+³   ³   1-removebg-preview.png
+³   ³   1-removebg-preview.png.meta
+³   ³   1.png
+³   ³   1.png.meta
+³   ³   7333779-removebg-preview.png
+³   ³   7333779-removebg-preview.png.meta
+³   ³   Adoquin 1.png
+³   ³   Adoquin 1.png.meta
+³   ³   Adoquin.png
+³   ³   Adoquin.png.meta
+³   ³   Adoquines.png
+³   ³   Adoquines.png.meta
+³   ³   Adrenalina.png
+³   ³   Adrenalina.png.meta
+³   ³   Ametralladora.png
+³   ³   Ametralladora.png.meta
+³   ³   Animacion Personaje.png
+³   ³   Animacion Personaje.png.meta
+³   ³   Arma_Escopeta.png
+³   ³   Arma_Escopeta.png.meta
+³   ³   Arma_Metralleta.png
+³   ³   Arma_Metralleta.png.meta
+³   ³   Arma_Pistola.png
+³   ³   Arma_Pistola.png.meta
+³   ³   Assets Torreta.png
+³   ³   Assets Torreta.png.meta
+³   ³   Auto 2.png
+³   ³   Auto 2.png.meta
+³   ³   Auto 3.png
+³   ³   Auto 3.png.meta
+³   ³   Auto Mejorado.png
+³   ³   Auto Mejorado.png.meta
+³   ³   Auto.png
+³   ³   Auto.png.meta
+³   ³   Bala blanca.png
+³   ³   Bala blanca.png.meta
+³   ³   Bala negra.png
+³   ³   Bala negra.png.meta
+³   ³   BalaDeCa¤on.png
+³   ³   BalaDeCa¤on.png.meta
+³   ³   Barra de puntaje fondo.png
+³   ³   Barra de puntaje fondo.png.meta
+³   ³   Barra de puntaje.png
+³   ³   Barra de puntaje.png.meta
+³   ³   Barril 2.png
+³   ³   Barril 2.png.meta
+³   ³   Barril.png
+³   ³   Barril.png.meta
+³   ³   Cajon.png
+³   ³   Cajon.png.meta
+³   ³   Cartel 1.png
+³   ³   Cartel 1.png.meta
+³   ³   Circulo de soldado actual.png
+³   ³   Circulo de soldado actual.png.meta
+³   ³   Circulo_rojo-removebg-preview.png
+³   ³   Circulo_rojo-removebg-preview.png.meta
+³   ³   Cursor.meta
+³   ³   d1036ebe-162a-4783-8edd-429246995af4.jpg
+³   ³   d1036ebe-162a-4783-8edd-429246995af4.jpg.meta
+³   ³   Desgastes.meta
+³   ³   Disparo 4.png
+³   ³   Disparo 4.png.meta
+³   ³   Disparo 5.png
+³   ³   Disparo 5.png.meta
+³   ³   Disparo 6.png
+³   ³   Disparo 6.png.meta
+³   ³   Efecto de fuego.png
+³   ³   Efecto de fuego.png.meta
+³   ³   Efecto de vi¤eta.png
+³   ³   Efecto de vi¤eta.png.meta
+³   ³   Efecto Disparo 1.png
+³   ³   Efecto Disparo 1.png.meta
+³   ³   Efecto Disparo 2.png
+³   ³   Efecto Disparo 2.png.meta
+³   ³   Enemigo.png
+³   ³   Enemigo.png.meta
+³   ³   Enemy_Cuerpo.png
+³   ³   Enemy_Cuerpo.png.meta
+³   ³   Escopeta.png
+³   ³   Escopeta.png.meta
+³   ³   Granada2.png
+³   ³   Granada2.png.meta
+³   ³   GranadaExplosion.png
+³   ³   GranadaExplosion.png.meta
+³   ³   Hojas.png
+³   ³   Hojas.png.meta
+³   ³   image-removebg-preview.png
+³   ³   image-removebg-preview.png.meta
+³   ³   IMG_Explosion Bala.png
+³   ³   IMG_Explosion Bala.png.meta
+³   ³   IMG_Proyectil bala.png
+³   ³   IMG_Proyectil bala.png.meta
+³   ³   Item_Recogible 1.png
+³   ³   Item_Recogible 1.png.meta
+³   ³   Item_Recogible.png
+³   ³   Item_Recogible.png.meta
+³   ³   Link.png
+³   ³   Link.png.meta
+³   ³   Luz. De linterna.png
+³   ³   Luz. De linterna.png.meta
+³   ³   Mapa Contenido.png
+³   ³   Mapa Contenido.png.meta
+³   ³   Mapa Rectangulo.png
+³   ³   Mapa Rectangulo.png.meta
+³   ³   Mapa Suciedad.png
+³   ³   Mapa Suciedad.png.meta
+³   ³   Mapa.png
+³   ³   Mapa.png.meta
+³   ³   Marco.png
+³   ³   Marco.png.meta
+³   ³   Nuevo.meta
+³   ³   Nuevos.meta
+³   ³   Overworld Tilesheet.png
+³   ³   Overworld Tilesheet.png.meta
+³   ³   Pasto.png
+³   ³   Pasto.png.meta
+³   ³   Personaje borde.png
+³   ³   Personaje borde.png.meta
+³   ³   Personaje entero.png
+³   ³   Personaje entero.png.meta
+³   ³   Personaje.png
+³   ³   Personaje.png.meta
+³   ³   PickUp Granada.png
+³   ³   PickUp Granada.png.meta
+³   ³   PickUp KitMedico.png
+³   ³   PickUp KitMedico.png.meta
+³   ³   PickUp Municion.png
+³   ³   PickUp Municion.png.meta
+³   ³   PisoGastado.png
+³   ³   PisoGastado.png.meta
+³   ³   Pistola.png
+³   ³   Pistola.png.meta
+³   ³   Puntaje.png
+³   ³   Puntaje.png.meta
+³   ³   Ruta.png
+³   ³   Ruta.png.meta
+³   ³   Sangre.png
+³   ³   Sangre.png.meta
+³   ³   Se¤alador De enemigo.png
+³   ³   Se¤alador De enemigo.png.meta
+³   ³   Simbolo de granada.png
+³   ³   Simbolo de granada.png.meta
+³   ³   Simbolo de KitMedico.png
+³   ³   Simbolo de KitMedico.png.meta
+³   ³   Sin t¡tulo 1.png
+³   ³   Sin t¡tulo 1.png.meta
+³   ³   SinBrazos.png
+³   ³   SinBrazos.png.meta
+³   ³   Soldado (1).png
+³   ³   Soldado (1).png.meta
+³   ³   Soldado (2).png
+³   ³   Soldado (2).png.meta
+³   ³   Soldado (3).png
+³   ³   Soldado (3).png.meta
+³   ³   Soldado 2.png
+³   ³   Soldado 2.png.meta
+³   ³   Soldado Modelo.png
+³   ³   Soldado Modelo.png.meta
+³   ³   SoldadoCuerpo.png
+³   ³   SoldadoCuerpo.png.meta
+³   ³   SoldadoSinArma.png
+³   ³   SoldadoSinArma.png.meta
+³   ³   spritesheet.png
+³   ³   spritesheet.png.meta
+³   ³   Tanque_base.png
+³   ³   Tanque_base.png.meta
+³   ³   Tanque_Ca¤on.png
+³   ³   Tanque_Ca¤on.png.meta
+³   ³   Tanque_Cuerpo.png
+³   ³   Tanque_Cuerpo.png.meta
+³   ³   Textos de puntaje.png
+³   ³   Textos de puntaje.png.meta
+³   ³   Vi¤eta Efecto de borde 1.png
+³   ³   Vi¤eta Efecto de borde 1.png.meta
+³   ³   _Sombras.mat
+³   ³   _Sombras.mat.meta
+³   ³   _Suelo 2.png
+³   ³   _Suelo 2.png.meta
+³   ³   _Suelo.mat
+³   ³   _Suelo.mat.meta
+³   ³   
+³   ÃÄÄÄCursor
+³   ³       Puntero (1) 1.png
+³   ³       Puntero (1) 1.png.meta
+³   ³       Puntero (1) 2.png
+³   ³       Puntero (1) 2.png.meta
+³   ³       Puntero (1).png
+³   ³       Puntero (1).png.meta
+³   ³       Puntero (2).png
+³   ³       Puntero (2).png.meta
+³   ³       Puntero (3).png
+³   ³       Puntero (3).png.meta
+³   ³       _RECTANGULO.png
+³   ³       _RECTANGULO.png.meta
+³   ³       
+³   ÃÄÄÄDesgastes
+³   ³   ³   2.png
+³   ³   ³   2.png.meta
+³   ³   ³   3.png
+³   ³   ³   3.png.meta
+³   ³   ³   4.png
+³   ³   ³   4.png.meta
+³   ³   ³   Materials.meta
+³   ³   ³   Textura 1.png
+³   ³   ³   Textura 1.png.meta
+³   ³   ³   
+³   ³   ÀÄÄÄMaterials
+³   ³       ³   3.mat
+³   ³       ³   3.mat.meta
+³   ³       ³   Materials.meta
+³   ³       ³   T1.png
+³   ³       ³   T1.png.meta
+³   ³       ³   Textura 1.mat
+³   ³       ³   Textura 1.mat.meta
+³   ³       ³   
+³   ³       ÀÄÄÄMaterials
+³   ³               T1.mat
+³   ³               T1.mat.meta
+³   ³               
+³   ÃÄÄÄNuevo
+³   ³       Barriles.png
+³   ³       Barriles.png.meta
+³   ³       Circulo.png
+³   ³       Circulo.png.meta
+³   ³       FondoDeMiniMapa.png
+³   ³       FondoDeMiniMapa.png.meta
+³   ³       Muro.prefab
+³   ³       Muro.prefab.meta
+³   ³       Obstaculo_1 (19).prefab
+³   ³       Obstaculo_1 (19).prefab.meta
+³   ³       Rectangulo.png
+³   ³       Rectangulo.png.meta
+³   ³       Suelo.prefab
+³   ³       Suelo.prefab.meta
+³   ³       UI (2).jpg
+³   ³       UI (2).jpg.meta
+³   ³       UI (3).jpg
+³   ³       UI (3).jpg.meta
+³   ³       UI (4).jpg
+³   ³       UI (4).jpg.meta
+³   ³       UI.png
+³   ³       UI.png.meta
+³   ³       _Cambio de soldado.png
+³   ³       _Cambio de soldado.png.meta
+³   ³       
+³   ÀÄÄÄNuevos
+³           _HabilidadEspecial.png
+³           _HabilidadEspecial.png.meta
+³           _IntroWASD.png
+³           _IntroWASD.png.meta
+³           
+ÃÄÄÄUI
+³   ³   Images.meta
+³   ³   
+³   ÀÄÄÄImages
+³       ³   Botiquin 2.png
+³       ³   Botiquin 2.png.meta
+³       ³   botiquin-removebg-preview (1).png
+³       ³   botiquin-removebg-preview (1).png.meta
+³       ³   Boton de granada.png
+³       ³   Boton de granada.png.meta
+³       ³   Boton de movimiento.png
+³       ³   Boton de movimiento.png.meta
+³       ³   Boton Tecla de teclado.png
+³       ³   Boton Tecla de teclado.png.meta
+³       ³   Botones Inicio.meta
+³       ³   BTN_Victoria_1.png
+³       ³   BTN_Victoria_1.png.meta
+³       ³   BTN_Victoria_2.png
+³       ³   BTN_Victoria_2.png.meta
+³       ³   BTN_Victoria_3.png
+³       ³   BTN_Victoria_3.png.meta
+³       ³   BTN_Victoria_4.png
+³       ³   BTN_Victoria_4.png.meta
+³       ³   Fondo 1.png
+³       ³   Fondo 1.png.meta
+³       ³   Fondo de boton de movimiento.png
+³       ³   Fondo de boton de movimiento.png.meta
+³       ³   Inicio 2.png
+³       ³   Inicio 2.png.meta
+³       ³   jeringa.png
+³       ³   jeringa.png.meta
+³       ³   Mouse central.png
+³       ³   Mouse central.png.meta
+³       ³   Mouse Derecho 1.png
+³       ³   Mouse Derecho 1.png.meta
+³       ³   Mouse Derecho.png
+³       ³   Mouse Derecho.png.meta
+³       ³   Mouse Izquierdo 1.png
+³       ³   Mouse Izquierdo 1.png.meta
+³       ³   Mouse Izquierdo.png
+³       ³   Mouse Izquierdo.png.meta
+³       ³   Victoria 1.png
+³       ³   Victoria 1.png.meta
+³       ³   Victoria 2.png
+³       ³   Victoria 2.png.meta
+³       ³   Victoria.png
+³       ³   Victoria.png.meta
+³       ³   V_BTN.prefab
+³       ³   V_BTN.prefab.meta
+³       ³   V_Image.prefab
+³       ³   V_Image.prefab.meta
+³       ³   
+³       ÀÄÄÄBotones Inicio
+³               BTN_Jugar 1.png
+³               BTN_Jugar 1.png.meta
+³               BTN_Jugar 2.png
+³               BTN_Jugar 2.png.meta
+³               BTN_Salir 1.png
+³               BTN_Salir 1.png.meta
+³               BTN_Salir 2.png
+³               BTN_Salir 2.png.meta
+³               ColorBase.mat
+³               ColorBase.mat.meta
+³               FondoDeCuadro.png
+³               FondoDeCuadro.png.meta
+³               Icono.png
+³               Icono.png.meta
+³               S_Asalto.png
+³               S_Asalto.png.meta
+³               S_Flancotirador.png
+³               S_Flancotirador.png.meta
+³               S_Medico.png
+³               S_Medico.png.meta
+³               Titulo.png
+³               Titulo.png.meta
+³               TituloWarzone.png
+³               TituloWarzone.png.meta
+³               
+ÃÄÄÄ_Documentos generados
+³       classDiagram.mmd
+³       classDiagram.mmd.meta
+³       classDiagram.part1.puml
+³       classDiagram.part1.puml.meta
+³       classDiagram.part2.puml
+³       classDiagram.part2.puml.meta
+³       classDiagram.puml
+³       classDiagram.puml.meta
+³       classDiagram.svg
+³       classDiagram.svg.meta
+³       classes.csv
+³       classes.csv.meta
+³       documentacion.md
+³       documentacion.md.meta
+³       file-index.txt
+³       file-index.txt.meta
+³       flowchart.mmd
+³       flowchart.mmd.meta
+³       flowchart.svg
+³       flowchart.svg.meta
+³       IA_index.txt
+³       IA_index.txt.meta
+³       IA_Relaciones.txt
+³       IA_Relaciones.txt.meta
+³       index.html
+³       index.html.meta
+³       methods.csv
+³       methods.csv.meta
+³       namespaces-mermaid.svg
+³       namespaces-mermaid.svg.meta
+³       namespaces.mmd
+³       namespaces.mmd.meta
+³       namespaces.puml
+³       namespaces.puml.meta
+³       namespaces.svg
+³       namespaces.svg.meta
+³       project.dgml
+³       project.dgml.meta
+³       project.json
+³       project.json.meta
+³       relations.csv
+³       relations.csv.meta
+³       reporte.html
+³       reporte.html.meta
+³       reporte.pdf
+³       reporte.pdf.meta
+³       REPORTE_GLOBAL.md
+³       REPORTE_GLOBAL.md.meta
+³       result.json
+³       result.json.meta
+³       roslyn-completo.json
+³       roslyn-completo.json.meta
+³       roslyn-completo.md
+³       roslyn-completo.md.meta
+³       summary.md
+³       summary.md.meta
+³       _agente_indice.txt
+³       _agente_indice.txt.meta
+³       _analisis.log
+³       _analisis.log.meta
+³       
+ÃÄÄÄ_Imagenes
+³       Choza.png
+³       Choza.png.meta
+³       Cobertura.png
+³       Cobertura.png.meta
+³       
+ÃÄÄÄ_Redes
+³   ³   Art.meta
+³   ³   Editor.meta
+³   ³   IMPLEMENTATION_GUIDE.md
+³   ³   IMPLEMENTATION_GUIDE.md.meta
+³   ³   Prefabs.meta
+³   ³   README.md
+³   ³   README.md.meta
+³   ³   Scenes.meta
+³   ³   Scripts.meta
+³   ³   
+³   ÃÄÄÄArt
+³   ³   ³   Audio.meta
+³   ³   ³   Models.meta
+³   ³   ³   Textures.meta
+³   ³   ³   
+³   ³   ÃÄÄÄAudio
+³   ³   ³       BGM.wav
+³   ³   ³       BGM.wav.meta
+³   ³   ³       Hit.wav
+³   ³   ³       Hit.wav.meta
+³   ³   ³       Lose.wav
+³   ³   ³       Lose.wav.meta
+³   ³   ³       Shoot.wav
+³   ³   ³       Shoot.wav.meta
+³   ³   ³       Win.wav
+³   ³   ³       Win.wav.meta
+³   ³   ³       
+³   ³   ÃÄÄÄModels
+³   ³   ³       BulletModel.obj
+³   ³   ³       BulletModel.obj.meta
+³   ³   ³       PlayerModel.obj
+³   ³   ³       PlayerModel.obj.meta
+³   ³   ³       
+³   ³   ÀÄÄÄTextures
+³   ³           Particle.png
+³   ³           Particle.png.meta
+³   ³           Terrain.png
+³   ³           Terrain.png.meta
+³   ³           
+³   ÃÄÄÄEditor
+³   ³       RedesBuildAll.cs
+³   ³       RedesBuildAll.cs.meta
+³   ³       RedesPrefabCreator.cs
+³   ³       RedesPrefabCreator.cs.meta
+³   ³       RedesSceneCreator.cs
+³   ³       RedesSceneCreator.cs.meta
+³   ³       RedesSceneLinker.cs
+³   ³       RedesSceneLinker.cs.meta
+³   ³       
+³   ÃÄÄÄPrefabs
+³   ³       Bullet.prefab
+³   ³       Bullet.prefab.meta
+³   ³       EntityDisplayView.prefab
+³   ³       EntityDisplayView.prefab.meta
+³   ³       Player.prefab
+³   ³       Player.prefab.meta
+³   ³       
+³   ÃÄÄÄScenes
+³   ³       RedesGame.unity
+³   ³       RedesGame.unity.meta
+³   ³       
+³   ÀÄÄÄScripts
+³       ³   Combat.meta
+³       ³   Controllers.meta
+³       ³   Core.meta
+³       ³   Gameplay.meta
+³       ³   Models.meta
+³       ³   Network.meta
+³       ³   Player.meta
+³       ³   Views.meta
+³       ³   
+³       ÃÄÄÄCombat
+³       ³       IDamageable.cs
+³       ³       IDamageable.cs.meta
+³       ³       Projectile.cs
+³       ³       Projectile.cs.meta
+³       ³       
+³       ÃÄÄÄControllers
+³       ³       EntityDisplayManager.cs
+³       ³       EntityDisplayManager.cs.meta
+³       ³       GameFlowController.cs
+³       ³       GameFlowController.cs.meta
+³       ³       MatchController.cs
+³       ³       MatchController.cs.meta
+³       ³       PlayerController.cs
+³       ³       PlayerController.cs.meta
+³       ³       TerrainController.cs
+³       ³       TerrainController.cs.meta
+³       ³       
+³       ÃÄÄÄCore
+³       ³       GameConstants.cs
+³       ³       GameConstants.cs.meta
+³       ³       GameEnums.cs
+³       ³       GameEnums.cs.meta
+³       ³       GameEventBus.asset
+³       ³       GameEventBus.asset.meta
+³       ³       GameEventBus.cs
+³       ³       GameEventBus.cs.meta
+³       ³       RedesLog.cs
+³       ³       RedesLog.cs.meta
+³       ³       
+³       ÃÄÄÄGameplay
+³       ³       MatchNetworkController.cs
+³       ³       MatchNetworkController.cs.meta
+³       ³       
+³       ÃÄÄÄModels
+³       ³       GameStateModel.cs
+³       ³       GameStateModel.cs.meta
+³       ³       IEntityDisplayModel.cs
+³       ³       IEntityDisplayModel.cs.meta
+³       ³       PlayerModel.cs
+³       ³       PlayerModel.cs.meta
+³       ³       TerrainModel.cs
+³       ³       TerrainModel.cs.meta
+³       ³       
+³       ÃÄÄÄNetwork
+³       ³       HostNetworkService.cs
+³       ³       HostNetworkService.cs.meta
+³       ³       INetworkService.cs
+³       ³       INetworkService.cs.meta
+³       ³       ISessionListHandler.cs
+³       ³       ISessionListHandler.cs.meta
+³       ³       NetworkInputData.cs
+³       ³       NetworkInputData.cs.meta
+³       ³       PlayerSpawner.cs
+³       ³       PlayerSpawner.cs.meta
+³       ³       RoomSessionHandler.cs
+³       ³       RoomSessionHandler.cs.meta
+³       ³       
+³       ÃÄÄÄPlayer
+³       ³       AmmoSystem.cs
+³       ³       AmmoSystem.cs.meta
+³       ³       NetworkPlayer.cs
+³       ³       NetworkPlayer.cs.meta
+³       ³       PlayerAnimationController.cs
+³       ³       PlayerAnimationController.cs.meta
+³       ³       PlayerEventBus.cs
+³       ³       PlayerEventBus.cs.meta
+³       ³       PlayerHealth.cs
+³       ³       PlayerHealth.cs.meta
+³       ³       PlayerMovement.cs
+³       ³       PlayerMovement.cs.meta
+³       ³       PlayerShooting.cs
+³       ³       PlayerShooting.cs.meta
+³       ³       
+³       ÀÄÄÄViews
+³               EntityDisplayView.cs
+³               EntityDisplayView.cs.meta
+³               GameHudView.cs
+³               GameHudView.cs.meta
+³               LobbyView.cs
+³               LobbyView.cs.meta
+³               ResultView.cs
+³               ResultView.cs.meta
+³               TerrainView.cs
+³               TerrainView.cs.meta
+³               VFXManager.cs
+³               VFXManager.cs.meta
+³               
+ÀÄÄÄ_Textos
+    ³   Orbitron.meta
+    ³   Science_Gothic.meta
+    ³   
+    ÃÄÄÄOrbitron
+    ³   ³   OFL.txt
+    ³   ³   OFL.txt.meta
+    ³   ³   Orbitron-VariableFont_wght.ttf
+    ³   ³   Orbitron-VariableFont_wght.ttf.meta
+    ³   ³   README.txt
+    ³   ³   README.txt.meta
+    ³   ³   static.meta
+    ³   ³   
+    ³   ÀÄÄÄstatic
+    ³           Orbitron-Black.ttf
+    ³           Orbitron-Black.ttf.meta
+    ³           Orbitron-Bold.ttf
+    ³           Orbitron-Bold.ttf.meta
+    ³           Orbitron-ExtraBold.ttf
+    ³           Orbitron-ExtraBold.ttf.meta
+    ³           Orbitron-Medium.ttf
+    ³           Orbitron-Medium.ttf.meta
+    ³           Orbitron-Regular SDF.asset
+    ³           Orbitron-Regular SDF.asset.meta
+    ³           Orbitron-Regular.ttf
+    ³           Orbitron-Regular.ttf.meta
+    ³           Orbitron-SemiBold.ttf
+    ³           Orbitron-SemiBold.ttf.meta
+    ³           
+    ÀÄÄÄScience_Gothic
+        ³   OFL.txt
+        ³   OFL.txt.meta
+        ³   README.txt
+        ³   README.txt.meta
+        ³   ScienceGothic-VariableFont_CTRS,slnt,wdth,wght.ttf
+        ³   ScienceGothic-VariableFont_CTRS,slnt,wdth,wght.ttf.meta
+        ³   static.meta
+        ³   
+        ÀÄÄÄstatic
+                ScienceGothic-Black.ttf
+                ScienceGothic-Black.ttf.meta
+                ScienceGothic-Bold.ttf
+                ScienceGothic-Bold.ttf.meta
+                ScienceGothic-ExtraBold.ttf
+                ScienceGothic-ExtraBold.ttf.meta
+                ScienceGothic-ExtraLight.ttf
+                ScienceGothic-ExtraLight.ttf.meta
+                ScienceGothic-Light.ttf
+                ScienceGothic-Light.ttf.meta
+                ScienceGothic-Medium.ttf
+                ScienceGothic-Medium.ttf.meta
+                ScienceGothic-Regular.ttf
+                ScienceGothic-Regular.ttf.meta
+                ScienceGothic-SemiBold.ttf
+                ScienceGothic-SemiBold.ttf.meta
+                ScienceGothic-Thin.ttf
+                ScienceGothic-Thin.ttf.meta
+                ScienceGothic_Condensed-Black.ttf
+                ScienceGothic_Condensed-Black.ttf.meta
+                ScienceGothic_Condensed-Bold.ttf
+                ScienceGothic_Condensed-Bold.ttf.meta
+                ScienceGothic_Condensed-ExtraBold.ttf
+                ScienceGothic_Condensed-ExtraBold.ttf.meta
+                ScienceGothic_Condensed-ExtraLight.ttf
+                ScienceGothic_Condensed-ExtraLight.ttf.meta
+                ScienceGothic_Condensed-Light.ttf
+                ScienceGothic_Condensed-Light.ttf.meta
+                ScienceGothic_Condensed-Medium.ttf
+                ScienceGothic_Condensed-Medium.ttf.meta
+                ScienceGothic_Condensed-Regular.ttf
+                ScienceGothic_Condensed-Regular.ttf.meta
+                ScienceGothic_Condensed-SemiBold.ttf
+                ScienceGothic_Condensed-SemiBold.ttf.meta
+                ScienceGothic_Condensed-Thin.ttf
+                ScienceGothic_Condensed-Thin.ttf.meta
+                ScienceGothic_Expanded-Black.ttf
+                ScienceGothic_Expanded-Black.ttf.meta
+                ScienceGothic_Expanded-Bold.ttf
+                ScienceGothic_Expanded-Bold.ttf.meta
+                ScienceGothic_Expanded-ExtraBold.ttf
+                ScienceGothic_Expanded-ExtraBold.ttf.meta
+                ScienceGothic_Expanded-ExtraLight.ttf
+                ScienceGothic_Expanded-ExtraLight.ttf.meta
+                ScienceGothic_Expanded-Light.ttf
+                ScienceGothic_Expanded-Light.ttf.meta
+                ScienceGothic_Expanded-Medium.ttf
+                ScienceGothic_Expanded-Medium.ttf.meta
+                ScienceGothic_Expanded-Regular.ttf
+                ScienceGothic_Expanded-Regular.ttf.meta
+                ScienceGothic_Expanded-SemiBold.ttf
+                ScienceGothic_Expanded-SemiBold.ttf.meta
+                ScienceGothic_Expanded-Thin.ttf
+                ScienceGothic_Expanded-Thin.ttf.meta
+                ScienceGothic_ExtraCondensed-Black.ttf
+                ScienceGothic_ExtraCondensed-Black.ttf.meta
+                ScienceGothic_ExtraCondensed-Bold.ttf
+                ScienceGothic_ExtraCondensed-Bold.ttf.meta
+                ScienceGothic_ExtraCondensed-ExtraBold.ttf
+                ScienceGothic_ExtraCondensed-ExtraBold.ttf.meta
+                ScienceGothic_ExtraCondensed-ExtraLight.ttf
+                ScienceGothic_ExtraCondensed-ExtraLight.ttf.meta
+                ScienceGothic_ExtraCondensed-Light.ttf
+                ScienceGothic_ExtraCondensed-Light.ttf.meta
+                ScienceGothic_ExtraCondensed-Medium.ttf
+                ScienceGothic_ExtraCondensed-Medium.ttf.meta
+                ScienceGothic_ExtraCondensed-Regular.ttf
+                ScienceGothic_ExtraCondensed-Regular.ttf.meta
+                ScienceGothic_ExtraCondensed-SemiBold.ttf
+                ScienceGothic_ExtraCondensed-SemiBold.ttf.meta
+                ScienceGothic_ExtraCondensed-Thin.ttf
+                ScienceGothic_ExtraCondensed-Thin.ttf.meta
+                ScienceGothic_ExtraExpanded-Black.ttf
+                ScienceGothic_ExtraExpanded-Black.ttf.meta
+                ScienceGothic_ExtraExpanded-Bold.ttf
+                ScienceGothic_ExtraExpanded-Bold.ttf.meta
+                ScienceGothic_ExtraExpanded-ExtraBold.ttf
+                ScienceGothic_ExtraExpanded-ExtraBold.ttf.meta
+                ScienceGothic_ExtraExpanded-ExtraLight.ttf
+                ScienceGothic_ExtraExpanded-ExtraLight.ttf.meta
+                ScienceGothic_ExtraExpanded-Light.ttf
+                ScienceGothic_ExtraExpanded-Light.ttf.meta
+                ScienceGothic_ExtraExpanded-Medium.ttf
+                ScienceGothic_ExtraExpanded-Medium.ttf.meta
+                ScienceGothic_ExtraExpanded-Regular.ttf
+                ScienceGothic_ExtraExpanded-Regular.ttf.meta
+                ScienceGothic_ExtraExpanded-SemiBold.ttf
+                ScienceGothic_ExtraExpanded-SemiBold.ttf.meta
+                ScienceGothic_ExtraExpanded-Thin.ttf
+                ScienceGothic_ExtraExpanded-Thin.ttf.meta
+                ScienceGothic_SemiCondensed-Black.ttf
+                ScienceGothic_SemiCondensed-Black.ttf.meta
+                ScienceGothic_SemiCondensed-Bold.ttf
+                ScienceGothic_SemiCondensed-Bold.ttf.meta
+                ScienceGothic_SemiCondensed-ExtraBold.ttf
+                ScienceGothic_SemiCondensed-ExtraBold.ttf.meta
+                ScienceGothic_SemiCondensed-ExtraLight.ttf
+                ScienceGothic_SemiCondensed-ExtraLight.ttf.meta
+                ScienceGothic_SemiCondensed-Light.ttf
+                ScienceGothic_SemiCondensed-Light.ttf.meta
+                ScienceGothic_SemiCondensed-Medium.ttf
+                ScienceGothic_SemiCondensed-Medium.ttf.meta
+                ScienceGothic_SemiCondensed-Regular.ttf
+                ScienceGothic_SemiCondensed-Regular.ttf.meta
+                ScienceGothic_SemiCondensed-SemiBold.ttf
+                ScienceGothic_SemiCondensed-SemiBold.ttf.meta
+                ScienceGothic_SemiCondensed-Thin.ttf
+                ScienceGothic_SemiCondensed-Thin.ttf.meta
+                ScienceGothic_SemiExpanded-Black.ttf
+                ScienceGothic_SemiExpanded-Black.ttf.meta
+                ScienceGothic_SemiExpanded-Bold.ttf
+                ScienceGothic_SemiExpanded-Bold.ttf.meta
+                ScienceGothic_SemiExpanded-ExtraBold.ttf
+                ScienceGothic_SemiExpanded-ExtraBold.ttf.meta
+                ScienceGothic_SemiExpanded-ExtraLight.ttf
+                ScienceGothic_SemiExpanded-ExtraLight.ttf.meta
+                ScienceGothic_SemiExpanded-Light.ttf
+                ScienceGothic_SemiExpanded-Light.ttf.meta
+                ScienceGothic_SemiExpanded-Medium.ttf
+                ScienceGothic_SemiExpanded-Medium.ttf.meta
+                ScienceGothic_SemiExpanded-Regular.ttf
+                ScienceGothic_SemiExpanded-Regular.ttf.meta
+                ScienceGothic_SemiExpanded-SemiBold.ttf
+                ScienceGothic_SemiExpanded-SemiBold.ttf.meta
+                ScienceGothic_SemiExpanded-Thin.ttf
+                ScienceGothic_SemiExpanded-Thin.ttf.meta
+                ScienceGothic_UltraCondensed-Black.ttf
+                ScienceGothic_UltraCondensed-Black.ttf.meta
+                ScienceGothic_UltraCondensed-Bold.ttf
+                ScienceGothic_UltraCondensed-Bold.ttf.meta
+                ScienceGothic_UltraCondensed-ExtraBold.ttf
+                ScienceGothic_UltraCondensed-ExtraBold.ttf.meta
+                ScienceGothic_UltraCondensed-ExtraLight.ttf
+                ScienceGothic_UltraCondensed-ExtraLight.ttf.meta
+                ScienceGothic_UltraCondensed-Light.ttf
+                ScienceGothic_UltraCondensed-Light.ttf.meta
+                ScienceGothic_UltraCondensed-Medium.ttf
+                ScienceGothic_UltraCondensed-Medium.ttf.meta
+                ScienceGothic_UltraCondensed-Regular.ttf
+                ScienceGothic_UltraCondensed-Regular.ttf.meta
+                ScienceGothic_UltraCondensed-SemiBold.ttf
+                ScienceGothic_UltraCondensed-SemiBold.ttf.meta
+                ScienceGothic_UltraCondensed-Thin.ttf
+                ScienceGothic_UltraCondensed-Thin.ttf.meta
+                ScienceGothic_UltraExpanded-Black.ttf
+                ScienceGothic_UltraExpanded-Black.ttf.meta
+                ScienceGothic_UltraExpanded-Bold.ttf
+                ScienceGothic_UltraExpanded-Bold.ttf.meta
+                ScienceGothic_UltraExpanded-ExtraBold.ttf
+                ScienceGothic_UltraExpanded-ExtraBold.ttf.meta
+                ScienceGothic_UltraExpanded-ExtraLight.ttf
+                ScienceGothic_UltraExpanded-ExtraLight.ttf.meta
+                ScienceGothic_UltraExpanded-Light.ttf
+                ScienceGothic_UltraExpanded-Light.ttf.meta
+                ScienceGothic_UltraExpanded-Medium.ttf
+                ScienceGothic_UltraExpanded-Medium.ttf.meta
+                ScienceGothic_UltraExpanded-Regular.ttf
+                ScienceGothic_UltraExpanded-Regular.ttf.meta
+                ScienceGothic_UltraExpanded-SemiBold.ttf
+                ScienceGothic_UltraExpanded-SemiBold.ttf.meta
+                ScienceGothic_UltraExpanded-Thin.ttf
+                ScienceGothic_UltraExpanded-Thin.ttf.meta
+                

@@ -3,6 +3,7 @@ using UnityEngine;
 using Redes.Core;
 using Redes.Combat;
 using Redes.Gameplay;
+using Redes.Views;
 
 namespace Redes.Player
 {
@@ -30,11 +31,33 @@ namespace Redes.Player
 
         public event System.Action<int> OnHealthChanged;
 
+        [SerializeField] private AudioClip _hitSound;
+        private PlayerEventBus _playerEventBus;
+        private int _lastHealth = GameConstants.DEFAULT_MAX_HEALTH;
+
+        private void Awake()
+        {
+            _playerEventBus = GetComponent<PlayerEventBus>();
+        }
+
         private void OnHealthChangedRender()
         {
             RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] OnHealthChangedRender: Player {Object.InputAuthority} (LocalPlayer={Runner.LocalPlayer}) health updated to {CurrentHealth}");
             try
             {
+                if (CurrentHealth < _lastHealth)
+                {
+                    if (_hitSound != null)
+                    {
+                        AudioSource.PlayClipAtPoint(_hitSound, transform.position);
+                    }
+                    if (Views.VFXManager.Instance != null)
+                    {
+                        Views.VFXManager.Instance.PlayHit(transform.position + Vector3.up);
+                    }
+                }
+                _lastHealth = CurrentHealth;
+
                 OnHealthChanged?.Invoke(CurrentHealth);
                 RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] OnHealthChangedRender completed successfully.");
             }
@@ -70,6 +93,11 @@ namespace Redes.Player
             // REQUIRED LOG -> "El jugador B recibio el impacto"
             RedesLog.Info(RedesLog.COMBAT, $"El jugador {Object.InputAuthority} recibio el impacto");
 
+            if (_playerEventBus != null)
+            {
+                _playerEventBus.TriggerTookDamage(attacker.PlayerId, null);
+            }
+
             if (!Object.HasStateAuthority)
             {
                 RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TakeDamage skipped since this client is NOT StateAuthority.");
@@ -98,6 +126,11 @@ namespace Redes.Player
                 // REQUIRED LOG -> "El jugador A Perdio"
                 RedesLog.Info(RedesLog.MATCH, $"El jugador {Object.InputAuthority} Perdio");
                 
+                if (_playerEventBus != null)
+                {
+                    _playerEventBus.TriggerDied();
+                }
+
                 try
                 {
                     if (_eventBus != null)
