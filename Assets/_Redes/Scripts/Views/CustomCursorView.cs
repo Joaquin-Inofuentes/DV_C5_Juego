@@ -21,6 +21,9 @@ namespace Redes.Views
         [SerializeField] private Sprite _cursorHit;
         [SerializeField] private Sprite _cursorReload;
 
+        [Header("Cursor Settings")]
+        public float CursorSize = 96f;
+
         private Canvas _canvas;
         private RectTransform _cursorRect;
         private Image _cursorImage;
@@ -43,7 +46,7 @@ namespace Redes.Views
             GameObject cursorGo = new GameObject("CustomCursor", typeof(RectTransform));
             cursorGo.transform.SetParent(transform, false);
             _cursorRect = cursorGo.GetComponent<RectTransform>();
-            _cursorRect.sizeDelta = new Vector2(32, 32);
+            _cursorRect.sizeDelta = new Vector2(CursorSize, CursorSize);
             _cursorRect.pivot = new Vector2(0.5f, 0.5f);
             
             _cursorImage = cursorGo.AddComponent<Image>();
@@ -164,6 +167,11 @@ namespace Redes.Views
                 if (_reloadProgressImage != null)
                     _reloadProgressImage.enabled = false;
                 return;
+            }
+
+            if (_cursorRect != null)
+            {
+                _cursorRect.sizeDelta = new Vector2(CursorSize, CursorSize);
             }
 
             // 2. Position custom cursor element matching mouse position

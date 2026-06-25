@@ -89,8 +89,8 @@ namespace Redes.EditorTools
                 var peb = player.GetComponent<PlayerEventBus>();
                 Assign(tester1, "_eventBus", peb);
 
-                // Find muzzle in hierarchy
-                var muzzle = FindInChildren(player.transform, "Muzzle");
+                // Find OrigenDeDisparo (or Muzzle fallback) in hierarchy
+                var muzzle = FindInChildren(player.transform, "OrigenDeDisparo") ?? FindInChildren(player.transform, "Muzzle");
                 if (muzzle != null)
                     Assign(tester1, "_muzzle", muzzle);
 
@@ -114,8 +114,8 @@ namespace Redes.EditorTools
                 var peb2 = player2.GetComponent<PlayerEventBus>();
                 Assign(tester2, "_eventBus", peb2);
 
-                // Find muzzle in hierarchy
-                var muzzle2 = FindInChildren(player2.transform, "Muzzle");
+                // Find OrigenDeDisparo (or Muzzle fallback) in hierarchy
+                var muzzle2 = FindInChildren(player2.transform, "OrigenDeDisparo") ?? FindInChildren(player2.transform, "Muzzle");
                 if (muzzle2 != null)
                     Assign(tester2, "_muzzle", muzzle2);
 
@@ -166,7 +166,7 @@ namespace Redes.EditorTools
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.Skybox;
             cam.orthographic = true;
-            cam.orthographicSize = 6.5f;
+            cam.orthographicSize = 13.0f; // Double orthographic size to zoom out double
             camGo.transform.position = new Vector3(0f, 15f, 0f);
             camGo.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             camGo.AddComponent<AudioListener>();
@@ -180,64 +180,86 @@ namespace Redes.EditorTools
 
         private static GameObject BuildPlayer()
         {
-            var playerGo = new GameObject("TestPlayer");
-            playerGo.transform.position = new Vector3(0, 0, 0);
+            var prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Redes/Prefabs/PlayerNuevo.prefab");
+            GameObject playerGo;
 
-            // -- Model --
-            var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ToonSoldiers_demo/models/ToonSoldier_demo.FBX");
-            GameObject modelObj;
-            Animator animator = null;
-
-            if (modelAsset != null)
+            if (prefabAsset != null)
             {
-                modelObj = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset, playerGo.transform);
-                modelObj.name = "Model";
-                modelObj.transform.localPosition = Vector3.zero;
-                modelObj.transform.localRotation = Quaternion.identity;
-                modelObj.transform.localScale = Vector3.one * 1.5f;
-
-                animator = modelObj.GetComponent<Animator>();
-                if (animator == null) animator = modelObj.AddComponent<Animator>();
-                animator.applyRootMotion = false;
-
-                // Assign or create animator controller
-                var ctrl = GetOrCreatePlayerAnimator();
-                animator.runtimeAnimatorController = ctrl;
-
-                Debug.Log("[TEST][BUILDER] Modelo ToonSoldier cargado. Scale=0.01");
+                playerGo = (GameObject)PrefabUtility.InstantiatePrefab(prefabAsset);
+                playerGo.transform.position = Vector3.zero;
+                playerGo.transform.rotation = Quaternion.identity;
+                Debug.Log("[TEST][BUILDER] Instanciado PlayerNuevo.prefab.");
             }
             else
             {
-                Debug.LogWarning("[TEST][BUILDER] ToonSoldier FBX no encontrado. Usando cápsula básica.");
-                modelObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                modelObj.name = "Model";
-                modelObj.transform.SetParent(playerGo.transform, false);
-                modelObj.transform.localPosition = new Vector3(0, 1f, 0);
+                playerGo = new GameObject("TestPlayer");
+                playerGo.transform.position = Vector3.zero;
+                Debug.LogWarning("[TEST][BUILDER] PlayerNuevo.prefab no encontrado. Creando fallback.");
+
+                // Create Model fallback
+                var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ToonSoldiers_demo/models/ToonSoldier_demo.FBX");
+                if (modelAsset != null)
+                {
+                    var modelObj = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset, playerGo.transform);
+                    modelObj.name = "Model";
+                    modelObj.transform.localPosition = Vector3.zero;
+                    modelObj.transform.localScale = Vector3.one * 1.5f;
+                }
+                else
+                {
+                    var modelObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                    modelObj.name = "Model";
+                    modelObj.transform.SetParent(playerGo.transform, false);
+                    modelObj.transform.localPosition = new Vector3(0, 1f, 0);
+                }
+
+                // Create Muzzle fallback
+                var muzzle = new GameObject("Muzzle");
+                muzzle.transform.SetParent(playerGo.transform, false);
+                muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f);
+
+                // Create OrigenDeDisparo fallback
+                var origen = new GameObject("OrigenDeDisparo");
+                origen.transform.SetParent(playerGo.transform, false);
+                origen.transform.localPosition = new Vector3(0, 1.5f, 0.8f);
             }
 
-            // -- Muzzle --
-            var muzzle = new GameObject("Muzzle");
-            muzzle.transform.SetParent(playerGo.transform, false);
-            muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f);
+            // Find or setup Animator
+            var modelChild = playerGo.transform.Find("Model");
+            Animator animator = null;
+            if (modelChild != null)
+            {
+                animator = modelChild.GetComponent<Animator>();
+                if (animator == null) animator = modelChild.gameObject.AddComponent<Animator>();
+                animator.applyRootMotion = false;
+                animator.runtimeAnimatorController = GetOrCreatePlayerAnimator();
+            }
 
-            // -- Player systems (offline-only) --
-            var peb = playerGo.AddComponent<PlayerEventBus>();
+            // Safe add components if missing
+            var peb = playerGo.GetComponent<PlayerEventBus>();
+            if (peb == null) peb = playerGo.AddComponent<PlayerEventBus>();
 
-            var animView = playerGo.AddComponent<PlayerAnimationView>();
+            var animView = playerGo.GetComponent<PlayerAnimationView>();
+            if (animView == null) animView = playerGo.AddComponent<PlayerAnimationView>();
+
             if (animator != null)
             {
                 Assign(animView, "_animator", animator);
                 Assign(animView, "_eventBus", peb);
             }
 
-            var tester = playerGo.AddComponent<OfflinePlayerTester>();
-            // Tester wired later in BuildTestScene to have dummy reference
+            var tester = playerGo.GetComponent<OfflinePlayerTester>();
+            if (tester == null) tester = playerGo.AddComponent<OfflinePlayerTester>();
 
-            // -- Capsule collider for reference --
-            var col = playerGo.AddComponent<CapsuleCollider>();
-            col.height = 1.8f;
-            col.radius = 0.35f;
-            col.center = new Vector3(0, 0.9f, 0);
+            // Setup Collider if missing
+            var col = playerGo.GetComponent<CapsuleCollider>();
+            if (col == null)
+            {
+                col = playerGo.AddComponent<CapsuleCollider>();
+                col.height = 1.8f;
+                col.radius = 0.35f;
+                col.center = new Vector3(0, 0.9f, 0);
+            }
 
             Debug.Log($"[TEST][BUILDER] Player offline creado: EventBus={peb != null}, Animator={animator != null}");
             return playerGo;

@@ -72,9 +72,20 @@ namespace Redes.Views
             
             if (VFXManager.Instance != null)
             {
-                Transform muzzle = transform.parent != null ? transform.parent.Find("Muzzle") : transform.Find("Muzzle");
-                if (muzzle == null && transform.parent != null && transform.parent.parent != null) 
-                    muzzle = transform.parent.parent.Find("Muzzle");
+                Transform muzzle = null;
+                Transform parent = transform.parent;
+                if (parent != null)
+                {
+                    muzzle = parent.Find("OrigenDeDisparo") ?? parent.Find("Muzzle");
+                    if (muzzle == null && parent.parent != null)
+                    {
+                        muzzle = parent.parent.Find("OrigenDeDisparo") ?? parent.parent.Find("Muzzle");
+                    }
+                }
+                else
+                {
+                    muzzle = transform.Find("OrigenDeDisparo") ?? transform.Find("Muzzle");
+                }
                 
                 if (muzzle != null) VFXManager.Instance.PlayMuzzleFlash(muzzle);
             }
