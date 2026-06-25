@@ -248,13 +248,13 @@ namespace Redes.EditorTools
             // Transitions in Shooting Layer
             var emptyToShoot = stateEmpty.AddTransition(stateShoot);
             emptyToShoot.hasExitTime = false;
-            emptyToShoot.duration = 0.02f; // Snap instantly to shooting pose
+            emptyToShoot.duration = 0f; // Snap instantly into shooting pose
             emptyToShoot.AddCondition(AnimatorConditionMode.If, 0, "Shoot");
 
             var shootToEmpty = stateShoot.AddTransition(stateEmpty);
             shootToEmpty.hasExitTime = true;
-            shootToEmpty.exitTime = 0.9f; // Blend out slightly before complete end
-            shootToEmpty.duration = 0.08f; // Fast return to neutral pose
+            shootToEmpty.exitTime = 1f; // Let the FULL animation play before returning
+            shootToEmpty.duration = 0f; // Snap back instantly — no blend
 
             var shootToEmptyOnDead = stateShoot.AddTransition(stateEmpty);
             shootToEmptyOnDead.hasExitTime = false;

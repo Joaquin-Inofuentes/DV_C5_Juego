@@ -38,11 +38,31 @@ namespace Redes.Test
         private int _currentAmmo;
         private bool _isReloading;
         private float _reloadTimer;
+        private float _shootClipDuration = 0.5f; // fallback
 
         private void Start()
         {
             _lastPosition = transform.position;
             _currentAmmo = _maxAmmo;
+
+            // Read the shoot clip duration from the animator so we can scale speed precisely
+            var model = transform.Find("Model");
+            if (model != null)
+            {
+                var animator = model.GetComponent<Animator>();
+                if (animator != null && animator.runtimeAnimatorController != null)
+                {
+                    foreach (var clip in animator.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name.ToLower().Contains("shoot"))
+                        {
+                            _shootClipDuration = clip.length;
+                            Debug.Log($"[TEST][PLAYER]   ShootClip: {clip.name} dur={_shootClipDuration:F3}s");
+                            break;
+                        }
+                    }
+                }
+            }
             
             Debug.Log("[TEST][PLAYER] OfflinePlayerTester iniciado. WASD=mover, LMB=disparar, R=recargar, T=debug");
             Debug.Log($"[TEST][PLAYER]   EventBus: {(_eventBus != null ? "OK" : "NULL ⚠️")}");
@@ -50,6 +70,7 @@ namespace Redes.Test
             Debug.Log($"[TEST][PLAYER]   Target:   {(_target != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Sound:    {(_shootSound != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Bullet:   {(_bulletPrefab != null ? "OK" : "NULL ⚠️")}");
+            Debug.Log($"[TEST][PLAYER]   FireRate: {_fireRate:F2}s  ClipDur: {_shootClipDuration:F3}s  AnimSpeed: {(_shootClipDuration / _fireRate):F2}x");
 
             // Initial UI sync
             _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
@@ -135,8 +156,10 @@ namespace Redes.Test
             if (_shootSound != null)
                 AudioSource.PlayClipAtPoint(_shootSound, transform.position);
 
-            // Calculate snappy animation speed matching the fire rate (10x faster baseline)
-            float animSpeed = (0.5f / Mathf.Min(_fireRate, 0.5f)) * 10f;
+            // Animation speed = clipDuration / fireRate
+            // This makes the animation complete in exactly _fireRate seconds
+            // e.g. 0.5s clip / 0.2s rate = 2.5x speed → anim plays in 0.2s (fills the gap)
+            float animSpeed = _shootClipDuration / _fireRate;
 
             // Event Bus (drives animation with dynamic speed)
             _eventBus?.TriggerShoot(animSpeed);
