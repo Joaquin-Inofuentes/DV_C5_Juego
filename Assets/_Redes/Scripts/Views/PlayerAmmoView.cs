@@ -13,6 +13,7 @@ namespace Redes.Views
     {
         [SerializeField] private PlayerEventBus _eventBus;
         [SerializeField] private Text _ammoText;
+        [SerializeField] private Slider _reloadSlider;
 
         private Vector3 _originalScale = Vector3.one;
         private Coroutine _animationCoroutine;
@@ -20,12 +21,25 @@ namespace Redes.Views
         private Color _emptyColor = Color.red;
         private RectTransform _rectTransform;
 
+        // Offline reload logic mirror if needed, or update dynamically via Update
+        private float _reloadTimer;
+        private float _reloadDuration = 1.5f;
+        private bool _isReloading;
+
         private void Awake()
         {
             if (_ammoText == null)
                 _ammoText = GetComponent<Text>();
             _originalScale = transform.localScale;
             _rectTransform = GetComponent<RectTransform>();
+
+            if (_reloadSlider != null)
+            {
+                _reloadSlider.gameObject.SetActive(false);
+                _reloadSlider.minValue = 0f;
+                _reloadSlider.maxValue = 1f;
+                _reloadSlider.value = 0f;
+            }
         }
 
         private void OnEnable()
@@ -46,8 +60,36 @@ namespace Redes.Views
             }
         }
 
+        private void Update()
+        {
+            if (_isReloading)
+            {
+                _reloadTimer += Time.deltaTime;
+                float progress = Mathf.Clamp01(_reloadTimer / _reloadDuration);
+                if (_reloadSlider != null)
+                {
+                    _reloadSlider.value = progress;
+                }
+
+                if (_reloadTimer >= _reloadDuration)
+                {
+                    _isReloading = false;
+                    if (_reloadSlider != null)
+                    {
+                        _reloadSlider.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
+
         private void HandleAmmoChanged(int currentAmmo, int maxAmmo)
         {
+            _isReloading = false;
+            if (_reloadSlider != null)
+            {
+                _reloadSlider.gameObject.SetActive(false);
+            }
+
             if (_ammoText != null)
             {
                 _ammoText.text = $"AMMO: {currentAmmo}/{maxAmmo}";
@@ -68,6 +110,14 @@ namespace Redes.Views
 
         private void HandleReload()
         {
+            _isReloading = true;
+            _reloadTimer = 0f;
+            if (_reloadSlider != null)
+            {
+                _reloadSlider.gameObject.SetActive(true);
+                _reloadSlider.value = 0f;
+            }
+
             if (_ammoText != null)
             {
                 _ammoText.text = "RELOADING...";

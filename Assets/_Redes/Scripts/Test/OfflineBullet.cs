@@ -31,6 +31,14 @@ namespace Redes.Test
                 if (dummy.IsAlive)
                 {
                     dummy.TakeDamage(Damage);
+                    
+                    // Trigger CustomCursorView hit visual effect
+                    var cursorView = Object.FindAnyObjectByType<Views.CustomCursorView>();
+                    if (cursorView != null)
+                    {
+                        cursorView.TriggerHit();
+                    }
+
                     Destroy(gameObject);
                 }
             }

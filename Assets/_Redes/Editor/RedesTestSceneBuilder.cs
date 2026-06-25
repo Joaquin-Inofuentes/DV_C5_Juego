@@ -327,20 +327,77 @@ namespace Redes.EditorTools
 
             // Ammo display (bottom-right)
             var ammoPanel = CreatePanel(canvasGo.transform, new Vector2(1, 0), new Vector2(1, 0),
-                new Vector2(-10, 10), new Vector2(220, 60), new Color(0, 0, 0, 0.7f));
+                new Vector2(-10, 10), new Vector2(220, 80), new Color(0, 0, 0, 0.7f));
             ammoPanel.name = "AmmoPanel";
             ((RectTransform)ammoPanel.transform).pivot = new Vector2(1, 0);
 
             // Centered ammo text to prevent anchoredPosition shifts
             var ammoText = CreateText(ammoPanel.transform, "AmmoText", "AMMO: 10/10",
-                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(210, 50), 18, Color.white, TextAnchor.MiddleCenter);
+                new Vector2(0.5f, 0.7f), new Vector2(0.5f, 0.7f), new Vector2(210, 30), 18, Color.white, TextAnchor.MiddleCenter);
             ammoText.fontStyle = FontStyle.Bold;
+
+            // Create Slider for reload progress
+            var sliderGo = new GameObject("ReloadSlider", typeof(RectTransform));
+            sliderGo.transform.SetParent(ammoPanel.transform, false);
+            var sliderRect = sliderGo.GetComponent<RectTransform>();
+            sliderRect.anchorMin = new Vector2(0.1f, 0.15f);
+            sliderRect.anchorMax = new Vector2(0.9f, 0.35f);
+            sliderRect.anchoredPosition = Vector2.zero;
+            sliderRect.sizeDelta = Vector2.zero;
+
+            var slider = sliderGo.AddComponent<Slider>();
+
+            // Slider Background
+            var sBg = new GameObject("Background", typeof(RectTransform));
+            sBg.transform.SetParent(sliderGo.transform, false);
+            var sBgImg = sBg.AddComponent<Image>();
+            sBgImg.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+            var sBgRect = sBg.GetComponent<RectTransform>();
+            sBgRect.anchorMin = Vector2.zero;
+            sBgRect.anchorMax = Vector2.one;
+            sBgRect.sizeDelta = Vector2.zero;
+
+            // Slider Fill Area
+            var sFillArea = new GameObject("Fill Area", typeof(RectTransform));
+            sFillArea.transform.SetParent(sliderGo.transform, false);
+            var sFillAreaRect = sFillArea.GetComponent<RectTransform>();
+            sFillAreaRect.anchorMin = Vector2.zero;
+            sFillAreaRect.anchorMax = Vector2.one;
+            sFillAreaRect.sizeDelta = Vector2.zero;
+
+            var sFill = new GameObject("Fill", typeof(RectTransform));
+            sFill.transform.SetParent(sFillArea.transform, false);
+            var sFillImg = sFill.AddComponent<Image>();
+            sFillImg.color = Color.yellow;
+            var sFillRect = sFill.GetComponent<RectTransform>();
+            sFillRect.anchorMin = Vector2.zero;
+            sFillRect.anchorMax = Vector2.one;
+            sFillRect.sizeDelta = Vector2.zero;
+
+            slider.fillRect = sFillRect;
+            slider.targetGraphic = sFillImg;
 
             // Attach PlayerAmmoView (MVC View)
             var ammoView = ammoText.gameObject.AddComponent<PlayerAmmoView>();
             var peb = player.GetComponent<PlayerEventBus>();
             Assign(ammoView, "_eventBus", peb);
             Assign(ammoView, "_ammoText", ammoText);
+            Assign(ammoView, "_reloadSlider", slider);
+
+            // Create CustomCursorView on Canvas
+            var cursorView = canvasGo.AddComponent<CustomCursorView>();
+            Assign(cursorView, "_eventBus", peb);
+
+            // Load cursor sprites and assign them
+            var cBase = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorBase.png");
+            var cShoot = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorShoot.png");
+            var cHit = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorHit.png");
+            var cReload = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorReload.png");
+            
+            Assign(cursorView, "_cursorBase", cBase);
+            Assign(cursorView, "_cursorShoot", cShoot);
+            Assign(cursorView, "_cursorHit", cHit);
+            Assign(cursorView, "_cursorReload", cReload);
 
             // Event log (bottom)
             var logPanel = CreatePanel(canvasGo.transform, new Vector2(0, 0), new Vector2(1, 0),
