@@ -30,26 +30,9 @@ namespace Redes.EditorTools
             // ---- ENVIRONMENT ----
             BuildEnvironment();
 
-            // ---- PLAYERS ----
+            // ---- PLAYER ----
             var player = BuildPlayer();
-            player.name = "TestPlayer1";
-
-            var player2 = BuildPlayer();
-            player2.name = "TestPlayer2";
-            player2.transform.position = new Vector3(-4f, 0f, 0f);
-
-            // Set PlayerInputMode on Player 2 to Arrows_Space
-            var tester2 = player2.GetComponent<OfflinePlayerTester>();
-            if (tester2 != null)
-            {
-                var so = new SerializedObject(tester2);
-                var prop = so.FindProperty("_inputMode");
-                if (prop != null)
-                {
-                    prop.enumValueIndex = (int)PlayerInputMode.Arrows_Space;
-                    so.ApplyModifiedPropertiesWithoutUndo();
-                }
-            }
+            player.name = "TestPlayer";
 
             // ---- WIRE CAMERA FOLLOW ----
             var mainCam = GameObject.FindWithTag("MainCamera");
@@ -59,15 +42,35 @@ namespace Redes.EditorTools
                 Assign(follow, "_target", player.transform);
             }
 
-            // ---- ENEMIES ----
-            var dummy1 = BuildDummy(new Vector3(5f, 0f, 3f));
-            dummy1.name = "DummyEnemy1";
-
-            var dummy2 = BuildDummy(new Vector3(5f, 0f, -1f));
-            dummy2.name = "DummyEnemy2";
+            // ---- ENEMY ----
+            var dummy = BuildDummy(new Vector3(5f, 0f, 0f));
+            dummy.name = "DummyEnemy";
 
             // ---- UI ----
             var (debugText, killText, legendText, logText, ammoText) = BuildUI(player);
+            var canvasGo = debugText.canvas.gameObject;
+
+            // Load and instantiate EntityDisplayView prefab for Player and Enemy
+            var displayPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.EntityDisplayViewPrefabPath);
+            Views.EntityDisplayView playerDisplay = null;
+            Views.EntityDisplayView dummyDisplay = null;
+
+            if (displayPrefab != null)
+            {
+                // Instantiate for player
+                var playerDisplayGo = (GameObject)PrefabUtility.InstantiatePrefab(displayPrefab, canvasGo.transform);
+                playerDisplayGo.name = "PlayerDisplayView";
+                playerDisplay = playerDisplayGo.GetComponent<Views.EntityDisplayView>();
+                playerDisplay.SetNickname("PLAYER");
+                playerDisplay.SetHealth(1f);
+
+                // Instantiate for dummy
+                var dummyDisplayGo = (GameObject)PrefabUtility.InstantiatePrefab(displayPrefab, canvasGo.transform);
+                dummyDisplayGo.name = "DummyDisplayView";
+                dummyDisplay = dummyDisplayGo.GetComponent<Views.EntityDisplayView>();
+                dummyDisplay.SetNickname("ENEMY");
+                dummyDisplay.SetHealth(1f);
+            }
 
             // ---- TEST MANAGER ----
             var managerGo = new GameObject("TestSceneManager");
@@ -75,59 +78,57 @@ namespace Redes.EditorTools
             Assign(manager, "_killCounterText", killText);
             Assign(manager, "_controlsLegendText", legendText);
             Assign(manager, "_eventLog", logText);
-            // Dynamic wire is done at runtime, but set reference to dummy1 as fallback
-            Assign(manager, "_dummy", dummy1.GetComponent<DummyEnemy>());
+            Assign(manager, "_dummy", dummy.GetComponent<DummyEnemy>());
 
-            // ---- WIRE PLAYER 1 TESTER ----
-            var tester1 = player.GetComponent<OfflinePlayerTester>();
-            if (tester1 != null)
+            // ---- WIRE PLAYER TESTER ----
+            var tester = player.GetComponent<OfflinePlayerTester>();
+            if (tester != null)
             {
-                Assign(tester1, "_debugText", debugText);
-                Assign(tester1, "_target", dummy1.GetComponent<DummyEnemy>());
+                Assign(tester, "_debugText", debugText);
+                Assign(tester, "_target", dummy.GetComponent<DummyEnemy>());
+                if (playerDisplay != null) Assign(tester, "_displayView", playerDisplay);
 
                 // Wire EventBus and Muzzle
                 var peb = player.GetComponent<PlayerEventBus>();
-                Assign(tester1, "_eventBus", peb);
+                Assign(tester, "_eventBus", peb);
 
                 // Find OrigenDeDisparo (or Muzzle fallback) in hierarchy
                 var muzzle = FindInChildren(player.transform, "OrigenDeDisparo") ?? FindInChildren(player.transform, "Muzzle");
                 if (muzzle != null)
-                    Assign(tester1, "_muzzle", muzzle);
+                    Assign(tester, "_muzzle", muzzle);
 
                 // Wire shoot sound if available
                 var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
                 if (shootSound != null)
-                    Assign(tester1, "_shootSound", shootSound);
+                    Assign(tester, "_shootSound", shootSound);
 
                 // Wire bullet prefab
                 var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
                 if (bulletPrefab != null)
-                    Assign(tester1, "_bulletPrefab", bulletPrefab);
+                    Assign(tester, "_bulletPrefab", bulletPrefab);
             }
 
-            // ---- WIRE PLAYER 2 TESTER ----
-            if (tester2 != null)
+            // ---- WIRE DUMMY ENEMY AUTO-SHOOT & DISPLAY ----
+            var dummyComp = dummy.GetComponent<DummyEnemy>();
+            if (dummyComp != null)
             {
-                Assign(tester2, "_target", dummy2.GetComponent<DummyEnemy>());
+                if (dummyDisplay != null) Assign(dummyComp, "_displayView", dummyDisplay);
 
-                // Wire EventBus and Muzzle
-                var peb2 = player2.GetComponent<PlayerEventBus>();
-                Assign(tester2, "_eventBus", peb2);
+                // Create muzzle for dummy if not already present
+                var dummyMuzzle = FindInChildren(dummy.transform, "OrigenDeDisparo") ?? FindInChildren(dummy.transform, "Muzzle");
+                if (dummyMuzzle == null)
+                {
+                    var newMuzzle = new GameObject("OrigenDeDisparo");
+                    newMuzzle.transform.SetParent(dummy.transform, false);
+                    newMuzzle.transform.localPosition = new Vector3(0f, 1.5f, 0.8f);
+                    dummyMuzzle = newMuzzle.transform;
+                }
+                Assign(dummyComp, "_muzzle", dummyMuzzle);
 
-                // Find OrigenDeDisparo (or Muzzle fallback) in hierarchy
-                var muzzle2 = FindInChildren(player2.transform, "OrigenDeDisparo") ?? FindInChildren(player2.transform, "Muzzle");
-                if (muzzle2 != null)
-                    Assign(tester2, "_muzzle", muzzle2);
-
-                // Wire shoot sound if available
-                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
-                if (shootSound != null)
-                    Assign(tester2, "_shootSound", shootSound);
-
-                // Wire bullet prefab
+                // Wire bullet prefab for dummy
                 var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
                 if (bulletPrefab != null)
-                    Assign(tester2, "_bulletPrefab", bulletPrefab);
+                    Assign(dummyComp, "_bulletPrefab", bulletPrefab);
             }
 
             // ---- SAVE ----

@@ -12,6 +12,8 @@ namespace Redes.Test
         public int Damage = 25;
         public float LifeTime = 2f;
 
+        public bool IsEnemyBullet = false;
+
         private void Start()
         {
             Destroy(gameObject, LifeTime);
@@ -24,22 +26,35 @@ namespace Redes.Test
 
         private void OnTriggerEnter(Collider other)
         {
-            // Try to find DummyEnemy on target or its parents (e.g. root)
-            var dummy = other.GetComponentInParent<DummyEnemy>();
-            if (dummy != null)
+            if (IsEnemyBullet)
             {
-                if (dummy.IsAlive)
+                // Enemy bullet hits the player
+                var player = other.GetComponentInParent<OfflinePlayerTester>();
+                if (player != null)
                 {
-                    dummy.TakeDamage(Damage);
-                    
-                    // Trigger CustomCursorView hit visual effect
-                    var cursorView = Object.FindAnyObjectByType<Views.CustomCursorView>();
-                    if (cursorView != null)
-                    {
-                        cursorView.TriggerHit();
-                    }
-
+                    player.TakeDamage(Damage);
                     Destroy(gameObject);
+                }
+            }
+            else
+            {
+                // Player bullet hits the dummy enemy
+                var dummy = other.GetComponentInParent<DummyEnemy>();
+                if (dummy != null)
+                {
+                    if (dummy.IsAlive)
+                    {
+                        dummy.TakeDamage(Damage);
+                        
+                        // Trigger CustomCursorView hit visual effect
+                        var cursorView = Object.FindAnyObjectByType<Views.CustomCursorView>();
+                        if (cursorView != null)
+                        {
+                            cursorView.TriggerHit();
+                        }
+
+                        Destroy(gameObject);
+                    }
                 }
             }
         }

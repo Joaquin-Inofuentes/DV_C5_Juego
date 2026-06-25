@@ -18,6 +18,17 @@ namespace Redes.Test
         [SerializeField] private Color _aliveColor = new Color(0.2f, 0.8f, 0.2f);
         [SerializeField] private Color _deadColor = new Color(0.3f, 0.1f, 0.1f);
 
+        [Header("Display Overlay")]
+        [SerializeField] private Views.EntityDisplayView _displayView;
+
+        [Header("Shooting Config")]
+        [SerializeField] private bool _autoShoot = true;
+        [SerializeField] private float _shootInterval = 1f;
+        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private Transform _muzzle;
+        [SerializeField] private int _shootDamage = 15;
+        [SerializeField] private float _shootSpeed = 15f;
+
         public int CurrentHealth { get; private set; }
         public bool IsAlive => CurrentHealth > 0;
 
@@ -27,6 +38,7 @@ namespace Redes.Test
         private float _respawnTimer;
         private bool _isDead;
         private Coroutine _hitAnimCoroutine;
+        private float _shootTimer;
 
         private void Awake()
         {
@@ -36,6 +48,11 @@ namespace Redes.Test
         private void Start()
         {
             ApplyColor();
+            if (_displayView != null)
+            {
+                _displayView.SetNickname("DUMMY_ENEMY");
+                _displayView.SetHealth(1f);
+            }
             Debug.Log($"[TEST][DUMMY] Dummy Enemy inicializado. HP={CurrentHealth}");
         }
 
@@ -46,6 +63,47 @@ namespace Redes.Test
                 _respawnTimer -= Time.deltaTime;
                 if (_respawnTimer <= 0f) Respawn();
             }
+            else if (_autoShoot && _bulletPrefab != null && _muzzle != null)
+            {
+                _shootTimer -= Time.deltaTime;
+                if (_shootTimer <= 0f)
+                {
+                    _shootTimer = _shootInterval;
+                    Shoot();
+                }
+            }
+        }
+
+        private void Shoot()
+        {
+            if (_bulletPrefab == null || _muzzle == null) return;
+            var bulletGo = Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
+            var offlineBullet = bulletGo.AddComponent<OfflineBullet>();
+            offlineBullet.Speed = _shootSpeed;
+            offlineBullet.Damage = _shootDamage;
+            offlineBullet.IsEnemyBullet = true; // Tell the bullet it was fired by the enemy
+        }
+
+        private void LateUpdate()
+        {
+            if (_displayView != null && Camera.main != null && !_isDead)
+            {
+                Vector3 worldPos = transform.position + Vector3.up * 2.2f;
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                if (screenPos.z > 0)
+                {
+                    _displayView.SetVisible(true);
+                    _displayView.SetPosition(screenPos);
+                }
+                else
+                {
+                    _displayView.SetVisible(false);
+                }
+            }
+            else if (_displayView != null && _isDead)
+            {
+                _displayView.SetVisible(false);
+            }
         }
 
         public void TakeDamage(int amount)
@@ -53,6 +111,10 @@ namespace Redes.Test
             if (_isDead) return;
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            if (_displayView != null)
+            {
+                _displayView.SetHealth((float)CurrentHealth / _maxHealth);
+            }
             Debug.Log($"[TEST][DUMMY] Recibio {amount} de daño → HP={CurrentHealth}/{_maxHealth}");
 
             if (CurrentHealth <= 0)
@@ -139,6 +201,11 @@ namespace Redes.Test
             transform.localRotation = Quaternion.identity;
             transform.localScale = Vector3.one;
             ApplyColor();
+            if (_displayView != null)
+            {
+                _displayView.SetVisible(true);
+                _displayView.SetHealth(1f);
+            }
             Debug.Log($"[TEST][DUMMY] Respawneado. HP={CurrentHealth}");
         }
 

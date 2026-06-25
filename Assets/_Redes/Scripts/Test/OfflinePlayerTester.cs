@@ -39,6 +39,10 @@ namespace Redes.Test
         [SerializeField] private AudioClip _reloadSound;
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Text _debugText;
+        [SerializeField] private Views.EntityDisplayView _displayView;
+
+        [Header("Health Config")]
+        [SerializeField] private int _maxHealth = 100;
 
         private float _fireCooldown;
         private int _shotsFired;
@@ -49,11 +53,19 @@ namespace Redes.Test
         private float _reloadTimer;
         private float _shootClipDuration = 0.5f; // fallback
         private Coroutine _recoilCoroutine;
+        private int _currentHealth;
 
         private void Start()
         {
             _lastPosition = transform.position;
             _currentAmmo = _maxAmmo;
+            _currentHealth = _maxHealth;
+
+            if (_displayView != null)
+            {
+                _displayView.SetNickname("PLAYER");
+                _displayView.SetHealth(1f);
+            }
 
             // Read the shoot clip duration from the animator so we can scale speed precisely
             var model = transform.Find("Model");
@@ -94,6 +106,46 @@ namespace Redes.Test
             HandleReloadTimer();
             HandleDebugKey();
             UpdateDebugUI();
+        }
+
+        private void LateUpdate()
+        {
+            if (_displayView != null && Camera.main != null)
+            {
+                Vector3 worldPos = transform.position + Vector3.up * 2.2f;
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+                if (screenPos.z > 0)
+                {
+                    _displayView.SetVisible(true);
+                    _displayView.SetPosition(screenPos);
+                }
+                else
+                {
+                    _displayView.SetVisible(false);
+                }
+            }
+        }
+
+        public void TakeDamage(int amount)
+        {
+            _currentHealth = Mathf.Max(0, _currentHealth - amount);
+            if (_displayView != null)
+            {
+                _displayView.SetHealth((float)_currentHealth / _maxHealth);
+            }
+            Debug.Log($"[TEST][PLAYER] Jugador recibio {amount} de daño → HP={_currentHealth}/{_maxHealth}");
+
+            if (_currentHealth <= 0)
+            {
+                // Respawn player
+                _currentHealth = _maxHealth;
+                transform.position = Vector3.zero;
+                if (_displayView != null)
+                {
+                    _displayView.SetHealth(1f);
+                }
+                Debug.Log("[TEST][PLAYER] ¡MUERTO! Respawneado en el centro.");
+            }
         }
 
         private void HandleMovement()
