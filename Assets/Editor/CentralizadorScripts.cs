@@ -6,7 +6,7 @@ using System.IO;
 
 public class CentralizadorScripts : EditorWindow
 {
-    [MenuItem("Tools/Centralizar")]
+    // [MenuItem("Tools/Centralizar")]
     public static void CentralizarScriptsEnEscena()
     {
         // 1. Obtener la escena activa

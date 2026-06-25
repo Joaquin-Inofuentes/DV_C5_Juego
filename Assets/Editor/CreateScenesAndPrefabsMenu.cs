@@ -41,7 +41,7 @@ namespace DebugSystem.Editor
             return font;
         }
 
-        [MenuItem("Tools/Pruebas/Crear Escenas y Prefabs")]
+        // [MenuItem("Tools/Pruebas/Crear Escenas y Prefabs")]
         public static void GenerateProjectSetup()
         {
             try
@@ -175,7 +175,7 @@ namespace DebugSystem.Editor
             }
         }
 
-        [MenuItem("Tools/Pruebas/Corregir")]
+        // [MenuItem("Tools/Pruebas/Corregir")]
         public static void FixAndConfigureScene()
         {
             try
@@ -588,6 +588,92 @@ namespace DebugSystem.Editor
             screenManager.gameOverTitleText = goTitleTxt;
             screenManager.gameOverDetailsText = goDetailsTxt;
             screenManager.restartButton = restartBtn;
+
+            // --- PREMIUM DEATH SCREEN UI (MVC) ---
+            GameObject deathPanel = new GameObject("DeathScreenPanel");
+            deathPanel.transform.SetParent(canvasGo.transform, false);
+            RectTransform deathRt = deathPanel.AddComponent<RectTransform>();
+            deathRt.anchorMin = Vector2.zero;
+            deathRt.anchorMax = Vector2.one;
+            deathRt.sizeDelta = Vector2.zero;
+            deathPanel.AddComponent<CanvasRenderer>();
+            Image deathImg = deathPanel.AddComponent<Image>();
+            deathImg.color = new Color(0.08f, 0.01f, 0.01f, 0.88f);
+            deathPanel.SetActive(false);
+
+            // Background Ring
+            GameObject bgRingGo = new GameObject("BgRing");
+            bgRingGo.transform.SetParent(deathPanel.transform, false);
+            RectTransform bgRingRt = bgRingGo.AddComponent<RectTransform>();
+            bgRingRt.sizeDelta = new Vector2(300, 300);
+            bgRingRt.anchoredPosition = new Vector2(0, 50);
+            bgRingGo.AddComponent<CanvasRenderer>();
+            Image bgRingImg = bgRingGo.AddComponent<Image>();
+            bgRingImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            bgRingImg.color = new Color(0.2f, 0.05f, 0.05f, 0.5f);
+
+            // Active Radial Circle
+            GameObject radialGo = new GameObject("RadialCircle");
+            radialGo.transform.SetParent(deathPanel.transform, false);
+            RectTransform radialRt = radialGo.AddComponent<RectTransform>();
+            radialRt.sizeDelta = new Vector2(300, 300);
+            radialRt.anchoredPosition = new Vector2(0, 50);
+            radialGo.AddComponent<CanvasRenderer>();
+            Image radialImg = radialGo.AddComponent<Image>();
+            radialImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            radialImg.color = new Color(0.85f, 0.15f, 0.15f, 0.9f);
+            radialImg.type = Image.Type.Filled;
+            radialImg.fillMethod = Image.FillMethod.Radial360;
+            radialImg.fillOrigin = (int)Image.Origin360.Top;
+            radialImg.fillClockwise = true;
+            radialImg.fillAmount = 0f;
+
+            // Countdown Text
+            GameObject countTxtGo = new GameObject("CountdownText");
+            countTxtGo.transform.SetParent(deathPanel.transform, false);
+            RectTransform countTxtRt = countTxtGo.AddComponent<RectTransform>();
+            countTxtRt.anchorMin = new Vector2(0.5f, 0.5f);
+            countTxtRt.anchorMax = new Vector2(0.5f, 0.5f);
+            countTxtRt.sizeDelta = new Vector2(250, 80);
+            countTxtRt.anchoredPosition = new Vector2(0, 50);
+            countTxtGo.AddComponent<CanvasRenderer>();
+            Text countTxt = countTxtGo.AddComponent<Text>();
+            countTxt.font = GetDefaultFont();
+            countTxt.fontSize = 38;
+            countTxt.fontStyle = FontStyle.Bold;
+            countTxt.color = Color.white;
+            countTxt.alignment = TextAnchor.MiddleCenter;
+            countTxt.text = "5.0s";
+
+            // Subtitle text below the circle
+            GameObject subTxtGo = new GameObject("SubtitleText");
+            subTxtGo.transform.SetParent(deathPanel.transform, false);
+            RectTransform subTxtRt = subTxtGo.AddComponent<RectTransform>();
+            subTxtRt.anchorMin = new Vector2(0.5f, 0.5f);
+            subTxtRt.anchorMax = new Vector2(0.5f, 0.5f);
+            subTxtRt.sizeDelta = new Vector2(600, 50);
+            subTxtRt.anchoredPosition = new Vector2(0, -140);
+            subTxtGo.AddComponent<CanvasRenderer>();
+            Text subTxt = subTxtGo.AddComponent<Text>();
+            subTxt.font = GetDefaultFont();
+            subTxt.fontSize = 20;
+            subTxt.color = new Color(0.9f, 0.7f, 0.7f);
+            subTxt.alignment = TextAnchor.MiddleCenter;
+            subTxt.text = "RESPAWN EN CAMINO...";
+
+            // Wire up components
+            Redes.Views.DeathScreenView deathView = deathPanel.AddComponent<Redes.Views.DeathScreenView>();
+            System.Reflection.FieldInfo panelField = typeof(Redes.Views.DeathScreenView).GetField("_panel", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            System.Reflection.FieldInfo circleField = typeof(Redes.Views.DeathScreenView).GetField("_radialCircle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            System.Reflection.FieldInfo textField = typeof(Redes.Views.DeathScreenView).GetField("_countdownText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+            if (panelField != null) panelField.SetValue(deathView, deathPanel);
+            if (circleField != null) circleField.SetValue(deathView, radialImg);
+            if (textField != null) textField.SetValue(deathView, countTxt);
+
+            Redes.Views.DeathScreenController deathCtrl = deathPanel.AddComponent<Redes.Views.DeathScreenController>();
+            System.Reflection.FieldInfo viewField = typeof(Redes.Views.DeathScreenController).GetField("_view", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (viewField != null) viewField.SetValue(deathCtrl, deathView);
         }
 
         private static void EnsureTagExists(string tag)
@@ -610,7 +696,7 @@ namespace DebugSystem.Editor
             }
         }
 
-        [MenuItem("Tools/Pruebas/Build Game")]
+        // [MenuItem("Tools/Pruebas/Build Game")]
         public static void BuildStandalonePlayer()
         {
             try
@@ -696,3 +782,4 @@ namespace DebugSystem.Editor
         }
     }
 }
+

@@ -19,7 +19,7 @@ namespace Redes.EditorTools
         private const string ScenePath = "Assets/_Redes/Scenes/RedesGame.unity";
         private const string BuildPath = "Builds/RedesGame_Win64/RedesGame.exe";
 
-        [MenuItem("Tools/Redes/4. Full Build (Scene + Prefabs + Link + Build)", priority = 4)]
+        // Removed Tools/Redes/4. Full Build MenuItem
         public static void FullBuild()
         {
             Debug.Log("[REDES][BUILD] === Paso 1: Crear escena ===");
@@ -85,9 +85,12 @@ namespace Redes.EditorTools
                 Debug.LogError("[REDES][BUILD] Build FALLO: " + report.summary.totalErrors + " errores");
         }
 
-        [MenuItem("Tools/Redes/5. Corregir", priority = 5)]
+        [MenuItem("Redes/Corregir", priority = 1)]
         public static void Corregir()
         {
+            Debug.Log("[REDES][CORREGIR] === Paso 0: Crear Mixer de Audio e Inicializar Variables ===");
+            RedesAudioSetup.CreateAudioMixerAndSetup();
+
             Debug.Log("[REDES][CORREGIR] === Paso 1: Crear escena de juego ===");
             RedesSceneCreator.CreateScene();
 

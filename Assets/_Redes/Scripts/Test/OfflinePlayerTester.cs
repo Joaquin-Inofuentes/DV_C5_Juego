@@ -57,6 +57,7 @@ namespace Redes.Test
         private Coroutine _recoilCoroutine;
         private int _currentHealth;
         private bool _isDead;
+        private Vector3 _lastHitDirection;
 
         private void Start()
         {
@@ -134,9 +135,10 @@ namespace Redes.Test
             }
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount, Vector3 hitDirection = default)
         {
             if (_isDead) return;
+            _lastHitDirection = hitDirection;
 
             _currentHealth = Mathf.Max(0, _currentHealth - amount);
             if (_displayView != null)
@@ -155,14 +157,15 @@ namespace Redes.Test
         {
             _isDead = true;
             _isReloading = false;
-            _eventBus?.TriggerDied();
+            _eventBus?.TriggerDied(_lastHitDirection);
             Debug.Log("[TEST][PLAYER] ¡MUERTO! Activando Ragdoll.");
+            DebugSystem.EventBus.TriggerPlayerDeath(DebugSystem.LocalNetworkMock.LocalActorID, 0, "DummyEnemy");
             StartCoroutine(RespawnCoroutine());
         }
 
         private System.Collections.IEnumerator RespawnCoroutine()
         {
-            yield return new WaitForSeconds(2.5f); // Let the ragdoll rest on the floor for 2.5s
+            yield return new WaitForSeconds(5.0f); // Let the ragdoll rest on the floor for 5.0s
 
             // Reset player position and health
             transform.position = Vector3.zero;
@@ -178,6 +181,7 @@ namespace Redes.Test
 
             _eventBus?.TriggerSpawned();
             _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
+            DebugSystem.EventBus.TriggerRespawnExecuted();
             Debug.Log("[TEST][PLAYER] Jugador respawneado.");
         }
 

@@ -32,7 +32,7 @@ namespace Redes.Test
                 var player = other.GetComponentInParent<OfflinePlayerTester>();
                 if (player != null)
                 {
-                    player.TakeDamage(Damage);
+                    player.TakeDamage(Damage, transform.forward);
                     Destroy(gameObject);
                 }
             }
@@ -44,7 +44,7 @@ namespace Redes.Test
                 {
                     if (dummy.IsAlive)
                     {
-                        dummy.TakeDamage(Damage);
+                        dummy.TakeDamage(Damage, transform.forward);
                         
                         // Trigger CustomCursorView hit visual effect
                         var cursorView = Object.FindAnyObjectByType<Views.CustomCursorView>();

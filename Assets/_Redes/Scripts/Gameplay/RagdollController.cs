@@ -71,34 +71,34 @@ namespace Redes.Gameplay
                     mass = 10f;
                     radius = 0.18f;
                 }
-                else if (name.Contains("thigh") || name.Contains("upperleg"))
+                else if (name.Contains("thigh") || name.Contains("upperleg") || name.Contains("upleg"))
                 {
                     isKeyBone = true;
                     mass = 10f;
-                    radius = 0.12f;
-                    height = 0.45f;
+                    radius = 0.06f;
+                    height = 0.225f;
                 }
-                else if (name.Contains("calf") || name.Contains("lowerleg") || name.Contains("shin"))
+                else if (name.Contains("calf") || name.Contains("lowerleg") || name.Contains("shin") || (name.Contains("leg") && !name.Contains("upleg") && !name.Contains("upperleg") && !name.Contains("foot")))
                 {
                     isKeyBone = true;
                     mass = 8f;
-                    radius = 0.1f;
-                    height = 0.4f;
+                    radius = 0.05f;
+                    height = 0.2f;
                 }
-                else if (name.Contains("upperarm"))
+                else if (name.Contains("upperarm") || (name.Contains("arm") && !name.Contains("forearm") && !name.Contains("lowerarm") && !name.Contains("hand")))
                 {
                     isKeyBone = true;
                     mass = 7f;
-                    radius = 0.09f;
-                    height = 0.35f;
+                    radius = 0.045f;
+                    height = 0.175f;
                     direction = 2; // Z or X depending on skeleton alignment
                 }
                 else if (name.Contains("forearm") || name.Contains("lowerarm"))
                 {
                     isKeyBone = true;
                     mass = 5f;
-                    radius = 0.08f;
-                    height = 0.3f;
+                    radius = 0.04f;
+                    height = 0.15f;
                     direction = 2;
                 }
 
@@ -154,7 +154,7 @@ namespace Redes.Gameplay
             }
         }
 
-        public void SetRagdollActive(bool active)
+        public void SetRagdollActive(bool active, Vector3 forceDirection = default)
         {
             _isRagdollActive = active;
 
@@ -183,6 +183,15 @@ namespace Redes.Gameplay
                 if (bone.collider != null)
                 {
                     bone.collider.isTrigger = !active;
+                }
+            }
+
+            if (active && forceDirection != Vector3.zero)
+            {
+                var rootBone = _bones.Count > 0 ? _bones[0].rigidbody : null;
+                if (rootBone != null)
+                {
+                    rootBone.AddForce(forceDirection.normalized * 500f, ForceMode.Impulse);
                 }
             }
         }

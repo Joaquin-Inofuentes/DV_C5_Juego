@@ -10,7 +10,7 @@ namespace Redes.EditorTools
     {
         public const string MixerPath = "Assets/_Redes/Art/Audio/GameMixer.mixer";
 
-        [MenuItem("Tools/Redes/Audio Setup", priority = 10)]
+        // [MenuItem("Tools/Redes/Audio Setup", priority = 10)]
         public static void CreateAudioMixerAndSetup()
         {
             if (!AssetDatabase.IsValidFolder("Assets/_Redes/Art/Audio"))
@@ -24,7 +24,7 @@ namespace Redes.EditorTools
             if (mixer == null)
             {
                 // Create AudioMixer using Reflection to call internal AudioMixerController
-                Type controllerType = Type.GetType("UnityEditor.Audio.AudioMixerController, UnityEditor");
+                Type controllerType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.Audio.AudioMixerController");
                 if (controllerType != null)
                 {
                     var createMethod = controllerType.GetMethod("CreateAudioMixerControllerAtPath", BindingFlags.Public | BindingFlags.Static);
@@ -39,8 +39,8 @@ namespace Redes.EditorTools
             if (mixer != null)
             {
                 // Add Groups "SFX" and "Music" via Reflection
-                Type controllerType = Type.GetType("UnityEditor.Audio.AudioMixerController, UnityEditor");
-                Type groupType = Type.GetType("UnityEditor.Audio.AudioMixerGroupController, UnityEditor");
+                Type controllerType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.Audio.AudioMixerController");
+                Type groupType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.Audio.AudioMixerGroupController");
 
                 if (controllerType != null && groupType != null)
                 {
@@ -100,6 +100,7 @@ namespace Redes.EditorTools
 
         public static AudioMixerGroup GetGroup(string name)
         {
+            AssetDatabase.Refresh();
             var mixer = AssetDatabase.LoadAssetAtPath<AudioMixer>(MixerPath);
             if (mixer == null) return null;
             var groups = mixer.FindMatchingGroups(name);
@@ -111,3 +112,4 @@ namespace Redes.EditorTools
         }
     }
 }
+

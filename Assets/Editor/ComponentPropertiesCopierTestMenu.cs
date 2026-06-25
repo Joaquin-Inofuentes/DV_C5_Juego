@@ -5,7 +5,7 @@ using System.IO;
 
 public static class ComponentPropertiesCopierTestMenu
 {
-    [MenuItem("Tests/Test Copy Properties From Colision Scene")]
+    // [MenuItem("Tests/Test Copy Properties From Colision Scene")]
     public static void RunTest()
     {
         string scenePath = @"Assets/Scenes/Tests/_Pruebas de colision.unity";
@@ -73,3 +73,4 @@ public static class ComponentPropertiesCopierTestMenu
         return null;
     }
 }
+

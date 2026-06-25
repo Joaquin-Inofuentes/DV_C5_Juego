@@ -19,7 +19,7 @@ namespace Redes.EditorTools
     {
         public const string TestScenePath = "Assets/_Redes/Scenes/RedesTest.unity";
 
-        [MenuItem("Tools/Redes/6. Crear Escena de Test", priority = 6)]
+        // [MenuItem("Tools/Redes/6. Crear Escena de Test", priority = 6)]
         public static void BuildTestScene()
         {
             Debug.Log("[TEST][BUILDER] === Creando escena de test offline ===");
@@ -204,7 +204,7 @@ namespace Redes.EditorTools
             {
                 bgmAudio.outputAudioMixerGroup = musicGroup;
             }
-            bgmAudio.Play();
+            // bgmAudio.Play(); -> Removed to avoid playing music inside the Unity editor in edit mode (playOnAwake is enough for runtime play mode)
 
             Debug.Log("[TEST][BUILDER] Entorno creado (suelo, cámara, luz, BGM 3D).");
         }
@@ -282,6 +282,37 @@ namespace Redes.EditorTools
             var tester = playerGo.GetComponent<OfflinePlayerTester>();
             if (tester == null) tester = playerGo.AddComponent<OfflinePlayerTester>();
 
+            // Setup AudioSource for 3D sound if missing
+            var audioSource = playerGo.GetComponent<AudioSource>();
+            if (audioSource == null)
+            {
+                audioSource = playerGo.AddComponent<AudioSource>();
+                audioSource.spatialBlend = 1.0f; // 3D Sound
+                audioSource.playOnAwake = false;
+                audioSource.minDistance = 3f;
+                audioSource.maxDistance = 25f;
+                audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+            }
+
+            var sfxGroup = RedesAudioSetup.GetGroup("SFX");
+            if (sfxGroup != null) audioSource.outputAudioMixerGroup = sfxGroup;
+
+            // Load audio clips
+            var shootClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Disparo de Metralleta (1).mp3");
+            var reloadClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Recarga de Metralleta.mp3");
+            var deathClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+            var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
+
+            Assign(animView, "_audioSource", audioSource);
+            Assign(animView, "_shootSound", shootClip);
+            Assign(animView, "_reloadSound", reloadClip);
+            Assign(animView, "_deathSound", deathClip);
+            Assign(animView, "_footstepSound", footstepClip);
+
+            Assign(tester, "_shootSound", shootClip);
+            Assign(tester, "_reloadSound", reloadClip);
+            Assign(tester, "_deathSound", deathClip);
+
             // Setup Collider if missing
             var col = playerGo.GetComponent<CapsuleCollider>();
             if (col == null)
@@ -291,6 +322,10 @@ namespace Redes.EditorTools
                 col.radius = 0.35f;
                 col.center = new Vector3(0, 0.9f, 0);
             }
+
+            // Setup Ragdoll
+            var ragdoll = playerGo.GetComponent<Gameplay.RagdollController>();
+            if (ragdoll == null) ragdoll = playerGo.AddComponent<Gameplay.RagdollController>();
 
             Debug.Log($"[TEST][BUILDER] Player offline creado: EventBus={peb != null}, Animator={animator != null}");
             return playerGo;
@@ -542,7 +577,58 @@ namespace Redes.EditorTools
                 new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 11, Color.green, TextAnchor.LowerLeft);
             logText.supportRichText = true;
 
-            Debug.Log("[TEST][BUILDER] HUD de test creado.");
+            // --- PREMIUM DEATH SCREEN UI (MVC) ---
+            var deathPanel = CreatePanel(canvasGo.transform, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, new Color(0.08f, 0.01f, 0.01f, 0.88f));
+            deathPanel.name = "DeathScreenPanel";
+            deathPanel.SetActive(false);
+
+            // Background Ring (radial guide)
+            var bgRingGo = new GameObject("BgRing", typeof(RectTransform));
+            bgRingGo.transform.SetParent(deathPanel.transform, false);
+            var bgRingRt = bgRingGo.GetComponent<RectTransform>();
+            bgRingRt.sizeDelta = new Vector2(300, 300);
+            bgRingRt.anchoredPosition = new Vector2(0, 50);
+            var bgRingImg = bgRingGo.AddComponent<Image>();
+            bgRingImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            bgRingImg.color = new Color(0.2f, 0.05f, 0.05f, 0.5f);
+
+            // Active Radial Circle
+            var radialGo = new GameObject("RadialCircle", typeof(RectTransform));
+            radialGo.transform.SetParent(deathPanel.transform, false);
+            var radialRt = radialGo.GetComponent<RectTransform>();
+            radialRt.sizeDelta = new Vector2(300, 300);
+            radialRt.anchoredPosition = new Vector2(0, 50);
+            var radialImg = radialGo.AddComponent<Image>();
+            radialImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+            radialImg.color = new Color(0.85f, 0.15f, 0.15f, 0.9f);
+            radialImg.type = Image.Type.Filled;
+            radialImg.fillMethod = Image.FillMethod.Radial360;
+            radialImg.fillOrigin = (int)Image.Origin360.Top;
+            radialImg.fillClockwise = true;
+            radialImg.fillAmount = 0f;
+
+            // Countdown Text (inside the circle)
+            var countTxt = CreateText(deathPanel.transform, "CountdownText", "5.0s",
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(250, 80), 38, Color.white, TextAnchor.MiddleCenter);
+            countTxt.fontStyle = FontStyle.Bold;
+            ((RectTransform)countTxt.transform).anchoredPosition = new Vector2(0, 50);
+
+            // Subtitle text below the circle
+            var subTxt = CreateText(deathPanel.transform, "SubtitleText", "RAGDOLL DECAY & RESPAWNING...",
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(600, 50), 20, new Color(0.9f, 0.7f, 0.7f), TextAnchor.MiddleCenter);
+            ((RectTransform)subTxt.transform).anchoredPosition = new Vector2(0, -140);
+
+            // MVC Components wire up
+            var deathView = deathPanel.AddComponent<Views.DeathScreenView>();
+            Assign(deathView, "_panel", deathPanel);
+            Assign(deathView, "_radialCircle", radialImg);
+            Assign(deathView, "_countdownText", countTxt);
+
+            var deathCtrl = deathPanel.AddComponent<Views.DeathScreenController>();
+            Assign(deathCtrl, "_view", deathView);
+            Assign(deathCtrl, "_playerEventBus", peb);
+
+            Debug.Log("[TEST][BUILDER] HUD de test creado con Death Screen premium.");
             return (debugText, killText, legendText, logText, ammoText);
         }
 
@@ -618,3 +704,4 @@ namespace Redes.EditorTools
         }
     }
 }
+

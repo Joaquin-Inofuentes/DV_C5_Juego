@@ -25,7 +25,7 @@ namespace Redes.EditorTools
         private const string SceneFolder = "Assets/_Redes/Scenes";
         private const string ScenePath = SceneFolder + "/RedesGame.unity";
 
-        [MenuItem("Tools/Redes/1. Create Scene", priority = 1)]
+        // [MenuItem("Tools/Redes/1. Create Scene", priority = 1)]
         public static void CreateScene()
         {
             EnsureFolder("Assets/_Redes", "Scenes");
@@ -425,3 +425,4 @@ namespace Redes.EditorTools
         }
     }
 }
+

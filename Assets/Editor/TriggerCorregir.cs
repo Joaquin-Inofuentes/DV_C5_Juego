@@ -5,7 +5,7 @@ namespace Redes.EditorTools
 {
     public static class TriggerCorregir
     {
-        [MenuItem("Tools/Redes/Trigger Corregir Now")]
+        // [MenuItem("Tools/Redes/Trigger Corregir Now")]
         public static void Run()
         {
             RedesBuildAll.Corregir();

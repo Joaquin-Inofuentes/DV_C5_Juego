@@ -24,7 +24,7 @@ namespace Redes.EditorTools
     {
         private const string ScenePath = "Assets/_Redes/Scenes/RedesGame.unity";
 
-        [MenuItem("Tools/Redes/3. Link & Assign All", priority = 3)]
+        // [MenuItem("Tools/Redes/3. Link & Assign All", priority = 3)]
         public static void LinkAll()
         {
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
@@ -189,3 +189,4 @@ namespace Redes.EditorTools
         }
     }
 }
+

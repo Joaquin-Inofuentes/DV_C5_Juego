@@ -8,7 +8,7 @@ namespace DebugSystem.Editor
 {
     public class CreateTestSceneMenu
     {
-        [MenuItem("Tools/Pruebas/CrearEscenaDeTests")]
+        // [MenuItem("Tools/Pruebas/CrearEscenaDeTests")]
         public static void CreateScene()
         {
             // 1. Create a new active scene
@@ -157,3 +157,4 @@ namespace DebugSystem.Editor
         }
     }
 }
+

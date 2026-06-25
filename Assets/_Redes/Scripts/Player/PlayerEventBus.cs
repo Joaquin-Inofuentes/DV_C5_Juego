@@ -23,7 +23,7 @@ namespace Redes.Player
         public Action OnSpawned;
 
         // 5. Morir (Die)
-        public Action OnDied;
+        public Action<Vector3> OnDied;
 
         // 6. Recargar (Reload)
         public Action OnReload;
@@ -51,9 +51,9 @@ namespace Redes.Player
             OnSpawned?.Invoke();
         }
 
-        public void TriggerDied()
+        public void TriggerDied(Vector3 hitDirection = default)
         {
-            OnDied?.Invoke();
+            OnDied?.Invoke(hitDirection);
         }
 
         public void TriggerReload()

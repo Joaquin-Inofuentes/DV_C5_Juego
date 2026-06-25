@@ -19,6 +19,7 @@ namespace Redes.Views
         [Header("Footstep Settings")]
         [SerializeField] private float _footstepInterval = 0.38f;
         private float _footstepTimer;
+        private float _currentMoveSpeed;
 
         private void OnEnable()
         {
@@ -46,28 +47,26 @@ namespace Redes.Views
 
         private void Update()
         {
-            if (_animator != null)
+            if (_currentMoveSpeed > 0.2f)
             {
-                float speed = _animator.GetFloat("MoveSpeed");
-                if (speed > 0.2f)
+                _footstepTimer -= Time.deltaTime;
+                if (_footstepTimer <= 0f)
                 {
-                    _footstepTimer -= Time.deltaTime;
-                    if (_footstepTimer <= 0f)
-                    {
-                        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-                        _footstepTimer = _footstepInterval / (isSprinting ? 1.2f : 1.0f);
-                        PlaySound3D(_footstepSound, 0.3f);
-                    }
+                    bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                    _footstepTimer = _footstepInterval / (isSprinting ? 1.2f : 1.0f);
+                    PlaySound3D(_footstepSound, 0.3f);
                 }
-                else
-                {
-                    _footstepTimer = 0f;
-                }
+            }
+            else
+            {
+                _footstepTimer = 0f;
             }
         }
 
         private void HandleMove(Vector3 velocity)
         {
+            _currentMoveSpeed = velocity.magnitude;
+
             if (_animator != null)
             {
                 float speed = velocity.magnitude;
@@ -98,6 +97,11 @@ namespace Redes.Views
                 _animator.SetTrigger("Shoot");
             }
 
+            if (_audioSource != null)
+            {
+                _audioSource.pitch = animSpeed; // Match sound pitch/speed to the animation duration/speed
+            }
+
             PlaySound3D(_shootSound, 0.8f);
             
             if (VFXManager.Instance != null)
@@ -123,11 +127,20 @@ namespace Redes.Views
 
         private void HandleReload()
         {
+            if (_audioSource != null)
+            {
+                _audioSource.pitch = 1.0f; // Reset pitch to normal
+            }
             PlaySound3D(_reloadSound, 0.8f);
         }
 
-        private void HandleDied()
+        private void HandleDied(Vector3 hitDirection = default)
         {
+            if (_audioSource != null)
+            {
+                _audioSource.pitch = 1.0f; // Reset pitch to normal
+            }
+
             if (_animator != null)
             {
                 _animator.SetBool("IsDead", true);
@@ -138,12 +151,17 @@ namespace Redes.Views
             var ragdoll = GetComponentInParent<Gameplay.RagdollController>();
             if (ragdoll != null)
             {
-                ragdoll.SetRagdollActive(true);
+                ragdoll.SetRagdollActive(true, hitDirection);
             }
         }
 
         private void HandleSpawned()
         {
+            if (_audioSource != null)
+            {
+                _audioSource.pitch = 1.0f; // Reset pitch to normal
+            }
+
             if (_animator != null)
             {
                 _animator.SetBool("IsDead", false);

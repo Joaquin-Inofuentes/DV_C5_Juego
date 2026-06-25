@@ -11,7 +11,7 @@ namespace Redes.Test
     {
         [Header("Config")]
         [SerializeField] private int _maxHealth = 100;
-        [SerializeField] private float _respawnDelay = 2.5f;
+        [SerializeField] private float _respawnDelay = 5.0f;
 
         [Header("Visual")]
         [SerializeField] private Renderer _bodyRenderer;
@@ -45,6 +45,7 @@ namespace Redes.Test
         private bool _isDead;
         private Coroutine _hitAnimCoroutine;
         private float _shootTimer;
+        private Vector3 _lastHitDirection;
 
         private void Awake()
         {
@@ -114,9 +115,10 @@ namespace Redes.Test
             }
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount, Vector3 hitDirection = default)
         {
             if (_isDead) return;
+            _lastHitDirection = hitDirection;
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             if (_displayView != null)
@@ -204,7 +206,7 @@ namespace Redes.Test
             var ragdoll = GetComponent<Gameplay.RagdollController>();
             if (ragdoll != null)
             {
-                ragdoll.SetRagdollActive(true);
+                ragdoll.SetRagdollActive(true, _lastHitDirection);
             }
             else
             {

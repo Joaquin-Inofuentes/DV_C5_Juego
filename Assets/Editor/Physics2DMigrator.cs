@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Physics2DMigrator
 {
-    [MenuItem("Tools/Migrate Project to Physics 2D")]
+    // [MenuItem("Tools/Migrate Project to Physics 2D")]
     public static void Migrate()
     {
         Debug.Log("--- INICIANDO MIGRACION A FISICA 2D ---");
@@ -236,3 +236,4 @@ public class Physics2DMigrator
         EditorApplication.Exit(0);
     }
 }
+

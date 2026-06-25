@@ -7,7 +7,7 @@ namespace DebugSystem.Editor
 {
     public class HierarchyToClipboardMenu
     {
-        [MenuItem("Tools/Pruebas/Copiar Jerarquía Completa")]
+        // [MenuItem("Tools/Pruebas/Copiar Jerarquia")]
         public static void CopyHierarchyToClipboard()
         {
             try
@@ -132,3 +132,4 @@ namespace DebugSystem.Editor
         }
     }
 }
+

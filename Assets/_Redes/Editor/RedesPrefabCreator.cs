@@ -24,7 +24,7 @@ namespace Redes.EditorTools
         public const string BulletPrefabPath = PrefabFolder + "/Bullet.prefab";
         public const string EntityDisplayViewPrefabPath = PrefabFolder + "/EntityDisplayView.prefab";
 
-        [MenuItem("Tools/Redes/2. Create Prefabs", priority = 2)]
+        // [MenuItem("Tools/Redes/2. Create Prefabs", priority = 2)]
         public static void CreatePrefabs()
         {
             EnsureFolder("Assets/_Redes", "Prefabs");
@@ -457,3 +457,4 @@ namespace Redes.EditorTools
         }
     }
 }
+
