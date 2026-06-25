@@ -28,6 +28,9 @@ namespace Redes.Player
         // 6. Recargar (Reload)
         public Action OnReload;
 
+        // 7. Cambio de munición (CurrentAmmo, MaxMagazine)
+        public Action<int, int> OnAmmoChanged;
+
         public void TriggerTookDamage(int attackerId, GameObject bulletObj)
         {
             OnTookDamage?.Invoke(attackerId, bulletObj);
@@ -56,6 +59,11 @@ namespace Redes.Player
         public void TriggerReload()
         {
             OnReload?.Invoke();
+        }
+
+        public void TriggerAmmoChanged(int currentAmmo, int maxMagazine)
+        {
+            OnAmmoChanged?.Invoke(currentAmmo, maxMagazine);
         }
     }
 }

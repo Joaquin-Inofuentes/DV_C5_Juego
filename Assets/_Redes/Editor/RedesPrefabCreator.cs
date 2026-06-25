@@ -132,66 +132,123 @@ namespace Redes.EditorTools
         private static AnimatorController GetOrCreatePlayerAnimator(string overridePath = null)
         {
             string path = overridePath ?? "Assets/_Redes/Art/PlayerAnimator.controller";
-            var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(path);
-            if (controller != null) return controller;
+            
+            // Re-create to force update/regeneration
+            if (AssetDatabase.LoadAssetAtPath<AnimatorController>(path) != null)
+            {
+                AssetDatabase.DeleteAsset(path);
+            }
 
             if (!AssetDatabase.IsValidFolder("Assets/_Redes/Art"))
             {
                 AssetDatabase.CreateFolder("Assets/_Redes", "Art");
             }
 
-            controller = AnimatorController.CreateAnimatorControllerAtPath(path);
+            var controller = AnimatorController.CreateAnimatorControllerAtPath(path);
 
             // Parameters
             controller.AddParameter("MoveSpeed", AnimatorControllerParameterType.Float);
             controller.AddParameter("Shoot", AnimatorControllerParameterType.Trigger);
             controller.AddParameter("IsDead", AnimatorControllerParameterType.Bool);
 
-            var rootStateMachine = controller.layers[0].stateMachine;
-
             // Load clips
             var idleClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_idle.FBX");
             var runClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_run.FBX");
             var shootClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_shoot.FBX");
 
-            // States
-            var stateIdle = rootStateMachine.AddState("Idle");
-            stateIdle.motion = idleClip;
+            // --- Layer 0: Base Layer (Movement & Death) ---
+            var baseStateMachine = controller.layers[0].stateMachine;
 
-            var stateRun = rootStateMachine.AddState("Run");
-            stateRun.motion = runClip;
+            var baseIdle = baseStateMachine.AddState("Idle");
+            baseIdle.motion = idleClip;
 
-            var stateShoot = rootStateMachine.AddState("Shoot");
-            stateShoot.motion = shootClip;
+            var baseRun = baseStateMachine.AddState("Run");
+            baseRun.motion = runClip;
 
-            var stateDead = rootStateMachine.AddState("Dead");
+            var baseDead = baseStateMachine.AddState("Dead");
 
-            rootStateMachine.defaultState = stateIdle;
+            baseStateMachine.defaultState = baseIdle;
 
-            // Transitions
-            var idleToRun = stateIdle.AddTransition(stateRun);
+            // Transitions for Base Layer
+            var idleToRun = baseIdle.AddTransition(baseRun);
             idleToRun.hasExitTime = false;
             idleToRun.AddCondition(AnimatorConditionMode.Greater, 0.1f, "MoveSpeed");
 
-            var runToIdle = stateRun.AddTransition(stateIdle);
+            var runToIdle = baseRun.AddTransition(baseIdle);
             runToIdle.hasExitTime = false;
             runToIdle.AddCondition(AnimatorConditionMode.Less, 0.1f, "MoveSpeed");
 
-            var anyToShoot = rootStateMachine.AddAnyStateTransition(stateShoot);
-            anyToShoot.hasExitTime = false;
-            anyToShoot.AddCondition(AnimatorConditionMode.If, 0, "Shoot");
-
-            var shootToIdle = stateShoot.AddTransition(stateIdle);
-            shootToIdle.hasExitTime = true;
-            shootToIdle.exitTime = 1f; // wait for anim to finish
-
-            var anyToDead = rootStateMachine.AddAnyStateTransition(stateDead);
+            var anyToDead = baseStateMachine.AddAnyStateTransition(baseDead);
             anyToDead.hasExitTime = false;
             anyToDead.AddCondition(AnimatorConditionMode.If, 0, "IsDead");
 
-            var deadToIdle = stateDead.AddTransition(stateIdle);
+            var deadToIdle = baseDead.AddTransition(baseIdle);
             deadToIdle.hasExitTime = false;
             deadToIdle.AddCondition(AnimatorConditionMode.IfNot, 0, "IsDead");
+
+            // --- Avatar Mask for Upper Body ---
+            string maskPath = "Assets/_Redes/Art/PlayerUpperBodyMask.mask";
+            AvatarMask mask = AssetDatabase.LoadAssetAtPath<AvatarMask>(maskPath);
+            if (mask == null)
+            {
+                mask = new AvatarMask();
+                
+                // Mask out legs/feet, keep spine, head, and arms
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.Root, false);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.Body, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.Head, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftLeg, false);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightLeg, false);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftArm, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightArm, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftFingers, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFingers, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftFootIK, false);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightFootIK, false);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.LeftHandIK, true);
+                mask.SetHumanoidBodyPartActive(AvatarMaskBodyPart.RightHandIK, true);
+
+                AssetDatabase.CreateAsset(mask, maskPath);
+            }
+
+            // --- Layer 1: Shooting Layer (Upper Body Masked) ---
+            controller.AddLayer("Shooting");
+            
+            var layers = controller.layers;
+            var shootingLayer = layers[1];
+            shootingLayer.name = "Shooting";
+            shootingLayer.avatarMask = mask;
+            shootingLayer.defaultWeight = 1f;
+            shootingLayer.blendingMode = AnimatorLayerBlendingMode.Override;
+            
+            var shootingStateMachine = shootingLayer.stateMachine;
+            
+            var stateEmpty = shootingStateMachine.AddState("Empty");
+            stateEmpty.motion = null;
+            
+            var stateShoot = shootingStateMachine.AddState("Shoot");
+            stateShoot.motion = shootClip;
+            stateShoot.speed = 1.6f; // Plays 60% faster for higher recoil intensity!
+            
+            shootingStateMachine.defaultState = stateEmpty;
+
+            // Transitions in Shooting Layer
+            var emptyToShoot = stateEmpty.AddTransition(stateShoot);
+            emptyToShoot.hasExitTime = false;
+            emptyToShoot.duration = 0.02f; // Snap instantly to shooting pose
+            emptyToShoot.AddCondition(AnimatorConditionMode.If, 0, "Shoot");
+
+            var shootToEmpty = stateShoot.AddTransition(stateEmpty);
+            shootToEmpty.hasExitTime = true;
+            shootToEmpty.exitTime = 0.9f; // Blend out slightly before complete end
+            shootToEmpty.duration = 0.08f; // Fast return to neutral pose
+
+            var shootToEmptyOnDead = stateShoot.AddTransition(stateEmpty);
+            shootToEmptyOnDead.hasExitTime = false;
+            shootToEmptyOnDead.duration = 0.05f;
+            shootToEmptyOnDead.AddCondition(AnimatorConditionMode.If, 0, "IsDead");
+
+            controller.layers = layers;
 
             AssetDatabase.SaveAssets();
             return controller;

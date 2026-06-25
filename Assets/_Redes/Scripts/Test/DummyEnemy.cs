@@ -26,6 +26,7 @@ namespace Redes.Test
         private int _totalKills;
         private float _respawnTimer;
         private bool _isDead;
+        private Coroutine _hitAnimCoroutine;
 
         private void Awake()
         {
@@ -54,13 +55,64 @@ namespace Redes.Test
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             Debug.Log($"[TEST][DUMMY] Recibio {amount} de daño → HP={CurrentHealth}/{_maxHealth}");
 
-            ApplyColor();
+            if (CurrentHealth <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                if (_hitAnimCoroutine != null)
+                {
+                    StopCoroutine(_hitAnimCoroutine);
+                }
+                _hitAnimCoroutine = StartCoroutine(HitAnimation());
+            }
+        }
 
-            if (CurrentHealth <= 0) Die();
+        private System.Collections.IEnumerator HitAnimation()
+        {
+            float duration = 0.25f;
+            float elapsed = 0f;
+
+            Color flashColor = Color.white;
+            Color normalColor = IsAlive ? Color.Lerp(_deadColor, _aliveColor, (float)CurrentHealth / _maxHealth) : _deadColor;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+
+                // Squash/Stretch scale bounce (squash short/fat, stretch tall/thin, then normalize)
+                float scaleY = 1f - Mathf.Sin(t * Mathf.PI) * 0.4f;
+                float scaleXZ = 1f + Mathf.Sin(t * Mathf.PI) * 0.3f;
+                transform.localScale = new Vector3(scaleXZ, scaleY, scaleXZ);
+
+                // Hit color flash
+                if (_bodyRenderer == null)
+                    _bodyRenderer = GetComponentInChildren<Renderer>();
+
+                if (_bodyRenderer != null)
+                {
+                    _bodyRenderer.material.color = Color.Lerp(flashColor, normalColor, t);
+                }
+
+                yield return null;
+            }
+
+            transform.localScale = Vector3.one;
+            ApplyColor();
+            _hitAnimCoroutine = null;
         }
 
         private void Die()
         {
+            if (_hitAnimCoroutine != null)
+            {
+                StopCoroutine(_hitAnimCoroutine);
+                _hitAnimCoroutine = null;
+            }
+            transform.localScale = Vector3.one;
+
             _isDead = true;
             _totalKills++;
             _respawnTimer = _respawnDelay;
@@ -77,6 +129,7 @@ namespace Redes.Test
             _isDead = false;
             CurrentHealth = _maxHealth;
             transform.localRotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
             ApplyColor();
             Debug.Log($"[TEST][DUMMY] Respawneado. HP={CurrentHealth}");
         }

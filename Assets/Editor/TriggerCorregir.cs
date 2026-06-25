@@ -8,7 +8,7 @@ namespace Redes.EditorTools
         [MenuItem("Tools/Redes/Trigger Corregir Now")]
         public static void Run()
         {
-            RedesSceneCreator.Corregir();
+            RedesBuildAll.Corregir();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Redes.EditorTools
             var dummy = BuildDummy();
 
             // ---- UI ----
-            var (debugText, killText, legendText, logText) = BuildUI();
+            var (debugText, killText, legendText, logText, ammoText) = BuildUI(player);
 
             // ---- TEST MANAGER ----
             var managerGo = new GameObject("TestSceneManager");
@@ -69,6 +69,11 @@ namespace Redes.EditorTools
                 var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
                 if (shootSound != null)
                     Assign(tester, "_shootSound", shootSound);
+
+                // Wire bullet prefab
+                var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
+                if (bulletPrefab != null)
+                    Assign(tester, "_bulletPrefab", bulletPrefab);
             }
 
             // ---- SAVE ----
@@ -101,14 +106,15 @@ namespace Redes.EditorTools
             groundMat.color = new Color(0.3f, 0.5f, 0.3f);
             ground.GetComponent<Renderer>().material = groundMat;
 
-            // Camera
+            // Camera (Orthogonal Top-down)
             var camGo = new GameObject("Main Camera");
             camGo.tag = "MainCamera";
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.Skybox;
-            cam.fieldOfView = 60f;
-            camGo.transform.position = new Vector3(0f, 12f, -10f);
-            camGo.transform.rotation = Quaternion.Euler(50f, 0f, 0f);
+            cam.orthographic = true;
+            cam.orthographicSize = 6.5f;
+            camGo.transform.position = new Vector3(0f, 12f, -8f);
+            camGo.transform.rotation = Quaternion.Euler(65f, 0f, 0f);
             camGo.AddComponent<AudioListener>();
 
             // Ambient light
@@ -202,8 +208,10 @@ namespace Redes.EditorTools
                 var renderers = model.GetComponentsInChildren<Renderer>();
                 foreach (var r in renderers)
                 {
-                    r.material = new Material(r.sharedMaterial ?? Shader.Find("Standard") != null ? new Material(Shader.Find("Standard")) : new Material(Shader.Find("Diffuse")));
-                    r.material.color = new Color(0.8f, 0.2f, 0.2f);
+                    Shader shader = Shader.Find("Standard") ?? Shader.Find("Diffuse");
+                    Material mat = new Material(r.sharedMaterial != null ? r.sharedMaterial.shader : shader);
+                    mat.color = new Color(0.8f, 0.2f, 0.2f);
+                    r.sharedMaterial = mat;
                 }
             }
             else
@@ -212,7 +220,10 @@ namespace Redes.EditorTools
                 body.name = "Body";
                 body.transform.SetParent(dummy.transform, false);
                 body.transform.localPosition = new Vector3(0, 1f, 0);
-                body.GetComponent<Renderer>().material.color = new Color(0.8f, 0.2f, 0.2f);
+                Shader shader = Shader.Find("Standard") ?? Shader.Find("Diffuse");
+                Material mat = new Material(shader);
+                mat.color = new Color(0.8f, 0.2f, 0.2f);
+                body.GetComponent<Renderer>().sharedMaterial = mat;
             }
 
             var col = dummy.AddComponent<CapsuleCollider>();
@@ -266,7 +277,7 @@ namespace Redes.EditorTools
             return dummy;
         }
 
-        private static (Text debug, Text kills, Text legend, Text log) BuildUI()
+        private static (Text debug, Text kills, Text legend, Text log, Text ammo) BuildUI(GameObject player)
         {
             var canvasGo = new GameObject("TestHUD");
             var canvas = canvasGo.AddComponent<Canvas>();
@@ -281,8 +292,9 @@ namespace Redes.EditorTools
 
             // Background panel
             var panel = CreatePanel(canvasGo.transform, new Vector2(0, 1), new Vector2(0, 1),
-                new Vector2(0, 0), new Vector2(300, 120), new Color(0, 0, 0, 0.55f));
+                new Vector2(10, -10), new Vector2(300, 120), new Color(0, 0, 0, 0.55f));
             panel.name = "DebugPanel";
+            ((RectTransform)panel.transform).pivot = new Vector2(0, 1);
 
             // Debug text (player state)
             var debugText = CreateText(panel.transform, "DebugText", "",
@@ -290,34 +302,50 @@ namespace Redes.EditorTools
 
             // Kill counter (top-center)
             var killPanel = CreatePanel(canvasGo.transform, new Vector2(0.5f, 1), new Vector2(0.5f, 1),
-                new Vector2(0, 0), new Vector2(200, 50), new Color(0, 0, 0, 0.7f));
+                new Vector2(0, -10), new Vector2(200, 50), new Color(0, 0, 0, 0.7f));
             killPanel.name = "KillPanel";
+            ((RectTransform)killPanel.transform).pivot = new Vector2(0.5f, 1);
             var killText = CreateText(killPanel.transform, "KillText", "KILLS: 0",
                 new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 22, Color.yellow, TextAnchor.MiddleCenter);
             killText.fontStyle = FontStyle.Bold;
 
             // Controls legend (top-right)
             var legendPanel = CreatePanel(canvasGo.transform, new Vector2(1, 1), new Vector2(1, 1),
-                new Vector2(0, 0), new Vector2(220, 140), new Color(0, 0, 0, 0.6f));
+                new Vector2(-10, -10), new Vector2(220, 140), new Color(0, 0, 0, 0.6f));
             legendPanel.name = "LegendPanel";
             ((RectTransform)legendPanel.transform).pivot = new Vector2(1, 1);
             var legendText = CreateText(legendPanel.transform, "LegendText", "",
                 new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 12, new Color(0.8f, 0.9f, 1f), TextAnchor.UpperLeft);
 
+            // Ammo display (bottom-right)
+            var ammoPanel = CreatePanel(canvasGo.transform, new Vector2(1, 0), new Vector2(1, 0),
+                new Vector2(-10, 10), new Vector2(220, 60), new Color(0, 0, 0, 0.7f));
+            ammoPanel.name = "AmmoPanel";
+            ((RectTransform)ammoPanel.transform).pivot = new Vector2(1, 0);
+            var ammoText = CreateText(ammoPanel.transform, "AmmoText", "AMMO: 10/10",
+                new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 18, Color.white, TextAnchor.MiddleCenter);
+            ammoText.fontStyle = FontStyle.Bold;
+
+            // Attach PlayerAmmoView (MVC View)
+            var ammoView = ammoText.gameObject.AddComponent<PlayerAmmoView>();
+            var peb = player.GetComponent<PlayerEventBus>();
+            Assign(ammoView, "_eventBus", peb);
+            Assign(ammoView, "_ammoText", ammoText);
+
             // Event log (bottom)
             var logPanel = CreatePanel(canvasGo.transform, new Vector2(0, 0), new Vector2(1, 0),
-                new Vector2(0, 0), new Vector2(0, 160), new Color(0, 0, 0, 0.5f));
+                new Vector2(0, 10), new Vector2(-20, 140), new Color(0, 0, 0, 0.6f));
             logPanel.name = "EventLogPanel";
             ((RectTransform)logPanel.transform).anchorMax = new Vector2(1, 0);
             ((RectTransform)logPanel.transform).anchorMin = new Vector2(0, 0);
             ((RectTransform)logPanel.transform).pivot = new Vector2(0.5f, 0);
-            ((RectTransform)logPanel.transform).sizeDelta = new Vector2(0, 160);
+            ((RectTransform)logPanel.transform).sizeDelta = new Vector2(-20, 140);
             var logText = CreateText(logPanel.transform, "EventLog", "",
                 new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 11, Color.green, TextAnchor.LowerLeft);
             logText.supportRichText = true;
 
             Debug.Log("[TEST][BUILDER] HUD de test creado.");
-            return (debugText, killText, legendText, logText);
+            return (debugText, killText, legendText, logText, ammoText);
         }
 
         // ----------------------------------------

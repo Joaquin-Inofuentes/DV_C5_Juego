@@ -19,32 +19,48 @@ namespace Redes.Test
         [SerializeField] private float _fireRate = 0.2f;
         [SerializeField] private Transform _muzzle;
 
+        [Header("Ammo")]
+        [SerializeField] private int _maxAmmo = 10;
+        [SerializeField] private float _reloadDuration = 1.5f;
+
         [Header("References")]
         [SerializeField] private PlayerEventBus _eventBus;
         [SerializeField] private DummyEnemy _target;
         [SerializeField] private AudioClip _shootSound;
-
-        [Header("Debug UI")]
+        [SerializeField] private AudioClip _reloadSound;
+        [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Text _debugText;
 
         private float _fireCooldown;
         private int _shotsFired;
         private Vector3 _lastPosition;
 
+        private int _currentAmmo;
+        private bool _isReloading;
+        private float _reloadTimer;
+
         private void Start()
         {
             _lastPosition = transform.position;
-            Debug.Log("[TEST][PLAYER] OfflinePlayerTester iniciado. WASD=mover, LMB=disparar, R=debug");
+            _currentAmmo = _maxAmmo;
+            
+            Debug.Log("[TEST][PLAYER] OfflinePlayerTester iniciado. WASD=mover, LMB=disparar, R=recargar, T=debug");
             Debug.Log($"[TEST][PLAYER]   EventBus: {(_eventBus != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Muzzle:   {(_muzzle != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Target:   {(_target != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Sound:    {(_shootSound != null ? "OK" : "NULL ⚠️")}");
+            Debug.Log($"[TEST][PLAYER]   Bullet:   {(_bulletPrefab != null ? "OK" : "NULL ⚠️")}");
+
+            // Initial UI sync
+            _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
         }
 
         private void Update()
         {
             HandleMovement();
             HandleShooting();
+            HandleReloadInput();
+            HandleReloadTimer();
             HandleDebugKey();
             UpdateDebugUI();
         }
@@ -59,7 +75,6 @@ namespace Redes.Test
             {
                 Vector3 move = dir.normalized * _moveSpeed * Time.deltaTime;
                 transform.position += move;
-                transform.rotation = Quaternion.LookRotation(dir);
 
                 _eventBus?.TriggerMove(dir.normalized * _moveSpeed);
             }
@@ -67,24 +82,54 @@ namespace Redes.Test
             {
                 _eventBus?.TriggerMove(Vector3.zero);
             }
+
+            // Always rotate to face the mouse cursor (orthogonal/top-down standard aiming)
+            if (Camera.main != null)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+                if (groundPlane.Raycast(ray, out float rayDistance))
+                {
+                    Vector3 lookPoint = ray.GetPoint(rayDistance);
+                    Vector3 lookDir = lookPoint - transform.position;
+                    lookDir.y = 0f; // Keep rotation horizontal
+                    if (lookDir.sqrMagnitude > 0.01f)
+                    {
+                        transform.rotation = Quaternion.LookRotation(lookDir);
+                    }
+                }
+            }
         }
 
         private void HandleShooting()
         {
             _fireCooldown -= Time.deltaTime;
 
+            if (_isReloading) return;
+
             bool firePressed = Input.GetButton("Fire1");
             if (firePressed && _fireCooldown <= 0f)
             {
                 _fireCooldown = _fireRate;
-                Shoot();
+                if (_currentAmmo > 0)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    // Dry fire -> Start reload automatically!
+                    StartReload();
+                }
             }
         }
 
         private void Shoot()
         {
+            _currentAmmo--;
             _shotsFired++;
-            Debug.Log($"[TEST][PLAYER] ¡Disparo #{_shotsFired}! Pos muzzle: {(_muzzle != null ? _muzzle.position.ToString() : "SIN MUZZLE")}");
+            _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
+
+            Debug.Log($"[TEST][PLAYER] ¡Disparo #{_shotsFired}! Pos muzzle: {(_muzzle != null ? _muzzle.position.ToString() : "SIN MUZZLE")}. Balas: {_currentAmmo}/{_maxAmmo}");
 
             // Sound
             if (_shootSound != null)
@@ -93,25 +138,66 @@ namespace Redes.Test
             // Event Bus (drives animation)
             _eventBus?.TriggerShoot();
 
-            // Hit detection — simple raycast or distance check to dummy
-            if (_target != null && _target.IsAlive)
+            // Spawn visual bullet
+            if (_bulletPrefab != null && _muzzle != null)
             {
-                float dist = Vector3.Distance(transform.position, _target.transform.position);
-                if (dist < 15f) // hit range
+                var bulletGo = Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
+                var offlineBullet = bulletGo.AddComponent<OfflineBullet>();
+                offlineBullet.Speed = 25f;
+                offlineBullet.Damage = _damage;
+            }
+            else
+            {
+                // Fallback to instant distance check if prefab is missing
+                if (_target != null && _target.IsAlive)
                 {
-                    Debug.Log($"[TEST][PLAYER] Impacto en dummy a {dist:F1}m. Daño={_damage}");
-                    _target.TakeDamage(_damage);
+                    float dist = Vector3.Distance(transform.position, _target.transform.position);
+                    if (dist < 15f)
+                    {
+                        Debug.Log($"[TEST][PLAYER] (Sin Prefab) Impacto en dummy a {dist:F1}m. Daño={_damage}");
+                        _target.TakeDamage(_damage);
+                    }
                 }
-                else
+            }
+        }
+
+        private void HandleReloadInput()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartReload();
+            }
+        }
+
+        private void StartReload()
+        {
+            if (_isReloading || _currentAmmo == _maxAmmo) return;
+            _isReloading = true;
+            _reloadTimer = _reloadDuration;
+            Debug.Log("[TEST][PLAYER] Recargando...");
+            _eventBus?.TriggerReload();
+            if (_reloadSound != null)
+                AudioSource.PlayClipAtPoint(_reloadSound, transform.position);
+        }
+
+        private void HandleReloadTimer()
+        {
+            if (_isReloading)
+            {
+                _reloadTimer -= Time.deltaTime;
+                if (_reloadTimer <= 0f)
                 {
-                    Debug.Log($"[TEST][PLAYER] Disparo fallado — dummy muy lejos ({dist:F1}m > 15m)");
+                    _currentAmmo = _maxAmmo;
+                    _isReloading = false;
+                    _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
+                    Debug.Log("[TEST][PLAYER] Recarga completa.");
                 }
             }
         }
 
         private void HandleDebugKey()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log("[TEST][PLAYER] === DEBUG STATUS ===");
                 Debug.Log($"  EventBus: {(_eventBus != null ? "OK" : "NULL")}");
@@ -119,7 +205,6 @@ namespace Redes.Test
                 Debug.Log($"  Target:   {(_target != null ? $"HP={_target.CurrentHealth}" : "NULL")}");
                 Debug.Log($"  Shots:    {_shotsFired}");
 
-                // Fire a force-test TriggerSpawned to verify bus connections
                 _eventBus?.TriggerSpawned();
                 Debug.Log("[TEST][PLAYER] TriggerSpawned() llamado (reset animaciones)");
             }
@@ -129,9 +214,10 @@ namespace Redes.Test
         {
             if (_debugText == null) return;
 
-            _debugText.text = $"WASD: Mover | LMB: Disparar | R: Debug Reset\n" +
+            _debugText.text = $"WASD: Mover | LMB: Disparar | R: Recargar | T: Debug Reset\n" +
                               $"Pos: {transform.position:F1}\n" +
                               $"Disparos: {_shotsFired}\n" +
+                              $"Munición: {_currentAmmo}/{_maxAmmo} {(_isReloading ? "(Recargando...)" : "")}\n" +
                               $"Enemigo HP: {(_target != null ? _target.CurrentHealth + "/" + 100 : "N/A")}\n" +
                               $"EventBus: {(_eventBus != null ? "✓" : "✗")}";
         }
