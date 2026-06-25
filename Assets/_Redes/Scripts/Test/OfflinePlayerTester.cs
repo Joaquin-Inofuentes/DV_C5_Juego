@@ -9,8 +9,17 @@ namespace Redes.Test
     /// Directly drives movement, shooting and animates the player
     /// WITHOUT Fusion networking — purely for local input/animation/VFX testing.
     /// </summary>
+    public enum PlayerInputMode
+    {
+        WASD_Mouse,
+        Arrows_Space
+    }
+
     public class OfflinePlayerTester : MonoBehaviour
     {
+        [Header("Input Setup")]
+        [SerializeField] private PlayerInputMode _inputMode = PlayerInputMode.WASD_Mouse;
+
         [Header("Movement")]
         [SerializeField] private float _moveSpeed = 5f;
 
@@ -39,6 +48,7 @@ namespace Redes.Test
         private bool _isReloading;
         private float _reloadTimer;
         private float _shootClipDuration = 0.5f; // fallback
+        private Coroutine _recoilCoroutine;
 
         private void Start()
         {
@@ -64,7 +74,7 @@ namespace Redes.Test
                 }
             }
             
-            Debug.Log("[TEST][PLAYER] OfflinePlayerTester iniciado. WASD=mover, LMB=disparar, R=recargar, T=debug");
+            Debug.Log($"[TEST][PLAYER] OfflinePlayerTester iniciado en modo {_inputMode}. WASD/Arrows=mover, LMB/Space=disparar, Shift=sprint");
             Debug.Log($"[TEST][PLAYER]   EventBus: {(_eventBus != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Muzzle:   {(_muzzle != null ? "OK" : "NULL ⚠️")}");
             Debug.Log($"[TEST][PLAYER]   Target:   {(_target != null ? "OK" : "NULL ⚠️")}");
@@ -88,36 +98,66 @@ namespace Redes.Test
 
         private void HandleMovement()
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            float h = 0f;
+            float v = 0f;
+
+            if (_inputMode == PlayerInputMode.WASD_Mouse)
+            {
+                h = Input.GetAxisRaw("Horizontal");
+                v = Input.GetAxisRaw("Vertical");
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.UpArrow)) v += 1f;
+                if (Input.GetKey(KeyCode.DownArrow)) v -= 1f;
+                if (Input.GetKey(KeyCode.LeftArrow)) h -= 1f;
+                if (Input.GetKey(KeyCode.RightArrow)) h += 1f;
+            }
+
             Vector3 dir = new Vector3(h, 0, v);
+
+            // Shift increases movement speed by 1.2x
+            bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            float currentMoveSpeed = _moveSpeed * (isSprinting ? 1.2f : 1.0f);
 
             if (dir.sqrMagnitude > 0.01f)
             {
-                Vector3 move = dir.normalized * _moveSpeed * Time.deltaTime;
+                Vector3 move = dir.normalized * currentMoveSpeed * Time.deltaTime;
                 transform.position += move;
 
-                _eventBus?.TriggerMove(dir.normalized * _moveSpeed);
+                _eventBus?.TriggerMove(dir.normalized * currentMoveSpeed);
             }
             else
             {
                 _eventBus?.TriggerMove(Vector3.zero);
             }
 
-            // Always rotate to face the mouse cursor (orthogonal/top-down standard aiming)
-            if (Camera.main != null)
+            // Aiming / Rotation
+            if (_inputMode == PlayerInputMode.WASD_Mouse)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
-                if (groundPlane.Raycast(ray, out float rayDistance))
+                // Always rotate to face the mouse cursor
+                if (Camera.main != null)
                 {
-                    Vector3 lookPoint = ray.GetPoint(rayDistance);
-                    Vector3 lookDir = lookPoint - transform.position;
-                    lookDir.y = 0f; // Keep rotation horizontal
-                    if (lookDir.sqrMagnitude > 0.01f)
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+                    if (groundPlane.Raycast(ray, out float rayDistance))
                     {
-                        transform.rotation = Quaternion.LookRotation(lookDir);
+                        Vector3 lookPoint = ray.GetPoint(rayDistance);
+                        Vector3 lookDir = lookPoint - transform.position;
+                        lookDir.y = 0f; // Keep rotation horizontal
+                        if (lookDir.sqrMagnitude > 0.01f)
+                        {
+                            transform.rotation = Quaternion.LookRotation(lookDir);
+                        }
                     }
+                }
+            }
+            else
+            {
+                // Rotate to face movement direction for Keyboard-only Player 2
+                if (dir.sqrMagnitude > 0.01f)
+                {
+                    transform.rotation = Quaternion.LookRotation(dir.normalized);
                 }
             }
         }
@@ -128,7 +168,16 @@ namespace Redes.Test
 
             if (_isReloading) return;
 
-            bool firePressed = Input.GetButton("Fire1");
+            bool firePressed = false;
+            if (_inputMode == PlayerInputMode.WASD_Mouse)
+            {
+                firePressed = Input.GetButton("Fire1") || Input.GetMouseButton(0);
+            }
+            else
+            {
+                firePressed = Input.GetKey(KeyCode.Space);
+            }
+
             if (firePressed && _fireCooldown <= 0f)
             {
                 _fireCooldown = _fireRate;
@@ -150,24 +199,41 @@ namespace Redes.Test
             _shotsFired++;
             _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
 
-            Debug.Log($"[TEST][PLAYER] ¡Disparo #{_shotsFired}! Pos muzzle: {(_muzzle != null ? _muzzle.position.ToString() : "SIN MUZZLE")}. Balas: {_currentAmmo}/{_maxAmmo}");
+            Debug.Log($"[TEST][PLAYER] Disparo #{_shotsFired} ({_inputMode})! Pos muzzle: {(_muzzle != null ? _muzzle.position.ToString() : "SIN MUZZLE")}. Balas: {_currentAmmo}/{_maxAmmo}");
 
             // Sound
             if (_shootSound != null)
                 AudioSource.PlayClipAtPoint(_shootSound, transform.position);
 
-            // Animation speed = clipDuration / fireRate
-            // This makes the animation complete in exactly _fireRate seconds
-            // e.g. 0.5s clip / 0.2s rate = 2.5x speed → anim plays in 0.2s (fills the gap)
-            float animSpeed = _shootClipDuration / _fireRate;
+            // Double shoot animation duration -> Half animation speed
+            // e.g. 0.5s clip / 0.2s rate = 2.5x speed. * 0.5f = 1.25x speed (takes double duration, i.e. 0.4s)
+            float animSpeed = (_shootClipDuration / _fireRate) * 0.5f;
 
             // Event Bus (drives animation with dynamic speed)
             _eventBus?.TriggerShoot(animSpeed);
 
-            // Spawn visual bullet
+            // Trigger recoil kickback coroutine for snappy combat feel
+            if (_recoilCoroutine != null) StopCoroutine(_recoilCoroutine);
+            _recoilCoroutine = StartCoroutine(RecoilCoroutine());
+
+            // Determine shoot direction
+            Vector3 shootDir = transform.forward;
+            if (_inputMode == PlayerInputMode.WASD_Mouse && Camera.main != null && _muzzle != null)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+                if (groundPlane.Raycast(ray, out float rayDistance))
+                {
+                    Vector3 lookPoint = ray.GetPoint(rayDistance);
+                    Vector3 targetPoint = new Vector3(lookPoint.x, _muzzle.position.y, lookPoint.z);
+                    shootDir = (targetPoint - _muzzle.position).normalized;
+                }
+            }
+
+            // Spawn visual bullet at Muzzle facing the exact target point
             if (_bulletPrefab != null && _muzzle != null)
             {
-                var bulletGo = Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
+                var bulletGo = Instantiate(_bulletPrefab, _muzzle.position, Quaternion.LookRotation(shootDir));
                 var offlineBullet = bulletGo.AddComponent<OfflineBullet>();
                 offlineBullet.Speed = 25f;
                 offlineBullet.Damage = _damage;
@@ -187,9 +253,34 @@ namespace Redes.Test
             }
         }
 
+        private System.Collections.IEnumerator RecoilCoroutine()
+        {
+            var model = transform.Find("Model");
+            if (model == null) yield break;
+
+            Vector3 origPos = Vector3.zero;
+            float elapsed = 0f;
+            float duration = 0.12f; // Fast snappy recovery
+            Vector3 kickback = -Vector3.forward * 0.35f; // Sneak backward slightly
+            
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                
+                // Sin curve for punchy recoil return
+                float weight = Mathf.Sin(t * Mathf.PI);
+                model.localPosition = origPos + kickback * weight;
+                yield return null;
+            }
+
+            model.localPosition = origPos;
+            _recoilCoroutine = null;
+        }
+
         private void HandleReloadInput()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && _inputMode == PlayerInputMode.WASD_Mouse)
             {
                 StartReload();
             }
@@ -200,7 +291,7 @@ namespace Redes.Test
             if (_isReloading || _currentAmmo == _maxAmmo) return;
             _isReloading = true;
             _reloadTimer = _reloadDuration;
-            Debug.Log("[TEST][PLAYER] Recargando...");
+            Debug.Log($"[TEST][PLAYER] ({_inputMode}) Recargando...");
             _eventBus?.TriggerReload();
             if (_reloadSound != null)
                 AudioSource.PlayClipAtPoint(_reloadSound, transform.position);
@@ -216,7 +307,7 @@ namespace Redes.Test
                     _currentAmmo = _maxAmmo;
                     _isReloading = false;
                     _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
-                    Debug.Log("[TEST][PLAYER] Recarga completa.");
+                    Debug.Log($"[TEST][PLAYER] ({_inputMode}) Recarga completa.");
                 }
             }
         }
@@ -240,7 +331,11 @@ namespace Redes.Test
         {
             if (_debugText == null) return;
 
-            _debugText.text = $"WASD: Mover | LMB: Disparar | R: Recargar | T: Debug Reset\n" +
+            string ctrlInfo = _inputMode == PlayerInputMode.WASD_Mouse 
+                ? "WASD: Mover | LMB: Disparar | R: Recargar"
+                : "FLECHAS: Mover | ESPACIO: Disparar (Auto-Recarga)";
+
+            _debugText.text = $"{ctrlInfo} | T: Debug Reset\n" +
                               $"Pos: {transform.position:F1}\n" +
                               $"Disparos: {_shotsFired}\n" +
                               $"Munición: {_currentAmmo}/{_maxAmmo} {(_isReloading ? "(Recargando...)" : "")}\n" +

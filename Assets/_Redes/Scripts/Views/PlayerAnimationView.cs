@@ -50,7 +50,10 @@ namespace Redes.Views
                         multiplier = -1f; // Invert feet animation
                     }
                 }
-                _animator.SetFloat("MoveSpeedMultiplier", multiplier);
+                
+                // Shift sprint increases locomotion animation speed by 1.2x
+                float sprintFactor = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? 1.2f : 1.0f;
+                _animator.SetFloat("MoveSpeedMultiplier", multiplier * sprintFactor);
             }
         }
 

@@ -30,8 +30,26 @@ namespace Redes.EditorTools
             // ---- ENVIRONMENT ----
             BuildEnvironment();
 
-            // ---- PLAYER ----
+            // ---- PLAYERS ----
             var player = BuildPlayer();
+            player.name = "TestPlayer1";
+
+            var player2 = BuildPlayer();
+            player2.name = "TestPlayer2";
+            player2.transform.position = new Vector3(-4f, 0f, 0f);
+
+            // Set PlayerInputMode on Player 2 to Arrows_Space
+            var tester2 = player2.GetComponent<OfflinePlayerTester>();
+            if (tester2 != null)
+            {
+                var so = new SerializedObject(tester2);
+                var prop = so.FindProperty("_inputMode");
+                if (prop != null)
+                {
+                    prop.enumValueIndex = (int)PlayerInputMode.Arrows_Space;
+                    so.ApplyModifiedPropertiesWithoutUndo();
+                }
+            }
 
             // ---- WIRE CAMERA FOLLOW ----
             var mainCam = GameObject.FindWithTag("MainCamera");
@@ -41,8 +59,12 @@ namespace Redes.EditorTools
                 Assign(follow, "_target", player.transform);
             }
 
-            // ---- ENEMY ----
-            var dummy = BuildDummy();
+            // ---- ENEMIES ----
+            var dummy1 = BuildDummy(new Vector3(5f, 0f, 3f));
+            dummy1.name = "DummyEnemy1";
+
+            var dummy2 = BuildDummy(new Vector3(5f, 0f, -1f));
+            dummy2.name = "DummyEnemy2";
 
             // ---- UI ----
             var (debugText, killText, legendText, logText, ammoText) = BuildUI(player);
@@ -53,35 +75,59 @@ namespace Redes.EditorTools
             Assign(manager, "_killCounterText", killText);
             Assign(manager, "_controlsLegendText", legendText);
             Assign(manager, "_eventLog", logText);
-            Assign(manager, "_dummy", dummy.GetComponent<DummyEnemy>());
+            // Dynamic wire is done at runtime, but set reference to dummy1 as fallback
+            Assign(manager, "_dummy", dummy1.GetComponent<DummyEnemy>());
 
-            // ---- WIRE PLAYER TESTER ----
-            var tester = player.GetComponent<OfflinePlayerTester>();
-            if (tester != null)
+            // ---- WIRE PLAYER 1 TESTER ----
+            var tester1 = player.GetComponent<OfflinePlayerTester>();
+            if (tester1 != null)
             {
-                Assign(tester, "_debugText", debugText);
-                Assign(tester, "_target", dummy.GetComponent<DummyEnemy>());
+                Assign(tester1, "_debugText", debugText);
+                Assign(tester1, "_target", dummy1.GetComponent<DummyEnemy>());
 
                 // Wire EventBus and Muzzle
                 var peb = player.GetComponent<PlayerEventBus>();
-                Assign(tester, "_eventBus", peb);
+                Assign(tester1, "_eventBus", peb);
 
                 // Find muzzle in hierarchy
                 var muzzle = FindInChildren(player.transform, "Muzzle");
                 if (muzzle != null)
-                    Assign(tester, "_muzzle", muzzle);
-                else
-                    Debug.LogWarning("[TEST][BUILDER] Muzzle no encontrado en el player — asignar manualmente.");
+                    Assign(tester1, "_muzzle", muzzle);
 
                 // Wire shoot sound if available
                 var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
                 if (shootSound != null)
-                    Assign(tester, "_shootSound", shootSound);
+                    Assign(tester1, "_shootSound", shootSound);
 
                 // Wire bullet prefab
                 var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
                 if (bulletPrefab != null)
-                    Assign(tester, "_bulletPrefab", bulletPrefab);
+                    Assign(tester1, "_bulletPrefab", bulletPrefab);
+            }
+
+            // ---- WIRE PLAYER 2 TESTER ----
+            if (tester2 != null)
+            {
+                Assign(tester2, "_target", dummy2.GetComponent<DummyEnemy>());
+
+                // Wire EventBus and Muzzle
+                var peb2 = player2.GetComponent<PlayerEventBus>();
+                Assign(tester2, "_eventBus", peb2);
+
+                // Find muzzle in hierarchy
+                var muzzle2 = FindInChildren(player2.transform, "Muzzle");
+                if (muzzle2 != null)
+                    Assign(tester2, "_muzzle", muzzle2);
+
+                // Wire shoot sound if available
+                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
+                if (shootSound != null)
+                    Assign(tester2, "_shootSound", shootSound);
+
+                // Wire bullet prefab
+                var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
+                if (bulletPrefab != null)
+                    Assign(tester2, "_bulletPrefab", bulletPrefab);
             }
 
             // ---- SAVE ----
@@ -197,10 +243,10 @@ namespace Redes.EditorTools
             return playerGo;
         }
 
-        private static GameObject BuildDummy()
+        private static GameObject BuildDummy(Vector3 position)
         {
             var dummy = new GameObject("DummyEnemy");
-            dummy.transform.position = new Vector3(5f, 0f, 3f);
+            dummy.transform.position = position;
             dummy.transform.rotation = Quaternion.Euler(0, 180, 0);
 
             // Visual body
@@ -211,6 +257,12 @@ namespace Redes.EditorTools
                 model.name = "Model";
                 model.transform.localPosition = Vector3.zero;
                 model.transform.localScale = Vector3.one * 1.5f;
+
+                // Setup animator to play the Idle animation by default
+                var animator = model.GetComponent<Animator>();
+                if (animator == null) animator = model.AddComponent<Animator>();
+                animator.applyRootMotion = false;
+                animator.runtimeAnimatorController = GetOrCreatePlayerAnimator();
 
                 // Tint red so it's clearly an enemy
                 var renderers = model.GetComponentsInChildren<Renderer>();
@@ -325,15 +377,15 @@ namespace Redes.EditorTools
             var legendText = CreateText(legendPanel.transform, "LegendText", "",
                 new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 12, new Color(0.8f, 0.9f, 1f), TextAnchor.UpperLeft);
 
-            // Ammo display (bottom-right)
+            // Ammo display (bottom-right) - doubled in size for 1920x1080
             var ammoPanel = CreatePanel(canvasGo.transform, new Vector2(1, 0), new Vector2(1, 0),
-                new Vector2(-10, 10), new Vector2(220, 80), new Color(0, 0, 0, 0.7f));
+                new Vector2(-20, 20), new Vector2(440, 160), new Color(0, 0, 0, 0.7f));
             ammoPanel.name = "AmmoPanel";
             ((RectTransform)ammoPanel.transform).pivot = new Vector2(1, 0);
 
-            // Centered ammo text to prevent anchoredPosition shifts
+            // Centered ammo text - doubled in size and font size
             var ammoText = CreateText(ammoPanel.transform, "AmmoText", "AMMO: 10/10",
-                new Vector2(0.5f, 0.7f), new Vector2(0.5f, 0.7f), new Vector2(210, 30), 18, Color.white, TextAnchor.MiddleCenter);
+                new Vector2(0.5f, 0.7f), new Vector2(0.5f, 0.7f), new Vector2(420, 60), 36, Color.white, TextAnchor.MiddleCenter);
             ammoText.fontStyle = FontStyle.Bold;
 
             // Create Slider for reload progress

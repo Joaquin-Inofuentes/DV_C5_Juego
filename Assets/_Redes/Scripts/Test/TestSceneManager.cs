@@ -23,8 +23,12 @@ namespace Redes.Test
         {
             Application.logMessageReceived += OnLogReceived;
 
-            if (_dummy != null)
-                _dummy.OnDummyKilled += HandleKill;
+            // Subscribe to all DummyEnemy instances in the scene
+            var dummies = Object.FindObjectsByType<DummyEnemy>(FindObjectsSortMode.None);
+            foreach (var dummy in dummies)
+            {
+                dummy.OnDummyKilled += HandleKill;
+            }
 
             UpdateKillUI();
 
@@ -32,10 +36,15 @@ namespace Redes.Test
             {
                 _controlsLegendText.text =
                     "CONTROLES:\n" +
-                    "WASD → Moverse\n" +
-                    "LMB → Disparar\n" +
-                    "R → Debug Reset / Status\n" +
-                    "\nACERCAR al enemigo verde\ny disparar para matar";
+                    "P1 (WASD + Mouse):\n" +
+                    "  WASD → Moverse\n" +
+                    "  LMB  → Disparar\n" +
+                    "  SHIFT→ Sprint (1.2x)\n" +
+                    "\n" +
+                    "P2 (Flechitas):\n" +
+                    "  FLECHAS → Moverse\n" +
+                    "  ESPACIO → Disparar\n" +
+                    "  SHIFT   → Sprint (1.2x)";
             }
 
             Debug.Log("[TEST][MANAGER] TestSceneManager listo.");

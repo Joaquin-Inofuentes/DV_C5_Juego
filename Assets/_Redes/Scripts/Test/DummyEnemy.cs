@@ -71,8 +71,11 @@ namespace Redes.Test
 
         private System.Collections.IEnumerator HitAnimation()
         {
-            float duration = 0.25f;
+            float duration = 0.22f;
             float elapsed = 0f;
+            Vector3 startPos = transform.position;
+            // Push dummy backward slightly in the direction of bullet impact (dummy faces shooter, so transform.forward goes away from shooter)
+            Vector3 knockback = transform.forward * 0.5f;
 
             Color flashColor = Color.white;
             Color normalColor = IsAlive ? Color.Lerp(_deadColor, _aliveColor, (float)CurrentHealth / _maxHealth) : _deadColor;
@@ -81,11 +84,15 @@ namespace Redes.Test
             {
                 elapsed += Time.deltaTime;
                 float t = elapsed / duration;
+                float sinT = Mathf.Sin(t * Mathf.PI);
 
-                // Squash/Stretch scale bounce (squash short/fat, stretch tall/thin, then normalize)
-                float scaleY = 1f - Mathf.Sin(t * Mathf.PI) * 0.4f;
-                float scaleXZ = 1f + Mathf.Sin(t * Mathf.PI) * 0.3f;
+                // Stronger Squash/Stretch scale bounce (squash short/fat, stretch tall/thin, then normalize)
+                float scaleY = 1f - sinT * 0.45f;
+                float scaleXZ = 1f + sinT * 0.35f;
                 transform.localScale = new Vector3(scaleXZ, scaleY, scaleXZ);
+
+                // Knockback slide
+                transform.position = startPos + knockback * sinT;
 
                 // Hit color flash
                 if (_bodyRenderer == null)
@@ -100,6 +107,7 @@ namespace Redes.Test
             }
 
             transform.localScale = Vector3.one;
+            transform.position = startPos;
             ApplyColor();
             _hitAnimCoroutine = null;
         }
