@@ -196,7 +196,7 @@ namespace Redes.Gameplay
                 bone.transform.localRotation = bone.initialLocalRot;
                 if (bone.rigidbody != null)
                 {
-                    bone.rigidbody.linearVelocity = Vector3.zero;
+                    bone.rigidbody.velocity = Vector3.zero;
                     bone.rigidbody.angularVelocity = Vector3.zero;
                 }
             }
