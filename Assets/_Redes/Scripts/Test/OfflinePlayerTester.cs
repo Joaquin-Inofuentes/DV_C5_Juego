@@ -101,6 +101,18 @@ namespace Redes.Test
 
             // Initial UI sync
             _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
+
+            // Play ambient music programmatically in play mode
+            var bgm = GameObject.Find("AmbientMusic");
+            if (bgm != null)
+            {
+                var src = bgm.GetComponent<AudioSource>();
+                if (src != null && !src.isPlaying)
+                {
+                    src.Play();
+                    Debug.Log("[TEST][PLAYER] AmbientMusic started programmatically in Play Mode.");
+                }
+            }
         }
 
         private void Update()

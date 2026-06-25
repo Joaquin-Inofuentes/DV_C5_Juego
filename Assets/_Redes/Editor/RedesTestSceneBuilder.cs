@@ -17,7 +17,7 @@ namespace Redes.EditorTools
     /// </summary>
     public static class RedesTestSceneBuilder
     {
-        public const string TestScenePath = "Assets/_Redes/Scenes/RedesTest.unity";
+        public const string TestScenePath = "Assets/_Redes/Scenes/__Redes_RedesTest.unity";
 
         // [MenuItem("Tools/Redes/6. Crear Escena de Test", priority = 6)]
         public static void BuildTestScene()
@@ -195,7 +195,7 @@ namespace Redes.EditorTools
             bgmAudio.maxDistance = 45f;
             bgmAudio.minDistance = 5f;
             bgmAudio.rolloffMode = AudioRolloffMode.Logarithmic;
-            bgmAudio.playOnAwake = true;
+            bgmAudio.playOnAwake = false;
 
             // Route to Music Mixer Group
             RedesAudioSetup.CreateAudioMixerAndSetup();

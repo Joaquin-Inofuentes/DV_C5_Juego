@@ -40,21 +40,19 @@ namespace Redes.Views
 
         private void Awake()
         {
-            RedesLog.Trace(RedesLog.MATCH, "ResultView", "Awake", null, "Subscribing button events");
-            if (_retryButton != null)
-            {
-                _retryButton.onClick.AddListener(() => {
-                    RedesLog.Trace(RedesLog.MATCH, "ResultView", "OnRetryClicked", null, "Retry button clicked");
-                    OnRetryClicked?.Invoke();
-                });
-            }
-            if (_lobbyButton != null)
-            {
-                _lobbyButton.onClick.AddListener(() => {
-                    RedesLog.Trace(RedesLog.MATCH, "ResultView", "OnLobbyClicked", null, "Lobby button clicked");
-                    OnLobbyClicked?.Invoke();
-                });
-            }
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "Awake", null, "No dynamic button listener required, relying on persistent events");
+        }
+
+        public void TriggerRetry()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "TriggerRetry", null, "Retry button clicked (traditional)");
+            OnRetryClicked?.Invoke();
+        }
+
+        public void TriggerLobby()
+        {
+            RedesLog.Trace(RedesLog.MATCH, "ResultView", "TriggerLobby", null, "Lobby button clicked (traditional)");
+            OnLobbyClicked?.Invoke();
         }
 
         /// <summary>

@@ -23,7 +23,7 @@ namespace Redes.EditorTools
     public static class RedesSceneCreator
     {
         private const string SceneFolder = "Assets/_Redes/Scenes";
-        private const string ScenePath = SceneFolder + "/RedesGame.unity";
+        private const string ScenePath = SceneFolder + "/__Redes_RedesGame.unity";
 
         // [MenuItem("Tools/Redes/1. Create Scene", priority = 1)]
         public static void CreateScene()
@@ -148,8 +148,7 @@ namespace Redes.EditorTools
             EditorSceneManager.SaveScene(scene, ScenePath);
             AssetDatabase.Refresh();
 
-            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Escena creada en " + ScenePath +
-                      ". Ahora ejecuta 'Tools > Redes > 2. Create Prefabs' y luego '3. Link & Assign All'.");
+            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Escena creada en " + ScenePath + ".");
         }
 
         private static void BuildUI()

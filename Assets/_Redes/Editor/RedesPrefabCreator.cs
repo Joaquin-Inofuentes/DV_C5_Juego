@@ -36,7 +36,7 @@ namespace Redes.EditorTools
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Prefabs creados. Ahora ejecuta '3. Link & Assign All'.");
+            Debug.Log("<color=#9E9E9E>[REDES][BOOT]</color> Prefabs creados.");
         }
 
         private static void CreateGameEventBusAsset()

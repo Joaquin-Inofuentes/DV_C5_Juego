@@ -16,7 +16,7 @@ namespace Redes.EditorTools
     /// </summary>
     public static class RedesBuildAll
     {
-        private const string ScenePath = "Assets/_Redes/Scenes/RedesGame.unity";
+        private const string ScenePath = "Assets/_Redes/Scenes/__Redes_RedesGame.unity";
         private const string BuildPath = "Builds/RedesGame_Win64/RedesGame.exe";
 
         // Removed Tools/Redes/4. Full Build MenuItem
@@ -61,9 +61,16 @@ namespace Redes.EditorTools
         /// </summary>
         private static void EnsureRedesSceneIsFirst()
         {
-            // El build de Redes solo incluye su propia escena para garantizar
-            // que sea la escena de inicio (build index 0).
-            Debug.Log("[REDES][BUILD] Build dedicado: solo RedesGame.unity (index 0)");
+            var scenes = EditorBuildSettings.scenes;
+            bool found = false;
+            foreach (var s in scenes) { if (s.path == ScenePath) found = true; }
+            if (!found) {
+                var newScenes = new EditorBuildSettingsScene[scenes.Length + 1];
+                System.Array.Copy(scenes, newScenes, scenes.Length);
+                newScenes[scenes.Length] = new EditorBuildSettingsScene(ScenePath, true);
+                EditorBuildSettings.scenes = newScenes;
+                Debug.Log("[REDES][BUILD] Escena añadida a Build Settings: " + ScenePath);
+            }
         }
 
         private static void DoBuild()
@@ -88,6 +95,9 @@ namespace Redes.EditorTools
         [MenuItem("Redes/Corregir", priority = 1)]
         public static void Corregir()
         {
+            PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
+            Debug.Log("[REDES][CORREGIR] PlayerSettings.insecureHttpOption set to AlwaysAllowed.");
+
             Debug.Log("[REDES][CORREGIR] === Paso 0: Crear Mixer de Audio e Inicializar Variables ===");
             RedesAudioSetup.CreateAudioMixerAndSetup();
 
@@ -102,6 +112,12 @@ namespace Redes.EditorTools
 
             Debug.Log("[REDES][CORREGIR] === Paso 4: Crear escena de test offline ===");
             RedesTestSceneBuilder.BuildTestScene();
+
+            Debug.Log("[REDES][CORREGIR] === Paso 5: Añadiendo escena a Build Settings ===");
+            EnsureRedesSceneIsFirst();
+
+            Debug.Log("[REDES][CORREGIR] === Paso 6: Abriendo escena de juego principal ===");
+            EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
 
             Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");
         }

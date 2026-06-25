@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor.Events;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
@@ -22,7 +23,7 @@ namespace Redes.EditorTools
     /// </summary>
     public static class RedesSceneLinker
     {
-        private const string ScenePath = "Assets/_Redes/Scenes/RedesGame.unity";
+        private const string ScenePath = "Assets/_Redes/Scenes/__Redes_RedesGame.unity";
 
         // [MenuItem("Tools/Redes/3. Link & Assign All", priority = 3)]
         public static void LinkAll()
@@ -121,6 +122,64 @@ namespace Redes.EditorTools
                 }
             }
 
+            // ---- Link persistent actions to buttons ----
+            Debug.Log("[REDES][LINKER] === LISTA DE BOTONES Y ACCIONES ASOCIADAS ===");
+            
+            if (lobby != null)
+            {
+                var hostBtn = lobby.HostButton;
+                if (hostBtn != null && flow != null)
+                {
+                    ClearPersistentListeners(hostBtn.onClick);
+                    UnityEventTools.AddVoidPersistentListener(hostBtn.onClick, flow.CreateRoom);
+                    Debug.Log($"- Botón '{hostBtn.name}' -> Asociado a {flow.GetType().Name}.CreateRoom()");
+                }
+                
+                var ramboBtn = ChildComp<Button>(lobby, "RamboButton");
+                if (ramboBtn != null)
+                {
+                    ClearPersistentListeners(ramboBtn.onClick);
+                    UnityEventTools.AddStringPersistentListener(ramboBtn.onClick, lobby.SetUsername, "Rambo");
+                    Debug.Log($"- Botón '{ramboBtn.name}' -> Asociado a {lobby.GetType().Name}.SetUsername(\"Rambo\")");
+                }
+                
+                var t600Btn = ChildComp<Button>(lobby, "T600Button");
+                if (t600Btn != null)
+                {
+                    ClearPersistentListeners(t600Btn.onClick);
+                    UnityEventTools.AddStringPersistentListener(t600Btn.onClick, lobby.SetUsername, "T600");
+                    Debug.Log($"- Botón '{t600Btn.name}' -> Asociado a {lobby.GetType().Name}.SetUsername(\"T600\")");
+                }
+                
+                var lionBtn = ChildComp<Button>(lobby, "LionButton");
+                if (lionBtn != null)
+                {
+                    ClearPersistentListeners(lionBtn.onClick);
+                    UnityEventTools.AddStringPersistentListener(lionBtn.onClick, lobby.SetUsername, "Lion");
+                    Debug.Log($"- Botón '{lionBtn.name}' -> Asociado a {lobby.GetType().Name}.SetUsername(\"Lion\")");
+                }
+            }
+
+            if (result != null)
+            {
+                var retryBtn = ChildComp<Button>(result, "RetryButton");
+                if (retryBtn != null)
+                {
+                    ClearPersistentListeners(retryBtn.onClick);
+                    UnityEventTools.AddVoidPersistentListener(retryBtn.onClick, result.TriggerRetry);
+                    Debug.Log($"- Botón '{retryBtn.name}' -> Asociado a {result.GetType().Name}.TriggerRetry()");
+                }
+                
+                var lobbyBtn = ChildComp<Button>(result, "LobbyButton");
+                if (lobbyBtn != null)
+                {
+                    ClearPersistentListeners(lobbyBtn.onClick);
+                    UnityEventTools.AddVoidPersistentListener(lobbyBtn.onClick, result.TriggerLobby);
+                    Debug.Log($"- Botón '{lobbyBtn.name}' -> Asociado a {result.GetType().Name}.TriggerLobby()");
+                }
+            }
+            Debug.Log("[REDES][LINKER] =============================================");
+
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
 
@@ -186,6 +245,14 @@ namespace Redes.EditorTools
             }
             so.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(target);
+        }
+
+        private static void ClearPersistentListeners(UnityEngine.Events.UnityEvent unityEvent)
+        {
+            while (unityEvent.GetPersistentEventCount() > 0)
+            {
+                UnityEventTools.RemovePersistentListener(unityEvent, 0);
+            }
         }
     }
 }

@@ -36,12 +36,10 @@ namespace Redes.Views
 
         private void Start()
         {
-            if (_ramboButton != null) _ramboButton.onClick.AddListener(() => SetUsername("Rambo"));
-            if (_t600Button != null) _t600Button.onClick.AddListener(() => SetUsername("T600"));
-            if (_lionButton != null) _lionButton.onClick.AddListener(() => SetUsername("Lion"));
+            // Relying on persistent events linked via editor tools
         }
 
-        private void SetUsername(string name)
+        public void SetUsername(string name)
         {
             if (_usernameInput != null)
             {
