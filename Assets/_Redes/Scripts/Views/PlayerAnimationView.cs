@@ -16,6 +16,7 @@ namespace Redes.Views
         [SerializeField] private AudioClip _reloadSound;
         [SerializeField] private AudioClip _deathSound;
         [SerializeField] private AudioClip _footstepSound;
+        [SerializeField] private AudioClip _ouchSound;
 
         [Header("Footstep Settings")]
         [SerializeField] private float _footstepInterval = 0.38f;
@@ -156,7 +157,8 @@ namespace Redes.Views
             if (currentShootCount > _lastShootCount)
             {
                 _lastShootCount = currentShootCount;
-                // Debug.Log($"[REDES][NET_ANIM] Player '{_netPlayer.Nickname}' (Local={_netPlayer.Object.HasInputAuthority}) FIRED a shot. Total: {currentShootCount}");
+                bool isLocal = _netPlayer.Object.HasInputAuthority;
+                RedesLog.Info(RedesLog.VFX, $"[NET_ANIM] Player '{_netPlayer.Nickname}' ({(isLocal ? "LOCAL" : "REMOTE")}) FIRED shot #{currentShootCount}. MuzzleFlash+ShootSFX triggered.");
                 
                 if (_animator != null)
                 {
@@ -193,11 +195,12 @@ namespace Redes.Views
             int currentHealth = _health != null ? _health.CurrentHealth : 100;
             if (currentHealth != _lastHealth)
             {
+                bool isLocal = _netPlayer.Object.HasInputAuthority;
                 if (currentHealth < _lastHealth)
                 {
                     if (currentHealth <= 0)
                     {
-                        // Debug.Log($"[REDES][NET_ANIM] Player '{_netPlayer.Nickname}' (Local={_netPlayer.Object.HasInputAuthority}) DIED. Health: {currentHealth}");
+                        RedesLog.Info(RedesLog.VFX, $"[NET_ANIM] Player '{_netPlayer.Nickname}' ({(isLocal ? "LOCAL" : "REMOTE")}) DIED. Health: {currentHealth}. DeathSFX+Ragdoll triggered.");
                         
                         if (_audioSource != null)
                         {
@@ -219,8 +222,15 @@ namespace Redes.Views
                     }
                     else
                     {
-                        // Debug.Log($"[REDES][NET_ANIM] Player '{_netPlayer.Nickname}' (Local={_netPlayer.Object.HasInputAuthority}) TOOK DAMAGE. Health: {currentHealth} (-{_lastHealth - currentHealth})");
-                        // Note: PlayerHealth already handles playing hit sounds and VFX via OnHealthChangedRender
+                        int dmg = _lastHealth - currentHealth;
+                        RedesLog.Info(RedesLog.VFX, $"[NET_ANIM] Player '{_netPlayer.Nickname}' ({(isLocal ? "LOCAL" : "REMOTE")}) TOOK DAMAGE (-{dmg}). Health: {currentHealth}. OuchSFX triggered.");
+                        // Play ouch sound on damage
+                        PlaySound3D(_ouchSound, 0.9f);
+                        // Also play via VFXManager for positional audio
+                        if (VFXManager.Instance != null)
+                        {
+                            VFXManager.Instance.PlayOuch(transform.position);
+                        }
                     }
                 }
                 else if (currentHealth > _lastHealth && _lastHealth <= 0)

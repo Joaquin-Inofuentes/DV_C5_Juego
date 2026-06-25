@@ -113,10 +113,23 @@ namespace Redes.Gameplay
         [Rpc(RpcSources.All, RpcTargets.All)]
         public void RpcPlaySparkVfx(Vector3 position, Vector3 normal)
         {
-            if (VFXManager.Instance != null)
+            RedesLog.Info(RedesLog.VFX, $"[RPC RECV] RpcPlaySparkVfx at {position} normal={normal} (LocalPlayer={Runner.LocalPlayer})");
+            try
             {
-                Quaternion rotation = normal != Vector3.zero ? Quaternion.LookRotation(normal) : Quaternion.identity;
-                VFXManager.Instance.PlaySpark(position, rotation);
+                if (VFXManager.Instance != null)
+                {
+                    Quaternion rotation = normal != Vector3.zero ? Quaternion.LookRotation(normal) : Quaternion.identity;
+                    VFXManager.Instance.PlaySpark(position, rotation);
+                    RedesLog.Info(RedesLog.VFX, $"[VFX] Spark+ObstacleHitSFX played successfully on client {Runner.LocalPlayer}");
+                }
+                else
+                {
+                    RedesLog.Warn(RedesLog.VFX, $"[VFX] VFXManager.Instance is null on client {Runner.LocalPlayer}! Spark skipped.");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                RedesLog.Error(RedesLog.VFX, $"[VFX] Exception in RpcPlaySparkVfx: {ex.Message}\n{ex.StackTrace}");
             }
         }
 

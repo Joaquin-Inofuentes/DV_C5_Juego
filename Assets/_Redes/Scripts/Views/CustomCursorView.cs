@@ -71,20 +71,16 @@ namespace Redes.Views
             _reloadProgressImage.raycastTarget = false;
             _reloadProgressImage.gameObject.SetActive(false);
 
-            // Hide normal system cursor
-            Cursor.visible = false;
         }
 
         private void OnEnable()
         {
             TryBindLocalPlayer();
-            Cursor.visible = false;
         }
 
         private void OnDisable()
         {
             UnbindEventBus();
-            Cursor.visible = true;
         }
 
         private void TryBindLocalPlayer()
@@ -189,14 +185,12 @@ namespace Redes.Views
 
             if (insideWindow)
             {
-                Cursor.visible = false;
                 _cursorImage.enabled = true;
                 if (_isReloading && _reloadProgressImage != null)
                     _reloadProgressImage.enabled = true;
             }
             else
             {
-                Cursor.visible = true;
                 _cursorImage.enabled = false;
                 if (_reloadProgressImage != null)
                     _reloadProgressImage.enabled = false;
@@ -210,10 +204,13 @@ namespace Redes.Views
 
             // 2. Position custom cursor element matching mouse position
             Vector2 localPoint;
+            var parentRect = transform as RectTransform;
+            if (parentRect == null) parentRect = GetComponent<RectTransform>();
+            if (parentRect == null) return;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                (RectTransform)transform,
+                parentRect,
                 mousePos,
-                _canvas.worldCamera,
+                _canvas != null ? _canvas.worldCamera : null,
                 out localPoint
             );
             _cursorRect.anchoredPosition = localPoint;

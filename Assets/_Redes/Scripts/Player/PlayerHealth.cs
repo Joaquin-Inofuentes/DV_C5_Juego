@@ -44,19 +44,24 @@ namespace Redes.Player
 
         private void OnHealthChangedRender()
         {
-            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] OnHealthChangedRender: Player {Object.InputAuthority} (LocalPlayer={Runner.LocalPlayer}) health updated to {CurrentHealth}");
+            bool isLocal = Object.HasInputAuthority;
+            string localStr = isLocal ? "LOCAL" : "REMOTE";
+            RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] OnHealthChangedRender: Player {Object.InputAuthority} ({localStr}) (LocalPlayer={Runner.LocalPlayer}) health updated to {CurrentHealth}");
             try
             {
                 if (CurrentHealth < _lastHealth)
                 {
+                    RedesLog.Info(RedesLog.VFX, $"[NET_HEALTH] Player {Object.InputAuthority} ({localStr}) took damage. Playing HitSFX+BloodBurstVFX. (Runs on ALL clients via [Networked] OnChangedRender)");
                     if (_hitSound != null)
                     {
                         AudioSource.PlayClipAtPoint(_hitSound, transform.position);
+                        RedesLog.Info(RedesLog.VFX, $"[SFX] HitSound played at {transform.position} on client {Runner.LocalPlayer}");
                     }
                     if (Views.VFXManager.Instance != null)
                     {
                         Quaternion rot = LastHitDirection != Vector3.zero ? Quaternion.LookRotation(LastHitDirection) : Quaternion.identity;
                         Views.VFXManager.Instance.PlayHit(transform.position + Vector3.up, rot);
+                        RedesLog.Info(RedesLog.VFX, $"[VFX] BloodBurst played at {transform.position + Vector3.up} on client {Runner.LocalPlayer}");
                     }
                 }
                 _lastHealth = CurrentHealth;

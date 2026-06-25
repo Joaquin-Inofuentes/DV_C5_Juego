@@ -97,6 +97,7 @@ namespace Redes.Combat
                 else if (hit.gameObject.layer == 6 || hit.CompareTag("Obstacle"))
                 {
                     // Hit obstacle
+                    RedesLog.Info(RedesLog.VFX, $"[PROJECTILE] Bullet {Object.Id} hit obstacle '{hit.name}' at {transform.position}. Sending RpcPlaySparkVfx to all clients.");
                     var matchNet = FindFirstObjectByType<MatchNetworkController>();
                     if (matchNet != null)
                     {

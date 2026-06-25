@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Redes.Core;
 
 namespace Redes.Views
 {
@@ -10,6 +11,10 @@ namespace Redes.Views
         [SerializeField] private ParticleSystem _hitVfxPrefab;       // Blood burst (Red)
         [SerializeField] private ParticleSystem _muzzleFlashPrefab;  // Muzzle flash (Green)
         [SerializeField] private ParticleSystem _sparkVfxPrefab;      // Obstacle spark (White)
+
+        [Header("SFX")]
+        [SerializeField] private AudioClip _obstacleHitSound;
+        [SerializeField] private AudioClip _ouchSound;
 
         private List<ParticleSystem> _muzzlePool = new List<ParticleSystem>();
         private List<ParticleSystem> _hitPool = new List<ParticleSystem>();
@@ -93,6 +98,7 @@ namespace Redes.Views
 
         public void PlayHit(Vector3 position, Quaternion rotation)
         {
+            RedesLog.Info(RedesLog.VFX, $"[VFX] PlayHit (blood burst) at {position}");
             var inst = GetFromPool(_hitPool, _hitVfxPrefab);
             if (inst != null)
             {
@@ -109,6 +115,7 @@ namespace Redes.Views
 
         public void PlayMuzzleFlash(Transform muzzlePoint)
         {
+            RedesLog.Info(RedesLog.VFX, $"[VFX] PlayMuzzleFlash at {muzzlePoint.position}");
             var inst = GetFromPool(_muzzlePool, _muzzleFlashPrefab);
             if (inst != null)
             {
@@ -120,6 +127,7 @@ namespace Redes.Views
 
         public void PlaySpark(Vector3 position, Quaternion rotation)
         {
+            RedesLog.Info(RedesLog.VFX, $"[VFX] PlaySpark (obstacle) at {position}");
             var inst = GetFromPool(_sparkPool, _sparkVfxPrefab);
             if (inst != null)
             {
@@ -127,7 +135,22 @@ namespace Redes.Views
                 inst.transform.rotation = rotation;
                 inst.gameObject.SetActive(true);
             }
+
+            // Play obstacle impact sound
+            if (_obstacleHitSound != null)
+            {
+                RedesLog.Info(RedesLog.VFX, $"[SFX] ObstacleHit sound at {position}");
+                AudioSource.PlayClipAtPoint(_obstacleHitSound, position, 0.7f);
+            }
+        }
+
+        public void PlayOuch(Vector3 position)
+        {
+            if (_ouchSound != null)
+            {
+                RedesLog.Info(RedesLog.VFX, $"[SFX] Ouch sound at {position}");
+                AudioSource.PlayClipAtPoint(_ouchSound, position, 0.8f);
+            }
         }
     }
 }
-

@@ -136,6 +136,7 @@ namespace Redes.EditorTools
             var deathClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
             var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
             var hitClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
+            var ouchClip = AssetDatabase.LoadAssetAtPath<AudioClip>(RedesProceduralAudio.OuchPath);
 
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
@@ -144,7 +145,8 @@ namespace Redes.EditorTools
             AssignRefs(move,  ("_body", rb));
             AssignRefs(animV, ("_animator", animator), ("_eventBus", peb), ("_audioSource", audioSource),
                               ("_shootSound", shootClip), ("_reloadSound", reloadClip),
-                              ("_deathSound", deathClip), ("_footstepSound", footstepClip));
+                              ("_deathSound", deathClip), ("_footstepSound", footstepClip),
+                              ("_ouchSound", ouchClip));
             AssignRefs(hp,    ("_hitSound", hitClip));
 
             PrefabUtility.SaveAsPrefabAsset(go, PlayerPrefabPath);

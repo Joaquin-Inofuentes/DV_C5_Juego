@@ -187,6 +187,12 @@ namespace Redes.EditorTools
             soVfx.FindProperty("_hitVfxPrefab").objectReferenceValue = hitPs;
             soVfx.FindProperty("_muzzleFlashPrefab").objectReferenceValue = muzzlePs;
             soVfx.FindProperty("_sparkVfxPrefab").objectReferenceValue = sparkPs;
+
+            // Load and assign SFX clips for VFXManager
+            var obstacleHitClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.ObstacleHitPath);
+            var ouchClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.OuchPath);
+            soVfx.FindProperty("_obstacleHitSound").objectReferenceValue = obstacleHitClip;
+            soVfx.FindProperty("_ouchSound").objectReferenceValue = ouchClip;
             soVfx.ApplyModifiedPropertiesWithoutUndo();
 
             // ---- UI (legacy Text) ----
