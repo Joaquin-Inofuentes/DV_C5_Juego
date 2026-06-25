@@ -8,6 +8,7 @@ namespace Redes.Test
     /// Offline player controller for the test scene.
     /// Directly drives movement, shooting and animates the player
     /// WITHOUT Fusion networking — purely for local input/animation/VFX testing.
+    /// Handles death with ragdoll activation via EventBus.
     /// </summary>
     public enum PlayerInputMode
     {
@@ -37,6 +38,7 @@ namespace Redes.Test
         [SerializeField] private DummyEnemy _target;
         [SerializeField] private AudioClip _shootSound;
         [SerializeField] private AudioClip _reloadSound;
+        [SerializeField] private AudioClip _deathSound;
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Text _debugText;
         [SerializeField] private Views.EntityDisplayView _displayView;
@@ -54,12 +56,14 @@ namespace Redes.Test
         private float _shootClipDuration = 0.5f; // fallback
         private Coroutine _recoilCoroutine;
         private int _currentHealth;
+        private bool _isDead;
 
         private void Start()
         {
             _lastPosition = transform.position;
             _currentAmmo = _maxAmmo;
             _currentHealth = _maxHealth;
+            _isDead = false;
 
             if (_displayView != null)
             {
@@ -100,6 +104,8 @@ namespace Redes.Test
 
         private void Update()
         {
+            if (_isDead) return;
+
             HandleMovement();
             HandleShooting();
             HandleReloadInput();
@@ -114,7 +120,7 @@ namespace Redes.Test
             {
                 Vector3 worldPos = transform.position + Vector3.up * 2.2f;
                 Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-                if (screenPos.z > 0)
+                if (screenPos.z > 0 && !_isDead)
                 {
                     _displayView.SetVisible(true);
                     _displayView.SetPosition(screenPos);
@@ -130,6 +136,8 @@ namespace Redes.Test
 
         public void TakeDamage(int amount)
         {
+            if (_isDead) return;
+
             _currentHealth = Mathf.Max(0, _currentHealth - amount);
             if (_displayView != null)
             {
@@ -139,15 +147,38 @@ namespace Redes.Test
 
             if (_currentHealth <= 0)
             {
-                // Respawn player
-                _currentHealth = _maxHealth;
-                transform.position = Vector3.zero;
-                if (_displayView != null)
-                {
-                    _displayView.SetHealth(1f);
-                }
-                Debug.Log("[TEST][PLAYER] ¡MUERTO! Respawneado en el centro.");
+                Die();
             }
+        }
+
+        private void Die()
+        {
+            _isDead = true;
+            _isReloading = false;
+            _eventBus?.TriggerDied();
+            Debug.Log("[TEST][PLAYER] ¡MUERTO! Activando Ragdoll.");
+            StartCoroutine(RespawnCoroutine());
+        }
+
+        private System.Collections.IEnumerator RespawnCoroutine()
+        {
+            yield return new WaitForSeconds(2.5f); // Let the ragdoll rest on the floor for 2.5s
+
+            // Reset player position and health
+            transform.position = Vector3.zero;
+            _currentHealth = _maxHealth;
+            _currentAmmo = _maxAmmo;
+            _isDead = false;
+
+            if (_displayView != null)
+            {
+                _displayView.SetVisible(true);
+                _displayView.SetHealth(1f);
+            }
+
+            _eventBus?.TriggerSpawned();
+            _eventBus?.TriggerAmmoChanged(_currentAmmo, _maxAmmo);
+            Debug.Log("[TEST][PLAYER] Jugador respawneado.");
         }
 
         private void HandleMovement()
@@ -255,15 +286,11 @@ namespace Redes.Test
 
             Debug.Log($"[TEST][PLAYER] Disparo #{_shotsFired} ({_inputMode})! Pos muzzle: {(_muzzle != null ? _muzzle.position.ToString() : "SIN MUZZLE")}. Balas: {_currentAmmo}/{_maxAmmo}");
 
-            // Sound
-            if (_shootSound != null)
-                AudioSource.PlayClipAtPoint(_shootSound, transform.position);
-
             // Double shoot animation duration -> Half animation speed
             // e.g. 0.5s clip / 0.2s rate = 2.5x speed. * 0.5f = 1.25x speed (takes double duration, i.e. 0.4s)
             float animSpeed = (_shootClipDuration / _fireRate) * 0.5f;
 
-            // Event Bus (drives animation with dynamic speed)
+            // Event Bus (drives animation and audio with dynamic speed)
             _eventBus?.TriggerShoot(animSpeed);
 
             // Trigger recoil kickback coroutine for snappy combat feel
@@ -347,8 +374,6 @@ namespace Redes.Test
             _reloadTimer = _reloadDuration;
             Debug.Log($"[TEST][PLAYER] ({_inputMode}) Recargando...");
             _eventBus?.TriggerReload();
-            if (_reloadSound != null)
-                AudioSource.PlayClipAtPoint(_reloadSound, transform.position);
         }
 
         private void HandleReloadTimer()

@@ -4,14 +4,14 @@ namespace Redes.Test
 {
     /// <summary>
     /// Offline dummy enemy for the test scene.
-    /// Takes damage, shows health, dies, and respawns.
+    /// Takes damage, shows health, dies with Ragdoll, and respawns.
     /// Completely independent of Fusion networking.
     /// </summary>
     public class DummyEnemy : MonoBehaviour
     {
         [Header("Config")]
         [SerializeField] private int _maxHealth = 100;
-        [SerializeField] private float _respawnDelay = 2f;
+        [SerializeField] private float _respawnDelay = 2.5f;
 
         [Header("Visual")]
         [SerializeField] private Renderer _bodyRenderer;
@@ -23,11 +23,17 @@ namespace Redes.Test
 
         [Header("Shooting Config")]
         [SerializeField] private bool _autoShoot = true;
-        [SerializeField] private float _shootInterval = 1f;
+        [SerializeField] private float _shootInterval = 1.2f;
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _muzzle;
         [SerializeField] private int _shootDamage = 15;
         [SerializeField] private float _shootSpeed = 15f;
+
+        [Header("Audio")]
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _shootSound;
+        [SerializeField] private AudioClip _hitSound;
+        [SerializeField] private AudioClip _deathSound;
 
         public int CurrentHealth { get; private set; }
         public bool IsAlive => CurrentHealth > 0;
@@ -76,12 +82,14 @@ namespace Redes.Test
 
         private void Shoot()
         {
-            if (_bulletPrefab == null || _muzzle == null) return;
+            if (_bulletPrefab == null || _muzzle == null || _isDead) return;
             var bulletGo = Instantiate(_bulletPrefab, _muzzle.position, transform.rotation);
             var offlineBullet = bulletGo.AddComponent<OfflineBullet>();
             offlineBullet.Speed = _shootSpeed;
             offlineBullet.Damage = _shootDamage;
             offlineBullet.IsEnemyBullet = true; // Tell the bullet it was fired by the enemy
+
+            PlaySound3D(_shootSound, 0.7f);
         }
 
         private void LateUpdate()
@@ -117,6 +125,8 @@ namespace Redes.Test
             }
             Debug.Log($"[TEST][DUMMY] Recibio {amount} de daño → HP={CurrentHealth}/{_maxHealth}");
 
+            PlaySound3D(_hitSound, 0.8f);
+
             if (CurrentHealth <= 0)
             {
                 Die();
@@ -136,7 +146,7 @@ namespace Redes.Test
             float duration = 0.22f;
             float elapsed = 0f;
             Vector3 startPos = transform.position;
-            // Push dummy backward slightly in the direction of bullet impact (dummy faces shooter, so transform.forward goes away from shooter)
+            // Push dummy backward slightly in the direction of bullet impact
             Vector3 knockback = transform.forward * 0.5f;
 
             Color flashColor = Color.white;
@@ -188,9 +198,20 @@ namespace Redes.Test
             _respawnTimer = _respawnDelay;
 
             Debug.Log($"[TEST][DUMMY] ¡MUERTO! Total kills: {_totalKills}");
-            transform.localRotation = Quaternion.Euler(90, 0, 0); // cae de espaldas
-            ApplyColor();
 
+            PlaySound3D(_deathSound, 1.0f);
+
+            var ragdoll = GetComponent<Gameplay.RagdollController>();
+            if (ragdoll != null)
+            {
+                ragdoll.SetRagdollActive(true);
+            }
+            else
+            {
+                transform.localRotation = Quaternion.Euler(90, 0, 0); // fallback
+            }
+
+            ApplyColor();
             OnDummyKilled?.Invoke(_totalKills);
         }
 
@@ -198,9 +219,20 @@ namespace Redes.Test
         {
             _isDead = false;
             CurrentHealth = _maxHealth;
-            transform.localRotation = Quaternion.identity;
+
+            var ragdoll = GetComponent<Gameplay.RagdollController>();
+            if (ragdoll != null)
+            {
+                ragdoll.ResetBones();
+            }
+            else
+            {
+                transform.localRotation = Quaternion.identity;
+            }
+
             transform.localScale = Vector3.one;
             ApplyColor();
+
             if (_displayView != null)
             {
                 _displayView.SetVisible(true);
@@ -217,6 +249,19 @@ namespace Redes.Test
             if (_bodyRenderer != null)
             {
                 _bodyRenderer.material.color = IsAlive ? Color.Lerp(_deadColor, _aliveColor, (float)CurrentHealth / _maxHealth) : _deadColor;
+            }
+        }
+
+        private void PlaySound3D(AudioClip clip, float volume = 1f)
+        {
+            if (clip == null) return;
+            if (_audioSource != null)
+            {
+                _audioSource.PlayOneShot(clip, volume);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(clip, transform.position, volume);
             }
         }
     }

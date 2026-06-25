@@ -98,9 +98,17 @@ namespace Redes.EditorTools
                     Assign(tester, "_muzzle", muzzle);
 
                 // Wire shoot sound if available
-                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
+                var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Disparo de Metralleta (1).mp3");
                 if (shootSound != null)
                     Assign(tester, "_shootSound", shootSound);
+
+                var reloadSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Recarga de Metralleta.mp3");
+                if (reloadSound != null)
+                    Assign(tester, "_reloadSound", reloadSound);
+
+                var deathSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+                if (deathSound != null)
+                    Assign(tester, "_deathSound", deathSound);
 
                 // Wire bullet prefab
                 var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.BulletPrefabPath);
@@ -176,7 +184,29 @@ namespace Redes.EditorTools
             RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
             RenderSettings.ambientLight = new Color(0.3f, 0.3f, 0.4f);
 
-            Debug.Log("[TEST][BUILDER] Entorno creado (suelo, cámara, luz).");
+            // Ambient Music (3D sound)
+            var bgmGo = new GameObject("AmbientMusic");
+            bgmGo.transform.position = Vector3.zero;
+            var bgmAudio = bgmGo.AddComponent<AudioSource>();
+            bgmAudio.clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Musica de fondo Audiomachine - The Last Stand (No Vocal).mp3");
+            bgmAudio.loop = true;
+            bgmAudio.volume = 0.35f;
+            bgmAudio.spatialBlend = 1.0f; // 3D
+            bgmAudio.maxDistance = 45f;
+            bgmAudio.minDistance = 5f;
+            bgmAudio.rolloffMode = AudioRolloffMode.Logarithmic;
+            bgmAudio.playOnAwake = true;
+
+            // Route to Music Mixer Group
+            RedesAudioSetup.CreateAudioMixerAndSetup();
+            var musicGroup = RedesAudioSetup.GetGroup("Music");
+            if (musicGroup != null)
+            {
+                bgmAudio.outputAudioMixerGroup = musicGroup;
+            }
+            bgmAudio.Play();
+
+            Debug.Log("[TEST][BUILDER] Entorno creado (suelo, cámara, luz, BGM 3D).");
         }
 
         private static GameObject BuildPlayer()
@@ -315,6 +345,32 @@ namespace Redes.EditorTools
             col.center = new Vector3(0, 0.9f, 0);
 
             var dummyComp = dummy.AddComponent<DummyEnemy>();
+            dummy.AddComponent<Gameplay.RagdollController>();
+
+            // Setup AudioSource for 3D sound
+            var audioSource = dummy.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1.0f; // 3D Sound
+            audioSource.playOnAwake = false;
+            audioSource.minDistance = 3f;
+            audioSource.maxDistance = 25f;
+            audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+
+            // Route to SFX Group in GameMixer
+            var sfxGroup = RedesAudioSetup.GetGroup("SFX");
+            if (sfxGroup != null)
+            {
+                audioSource.outputAudioMixerGroup = sfxGroup;
+            }
+
+            // Load and wire AudioClips
+            var dShoot = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Disparo de Metralleta (1).mp3");
+            var dHit = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
+            var dDeath = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+
+            Assign(dummyComp, "_audioSource", audioSource);
+            Assign(dummyComp, "_shootSound", dShoot);
+            Assign(dummyComp, "_hitSound", dHit);
+            Assign(dummyComp, "_deathSound", dDeath);
 
             // Health bar above head (world-space canvas)
             var canvasGo = new GameObject("HealthBarCanvas", typeof(RectTransform));

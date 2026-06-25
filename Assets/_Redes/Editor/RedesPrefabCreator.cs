@@ -80,6 +80,25 @@ namespace Redes.EditorTools
             var peb   = go.AddComponent<PlayerEventBus>();
             var animV = go.AddComponent<PlayerAnimationView>();
 
+            // Setup AudioSource for 3D sound
+            var audioSource = go.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1.0f; // 3D Sound
+            audioSource.playOnAwake = false;
+            audioSource.minDistance = 3f;
+            audioSource.maxDistance = 25f;
+            audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+
+            // Ensure mixer exists and route to SFX group
+            RedesAudioSetup.CreateAudioMixerAndSetup();
+            var sfxGroup = RedesAudioSetup.GetGroup("SFX");
+            if (sfxGroup != null)
+            {
+                audioSource.outputAudioMixerGroup = sfxGroup;
+            }
+
+            // Setup Ragdoll
+            go.AddComponent<Gameplay.RagdollController>();
+
             // Visual Model
             var modelAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/ToonSoldiers_demo/models/ToonSoldier_demo.FBX");
             GameObject modelObj;
@@ -107,17 +126,26 @@ namespace Redes.EditorTools
             }
 
             // Muzzle (where bullets will spawn).
-            // Muzzle is a SIBLING of the model on the root, so its position is in world-space relative to the player root.
             var muzzle = new GameObject("Muzzle");
             muzzle.transform.SetParent(go.transform, false);
             muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f); // ~chest height, forward
+
+            // Load audio clips
+            var shootClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Disparo de Metralleta (1).mp3");
+            var reloadClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Recarga de Metralleta.mp3");
+            var deathClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+            var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
+            var hitClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
 
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
                               ("_ammo", ammo), ("_eventBus", peb));
             AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform));
             AssignRefs(move,  ("_body", rb));
-            AssignRefs(animV, ("_animator", animator), ("_eventBus", peb));
+            AssignRefs(animV, ("_animator", animator), ("_eventBus", peb), ("_audioSource", audioSource),
+                              ("_shootSound", shootClip), ("_reloadSound", reloadClip),
+                              ("_deathSound", deathClip), ("_footstepSound", footstepClip));
+            AssignRefs(hp,    ("_hitSound", hitClip));
 
             PrefabUtility.SaveAsPrefabAsset(go, PlayerPrefabPath);
             Object.DestroyImmediate(go);

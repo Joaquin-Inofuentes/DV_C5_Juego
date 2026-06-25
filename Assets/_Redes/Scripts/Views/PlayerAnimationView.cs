@@ -8,8 +8,17 @@ namespace Redes.Views
         [Header("References (auto-assigned by Prefab Tool)")]
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerEventBus _eventBus;
+        [SerializeField] private AudioSource _audioSource;
 
+        [Header("SFX Clips")]
         [SerializeField] private AudioClip _shootSound;
+        [SerializeField] private AudioClip _reloadSound;
+        [SerializeField] private AudioClip _deathSound;
+        [SerializeField] private AudioClip _footstepSound;
+
+        [Header("Footstep Settings")]
+        [SerializeField] private float _footstepInterval = 0.38f;
+        private float _footstepTimer;
 
         private void OnEnable()
         {
@@ -17,6 +26,7 @@ namespace Redes.Views
             {
                 _eventBus.OnMove += HandleMove;
                 _eventBus.OnShoot += HandleShoot;
+                _eventBus.OnReload += HandleReload;
                 _eventBus.OnDied += HandleDied;
                 _eventBus.OnSpawned += HandleSpawned;
             }
@@ -28,8 +38,31 @@ namespace Redes.Views
             {
                 _eventBus.OnMove -= HandleMove;
                 _eventBus.OnShoot -= HandleShoot;
+                _eventBus.OnReload -= HandleReload;
                 _eventBus.OnDied -= HandleDied;
                 _eventBus.OnSpawned -= HandleSpawned;
+            }
+        }
+
+        private void Update()
+        {
+            if (_animator != null)
+            {
+                float speed = _animator.GetFloat("MoveSpeed");
+                if (speed > 0.2f)
+                {
+                    _footstepTimer -= Time.deltaTime;
+                    if (_footstepTimer <= 0f)
+                    {
+                        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                        _footstepTimer = _footstepInterval / (isSprinting ? 1.2f : 1.0f);
+                        PlaySound3D(_footstepSound, 0.3f);
+                    }
+                }
+                else
+                {
+                    _footstepTimer = 0f;
+                }
             }
         }
 
@@ -65,10 +98,7 @@ namespace Redes.Views
                 _animator.SetTrigger("Shoot");
             }
 
-            if (_shootSound != null)
-            {
-                AudioSource.PlayClipAtPoint(_shootSound, transform.position);
-            }
+            PlaySound3D(_shootSound, 0.8f);
             
             if (VFXManager.Instance != null)
             {
@@ -91,11 +121,24 @@ namespace Redes.Views
             }
         }
 
+        private void HandleReload()
+        {
+            PlaySound3D(_reloadSound, 0.8f);
+        }
+
         private void HandleDied()
         {
             if (_animator != null)
             {
                 _animator.SetBool("IsDead", true);
+            }
+
+            PlaySound3D(_deathSound, 1.0f);
+
+            var ragdoll = GetComponentInParent<Gameplay.RagdollController>();
+            if (ragdoll != null)
+            {
+                ragdoll.SetRagdollActive(true);
             }
         }
 
@@ -105,6 +148,25 @@ namespace Redes.Views
             {
                 _animator.SetBool("IsDead", false);
                 _animator.SetFloat("MoveSpeed", 0f);
+            }
+
+            var ragdoll = GetComponentInParent<Gameplay.RagdollController>();
+            if (ragdoll != null)
+            {
+                ragdoll.ResetBones();
+            }
+        }
+
+        private void PlaySound3D(AudioClip clip, float volume = 1f)
+        {
+            if (clip == null) return;
+            if (_audioSource != null)
+            {
+                _audioSource.PlayOneShot(clip, volume);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(clip, transform.position, volume);
             }
         }
     }
