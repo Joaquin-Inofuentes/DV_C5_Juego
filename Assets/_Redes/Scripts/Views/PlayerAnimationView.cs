@@ -99,7 +99,7 @@ namespace Redes.Views
 
             if (_audioSource != null)
             {
-                _audioSource.pitch = animSpeed; // Match sound pitch/speed to the animation duration/speed
+                _audioSource.pitch = animSpeed * 0.5f; // Play at half speed to double the duration
             }
 
             PlaySound3D(_shootSound, 0.8f);
