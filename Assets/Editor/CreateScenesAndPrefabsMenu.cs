@@ -756,7 +756,7 @@ namespace DebugSystem.Editor
                 buildPlayerOptions.options = BuildOptions.None;
 
                 // Configurar 1280x720 en formato ventana
-                PlayerSettings.defaultIsFullScreen = false;
+                // PlayerSettings.defaultIsFullScreen = false;
                 PlayerSettings.defaultScreenWidth = 1280;
                 PlayerSettings.defaultScreenHeight = 720;
                 PlayerSettings.fullScreenMode = FullScreenMode.Windowed;

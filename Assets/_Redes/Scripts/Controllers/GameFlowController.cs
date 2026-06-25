@@ -185,6 +185,7 @@ namespace Redes.Controllers
             }
             _model.SetPhase(GamePhase.Booting);
             
+            Debug.Log("Se volvio al inicio");
             RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby", null, "Reloading scene to ensure clean state...");
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
 
@@ -199,22 +200,22 @@ namespace Redes.Controllers
 
         public void CreateRoom()
         {
-            Debug.Log($"[CONNECTION_DEBUG] >>> [A] Entrando a CreateRoom() en GameFlowController...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [A] Entrando a CreateRoom() en GameFlowController...");
             RedesLog.Info(RedesLog.LOBBY, ">> CreateRoom() - Jugador 1 quiere crear sala");
             
             if (NetworkService == null) { 
-                Debug.LogError($"[CONNECTION_DEBUG] <<< [A] ERROR: NetworkService is null en GameFlowController!"); 
+                // Debug.LogError($"[CONNECTION_DEBUG] <<< [A] ERROR: NetworkService is null en GameFlowController!"); 
                 RedesLog.Error(RedesLog.LOBBY, "   NetworkService NULL"); 
                 return; 
             }
-            Debug.Log($"[CONNECTION_DEBUG] >>> [B] NetworkService validado (no nulo).");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [B] NetworkService validado (no nulo).");
 
             string username = _lobbyView != null ? _lobbyView.Username : "";
-            Debug.Log($"[CONNECTION_DEBUG] >>> [C] Obteniendo username de _lobbyView. username='{username}'");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [C] Obteniendo username de _lobbyView. username='{username}'");
             
             if (string.IsNullOrWhiteSpace(username) || username.Trim() == "Username" || username.Trim() == "")
             {
-                Debug.LogWarning($"[CONNECTION_DEBUG] <<< [C] Username is empty/invalid, rejecting create room.");
+                // Debug.LogWarning($"[CONNECTION_DEBUG] <<< [C] Username is empty/invalid, rejecting create room.");
                 if (_lobbyView != null)
                 {
                     _lobbyView.ShowStatus("Debe ingresar un nombre");
@@ -223,7 +224,7 @@ namespace Redes.Controllers
                 return;
             }
             LocalUsername = username.Trim();
-            Debug.Log($"[CONNECTION_DEBUG] >>> [D] Username accepted: {LocalUsername}. Proceeding to create room...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [D] Username accepted: {LocalUsername}. Proceeding to create room...");
 
             if (_lobbyView != null)
             {
@@ -232,25 +233,29 @@ namespace Redes.Controllers
             }
             
             string fullSessionName = LocalUsername + "'s Room";
-            Debug.Log($"[CONNECTION_DEBUG] >>> [E] Llamando a NetworkService.StartAsHost(\"{fullSessionName}\")...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [E] Llamando a NetworkService.StartAsHost(\"{fullSessionName}\")...");
             NetworkService.StartAsHost(fullSessionName);
             
-            Debug.Log($"[CONNECTION_DEBUG] >>> [F] Cambiando fase a SearchingSession...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [F] Cambiando fase a SearchingSession...");
             _model.SetPhase(GamePhase.SearchingSession);
             RedesLog.Info(RedesLog.LOBBY, "<< CreateRoom() - fase=SearchingSession, esperando StartGame...");
-            Debug.Log($"[CONNECTION_DEBUG] <<< [G] Fin de CreateRoom().");
+            // Debug.Log($"[CONNECTION_DEBUG] <<< [G] Fin de CreateRoom().");
         }
 
         public void JoinRoom(string sessionName)
         {
-            Debug.Log($"[CONNECTION_DEBUG] UI Button 'Join Room' clicked. sessionName={sessionName}");
-            RedesLog.Info(RedesLog.LOBBY, $">> JoinRoom({sessionName}) - Jugador quiere unirse");
-            if (NetworkService == null) { Debug.LogError($"[CONNECTION_DEBUG] NetworkService is null!"); RedesLog.Error(RedesLog.LOBBY, "   NetworkService NULL"); return; }
+            // Debug.Log($"[CONNECTION_DEBUG] UI Button 'Join Room' clicked. sessionName={sessionName}");
+            if (NetworkService == null) 
+            {
+                // Debug.LogError($"[CONNECTION_DEBUG] NetworkService is null!"); 
+                RedesLog.Error(RedesLog.LOBBY, "   NetworkService NULL"); 
+                return; 
+            }
 
             string username = _lobbyView != null ? _lobbyView.Username : "";
             if (string.IsNullOrWhiteSpace(username) || username.Trim() == "Username" || username.Trim() == "")
             {
-                Debug.LogWarning($"[CONNECTION_DEBUG] Username is empty, rejecting join room.");
+                // Debug.LogWarning($"[CONNECTION_DEBUG] Username is empty, rejecting join room.");
                 if (_lobbyView != null)
                 {
                     _lobbyView.ShowStatus("Debe ingresar un nombre");
@@ -258,7 +263,7 @@ namespace Redes.Controllers
                 return;
             }
             LocalUsername = username.Trim();
-            Debug.Log($"[CONNECTION_DEBUG] Username accepted: {LocalUsername}. Proceeding to join room...");
+            // Debug.Log($"[CONNECTION_DEBUG] Username accepted: {LocalUsername}. Proceeding to join room...");
 
             if (_lobbyView != null)
             {
@@ -300,6 +305,7 @@ namespace Redes.Controllers
                 case GamePhase.Playing:
                     if (_lobbyView != null) _lobbyView.SetVisible(false);
                     if (_gameHudView != null) _gameHudView.SetVisible(true);
+                    Debug.Log("Inicio el juego");
                     RedesLog.Info(RedesLog.BOOT, "   PLAYING → lobby oculto, HUD visible");
                     break;
 
@@ -398,7 +404,6 @@ namespace Redes.Controllers
             if (_lobbyView != null)
             {
                 RedesLog.Info(RedesLog.BOOT, $"  _lobbyView._hostButton: {(_lobbyView.HostButton != null ? "OK" : "NULL ⚠️")}");
-                RedesLog.Info(RedesLog.BOOT, $"  _lobbyView._joinButton: {(_lobbyView.JoinButton != null ? "OK" : "NULL ⚠️")}");
             }
             if (_hostService != null)
             {

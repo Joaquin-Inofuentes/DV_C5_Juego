@@ -90,10 +90,18 @@ namespace Redes.Gameplay
 
             var result = (Runner.LocalPlayer == loser) ? MatchResult.Lose : MatchResult.Win;
             
-            if (result == MatchResult.Win && _winSound != null && Camera.main != null) 
-                AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
-            if (result == MatchResult.Lose && _loseSound != null && Camera.main != null) 
-                AudioSource.PlayClipAtPoint(_loseSound, Camera.main.transform.position);
+            if (result == MatchResult.Win)
+            {
+                Debug.Log("Se gano");
+                if (_winSound != null && Camera.main != null) 
+                    AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
+            }
+            else
+            {
+                Debug.Log("Se perdio");
+                if (_loseSound != null && Camera.main != null) 
+                    AudioSource.PlayClipAtPoint(_loseSound, Camera.main.transform.position);
+            }
 
             if (_matchController != null)
             {

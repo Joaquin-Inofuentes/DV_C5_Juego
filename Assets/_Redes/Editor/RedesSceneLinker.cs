@@ -87,7 +87,6 @@ namespace Redes.EditorTools
                 ("_usernameInput", ChildComp<InputField>(lobby, "UsernameInput")),
                 ("_roomListContainer", ChildGO(lobby, "RoomList")?.transform),
                 ("_hostButton", ChildComp<Button>(lobby, "HostButton")),
-                ("_joinButton", ChildComp<Button>(lobby, "JoinButton")),
                 ("_ramboButton", ChildComp<Button>(lobby, "RamboButton")),
                 ("_t600Button", ChildComp<Button>(lobby, "T600Button")),
                 ("_lionButton", ChildComp<Button>(lobby, "LionButton")));

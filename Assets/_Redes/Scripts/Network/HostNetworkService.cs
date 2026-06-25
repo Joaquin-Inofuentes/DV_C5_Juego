@@ -117,7 +117,7 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         public async void StartLobbyWatch()
         {
-            Debug.Log($"[CONNECTION_DEBUG] StartLobbyWatch called. _isInSession={_isInSession}, _lobbyRunner exists={_lobbyRunner != null}");
+            // Debug.Log($"[CONNECTION_DEBUG] StartLobbyWatch called. _isInSession={_isInSession}, _lobbyRunner exists={_lobbyRunner != null}");
             if (_isInSession)
             {
                 RedesLog.Info(RedesLog.LOBBY, "   StartLobbyWatch omitido (estamos en sesion de juego)");
@@ -132,14 +132,14 @@ namespace Redes.Network
             RedesLog.Info(RedesLog.LOBBY, ">> StartLobbyWatch() - creando lobbyRunner y conectando al lobby...");
             _lobbyShutdownIntentional = false;
             _lobbyRunner = CreateRunner("LobbyRunner", provideInput: false);
-            Debug.Log($"[CONNECTION_DEBUG] Created LobbyRunner. Attempting JoinSessionLobby...");
+            // Debug.Log($"[CONNECTION_DEBUG] Created LobbyRunner. Attempting JoinSessionLobby...");
 
             try
             {
                 var result = await _lobbyRunner.JoinSessionLobby(SessionLobby.ClientServer);
                 if (this == null) return;
 
-                Debug.Log($"[CONNECTION_DEBUG] JoinSessionLobby completed. Result Ok={result.Ok}");
+                // Debug.Log($"[CONNECTION_DEBUG] JoinSessionLobby completed. Result Ok={result.Ok}");
 
                 if (result.Ok)
                     RedesLog.Info(RedesLog.LOBBY, "<< StartLobbyWatch() OK - escuchando salas. Boton UNIRSE espera a detectar 'RedesRoom'.");
@@ -148,7 +148,7 @@ namespace Redes.Network
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CONNECTION_DEBUG] Exception in JoinSessionLobby: {ex}");
+                // Debug.LogError($"[CONNECTION_DEBUG] Exception in JoinSessionLobby: {ex}");
                 RedesLog.Error(RedesLog.LOBBY, $"<< StartLobbyWatch() EXCEPCION: {ex.Message}");
             }
         }
@@ -157,19 +157,19 @@ namespace Redes.Network
         {
             if (_lobbyRunner == null)
             {
-                Debug.Log("[CONNECTION_DEBUG] ShutdownLobbyRunnerAsync() called but _lobbyRunner is already null.");
+                // Debug.Log("[CONNECTION_DEBUG] ShutdownLobbyRunnerAsync() called but _lobbyRunner is already null.");
                 return;
             }
             RedesLog.Info(RedesLog.LOBBY, "   ShutdownLobbyRunner() - dejamos de mirar el lobby");
             _lobbyShutdownIntentional = true;
             var r = _lobbyRunner;
             _lobbyRunner = null;
-            Debug.Log($"[CONNECTION_DEBUG] >>> ShutdownLobbyRunnerAsync() - Calling await r.Shutdown() on {r.name}...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> ShutdownLobbyRunnerAsync() - Calling await r.Shutdown() on {r.name}...");
             await r.Shutdown();
-            Debug.Log($"[CONNECTION_DEBUG] >>> ShutdownLobbyRunnerAsync() - Shutdown completed. Destroying runner GameObject...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> ShutdownLobbyRunnerAsync() - Shutdown completed. Destroying runner GameObject...");
             DestroyRunnerGameObject(r);
             await System.Threading.Tasks.Task.Yield();
-            Debug.Log($"[CONNECTION_DEBUG] <<< ShutdownLobbyRunnerAsync() - finished successfully.");
+            // Debug.Log($"[CONNECTION_DEBUG] <<< ShutdownLobbyRunnerAsync() - finished successfully.");
         }
 
         // ──────────────────────────────────────────────────────────────────
@@ -177,46 +177,46 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         public async void StartAsHost(string sessionName)
         {
-            Debug.Log($"[CONNECTION_DEBUG] >>> [1] Inicia StartAsHost(). sessionName={sessionName}, _isInSession={_isInSession}");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [1] Inicia StartAsHost(). sessionName={sessionName}, _isInSession={_isInSession}");
             RedesLog.Info(RedesLog.NET, $">> StartAsHost() - crear sala {sessionName}");
             if (_isInSession) { 
-                Debug.Log($"[CONNECTION_DEBUG] <<< [1] StartAsHost() ABORTADO porque _isInSession=true");
+                // Debug.Log($"[CONNECTION_DEBUG] <<< [1] StartAsHost() ABORTADO porque _isInSession=true");
                 RedesLog.Warn(RedesLog.NET, "<< StartAsHost ABORTADO - ya en sesion"); 
                 return; 
             }
 
             _isInSession = true;
-            Debug.Log($"[CONNECTION_DEBUG] >>> [2] _isInSession puesto en true. Apagando LobbyRunner...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [2] _isInSession puesto en true. Apagando LobbyRunner...");
             await ShutdownLobbyRunnerAsync();                       // soltamos el lobby con await!
             
-            Debug.Log($"[CONNECTION_DEBUG] >>> [3] Creando GameRunner (provideInput=true)...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [3] Creando GameRunner (provideInput=true)...");
             _gameRunner = CreateRunner("GameRunner", provideInput: true);
             
             if (_gameRunner == null) {
-                Debug.LogError($"[CONNECTION_DEBUG] <<< [3] ERROR FATAL: _gameRunner es nulo después de CreateRunner.");
+                // Debug.LogError($"[CONNECTION_DEBUG] <<< [3] ERROR FATAL: _gameRunner es nulo después de CreateRunner.");
                 return;
             }
 
-            Debug.Log($"[CONNECTION_DEBUG] >>> [4] GameRunner creado con éxito (InstanceID: {_gameRunner.GetInstanceID()}). Configurando StartGameArgs...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [4] GameRunner creado con éxito (InstanceID: {_gameRunner.GetInstanceID()}). Configurando StartGameArgs...");
 
             int buildIdx = 0;
             try
             {
                 var activeScene = SceneManager.GetActiveScene();
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4A] Escena activa obtenida: name={activeScene.name}, buildIndex={activeScene.buildIndex}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4A] Escena activa obtenida: name={activeScene.name}, buildIndex={activeScene.buildIndex}");
                 
                 buildIdx = activeScene.buildIndex;
                 if (buildIdx < 0)
                 {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] >>> [4B] Active scene '{activeScene.name}' is not in Build Settings (index -1). Falling back to index 0.");
+                    // Debug.LogWarning($"[CONNECTION_DEBUG] >>> [4B] Active scene '{activeScene.name}' is not in Build Settings (index -1). Falling back to index 0.");
                     buildIdx = 0;
                 }
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4C] Usando buildIdx={buildIdx} para SceneRef.");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4C] Usando buildIdx={buildIdx} para SceneRef.");
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4D] Añadiendo NetworkSceneManagerDefault a _gameRunner...");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4D] Añadiendo NetworkSceneManagerDefault a _gameRunner...");
                 var sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
-                if (sceneMgr == null) Debug.LogError("[CONNECTION_DEBUG] ERROR: NetworkSceneManagerDefault no se pudo añadir!");
+                if (sceneMgr == null) // Debug.LogError("[CONNECTION_DEBUG] ERROR: NetworkSceneManagerDefault no se pudo añadir!");
                 
                 RedesLog.Info(RedesLog.LOBBY, $"   Creando sala '{sessionName}' (maxPlayers={GameConstants.MAX_PLAYERS})...");
 
@@ -229,17 +229,17 @@ namespace Redes.Network
                     Scene        = SceneRef.FromIndex(buildIdx)
                 };
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [5] StartGameArgs configurado: GameMode={args.GameMode}, SessionName={args.SessionName}, PlayerCount={args.PlayerCount}, SceneHasValue={args.Scene.HasValue}");
-                Debug.Log($"[CONNECTION_DEBUG] >>> [6] Llamando a await _gameRunner.StartGame(args)...");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [5] StartGameArgs configurado: GameMode={args.GameMode}, SessionName={args.SessionName}, PlayerCount={args.PlayerCount}, SceneHasValue={args.Scene.HasValue}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [6] Llamando a await _gameRunner.StartGame(args)...");
 
                 var result = await _gameRunner.StartGame(args);
                 
                 if (this == null || _gameRunner == null) {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] <<< [6] HostNetworkService o _gameRunner destruido mientras se esperaba StartGame.");
+                    // Debug.LogWarning($"[CONNECTION_DEBUG] <<< [6] HostNetworkService o _gameRunner destruido mientras se esperaba StartGame.");
                     return;
                 }
 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [7] StartGame() finalizado. Resultado Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [7] StartGame() finalizado. Resultado Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
 
                 if (!result.Ok && result.ShutdownReason == ShutdownReason.IncompatibleConfiguration)
                 {
@@ -261,21 +261,22 @@ namespace Redes.Network
                 if (result.Ok)
                 {
                     IsRunning = true;
-                    Debug.Log($"[CONNECTION_DEBUG] <<< [8] Host started successfully. Waiting for Player 2...");
+                    Debug.Log($"Se creo sala {sessionName}");
+                    // Debug.Log($"[CONNECTION_DEBUG] <<< [8] Host started successfully. Waiting for Player 2...");
                     RedesLog.Info(RedesLog.LOBBY, $"   Sala '{sessionName}' creada. Esperando al otro jugador.");
                     RedesLog.Info(RedesLog.NET, "<< StartAsHost() OK");
                     OnHostStarted?.Invoke();
                 }
                 else
                 {
-                    Debug.LogError($"[CONNECTION_DEBUG] <<< [8] Host start failed con razón: {result.ShutdownReason}");
+                    // Debug.LogError($"[CONNECTION_DEBUG] <<< [8] Host start failed con razón: {result.ShutdownReason}");
                     RedesLog.Error(RedesLog.NET, $"<< StartAsHost() FALLO - {result.ShutdownReason}");
                     FailAndReturnToLobby($"Crear sala fallo: {result.ShutdownReason}");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CONNECTION_DEBUG] <<< [EXCEPCIÓN] Exception in StartAsHost: {ex}");
+                // Debug.LogError($"[CONNECTION_DEBUG] <<< [EXCEPCIÓN] Exception in StartAsHost: {ex}");
                 RedesLog.Error(RedesLog.NET, $"<< StartAsHost() EXCEPCION: {ex.Message}");
                 FailAndReturnToLobby($"Excepcion al crear sala: {ex.Message}");
             }
@@ -286,46 +287,46 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         public async void StartAsClient(string sessionName)
         {
-            Debug.Log($"[CONNECTION_DEBUG] >>> [1] Inicia StartAsClient(). sessionName={sessionName}, _isInSession={_isInSession}");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [1] Inicia StartAsClient(). sessionName={sessionName}, _isInSession={_isInSession}");
             RedesLog.Info(RedesLog.NET, $">> StartAsClient() - unirse a sala {sessionName}");
             if (_isInSession) { 
-                Debug.Log($"[CONNECTION_DEBUG] <<< [1] StartAsClient() ABORTADO porque _isInSession=true");
+                // Debug.Log($"[CONNECTION_DEBUG] <<< [1] StartAsClient() ABORTADO porque _isInSession=true");
                 RedesLog.Warn(RedesLog.NET, "<< StartAsClient ABORTADO - ya en sesion"); 
                 return; 
             }
 
             _isInSession = true;
-            Debug.Log($"[CONNECTION_DEBUG] >>> [2] _isInSession puesto en true. Apagando LobbyRunner...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [2] _isInSession puesto en true. Apagando LobbyRunner...");
             await ShutdownLobbyRunnerAsync();
             
-            Debug.Log($"[CONNECTION_DEBUG] >>> [3] Creando GameRunner (provideInput=true)...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [3] Creando GameRunner (provideInput=true)...");
             _gameRunner = CreateRunner("GameRunner", provideInput: true);
             
             if (_gameRunner == null) {
-                Debug.LogError($"[CONNECTION_DEBUG] <<< [3] ERROR FATAL: _gameRunner es nulo después de CreateRunner.");
+                // Debug.LogError($"[CONNECTION_DEBUG] <<< [3] ERROR FATAL: _gameRunner es nulo después de CreateRunner.");
                 return;
             }
 
-            Debug.Log($"[CONNECTION_DEBUG] >>> [4] GameRunner creado con éxito (InstanceID: {_gameRunner.GetInstanceID()}). Configurando StartGameArgs...");
+            // Debug.Log($"[CONNECTION_DEBUG] >>> [4] GameRunner creado con éxito (InstanceID: {_gameRunner.GetInstanceID()}). Configurando StartGameArgs...");
 
             int buildIdx = 0;
             try
             {
                 var activeScene = SceneManager.GetActiveScene();
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4A] Escena activa obtenida: name={activeScene.name}, buildIndex={activeScene.buildIndex}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4A] Escena activa obtenida: name={activeScene.name}, buildIndex={activeScene.buildIndex}");
                 
                 buildIdx = activeScene.buildIndex;
                 if (buildIdx < 0)
                 {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] >>> [4B] Active scene '{activeScene.name}' is not in Build Settings (index -1). Falling back to index 0.");
+                    // Debug.LogWarning($"[CONNECTION_DEBUG] >>> [4B] Active scene '{activeScene.name}' is not in Build Settings (index -1). Falling back to index 0.");
                     buildIdx = 0;
                 }
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4C] Usando buildIdx={buildIdx} (no se usará explicitamente en el args porque es cliente, pero se verifica).");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4C] Usando buildIdx={buildIdx} (no se usará explicitamente en el args porque es cliente, pero se verifica).");
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [4D] Añadiendo NetworkSceneManagerDefault a _gameRunner...");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [4D] Añadiendo NetworkSceneManagerDefault a _gameRunner...");
                 var sceneMgr = _gameRunner.gameObject.AddComponent<NetworkSceneManagerDefault>();
-                if (sceneMgr == null) Debug.LogError("[CONNECTION_DEBUG] ERROR: NetworkSceneManagerDefault no se pudo añadir!");
+                if (sceneMgr == null) // Debug.LogError("[CONNECTION_DEBUG] ERROR: NetworkSceneManagerDefault no se pudo añadir!");
 
                 RedesLog.Info(RedesLog.LOBBY, $"   Uniéndose a sala '{sessionName}'...");
 
@@ -336,17 +337,17 @@ namespace Redes.Network
                     SceneManager = sceneMgr
                 };
                 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [5] StartGameArgs configurado: GameMode={args.GameMode}, SessionName={args.SessionName}");
-                Debug.Log($"[CONNECTION_DEBUG] >>> [6] Llamando a await _gameRunner.StartGame(args)...");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [5] StartGameArgs configurado: GameMode={args.GameMode}, SessionName={args.SessionName}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [6] Llamando a await _gameRunner.StartGame(args)...");
 
                 var result = await _gameRunner.StartGame(args);
                 
                 if (this == null || _gameRunner == null) {
-                    Debug.LogWarning($"[CONNECTION_DEBUG] <<< [6] HostNetworkService o _gameRunner destruido mientras se esperaba StartGame.");
+                    // Debug.LogWarning($"[CONNECTION_DEBUG] <<< [6] HostNetworkService o _gameRunner destruido mientras se esperaba StartGame.");
                     return;
                 }
 
-                Debug.Log($"[CONNECTION_DEBUG] >>> [7] StartGame() finalizado. Resultado Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
+                // Debug.Log($"[CONNECTION_DEBUG] >>> [7] StartGame() finalizado. Resultado Ok={result.Ok}, ShutdownReason={result.ShutdownReason}");
 
                 if (!result.Ok && result.ShutdownReason == ShutdownReason.IncompatibleConfiguration)
                 {
@@ -368,7 +369,7 @@ namespace Redes.Network
                 if (result.Ok)
                 {
                     IsRunning = true;
-                    Debug.Log($"[CONNECTION_DEBUG] <<< [8] Client started successfully. Joined room {sessionName}.");
+                    // Debug.Log($"[CONNECTION_DEBUG] <<< [8] Client started successfully. Joined room {sessionName}.");
                     RedesLog.Info(RedesLog.LOBBY, $"   Unido a sala '{sessionName}'!");
                     RedesLog.Info(RedesLog.NET, "<< StartAsClient() OK");
                 }

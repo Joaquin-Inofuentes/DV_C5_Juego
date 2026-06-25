@@ -198,17 +198,17 @@ namespace Redes.Gameplay
 
         public void ResetBones()
         {
-            SetRagdollActive(false);
             foreach (var bone in _bones)
             {
-                bone.transform.localPosition = bone.initialLocalPos;
-                bone.transform.localRotation = bone.initialLocalRot;
-                if (bone.rigidbody != null)
+                if (bone.rigidbody != null && !bone.rigidbody.isKinematic)
                 {
                     bone.rigidbody.velocity = Vector3.zero;
                     bone.rigidbody.angularVelocity = Vector3.zero;
                 }
+                bone.transform.localPosition = bone.initialLocalPos;
+                bone.transform.localRotation = bone.initialLocalRot;
             }
+            SetRagdollActive(false);
         }
     }
 }

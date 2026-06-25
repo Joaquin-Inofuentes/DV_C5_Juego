@@ -49,9 +49,29 @@ namespace Redes.EditorTools
             lightGo.transform.rotation = Quaternion.Euler(50, -30, 0);
 
             // ---- Ground (TerrainController MVC) ----
-            var ground = new GameObject("Ground");
+            var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            ground.name = "Ground";
+            var renderer = ground.GetComponent<Renderer>();
+            
+            // Set default editor-time material to black
+            if (renderer != null)
+            {
+                var blackMat = new Material(Shader.Find("Standard"));
+                blackMat.color = Color.black;
+                renderer.sharedMaterial = blackMat;
+            }
+
             var terrainController = ground.AddComponent<Redes.Controllers.TerrainController>();
-            // Since it requires TerrainModel and TerrainView, they are added automatically.
+            var terrainView = ground.GetComponent<TerrainView>();
+
+            // Assign _terrainRenderer on TerrainView via SerializedObject
+            if (terrainView != null && renderer != null)
+            {
+                var soView = new SerializedObject(terrainView);
+                var rendererProp = soView.FindProperty("_terrainRenderer");
+                if (rendererProp != null) rendererProp.objectReferenceValue = renderer;
+                soView.ApplyModifiedPropertiesWithoutUndo();
+            }
             
             // Try to assign the downloaded terrain texture via SerializedObject since the field is private serialized
             var texAsset = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/Terrain.png");

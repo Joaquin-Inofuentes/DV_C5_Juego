@@ -33,6 +33,18 @@ namespace Redes.Player
         private void OnNicknameChangedRender()
         {
             RedesLog.Info(RedesLog.PLAYER, $"[Nickname Sync] Player {Object.InputAuthority} nickname synchronized: {NetNickname}");
+            
+            Debug.Log($"Jugador {NetNickname} se conecto");
+            
+            if (Runner != null && Runner.SessionInfo.IsValid)
+            {
+                // In Fusion Host-Client mode, PlayerId 1 is the Host creator
+                bool isHost = (Object.InputAuthority.PlayerId == 1);
+                if (!isHost)
+                {
+                    Debug.Log($"Se unio jugador {NetNickname} a la sala {Runner.SessionInfo.Name}");
+                }
+            }
         }
 
         [Header("Player systems (auto-assigned by the Prefab tool on the same prefab)")]
@@ -95,7 +107,9 @@ namespace Redes.Player
                 RpcSetNickname(GameFlowController.LocalUsername);
             }
 
-            Color playerColor = (Object.InputAuthority.PlayerId % 2 == 0) ? Color.blue : Color.red;
+            Color playerColor = (Object.InputAuthority.PlayerId % 2 == 0) 
+                ? new Color(0.8f, 0.9f, 1f, 1f)      // Soft cold ice-blue tint
+                : new Color(1f, 0.85f, 0.85f, 1f);   // Soft warm rose-red tint
             var spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             if (spriteRenderer != null)
             {

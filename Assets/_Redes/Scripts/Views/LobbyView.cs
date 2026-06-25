@@ -22,7 +22,6 @@ namespace Redes.Views
 
         [Header("Buttons (assigned by the Link tool)")]
         [SerializeField] private Button _hostButton;  // "Crear Sala"
-        [SerializeField] private Button _joinButton;  // "Unirse a Sala"
 
         [Header("Generic Name Buttons")]
         [SerializeField] private Button _ramboButton;
@@ -30,7 +29,6 @@ namespace Redes.Views
         [SerializeField] private Button _lionButton;
 
         public Button HostButton => _hostButton;
-        public Button JoinButton => _joinButton;
         
         public string Username => _usernameInput != null ? _usernameInput.text : "Player";
 
@@ -69,14 +67,9 @@ namespace Redes.Views
             ShowStatus("Buscando salas...");
         }
 
-        /// <summary>
-        /// Habilita o deshabilita el botón "Unirse a Sala".
-        /// Llamado por GameFlowController cuando OnRoomAvailabilityChanged llega.
-        /// </summary>
         public void SetJoinButtonEnabled(bool enabled)
         {
-            if (_joinButton == null) return;
-            _joinButton.interactable = enabled;
+            // JoinButton is dynamic under RoomList now, not a static button.
             RedesLog.Info(RedesLog.LOBBY,
                 $"   LobbyView: boton UNIRSE {(enabled ? "HABILITADO ✓ (sala disponible)" : "DESHABILITADO (no hay sala)")}");
         }
@@ -176,7 +169,6 @@ namespace Redes.Views
         private void SetButtons(bool host, bool join)
         {
             if (_hostButton != null) _hostButton.gameObject.SetActive(host);
-            if (_joinButton != null) _joinButton.gameObject.SetActive(join);
         }
     }
 }

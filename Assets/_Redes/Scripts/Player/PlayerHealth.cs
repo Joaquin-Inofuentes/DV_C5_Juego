@@ -25,7 +25,9 @@ namespace Redes.Player
         [SerializeField] private GameEventBus _eventBus;
 
         // Networked source of truth. OnChanged hook updates the HUD on every client.
+        // Networked source of truth. OnChanged hook updates the HUD on every client.
         [Networked, OnChangedRender(nameof(OnHealthChangedRender))] public int CurrentHealth { get; set; }
+        [Networked] public Vector3 LastHitDirection { get; set; }
 
         public bool IsAlive => CurrentHealth > 0;
 
@@ -75,6 +77,7 @@ namespace Redes.Player
                 if (Object.HasStateAuthority)
                 {
                     CurrentHealth = _maxHealth;
+                    LastHitDirection = Vector3.up;
                     RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: Spawned initialized CurrentHealth to {CurrentHealth} on Server.");
                 }
                 OnHealthChanged?.Invoke(CurrentHealth);
@@ -103,6 +106,18 @@ namespace Redes.Player
                 RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [OUT] TakeDamage skipped since this client is NOT StateAuthority.");
                 return;
             }
+
+            // Calculate hit direction on State Authority
+            Vector3 hitDirection = Vector3.up;
+            if (Runner != null)
+            {
+                var attackerGo = Runner.GetPlayerObject(attacker);
+                if (attackerGo != null)
+                {
+                    hitDirection = (transform.position - attackerGo.transform.position).normalized;
+                }
+            }
+            LastHitDirection = hitDirection;
 
             try
             {
