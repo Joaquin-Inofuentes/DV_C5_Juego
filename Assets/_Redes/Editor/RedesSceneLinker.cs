@@ -57,6 +57,17 @@ namespace Redes.EditorTools
             // ---- Network ----
             Assign(host, ("_playerSpawner", spawner), ("_playerPrefab", playerPrefabNo));
 
+            // Link the VFXManager spark prefab (to keep it clean and robust)
+            var vfxManager = Find<VFXManager>();
+            if (vfxManager != null)
+            {
+                var sparkVfxPrefab = vfxManager.transform.Find("SparkVFXPrefab")?.GetComponent<ParticleSystem>();
+                if (sparkVfxPrefab != null)
+                {
+                    Assign(vfxManager, ("_sparkVfxPrefab", sparkVfxPrefab));
+                }
+            }
+
             // ---- Controllers ----
             Assign(flow, ("_hostService", host), ("_lobbyView", lobby),
                          ("_gameHudView", hud), ("_matchController", match));

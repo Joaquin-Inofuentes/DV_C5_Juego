@@ -109,6 +109,16 @@ namespace Redes.Gameplay
             }
         }
 
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RpcPlaySparkVfx(Vector3 position, Vector3 normal)
+        {
+            if (VFXManager.Instance != null)
+            {
+                Quaternion rotation = normal != Vector3.zero ? Quaternion.LookRotation(normal) : Quaternion.identity;
+                VFXManager.Instance.PlaySpark(position, rotation);
+            }
+        }
+
         // --- RETRY LOGIC ---
 
         /// <summary>

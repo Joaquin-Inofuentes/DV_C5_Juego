@@ -95,6 +95,7 @@ namespace Redes.EditorTools
         [MenuItem("Redes/Corregir", priority = 1)]
         public static void Corregir()
         {
+            Debug.Log("[REDES][BOOT] Version2 mejorada");
             PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
             Debug.Log("[REDES][CORREGIR] PlayerSettings.insecureHttpOption set to AlwaysAllowed.");
 

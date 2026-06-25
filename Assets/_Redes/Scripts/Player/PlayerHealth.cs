@@ -55,7 +55,8 @@ namespace Redes.Player
                     }
                     if (Views.VFXManager.Instance != null)
                     {
-                        Views.VFXManager.Instance.PlayHit(transform.position + Vector3.up);
+                        Quaternion rot = LastHitDirection != Vector3.zero ? Quaternion.LookRotation(LastHitDirection) : Quaternion.identity;
+                        Views.VFXManager.Instance.PlayHit(transform.position + Vector3.up, rot);
                     }
                 }
                 _lastHealth = CurrentHealth;

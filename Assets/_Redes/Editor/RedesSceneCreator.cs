@@ -107,58 +107,86 @@ namespace Redes.EditorTools
             var vfxGo = new GameObject("VFXManager");
             var vfxManager = vfxGo.AddComponent<VFXManager>();
             
-            // Create Hit VFX Prefab
+            // Create Hit VFX Prefab (Red, Sphere)
             var hitGo = new GameObject("HitVFXPrefab");
             hitGo.transform.SetParent(vfxGo.transform, false);
-            hitGo.SetActive(false); // keep it as a prefab
+            hitGo.SetActive(false);
             var hitPs = hitGo.AddComponent<ParticleSystem>();
             var hitMain = hitPs.main;
             hitMain.duration = 0.5f;
             hitMain.loop = false;
-            hitMain.startLifetime = 0.5f;
-            hitMain.startSpeed = 5f;
-            hitMain.startSize = 0.3f;
+            hitMain.startLifetime = 0.4f;
+            hitMain.startSpeed = 6f;
+            hitMain.startSize = 0.25f;
             hitMain.startColor = Color.red;
             var hitEmission = hitPs.emission;
             hitEmission.rateOverTime = 0;
-            hitEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 20) });
+            hitEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 15) });
             var hitShape = hitPs.shape;
             hitShape.shapeType = ParticleSystemShapeType.Sphere;
 
-            // Create Muzzle VFX Prefab
+            // Create Muzzle VFX Prefab (Green, Cone)
             var muzzleGo = new GameObject("MuzzleVFXPrefab");
             muzzleGo.transform.SetParent(vfxGo.transform, false);
             muzzleGo.SetActive(false);
             var muzzlePs = muzzleGo.AddComponent<ParticleSystem>();
             var muzzleMain = muzzlePs.main;
-            muzzleMain.duration = 0.1f;
+            muzzleMain.duration = 0.15f;
             muzzleMain.loop = false;
-            muzzleMain.startLifetime = 0.1f;
-            muzzleMain.startSpeed = 10f;
+            muzzleMain.startLifetime = 0.15f;
+            muzzleMain.startSpeed = 8f;
             muzzleMain.startSize = 0.2f;
-            muzzleMain.startColor = Color.yellow;
+            muzzleMain.startColor = Color.green;
             var muzzleEmission = muzzlePs.emission;
             muzzleEmission.rateOverTime = 0;
-            muzzleEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 10) });
+            muzzleEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 8) });
             var muzzleShape = muzzlePs.shape;
             muzzleShape.shapeType = ParticleSystemShapeType.Cone;
-            muzzleShape.angle = 15f;
+            muzzleShape.angle = 12f;
 
-            // Try to assign the particle texture
-            var partTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/Particle.png");
-            if (partTex != null)
+            // Create Spark VFX Prefab (White, Sphere/Cone)
+            var sparkGo = new GameObject("SparkVFXPrefab");
+            sparkGo.transform.SetParent(vfxGo.transform, false);
+            sparkGo.SetActive(false);
+            var sparkPs = sparkGo.AddComponent<ParticleSystem>();
+            var sparkMain = sparkPs.main;
+            sparkMain.duration = 0.4f;
+            sparkMain.loop = false;
+            sparkMain.startLifetime = 0.35f;
+            sparkMain.startSpeed = 5f;
+            sparkMain.startSize = 0.25f;
+            sparkMain.startColor = Color.white;
+            var sparkEmission = sparkPs.emission;
+            sparkEmission.rateOverTime = 0;
+            sparkEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 12) });
+            var sparkShape = sparkPs.shape;
+            sparkShape.shapeType = ParticleSystemShapeType.Sphere;
+
+            // Apply texture for spark particles (kenney spark texture)
+            var sparkTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/ObstacleSpark.png");
+            if (sparkTex != null)
             {
                 var mat = new Material(Shader.Find("Particles/Standard Unlit"));
-                mat.mainTexture = partTex;
-                var hitRenderer = hitPs.GetComponent<ParticleSystemRenderer>();
-                var muzzleRenderer = muzzlePs.GetComponent<ParticleSystemRenderer>();
-                if (hitRenderer != null) hitRenderer.sharedMaterial = mat;
-                if (muzzleRenderer != null) muzzleRenderer.sharedMaterial = mat;
+                mat.mainTexture = sparkTex;
+                var sparkRenderer = sparkPs.GetComponent<ParticleSystemRenderer>();
+                if (sparkRenderer != null) sparkRenderer.sharedMaterial = mat;
+            }
+            else
+            {
+                var partTex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Redes/Art/Textures/Particle.png");
+                if (partTex != null)
+                {
+                    var mat = new Material(Shader.Find("Particles/Standard Unlit"));
+                    mat.mainTexture = partTex;
+                    var sparkRenderer = sparkPs.GetComponent<ParticleSystemRenderer>();
+                    if (sparkRenderer != null) sparkRenderer.sharedMaterial = mat;
+                }
             }
 
             var soVfx = new SerializedObject(vfxManager);
             soVfx.FindProperty("_hitVfxPrefab").objectReferenceValue = hitPs;
             soVfx.FindProperty("_muzzleFlashPrefab").objectReferenceValue = muzzlePs;
+            soVfx.FindProperty("_sparkVfxPrefab").objectReferenceValue = sparkPs;
             soVfx.ApplyModifiedPropertiesWithoutUndo();
 
             // ---- UI (legacy Text) ----
@@ -358,6 +386,17 @@ namespace Redes.EditorTools
             var soDeathCtrl = new SerializedObject(deathCtrl);
             soDeathCtrl.FindProperty("_view").objectReferenceValue = deathView;
             soDeathCtrl.ApplyModifiedPropertiesWithoutUndo();
+
+            // --- Custom Cursor View ---
+            var cursorGo = new GameObject("CustomCursorView");
+            cursorGo.transform.SetParent(canvasGo.transform, false);
+            var cursorView = cursorGo.AddComponent<CustomCursorView>();
+            var soCursor = new SerializedObject(cursorView);
+            soCursor.FindProperty("_cursorBase").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorBase.png");
+            soCursor.FindProperty("_cursorShoot").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorShoot.png");
+            soCursor.FindProperty("_cursorHit").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorHit.png");
+            soCursor.FindProperty("_cursorReload").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorReload.png");
+            soCursor.ApplyModifiedPropertiesWithoutUndo();
         }
 
         // ---------- small UI helpers ----------

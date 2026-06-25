@@ -77,6 +77,41 @@ namespace Redes.Views
 
         private void OnEnable()
         {
+            TryBindLocalPlayer();
+            Cursor.visible = false;
+        }
+
+        private void OnDisable()
+        {
+            UnbindEventBus();
+            Cursor.visible = true;
+        }
+
+        private void TryBindLocalPlayer()
+        {
+            if (_eventBus != null) return;
+
+            // Search for local network player
+            var netPlayers = FindObjectsByType<Redes.Player.NetworkPlayer>(FindObjectsSortMode.None);
+            foreach (var np in netPlayers)
+            {
+                if (np.Object != null && np.Object.IsValid && np.Object.HasInputAuthority)
+                {
+                    _eventBus = np.GetComponent<PlayerEventBus>();
+                    break;
+                }
+            }
+
+            // Fallback for offline play tester
+            if (_eventBus == null)
+            {
+                var tester = FindFirstObjectByType<Redes.Test.OfflinePlayerTester>();
+                if (tester != null)
+                {
+                    _eventBus = tester.GetComponent<PlayerEventBus>();
+                }
+            }
+
             if (_eventBus != null)
             {
                 _eventBus.OnShoot += HandleShoot;
@@ -84,12 +119,9 @@ namespace Redes.Views
                 _eventBus.OnAmmoChanged += HandleAmmoChanged;
                 _eventBus.OnTookDamage += HandleTookDamage;
             }
-            
-            // Also listen to dummy taking damage globally or via other events to trigger Hit cursor.
-            // But since the dummy has OnDummyKilled and we want hit feedback, we can hook it or wire it from the tester.
         }
 
-        private void OnDisable()
+        private void UnbindEventBus()
         {
             if (_eventBus != null)
             {
@@ -97,8 +129,8 @@ namespace Redes.Views
                 _eventBus.OnReload -= HandleReload;
                 _eventBus.OnAmmoChanged -= HandleAmmoChanged;
                 _eventBus.OnTookDamage -= HandleTookDamage;
+                _eventBus = null;
             }
-            Cursor.visible = true;
         }
 
         // Exposed public method to trigger hit effect from OfflinePlayerTester/DummyEnemy collisions
@@ -148,6 +180,8 @@ namespace Redes.Views
 
         private void Update()
         {
+            TryBindLocalPlayer();
+
             // 1. Only show cursor when within game window bounds
             Vector3 mousePos = Input.mousePosition;
             bool insideWindow = mousePos.x >= 0 && mousePos.x <= Screen.width &&

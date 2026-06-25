@@ -93,6 +93,20 @@ namespace Redes.Combat
                     }
                     return;
                 }
+                else if (hit.gameObject.layer == 6 || hit.CompareTag("Obstacle"))
+                {
+                    // Hit obstacle
+                    var matchNet = FindFirstObjectByType<MatchNetworkController>();
+                    if (matchNet != null)
+                    {
+                        // Calculate approximate contact normal or direction
+                        Vector3 normal = (transform.position - hit.bounds.center).normalized;
+                        matchNet.RpcPlaySparkVfx(transform.position, normal);
+                    }
+
+                    Runner.Despawn(Object);
+                    return;
+                }
             }
         }
     }
