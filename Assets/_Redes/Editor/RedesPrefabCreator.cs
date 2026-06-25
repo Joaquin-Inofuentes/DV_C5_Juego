@@ -111,7 +111,7 @@ namespace Redes.EditorTools
                 modelObj.transform.SetParent(go.transform, false);
                 modelObj.transform.localPosition = Vector3.zero; // pivot already at feet in FBX
                 modelObj.transform.localRotation = Quaternion.identity;
-                modelObj.transform.localScale = Vector3.one * 0.01f; // FBX is in cm, Unity uses meters
+                modelObj.transform.localScale = Vector3.one * 1.5f; // Match the offline fallback scale so it's visible
 
                 animator = modelObj.GetComponent<Animator>();
                 if (animator == null) animator = modelObj.AddComponent<Animator>();
