@@ -417,22 +417,6 @@ namespace Redes.EditorTools
             return f;
         }
 
-        [MenuItem("Tools/Redes/5. Corregir", priority = 5)]
-        public static void Corregir()
-        {
-            Debug.Log("[REDES][CORREGIR] Iniciando corrección completa...");
-            
-            // 1. Recrear prefabs
-            RedesPrefabCreator.CreatePrefabs();
-            
-            // 2. Recrear escena (incluye el terreno negro, nuevos paneles y controladores)
-            CreateScene();
-            
-            // 3. Re-vincular todas las referencias
-            RedesSceneLinker.LinkAll();
-            
-            Debug.Log("[REDES][CORREGIR] ¡Corrección completa finalizada con éxito!");
-        }
 
         private static void EnsureFolder(string parent, string child)
         {
