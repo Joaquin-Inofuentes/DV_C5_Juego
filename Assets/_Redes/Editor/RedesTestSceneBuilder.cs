@@ -33,6 +33,14 @@ namespace Redes.EditorTools
             // ---- PLAYER ----
             var player = BuildPlayer();
 
+            // ---- WIRE CAMERA FOLLOW ----
+            var mainCam = GameObject.FindWithTag("MainCamera");
+            if (mainCam != null)
+            {
+                var follow = mainCam.AddComponent<CameraFollow>();
+                Assign(follow, "_target", player.transform);
+            }
+
             // ---- ENEMY ----
             var dummy = BuildDummy();
 
@@ -106,15 +114,15 @@ namespace Redes.EditorTools
             groundMat.color = new Color(0.3f, 0.5f, 0.3f);
             ground.GetComponent<Renderer>().material = groundMat;
 
-            // Camera (Orthogonal Top-down)
+            // Camera (Orthogonal 90 deg Pleno)
             var camGo = new GameObject("Main Camera");
             camGo.tag = "MainCamera";
             var cam = camGo.AddComponent<Camera>();
             cam.clearFlags = CameraClearFlags.Skybox;
             cam.orthographic = true;
             cam.orthographicSize = 6.5f;
-            camGo.transform.position = new Vector3(0f, 12f, -8f);
-            camGo.transform.rotation = Quaternion.Euler(65f, 0f, 0f);
+            camGo.transform.position = new Vector3(0f, 15f, 0f);
+            camGo.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             camGo.AddComponent<AudioListener>();
 
             // Ambient light
@@ -322,8 +330,10 @@ namespace Redes.EditorTools
                 new Vector2(-10, 10), new Vector2(220, 60), new Color(0, 0, 0, 0.7f));
             ammoPanel.name = "AmmoPanel";
             ((RectTransform)ammoPanel.transform).pivot = new Vector2(1, 0);
+
+            // Centered ammo text to prevent anchoredPosition shifts
             var ammoText = CreateText(ammoPanel.transform, "AmmoText", "AMMO: 10/10",
-                new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, 18, Color.white, TextAnchor.MiddleCenter);
+                new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(210, 50), 18, Color.white, TextAnchor.MiddleCenter);
             ammoText.fontStyle = FontStyle.Bold;
 
             // Attach PlayerAmmoView (MVC View)
@@ -403,8 +413,11 @@ namespace Redes.EditorTools
             rect.anchorMin = anchorMin;
             rect.anchorMax = anchorMax;
             rect.sizeDelta = sizeDelta;
-            rect.offsetMin = new Vector2(5, 5);
-            rect.offsetMax = new Vector2(-5, -5);
+            if (sizeDelta == Vector2.zero)
+            {
+                rect.offsetMin = new Vector2(5, 5);
+                rect.offsetMax = new Vector2(-5, -5);
+            }
             var txt = go.AddComponent<Text>();
             txt.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             txt.fontSize = fontSize;

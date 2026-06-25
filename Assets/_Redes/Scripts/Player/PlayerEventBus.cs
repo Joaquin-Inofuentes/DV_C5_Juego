@@ -14,7 +14,7 @@ namespace Redes.Player
         public Action<int, GameObject> OnTookDamage;
 
         // 2. Crear/Disparar proyectil
-        public Action OnShoot;
+        public Action<float> OnShoot;
 
         // 3. Moverse (Velocity)
         public Action<Vector3> OnMove;
@@ -36,9 +36,9 @@ namespace Redes.Player
             OnTookDamage?.Invoke(attackerId, bulletObj);
         }
 
-        public void TriggerShoot()
+        public void TriggerShoot(float animSpeed = 1f)
         {
-            OnShoot?.Invoke();
+            OnShoot?.Invoke(animSpeed);
         }
 
         public void TriggerMove(Vector3 velocity)

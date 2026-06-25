@@ -135,8 +135,11 @@ namespace Redes.Test
             if (_shootSound != null)
                 AudioSource.PlayClipAtPoint(_shootSound, transform.position);
 
-            // Event Bus (drives animation)
-            _eventBus?.TriggerShoot();
+            // Calculate snappy animation speed matching the fire rate (10x faster baseline)
+            float animSpeed = (0.5f / Mathf.Min(_fireRate, 0.5f)) * 10f;
+
+            // Event Bus (drives animation with dynamic speed)
+            _eventBus?.TriggerShoot(animSpeed);
 
             // Spawn visual bullet
             if (_bulletPrefab != null && _muzzle != null)

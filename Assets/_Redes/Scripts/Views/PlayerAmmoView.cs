@@ -18,12 +18,14 @@ namespace Redes.Views
         private Coroutine _animationCoroutine;
         private Color _normalColor = Color.white;
         private Color _emptyColor = Color.red;
+        private RectTransform _rectTransform;
 
         private void Awake()
         {
             if (_ammoText == null)
                 _ammoText = GetComponent<Text>();
             _originalScale = transform.localScale;
+            _rectTransform = GetComponent<RectTransform>();
         }
 
         private void OnEnable()
@@ -101,18 +103,21 @@ namespace Redes.Views
                 if (shake)
                 {
                     float shakeOffset = Mathf.Sin(t * Mathf.PI * 6f) * 10f * (1f - t);
-                    transform.localPosition = new Vector3(shakeOffset, 0, 0);
+                    if (_rectTransform != null)
+                        _rectTransform.anchoredPosition = new Vector2(shakeOffset, 0f);
                 }
                 else
                 {
-                    transform.localPosition = Vector3.zero;
+                    if (_rectTransform != null)
+                        _rectTransform.anchoredPosition = Vector2.zero;
                 }
 
                 yield return null;
             }
 
             transform.localScale = _originalScale;
-            transform.localPosition = Vector3.zero;
+            if (_rectTransform != null)
+                _rectTransform.anchoredPosition = Vector2.zero;
             _animationCoroutine = null;
         }
     }

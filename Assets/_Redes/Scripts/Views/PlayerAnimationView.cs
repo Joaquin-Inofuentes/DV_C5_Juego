@@ -39,13 +39,26 @@ namespace Redes.Views
             {
                 float speed = velocity.magnitude;
                 _animator.SetFloat("MoveSpeed", speed);
+
+                // Reverse locomotion when walking backwards relative to aiming direction
+                float multiplier = 1f;
+                if (speed > 0.01f)
+                {
+                    float dot = Vector3.Dot(transform.forward, velocity.normalized);
+                    if (dot < -0.1f)
+                    {
+                        multiplier = -1f; // Invert feet animation
+                    }
+                }
+                _animator.SetFloat("MoveSpeedMultiplier", multiplier);
             }
         }
 
-        private void HandleShoot()
+        private void HandleShoot(float animSpeed)
         {
             if (_animator != null)
             {
+                _animator.SetFloat("ShootSpeed", animSpeed);
                 _animator.SetTrigger("Shoot");
             }
 

@@ -148,8 +148,18 @@ namespace Redes.EditorTools
 
             // Parameters
             controller.AddParameter("MoveSpeed", AnimatorControllerParameterType.Float);
+            controller.AddParameter("MoveSpeedMultiplier", AnimatorControllerParameterType.Float);
             controller.AddParameter("Shoot", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("ShootSpeed", AnimatorControllerParameterType.Float);
             controller.AddParameter("IsDead", AnimatorControllerParameterType.Bool);
+
+            var parameters = controller.parameters;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                if (parameters[i].name == "MoveSpeedMultiplier") parameters[i].defaultFloat = 1f;
+                if (parameters[i].name == "ShootSpeed") parameters[i].defaultFloat = 1f;
+            }
+            controller.parameters = parameters;
 
             // Load clips
             var idleClip = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/ToonSoldiers_demo/animation/assault_combat_idle.FBX");
@@ -164,6 +174,8 @@ namespace Redes.EditorTools
 
             var baseRun = baseStateMachine.AddState("Run");
             baseRun.motion = runClip;
+            baseRun.speedParameterActive = true;
+            baseRun.speedParameter = "MoveSpeedMultiplier";
 
             var baseDead = baseStateMachine.AddState("Dead");
 
@@ -228,7 +240,8 @@ namespace Redes.EditorTools
             
             var stateShoot = shootingStateMachine.AddState("Shoot");
             stateShoot.motion = shootClip;
-            stateShoot.speed = 1.6f; // Plays 60% faster for higher recoil intensity!
+            stateShoot.speedParameterActive = true;
+            stateShoot.speedParameter = "ShootSpeed";
             
             shootingStateMachine.defaultState = stateEmpty;
 
