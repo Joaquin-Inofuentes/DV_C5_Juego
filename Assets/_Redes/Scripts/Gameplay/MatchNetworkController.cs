@@ -2,6 +2,7 @@ using Fusion;
 using UnityEngine;
 using Redes.Core;
 using Redes.Controllers;
+using Redes.Views;
 
 namespace Redes.Gameplay
 {

@@ -1,6 +1,7 @@
 using Fusion;
 using UnityEngine;
 using Redes.Core;
+using Redes.Gameplay;
 using NetworkPlayer = Redes.Player.NetworkPlayer;
 
 namespace Redes.Combat
