@@ -549,6 +549,7 @@ namespace Redes.Network
             var data = new NetworkInputData();
             data.Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+
             if (Camera.main != null)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

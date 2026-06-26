@@ -26,18 +26,22 @@ namespace Redes.Player
         {
             _eventBus = GetComponent<PlayerEventBus>();
             _controller = GetComponent<CharacterController>();
+            
+            if (_controller != null)
+            {
+                // DESACTIVAR INICIALMENTE para que NetworkTransform pueda hacer rollback libremente.
+                // Solo lo activaremos 1 milisegundo durante el Move().
+                _controller.enabled = false;
+            }
         }
 
         public override void Spawned()
         {
-            // Desactivar el CharacterController en los clientes proxy remotos
-            // para permitir que NetworkTransform interpole sus posiciones suavemente sin interferencias de físicas.
-            if (!Object.HasInputAuthority && !Object.HasStateAuthority)
+            if (_controller != null)
             {
-                if (_controller != null)
-                {
-                    _controller.enabled = false;
-                }
+                // El servidor (StateAuthority) necesita el collider activo para que las balas (OverlapSphere) lo detecten.
+                // Los clientes lo mantienen apagado por defecto para permitir el Rollback de NetworkTransform.
+                _controller.enabled = Object.HasStateAuthority;
             }
         }
 
@@ -54,15 +58,23 @@ namespace Redes.Player
                 Vector3 dir = new Vector3(data.Move.x, 0, data.Move.y);
                 Vector3 moveVelocity = dir.normalized * _moveSpeed;
 
-                if (_controller != null && _controller.enabled)
+                if (_controller != null)
                 {
-                    // Si no está en el suelo, aplicamos gravedad básica para que no quede flotando
+                    // Si somos cliente prediciendo, lo activamos temporalmente.
+                    // Si somos servidor, ya estaba activado.
+                    bool wasEnabled = _controller.enabled;
+                    if (!wasEnabled) _controller.enabled = true;
+
                     if (!_controller.isGrounded)
                     {
                         moveVelocity.y = -9.81f;
                     }
+
                     _controller.Move(moveVelocity * Runner.DeltaTime);
                     NetworkVelocity = _controller.velocity;
+
+                    // Volvemos a desactivar solo si lo activamos temporalmente (cliente prediciendo).
+                    if (!wasEnabled) _controller.enabled = false;
                 }
                 else
                 {
@@ -72,6 +84,7 @@ namespace Redes.Player
 
                 Vector3 horizontalVelocity = moveVelocity;
                 horizontalVelocity.y = 0;
+                
                 if (_eventBus != null && horizontalVelocity.sqrMagnitude > 0.01f)
                 {
                     _eventBus.TriggerMove(horizontalVelocity);
@@ -80,6 +93,7 @@ namespace Redes.Player
                 Vector3 lookPos = new Vector3(data.AimDirection.x, transform.position.y, data.AimDirection.y);
                 Vector3 lookDir = lookPos - transform.position;
                 lookDir.y = 0;
+                
                 if (lookDir.sqrMagnitude > 0.01f)
                 {
                     transform.rotation = Quaternion.LookRotation(lookDir);

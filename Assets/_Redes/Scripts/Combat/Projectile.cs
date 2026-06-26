@@ -56,14 +56,27 @@ namespace Redes.Combat
 
             Collider[] hits = new Collider[5];
             int hitCount = Runner.GetPhysicsScene().OverlapSphere(transform.position, 0.3f, hits, -1, QueryTriggerInteraction.Ignore);
+            
+            if (hitCount > 0)
+            {
+                Debug.Log($"[ATAQUE_DEBUG] 1. [Proyectil {Object.Id}] Detectados {hitCount} colliders en OverlapSphere en pos {transform.position}");
+            }
+
             for (int i = 0; i < hitCount; i++)
             {
                 var hit = hits[i];
-                if (hit == null || hit.isTrigger) continue;
+                if (hit == null || hit.isTrigger) 
+                {
+                    if (hit != null) Debug.Log($"[ATAQUE_DEBUG] 2. [Proyectil {Object.Id}] Ignorando {hit.name} porque es trigger.");
+                    continue;
+                }
+
+                Debug.Log($"[ATAQUE_DEBUG] 3. [Proyectil {Object.Id}] Evaluando colisión válida con: '{hit.name}' (Layer: {hit.gameObject.layer})");
 
                 var damageable = hit.GetComponentInParent<IDamageable>();
                 if (damageable != null && damageable.IsAlive)
                 {
+                    Debug.Log($"[ATAQUE_DEBUG] 4. [Proyectil {Object.Id}] '{hit.name}' tiene IDamageable y esta vivo!");
                     var netPlayer = hit.GetComponentInParent<NetworkPlayer>();
                     if (netPlayer != null && netPlayer.Object.InputAuthority == Owner)
                     {
@@ -104,6 +117,7 @@ namespace Redes.Combat
                 }
                 else if (hit.gameObject.layer == 6 || hit.CompareTag("Obstacle"))
                 {
+                    Debug.Log($"[ATAQUE_DEBUG] 5. [Proyectil {Object.Id}] Impactó contra obstáculo '{hit.name}'. Despawneando.");
                     // Hit obstacle
                     RedesLog.Info(RedesLog.VFX, $"[PROJECTILE] Bullet {Object.Id} hit obstacle '{hit.name}' at {transform.position}. Sending RpcPlaySparkVfx to all clients.\nStack Trace:\n{System.Environment.StackTrace}");
                     var matchNet = FindFirstObjectByType<MatchNetworkController>();
