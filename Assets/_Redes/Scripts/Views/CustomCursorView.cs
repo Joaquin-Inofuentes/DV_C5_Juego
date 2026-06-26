@@ -37,6 +37,7 @@ namespace Redes.Views
         private float _hitScale = 1f;
         private bool _isHitting;
         private float _hitTimer;
+        private Sprite _lastSprite;
 
         private void Awake()
         {
@@ -270,9 +271,6 @@ namespace Redes.Views
                 _cursorRect.anchoredPosition = localPoint;
             }
 
-            // Debug del cursor enganchado
-            Debug.Log($"[CURSOR_DEBUG] Posición del CustomCursor enganchado: Screen={mousePos}, LocalCanvas={localPoint}");
-
             // 4. Handle Reload radial fill animation
             if (_isReloading)
             {
@@ -326,6 +324,13 @@ namespace Redes.Views
                 _cursorImage.sprite = _cursorBase;
                 _cursorImage.color = Color.white;
                 _cursorRect.localScale = Vector3.one;
+            }
+
+            // Solo mostrar debug si cambió el sprite para no inundar la consola
+            if (_cursorImage.sprite != _lastSprite)
+            {
+                _lastSprite = _cursorImage.sprite;
+                Debug.Log($"[CURSOR] Cambio de estado de cursor -> Nuevo sprite: {(_lastSprite != null ? _lastSprite.name : "null")}");
             }
         }
     }

@@ -55,13 +55,7 @@ namespace Redes.Core
                    lower.Contains("sfx") || 
                    lower.Contains("audio") || 
                    lower.Contains("cursor") || 
-                   lower.Contains("disparo") || 
-                   lower.Contains("daño") || 
-                   lower.Contains("dano") || 
-                   lower.Contains("ouch") || 
-                   lower.Contains("hit") || 
-                   lower.Contains("reproduc") ||
-                   lower.Contains("play");
+                   lower.Contains("teleport");
         }
 
         public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info")

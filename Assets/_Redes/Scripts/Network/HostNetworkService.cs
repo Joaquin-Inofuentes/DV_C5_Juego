@@ -564,7 +564,7 @@ namespace Redes.Network
             data.Buttons.Set(InputButton.Fire,     Input.GetButton("Fire1"));
             data.Buttons.Set(InputButton.Reload,   Input.GetKey(KeyCode.R));
             data.Buttons.Set(InputButton.Crouch,   Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
-            data.Buttons.Set(InputButton.Teleport, Input.GetKeyDown(KeyCode.Space));
+            data.Buttons.Set(InputButton.Teleport, Input.GetKey(KeyCode.Space));
             input.Set(data);
         }
 
