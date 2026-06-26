@@ -19,6 +19,7 @@ namespace Redes.Views
         [SerializeField] private InputField _usernameInput;
         [SerializeField] private Transform _roomListContainer;
         [SerializeField] private GameObject _roomButtonPrefab; // Can be assigned or dynamically created
+        [SerializeField] private Font _buttonFont;
 
         [Header("Buttons (assigned by the Link tool)")]
         [SerializeField] private Button _hostButton;  // "Crear Sala"
@@ -35,6 +36,96 @@ namespace Redes.Views
         private void Start()
         {
             // Relying on persistent events linked via editor tools
+        }
+
+        public void ApplyButtonStyle(Button button)
+        {
+            if (button == null) return;
+            var img = button.GetComponent<Image>();
+            if (img == null) img = button.gameObject.AddComponent<Image>();
+
+            // Obtener el sprite de fondo del _ramboButton si está asignado
+            Sprite btnSprite = null;
+            if (_ramboButton != null)
+            {
+                var ramboImg = _ramboButton.GetComponent<Image>();
+                if (ramboImg != null) btnSprite = ramboImg.sprite;
+            }
+            if (btnSprite != null)
+            {
+                img.sprite = btnSprite;
+            }
+
+            img.type = Image.Type.Sliced;
+            img.pixelsPerUnitMultiplier = 0.54f;
+
+            button.targetGraphic = img;
+            button.transition = Selectable.Transition.ColorTint;
+
+            ColorBlock cb = button.colors;
+            cb.normalColor = new Color(1f, 1f, 1f, 1f);
+            cb.highlightedColor = new Color(1f, 0.2f, 0.2f, 1f);
+            cb.pressedColor = new Color(0.08f, 0.1f, 0.16f, 1f);
+            cb.selectedColor = new Color(1f, 0.2f, 0.2f, 1f);
+            cb.disabledColor = new Color(0.15f, 0.15f, 0.15f, 0.5f);
+            cb.colorMultiplier = 1f;
+            cb.fadeDuration = 0.1f;
+            button.colors = cb;
+            
+            // Asignar el sonido del click
+            var soundClick = button.GetComponent<PlaySoundOnButtonClick>();
+            if (soundClick == null)
+            {
+                soundClick = button.gameObject.AddComponent<PlaySoundOnButtonClick>();
+                if (_ramboButton != null)
+                {
+                    var ramboClick = _ramboButton.GetComponent<PlaySoundOnButtonClick>();
+                    if (ramboClick != null)
+                    {
+                        soundClick.Initialize(ramboClick.ClickSound, ramboClick.SfxGroup);
+                    }
+                }
+            }
+
+            // Aplicar tamaño automático (BestFit/AutoSizing), anchors de estiramiento completo y alineación al centro
+            var childTexts = button.GetComponentsInChildren<Text>(true);
+            foreach (var txt in childTexts)
+            {
+                if (_buttonFont != null) txt.font = _buttonFont;
+                var rt = txt.rectTransform;
+                if (rt != null)
+                {
+                    rt.anchorMin = new Vector2(0, 0);
+                    rt.anchorMax = new Vector2(1, 1);
+                    rt.anchoredPosition = Vector2.zero;
+                    rt.sizeDelta = Vector2.zero;
+                    rt.pivot = new Vector2(0.5f, 0.5f);
+                }
+                txt.resizeTextForBestFit = true;
+                txt.resizeTextMinSize = 10;
+                txt.resizeTextMaxSize = 40;
+                txt.alignment = TextAnchor.MiddleCenter;
+                txt.horizontalOverflow = HorizontalWrapMode.Wrap;
+                txt.verticalOverflow = VerticalWrapMode.Truncate;
+            }
+
+            var childTmpTexts = button.GetComponentsInChildren<TMPro.TMP_Text>(true);
+            foreach (var tmp in childTmpTexts)
+            {
+                var rt = tmp.rectTransform;
+                if (rt != null)
+                {
+                    rt.anchorMin = new Vector2(0, 0);
+                    rt.anchorMax = new Vector2(1, 1);
+                    rt.anchoredPosition = Vector2.zero;
+                    rt.sizeDelta = Vector2.zero;
+                    rt.pivot = new Vector2(0.5f, 0.5f);
+                }
+                tmp.enableAutoSizing = true;
+                tmp.fontSizeMin = 10f;
+                tmp.fontSizeMax = 40f;
+                tmp.alignment = TMPro.TextAlignmentOptions.Center;
+            }
         }
 
         public void SetUsername(string name)
@@ -101,7 +192,7 @@ namespace Redes.Views
                 noRoomsObj.transform.SetParent(_roomListContainer, false);
                 var text = noRoomsObj.AddComponent<Text>();
                 text.text = "No existen salas. Debes crear una.";
-                text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+                text.font = _buttonFont != null ? _buttonFont : (Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf"));
                 text.fontSize = 24;
                 text.color = Color.white;
                 text.alignment = TextAnchor.MiddleCenter;
@@ -122,9 +213,6 @@ namespace Redes.Views
                 var btnRt = btnObj.GetComponent<RectTransform>();
                 btnRt.sizeDelta = new Vector2(300, 40);
                 
-                var img = btnObj.AddComponent<Image>();
-                img.color = new Color(0.2f, 0.6f, 0.3f);
-                
                 var btn = btnObj.AddComponent<Button>();
                 string sessionName = session.Name;
                 btn.onClick.AddListener(() => onJoinClicked?.Invoke(sessionName));
@@ -137,10 +225,13 @@ namespace Redes.Views
                 
                 var text = txtObj.AddComponent<Text>();
                 text.text = $"Entrar a: {session.Name} ({session.PlayerCount}/{session.MaxPlayers})";
-                text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf");
+                text.font = _buttonFont != null ? _buttonFont : (Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf") ?? Resources.GetBuiltinResource<Font>("Arial.ttf"));
                 text.fontSize = 20;
                 text.color = Color.white;
                 text.alignment = TextAnchor.MiddleCenter;
+
+                // Aplicar estilo al botón dinámico (después de agregar el texto hijo)
+                ApplyButtonStyle(btn);
             }
             
             SetJoinButtonEnabled(hasValidRoom);

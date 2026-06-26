@@ -67,10 +67,10 @@ namespace Redes.EditorTools
             rb.isKinematic = true;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
             
-            var col = go.AddComponent<CapsuleCollider>();
-            col.height = 1.8f;
-            col.radius = 0.7f;
-            col.center = new Vector3(0, 0.9f, 0); // pivot at feet, center at mid-body
+            var cc = go.AddComponent<CharacterController>();
+            cc.height = 1.8f;
+            cc.radius = 0.7f;
+            cc.center = new Vector3(0, 0.9f, 0); // pivot at feet, center at mid-body
 
             go.AddComponent<NetworkObject>();
             go.AddComponent<NetworkTransform>();

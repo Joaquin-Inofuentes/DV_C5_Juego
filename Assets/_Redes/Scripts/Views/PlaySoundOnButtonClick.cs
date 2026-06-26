@@ -10,7 +10,16 @@ namespace Redes.Views
         [SerializeField] private AudioClip _clickSound;
         [SerializeField] private AudioMixerGroup _sfxGroup;
 
+        public AudioClip ClickSound => _clickSound;
+        public AudioMixerGroup SfxGroup => _sfxGroup;
+
         private Button _button;
+
+        public void Initialize(AudioClip clickSound, AudioMixerGroup sfxGroup)
+        {
+            _clickSound = clickSound;
+            _sfxGroup = sfxGroup;
+        }
 
         private void Awake()
         {

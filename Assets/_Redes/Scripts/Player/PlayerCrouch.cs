@@ -26,7 +26,13 @@ namespace Redes.Player
         private Vector3 _crouchingScale;
 
         // ─── Refs opcionales ────────────────────────────────────────────
+        private CharacterController _controller;
         private PlayerEventBus _eventBus;
+
+        private float _standingHeight;
+        private float _crouchingHeight;
+        private Vector3 _standingCenter;
+        private Vector3 _crouchingCenter;
 
         // Velocidad de interpolación de escala
         private const float SCALE_SPEED = 10f;
@@ -35,16 +41,32 @@ namespace Redes.Player
         private void Awake()
         {
             _eventBus      = GetComponent<PlayerEventBus>();
+            _controller    = GetComponent<CharacterController>();
             _standingScale = transform.localScale;
             _crouchingScale = new Vector3(
                 _standingScale.x,
                 _standingScale.y * GameConstants.CROUCH_SCALE_Y,
                 _standingScale.z);
+
+            if (_controller != null)
+            {
+                _standingHeight = _controller.height;
+                _crouchingHeight = _standingHeight * GameConstants.CROUCH_SCALE_Y;
+                _standingCenter = _controller.center;
+                _crouchingCenter = new Vector3(_standingCenter.x, _standingCenter.y * GameConstants.CROUCH_SCALE_Y, _standingCenter.z);
+            }
         }
 
         // ─── Servidor: leer input y actualizar estado ───────────────────
         public override void FixedUpdateNetwork()
         {
+            // Sincronizar el tamaño físico del CharacterController en el tick de físicas
+            if (_controller != null && _controller.enabled)
+            {
+                _controller.height = IsCrouching ? _crouchingHeight : _standingHeight;
+                _controller.center = IsCrouching ? _crouchingCenter : _standingCenter;
+            }
+
             if (!Object.HasStateAuthority) return;
             if (Runner.SessionInfo.PlayerCount < 2) return;
 

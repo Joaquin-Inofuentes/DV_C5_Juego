@@ -232,6 +232,16 @@ namespace Redes.EditorTools
                 Debug.LogError($"[REDES][CORREGIR] ERROR crítico general en el Paso Extra de Props: {ex.Message}\n{ex.StackTrace}");
             }
 
+            try
+            {
+                Debug.Log("[REDES][CORREGIR] === Paso Extra 2: Configurar Fuentes y Temática de Botones ===");
+                RedesVisualConfigurator.ConfigureAllVisuals();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso Extra 2 (Configurar Fuentes y Botones): {ex.Message}\n{ex.StackTrace}");
+            }
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");

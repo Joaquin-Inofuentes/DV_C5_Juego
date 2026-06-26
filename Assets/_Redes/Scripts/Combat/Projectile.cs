@@ -83,6 +83,13 @@ namespace Redes.Combat
                         RedesLog.Error(RedesLog.COMBAT, $">> Projectile: [ERROR] Exception during TakeDamage call: {ex.Message}\n{ex.StackTrace}");
                     }
                     
+                    var matchNet = FindFirstObjectByType<MatchNetworkController>();
+                    if (matchNet != null)
+                    {
+                        Vector3 normal = (transform.position - hit.bounds.center).normalized;
+                        matchNet.RpcPlaySparkVfx(transform.position, normal);
+                    }
+
                     try
                     {
                         RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [IN] Calling Runner.Despawn for bullet {Object.Id}");

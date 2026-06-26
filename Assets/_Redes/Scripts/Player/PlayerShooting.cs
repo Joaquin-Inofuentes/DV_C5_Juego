@@ -96,7 +96,8 @@ namespace Redes.Player
                 if (_playerEventBus != null) _playerEventBus.TriggerShoot();
                 
                 string muzzlePosStr = _muzzle != null ? _muzzle.position.ToString() : "NULO";
-                RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] Proceso de disparo completado exitosamente. Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {muzzlePosStr}");
+                float muzzleY = _muzzle != null ? _muzzle.position.y : 0f;
+                RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] [ALTURA DISPARO] Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {muzzlePosStr}. Altura Y del Muzzle: {muzzleY} (Si está agachado, debería ser menor que de pie).");
             }
             catch (System.Exception e)
             {

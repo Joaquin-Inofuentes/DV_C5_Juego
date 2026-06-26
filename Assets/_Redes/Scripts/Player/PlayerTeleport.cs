@@ -104,7 +104,10 @@ namespace Redes.Player
             LastTeleportDest   = dest;
 
             // Mover al jugador
+            var cc = GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
             transform.position = dest;
+            if (cc != null) cc.enabled = true;
 
             // Iniciar cooldown
             TeleportCooldown = TickTimer.CreateFromSeconds(Runner, _cooldown);

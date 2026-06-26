@@ -126,6 +126,20 @@ namespace Redes.Gameplay
                 {
                     RedesLog.Warn(RedesLog.VFX, $"[VFX] VFXManager.Instance is null on client {Runner.LocalPlayer}! Spark skipped.");
                 }
+
+                // Disparar rebote de escala en clientes locales (Visual Feedback)
+                Collider[] hits = Physics.OverlapSphere(position, 1.5f);
+                foreach(var h in hits)
+                {
+                    if (h.gameObject.layer == 6 || h.CompareTag("Obstacle") || h.GetComponentInParent<Combat.IDamageable>() != null)
+                    {
+                        var feedback = h.GetComponentInParent<Combat.ObstacleHitFeedback>();
+                        if (feedback != null)
+                        {
+                            feedback.DoBounce();
+                        }
+                    }
+                }
             }
             catch (System.Exception ex)
             {

@@ -17,6 +17,7 @@ namespace Redes.Player
 
         // Optional cached refs (assigned by the Prefab tool).
         [SerializeField] private Rigidbody _body;
+        private CharacterController _controller;
         private PlayerEventBus _eventBus;
 
         [Networked] public Vector3 NetworkVelocity { get; set; }
@@ -24,6 +25,20 @@ namespace Redes.Player
         private void Awake()
         {
             _eventBus = GetComponent<PlayerEventBus>();
+            _controller = GetComponent<CharacterController>();
+        }
+
+        public override void Spawned()
+        {
+            // Desactivar el CharacterController en los clientes proxy remotos
+            // para permitir que NetworkTransform interpole sus posiciones suavemente sin interferencias de físicas.
+            if (!Object.HasInputAuthority && !Object.HasStateAuthority)
+            {
+                if (_controller != null)
+                {
+                    _controller.enabled = false;
+                }
+            }
         }
 
         public override void FixedUpdateNetwork()
@@ -39,13 +54,27 @@ namespace Redes.Player
                 Vector3 dir = new Vector3(data.Move.x, 0, data.Move.y);
                 Vector3 moveVelocity = dir.normalized * _moveSpeed;
 
-                // Move transform directly. Rigidbody is set to kinematic.
-                transform.position += moveVelocity * Runner.DeltaTime;
-                NetworkVelocity = moveVelocity;
-
-                if (_eventBus != null && moveVelocity.sqrMagnitude > 0.01f)
+                if (_controller != null && _controller.enabled)
                 {
-                    _eventBus.TriggerMove(moveVelocity);
+                    // Si no está en el suelo, aplicamos gravedad básica para que no quede flotando
+                    if (!_controller.isGrounded)
+                    {
+                        moveVelocity.y = -9.81f;
+                    }
+                    _controller.Move(moveVelocity * Runner.DeltaTime);
+                    NetworkVelocity = _controller.velocity;
+                }
+                else
+                {
+                    transform.position += moveVelocity * Runner.DeltaTime;
+                    NetworkVelocity = moveVelocity;
+                }
+
+                Vector3 horizontalVelocity = moveVelocity;
+                horizontalVelocity.y = 0;
+                if (_eventBus != null && horizontalVelocity.sqrMagnitude > 0.01f)
+                {
+                    _eventBus.TriggerMove(horizontalVelocity);
                 }
 
                 Vector3 lookPos = new Vector3(data.AimDirection.x, transform.position.y, data.AimDirection.y);
