@@ -5,7 +5,7 @@ using Game.Sensors;
 
 public class AmmoCreator : EditorWindow
 {
-    [MenuItem("Tools/Corregir")]
+    // [MenuItem("Tools/Corregir")]
     public static void CorregirEscena()
     {
         CrearPrefabMunicion();
