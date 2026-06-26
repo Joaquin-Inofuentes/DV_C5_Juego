@@ -147,15 +147,42 @@ namespace Redes.EditorTools
                     Debug.Log($"[REDES][CORREGIR] Se encontraron {prefabGuids.Length} prefabs en {propsPath} y sus subcarpetas");
 
                     int totalRemoved = 0;
+                    int successPrefabs = 0;
+                    int failedPrefabs = 0;
+
                     foreach (string guid in prefabGuids)
                     {
                         string path = AssetDatabase.GUIDToAssetPath(guid);
                         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                        if (prefab != null)
+                        if (prefab == null)
                         {
-                            // Cargamos el contenido del prefab para poder editarlo
-                            GameObject prefabInstance = PrefabUtility.LoadPrefabContents(path);
-                            
+                            Debug.LogWarning($"[REDES][CORREGIR] No se pudo cargar la referencia inicial de Asset en: {path}");
+                            continue;
+                        }
+
+                        // OPTIMIZACIÓN: Revisar si tiene colliders antes de cargar el contenido editable (LoadPrefabContents),
+                        // ya que LoadPrefabContents dispara Warnings molestos en Unity si el prefab tiene Nested Prefabs rotos.
+                        Collider[] collidersInAsset = prefab.GetComponentsInChildren<Collider>(true);
+                        if (collidersInAsset.Length == 0)
+                        {
+                            // No tiene colliders, saltar sin intentar editar.
+                            // Debug.Log($"[REDES][CORREGIR] Prefab ya estaba limpio (0 colliders): {prefab.name}");
+                            successPrefabs++;
+                            continue;
+                        }
+
+                        GameObject prefabInstance = null;
+                        try
+                        {
+                            // Intentamos cargar el contenido del prefab
+                            prefabInstance = PrefabUtility.LoadPrefabContents(path);
+                            if (prefabInstance == null)
+                            {
+                                Debug.LogWarning($"[REDES][CORREGIR] PrefabUtility.LoadPrefabContents devolvió null para: {path}");
+                                failedPrefabs++;
+                                continue;
+                            }
+
                             // Buscar todos los colliders 3D
                             Collider[] colliders = prefabInstance.GetComponentsInChildren<Collider>(true);
                             if (colliders.Length > 0)
@@ -169,13 +196,31 @@ namespace Redes.EditorTools
                                 }
                                 
                                 PrefabUtility.SaveAsPrefabAsset(prefabInstance, path);
-                                Debug.Log($"[REDES][CORREGIR] Eliminados {removedInPrefab} colliders de {prefab.name} ({Path.GetFileName(path)})");
+                                Debug.Log($"[REDES][CORREGIR] Exitoso: Eliminados {removedInPrefab} colliders de {prefab.name} ({Path.GetFileName(path)})");
                             }
-                            
-                            PrefabUtility.UnloadPrefabContents(prefabInstance);
+                            successPrefabs++;
+                        }
+                        catch (System.Exception ex)
+                        {
+                            failedPrefabs++;
+                            Debug.LogError($"[REDES][CORREGIR] ERROR procesando prefab individual '{prefab.name}' en la ruta: {path}. Detalles del error: {ex.Message}\n{ex.StackTrace}");
+                        }
+                        finally
+                        {
+                            if (prefabInstance != null)
+                            {
+                                try
+                                {
+                                    PrefabUtility.UnloadPrefabContents(prefabInstance);
+                                }
+                                catch (System.Exception unloadEx)
+                                {
+                                    Debug.LogWarning($"[REDES][CORREGIR] Error al descargar contenidos del prefab '{prefab.name}': {unloadEx.Message}");
+                                }
+                            }
                         }
                     }
-                    Debug.Log($"[REDES][CORREGIR] Proceso terminado. Total de colliders eliminados: {totalRemoved}");
+                    Debug.Log($"[REDES][CORREGIR] Proceso terminado. Prefabs procesados con éxito: {successPrefabs}, Prefabs fallidos: {failedPrefabs}. Total de colliders eliminados: {totalRemoved}");
                 }
                 else
                 {
@@ -184,7 +229,7 @@ namespace Redes.EditorTools
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"[REDES][CORREGIR] ERROR eliminando colliders de Props: {ex.Message}\n{ex.StackTrace}");
+                Debug.LogError($"[REDES][CORREGIR] ERROR crítico general en el Paso Extra de Props: {ex.Message}\n{ex.StackTrace}");
             }
 
             AssetDatabase.SaveAssets();
