@@ -51,8 +51,16 @@ namespace Redes.Controllers
         {
             if (_localPlayer == null || _localPlayer.Object == null || !_localPlayer.Object.IsValid || _hudView == null) return;
 
+            // ── Estado textual ──────────────────────────────────────────────
             string state = "Quieto";
-            if (_localPlayer.Ammo != null && _localPlayer.Ammo.Object != null && _localPlayer.Ammo.Object.IsValid && _localPlayer.Ammo.IsReloading)
+
+            if (_localPlayer.Crouch != null && _localPlayer.Crouch.Object != null
+                && _localPlayer.Crouch.Object.IsValid && _localPlayer.Crouch.IsCrouching)
+            {
+                state = "Agachado";
+            }
+            else if (_localPlayer.Ammo != null && _localPlayer.Ammo.Object != null
+                && _localPlayer.Ammo.Object.IsValid && _localPlayer.Ammo.IsReloading)
             {
                 state = "Recargando";
             }
@@ -67,9 +75,24 @@ namespace Redes.Controllers
 
             _hudView.ShowState(state);
 
+            // ── Reload progress ─────────────────────────────────────────────
             if (_localPlayer.Ammo != null)
             {
                 _hudView.ShowReloadProgress(_localPlayer.Ammo.ReloadProgress);
+            }
+
+            // ── Teleport cooldown radial ────────────────────────────────────
+            if (_localPlayer.Teleport != null && _localPlayer.Teleport.Object != null
+                && _localPlayer.Teleport.Object.IsValid)
+            {
+                _hudView.ShowTeleportCooldown(_localPlayer.Teleport.CooldownProgress);
+            }
+
+            // ── Crouch indicator ────────────────────────────────────────────
+            if (_localPlayer.Crouch != null && _localPlayer.Crouch.Object != null
+                && _localPlayer.Crouch.Object.IsValid)
+            {
+                _hudView.ShowCrouch(_localPlayer.Crouch.IsCrouching);
             }
         }
     }

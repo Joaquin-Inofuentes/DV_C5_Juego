@@ -76,11 +76,17 @@ namespace Redes.Views
         private void OnEnable()
         {
             TryBindLocalPlayer();
+            // Ocultar cursor del sistema al entrar al juego
+            Cursor.visible   = false;
+            Cursor.lockState = CursorLockMode.None; // libre pero invisible
         }
 
         private void OnDisable()
         {
             UnbindEventBus();
+            // Restaurar cursor del sistema al salir (lobby, resultados, etc.)
+            Cursor.visible   = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         private void TryBindLocalPlayer()
@@ -110,10 +116,11 @@ namespace Redes.Views
 
             if (_eventBus != null)
             {
-                _eventBus.OnShoot += HandleShoot;
-                _eventBus.OnReload += HandleReload;
+                _eventBus.OnShoot       += HandleShoot;
+                _eventBus.OnReload      += HandleReload;
                 _eventBus.OnAmmoChanged += HandleAmmoChanged;
-                _eventBus.OnTookDamage += HandleTookDamage;
+                _eventBus.OnTookDamage  += HandleTookDamage;
+                _eventBus.OnTeleport    += HandleTeleport;
             }
         }
 
@@ -121,10 +128,11 @@ namespace Redes.Views
         {
             if (_eventBus != null)
             {
-                _eventBus.OnShoot -= HandleShoot;
-                _eventBus.OnReload -= HandleReload;
+                _eventBus.OnShoot       -= HandleShoot;
+                _eventBus.OnReload      -= HandleReload;
                 _eventBus.OnAmmoChanged -= HandleAmmoChanged;
-                _eventBus.OnTookDamage -= HandleTookDamage;
+                _eventBus.OnTookDamage  -= HandleTookDamage;
+                _eventBus.OnTeleport    -= HandleTeleport;
                 _eventBus = null;
             }
         }
@@ -171,7 +179,16 @@ namespace Redes.Views
 
         private void HandleTookDamage(int attackerId, GameObject bullet)
         {
-            // Player got hit, can shake or react if desired
+            // Player got hit → activar estado Hit
+            _isHitting  = true;
+            _hitTimer   = 0.2f;
+            _hitScale   = 1.4f;
+        }
+
+        private void HandleTeleport(Vector3 origin, Vector3 destination)
+        {
+            // Flash rápido al teletransportarse
+            _shootReboundScale = 2.0f;
         }
 
         private void Update()

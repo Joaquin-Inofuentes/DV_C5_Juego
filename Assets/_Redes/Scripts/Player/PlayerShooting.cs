@@ -40,6 +40,12 @@ namespace Redes.Player
             {
                 if (_ammo != null && !_ammo.TryConsume())
                 {
+                    // AUTO-RELOAD: si intentó disparar sin munición, recarga automáticamente
+                    if (!_ammo.IsReloading)
+                    {
+                        RedesLog.Info(RedesLog.AMMO, $"[Auto-Reload] Jugador {Object.InputAuthority} intentó disparar sin munición → recarga automática iniciada");
+                        _ammo.StartReload();
+                    }
                     return;
                 }
 

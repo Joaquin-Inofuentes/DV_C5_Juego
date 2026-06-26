@@ -48,17 +48,21 @@ namespace Redes.Player
         }
 
         [Header("Player systems (auto-assigned by the Prefab tool on the same prefab)")]
-        [SerializeField] private PlayerMovement _movement;
-        [SerializeField] private PlayerShooting _shooting;
-        [SerializeField] private PlayerHealth _health;
-        [SerializeField] private AmmoSystem _ammo;
-        [SerializeField] private PlayerEventBus _eventBus;
+        [SerializeField] private PlayerMovement  _movement;
+        [SerializeField] private PlayerShooting  _shooting;
+        [SerializeField] private PlayerHealth    _health;
+        [SerializeField] private AmmoSystem      _ammo;
+        [SerializeField] private PlayerEventBus  _eventBus;
+        [SerializeField] private PlayerCrouch    _crouch;
+        [SerializeField] private PlayerTeleport  _teleport;
 
-        public PlayerMovement Movement => _movement;
-        public PlayerShooting Shooting => _shooting;
-        public PlayerHealth Health => _health;
-        public AmmoSystem Ammo => _ammo;
-        public PlayerEventBus EventBus => _eventBus;
+        public PlayerMovement Movement  => _movement;
+        public PlayerShooting Shooting  => _shooting;
+        public PlayerHealth   Health    => _health;
+        public AmmoSystem     Ammo      => _ammo;
+        public PlayerEventBus EventBus  => _eventBus;
+        public PlayerCrouch   Crouch    => _crouch;
+        public PlayerTeleport Teleport  => _teleport;
 
         [Networked] private NetworkButtons _previousButtons { get; set; }
 
@@ -170,6 +174,10 @@ namespace Redes.Player
                 {
                     _ammo.StartReload();
                 }
+
+                // Crouch: se procesa en PlayerCrouch.FixedUpdateNetwork (lee el botón directo, no pressed)
+                // Teleport: se procesa en PlayerTeleport.FixedUpdateNetwork (requiere cooldown check)
+                // Ambos usan GetInput() internamente, por lo que no hay doble lectura.
             }
         }
     }

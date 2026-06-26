@@ -72,13 +72,15 @@ namespace Redes.EditorTools
             go.AddComponent<NetworkTransform>();
 
             // Player systems.
-            var net   = go.AddComponent<Player.NetworkPlayer>();
-            var move  = go.AddComponent<PlayerMovement>();
-            var shoot = go.AddComponent<PlayerShooting>();
-            var hp    = go.AddComponent<PlayerHealth>();
-            var ammo  = go.AddComponent<AmmoSystem>();
-            var peb   = go.AddComponent<PlayerEventBus>();
-            var animV = go.AddComponent<PlayerAnimationView>();
+            var net     = go.AddComponent<Player.NetworkPlayer>();
+            var move    = go.AddComponent<PlayerMovement>();
+            var shoot   = go.AddComponent<PlayerShooting>();
+            var hp      = go.AddComponent<PlayerHealth>();
+            var ammo    = go.AddComponent<AmmoSystem>();
+            var peb     = go.AddComponent<PlayerEventBus>();
+            var animV   = go.AddComponent<PlayerAnimationView>();
+            var crouch  = go.AddComponent<PlayerCrouch>();     // Mecánica extra: agacharse
+            var teleport= go.AddComponent<PlayerTeleport>();  // Mecánica extra: teletransporte
 
             // Setup AudioSource for 3D sound
             var audioSource = go.AddComponent<AudioSource>();
@@ -140,7 +142,8 @@ namespace Redes.EditorTools
 
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
-                              ("_ammo", ammo), ("_eventBus", peb));
+                              ("_ammo", ammo), ("_eventBus", peb),
+                              ("_crouch", crouch), ("_teleport", teleport));  // nuevas mecánicas
             AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform));
             AssignRefs(move,  ("_body", rb));
             AssignRefs(animV, ("_animator", animator), ("_eventBus", peb), ("_audioSource", audioSource),

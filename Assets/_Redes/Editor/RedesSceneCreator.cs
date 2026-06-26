@@ -312,6 +312,54 @@ namespace Redes.EditorTools
             slRt.anchorMin = new Vector2(0, 1); slRt.anchorMax = new Vector2(0, 1); slRt.pivot = new Vector2(0, 1);
             slRt.anchoredPosition = new Vector2(30, -150);
 
+            // --- Teleport Cooldown Radial (esquina inferior derecha) ---
+            var teleportContainer = new GameObject("TeleportHUD", typeof(RectTransform));
+            teleportContainer.transform.SetParent(hud.transform, false);
+            var tcRt = teleportContainer.GetComponent<RectTransform>();
+            tcRt.anchorMin = new Vector2(1, 0); tcRt.anchorMax = new Vector2(1, 0); tcRt.pivot = new Vector2(1, 0);
+            tcRt.anchoredPosition = new Vector2(-20, 20);
+            tcRt.sizeDelta = new Vector2(80, 100);
+
+            // Fondo negro semi-transparente del radial
+            var tcBg = new GameObject("TeleportBG", typeof(RectTransform));
+            tcBg.transform.SetParent(teleportContainer.transform, false);
+            var tcBgImg = tcBg.AddComponent<Image>();
+            tcBgImg.color = new Color(0, 0, 0, 0.4f);
+            var tcBgRt = tcBg.GetComponent<RectTransform>();
+            tcBgRt.anchorMin = Vector2.zero; tcBgRt.anchorMax = Vector2.one; tcBgRt.offsetMin = Vector2.zero; tcBgRt.offsetMax = Vector2.zero;
+
+            // Imagen radial (Image.Type.Filled Radial360)
+            var teleportRadialGo = new GameObject("TeleportRadial", typeof(RectTransform));
+            teleportRadialGo.transform.SetParent(teleportContainer.transform, false);
+            var trImg = teleportRadialGo.AddComponent<Image>();
+            trImg.type = Image.Type.Filled;
+            trImg.fillMethod = Image.FillMethod.Radial360;
+            trImg.fillOrigin = (int)Image.Origin360.Top;
+            trImg.fillClockwise = true;
+            trImg.fillAmount = 1f;
+            trImg.color = new Color(0.3f, 1f, 0.5f); // verde = listo
+            trImg.raycastTarget = false;
+            var trRt = teleportRadialGo.GetComponent<RectTransform>();
+            trRt.anchorMin = new Vector2(0.5f, 0.5f); trRt.anchorMax = new Vector2(0.5f, 0.5f); trRt.pivot = new Vector2(0.5f, 0.5f);
+            trRt.sizeDelta = new Vector2(64, 64);
+            trRt.anchoredPosition = new Vector2(0, 20);
+
+            // Texto "TELEPORT [SPACE]"
+            var teleportTextGo = NewText("TeleportText", teleportContainer.transform, font, "TELEPORT\n[SPACE]", Vector2.zero, 12, TextAnchor.MiddleCenter);
+            var ttRt = teleportTextGo.rectTransform;
+            ttRt.anchorMin = new Vector2(0, 0); ttRt.anchorMax = new Vector2(1, 0); ttRt.pivot = new Vector2(0.5f, 0);
+            ttRt.anchoredPosition = new Vector2(0, 5);
+            ttRt.sizeDelta = new Vector2(0, 24);
+            teleportTextGo.color = Color.white;
+
+            // --- Crouch Indicator (esquina inferior izquierda) ---
+            var crouchTextGo = NewText("CrouchText", hud.transform, font, "AGACHADO", Vector2.zero, 18, TextAnchor.MiddleLeft);
+            var ctRt = crouchTextGo.rectTransform;
+            ctRt.anchorMin = new Vector2(0, 0); ctRt.anchorMax = new Vector2(0, 0); ctRt.pivot = new Vector2(0, 0);
+            ctRt.anchoredPosition = new Vector2(20, 20);
+            crouchTextGo.color = new Color(1f, 0.9f, 0.3f); // amarillo
+            crouchTextGo.gameObject.SetActive(false); // oculto por defecto
+
             // --- Entity Display Overlay Panel (for enemy/player overhead health bars) ---
             NewUiPanel("EntityDisplayPanel", canvasGo.transform);
 

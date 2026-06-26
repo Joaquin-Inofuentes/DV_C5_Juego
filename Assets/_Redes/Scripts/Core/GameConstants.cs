@@ -25,5 +25,15 @@ namespace Redes.Core
         // --- Extra mechanic: Ammo / Reload ---
         public const int   DEFAULT_MAGAZINE_SIZE = 6;
         public const float DEFAULT_RELOAD_TIME   = 1.5f;
+
+        // --- Extra mechanic: Teleport ---
+        // Rango máximo del teletransporte (unidades de mundo).
+        public const float TELEPORT_RANGE        = 8f;
+        // Segundos de cooldown antes de poder volver a teletransportarse.
+        public const float TELEPORT_COOLDOWN     = 2f;
+
+        // --- Extra mechanic: Crouch ---
+        // Factor de escala Y cuando el jugador está agachado (50 %).
+        public const float CROUCH_SCALE_Y        = 0.5f;
     }
 }

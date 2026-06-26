@@ -31,6 +31,12 @@ namespace Redes.Player
         // 7. Cambio de munición (CurrentAmmo, MaxMagazine)
         public Action<int, int> OnAmmoChanged;
 
+        // 8. Agacharse/levantarse (mecánica extra)
+        public Action<bool> OnCrouch;
+
+        // 9. Teletransporte (mecánica extra) — posición de origen y destino
+        public Action<Vector3, Vector3> OnTeleport;
+
         public void TriggerTookDamage(int attackerId, GameObject bulletObj)
         {
             OnTookDamage?.Invoke(attackerId, bulletObj);
@@ -64,6 +70,16 @@ namespace Redes.Player
         public void TriggerAmmoChanged(int currentAmmo, int maxMagazine)
         {
             OnAmmoChanged?.Invoke(currentAmmo, maxMagazine);
+        }
+
+        public void TriggerCrouch(bool isCrouching)
+        {
+            OnCrouch?.Invoke(isCrouching);
+        }
+
+        public void TriggerTeleport(Vector3 origin, Vector3 destination)
+        {
+            OnTeleport?.Invoke(origin, destination);
         }
     }
 }

@@ -102,10 +102,13 @@ namespace Redes.EditorTools
                 ("_t600Button", ChildComp<Button>(lobby, "T600Button")),
                 ("_lionButton", ChildComp<Button>(lobby, "LionButton")));
             Assign(hud,
-                ("_healthText", ChildText(hud, "HealthText")),
-                ("_ammoText", ChildText(hud, "AmmoText")),
-                ("_stateText", ChildText(hud, "StateText")),
-                ("_reloadSlider", ChildComp<Slider>(hud, "ReloadSlider")));
+                ("_healthText",    ChildText(hud, "HealthText")),
+                ("_ammoText",      ChildText(hud, "AmmoText")),
+                ("_stateText",     ChildText(hud, "StateText")),
+                ("_reloadSlider",  ChildComp<Slider>(hud, "ReloadSlider")),
+                ("_teleportRadial",ChildComp<Image>(hud, "TeleportRadial")),
+                ("_teleportText",  ChildText(hud, "TeleportText")),
+                ("_crouchText",    ChildText(hud, "CrouchText")));
             Assign(result,
                 ("_resultText", ChildText(result, "ResultText")),
                 ("_panelRoot", ChildGO(result, "ResultPanel")),
