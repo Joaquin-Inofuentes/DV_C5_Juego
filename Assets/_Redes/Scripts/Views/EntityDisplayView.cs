@@ -30,16 +30,20 @@ namespace Redes.Views
             }
         }
 
+        [Header("Positioning")]
+        public float YOffset = -120f; // Ajuste para posicionar la barra debajo del personaje (4 o 5 veces el tamaño habitual hacia abajo)
+        public float XOffset = 0f;
+
         public void SetPosition(Vector2 screenPos)
         {
             var rect = transform as RectTransform;
             if (rect != null)
             {
-                rect.position = screenPos;
+                rect.position = new Vector3(screenPos.x + XOffset, screenPos.y + YOffset, 0f);
             }
             else
             {
-                transform.position = screenPos;
+                transform.position = new Vector3(screenPos.x + XOffset, screenPos.y + YOffset, 0f);
             }
         }
 
