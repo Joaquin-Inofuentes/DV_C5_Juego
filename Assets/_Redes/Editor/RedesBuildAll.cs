@@ -92,7 +92,7 @@ namespace Redes.EditorTools
                 Debug.LogError("[REDES][BUILD] Build FALLO: " + report.summary.totalErrors + " errores");
         }
 
-        [MenuItem("Redes/Corregir", priority = 1)]
+        // MenuItem removido para limpiar la opción Redes > Corregir
         public static void Corregir()
         {
             Debug.Log("[REDES][BOOT] Version2 mejorada");

@@ -41,6 +41,11 @@ public class UnitView : MonoBehaviour
     public float barWidth = 60f;
     public Vector2 offset = new Vector2(0, 50);
 
+    [Header("Audio (MVC)")]
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    public AudioClip damageSound;
+
     private Dictionary<IndicatorType, Coroutine> _activeBlinkRoutines = new Dictionary<IndicatorType, Coroutine>();
 
     void Awake()
@@ -500,5 +505,25 @@ public class UnitView : MonoBehaviour
     {
         if (selectionRing != null)
             selectionRing.SetActive(isActive);
+    }
+
+    public void PlayShootSound()
+    {
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.spatialBlend = 1f;
+            audioSource.PlayOneShot(shootSound);
+            Debug.Log($"<color=cyan>[UnitView]</color> PlayShootSound reproducido en {gameObject.name}");
+        }
+    }
+
+    public void PlayDamageSound()
+    {
+        if (audioSource != null && damageSound != null)
+        {
+            audioSource.spatialBlend = 1f;
+            audioSource.PlayOneShot(damageSound);
+            Debug.Log($"<color=cyan>[UnitView]</color> PlayDamageSound reproducido en {gameObject.name}");
+        }
     }
 }

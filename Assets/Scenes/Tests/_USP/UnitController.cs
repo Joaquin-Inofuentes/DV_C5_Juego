@@ -109,11 +109,16 @@ namespace Game.Squad
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             view.RotateGraphicsSmooth(angle, 10f);
 
-            // L�gica de disparo con cooldown
+            // Lógica de disparo con cooldown
             if (Time.time >= nextFireTime && model.CanFire())
             {
                 shooter.Disparar();
                 model.ConsumeAmmo();
+                
+                // MVC: Notificar a View para sonido
+                view.PlayShootSound();
+                Debug.Log($"<color=cyan>[MVC]</color> UnitController ordenando a View reproducir sonido de Disparo en {name}");
+
                 nextFireTime = Time.time + model.fireRate;
             }
         }
@@ -241,6 +246,10 @@ namespace Game.Squad
 
             model.TakeDamage(cantidad, atacante);
             view.TriggerFlash();
+
+            // MVC: Notificar a View para sonido de daño
+            view.PlayDamageSound();
+            Debug.Log($"<color=cyan>[MVC]</color> UnitController ordenando a View reproducir sonido de Daño recibido en {name}");
 
             // Debug.Log($"<color=red>[Daño]</color> {name} recibió {cantidad} de {(atacante != null ? atacante.name : "desconocido")}. HP: {model.healthActual}/{model.healthMax}");
 
