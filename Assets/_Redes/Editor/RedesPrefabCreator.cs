@@ -132,13 +132,21 @@ namespace Redes.EditorTools
             muzzle.transform.SetParent(go.transform, false);
             muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f); // ~chest height, forward
 
-            // Load audio clips
-            var shootClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/ShootRealistic.ogg");
-            var reloadClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Click.wav");
-            var deathClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
+            // ─── Cargar clips de audio importados ─────────────────────────────────
+            // 3 Disparos distintos por jugador (PlayerId determina cuál usa cada uno)
+            var shoot1 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo1.wav");
+            var shoot2 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo2.wav");
+            var shoot3 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo3.wav");
+            // 4 clips de dolor aleatorios al recibir daño
+            var ouch1  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano1.wav");
+            var ouch2  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano2.wav");
+            var ouch3  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano3.wav");
+            var ouch4  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano4.wav");
+            // Recarga y pasos
+            var reloadClip   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Recargar.wav");
+            var deathClip    = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
             var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
-            var hitClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
-            var ouchClip = AssetDatabase.LoadAssetAtPath<AudioClip>(RedesProceduralAudio.OuchPath);
+            var hitClip      = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
 
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
@@ -146,11 +154,18 @@ namespace Redes.EditorTools
                               ("_crouch", crouch), ("_teleport", teleport));  // nuevas mecánicas
             AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform));
             AssignRefs(move,  ("_body", rb));
+
+            // Asignar campos escalares de animV
             AssignRefs(animV, ("_animator", animator), ("_eventBus", peb), ("_audioSource", audioSource),
-                              ("_shootSound", shootClip), ("_reloadSound", reloadClip),
-                              ("_deathSound", deathClip), ("_footstepSound", footstepClip),
-                              ("_ouchSound", ouchClip));
-            AssignRefs(hp,    ("_hitSound", hitClip));
+                              ("_reloadSound", reloadClip),
+                              ("_deathSound", deathClip), ("_footstepSound", footstepClip));
+            // Asignar arrays de clips en animV
+            AssignArrayRefs(animV, "_shootSounds",
+                new AudioClip[] { shoot1, shoot2, shoot3 });
+            AssignArrayRefs(animV, "_ouchSounds",
+                new AudioClip[] { ouch1, ouch2, ouch3, ouch4 });
+
+            AssignRefs(hp, ("_hitSound", hitClip));
 
             PrefabUtility.SaveAsPrefabAsset(go, PlayerPrefabPath);
             Object.DestroyImmediate(go);
@@ -451,6 +466,29 @@ namespace Redes.EditorTools
                 var prop = so.FindProperty(field);
                 if (prop != null) prop.objectReferenceValue = value;
                 else Debug.LogWarning($"[REDES][LINK] Campo '{field}' no encontrado en {target.GetType().Name}");
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        /// <summary>Asigna un array de AudioClips a un campo serializado de tipo AudioClip[].</summary>
+        private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips)
+        {
+            if (target == null || clips == null) return;
+            var so   = new SerializedObject(target);
+            var prop = so.FindProperty(fieldName);
+            if (prop == null)
+            {
+                Debug.LogWarning($"[REDES][LINK] Array field '{fieldName}' no encontrado en {target.GetType().Name}");
+                return;
+            }
+            prop.ClearArray();
+            prop.arraySize = clips.Length;
+            for (int i = 0; i < clips.Length; i++)
+            {
+                var elem = prop.GetArrayElementAtIndex(i);
+                elem.objectReferenceValue = clips[i];
+                if (clips[i] == null)
+                    Debug.LogWarning($"[REDES][LINK] Clip[{i}] en '{fieldName}' es null — verificá la ruta de Audio/Importados/");
             }
             so.ApplyModifiedPropertiesWithoutUndo();
         }

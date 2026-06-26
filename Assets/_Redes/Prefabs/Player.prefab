@@ -255,8 +255,8 @@ MonoBehaviour:
   _animator: {fileID: 802532596272001718}
   _eventBus: {fileID: 1659807546825643443}
   _audioSource: {fileID: 2197367697350939627}
-  _shootSound: {fileID: 8300000, guid: 0ce23e9095ca8dd4b9561ca8ff0145ac, type: 3}
-  _reloadSound: {fileID: 8300000, guid: 8394670cdd20419478437ae82dbdc1b8, type: 3}
+  _shootSound: {fileID: 8300000, guid: 0b57219e603334e43aa8b4bc8a7719af, type: 3}
+  _reloadSound: {fileID: 8300000, guid: ceddc220f3826d047bab08712b5742e5, type: 3}
   _deathSound: {fileID: 8300000, guid: 80bcfb9a8e320f1489968d6071eef5b2, type: 3}
   _footstepSound: {fileID: 8300000, guid: 1c696fad07bb73f4d9de7fcad4f547a9, type: 3}
   _ouchSound: {fileID: 8300000, guid: 346573fa4638f944eb1d3f114dc5d656, type: 3}

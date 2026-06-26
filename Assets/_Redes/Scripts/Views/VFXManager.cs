@@ -15,7 +15,7 @@ namespace Redes.Views
 
         [Header("SFX")]
         [SerializeField] private AudioClip _obstacleHitSound;
-        [SerializeField] private AudioClip _ouchSound;
+        [SerializeField] private AudioClip[] _ouchSounds;   // Varios clips de dolor (reproducidos aleatoriamente)
         [SerializeField] private AudioMixerGroup _sfxGroup;
 
         private List<ParticleSystem> _muzzlePool = new List<ParticleSystem>();
@@ -148,10 +148,12 @@ namespace Redes.Views
 
         public void PlayOuch(Vector3 position)
         {
-            if (_ouchSound != null)
+            if (_ouchSounds == null || _ouchSounds.Length == 0) return;
+            var clip = _ouchSounds[Random.Range(0, _ouchSounds.Length)];
+            if (clip != null)
             {
-                RedesLog.Info(RedesLog.VFX, $"[SFX] Ouch sound at {position}");
-                PlayClipAtPointRouted(_ouchSound, position, 0.8f);
+                RedesLog.Info(RedesLog.VFX, $"[SFX] Ouch sound '{clip.name}' at {position}");
+                PlayClipAtPointRouted(clip, position, 0.75f);
             }
         }
 

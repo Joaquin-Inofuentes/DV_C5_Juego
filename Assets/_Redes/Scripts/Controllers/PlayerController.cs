@@ -20,6 +20,7 @@ namespace Redes.Controllers
     {
         [Header("View (assigned by Tools > Redes > Link & Assign All)")]
         [SerializeField] private GameHudView _hudView;
+        [SerializeField] private TeleportCooldownView _teleportCooldownView;
 
         // Local view-model the HUD binds to.
         private PlayerModel _model;
@@ -44,6 +45,15 @@ namespace Redes.Controllers
             {
                 _localPlayer.Ammo.OnAmmoChanged += _model.SetAmmo;
                 _model.SetAmmo(_localPlayer.Ammo.CurrentAmmo);
+            }
+
+            // Bindear TeleportCooldownView al jugador local (CONTROLLER conecta Modelo ↔ Vista)
+            if (_teleportCooldownView != null && _localPlayer.Teleport != null)
+            {
+                _teleportCooldownView.Bind(
+                    _localPlayer.Teleport,
+                    _localPlayer.EventBus,
+                    _localPlayer.transform);
             }
         }
 
@@ -81,12 +91,9 @@ namespace Redes.Controllers
                 _hudView.ShowReloadProgress(_localPlayer.Ammo.ReloadProgress);
             }
 
-            // ── Teleport cooldown radial ────────────────────────────────────
-            if (_localPlayer.Teleport != null && _localPlayer.Teleport.Object != null
-                && _localPlayer.Teleport.Object.IsValid)
-            {
-                _hudView.ShowTeleportCooldown(_localPlayer.Teleport.CooldownProgress);
-            }
+            // ── Teleport cooldown radial ─────────────────────────────────────
+            // TeleportCooldownView se actualiza a si misma en Update().
+            // GameHudView.ShowTeleportCooldown() ya no se usa (reemplazado por TeleportCooldownView).
 
             // ── Crouch indicator ────────────────────────────────────────────
             if (_localPlayer.Crouch != null && _localPlayer.Crouch.Object != null

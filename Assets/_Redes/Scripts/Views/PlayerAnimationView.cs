@@ -11,12 +11,19 @@ namespace Redes.Views
         [SerializeField] private PlayerEventBus _eventBus;
         [SerializeField] private AudioSource _audioSource;
 
-        [Header("SFX Clips")]
-        [SerializeField] private AudioClip _shootSound;
+        [Header("SFX Clips - Disparos (1 por jugador, selección por PlayerId % length)")]
+        [SerializeField] private AudioClip[] _shootSounds;   // [0]=Disparo1, [1]=Disparo2, [2]=Disparo3
+
+        [Header("SFX Clips - Impacto (aleatorio al recibir daño)")]
+        [SerializeField] private AudioClip[] _ouchSounds;    // [0..3]=RecibirDano1..4
+
+        [Header("SFX Clips - Generales")]
         [SerializeField] private AudioClip _reloadSound;
         [SerializeField] private AudioClip _deathSound;
         [SerializeField] private AudioClip _footstepSound;
-        [SerializeField] private AudioClip _ouchSound;
+
+        // PlayerId del jugador local (cacheado en Start para selección de SFX)
+        private int _cachedPlayerId = 1;
 
         [Header("Footstep Settings")]
         [SerializeField] private float _footstepInterval = 0.38f;
@@ -58,6 +65,10 @@ namespace Redes.Views
                 _lastShootCount = _shooting != null ? _shooting.ShootCount : 0;
                 _lastIsReloading = _ammo != null && _ammo.IsReloading;
                 _lastHealth = _health != null ? _health.CurrentHealth : 100;
+
+                // Cachear PlayerId para selección de clip de disparo
+                if (_netPlayer != null && _netPlayer.Object != null && _netPlayer.Object.IsValid)
+                    _cachedPlayerId = _netPlayer.Object.InputAuthority.PlayerId;
 
                 // Debug.Log($"[REDES][NET_ANIM] Player '{_netPlayer.Nickname}' (ID: {_netPlayer.Object.InputAuthority.PlayerId}) animation view initialized in NETWORKED mode.");
             }
@@ -168,9 +179,9 @@ namespace Redes.Views
 
                 if (_audioSource != null)
                 {
-                    _audioSource.pitch = 0.125f; // Play at eighth speed (double duration)
+                    _audioSource.pitch = 1.0f;
                 }
-                PlaySound3D(_shootSound, 0.8f);
+                PlaySound3D(SelectShootClip(_cachedPlayerId), 0.85f);
 
                 PlayMuzzleFlashEffect();
             }
@@ -224,9 +235,9 @@ namespace Redes.Views
                     {
                         int dmg = _lastHealth - currentHealth;
                         RedesLog.Info(RedesLog.VFX, $"[NET_ANIM] Player '{_netPlayer.Nickname}' ({(isLocal ? "LOCAL" : "REMOTE")}) TOOK DAMAGE (-{dmg}). Health: {currentHealth}. OuchSFX triggered.");
-                        // Play ouch sound on damage
-                        PlaySound3D(_ouchSound, 0.9f);
-                        // Also play via VFXManager for positional audio
+                        // Play ouch sound aleatorio al recibir daño (VIEW elige clip, modelo no sabe nada de audio)
+                        PlaySound3D(SelectRandomOuchClip(), 0.95f);
+                        // También reproducir en VFXManager para audio 3D posicional del enemigo
                         if (VFXManager.Instance != null)
                         {
                             VFXManager.Instance.PlayOuch(transform.position);
@@ -315,10 +326,10 @@ namespace Redes.Views
 
             if (_audioSource != null)
             {
-                _audioSource.pitch = animSpeed * 0.125f;
+                _audioSource.pitch = 1.0f;
             }
 
-            PlaySound3D(_shootSound, 0.8f);
+            PlaySound3D(SelectShootClip(_cachedPlayerId), 0.85f);
             PlayMuzzleFlashEffect();
         }
 
@@ -381,6 +392,24 @@ namespace Redes.Views
         // ──────────────────────────────────────────────────────────────────
         //  COMMON AUDIO & VFX UTILITIES
         // ──────────────────────────────────────────────────────────────────
+        // ─── Selección de clips (lógica de presentación, puramente en la Vista) ──
+        /// <summary>Selecciona el clip de disparo según el PlayerId del jugador (1-indexado).</summary>
+        private AudioClip SelectShootClip(int playerId)
+        {
+            if (_shootSounds == null || _shootSounds.Length == 0) return null;
+            // PlayerId 1 → índice 0, PlayerId 2 → índice 1, resto → módulo
+            int idx = (playerId - 1) % _shootSounds.Length;
+            if (idx < 0) idx = 0;
+            return _shootSounds[idx];
+        }
+
+        /// <summary>Selecciona un clip de dolor/impacto de forma aleatoria.</summary>
+        private AudioClip SelectRandomOuchClip()
+        {
+            if (_ouchSounds == null || _ouchSounds.Length == 0) return null;
+            return _ouchSounds[Random.Range(0, _ouchSounds.Length)];
+        }
+
         private void PlaySound3D(AudioClip clip, float volume = 1f)
         {
             if (clip == null) return;

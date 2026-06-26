@@ -337,7 +337,7 @@ namespace Redes.EditorTools
             trImg.fillOrigin = (int)Image.Origin360.Top;
             trImg.fillClockwise = true;
             trImg.fillAmount = 1f;
-            trImg.color = new Color(0.3f, 1f, 0.5f); // verde = listo
+            trImg.color = new Color(1.00f, 0.88f, 0.00f, 1f); // amarillo = listo (TeleportCooldownView lo actualiza)
             trImg.raycastTarget = false;
             var trRt = teleportRadialGo.GetComponent<RectTransform>();
             trRt.anchorMin = new Vector2(0.5f, 0.5f); trRt.anchorMax = new Vector2(0.5f, 0.5f); trRt.pivot = new Vector2(0.5f, 0.5f);
@@ -359,6 +359,15 @@ namespace Redes.EditorTools
             ctRt.anchoredPosition = new Vector2(20, 20);
             crouchTextGo.color = new Color(1f, 0.9f, 0.3f); // amarillo
             crouchTextGo.gameObject.SetActive(false); // oculto por defecto
+
+            // --- TeleportCooldownView: View MVC dedicada al cooldown ---
+            // Se agrega al mismo GameObject que GameHudView para que el SceneLinker la encuentre.
+            var teleportCooldownView = hud.AddComponent<TeleportCooldownView>();
+            // Wired en SceneLinker (referenciar radialImage y labelText)
+            var soTcv = new SerializedObject(teleportCooldownView);
+            soTcv.FindProperty("_radialImage").objectReferenceValue = trImg;
+            soTcv.FindProperty("_labelText").objectReferenceValue   = teleportTextGo;
+            soTcv.ApplyModifiedPropertiesWithoutUndo();
 
             // --- Entity Display Overlay Panel (for enemy/player overhead health bars) ---
             NewUiPanel("EntityDisplayPanel", canvasGo.transform);

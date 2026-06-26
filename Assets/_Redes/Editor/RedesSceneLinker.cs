@@ -48,7 +48,15 @@ namespace Redes.EditorTools
             var bulletPrefabNo = bulletPrefab != null ? bulletPrefab.GetComponent<NetworkObject>() : null;
 
             // ---- Load AudioClips ----
-            var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/ShootRealistic.ogg");
+            // Clips de disparo importados (1 por jugador según PlayerId)
+            var shootSound1 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo1.wav");
+            var shootSound2 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo2.wav");
+            var shootSound3 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_Disparo3.wav");
+            // Clips de daño importados (aleatorios)
+            var ouch1 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano1.wav");
+            var ouch2 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano2.wav");
+            var ouch3 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano3.wav");
+            var ouch4 = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/Importados/SFX_RecibirDano4.wav");
             var hitSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
             var winSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Win.wav");
             var loseSound  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
@@ -72,7 +80,11 @@ namespace Redes.EditorTools
             Assign(flow, ("_hostService", host), ("_lobbyView", lobby),
                          ("_gameHudView", hud), ("_matchController", match));
             Assign(match, ("_resultView", result));
-            Assign(player, ("_hudView", hud));
+
+            // Buscar TeleportCooldownView en escena y linkear al PlayerController
+            var teleportCooldownView = Find<TeleportCooldownView>();
+            Assign(player, ("_hudView", hud), ("_teleportCooldownView", teleportCooldownView));
+
             Assign(matchNet, ("_matchController", match), 
                              ("_winSound", winSound), 
                              ("_loseSound", loseSound), 
@@ -131,8 +143,24 @@ namespace Redes.EditorTools
                     Assign(playerPrefab.GetComponent<PlayerHealth>(), ("_eventBus", eventBus), ("_hitSound", hitSound));
                     Assign(playerPrefab.GetComponent<PlayerShooting>(), ("_eventBus", eventBus));
                     Assign(playerPrefab.GetComponent<AmmoSystem>(), ("_eventBus", eventBus));
-                    Assign(playerPrefab.GetComponent<Redes.Views.PlayerAnimationView>(), ("_shootSound", shootSound));
+
+                    // Asignar arrays de audio importados en el prefab del jugador
+                    var animView = playerPrefab.GetComponent<Redes.Views.PlayerAnimationView>();
+                    if (animView != null)
+                    {
+                        AssignArrayRefs(animView, "_shootSounds",
+                            new AudioClip[] { shootSound1, shootSound2, shootSound3 });
+                        AssignArrayRefs(animView, "_ouchSounds",
+                            new AudioClip[] { ouch1, ouch2, ouch3, ouch4 });
+                    }
                 }
+            }
+
+            // Asignar ouchSounds al VFXManager (para audio 3D posicional del enemigo)
+            if (vfxManager != null)
+            {
+                AssignArrayRefs(vfxManager, "_ouchSounds",
+                    new AudioClip[] { ouch1, ouch2, ouch3, ouch4 });
             }
 
             // ---- Link persistent actions to buttons ----
@@ -282,6 +310,30 @@ namespace Redes.EditorTools
             {
                 UnityEventTools.RemovePersistentListener(unityEvent, 0);
             }
+        }
+
+        /// <summary>Asigna un array de AudioClips a un campo serializado de tipo AudioClip[].</summary>
+        private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips)
+        {
+            if (target == null || clips == null) return;
+            var so   = new SerializedObject(target);
+            var prop = so.FindProperty(fieldName);
+            if (prop == null)
+            {
+                Debug.LogWarning($"[REDES][LINK] Array field '{fieldName}' no encontrado en {target.GetType().Name}");
+                return;
+            }
+            prop.ClearArray();
+            prop.arraySize = clips.Length;
+            for (int i = 0; i < clips.Length; i++)
+            {
+                var elem = prop.GetArrayElementAtIndex(i);
+                elem.objectReferenceValue = clips[i];
+                if (clips[i] == null)
+                    Debug.LogWarning($"[REDES][LINK] Clip[{i}] en '{fieldName}' es null — verificá la ruta en Audio/Importados/");
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(target);
         }
     }
 }
