@@ -255,11 +255,18 @@ MonoBehaviour:
   _animator: {fileID: 802532596272001718}
   _eventBus: {fileID: 1659807546825643443}
   _audioSource: {fileID: 2197367697350939627}
-  _shootSound: {fileID: 8300000, guid: 0b57219e603334e43aa8b4bc8a7719af, type: 3}
-  _reloadSound: {fileID: 8300000, guid: ceddc220f3826d047bab08712b5742e5, type: 3}
+  _shootSounds:
+  - {fileID: 8300000, guid: 868fb5ba59af1bf4daecd9112658fbf4, type: 3}
+  - {fileID: 8300000, guid: c50f190258e2a9a418b51499c5f51199, type: 3}
+  - {fileID: 8300000, guid: d1ff714b8cc69b24184f2645ebbfe2af, type: 3}
+  _ouchSounds:
+  - {fileID: 8300000, guid: 110d7a622cf0623428b22aedded160ab, type: 3}
+  - {fileID: 8300000, guid: 1ffa4274a3d083847b076c57cb0c2d02, type: 3}
+  - {fileID: 8300000, guid: 7b4f8ca2cb0e48645b48d657099454ce, type: 3}
+  - {fileID: 8300000, guid: 84ff8b631cbefe944ac19fafad8a5882, type: 3}
+  _reloadSound: {fileID: 8300000, guid: a3524e27facff02419d96bc9b67d23c8, type: 3}
   _deathSound: {fileID: 8300000, guid: 80bcfb9a8e320f1489968d6071eef5b2, type: 3}
   _footstepSound: {fileID: 8300000, guid: 1c696fad07bb73f4d9de7fcad4f547a9, type: 3}
-  _ouchSound: {fileID: 8300000, guid: 346573fa4638f944eb1d3f114dc5d656, type: 3}
   _footstepInterval: 0.38
 --- !u!114 &3127250213055132550
 MonoBehaviour:

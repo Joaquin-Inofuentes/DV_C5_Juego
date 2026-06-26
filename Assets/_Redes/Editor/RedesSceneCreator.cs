@@ -193,10 +193,8 @@ namespace Redes.EditorTools
 
             // Load and assign SFX clips for VFXManager
             var obstacleHitClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.ObstacleHitPath);
-            var ouchClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.OuchPath);
             var sfxGroup = Redes.EditorTools.RedesAudioSetup.GetGroup("SFX");
             soVfx.FindProperty("_obstacleHitSound").objectReferenceValue = obstacleHitClip;
-            soVfx.FindProperty("_ouchSound").objectReferenceValue = ouchClip;
             soVfx.FindProperty("_sfxGroup").objectReferenceValue = sfxGroup;
             soVfx.ApplyModifiedPropertiesWithoutUndo();
 

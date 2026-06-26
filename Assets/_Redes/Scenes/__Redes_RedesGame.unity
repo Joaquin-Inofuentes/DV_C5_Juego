@@ -395,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hudView: {fileID: 1477624764}
+  _teleportCooldownView: {fileID: 0}
 --- !u!114 &59622028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7184,7 +7185,11 @@ MonoBehaviour:
   _muzzleFlashPrefab: {fileID: 1817314169}
   _sparkVfxPrefab: {fileID: 1701588944}
   _obstacleHitSound: {fileID: 8300000, guid: 6538317da4adcc44e889aef39d896ecb, type: 3}
-  _ouchSound: {fileID: 8300000, guid: 346573fa4638f944eb1d3f114dc5d656, type: 3}
+  _ouchSounds:
+  - {fileID: 8300000, guid: 110d7a622cf0623428b22aedded160ab, type: 3}
+  - {fileID: 8300000, guid: 1ffa4274a3d083847b076c57cb0c2d02, type: 3}
+  - {fileID: 8300000, guid: 7b4f8ca2cb0e48645b48d657099454ce, type: 3}
+  - {fileID: 8300000, guid: 84ff8b631cbefe944ac19fafad8a5882, type: 3}
   _sfxGroup: {fileID: 0}
 --- !u!4 &884728637
 Transform:

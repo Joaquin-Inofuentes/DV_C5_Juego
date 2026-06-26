@@ -304,7 +304,9 @@ namespace Redes.EditorTools
             var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
 
             Assign(animView, "_audioSource", audioSource);
-            Assign(animView, "_shootSound", shootClip);
+            AssignArrayRefs(animView, "_shootSounds", new[] { shootClip });
+            // Agregamos un ouch falso para evitar errores si no hay importados
+            AssignArrayRefs(animView, "_ouchSounds", new[] { shootClip }); // usando shoot como dummy ouch
             Assign(animView, "_reloadSound", reloadClip);
             Assign(animView, "_deathSound", deathClip);
             Assign(animView, "_footstepSound", footstepClip);
@@ -655,11 +657,38 @@ namespace Redes.EditorTools
 
         private static void Assign(Object target, string field, Object value)
         {
-            if (target == null) { Debug.LogWarning($"[TEST][BUILDER] target null al asignar '{field}'"); return; }
-            var so = new UnityEditor.SerializedObject(target);
+            if (target == null) return;
+            var so = new SerializedObject(target);
             var prop = so.FindProperty(field);
-            if (prop != null) { prop.objectReferenceValue = value; so.ApplyModifiedPropertiesWithoutUndo(); }
-            else Debug.LogWarning($"[TEST][BUILDER] Campo '{field}' no encontrado en {target.GetType().Name}");
+            if (prop != null)
+            {
+                prop.objectReferenceValue = value;
+                so.ApplyModifiedPropertiesWithoutUndo();
+            }
+            else
+            {
+                Debug.LogWarning($"[TEST][BUILDER] Campo '{field}' no encontrado en {target.GetType().Name}");
+            }
+        }
+
+        private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips)
+        {
+            if (target == null || clips == null) return;
+            var so   = new SerializedObject(target);
+            var prop = so.FindProperty(fieldName);
+            if (prop == null)
+            {
+                Debug.LogWarning($"[TEST][BUILDER] Array field '{fieldName}' no encontrado en {target.GetType().Name}");
+                return;
+            }
+            prop.ClearArray();
+            prop.arraySize = clips.Length;
+            for (int i = 0; i < clips.Length; i++)
+            {
+                var elem = prop.GetArrayElementAtIndex(i);
+                elem.objectReferenceValue = clips[i];
+            }
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static GameObject CreatePanel(Transform parent, Vector2 anchorMin, Vector2 anchorMax,
