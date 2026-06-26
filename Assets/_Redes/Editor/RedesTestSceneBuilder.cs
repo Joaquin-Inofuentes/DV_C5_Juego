@@ -555,7 +555,7 @@ namespace Redes.EditorTools
             // Create CustomCursorView on Canvas
             var cursorView = canvasGo.AddComponent<CustomCursorView>();
             Assign(cursorView, "_eventBus", peb);
-            var globalBus = AssetDatabase.LoadAssetAtPath<GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
+            var globalBus = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
             Assign(cursorView, "_globalEventBus", globalBus);
 
             // Load cursor sprites and assign them
