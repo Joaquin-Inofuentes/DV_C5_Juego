@@ -31,7 +31,7 @@ namespace Redes.Combat
 
         public override void Spawned()
         {
-            RedesLog.Info(RedesLog.COMBAT, $"[Bullet Spawned] ObjetoId: {Object.Id}, HasStateAuthority: {Object.HasStateAuthority}, Owner: {Owner}, Posición: {transform.position}");
+            RedesLog.Info(RedesLog.COMBAT, $"[Bullet Spawned] ObjetoId: {Object.Id}, HasStateAuthority: {Object.HasStateAuthority}, Owner: {Owner}, Posición: {transform.position}\nStack Trace:\n{System.Environment.StackTrace}");
             
             if (Object.HasStateAuthority)
             {
@@ -67,10 +67,11 @@ namespace Redes.Combat
                     var netPlayer = hit.GetComponentInParent<NetworkPlayer>();
                     if (netPlayer != null && netPlayer.Object.InputAuthority == Owner)
                     {
+                        RedesLog.Info(RedesLog.COMBAT, $"[Projectile] ObjetoId: {Object.Id} colisionó con su Owner ({Owner}). Ignorando...");
                         continue;
                     }
 
-                    RedesLog.Info(RedesLog.COMBAT, $">> Projectile.Hit: owner={Owner} target={hit.name} damage={_damage}");
+                    RedesLog.Info(RedesLog.COMBAT, $">> Projectile.Hit: owner={Owner} target={hit.name} (IDamageable) damage={_damage}\nStack Trace:\n{System.Environment.StackTrace}");
                     try
                     {
                         RedesLog.Info(RedesLog.COMBAT, $">> Projectile: [IN] Calling damageable.TakeDamage(amount={_damage}, Owner={Owner})");
@@ -97,7 +98,7 @@ namespace Redes.Combat
                 else if (hit.gameObject.layer == 6 || hit.CompareTag("Obstacle"))
                 {
                     // Hit obstacle
-                    RedesLog.Info(RedesLog.VFX, $"[PROJECTILE] Bullet {Object.Id} hit obstacle '{hit.name}' at {transform.position}. Sending RpcPlaySparkVfx to all clients.");
+                    RedesLog.Info(RedesLog.VFX, $"[PROJECTILE] Bullet {Object.Id} hit obstacle '{hit.name}' at {transform.position}. Sending RpcPlaySparkVfx to all clients.\nStack Trace:\n{System.Environment.StackTrace}");
                     var matchNet = FindFirstObjectByType<MatchNetworkController>();
                     if (matchNet != null)
                     {
@@ -108,6 +109,10 @@ namespace Redes.Combat
 
                     Runner.Despawn(Object);
                     return;
+                }
+                else
+                {
+                    RedesLog.Info(RedesLog.COMBAT, $"[Projectile] ObjetoId: {Object.Id} colisionó con {hit.name} pero no es IDamageable ni Obstacle (Layer: {hit.gameObject.layer}, Tag: {hit.tag}). Ignorando...");
                 }
             }
         }

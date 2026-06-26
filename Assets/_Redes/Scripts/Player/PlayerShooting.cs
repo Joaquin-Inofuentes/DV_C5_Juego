@@ -36,11 +36,18 @@ namespace Redes.Player
         /// <summary>Called from the player's input tick when the fire button is pressed.</summary>
         public void Fire()
         {
-            if (Object.HasStateAuthority)
+            try
             {
+                if (!Object.HasStateAuthority) 
+                {
+                    // Only State Authority spawns objects
+                    return;
+                }
+
+                RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] Se recibio el input de disparar en State Authority. Jugador: {Object.InputAuthority}");
+
                 if (_ammo != null && !_ammo.TryConsume())
                 {
-                    // AUTO-RELOAD: si intentó disparar sin munición, recarga automáticamente
                     if (!_ammo.IsReloading)
                     {
                         RedesLog.Info(RedesLog.AMMO, $"[Auto-Reload] Jugador {Object.InputAuthority} intentó disparar sin munición → recarga automática iniciada");
@@ -49,8 +56,20 @@ namespace Redes.Player
                     return;
                 }
 
+                if (_projectilePrefab == null)
+                {
+                    RedesLog.Error(RedesLog.COMBAT, $"[PlayerShooting] ERROR: _projectilePrefab es nulo en el jugador {Object.InputAuthority}. ¡Falta asignar el prefab en el inspector!");
+                }
+
+                if (_muzzle == null)
+                {
+                    RedesLog.Error(RedesLog.COMBAT, $"[PlayerShooting] ERROR: _muzzle es nulo en el jugador {Object.InputAuthority}. ¡Falta asignar el transform del origen de disparo!");
+                }
+
                 if (_projectilePrefab != null && _muzzle != null)
                 {
+                    RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] Intentando instanciar bala. Prefab: {_projectilePrefab.name}, Muzzle Pos: {_muzzle.position}");
+                    
                     PlayerRef ownerRef = Object.InputAuthority;
                     var bullet = Runner.Spawn(_projectilePrefab, _muzzle.position, _muzzle.rotation, PlayerRef.None, (runner, obj) => {
                         var proj = obj.GetComponent<Combat.Projectile>();
@@ -59,13 +78,29 @@ namespace Redes.Player
                             proj.Owner = ownerRef;
                         }
                     });
+
+                    if (bullet != null)
+                    {
+                        RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] EXITO: Se creo la bala {bullet.Id}. Se disparo con owner {ownerRef}");
+                    }
+                    else
+                    {
+                        RedesLog.Error(RedesLog.COMBAT, $"[PlayerShooting] FALLO: Runner.Spawn devolvió nulo. No se pudo crear la bala.");
+                    }
                 }
 
                 ShootCount++;
                 ShootTimer = TickTimer.CreateFromSeconds(Runner, 0.2f);
+
                 if (_eventBus != null) _eventBus.TriggerPlayerShooting(Object.InputAuthority);
                 if (_playerEventBus != null) _playerEventBus.TriggerShoot();
-                RedesLog.Info(RedesLog.COMBAT, $"[Shooting] Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {_muzzle.position}");
+                
+                string muzzlePosStr = _muzzle != null ? _muzzle.position.ToString() : "NULO";
+                RedesLog.Info(RedesLog.COMBAT, $"[PlayerShooting] Proceso de disparo completado exitosamente. Jugador {Object.InputAuthority} disparó. Balas: {_ammo?.CurrentAmmo}. Pos: {muzzlePosStr}");
+            }
+            catch (System.Exception e)
+            {
+                RedesLog.Error(RedesLog.COMBAT, $"[PlayerShooting] ERROR FATAL en Fire(): {e.Message}\n{e.StackTrace}");
             }
         }
     }

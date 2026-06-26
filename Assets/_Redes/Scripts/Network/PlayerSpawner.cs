@@ -84,19 +84,21 @@ namespace Redes.Network
         // Helper for the other agent to pick a spawn position.
         private Vector3 GetSpawnPosition(PlayerRef player)
         {
-            Vector3 basePos = Vector3.zero;
             if (_spawnPoints != null && _spawnPoints.Length > 0)
             {
-                basePos = _spawnPoints[player.PlayerId % _spawnPoints.Length].position;
+                int randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Length);
+                Transform sp = _spawnPoints[randomIndex];
+                if (sp != null)
+                {
+                    RedesLog.Info(RedesLog.PLAYER, $"[PlayerSpawner] Se spameo al jugador {player} en posicion {sp.position} (SpawnPoint seleccionado: '{sp.name}', Indice: {randomIndex})");
+                    return sp.position;
+                }
             }
-            else
-            {
-                basePos = new Vector3(player.PlayerId * 3f, 0f, 0f);
-            }
-
-            // Always add a slight offset depending on player ID to guarantee no exact collision overlaps
-            basePos += new Vector3(player.PlayerId * 2f, 0f, player.PlayerId * 2f);
-            return basePos;
+            
+            // Fallback
+            Vector3 fallbackPos = new Vector3(player.PlayerId * 3f, 0f, player.PlayerId * 3f);
+            RedesLog.Warn(RedesLog.PLAYER, $"[PlayerSpawner] No hay _spawnPoints validos asignados en el inspector. Usando posicion fallback {fallbackPos} para el jugador {player}");
+            return fallbackPos;
         }
     }
 }

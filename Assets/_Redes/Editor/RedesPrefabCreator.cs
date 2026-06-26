@@ -23,6 +23,8 @@ namespace Redes.EditorTools
         public const string PlayerPrefabPath = PrefabFolder + "/Player.prefab";
         public const string BulletPrefabPath = PrefabFolder + "/Bullet.prefab";
         public const string EntityDisplayViewPrefabPath = PrefabFolder + "/EntityDisplayView.prefab";
+        public const string CustomObstaclePrefabPath = PrefabFolder + "/CustomObstacle.prefab";
+        public const string BombObstaclePrefabPath = PrefabFolder + "/BombObstacle.prefab";
 
         // [MenuItem("Tools/Redes/2. Create Prefabs", priority = 2)]
         public static void CreatePrefabs()
@@ -33,6 +35,8 @@ namespace Redes.EditorTools
             CreateBulletPrefab();
             CreatePlayerPrefab();
             CreateEntityDisplayViewPrefab();
+            CreateCustomObstaclePrefab();
+            CreateBombObstaclePrefab();
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -148,12 +152,21 @@ namespace Redes.EditorTools
             var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
             var hitClip      = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
 
+            // Load bullet prefab for PlayerShooting assignment
+            var bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(BulletPrefabPath);
+            var bulletPrefabNo = bulletPrefab != null ? bulletPrefab.GetComponent<NetworkObject>() : null;
+
+            // Load global GameEventBus
+            var eventBus = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
+
             // Wire SAME-PREFAB references via SerializedObject.
             AssignRefs(net,   ("_movement", move), ("_shooting", shoot), ("_health", hp),
                               ("_ammo", ammo), ("_eventBus", peb),
                               ("_crouch", crouch), ("_teleport", teleport));  // nuevas mecánicas
-            AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform));
+            AssignRefs(shoot, ("_ammo", ammo), ("_muzzle", muzzle.transform), ("_projectilePrefab", bulletPrefabNo), ("_eventBus", eventBus));
             AssignRefs(move,  ("_body", rb));
+            AssignRefs(hp,    ("_hitSound", hitClip), ("_eventBus", eventBus));
+            AssignRefs(ammo,  ("_eventBus", eventBus));
 
             // Asignar campos escalares de animV
             AssignRefs(animV, ("_animator", animator), ("_eventBus", peb), ("_audioSource", audioSource),
@@ -164,8 +177,6 @@ namespace Redes.EditorTools
                 new AudioClip[] { shoot1, shoot2, shoot3 });
             AssignArrayRefs(animV, "_ouchSounds",
                 new AudioClip[] { ouch1, ouch2, ouch3, ouch4 });
-
-            AssignRefs(hp, ("_hitSound", hitClip));
 
             PrefabUtility.SaveAsPrefabAsset(go, PlayerPrefabPath);
             Object.DestroyImmediate(go);
@@ -454,6 +465,145 @@ namespace Redes.EditorTools
                              ("_reloadFillImage", (Object)reloadFillImg), ("_reloadArea", (Object)reloadAreaGo));
 
             PrefabUtility.SaveAsPrefabAsset(go, EntityDisplayViewPrefabPath);
+            Object.DestroyImmediate(go);
+        }
+
+        private static void CreateCustomObstaclePrefab()
+        {
+            var go = new GameObject("CustomObstacle");
+            go.tag = "Obstacle";
+            go.layer = 6; // Obstacles / Obstaculos
+
+            // Add standard cube visuals
+            var modelObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            modelObj.name = "Visuals";
+            modelObj.transform.SetParent(go.transform, false);
+            // Destroy default box collider on primitive to manage it on root
+            var primCollider = modelObj.GetComponent<BoxCollider>();
+            if (primCollider != null) Object.DestroyImmediate(primCollider);
+
+            // Add physics collider on root
+            var boxCol = go.AddComponent<BoxCollider>();
+            boxCol.size = Vector3.one;
+
+            // Make it dynamic standard obstacle
+            var rb = go.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.useGravity = false;
+
+            PrefabUtility.SaveAsPrefabAsset(go, CustomObstaclePrefabPath);
+            Object.DestroyImmediate(go);
+        }
+
+        private static void CreateBombObstaclePrefab()
+        {
+            var go = new GameObject("BombObstacle");
+            go.tag = "Obstacle";
+            go.layer = 6; // Obstacles / Obstaculos
+
+            // Fusion core
+            go.AddComponent<NetworkObject>();
+            go.AddComponent<NetworkTransform>();
+
+            // Solid blocker box collider
+            var boxCol = go.AddComponent<BoxCollider>();
+            boxCol.size = Vector3.one;
+
+            // Explosion SphereCollider trigger (double size, so radius is 2 for diameter 4)
+            var sphereCol = go.AddComponent<SphereCollider>();
+            sphereCol.isTrigger = true;
+            sphereCol.radius = 2.0f;
+            sphereCol.enabled = false;
+
+            var rb = go.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+            rb.useGravity = false;
+
+            // 3D Cube Visuals
+            var cubeVisual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cubeVisual.name = "CubeVisual";
+            cubeVisual.transform.SetParent(go.transform, false);
+            var primCollider = cubeVisual.GetComponent<BoxCollider>();
+            if (primCollider != null) Object.DestroyImmediate(primCollider);
+
+            // Setup renderer with orange color initially for bomb
+            var renderer = cubeVisual.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                var orangeMat = new Material(Shader.Find("Standard"));
+                orangeMat.color = new Color(0.85f, 0.4f, 0.1f);
+                renderer.sharedMaterial = orangeMat;
+            }
+
+            // Get default particle material
+            var defaultParticleMat = AssetDatabase.GetBuiltinExtraResource<Material>("Default-ParticleSystem.mat");
+            if (defaultParticleMat == null)
+            {
+                defaultParticleMat = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Particle.mat");
+            }
+
+            // Fire particles placeholder
+            var fireGo = new GameObject("FireParticles");
+            fireGo.transform.SetParent(go.transform, false);
+            var firePs = fireGo.AddComponent<ParticleSystem>();
+            var firePsMain = firePs.main;
+            firePsMain.duration = 2.0f;
+            firePsMain.loop = true;
+            firePsMain.startColor = new Color(1.0f, 0.3f, 0f, 1.0f);
+            var firePsEmission = firePs.emission;
+            firePsEmission.rateOverTime = 15;
+            var fireRend = fireGo.GetComponent<ParticleSystemRenderer>();
+            if (fireRend != null && defaultParticleMat != null) fireRend.sharedMaterial = defaultParticleMat;
+            fireGo.SetActive(true); // Must be active, but PS plays when triggered
+
+            // Explosion particles placeholder
+            var explosionGo = new GameObject("ExplosionParticles");
+            explosionGo.transform.SetParent(go.transform, false);
+            var explosionPs = explosionGo.AddComponent<ParticleSystem>();
+            var expMain = explosionPs.main;
+            expMain.duration = 1.0f;
+            expMain.loop = false;
+            expMain.startSpeed = 8f;
+            expMain.startSize = 0.5f;
+            expMain.startColor = new Color(1f, 0.2f, 0f, 1.0f);
+            var expEmission = explosionPs.emission;
+            expEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 30) });
+            var expRend = explosionGo.GetComponent<ParticleSystemRenderer>();
+            if (expRend != null && defaultParticleMat != null) expRend.sharedMaterial = defaultParticleMat;
+            explosionGo.SetActive(false); // Enable and play on explode
+
+            // AudioSource
+            var audioSource = go.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1.0f; // 3D Sound
+            audioSource.playOnAwake = false;
+            audioSource.minDistance = 3f;
+            audioSource.maxDistance = 25f;
+            var sfxGroup = RedesAudioSetup.GetGroup("SFX");
+            if (sfxGroup != null) audioSource.outputAudioMixerGroup = sfxGroup;
+
+            // Load SFX_Bomba.mp3
+            var bombSfx = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/SFX_Bomba.mp3");
+            if (bombSfx == null)
+            {
+                // Try alternate local path
+                bombSfx = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Audio/SFX_Bomba.mp3");
+            }
+
+            // Script and wire properties
+            var bombComponent = go.AddComponent<Redes.Combat.DestructibleBombObstacle>();
+            
+            // Assign fields via SerializedObject
+            AssignRefs(bombComponent, new (string field, Object value)[] {
+                ("_boxCollider", (Object)boxCol),
+                ("_explosionTrigger", (Object)sphereCol),
+                ("_fireParticles", (Object)firePs),
+                ("_explosionParticles", (Object)explosionPs),
+                ("_audioSource", (Object)audioSource),
+                ("_visualCube", (Object)cubeVisual.transform),
+                ("_explosionSound", (Object)bombSfx)
+            });
+
+            PrefabUtility.SaveAsPrefabAsset(go, BombObstaclePrefabPath);
             Object.DestroyImmediate(go);
         }
 

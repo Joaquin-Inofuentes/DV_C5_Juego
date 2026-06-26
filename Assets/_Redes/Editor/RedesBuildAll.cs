@@ -129,16 +129,6 @@ namespace Redes.EditorTools
 
             try
             {
-                Debug.Log("[REDES][CORREGIR] === Paso 1: Crear escena de juego ===");
-                RedesSceneCreator.CreateScene();
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso 1 (Crear Escena): {ex.Message}\n{ex.StackTrace}");
-            }
-
-            try
-            {
                 Debug.Log("[REDES][CORREGIR] === Paso 2: Crear prefabs ===");
                 RedesPrefabCreator.CreatePrefabs();
             }
@@ -149,44 +139,56 @@ namespace Redes.EditorTools
 
             try
             {
-                Debug.Log("[REDES][CORREGIR] === Paso 3: Enlazar referencias ===");
-                RedesSceneLinker.LinkAll();
+                Debug.Log("[REDES][CORREGIR] === Paso Extra: Eliminar Colliders en POLYGON city pack/Prefabs ===");
+                string propsPath = "Assets/POLYGON city pack/Prefabs";
+                if (Directory.Exists(propsPath))
+                {
+                    string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { propsPath });
+                    Debug.Log($"[REDES][CORREGIR] Se encontraron {prefabGuids.Length} prefabs en {propsPath} y sus subcarpetas");
+
+                    int totalRemoved = 0;
+                    foreach (string guid in prefabGuids)
+                    {
+                        string path = AssetDatabase.GUIDToAssetPath(guid);
+                        GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                        if (prefab != null)
+                        {
+                            // Cargamos el contenido del prefab para poder editarlo
+                            GameObject prefabInstance = PrefabUtility.LoadPrefabContents(path);
+                            
+                            // Buscar todos los colliders 3D
+                            Collider[] colliders = prefabInstance.GetComponentsInChildren<Collider>(true);
+                            if (colliders.Length > 0)
+                            {
+                                int removedInPrefab = 0;
+                                foreach (var col in colliders)
+                                {
+                                    Object.DestroyImmediate(col, true);
+                                    removedInPrefab++;
+                                    totalRemoved++;
+                                }
+                                
+                                PrefabUtility.SaveAsPrefabAsset(prefabInstance, path);
+                                Debug.Log($"[REDES][CORREGIR] Eliminados {removedInPrefab} colliders de {prefab.name} ({Path.GetFileName(path)})");
+                            }
+                            
+                            PrefabUtility.UnloadPrefabContents(prefabInstance);
+                        }
+                    }
+                    Debug.Log($"[REDES][CORREGIR] Proceso terminado. Total de colliders eliminados: {totalRemoved}");
+                }
+                else
+                {
+                    Debug.LogWarning($"[REDES][CORREGIR] No se encontró la carpeta: {propsPath}");
+                }
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso 3 (Enlazar): {ex.Message}\n{ex.StackTrace}");
+                Debug.LogError($"[REDES][CORREGIR] ERROR eliminando colliders de Props: {ex.Message}\n{ex.StackTrace}");
             }
 
-            try
-            {
-                Debug.Log("[REDES][CORREGIR] === Paso 4: Crear escena de test offline ===");
-                RedesTestSceneBuilder.BuildTestScene();
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso 4 (Test Scene): {ex.Message}\n{ex.StackTrace}");
-            }
-
-            try
-            {
-                Debug.Log("[REDES][CORREGIR] === Paso 5: Añadiendo escena a Build Settings ===");
-                EnsureRedesSceneIsFirst();
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso 5 (Build Settings): {ex.Message}\n{ex.StackTrace}");
-            }
-
-            try
-            {
-                Debug.Log("[REDES][CORREGIR] === Paso 6: Abriendo escena de juego principal ===");
-                EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"[REDES][CORREGIR] ERROR en Paso 6 (Abrir Escena): {ex.Message}\n{ex.StackTrace}");
-            }
-
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
             Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");
         }
     }
