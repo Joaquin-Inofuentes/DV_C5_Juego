@@ -81,7 +81,7 @@ namespace Redes.EditorTools
             var displayManager = Find<EntityDisplayManager>();
             var displayViewPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(RedesPrefabCreator.EntityDisplayViewPrefabPath);
             var displayViewPrefabComponent = displayViewPrefab != null ? displayViewPrefab.GetComponent<EntityDisplayView>() : null;
-            var canvas = GameObject.Find("Canvas");
+            var canvas = GameObject.Find("[UI] Canvas UI") ?? GameObject.Find("Canvas");
             Transform displayPanelTrans = null;
             if (canvas != null)
             {

@@ -96,12 +96,16 @@ namespace Redes.Network
         // ──────────────────────────────────────────────────────────────────
         private NetworkRunner CreateRunner(string goName, bool provideInput)
         {
-            var go = new GameObject(goName);
+            string cleanName = goName;
+            if (goName == "LobbyRunner") cleanName = "[RUNNER] Lobby Network Runner";
+            else if (goName == "GameRunner") cleanName = "[RUNNER] Game Network Runner";
+
+            var go = new GameObject(cleanName);
             go.transform.SetParent(transform, false);
             var runner = go.AddComponent<NetworkRunner>();
             runner.ProvideInput = provideInput;
             runner.AddCallbacks(this);
-            RedesLog.Info(RedesLog.NET, $"   CreateRunner('{goName}', provideInput={provideInput})");
+            RedesLog.Info(RedesLog.NET, $"   CreateRunner('{cleanName}', provideInput={provideInput})");
             return runner;
         }
 

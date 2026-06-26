@@ -107,7 +107,7 @@ namespace Redes.EditorTools
             if (modelAsset != null)
             {
                 modelObj = (GameObject)PrefabUtility.InstantiatePrefab(modelAsset);
-                modelObj.name = "Model";
+                modelObj.name = "[MODEL & ANIMATOR] Player Visual Model";
                 modelObj.transform.SetParent(go.transform, false);
                 modelObj.transform.localPosition = Vector3.zero; // pivot already at feet in FBX
                 modelObj.transform.localRotation = Quaternion.identity;
@@ -120,9 +120,9 @@ namespace Redes.EditorTools
             else
             {
                 modelObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                modelObj.name = "Model";
+                modelObj.name = "[MODEL & ANIMATOR] Player Visual Model";
                 modelObj.transform.SetParent(go.transform, false);
-                 UnityEngine.Object.DestroyImmediate(modelObj.GetComponent<BoxCollider>());
+                UnityEngine.Object.DestroyImmediate(modelObj.GetComponent<BoxCollider>());
             }
 
             // Muzzle (where bullets will spawn).

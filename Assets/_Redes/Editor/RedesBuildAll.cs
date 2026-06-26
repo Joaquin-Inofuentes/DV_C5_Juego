@@ -181,6 +181,7 @@ namespace Redes.EditorTools
             {
                 Debug.Log("[REDES][CORREGIR] === Paso 6: Abriendo escena de juego principal ===");
                 EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+                DebugPrintSceneHierarchy();
             }
             catch (System.Exception ex)
             {
@@ -188,6 +189,37 @@ namespace Redes.EditorTools
             }
 
             Debug.Log("[REDES][CORREGIR] === COMPLETADO ===");
+        }
+
+        private static void DebugPrintSceneHierarchy()
+        {
+            var activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            Debug.Log($"[REDES][HIERARCHY] === JERARQUÍA DE LA ESCENA: '{activeScene.name}' ===");
+            var rootObjects = activeScene.GetRootGameObjects();
+            foreach (var root in rootObjects)
+            {
+                PrintTransformRecursive(root.transform, 0);
+            }
+            Debug.Log("[REDES][HIERARCHY] ===================================================");
+        }
+
+        private static void PrintTransformRecursive(Transform t, int depth)
+        {
+            string indent = new string('-', depth * 2) + (depth > 0 ? " " : "");
+            string components = "";
+            var allComps = t.GetComponents<Component>();
+            foreach (var comp in allComps)
+            {
+                if (comp == null) continue;
+                if (comp is Transform) continue;
+                components += $"[{comp.GetType().Name}] ";
+            }
+
+            Debug.Log($"[REDES][HIERARCHY] {indent}{t.name}  {components}");
+            for (int i = 0; i < t.childCount; i++)
+            {
+                PrintTransformRecursive(t.GetChild(i), depth + 1);
+            }
         }
     }
 }
