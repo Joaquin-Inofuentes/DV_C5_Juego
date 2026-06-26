@@ -17,7 +17,6 @@ namespace Game.Squad
         private float revivalDuration = 3f;
         private float revivalTimer = 0f;
         private float revivalRange = 3f;
-        private bool isActivelyReviving = false;
 
         public RevivingState(UnitController damagedTarget)
         {
@@ -34,7 +33,6 @@ namespace Game.Squad
             if (unit.agent != null) unit.agent.StopAgent();
 
             // Marcar que comienza el revivimiento
-            isActivelyReviving = true;
             revivalTimer = 0f;
 
             // Mostrar que está reviviendo
@@ -48,7 +46,6 @@ namespace Game.Squad
         {
             if (damagedAlly == null || !damagedAlly.isActiveAndEnabled)
             {
-                isActivelyReviving = false;
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }
@@ -57,7 +54,6 @@ namespace Game.Squad
             if (distance > revivalRange)
             {
                 LogMethodEntry($"[Update] {unit.name} se alejó del caído ({distance:F1}m). Abortando.");
-                isActivelyReviving = false;
                 unit.CambiarEstado(new SeguirFormacionState());
                 return;
             }
@@ -86,7 +82,6 @@ namespace Game.Squad
         {
             LogMethodEntry($"[Exit] Soldado {unit.name} saliendo del estado REVIVIENDO");
             unit.view.StopBlink(IndicatorType.Reviving);
-            isActivelyReviving = false;
             revivalTimer = 0f;
         }
 
@@ -104,9 +99,6 @@ namespace Game.Squad
 
             // Hacer que el revividor vuelva a formación
             unit.CambiarEstado(new SeguirFormacionState());
-
-            // Marcar que ya no está reviviendo
-            isActivelyReviving = false;
 
             LogMethodEntry($"[CompleteRevival] {damagedAlly.name} ahora es OPERATIVO nuevamente");
         }

@@ -185,6 +185,8 @@ namespace Redes.Controllers
             }
             _model.SetPhase(GamePhase.Booting);
             
+            RedesLoadingScreen.Instance?.ShowLoading("REINICIANDO PARTIDA...");
+            
             Debug.Log("Se volvio al inicio");
             RedesLog.Trace(RedesLog.LOBBY, "GameFlowController", "TriggerReturnToLobby", null, "Reloading scene to ensure clean state...");
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
@@ -232,6 +234,8 @@ namespace Redes.Controllers
                 _lobbyView.ShowStatus("Creando sala...");
             }
             
+            RedesLoadingScreen.Instance?.ShowLoading("CREANDO SALA...");
+            
             string fullSessionName = LocalUsername + "'s Room";
             // Debug.Log($"[CONNECTION_DEBUG] >>> [E] Llamando a NetworkService.StartAsHost(\"{fullSessionName}\")...");
             NetworkService.StartAsHost(fullSessionName);
@@ -270,6 +274,9 @@ namespace Redes.Controllers
                 _lobbyView.HideButtons();
                 _lobbyView.ShowStatus($"Uniéndose a {sessionName}...");
             }
+            
+            RedesLoadingScreen.Instance?.ShowLoading("UNIÉNDOSE A LA SALA...");
+            
             NetworkService.StartAsClient(sessionName);
             _model.SetPhase(GamePhase.SearchingSession);
             RedesLog.Info(RedesLog.LOBBY, "<< JoinRoom() - fase=SearchingSession, esperando StartGame...");
@@ -324,6 +331,7 @@ namespace Redes.Controllers
 
         private void HandleHostStarted()
         {
+            RedesLoadingScreen.Instance?.HideLoading();
             RedesLog.Info(RedesLog.NET, ">> HandleHostStarted() - runner activo, esperando jugadores");
             _model.SetPhase(GamePhase.WaitingForPlayers);
             RedesLog.Info(RedesLog.NET, "<< HandleHostStarted()");
@@ -339,6 +347,7 @@ namespace Redes.Controllers
 
         private void HandleEnoughPlayers()
         {
+            RedesLoadingScreen.Instance?.HideLoading();
             RedesLog.Info(RedesLog.MATCH, ">> HandleEnoughPlayers() - 2 jugadores conectados, INICIANDO JUEGO");
             _model.SetPhase(GamePhase.Playing);
             if (_lobbyView != null) _lobbyView.SetVisible(false);
@@ -362,6 +371,7 @@ namespace Redes.Controllers
 
         private void HandleConnectionFailed(string reason)
         {
+            RedesLoadingScreen.Instance?.HideLoading();
             RedesLog.Error(RedesLog.NET, $">> HandleConnectionFailed(reason={reason})");
             _model.SetPhase(GamePhase.Booting);
             if (_lobbyView != null)

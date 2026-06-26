@@ -18,8 +18,8 @@ namespace Redes.Player
         [SerializeField] private AmmoSystem _ammo;         // Sibling system.
         [SerializeField] private GameEventBus _eventBus;   // Global event bus.
 
-        [Header("Tuning")]
-        [SerializeField] private int _damage = GameConstants.DEFAULT_BULLET_DAMAGE;
+        // [Header("Tuning")]
+        // [SerializeField] private int _damage = GameConstants.DEFAULT_BULLET_DAMAGE; // Removed unused field
 
         [Networked] public int ShootCount { get; set; }
         [Networked] public TickTimer ShootTimer { get; set; }

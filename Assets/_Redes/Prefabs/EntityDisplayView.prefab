@@ -396,6 +396,8 @@ MonoBehaviour:
   _nicknameText: {fileID: 2818754774747313302}
   _reloadFillImage: {fileID: 1582500263248948584}
   _reloadArea: {fileID: 1285887962863089520}
+  YOffset: -120
+  XOffset: 0
 --- !u!1 &7353782773014005246
 GameObject:
   m_ObjectHideFlags: 0

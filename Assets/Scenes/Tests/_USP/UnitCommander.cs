@@ -7,7 +7,6 @@ public class UnitCommander : MonoBehaviour
 {
     private bool _suscrito = false;
     private Vector3 _ultimaPosOrden;
-    private bool _hayOrdenPendiente = false;
 
     void Start()
     {
@@ -41,7 +40,6 @@ public class UnitCommander : MonoBehaviour
         {
             Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
             _ultimaPosOrden = mousePos;
-            _hayOrdenPendiente = true;
 
             // Detectar si hay un aliado caído cerca del click
             UnitController clickedDown = null;

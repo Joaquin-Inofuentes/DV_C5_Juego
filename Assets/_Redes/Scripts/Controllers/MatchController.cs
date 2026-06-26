@@ -60,6 +60,7 @@ namespace Redes.Controllers
         private void HandleLobbyClicked()
         {
             RedesLog.Trace(RedesLog.MATCH, "MatchController", "HandleLobbyClicked", null, "Local player clicked return to lobby. Notifying other players...");
+            RedesLoadingScreen.Instance?.ShowLoading("VOLVIENDO AL LOBBY...");
             try
             {
                 var netCtrl = ActiveNetworkController;
@@ -92,6 +93,7 @@ namespace Redes.Controllers
         private void HandleRetryClicked()
         {
             RedesLog.Info(RedesLog.MATCH, ">> MatchController.HandleRetryClicked() [IN] - No arguments");
+            RedesLoadingScreen.Instance?.ShowLoading("PREPARANDO REVANCHA...");
             try
             {
                 if (_resultView != null)

@@ -191,7 +191,6 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 1849421110313875080, guid: 5b13455fdbadb5f429b0698f40a51977, type: 3}
   _ammo: {fileID: 3109412577341739674}
   _eventBus: {fileID: 11400000, guid: b0e6135b1a473234a89b7e5f10244f0c, type: 2}
-  _damage: 25
   _ShootCount: 0
 --- !u!114 &427579071385923016
 MonoBehaviour:

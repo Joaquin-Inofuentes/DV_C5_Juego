@@ -59,7 +59,6 @@ namespace Redes.Network
 
         private bool _isInSession = false;          // true cuando entramos a Crear/Unirse
         private bool _lobbyShutdownIntentional = false;
-        private bool _lastRoomAvailable = false;
 
         public bool IsRunning { get; private set; }
         public int ConnectedPlayers { get; private set; }

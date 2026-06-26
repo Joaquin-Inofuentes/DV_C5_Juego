@@ -153,9 +153,9 @@ namespace Redes.EditorTools
             sparkGo.SetActive(false);
             var sparkPs = sparkGo.AddComponent<ParticleSystem>();
             var sparkMain = sparkPs.main;
-            sparkMain.duration = 0.4f;
+            sparkMain.duration = 0.8f;
             sparkMain.loop = false;
-            sparkMain.startLifetime = 0.35f;
+            sparkMain.startLifetime = 0.7f;
             sparkMain.startSpeed = 5f;
             sparkMain.startSize = 0.25f;
             sparkMain.startColor = Color.white;
@@ -465,6 +465,31 @@ namespace Redes.EditorTools
             soCursor.FindProperty("_cursorReload").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorReload.png");
             soCursor.FindProperty("_globalEventBus").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Redes.Core.GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
             soCursor.ApplyModifiedPropertiesWithoutUndo();
+
+            // --- Loading Screen (Screen Manager) ---
+            var loadingCanvasGo = new GameObject("[UI] Loading Canvas");
+            var loadingCanvas = loadingCanvasGo.AddComponent<Canvas>();
+            loadingCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            loadingCanvas.sortingOrder = 999; // Topmost to block inputs
+            var loadingCanvasScaler = loadingCanvasGo.AddComponent<CanvasScaler>();
+            loadingCanvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            loadingCanvasScaler.referenceResolution = new Vector2(1920, 1080);
+            loadingCanvasGo.AddComponent<GraphicRaycaster>(); // Blocks raycasts
+
+            var loadingPanel = NewUiPanel("LoadingPanel", loadingCanvasGo.transform);
+            var loadingImg = loadingPanel.AddComponent<Image>();
+            loadingImg.color = new Color(0.05f, 0.05f, 0.08f, 1f); // Solid dark background
+
+            var loadingTextGo = NewText("LoadingText", loadingPanel.transform, font, "CARGANDO...", Vector2.zero, 64);
+            loadingTextGo.color = Color.white;
+
+            var screenManager = loadingCanvasGo.AddComponent<Redes.Controllers.RedesLoadingScreen>();
+            var soScreenMgr = new SerializedObject(screenManager);
+            soScreenMgr.FindProperty("_loadingPanel").objectReferenceValue = loadingPanel;
+            soScreenMgr.FindProperty("_loadingText").objectReferenceValue = loadingTextGo;
+            soScreenMgr.ApplyModifiedPropertiesWithoutUndo();
+
+            loadingPanel.SetActive(false); // Initially hidden
         }
 
         // ---------- small UI helpers ----------
