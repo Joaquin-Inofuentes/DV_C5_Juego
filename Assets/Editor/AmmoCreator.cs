@@ -178,6 +178,18 @@ public class AmmoCreator : EditorWindow
                 }
             }
 
+            // --- 2.5. Asegurar ShotSensor ---
+            ShotSensor[] sensores = unit.GetComponentsInChildren<ShotSensor>();
+            foreach (var sensor in sensores)
+            {
+                if (sensor.miController == null)
+                {
+                    sensor.miController = unit;
+                    Debug.Log($"<color=cyan>[Autocorrección]</color> {unit.name}: Asignado miController en ShotSensor");
+                    modificadoEsteUnit = true;
+                }
+            }
+
             // --- 3. Asegurar variables básicas en UnitView ---
             if (unit.view != null)
             {
@@ -319,6 +331,23 @@ public class AmmoCreator : EditorWindow
         else
         {
             Debug.Log("<color=green>[Herramienta]</color> Todas las unidades ya estaban correctamente configuradas.");
+        }
+
+        // --- 5. Limpieza de ShotSensors Huérfanos (ej: Formacion) ---
+        ShotSensor[] todosSensores = Object.FindObjectsOfType<ShotSensor>(true);
+        int sensoresRemovidos = 0;
+        foreach (var sensor in todosSensores)
+        {
+            if (sensor.GetComponentInParent<Game.Squad.UnitController>() == null)
+            {
+                Debug.Log($"<color=orange>[Limpieza]</color> Se ha removido un ShotSensor del objeto '{sensor.gameObject.name}' ya que no pertenece a una unidad.");
+                Object.DestroyImmediate(sensor, true);
+                sensoresRemovidos++;
+            }
+        }
+        if (sensoresRemovidos > 0)
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene());
         }
     }
 }
