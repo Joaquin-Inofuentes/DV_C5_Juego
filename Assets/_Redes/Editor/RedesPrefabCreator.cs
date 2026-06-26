@@ -578,8 +578,18 @@ namespace Redes.EditorTools
             audioSource.playOnAwake = false;
             audioSource.minDistance = 3f;
             audioSource.maxDistance = 25f;
+            
+            RedesAudioSetup.CreateAudioMixerAndSetup();
             var sfxGroup = RedesAudioSetup.GetGroup("SFX");
-            if (sfxGroup != null) audioSource.outputAudioMixerGroup = sfxGroup;
+            if (sfxGroup != null)
+            {
+                audioSource.outputAudioMixerGroup = sfxGroup;
+                // Forzar la asignación mediante SerializedObject por si Unity la descarta al guardar
+                var soAudio = new SerializedObject(audioSource);
+                var groupProp = soAudio.FindProperty("OutputAudioMixerGroup");
+                if (groupProp != null) groupProp.objectReferenceValue = sfxGroup;
+                soAudio.ApplyModifiedPropertiesWithoutUndo();
+            }
 
             // Load SFX_Bomba.mp3
             var bombSfx = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/SFX_Bomba.mp3");
