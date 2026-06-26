@@ -109,6 +109,7 @@ public class UnitModel : MonoBehaviour, IHealth
 
     public void UpdateStatsToDefaults()
     {
+        Debug.Log($"[UnitModel] Inicio UpdateStatsToDefaults para {name} con especialidad {specialization}");
         switch (specialization)
         {
             case UnitSpecialization.Flancotirador:
@@ -118,6 +119,8 @@ public class UnitModel : MonoBehaviour, IHealth
                 dispersionAngle = 0f;
                 attackRange = 20f;
                 detectionRange = 25f;
+                speedPatrol = 3.0f;
+                speedChase = 4.5f;
                 break;
             case UnitSpecialization.Apoyo:
                 damage = 5f;
@@ -126,6 +129,8 @@ public class UnitModel : MonoBehaviour, IHealth
                 dispersionAngle = 30f;
                 attackRange = 8f;
                 detectionRange = 12f;
+                speedPatrol = 2.5f;
+                speedChase = 4.0f;
                 break;
             case UnitSpecialization.Medico:
                 damage = 5f;
@@ -134,6 +139,8 @@ public class UnitModel : MonoBehaviour, IHealth
                 dispersionAngle = 6f;
                 attackRange = 7f;
                 detectionRange = 12f;
+                speedPatrol = 3.5f;
+                speedChase = 5.0f;
                 break;
             case UnitSpecialization.Asalto:
                 damage = 5f;
@@ -142,6 +149,8 @@ public class UnitModel : MonoBehaviour, IHealth
                 dispersionAngle = 5f;
                 attackRange = 8f;
                 detectionRange = 12f;
+                speedPatrol = 3.8f;
+                speedChase = 5.5f;
                 break;
             case UnitSpecialization.EnemigoSimple:
                 damage = 5f;
@@ -150,24 +159,16 @@ public class UnitModel : MonoBehaviour, IHealth
                 dispersionAngle = 12f;
                 attackRange = 7f;
                 detectionRange = 12f;
+                speedPatrol = 2.2f;
+                speedChase = 3.5f;
                 break;
         }
+        Debug.Log($"[UnitModel] Fin UpdateStatsToDefaults para {name}. SpeedPatrol: {speedPatrol}, SpeedChase: {speedChase}");
     }
 
     private void Awake()
     {
-        if (team == UnitTeam.BandoA)
-        {
-            // Aliados: velocidad doble al iniciar
-            speedChase *= 2.0f;
-            speedPatrol *= 2.0f;
-        }
-        else
-        {
-            // Enemigos/otros: reducir velocidad base a la mitad globalmente
-            speedChase *= 0.5f;
-            speedPatrol *= 0.5f;
-        }
+        // Balance: Velocidades ya configuradas en UpdateStatsToDefaults. Se remueven los multiplicadores abusivos para evitar bugs de velocidad excesiva.
     }
 
     private void Start() 

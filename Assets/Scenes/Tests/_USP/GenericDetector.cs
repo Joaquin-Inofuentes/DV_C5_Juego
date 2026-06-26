@@ -20,7 +20,7 @@ namespace Game.Sensors
         private List<IDetectable> previouslyVisibleTargets = new List<IDetectable>();
 
         private CircleCollider2D trigger;
-        private float scanInterval = 0.15f;
+        private float scanInterval = 0.30f;
         private float nextScanTime;
 
         public event Action<IDetectable> OnTargetDetected;

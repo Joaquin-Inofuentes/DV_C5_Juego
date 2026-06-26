@@ -35,6 +35,34 @@ public class UnitCommander : MonoBehaviour
             }
         }
 
+        // X: reagrupar aliado específico apuntado por el mouse
+        if (GEN_Inputs.Instance.RegresarAliadoEspecifico)
+        {
+            Debug.Log($"[UnitCommander] Inicio procesamiento de reagrupe específico (Tecla X)");
+            Vector3 mousePos = GEN_Inputs.Instance.MouseWorldPosition;
+            UnitController clickedAlly = null;
+            float minClickDist = 1.5f;
+            foreach (var u in FindObjectsOfType<UnitController>())
+            {
+                if (u.model.team != UnitTeam.BandoA || u.model.IsDead || u.model.IsLeader) continue;
+                float d = Vector3.Distance(mousePos, u.transform.position);
+                if (d < minClickDist) { minClickDist = d; clickedAlly = u; }
+            }
+
+            if (clickedAlly != null)
+            {
+                Debug.Log($"<color=lime>[UnitCommander]</color> X presionado sobre aliado: {clickedAlly.name}. Reagrupando.");
+                clickedAlly.isWaitingOrder = false;
+                clickedAlly.CambiarEstado(new SeguirFormacionState());
+                clickedAlly.view.ShowSpeech("¡Entendido, vuelvo!", 2f);
+            }
+            else
+            {
+                Debug.Log($"[UnitCommander] No se encontró ningún aliado válido bajo el mouse para reagrupar.");
+            }
+            Debug.Log($"[UnitCommander] Fin procesamiento de reagrupe específico (Tecla X)");
+        }
+
         // Click derecho: si el click es sobre un aliado caído, mandar revividor; si es sobre un enemigo, atacar; si no, mandar al destino
         if (GEN_Inputs.Instance.OrdenPresionada)
         {

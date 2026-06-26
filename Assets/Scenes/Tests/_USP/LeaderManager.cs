@@ -213,6 +213,7 @@ public class LeaderManager : MonoBehaviour
 
     public void CambiarLider(int index)
     {
+        Debug.Log($"<color=yellow>[LeaderManager] Inicio CambiarLider hacia índice {index}</color>");
         if (index < 0 || index >= unidades.Count)
         {
             Debug.LogWarning($"[LeaderManager] Índice {index} fuera de rango (0-{unidades.Count - 1}).");
@@ -239,8 +240,9 @@ public class LeaderManager : MonoBehaviour
         GlobalData.liderActual.model.IsLeader = true;
         GlobalData.liderActual.ReleaseSlot();
         GlobalData.liderActual.CambiarEstado(new LiderandoState());
+        GlobalData.liderActual.view.TriggerLeaderFlash();
 
-        Debug.Log($"<color=yellow>[LeaderManager] Nuevo Líder: {GlobalData.liderActual.name} (índice {index})</color>");
+        Debug.Log($"<color=yellow>[LeaderManager] Fin CambiarLider. Nuevo Líder: {GlobalData.liderActual.name} (índice {index})</color>");
         
         ActualizarImagenLider(GlobalData.liderActual.model.specialization);
     }

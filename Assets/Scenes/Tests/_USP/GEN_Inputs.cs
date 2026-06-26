@@ -23,6 +23,7 @@ public class GEN_Inputs : MonoBehaviour
     public bool DisparoPresionado    { get; private set; }
     public bool OrdenPresionada      { get; private set; }
     public bool RegresarAFormacion   { get; private set; }
+    public bool RegresarAliadoEspecifico { get; private set; }
     public bool RavivicionInput      { get; private set; } // Barra espaciadora sostenida (revivir)
     public bool HealPresionado       { get; private set; } // Barra espaciadora pulsada (médico cura)
     public bool SprintInput          { get; private set; } // Tecla Shift presionada (sprint)
@@ -95,8 +96,10 @@ public class GEN_Inputs : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) TriggerOrdenDirecta(2);
         if (Input.GetKeyDown(KeyCode.G)) ActivarModoDios();
 
-        // 7. Regresar a formación: Z
+        // 7. Regresar a formación: Z, y reagrupar específico: X
         RegresarAFormacion = Input.GetKeyDown(KeyCode.Z);
+        RegresarAliadoEspecifico = Input.GetKeyDown(KeyCode.X);
+        if (RegresarAliadoEspecifico) Debug.Log("[GEN_Inputs] Tecla X presionada: RegresarAliadoEspecifico = true");
 
         // 8. Barra espaciadora
         RavivicionInput = Input.GetKey(KeyCode.Space);

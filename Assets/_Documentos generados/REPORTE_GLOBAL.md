@@ -1,6 +1,6 @@
 # 📘 Reporte global — Assets
 
-_Generado: 2026-06-23 16:17:35_
+_Generado: 2026-06-26 15:03:13_
 
 ## Índice
 
@@ -15,17 +15,17 @@ _Generado: 2026-06-23 16:17:35_
 
 | Métrica | Valor |
 |---------|------:|
-| Archivos | 224 |
+| Archivos | 246 |
 | Carpetas | 36 |
-| Namespaces | 26 |
-| Clases | 464 |
+| Namespaces | 27 |
+| Clases | 487 |
 | Interfaces | 20 |
-| Enums | 22 |
-| Métodos | 2090 |
-| Propiedades | 309 |
-| Campos | 1603 |
+| Enums | 24 |
+| Métodos | 2263 |
+| Propiedades | 328 |
+| Campos | 1821 |
 | Eventos | 183 |
-| Líneas totales | 54052 |
+| Líneas totales | 60454 |
 
 ## Diagramas
 
@@ -384,104 +384,106 @@ _Versión imagen: [namespaces-mermaid.svg](namespaces-mermaid.svg)_
 ## Documentación
 
 
-Generado: 2026-06-23 16:17:35
+Generado: 2026-06-26 15:03:13
 
 ### Resumen
 
-- Archivos: 224
+- Archivos: 246
 - Carpetas: 36
-- Namespaces: 26
-- Clases: 464
+- Namespaces: 27
+- Clases: 487
 - Interfaces: 20
-- Enums: 22
-- Métodos: 2090
-- Propiedades: 309
-- Campos: 1603
-- Líneas totales: 54052 (código 40724, comentarios 3891, blancos 9437)
+- Enums: 24
+- Métodos: 2263
+- Propiedades: 328
+- Campos: 1821
+- Líneas totales: 60454 (código 45728, comentarios 4429, blancos 10297)
 
 ### Mapa de relaciones
 
-- **FusionGlobalScriptableObjectAddressAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
-- **FusionGlobalScriptableObjectResourceAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
-- **FusionCoroutine** implementa **ICoroutine**
-- **FusionCoroutine** implementa **IDisposable**
-- **FusionLogInitializer** usa **FusionUnityLogger**
-- **FusionUnityLogger** hereda de **FusionUnityLoggerBase**
-- **FusionUnityLogger** usa **Stage**
-- **JsonUtilityExtensions** usa **TypeNameWrapper**
-- **FusionMppm** usa **FusionMppmStatus**
-- **FusionMppm** usa **FusionMppmCommand**
-- **NetworkObjectBaker** usa **TransformPath**
-- **NetworkObjectBaker** usa **TransformPathCache**
-- **NetworkObjectBaker** usa **Result**
-- **NetworkObjectBaker** usa **_Indices**
-- **TransformPath** usa **_Indices**
-- **TransformPathCache** implementa **IComparer**
-- **TransformPathCache** implementa **IEqualityComparer**
-- **TransformPathCache** usa **TransformPath**
-- **NetworkPrefabSourceStatic** hereda de **NetworkAssetSourceStatic**
-- **NetworkPrefabSourceStatic** implementa **INetworkPrefabSource**
-- **NetworkPrefabSourceStaticLazy** hereda de **NetworkAssetSourceStaticLazy**
-- **NetworkPrefabSourceStaticLazy** implementa **INetworkPrefabSource**
-- **NetworkPrefabSourceResource** hereda de **NetworkAssetSourceResource**
-- **NetworkPrefabSourceResource** implementa **INetworkPrefabSource**
-- **FusionStatisticsHelper** usa **RenderSimStats**
-- **FusionStatsGraphBase** hereda de **MonoBehaviour**
-- **FusionStatsGraphBase** usa **FusionStatBuffer**
-- **FusionStatsGraphBase** usa **FusionStatistics**
-- **SceneEqualityComparer** implementa **IEqualityComparer**
-- **NetworkRunnerVisibilityExtensions** usa **IRunnerVisibilityRecognizedType**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibility**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLink**
-- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLinksRoot**
-- **NetworkRunnerVisibilityExtensions** usa **EnableOnSingleRunner**
-- **NetworkRunnerVisibilityExtensions** usa **PreferredRunners**
-- **RunnerVisibility** usa **RunnerVisibilityLink**
-- **VfxController** hereda de **MonoBehaviour**
-- **DropdownController** hereda de **MonoBehaviour**
-- **DropdownController** usa **VfxController**
-- **DebugColisionesFull** hereda de **MonoBehaviour**
-- **CollisionDetector** hereda de **MonoBehaviour**
-- **DesactivarPorTimer** hereda de **MonoBehaviour**
-- **UnitView** hereda de **MonoBehaviour**
-- **UnitView** usa **UnitModel**
-- **UnitView** usa **IndicatorEntry**
-- **UnitView** usa **IndicatorType**
-- **UnitView** usa **UnitSpecialization**
-- **IUnitState** usa **UnitController**
-- **TriggerCorregir** usa **RedesSceneCreator**
-- **Physics2DMigrator** usa **AssetDatabase**
-- **Physics2DMigrator** usa **EditorApplication**
-- **HierarchyToClipboardMenu** usa **EditorUtility**
-- **HierarchyToClipboardMenu** usa **SerializedProperty**
-- **CreateTestSceneMenu** usa **GameManager**
-- **CreateTestSceneMenu** usa **DebugLogger**
-- **CreateTestSceneMenu** usa **GameLoopReferee**
-- **CreateTestSceneMenu** usa **BulletPool**
-- **CreateTestSceneMenu** usa **AssetDatabase**
-- **CreateTestSceneMenu** usa **Bullet**
-- **CreateTestSceneMenu** usa **PlayerModel**
-- **CreateTestSceneMenu** usa **PlayerView**
-- **CreateTestSceneMenu** usa **PlayerController**
-- **CreateTestSceneMenu** usa **Weapon**
-- **CreateTestSceneMenu** usa **SimpleEnemyAI**
-- **CreateScenesAndPrefabsMenu** usa **AssetDatabase**
-- **CreateScenesAndPrefabsMenu** usa **Bullet**
-- **CreateScenesAndPrefabsMenu** usa **PlayerModel**
-- **CreateScenesAndPrefabsMenu** usa **PlayerView**
-- **CreateScenesAndPrefabsMenu** usa **PlayerController**
-- **CreateScenesAndPrefabsMenu** usa **SimpleAnimator**
-- **CreateScenesAndPrefabsMenu** usa **FloatingHealthBar**
-- **CreateScenesAndPrefabsMenu** usa **Weapon**
-- **CreateScenesAndPrefabsMenu** usa **GameManager**
-- **CreateScenesAndPrefabsMenu** usa **DebugLogger**
-- **CreateScenesAndPrefabsMenu** usa **GameLoopReferee**
-- **CreateScenesAndPrefabsMenu** usa **BulletPool**
-- **CreateScenesAndPrefabsMenu** usa **EffectPool**
-- **CreateScenesAndPrefabsMenu** usa **ScreenManager**
-- **CreateScenesAndPrefabsMenu** usa **SerializedProperty**
-- **ComponentPropertiesCopierTestMenu** usa **ComponentPropertiesCopier**
 - **ComponentPropertiesCopier** usa **SerializedProperty**
+- **CentralizadorScripts** hereda de **EditorWindow**
+- **CentralizadorScripts** usa **AssetDatabase**
+- **CentralizadorScripts** usa **EditorUtility**
+- **ILWeaverException** hereda de **Exception**
+- **NetworkProjectConfigImporterEditor** hereda de **ScriptedImporterEditor**
+- **NetworkProjectConfigImporterEditor** usa **NetworkProjectConfigImporter**
+- **NetworkProjectConfigImporterEditor** usa **LogSettingsDrawer**
+- **NetworkProjectConfigImporterEditor** usa **FusionEditorGUI**
+- **NetworkProjectConfigImporterEditor** usa **EditorGUI**
+- **NetworkProjectConfigImporterEditor** usa **NetworkPrefabsInspector**
+- **NetworkProjectConfigImporterEditor** usa **EnabledScope**
+- **NetworkProjectConfigImporterEditor** usa **NetworkProjectConfigUtilities**
+- **NetworkProjectConfigImporterEditor** usa **EditorUtility**
+- **NetworkProjectConfigImporter** hereda de **ScriptedImporter**
+- **NetworkProjectConfigImporter** usa **NetworkAssetSourceFactory**
+- **NetworkProjectConfigImporter** usa **AssetDatabaseUtils**
+- **NetworkProjectConfigImporter** usa **AssetDatabase**
+- **NetworkProjectConfigImporter** usa **NetworkAssetSourceFactoryContext**
+- **NetworkProjectConfigImporter** usa **FusionCustomDependency**
+- **Postprocessor** hereda de **AssetPostprocessor**
+- **Postprocessor** usa **AssetDatabase**
+- **NetworkPrefabsInspector** hereda de **EditorWindow**
+- **NetworkPrefabsInspector** usa **Grid**
+- **NetworkPrefabsInspector** usa **EditorGUI**
+- **NetworkPrefabsInspector** usa **FusionGridItem**
+- **NetworkPrefabsInspector** usa **AssetDatabase**
+- **NetworkPrefabsInspector** usa **NetworkProjectConfigUtilities**
+- **NetworkPrefabsInspector** usa **LoadState**
+- **NetworkPrefabsInspector** usa **GridItem**
+- **NetworkPrefabsInspector** usa **Column**
+- **NetworkPrefabsInspector** usa **FusionEditorSkin**
+- **NetworkPrefabsInspector** usa **FusionEditorGUI**
+- **NetworkPrefabsInspector** usa **ContentColorScope**
+- **NetworkPrefabsInspector** usa **INetworkPrefabSourceDrawer**
+- **NetworkPrefabsInspector** usa **EditorUtility**
+- **NetworkPrefabsInspector** usa **FusionGrid**
+- **InspectorTreeViewState** hereda de **TreeViewState**
+- **GridItem** hereda de **FusionGridItem**
+- **GridItem** usa **AssetDatabase**
+- **GridItem** usa **NetworkProjectConfigUtilities**
+- **GridItem** usa **LoadState**
+- **Grid** hereda de **FusionGrid**
+- **Grid** usa **GridItem**
+- **Grid** usa **Column**
+- **Grid** usa **FusionEditorSkin**
+- **Grid** usa **LoadState**
+- **Grid** usa **FusionEditorGUI**
+- **Grid** usa **ContentColorScope**
+- **Grid** usa **EditorGUI**
+- **Grid** usa **INetworkPrefabSourceDrawer**
+- **Grid** usa **EditorUtility**
+- **FusionWeaverTriggerImporter** hereda de **ScriptedImporter**
+- **FusionWeaverTriggerImporter** usa **NetworkProjectConfigImporter**
+- **FusionWeaverTriggerImporter** usa **ILWeaverUtils**
+- **FusionWeaverTriggerImporter** usa **FusionCustomDependency**
+- **FusionWeaverTriggerImporter** usa **EditorApplication**
+- **FusionWeaverTriggerImporter** usa **NetworkProjectConfigUtilities**
+- **Postprocessor** hereda de **AssetPostprocessor**
+- **Postprocessor** usa **NetworkProjectConfigImporter**
+- **FusionRunnerVisibilityControlsWindow** hereda de **EditorWindow**
+- **FusionRunnerVisibilityControlsWindow** usa **RunnerEnableVisibility**
+- **FusionRunnerVisibilityControlsWindow** usa **NetworkRunnerVisibilityExtensions**
+- **FusionRunnerVisibilityControlsWindow** usa **EditorGUIUtility**
+- **FusionRunnerVisibilityControlsWindow** usa **Labels**
+- **FusionRunnerVisibilityControlsWindow** usa **FusionEditorSkin**
+- **FusionRunnerVisibilityControlsWindow** usa **FusionStatistics**
+- **FusionRunnerVisibilityControlsWindow** usa **EditorGUI**
+- **FusionRunnerVisibilityControlsWindow** usa **DisabledGroupScope**
+- **FusionRunnerVisibilityControlsWindow** usa **Event**
+- **FusionRunnerVisibilityControlsWindow** usa **CanvasAnchor**
+- **Labels** usa **RunnerEnableVisibility**
+- **Labels** usa **NetworkRunnerVisibilityExtensions**
+- **FusionEditorSkin** hereda de **ScriptableObject**
+- **FusionEditorSkin** usa **EditorGUIUtility**
+- **FusionEditorSkin** usa **LazyAsset**
+- **FusionEditorSkin** usa **LazyGUIStyle**
+- **FusionEditorConfigImporter** hereda de **ScriptedImporter**
+- **GameLoopReferee** hereda de **MonoBehaviour**
+- **GameLoopReferee** usa **PlayerModel**
+- **GameLoopReferee** usa **PlayerController**
+- **GameLoopReferee** usa **SimpleEnemyAI**
+- **GameLoopReferee** usa **GameManager**
 - **FloatingHealthBar** hereda de **MonoBehaviour**
 - **FloatingHealthBar** usa **PlayerModel**
 - **EffectPool** hereda de **MonoBehaviour**
@@ -509,57 +511,16 @@ Generado: 2026-06-23 16:17:35
 - **WeaponControllerMVC** usa **IWeaponInput**
 - **UnityWeaponInput** implementa **IWeaponInput**
 - **UnityCharacterInput** implementa **ICharacterInput**
-- **FusionNetworkObjectStatistics** hereda de **MonoBehaviour**
-- **FusionNetworkObjectStatistics** usa **FusionStatistics**
-- **RunnerVisibilityLinksRoot** hereda de **MonoBehaviour**
-- **RunnerVisibilityLink** hereda de **MonoBehaviour**
-- **RunnerVisibilityLink** usa **PreferredRunners**
-- **RunnerVisibilityLink** usa **ComponentType**
-- **RunnerVisibilityLink** usa **NetworkRunnerVisibilityExtensions**
-- **RunnerLagCompensationGizmos** hereda de **Behaviour**
-- **RunnerEnableVisibility** hereda de **Behaviour**
-- **RunnerEnableVisibility** implementa **INetworkRunnerCallbacks**
-- **RunnerAOIGizmos** hereda de **SimulationBehaviour**
-- **EnableOnSingleRunner** hereda de **Behaviour**
-- **EnableOnSingleRunner** usa **RunnerVisibilityLink**
-- **EnableOnSingleRunner** usa **PreferredRunners**
-- **NetworkSceneManagerDefault** hereda de **Behaviour**
-- **NetworkSceneManagerDefault** implementa **INetworkSceneManager**
-- **NetworkSceneManagerDefault** usa **FusionUnitySceneManagerUtils**
-- **NetworkSceneManagerDefault** usa **SceneEqualityComparer**
-- **NetworkSceneManagerDefault** usa **MultiPeerSceneRoot**
-- **NetworkSceneManagerDefault** usa **FusionCoroutine**
-- **NetworkSceneManagerDefault** usa **LoadingScope**
-- **MultiPeerSceneRoot** hereda de **MonoBehaviour**
-- **LoadingScope** implementa **IDisposable**
-- **LoadingScope** usa **NetworkSceneManagerDefault**
-- **NetworkObjectProviderDefault** hereda de **Behaviour**
-- **NetworkObjectProviderDefault** implementa **INetworkObjectProvider**
-- **NetworkCCData** implementa **INetworkStruct**
-- **NetworkCharacterController** hereda de **NetworkTRSP**
-- **NetworkCharacterController** implementa **INetworkTRSPTeleport**
-- **NetworkCharacterController** implementa **IBeforeAllTicks**
-- **NetworkCharacterController** implementa **IAfterAllTicks**
-- **NetworkCharacterController** implementa **IBeforeCopyPreviousState**
-- **NetworkCharacterController** usa **NetworkCCData**
-- **FusionBootstrapDebugGUI** hereda de **Behaviour**
-- **FusionBootstrapDebugGUI** usa **FusionBootstrap**
-- **FusionBootstrapDebugGUI** usa **Stage**
-- **FusionBootstrapDebugGUI** usa **FusionScalableIMGUI**
-- **FusionBootstrap** hereda de **Behaviour**
-- **FusionBootstrap** usa **FusionMppmCommand**
-- **FusionBootstrap** usa **StartCommand**
-- **FusionBootstrap** usa **StartModes**
-- **FusionBootstrap** usa **Stage**
-- **FusionBootstrap** usa **State**
-- **FusionBootstrap** usa **FusionBootstrapDebugGUI**
-- **FusionBootstrap** usa **FusionMppm**
-- **FusionBootstrap** usa **FusionMppmStatus**
-- **FusionBootstrap** usa **NetworkSceneManagerDefault**
-- **FusionBootstrap** usa **NetworkObjectProviderDefault**
-- **StartCommand** hereda de **FusionMppmCommand**
-- **FusionBasicBillboard** hereda de **Behaviour**
-- **FusionAddressablePrefabsPreloader** hereda de **MonoBehaviour**
+- **IndicadorEnemigos** hereda de **MonoBehaviour**
+- **IndicadorEnemigos** usa **GameManager**
+- **Ideasypseudocodigos** hereda de **MonoBehaviour**
+- **GestorTexto** hereda de **MonoBehaviour**
+- **CodigoDeInicio** hereda de **MonoBehaviour**
+- **CodigoDeInicio** usa **BD_Audios**
+- **Camara** hereda de **MonoBehaviour**
+- **BD_Audios** hereda de **MonoBehaviour**
+- **BD_Audios** usa **CoroutineHelper**
+- **CoroutineHelper** hereda de **MonoBehaviour**
 - **GlobalLogicTests** usa **DebugLogger**
 - **GlobalLogicTests** usa **GameManager**
 - **GlobalLogicTests** usa **EventBus**
@@ -570,99 +531,6 @@ Generado: 2026-06-23 16:17:35
 - **GlobalLogicTests** usa **PlayerModel**
 - **GlobalLogicTests** usa **PlayerView**
 - **GlobalLogicTests** usa **PlayerController**
-- **RedesSceneLinker** usa **HostNetworkService**
-- **RedesSceneLinker** usa **PlayerSpawner**
-- **RedesSceneLinker** usa **GameFlowController**
-- **RedesSceneLinker** usa **MatchController**
-- **RedesSceneLinker** usa **PlayerController**
-- **RedesSceneLinker** usa **MatchNetworkController**
-- **RedesSceneLinker** usa **LobbyView**
-- **RedesSceneLinker** usa **GameHudView**
-- **RedesSceneLinker** usa **ResultView**
-- **RedesSceneLinker** usa **AssetDatabase**
-- **RedesSceneLinker** usa **RedesPrefabCreator**
-- **RedesSceneLinker** usa **EntityDisplayManager**
-- **RedesSceneLinker** usa **EntityDisplayView**
-- **RedesSceneLinker** usa **GameEventBus**
-- **RedesSceneLinker** usa **PlayerHealth**
-- **RedesSceneLinker** usa **PlayerShooting**
-- **RedesSceneLinker** usa **AmmoSystem**
-- **RedesSceneLinker** usa **PlayerAnimationController**
-- **RedesSceneLinker** usa **EditorUtility**
-- **RedesSceneCreator** usa **TerrainController**
-- **RedesSceneCreator** usa **AssetDatabase**
-- **RedesSceneCreator** usa **HostNetworkService**
-- **RedesSceneCreator** usa **PlayerSpawner**
-- **RedesSceneCreator** usa **MatchNetworkController**
-- **RedesSceneCreator** usa **GameFlowController**
-- **RedesSceneCreator** usa **MatchController**
-- **RedesSceneCreator** usa **PlayerController**
-- **RedesSceneCreator** usa **EntityDisplayManager**
-- **RedesSceneCreator** usa **VFXManager**
-- **RedesSceneCreator** usa **LobbyView**
-- **RedesSceneCreator** usa **GameHudView**
-- **RedesSceneCreator** usa **ResultView**
-- **RedesSceneCreator** usa **RedesPrefabCreator**
-- **RedesSceneCreator** usa **RedesSceneLinker**
-- **RedesPrefabCreator** usa **AssetDatabase**
-- **RedesPrefabCreator** usa **GameEventBus**
-- **RedesPrefabCreator** usa **NetworkPlayer**
-- **RedesPrefabCreator** usa **PlayerMovement**
-- **RedesPrefabCreator** usa **PlayerShooting**
-- **RedesPrefabCreator** usa **PlayerHealth**
-- **RedesPrefabCreator** usa **AmmoSystem**
-- **RedesPrefabCreator** usa **PlayerAnimationController**
-- **RedesPrefabCreator** usa **PlayerEventBus**
-- **RedesPrefabCreator** usa **Projectile**
-- **RedesPrefabCreator** usa **EntityDisplayView**
-- **RedesBuildAll** usa **RedesSceneCreator**
-- **RedesBuildAll** usa **RedesPrefabCreator**
-- **RedesBuildAll** usa **RedesSceneLinker**
-- **RedesBuildAll** usa **EditorApplication**
-- **Projectile** hereda de **NetworkBehaviour**
-- **Projectile** usa **GameConstants**
-- **Projectile** usa **RedesLog**
-- **Projectile** usa **IDamageable**
-- **Projectile** usa **NetworkPlayer**
-- **TerrainController** hereda de **MonoBehaviour**
-- **TerrainController** usa **TerrainModel**
-- **TerrainController** usa **TerrainView**
-- **PlayerController** hereda de **MonoBehaviour**
-- **PlayerController** usa **GameHudView**
-- **PlayerController** usa **PlayerModel**
-- **PlayerController** usa **NetworkPlayer**
-- **PlayerController** usa **GameConstants**
-- **MatchController** hereda de **MonoBehaviour**
-- **MatchController** usa **ResultView**
-- **MatchController** usa **MatchNetworkController**
-- **MatchController** usa **MatchResult**
-- **MatchController** usa **RedesLog**
-- **GameFlowController** hereda de **MonoBehaviour**
-- **GameFlowController** usa **HostNetworkService**
-- **GameFlowController** usa **LobbyView**
-- **GameFlowController** usa **GameHudView**
-- **GameFlowController** usa **MatchController**
-- **GameFlowController** usa **GameStateModel**
-- **GameFlowController** usa **INetworkService**
-- **GameFlowController** usa **RedesLog**
-- **GameFlowController** usa **GameConstants**
-- **GameFlowController** usa **GamePhase**
-- **GameFlowController** usa **ResultView**
-- **GameFlowController** usa **MatchResult**
-- **EntityDisplayManager** hereda de **MonoBehaviour**
-- **EntityDisplayManager** usa **EntityDisplayView**
-- **EntityDisplayManager** usa **NetworkPlayer**
-- **EntityDisplayManager** usa **IEntityDisplayModel**
-- **EntityDisplayManager** usa **RedesLog**
-- **UnitPathRenderer** hereda de **MonoBehaviour**
-- **UnitPathRenderer** usa **UnitController**
-- **UnitPathRenderer** usa **UnitFSM**
-- **UnitPathRenderer** usa **State**
-- **UnitModel** hereda de **MonoBehaviour**
-- **UnitModel** implementa **IHealth**
-- **UnitModel** usa **UnitTeam**
-- **UnitModel** usa **UnitSpecialization**
-- **UnitModel** usa **Destruible**
 - **UnitController** hereda de **MonoBehaviour**
 - **UnitController** implementa **IDaniable**
 - **UnitController** implementa **IDetectable**
@@ -715,253 +583,185 @@ Generado: 2026-06-23 16:17:35
 - **RevivingState** usa **IndicatorType**
 - **RevivingState** usa **SeguirFormacionState**
 - **RevivalSystemSetup** hereda de **MonoBehaviour**
-- **RevivalBarView** hereda de **MonoBehaviour**
-- **RevivalBarView** usa **UnitController**
-- **RehenBruto** hereda de **MonoBehaviour**
-- **RehenBruto** usa **IA_P2_AgentIA**
-- **RehenBruto** usa **GlobalData**
-- **PositionManager** hereda de **MonoBehaviour**
-- **PositionManager** usa **GlobalData**
-- **PositionManager** usa **UnitController**
-- **PositionManager** usa **UnitTeam**
-- **PositionManager** usa **EsperandoState**
-- **PositionManager** usa **SeguirFormacionState**
-- **Municion** hereda de **MonoBehaviour**
-- **Rigidbody2DMovementHandler** hereda de **MonoBehaviour**
-- **Rigidbody2DMovementHandler** implementa **IMovementHandler**
-- **Rigidbody2DMovementHandler** usa **BD_Audios**
-- **MovementProxy** usa **IMovable**
-- **ShootingProxy** usa **IAttackable**
-- **PersecucionEnemigo** hereda de **MonoBehaviour**
-- **PersecucionEnemigo** usa **Enemigo**
-- **IA_P2_BusEvent_Manager** hereda de **MonoBehaviour**
-- **IA_P2_BusEvent_Manager** usa **IA_P2_FSM**
-- **CrearYDestruir** hereda de **MonoBehaviour**
-- **AutoDestruccionSegura** hereda de **MonoBehaviour**
-- **Soldado_Anim** hereda de **MonoBehaviour**
-- **Soldado_Anim** usa **BD_Audios**
-- **CambiarOpacidad** hereda de **MonoBehaviour**
-- **WeaponView** hereda de **MonoBehaviour**
-- **WeaponView** usa **CambiarOpacidad**
-- **WeaponView** usa **Proyectil**
-- **WeaponView** usa **InformacionPersonaje**
-- **WeaponView** usa **WeaponModel**
-- **WeaponView** usa **Bala**
-- **WeaponView** usa **BD_Audios**
-- **WeaponController** hereda de **MonoBehaviour**
-- **WeaponController** usa **WeaponModel**
-- **WeaponController** usa **WeaponView**
-- **WeaponController** usa **IWeaponInput**
-- **WeaponController** usa **WeaponControllerMVC**
-- **WeaponController** usa **UnityWeaponInput**
-- **Proyectil2** hereda de **MonoBehaviour**
-- **Proyectil** hereda de **MonoBehaviour**
-- **Proyectil** usa **Manager_VFX**
-- **Proyectil** usa **IDaniable**
-- **Proyectil** usa **InformacionPersonaje**
-- **Proyectil** usa **Enemigo**
-- **Cohete** hereda de **MonoBehaviour**
-- **Cohete** usa **IDaniable**
-- **VibracionCamara** hereda de **MonoBehaviour**
-- **VibracionCamara** usa **ConfiguracionGlobal**
-- **UnitFSM** hereda de **MonoBehaviour**
-- **UnitFSM** usa **State**
-- **UnitFSM** usa **UnitController**
-- **UnitFSM** usa **TickManager**
-- **CambioDeLider** hereda de **MonoBehaviour**
-- **Weapon** hereda de **MonoBehaviour**
-- **Weapon** usa **PlayerModel**
-- **Weapon** usa **PlayerView**
-- **Weapon** usa **EventBus**
-- **Weapon** usa **Bullet**
-- **Weapon** usa **BulletPool**
-- **SimpleEnemyAI** hereda de **MonoBehaviour**
-- **SimpleEnemyAI** usa **PlayerModel**
-- **SimpleEnemyAI** usa **Weapon**
-- **SimpleEnemyAI** usa **PlayerView**
-- **SimpleEnemyAI** usa **PlayerController**
-- **SimpleEnemyAI** usa **EventBus**
-- **SimpleAnimator** hereda de **MonoBehaviour**
-- **ScreenManager** hereda de **MonoBehaviour**
-- **ScreenManager** usa **EventBus**
-- **ScreenManager** usa **LocalNetworkMock**
-- **ScreenManager** usa **RoomData**
-- **PlayerView** hereda de **MonoBehaviour**
-- **PlayerView** usa **PlayerModel**
-- **PlayerView** usa **SimpleAnimator**
-- **PlayerView** usa **EventBus**
-- **PlayerView** usa **ProceduralAudioGenerator**
-- **PlayerModel** hereda de **MonoBehaviour**
-- **PlayerModel** usa **EventBus**
+- **RedesSceneCreator** usa **TerrainController**
+- **RedesSceneCreator** usa **TerrainView**
+- **RedesSceneCreator** usa **AssetDatabase**
+- **RedesSceneCreator** usa **HostNetworkService**
+- **RedesSceneCreator** usa **PlayerSpawner**
+- **RedesSceneCreator** usa **MatchNetworkController**
+- **RedesSceneCreator** usa **GameFlowController**
+- **RedesSceneCreator** usa **MatchController**
+- **RedesSceneCreator** usa **PlayerController**
+- **RedesSceneCreator** usa **EntityDisplayManager**
+- **RedesSceneCreator** usa **VFXManager**
+- **RedesSceneCreator** usa **RedesProceduralAudio**
+- **RedesSceneCreator** usa **RedesAudioSetup**
+- **RedesSceneCreator** usa **LobbyView**
+- **RedesSceneCreator** usa **GameHudView**
+- **RedesSceneCreator** usa **TeleportCooldownView**
+- **RedesSceneCreator** usa **ResultView**
+- **RedesSceneCreator** usa **DeathScreenView**
+- **RedesSceneCreator** usa **DeathScreenController**
+- **RedesSceneCreator** usa **CustomCursorView**
+- **RedesSceneCreator** usa **GameEventBus**
+- **RedesSceneCreator** usa **RedesLoadingScreen**
+- **RedesProceduralAudio** usa **AssetDatabase**
+- **RedesPrefabCreator** usa **AssetDatabase**
+- **RedesPrefabCreator** usa **GameEventBus**
+- **RedesPrefabCreator** usa **NetworkPlayer**
+- **RedesPrefabCreator** usa **PlayerMovement**
+- **RedesPrefabCreator** usa **PlayerShooting**
+- **RedesPrefabCreator** usa **PlayerHealth**
+- **RedesPrefabCreator** usa **AmmoSystem**
+- **RedesPrefabCreator** usa **PlayerEventBus**
+- **RedesPrefabCreator** usa **PlayerAnimationView**
+- **RedesPrefabCreator** usa **PlayerCrouch**
+- **RedesPrefabCreator** usa **PlayerTeleport**
+- **RedesPrefabCreator** usa **RedesAudioSetup**
+- **RedesPrefabCreator** usa **RagdollController**
+- **RedesPrefabCreator** usa **Projectile**
+- **RedesPrefabCreator** usa **EntityDisplayView**
+- **RedesPrefabCreator** usa **DestructibleBombObstacle**
+- **RedesBuildAll** usa **RedesSceneCreator**
+- **RedesBuildAll** usa **RedesPrefabCreator**
+- **RedesBuildAll** usa **RedesSceneLinker**
+- **RedesBuildAll** usa **EditorApplication**
+- **RedesBuildAll** usa **RedesAudioSetup**
+- **RedesBuildAll** usa **RedesProceduralAudio**
+- **RedesBuildAll** usa **AssetDatabase**
+- **RedesBuildAll** usa **RedesVisualConfigurator**
+- **RedesAudioSetup** usa **AssetDatabase**
+- **RedesAudioSetup** usa **Editor**
+- **AddObstacleFeedbackToPrefabs** usa **EditorApplication**
+- **AddObstacleFeedbackToPrefabs** usa **AssetDatabase**
+- **AddObstacleFeedbackToPrefabs** usa **ObstacleHitFeedback**
+- **AddObstacleFeedbackToPrefabs** usa **EditorUtility**
+- **Projectile** hereda de **NetworkBehaviour**
+- **Projectile** usa **GameConstants**
+- **Projectile** usa **RedesLog**
+- **Projectile** usa **IDamageable**
+- **Projectile** usa **NetworkPlayer**
+- **Projectile** usa **MatchNetworkController**
+- **ObstacleHitFeedback** hereda de **MonoBehaviour**
+- **ObstacleHitFeedback** usa **RedesLog**
+- **DestructibleBombObstacle** hereda de **NetworkBehaviour**
+- **DestructibleBombObstacle** implementa **IDamageable**
+- **DestructibleBombObstacle** usa **BombState**
+- **DestructibleBombObstacle** usa **RedesLog**
+- **DestructibleBombObstacle** usa **NetworkPlayer**
+- **TerrainController** hereda de **MonoBehaviour**
+- **TerrainController** usa **TerrainModel**
+- **TerrainController** usa **TerrainView**
+- **RedesLoadingScreen** hereda de **MonoBehaviour**
 - **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **GameHudView**
+- **PlayerController** usa **TeleportCooldownView**
 - **PlayerController** usa **PlayerModel**
-- **PlayerController** usa **PlayerView**
-- **PlayerController** usa **Weapon**
-- **PlayerController** usa **LocalNetworkMock**
+- **PlayerController** usa **NetworkPlayer**
+- **PlayerController** usa **GameConstants**
 - **PlayerController** usa **EventBus**
-- **LocalNetworkMock** usa **RoomData**
-- **ImpactEffect** hereda de **MonoBehaviour**
-- **GameManager** hereda de **MonoBehaviour**
-- **GameManager** usa **EventBus**
-- **GameManager** usa **PlayerModel**
-- **GameManager** usa **LocalNetworkMock**
-- **GameManager** usa **FloatingHealthBar**
-- **GameLoopReferee** hereda de **MonoBehaviour**
-- **GameLoopReferee** usa **PlayerModel**
-- **GameLoopReferee** usa **PlayerController**
-- **GameLoopReferee** usa **SimpleEnemyAI**
-- **GameLoopReferee** usa **GameManager**
-- **CharacterView** hereda de **MonoBehaviour**
-- **IA_P2_ST_SearchingState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_SearchingState** usa **IA_P2_FSM**
-- **IA_P2_ST_SearchingState** usa **AgentState**
-- **IA_P2_ST_SearchingState** usa **IA_P2_LineOfSight3D**
-- **IA_P2_ST_ReturningToPatrolState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_ReturningToPatrolState** usa **IA_P2_FSM**
-- **IA_P2_ST_ReturningToPatrolState** usa **AgentState**
-- **IA_P2_ST_PatrolState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_PatrolState** usa **IA_P2_FSM**
-- **IA_P2_ST_PatrolState** usa **AgentState**
-- **IA_P2_ST_ChaseState** implementa **IA_P2_INT_gentState**
-- **IA_P2_ST_ChaseState** usa **IA_P2_FSM**
-- **IA_P2_ST_ChaseState** usa **AgentState**
-- **IA_P2_ST_ChaseState** usa **IA_P2_LineOfSight3D**
-- **IA_P2_PathfindingManager** usa **IA_P2_PathNode**
-- **IA_P2_PathfindingManager** usa **IA_P2_PathfindingModel**
-- **IA_P2_PathfindingManager** usa **FinalPathResult**
-- **IA_P2_PathfindingManager** usa **NodeDistance**
-- **IA_P2_PathfindingManager** usa **IA_P2_LineOfSight3D**
-- **IA_P2_PathfindingManager** usa **AStarResult**
-- **IA_P2_PathfindingManager** usa **ThetaStarResult**
-- **AStarResult** usa **IA_P2_PathNode**
-- **NodeDistance** usa **IA_P2_PathNode**
-- **IA_P2_INT_gentState** usa **IA_P2_FSM**
-- **IA_P2_FSM** hereda de **MonoBehaviour**
-- **IA_P2_FSM** usa **IA_P2_AgentIA**
-- **IA_P2_FSM** usa **AgentState**
-- **IA_P2_FSM** usa **IA_P2_INT_gentState**
-- **IA_P2_FSM** usa **IA_P2_FOV**
-- **IA_P2_FSM** usa **IA_P2_ST_PatrolState**
-- **IA_P2_FSM** usa **IA_P2_ST_ChaseState**
-- **IA_P2_FSM** usa **IA_P2_ST_SearchingState**
-- **IA_P2_FSM** usa **IA_P2_ST_ReturningToPatrolState**
-- **IA_P2_FSM** usa **IA_P2_BusEvent_Manager**
-- **IA_P2_FOV** hereda de **MonoBehaviour**
-- **IA_P2_FOV** usa **IA_P2_LineOfSight3D**
-- **IA_F_PathFinding_Theta** usa **IA_P2_LineOfSight3D**
-- **IA_F_EnemyCercanos** hereda de **MonoBehaviour**
-- **IA_F_ControllerSeguidor** hereda de **MonoBehaviour**
-- **IA_F_ControllerSeguidor** usa **IA_P2_AgentIA**
-- **IA_F_ControllerSeguidor** usa **IA_F_EnemyCercanos**
-- **IA_F_ChangeMode** hereda de **MonoBehaviour**
-- **IA_F_ChangeMode** usa **IA_P2_AgentIA**
-- **IA_F_ChangeMode** usa **IA_P2_BusEvent_Manager**
-- **CharacterControllerMVC** usa **CharacterModel**
-- **CharacterControllerMVC** usa **CharacterView**
-- **CharacterControllerMVC** usa **ICharacterInput**
-- **CharacterControllerMVC** usa **IMovementHandler**
-- **SelectedSoldierUIFeedback** hereda de **MonoBehaviour**
-- **SelectedSoldierUIFeedback** usa **UnitController**
-- **WeaponModel** hereda de **MonoBehaviour**
-- **InformacionPersonaje** hereda de **MonoBehaviour**
-- **InformacionPersonaje** implementa **IHealth**
-- **InformacionPersonaje** usa **WeaponController**
-- **InformacionPersonaje** usa **GameManager**
-- **CharacterModel** hereda de **MonoBehaviour**
-- **CharacterModel** usa **InformacionPersonaje**
-- **Tanque** hereda de **MonoBehaviour**
-- **Tanque** usa **Puntero_Tanque**
-- **Tanque** usa **Cohete**
-- **Tanque** usa **ObjetoColisionado**
-- **Puntero_Tanque** hereda de **MonoBehaviour**
-- **Puntero_Tanque** usa **Tanque**
-- **PlayerController** hereda de **MonoBehaviour**
-- **PlayerController** usa **CharacterModel**
-- **PlayerController** usa **CharacterView**
-- **PlayerController** usa **Rigidbody2DMovementHandler**
-- **PlayerController** usa **ICharacterInput**
-- **PlayerController** usa **UnityCharacterInput**
-- **PlayerController** usa **BD_Audios**
-- **EntrarAlTanque** hereda de **MonoBehaviour**
-- **EntrarAlTanque** usa **ControladorTanque**
-- **Enemigo** hereda de **MonoBehaviour**
-- **Enemigo** usa **GameManager**
-- **ControladorTanque** hereda de **MonoBehaviour**
-- **ControladorTanque** usa **EntrarAlTanque**
-- **ControladorTanque** usa **Proyectil**
-- **ControladorTanque** usa **Bala**
-- **ControladorTanque** usa **BD_Audios**
-- **GenericDetector** hereda de **MonoBehaviour**
-- **GenericDetector** usa **DetectableType**
-- **GenericDetector** usa **IDetectable**
-- **GameManager** hereda de **MonoBehaviour**
-- **GameManager** usa **Enemigo**
-- **FormationRelocator** hereda de **MonoBehaviour**
-- **FormationRelocator** usa **GlobalData**
-- **EnemyView** hereda de **MonoBehaviour**
-- **EnemyView** usa **EnemyModel**
-- **EnemyModel** hereda de **MonoBehaviour**
-- **EnemyModel** implementa **IHealth**
-- **Disparador** hereda de **MonoBehaviour**
-- **Disparador** usa **Manager_VFX**
-- **Disparador** usa **BD_Audios**
-- **Disparador** usa **BalaPool**
-- **Disparador** usa **Bala**
-- **Destruible** hereda de **MonoBehaviour**
-- **Destruible** implementa **IDaniable**
-- **Destruible** usa **UnitController**
-- **DamagedState** implementa **IUnitState**
-- **DamagedState** usa **DamagedStateHandler**
-- **DamagedState** usa **UnitController**
-- **DamagedState** usa **IDetectable**
-- **DamagedStateHandler** hereda de **MonoBehaviour**
-- **DamagedStateHandler** usa **UnitController**
-- **CursorManager** hereda de **MonoBehaviour**
-- **CursorManager** usa **IInteractable**
-- **CursorManager** usa **IDaniable**
-- **ControlDerrota** hereda de **MonoBehaviour**
-- **ControlDerrota** usa **LeaderManager**
-- **BalaPool** hereda de **MonoBehaviour**
-- **BalaPool** usa **Bala**
-- **Bala** hereda de **MonoBehaviour**
-- **Bala** implementa **IDetectable**
-- **Bala** usa **DetectableType**
-- **Bala** usa **Proyectil**
-- **Bala** usa **CursorManager**
-- **Bala** usa **IDaniable**
-- **Bala** usa **UnitController**
-- **Bala** usa **CoroutineHelper**
-- **Bala** usa **Manager_VFX**
-- **Bala** usa **BD_Audios**
-- **Bala** usa **UnitTeam**
-- **Bala** usa **BalaPool**
-- **AmmoManager** hereda de **MonoBehaviour**
-- **AmmoManager** usa **UnitController**
-- **AmmoManager** usa **UnitModel**
-- **PlayerShooting** hereda de **NetworkBehaviour**
-- **PlayerShooting** usa **AmmoSystem**
-- **PlayerShooting** usa **GameEventBus**
-- **PlayerShooting** usa **GameConstants**
-- **PlayerShooting** usa **PlayerEventBus**
-- **PlayerShooting** usa **Projectile**
-- **PlayerShooting** usa **RedesLog**
-- **PlayerMovement** hereda de **NetworkBehaviour**
-- **PlayerMovement** usa **GameConstants**
-- **PlayerMovement** usa **PlayerEventBus**
-- **PlayerMovement** usa **NetworkInputData**
-- **PlayerHealth** hereda de **NetworkBehaviour**
-- **PlayerHealth** implementa **IDamageable**
-- **PlayerHealth** usa **GameConstants**
-- **PlayerHealth** usa **GameEventBus**
-- **PlayerHealth** usa **PlayerEventBus**
-- **PlayerHealth** usa **RedesLog**
-- **PlayerHealth** usa **VFXManager**
-- **PlayerEventBus** hereda de **MonoBehaviour**
-- **PlayerAnimationController** hereda de **NetworkBehaviour**
-- **PlayerAnimationController** usa **PlayerMovement**
-- **PlayerAnimationController** usa **PlayerHealth**
-- **PlayerAnimationController** usa **PlayerShooting**
-- **PlayerAnimationController** usa **VFXManager**
+- **MatchController** hereda de **MonoBehaviour**
+- **MatchController** usa **ResultView**
+- **MatchController** usa **MatchNetworkController**
+- **MatchController** usa **MatchResult**
+- **MatchController** usa **RedesLog**
+- **MatchController** usa **RedesLoadingScreen**
+- **EntityDisplayManager** hereda de **MonoBehaviour**
+- **EntityDisplayManager** usa **EntityDisplayView**
+- **EntityDisplayManager** usa **NetworkPlayer**
+- **EntityDisplayManager** usa **IEntityDisplayModel**
+- **EntityDisplayManager** usa **RedesLog**
+- **GameEventBus** hereda de **ScriptableObject**
+- **RagdollController** hereda de **MonoBehaviour**
+- **RagdollController** usa **BoneJointData**
+- **MatchNetworkController** hereda de **NetworkBehaviour**
+- **MatchNetworkController** usa **MatchController**
+- **MatchNetworkController** usa **GameEventBus**
+- **MatchNetworkController** usa **RedesLog**
+- **MatchNetworkController** usa **MatchResult**
+- **MatchNetworkController** usa **VFXManager**
+- **MatchNetworkController** usa **IDamageable**
+- **MatchNetworkController** usa **ObstacleHitFeedback**
+- **MatchNetworkController** usa **GameFlowController**
+- **TerrainModel** hereda de **MonoBehaviour**
+- **PlayerModel** usa **GameConstants**
+- **GameStateModel** usa **GamePhase**
+- **RoomSessionHandler** implementa **ISessionListHandler**
+- **RoomSessionHandler** usa **HostNetworkService**
+- **RoomSessionHandler** usa **NetworkSceneManagerDefault**
+- **RoomSessionHandler** usa **RedesLog**
+- **RoomSessionHandler** usa **GameConstants**
+- **PlayerSpawner** hereda de **MonoBehaviour**
+- **PlayerSpawner** usa **RedesLog**
+- **NetworkInputData** implementa **INetworkInput**
+- **NetworkObjectProviderDefault** hereda de **Behaviour**
+- **NetworkObjectProviderDefault** implementa **INetworkObjectProvider**
+- **NetworkCCData** implementa **INetworkStruct**
+- **NetworkCharacterController** hereda de **NetworkTRSP**
+- **NetworkCharacterController** implementa **INetworkTRSPTeleport**
+- **NetworkCharacterController** implementa **IBeforeAllTicks**
+- **NetworkCharacterController** implementa **IAfterAllTicks**
+- **NetworkCharacterController** implementa **IBeforeCopyPreviousState**
+- **NetworkCharacterController** usa **NetworkCCData**
+- **FusionBootstrapDebugGUI** hereda de **Behaviour**
+- **FusionBootstrapDebugGUI** usa **FusionBootstrap**
+- **FusionBootstrapDebugGUI** usa **Stage**
+- **FusionBootstrapDebugGUI** usa **FusionScalableIMGUI**
+- **FusionBootstrap** hereda de **Behaviour**
+- **FusionBootstrap** usa **FusionMppmCommand**
+- **FusionBootstrap** usa **StartCommand**
+- **FusionBootstrap** usa **StartModes**
+- **FusionBootstrap** usa **Stage**
+- **FusionBootstrap** usa **State**
+- **FusionBootstrap** usa **FusionBootstrapDebugGUI**
+- **FusionBootstrap** usa **FusionMppm**
+- **FusionBootstrap** usa **FusionMppmStatus**
+- **FusionBootstrap** usa **NetworkSceneManagerDefault**
+- **FusionBootstrap** usa **NetworkObjectProviderDefault**
+- **StartCommand** hereda de **FusionMppmCommand**
+- **FusionBasicBillboard** hereda de **Behaviour**
+- **FusionAddressablePrefabsPreloader** hereda de **MonoBehaviour**
+- **FusionGlobalScriptableObjectAddressAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
+- **FusionGlobalScriptableObjectResourceAttribute** hereda de **FusionGlobalScriptableObjectSourceAttribute**
+- **FusionCoroutine** implementa **ICoroutine**
+- **FusionCoroutine** implementa **IDisposable**
+- **FusionLogInitializer** usa **FusionUnityLogger**
+- **FusionUnityLogger** hereda de **FusionUnityLoggerBase**
+- **FusionUnityLogger** usa **Stage**
+- **JsonUtilityExtensions** usa **TypeNameWrapper**
+- **FusionMppm** usa **FusionMppmStatus**
+- **FusionMppm** usa **FusionMppmCommand**
+- **NetworkObjectBaker** usa **TransformPath**
+- **NetworkObjectBaker** usa **TransformPathCache**
+- **NetworkObjectBaker** usa **Result**
+- **NetworkObjectBaker** usa **_Indices**
+- **TransformPath** usa **_Indices**
+- **TransformPathCache** implementa **IComparer**
+- **TransformPathCache** implementa **IEqualityComparer**
+- **TransformPathCache** usa **TransformPath**
+- **NetworkPrefabSourceStatic** hereda de **NetworkAssetSourceStatic**
+- **NetworkPrefabSourceStatic** implementa **INetworkPrefabSource**
+- **NetworkPrefabSourceStaticLazy** hereda de **NetworkAssetSourceStaticLazy**
+- **NetworkPrefabSourceStaticLazy** implementa **INetworkPrefabSource**
+- **NetworkPrefabSourceResource** hereda de **NetworkAssetSourceResource**
+- **NetworkPrefabSourceResource** implementa **INetworkPrefabSource**
+- **FusionStatisticsHelper** usa **RenderSimStats**
+- **FusionStatsGraphBase** hereda de **MonoBehaviour**
+- **FusionStatsGraphBase** usa **FusionStatBuffer**
+- **FusionStatsGraphBase** usa **FusionStatistics**
+- **SceneEqualityComparer** implementa **IEqualityComparer**
+- **NetworkRunnerVisibilityExtensions** usa **IRunnerVisibilityRecognizedType**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibility**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLink**
+- **NetworkRunnerVisibilityExtensions** usa **RunnerVisibilityLinksRoot**
+- **NetworkRunnerVisibilityExtensions** usa **EnableOnSingleRunner**
+- **NetworkRunnerVisibilityExtensions** usa **PreferredRunners**
+- **RunnerVisibility** usa **RunnerVisibilityLink**
+- **VfxController** hereda de **MonoBehaviour**
+- **DropdownController** hereda de **MonoBehaviour**
+- **DropdownController** usa **VfxController**
+- **DebugColisionesFull** hereda de **MonoBehaviour**
+- **CollisionDetector** hereda de **MonoBehaviour**
 - **NetworkPlayer** hereda de **NetworkBehaviour**
 - **NetworkPlayer** implementa **IEntityDisplayModel**
 - **NetworkPlayer** usa **GameConstants**
@@ -970,8 +770,10 @@ Generado: 2026-06-23 16:17:35
 - **NetworkPlayer** usa **PlayerShooting**
 - **NetworkPlayer** usa **PlayerHealth**
 - **NetworkPlayer** usa **AmmoSystem**
-- **NetworkPlayer** usa **PlayerAnimationController**
 - **NetworkPlayer** usa **PlayerEventBus**
+- **NetworkPlayer** usa **PlayerCrouch**
+- **NetworkPlayer** usa **PlayerTeleport**
+- **NetworkPlayer** usa **CustomCursorView**
 - **NetworkPlayer** usa **GameFlowController**
 - **NetworkPlayer** usa **PlayerController**
 - **NetworkPlayer** usa **NetworkInputData**
@@ -981,111 +783,25 @@ Generado: 2026-06-23 16:17:35
 - **AmmoSystem** usa **GameEventBus**
 - **AmmoSystem** usa **PlayerEventBus**
 - **AmmoSystem** usa **RedesLog**
-- **VFXManager** hereda de **MonoBehaviour**
-- **TerrainView** hereda de **MonoBehaviour**
-- **ResultView** hereda de **MonoBehaviour**
-- **ResultView** usa **MatchResult**
-- **ResultView** usa **RedesLog**
-- **LobbyView** hereda de **MonoBehaviour**
-- **LobbyView** usa **GameConstants**
-- **LobbyView** usa **RedesLog**
-- **GameHudView** hereda de **MonoBehaviour**
-- **EntityDisplayView** hereda de **MonoBehaviour**
-- **TriggerEventAndDestroy** hereda de **MonoBehaviour**
-- **MenuPausa** hereda de **MonoBehaviour**
-- **MarkerAnim** hereda de **MonoBehaviour**
-- **Manager_VFX** hereda de **MonoBehaviour**
-- **MainGameController** hereda de **MonoBehaviour**
-- **MainGameController** usa **LeaderManager**
-- **MainGameController** usa **GlobalData**
-- **MainGameController** usa **UnitModel**
-- **MainGameController** usa **UnitSpecialization**
-- **MainGameController** usa **UnitFSM**
-- **LiderandoState** implementa **IUnitState**
-- **LiderandoState** usa **UnitController**
-- **LiderandoState** usa **UnitSpecialization**
-- **LiderandoState** usa **LeaderManager**
-- **LiderandoState** usa **GEN_Inputs**
-- **LiderandoState** usa **CursorManager**
-- **SeguirFormacionState** implementa **IUnitState**
-- **SeguirFormacionState** usa **UnitController**
-- **SeguirFormacionState** usa **GlobalData**
-- **SeguirFormacionState** usa **EsperandoState**
-- **SeguirFormacionState** usa **DetectableType**
-- **SeguirFormacionState** usa **Enemigo**
-- **SeguirFormacionState** usa **AtacarState**
-- **AtacarState** implementa **IUnitState**
-- **AtacarState** usa **UnitController**
-- **AtacarState** usa **IndicatorType**
-- **AtacarState** usa **UnitTeam**
-- **AtacarState** usa **SeguirFormacionState**
-- **AtacarState** usa **EsperandoState**
-- **AtacarState** usa **PerseguirState**
-- **PerseguirState** implementa **IUnitState**
-- **PerseguirState** usa **UnitController**
-- **PerseguirState** usa **IndicatorType**
-- **PerseguirState** usa **UnitTeam**
-- **PerseguirState** usa **SeguirFormacionState**
-- **PerseguirState** usa **EsperandoState**
-- **PerseguirState** usa **AtacarState**
-- **EsperandoState** implementa **IUnitState**
-- **EsperandoState** usa **UnitController**
-- **EsperandoState** usa **IndicatorType**
-- **EsperandoState** usa **SeguirFormacionState**
-- **HuirDetrasLiderState** implementa **IUnitState**
-- **HuirDetrasLiderState** usa **UnitController**
-- **HuirDetrasLiderState** usa **GlobalData**
-- **HuirDetrasLiderState** usa **SeguirFormacionState**
-- **IrADestinoState** implementa **IUnitState**
-- **IrADestinoState** usa **UnitController**
-- **IrADestinoState** usa **IndicatorType**
-- **IrADestinoState** usa **EsperandoState**
-- **LeaderManager** hereda de **MonoBehaviour**
-- **LeaderManager** usa **UnitController**
-- **LeaderManager** usa **UnitSpecialization**
-- **LeaderManager** usa **GEN_Inputs**
-- **LeaderManager** usa **GlobalData**
-- **LeaderManager** usa **MainGameController**
-- **LeaderManager** usa **SeguirFormacionState**
-- **LeaderManager** usa **LiderandoState**
-- **InteractableItem** hereda de **MonoBehaviour**
-- **InteractableItem** implementa **IInteractable**
-- **InteractableItem** usa **UnitController**
-- **InteractableItem** usa **UnitTeam**
-- **InteractableItem** usa **BD_Audios**
-- **IA_P2_PathNode** hereda de **MonoBehaviour**
-- **IA_P2_PathNode** usa **IA_P2_PathfindingModel**
-- **IA_P2_PathfindingModel** hereda de **MonoBehaviour**
-- **IA_P2_PathfindingModel** usa **IA_P2_PathNode**
-- **IA_P2_PathfindingModel** usa **IA_P2_LineOfSight3D**
-- **IA_P2_AgentIA** hereda de **MonoBehaviour**
-- **IA_P2_AgentIA** usa **UnitModel**
-- **IA_P2_AgentIA** usa **IA_P2_PathfindingModel**
-- **IA_P2_AgentIA** usa **IA_P2_PathfindingManager**
-- **IA_P2_AgentIA** usa **IA_F_PathFinding_Theta**
-- **GlobalHUD** hereda de **MonoBehaviour**
-- **GlobalHUD** usa **LeaderManager**
-- **GlobalData** usa **UnitController**
-- **GEN_Inputs** hereda de **MonoBehaviour**
-- **GEN_Inputs** usa **Destruible**
-- **FusionRunnerVisibilityControlsWindow** hereda de **EditorWindow**
-- **FusionRunnerVisibilityControlsWindow** usa **RunnerEnableVisibility**
-- **FusionRunnerVisibilityControlsWindow** usa **NetworkRunnerVisibilityExtensions**
-- **FusionRunnerVisibilityControlsWindow** usa **EditorGUIUtility**
-- **FusionRunnerVisibilityControlsWindow** usa **Labels**
-- **FusionRunnerVisibilityControlsWindow** usa **FusionEditorSkin**
-- **FusionRunnerVisibilityControlsWindow** usa **FusionStatistics**
-- **FusionRunnerVisibilityControlsWindow** usa **EditorGUI**
-- **FusionRunnerVisibilityControlsWindow** usa **DisabledGroupScope**
-- **FusionRunnerVisibilityControlsWindow** usa **Event**
-- **FusionRunnerVisibilityControlsWindow** usa **CanvasAnchor**
-- **Labels** usa **RunnerEnableVisibility**
-- **Labels** usa **NetworkRunnerVisibilityExtensions**
-- **FusionEditorSkin** hereda de **ScriptableObject**
-- **FusionEditorSkin** usa **EditorGUIUtility**
-- **FusionEditorSkin** usa **LazyAsset**
-- **FusionEditorSkin** usa **LazyGUIStyle**
-- **FusionEditorConfigImporter** hereda de **ScriptedImporter**
+- **TestSceneManager** hereda de **MonoBehaviour**
+- **TestSceneManager** usa **DummyEnemy**
+- **OfflinePlayerTester** hereda de **MonoBehaviour**
+- **OfflinePlayerTester** usa **PlayerInputMode**
+- **OfflinePlayerTester** usa **PlayerEventBus**
+- **OfflinePlayerTester** usa **DummyEnemy**
+- **OfflinePlayerTester** usa **EntityDisplayView**
+- **OfflinePlayerTester** usa **EventBus**
+- **OfflinePlayerTester** usa **LocalNetworkMock**
+- **OfflinePlayerTester** usa **OfflineBullet**
+- **OfflineBullet** hereda de **MonoBehaviour**
+- **OfflineBullet** usa **OfflinePlayerTester**
+- **OfflineBullet** usa **DummyEnemy**
+- **OfflineBullet** usa **CustomCursorView**
+- **DummyEnemy** hereda de **MonoBehaviour**
+- **DummyEnemy** usa **EntityDisplayView**
+- **DummyEnemy** usa **OfflineBullet**
+- **DummyEnemy** usa **RagdollController**
+- **CameraFollow** hereda de **MonoBehaviour**
 - **AssetObjectEditor** hereda de **Editor**
 - **BehaviourEditor** hereda de **FusionEditor**
 - **ChangeDllManager** usa **AssetDatabase**
@@ -1740,6 +1456,29 @@ Generado: 2026-06-23 16:17:35
 - **FusionStatsWorldAnchor** hereda de **MonoBehaviour**
 - **FusionStatsWorldAnchor** usa **FusionStatsConfig**
 - **FusionStatsWorldAnchor** usa **FusionStatsCanvas**
+- **Tanque** hereda de **MonoBehaviour**
+- **Tanque** usa **Puntero_Tanque**
+- **Tanque** usa **Cohete**
+- **Tanque** usa **ObjetoColisionado**
+- **Puntero_Tanque** hereda de **MonoBehaviour**
+- **Puntero_Tanque** usa **Tanque**
+- **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **CharacterModel**
+- **PlayerController** usa **CharacterView**
+- **PlayerController** usa **Rigidbody2DMovementHandler**
+- **PlayerController** usa **ICharacterInput**
+- **PlayerController** usa **UnityCharacterInput**
+- **PlayerController** usa **BD_Audios**
+- **EntrarAlTanque** hereda de **MonoBehaviour**
+- **EntrarAlTanque** usa **ControladorTanque**
+- **Enemigo** hereda de **MonoBehaviour**
+- **Enemigo** usa **GameManager**
+- **ControladorTanque** hereda de **MonoBehaviour**
+- **ControladorTanque** usa **EntrarAlTanque**
+- **ControladorTanque** usa **Proyectil**
+- **ControladorTanque** usa **Bala**
+- **ControladorTanque** usa **BD_Audios**
+- **CharacterView** hereda de **MonoBehaviour**
 - **FusionStatsPanelHeader** hereda de **MonoBehaviour**
 - **FusionStatsPanelHeader** usa **FusionStatsGraphDefault**
 - **FusionStatsPanelHeader** usa **RenderSimStats**
@@ -1785,44 +1524,307 @@ Generado: 2026-06-23 16:17:35
 - **FusionNetworkObjectStatsGraph** hereda de **FusionStatsGraphBase**
 - **FusionNetworkObjectStatsGraph** usa **NetworkObjectStat**
 - **FusionNetworkObjectStatsGraph** usa **FusionNetworkObjectStatsGraphCombine**
-- **Torreta** hereda de **MonoBehaviour**
-- **Torreta** usa **GameManager**
-- **SistemaPuntaje** hereda de **MonoBehaviour**
-- **SenalizacionDeEnemigos** hereda de **MonoBehaviour**
+- **FusionNetworkObjectStatistics** hereda de **MonoBehaviour**
+- **FusionNetworkObjectStatistics** usa **FusionStatistics**
+- **RunnerVisibilityLinksRoot** hereda de **MonoBehaviour**
+- **RunnerVisibilityLink** hereda de **MonoBehaviour**
+- **RunnerVisibilityLink** usa **PreferredRunners**
+- **RunnerVisibilityLink** usa **ComponentType**
+- **RunnerVisibilityLink** usa **NetworkRunnerVisibilityExtensions**
+- **RunnerLagCompensationGizmos** hereda de **Behaviour**
+- **RunnerEnableVisibility** hereda de **Behaviour**
+- **RunnerEnableVisibility** implementa **INetworkRunnerCallbacks**
+- **RunnerAOIGizmos** hereda de **SimulationBehaviour**
+- **EnableOnSingleRunner** hereda de **Behaviour**
+- **EnableOnSingleRunner** usa **RunnerVisibilityLink**
+- **EnableOnSingleRunner** usa **PreferredRunners**
+- **IA_P2_ST_SearchingState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_SearchingState** usa **IA_P2_FSM**
+- **IA_P2_ST_SearchingState** usa **AgentState**
+- **IA_P2_ST_SearchingState** usa **IA_P2_LineOfSight3D**
+- **IA_P2_ST_ReturningToPatrolState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_ReturningToPatrolState** usa **IA_P2_FSM**
+- **IA_P2_ST_ReturningToPatrolState** usa **AgentState**
+- **IA_P2_ST_PatrolState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_PatrolState** usa **IA_P2_FSM**
+- **IA_P2_ST_PatrolState** usa **AgentState**
+- **IA_P2_ST_ChaseState** implementa **IA_P2_INT_gentState**
+- **IA_P2_ST_ChaseState** usa **IA_P2_FSM**
+- **IA_P2_ST_ChaseState** usa **AgentState**
+- **IA_P2_ST_ChaseState** usa **IA_P2_LineOfSight3D**
+- **IA_P2_PathfindingManager** usa **IA_P2_PathNode**
+- **IA_P2_PathfindingManager** usa **IA_P2_PathfindingModel**
+- **IA_P2_PathfindingManager** usa **FinalPathResult**
+- **IA_P2_PathfindingManager** usa **NodeDistance**
+- **IA_P2_PathfindingManager** usa **IA_P2_LineOfSight3D**
+- **IA_P2_PathfindingManager** usa **AStarResult**
+- **IA_P2_PathfindingManager** usa **ThetaStarResult**
+- **AStarResult** usa **IA_P2_PathNode**
+- **NodeDistance** usa **IA_P2_PathNode**
+- **IA_P2_INT_gentState** usa **IA_P2_FSM**
+- **IA_P2_FSM** hereda de **MonoBehaviour**
+- **IA_P2_FSM** usa **IA_P2_AgentIA**
+- **IA_P2_FSM** usa **AgentState**
+- **IA_P2_FSM** usa **IA_P2_INT_gentState**
+- **IA_P2_FSM** usa **IA_P2_FOV**
+- **IA_P2_FSM** usa **IA_P2_ST_PatrolState**
+- **IA_P2_FSM** usa **IA_P2_ST_ChaseState**
+- **IA_P2_FSM** usa **IA_P2_ST_SearchingState**
+- **IA_P2_FSM** usa **IA_P2_ST_ReturningToPatrolState**
+- **IA_P2_FSM** usa **IA_P2_BusEvent_Manager**
+- **IA_P2_FOV** hereda de **MonoBehaviour**
+- **IA_P2_FOV** usa **IA_P2_LineOfSight3D**
+- **IA_F_PathFinding_Theta** usa **IA_P2_LineOfSight3D**
+- **IA_F_EnemyCercanos** hereda de **MonoBehaviour**
+- **IA_F_ControllerSeguidor** hereda de **MonoBehaviour**
+- **IA_F_ControllerSeguidor** usa **IA_P2_AgentIA**
+- **IA_F_ControllerSeguidor** usa **IA_F_EnemyCercanos**
+- **IA_F_ChangeMode** hereda de **MonoBehaviour**
+- **IA_F_ChangeMode** usa **IA_P2_AgentIA**
+- **IA_F_ChangeMode** usa **IA_P2_BusEvent_Manager**
+- **Rigidbody2DMovementHandler** hereda de **MonoBehaviour**
+- **Rigidbody2DMovementHandler** implementa **IMovementHandler**
+- **Rigidbody2DMovementHandler** usa **BD_Audios**
+- **MovementProxy** usa **IMovable**
+- **ShootingProxy** usa **IAttackable**
+- **LobbyView** hereda de **MonoBehaviour**
+- **LobbyView** usa **PlaySoundOnButtonClick**
+- **LobbyView** usa **GameConstants**
+- **LobbyView** usa **RedesLog**
+- **GameHudView** hereda de **MonoBehaviour**
+- **EntityDisplayView** hereda de **MonoBehaviour**
+- **DeathScreenView** hereda de **MonoBehaviour**
+- **CursorManager** hereda de **MonoBehaviour**
+- **CursorManager** usa **IInteractable**
+- **CursorManager** usa **IDaniable**
+- **ControlDerrota** hereda de **MonoBehaviour**
+- **ControlDerrota** usa **LeaderManager**
+- **BalaPool** hereda de **MonoBehaviour**
+- **BalaPool** usa **Bala**
+- **PooledParticleHelper** hereda de **MonoBehaviour**
+- **PlaySoundOnButtonClick** hereda de **MonoBehaviour**
+- **PlayerAnimationView** hereda de **MonoBehaviour**
+- **PlayerAnimationView** usa **PlayerEventBus**
+- **PlayerAnimationView** usa **NetworkPlayer**
+- **PlayerAnimationView** usa **PlayerMovement**
+- **PlayerAnimationView** usa **PlayerShooting**
+- **PlayerAnimationView** usa **PlayerHealth**
+- **PlayerAnimationView** usa **AmmoSystem**
+- **PlayerAnimationView** usa **RedesLog**
+- **PlayerAnimationView** usa **RagdollController**
+- **PlayerAnimationView** usa **VFXManager**
+- **PlayerAmmoView** hereda de **MonoBehaviour**
+- **PlayerAmmoView** usa **PlayerEventBus**
+- **DeathScreenController** hereda de **MonoBehaviour**
+- **DeathScreenController** usa **DeathScreenView**
+- **DeathScreenController** usa **PlayerEventBus**
+- **DeathScreenController** usa **EventBus**
+- **DeathScreenController** usa **LocalNetworkMock**
+- **CustomCursorView** hereda de **MonoBehaviour**
+- **CustomCursorView** usa **PlayerEventBus**
+- **CustomCursorView** usa **GameEventBus**
+- **CustomCursorView** usa **NetworkPlayer**
+- **CustomCursorView** usa **OfflinePlayerTester**
+- **CustomCursorView** usa **GameFlowController**
+- **CustomCursorView** usa **GameStateModel**
+- **CustomCursorView** usa **GamePhase**
+- **TriggerEventAndDestroy** hereda de **MonoBehaviour**
+- **TriggerCorregir** usa **RedesBuildAll**
+- **Physics2DMigrator** usa **AssetDatabase**
+- **Physics2DMigrator** usa **EditorApplication**
+- **HierarchyToClipboardMenu** usa **EditorUtility**
+- **HierarchyToClipboardMenu** usa **SerializedProperty**
+- **CreateTestSceneMenu** usa **GameManager**
+- **CreateTestSceneMenu** usa **DebugLogger**
+- **CreateTestSceneMenu** usa **GameLoopReferee**
+- **CreateTestSceneMenu** usa **BulletPool**
+- **CreateTestSceneMenu** usa **AssetDatabase**
+- **CreateTestSceneMenu** usa **Bullet**
+- **CreateTestSceneMenu** usa **PlayerModel**
+- **CreateTestSceneMenu** usa **PlayerView**
+- **CreateTestSceneMenu** usa **PlayerController**
+- **CreateTestSceneMenu** usa **Weapon**
+- **CreateTestSceneMenu** usa **SimpleEnemyAI**
+- **CreateScenesAndPrefabsMenu** usa **AssetDatabase**
+- **CreateScenesAndPrefabsMenu** usa **Bullet**
+- **CreateScenesAndPrefabsMenu** usa **PlayerModel**
+- **CreateScenesAndPrefabsMenu** usa **PlayerView**
+- **CreateScenesAndPrefabsMenu** usa **PlayerController**
+- **CreateScenesAndPrefabsMenu** usa **SimpleAnimator**
+- **CreateScenesAndPrefabsMenu** usa **FloatingHealthBar**
+- **CreateScenesAndPrefabsMenu** usa **Weapon**
+- **CreateScenesAndPrefabsMenu** usa **GameManager**
+- **CreateScenesAndPrefabsMenu** usa **DebugLogger**
+- **CreateScenesAndPrefabsMenu** usa **GameLoopReferee**
+- **CreateScenesAndPrefabsMenu** usa **BulletPool**
+- **CreateScenesAndPrefabsMenu** usa **EffectPool**
+- **CreateScenesAndPrefabsMenu** usa **ScreenManager**
+- **CreateScenesAndPrefabsMenu** usa **DeathScreenView**
+- **CreateScenesAndPrefabsMenu** usa **DeathScreenController**
+- **CreateScenesAndPrefabsMenu** usa **SerializedProperty**
+- **ComponentPropertiesCopierTestMenu** usa **ComponentPropertiesCopier**
+- **GlobalHUD** hereda de **MonoBehaviour**
+- **GlobalHUD** usa **LeaderManager**
+- **GlobalData** usa **UnitController**
+- **GEN_Inputs** hereda de **MonoBehaviour**
+- **GEN_Inputs** usa **Destruible**
+- **GenericDetector** hereda de **MonoBehaviour**
+- **GenericDetector** usa **DetectableType**
+- **GenericDetector** usa **IDetectable**
+- **GameManager** hereda de **MonoBehaviour**
+- **GameManager** usa **Enemigo**
+- **FormationRelocator** hereda de **MonoBehaviour**
+- **FormationRelocator** usa **GlobalData**
+- **EnemyView** hereda de **MonoBehaviour**
+- **EnemyView** usa **EnemyModel**
+- **EnemyModel** hereda de **MonoBehaviour**
+- **EnemyModel** implementa **IHealth**
+- **Disparador** hereda de **MonoBehaviour**
+- **Disparador** usa **Manager_VFX**
+- **Disparador** usa **BD_Audios**
+- **Disparador** usa **BalaPool**
+- **Disparador** usa **Bala**
+- **Destruible** hereda de **MonoBehaviour**
+- **Destruible** implementa **IDaniable**
+- **Destruible** usa **UnitController**
+- **DamagedState** implementa **IUnitState**
+- **DamagedState** usa **DamagedStateHandler**
+- **DamagedState** usa **UnitController**
+- **DamagedState** usa **IDetectable**
+- **DamagedStateHandler** hereda de **MonoBehaviour**
+- **DamagedStateHandler** usa **UnitController**
+- **Bala** hereda de **MonoBehaviour**
+- **Bala** implementa **IDetectable**
+- **Bala** usa **DetectableType**
+- **Bala** usa **Proyectil**
+- **Bala** usa **CursorManager**
+- **Bala** usa **IDaniable**
+- **Bala** usa **UnitController**
+- **Bala** usa **CoroutineHelper**
+- **Bala** usa **Manager_VFX**
+- **Bala** usa **BD_Audios**
+- **Bala** usa **UnitTeam**
+- **Bala** usa **BalaPool**
+- **AmmoManager** hereda de **MonoBehaviour**
+- **AmmoManager** usa **UnitController**
+- **AmmoManager** usa **UnitModel**
+- **UnitFSM** hereda de **MonoBehaviour**
+- **UnitFSM** usa **State**
+- **UnitFSM** usa **UnitController**
+- **UnitFSM** usa **TickManager**
+- **CambioDeLider** hereda de **MonoBehaviour**
+- **Weapon** hereda de **MonoBehaviour**
+- **Weapon** usa **PlayerModel**
+- **Weapon** usa **PlayerView**
+- **Weapon** usa **EventBus**
+- **Weapon** usa **Bullet**
+- **Weapon** usa **BulletPool**
+- **SimpleEnemyAI** hereda de **MonoBehaviour**
+- **SimpleEnemyAI** usa **PlayerModel**
+- **SimpleEnemyAI** usa **Weapon**
+- **SimpleEnemyAI** usa **PlayerView**
+- **SimpleEnemyAI** usa **PlayerController**
+- **SimpleEnemyAI** usa **EventBus**
+- **SimpleAnimator** hereda de **MonoBehaviour**
+- **ScreenManager** hereda de **MonoBehaviour**
+- **ScreenManager** usa **EventBus**
+- **ScreenManager** usa **LocalNetworkMock**
+- **ScreenManager** usa **RoomData**
+- **PlayerView** hereda de **MonoBehaviour**
+- **PlayerView** usa **PlayerModel**
+- **PlayerView** usa **SimpleAnimator**
+- **PlayerView** usa **EventBus**
+- **PlayerView** usa **ProceduralAudioGenerator**
+- **PlayerModel** hereda de **MonoBehaviour**
+- **PlayerModel** usa **EventBus**
+- **PlayerController** hereda de **MonoBehaviour**
+- **PlayerController** usa **PlayerModel**
+- **PlayerController** usa **PlayerView**
+- **PlayerController** usa **Weapon**
+- **PlayerController** usa **LocalNetworkMock**
+- **PlayerController** usa **EventBus**
+- **LocalNetworkMock** usa **RoomData**
+- **ImpactEffect** hereda de **MonoBehaviour**
+- **GameManager** hereda de **MonoBehaviour**
+- **GameManager** usa **EventBus**
+- **GameManager** usa **PlayerModel**
+- **GameManager** usa **LocalNetworkMock**
+- **GameManager** usa **FloatingHealthBar**
 - **Prueba_de_color** hereda de **MonoBehaviour**
 - **PickUp** hereda de **MonoBehaviour**
 - **PickUp** usa **UnitController**
 - **PickUp** usa **UnitTeam**
 - **Obstaculo** hereda de **MonoBehaviour**
 - **MenuVictoria** hereda de **MonoBehaviour**
-- **IndicadorEnemigos** hereda de **MonoBehaviour**
-- **IndicadorEnemigos** usa **GameManager**
-- **Ideasypseudocodigos** hereda de **MonoBehaviour**
-- **GestorTexto** hereda de **MonoBehaviour**
-- **CodigoDeInicio** hereda de **MonoBehaviour**
-- **CodigoDeInicio** usa **BD_Audios**
-- **Camara** hereda de **MonoBehaviour**
-- **BD_Audios** hereda de **MonoBehaviour**
-- **BD_Audios** usa **CoroutineHelper**
-- **CoroutineHelper** hereda de **MonoBehaviour**
-- **GameEventBus** hereda de **ScriptableObject**
-- **MatchNetworkController** hereda de **NetworkBehaviour**
-- **MatchNetworkController** usa **MatchController**
-- **MatchNetworkController** usa **GameEventBus**
-- **MatchNetworkController** usa **RedesLog**
-- **MatchNetworkController** usa **MatchResult**
-- **MatchNetworkController** usa **GameFlowController**
-- **TerrainModel** hereda de **MonoBehaviour**
-- **PlayerModel** usa **GameConstants**
-- **GameStateModel** usa **GamePhase**
-- **RoomSessionHandler** implementa **ISessionListHandler**
-- **RoomSessionHandler** usa **HostNetworkService**
-- **RoomSessionHandler** usa **NetworkSceneManagerDefault**
-- **RoomSessionHandler** usa **RedesLog**
-- **RoomSessionHandler** usa **GameConstants**
-- **PlayerSpawner** hereda de **MonoBehaviour**
-- **PlayerSpawner** usa **RedesLog**
-- **NetworkInputData** implementa **INetworkInput**
+- **VFXManager** hereda de **MonoBehaviour**
+- **VFXManager** usa **PooledParticleHelper**
+- **VFXManager** usa **RedesLog**
+- **TerrainView** hereda de **MonoBehaviour**
+- **DesactivarPorTimer** hereda de **MonoBehaviour**
+- **UnitView** hereda de **MonoBehaviour**
+- **UnitView** usa **UnitModel**
+- **UnitView** usa **IndicatorEntry**
+- **UnitView** usa **IndicatorType**
+- **UnitView** usa **UnitSpecialization**
+- **IUnitState** usa **UnitController**
+- **UnitPathRenderer** hereda de **MonoBehaviour**
+- **UnitPathRenderer** usa **UnitController**
+- **UnitPathRenderer** usa **UnitFSM**
+- **UnitPathRenderer** usa **State**
+- **UnitModel** hereda de **MonoBehaviour**
+- **UnitModel** implementa **IHealth**
+- **UnitModel** usa **UnitTeam**
+- **UnitModel** usa **UnitSpecialization**
+- **UnitModel** usa **Destruible**
+- **CharacterControllerMVC** usa **CharacterModel**
+- **CharacterControllerMVC** usa **CharacterView**
+- **CharacterControllerMVC** usa **ICharacterInput**
+- **CharacterControllerMVC** usa **IMovementHandler**
+- **SelectedSoldierUIFeedback** hereda de **MonoBehaviour**
+- **SelectedSoldierUIFeedback** usa **UnitController**
+- **WeaponModel** hereda de **MonoBehaviour**
+- **InformacionPersonaje** hereda de **MonoBehaviour**
+- **InformacionPersonaje** implementa **IHealth**
+- **InformacionPersonaje** usa **WeaponController**
+- **InformacionPersonaje** usa **GameManager**
+- **CharacterModel** hereda de **MonoBehaviour**
+- **CharacterModel** usa **InformacionPersonaje**
+- **PersecucionEnemigo** hereda de **MonoBehaviour**
+- **PersecucionEnemigo** usa **Enemigo**
+- **IA_P2_BusEvent_Manager** hereda de **MonoBehaviour**
+- **IA_P2_BusEvent_Manager** usa **IA_P2_FSM**
+- **CrearYDestruir** hereda de **MonoBehaviour**
+- **AutoDestruccionSegura** hereda de **MonoBehaviour**
+- **Soldado_Anim** hereda de **MonoBehaviour**
+- **Soldado_Anim** usa **BD_Audios**
+- **CambiarOpacidad** hereda de **MonoBehaviour**
+- **WeaponView** hereda de **MonoBehaviour**
+- **WeaponView** usa **CambiarOpacidad**
+- **WeaponView** usa **Proyectil**
+- **WeaponView** usa **InformacionPersonaje**
+- **WeaponView** usa **WeaponModel**
+- **WeaponView** usa **Bala**
+- **WeaponView** usa **BD_Audios**
+- **WeaponController** hereda de **MonoBehaviour**
+- **WeaponController** usa **WeaponModel**
+- **WeaponController** usa **WeaponView**
+- **WeaponController** usa **IWeaponInput**
+- **WeaponController** usa **WeaponControllerMVC**
+- **WeaponController** usa **UnityWeaponInput**
+- **Proyectil2** hereda de **MonoBehaviour**
+- **Proyectil** hereda de **MonoBehaviour**
+- **Proyectil** usa **Manager_VFX**
+- **Proyectil** usa **IDaniable**
+- **Proyectil** usa **InformacionPersonaje**
+- **Proyectil** usa **Enemigo**
+- **Cohete** hereda de **MonoBehaviour**
+- **Cohete** usa **IDaniable**
+- **VibracionCamara** hereda de **MonoBehaviour**
+- **VibracionCamara** usa **ConfiguracionGlobal**
+- **Torreta** hereda de **MonoBehaviour**
+- **Torreta** usa **GameManager**
+- **SistemaPuntaje** hereda de **MonoBehaviour**
+- **SenalizacionDeEnemigos** hereda de **MonoBehaviour**
 - **HostNetworkService** hereda de **MonoBehaviour**
 - **HostNetworkService** implementa **INetworkService**
 - **HostNetworkService** implementa **INetworkRunnerCallbacks**
@@ -1834,65 +1836,194 @@ Generado: 2026-06-23 16:17:35
 - **HostNetworkService** usa **GameFlowController**
 - **HostNetworkService** usa **NetworkInputData**
 - **HostNetworkService** usa **InputButton**
-- **CentralizadorScripts** hereda de **EditorWindow**
-- **CentralizadorScripts** usa **AssetDatabase**
-- **CentralizadorScripts** usa **EditorUtility**
-- **ILWeaverException** hereda de **Exception**
-- **NetworkProjectConfigImporterEditor** hereda de **ScriptedImporterEditor**
-- **NetworkProjectConfigImporterEditor** usa **NetworkProjectConfigImporter**
-- **NetworkProjectConfigImporterEditor** usa **LogSettingsDrawer**
-- **NetworkProjectConfigImporterEditor** usa **FusionEditorGUI**
-- **NetworkProjectConfigImporterEditor** usa **EditorGUI**
-- **NetworkProjectConfigImporterEditor** usa **NetworkPrefabsInspector**
-- **NetworkProjectConfigImporterEditor** usa **EnabledScope**
-- **NetworkProjectConfigImporterEditor** usa **NetworkProjectConfigUtilities**
-- **NetworkProjectConfigImporterEditor** usa **EditorUtility**
-- **NetworkProjectConfigImporter** hereda de **ScriptedImporter**
-- **NetworkProjectConfigImporter** usa **NetworkAssetSourceFactory**
-- **NetworkProjectConfigImporter** usa **AssetDatabaseUtils**
-- **NetworkProjectConfigImporter** usa **AssetDatabase**
-- **NetworkProjectConfigImporter** usa **NetworkAssetSourceFactoryContext**
-- **NetworkProjectConfigImporter** usa **FusionCustomDependency**
-- **Postprocessor** hereda de **AssetPostprocessor**
-- **Postprocessor** usa **AssetDatabase**
-- **NetworkPrefabsInspector** hereda de **EditorWindow**
-- **NetworkPrefabsInspector** usa **Grid**
-- **NetworkPrefabsInspector** usa **EditorGUI**
-- **NetworkPrefabsInspector** usa **FusionGridItem**
-- **NetworkPrefabsInspector** usa **AssetDatabase**
-- **NetworkPrefabsInspector** usa **NetworkProjectConfigUtilities**
-- **NetworkPrefabsInspector** usa **LoadState**
-- **NetworkPrefabsInspector** usa **GridItem**
-- **NetworkPrefabsInspector** usa **Column**
-- **NetworkPrefabsInspector** usa **FusionEditorSkin**
-- **NetworkPrefabsInspector** usa **FusionEditorGUI**
-- **NetworkPrefabsInspector** usa **ContentColorScope**
-- **NetworkPrefabsInspector** usa **INetworkPrefabSourceDrawer**
-- **NetworkPrefabsInspector** usa **EditorUtility**
-- **NetworkPrefabsInspector** usa **FusionGrid**
-- **InspectorTreeViewState** hereda de **TreeViewState**
-- **GridItem** hereda de **FusionGridItem**
-- **GridItem** usa **AssetDatabase**
-- **GridItem** usa **NetworkProjectConfigUtilities**
-- **GridItem** usa **LoadState**
-- **Grid** hereda de **FusionGrid**
-- **Grid** usa **GridItem**
-- **Grid** usa **Column**
-- **Grid** usa **FusionEditorSkin**
-- **Grid** usa **LoadState**
-- **Grid** usa **FusionEditorGUI**
-- **Grid** usa **ContentColorScope**
-- **Grid** usa **EditorGUI**
-- **Grid** usa **INetworkPrefabSourceDrawer**
-- **Grid** usa **EditorUtility**
-- **FusionWeaverTriggerImporter** hereda de **ScriptedImporter**
-- **FusionWeaverTriggerImporter** usa **NetworkProjectConfigImporter**
-- **FusionWeaverTriggerImporter** usa **ILWeaverUtils**
-- **FusionWeaverTriggerImporter** usa **FusionCustomDependency**
-- **FusionWeaverTriggerImporter** usa **EditorApplication**
-- **FusionWeaverTriggerImporter** usa **NetworkProjectConfigUtilities**
-- **Postprocessor** hereda de **AssetPostprocessor**
-- **Postprocessor** usa **NetworkProjectConfigImporter**
+- **PlayerTeleport** hereda de **NetworkBehaviour**
+- **PlayerTeleport** usa **GameConstants**
+- **PlayerTeleport** usa **PlayerEventBus**
+- **PlayerTeleport** usa **NetworkInputData**
+- **PlayerTeleport** usa **InputButton**
+- **PlayerTeleport** usa **RedesLog**
+- **PlayerTeleport** usa **VFXManager**
+- **PlayerShooting** hereda de **NetworkBehaviour**
+- **PlayerShooting** usa **AmmoSystem**
+- **PlayerShooting** usa **GameEventBus**
+- **PlayerShooting** usa **PlayerEventBus**
+- **PlayerShooting** usa **RedesLog**
+- **PlayerShooting** usa **Projectile**
+- **PlayerMovement** hereda de **NetworkBehaviour**
+- **PlayerMovement** usa **GameConstants**
+- **PlayerMovement** usa **PlayerEventBus**
+- **PlayerMovement** usa **NetworkInputData**
+- **PlayerHealth** hereda de **NetworkBehaviour**
+- **PlayerHealth** implementa **IDamageable**
+- **PlayerHealth** usa **GameConstants**
+- **PlayerHealth** usa **GameEventBus**
+- **PlayerHealth** usa **PlayerEventBus**
+- **PlayerHealth** usa **RedesLog**
+- **PlayerHealth** usa **VFXManager**
+- **PlayerHealth** usa **NetworkPlayer**
+- **PlayerEventBus** hereda de **MonoBehaviour**
+- **PlayerCrouch** hereda de **NetworkBehaviour**
+- **PlayerCrouch** usa **PlayerEventBus**
+- **PlayerCrouch** usa **GameConstants**
+- **PlayerCrouch** usa **NetworkInputData**
+- **PlayerCrouch** usa **InputButton**
+- **PlayerCrouch** usa **RedesLog**
+- **RevivalBarView** hereda de **MonoBehaviour**
+- **RevivalBarView** usa **UnitController**
+- **RehenBruto** hereda de **MonoBehaviour**
+- **RehenBruto** usa **IA_P2_AgentIA**
+- **RehenBruto** usa **GlobalData**
+- **PositionManager** hereda de **MonoBehaviour**
+- **PositionManager** usa **GlobalData**
+- **PositionManager** usa **UnitController**
+- **PositionManager** usa **UnitTeam**
+- **PositionManager** usa **EsperandoState**
+- **PositionManager** usa **SeguirFormacionState**
+- **Municion** hereda de **MonoBehaviour**
+- **MenuPausa** hereda de **MonoBehaviour**
+- **MarkerAnim** hereda de **MonoBehaviour**
+- **Manager_VFX** hereda de **MonoBehaviour**
+- **MainGameController** hereda de **MonoBehaviour**
+- **MainGameController** usa **LeaderManager**
+- **MainGameController** usa **GlobalData**
+- **MainGameController** usa **UnitModel**
+- **MainGameController** usa **UnitSpecialization**
+- **MainGameController** usa **UnitFSM**
+- **LiderandoState** implementa **IUnitState**
+- **LiderandoState** usa **UnitController**
+- **LiderandoState** usa **UnitSpecialization**
+- **LiderandoState** usa **LeaderManager**
+- **LiderandoState** usa **GEN_Inputs**
+- **LiderandoState** usa **CursorManager**
+- **SeguirFormacionState** implementa **IUnitState**
+- **SeguirFormacionState** usa **UnitController**
+- **SeguirFormacionState** usa **GlobalData**
+- **SeguirFormacionState** usa **EsperandoState**
+- **SeguirFormacionState** usa **DetectableType**
+- **SeguirFormacionState** usa **Enemigo**
+- **SeguirFormacionState** usa **AtacarState**
+- **AtacarState** implementa **IUnitState**
+- **AtacarState** usa **UnitController**
+- **AtacarState** usa **IndicatorType**
+- **AtacarState** usa **UnitTeam**
+- **AtacarState** usa **SeguirFormacionState**
+- **AtacarState** usa **EsperandoState**
+- **AtacarState** usa **PerseguirState**
+- **PerseguirState** implementa **IUnitState**
+- **PerseguirState** usa **UnitController**
+- **PerseguirState** usa **IndicatorType**
+- **PerseguirState** usa **UnitTeam**
+- **PerseguirState** usa **SeguirFormacionState**
+- **PerseguirState** usa **EsperandoState**
+- **PerseguirState** usa **AtacarState**
+- **EsperandoState** implementa **IUnitState**
+- **EsperandoState** usa **UnitController**
+- **EsperandoState** usa **IndicatorType**
+- **EsperandoState** usa **SeguirFormacionState**
+- **HuirDetrasLiderState** implementa **IUnitState**
+- **HuirDetrasLiderState** usa **UnitController**
+- **HuirDetrasLiderState** usa **GlobalData**
+- **HuirDetrasLiderState** usa **SeguirFormacionState**
+- **IrADestinoState** implementa **IUnitState**
+- **IrADestinoState** usa **UnitController**
+- **IrADestinoState** usa **IndicatorType**
+- **IrADestinoState** usa **EsperandoState**
+- **LeaderManager** hereda de **MonoBehaviour**
+- **LeaderManager** usa **UnitController**
+- **LeaderManager** usa **UnitSpecialization**
+- **LeaderManager** usa **GEN_Inputs**
+- **LeaderManager** usa **GlobalData**
+- **LeaderManager** usa **MainGameController**
+- **LeaderManager** usa **SeguirFormacionState**
+- **LeaderManager** usa **LiderandoState**
+- **InteractableItem** hereda de **MonoBehaviour**
+- **InteractableItem** implementa **IInteractable**
+- **InteractableItem** usa **UnitController**
+- **InteractableItem** usa **UnitTeam**
+- **InteractableItem** usa **BD_Audios**
+- **IA_P2_PathNode** hereda de **MonoBehaviour**
+- **IA_P2_PathNode** usa **IA_P2_PathfindingModel**
+- **IA_P2_PathfindingModel** hereda de **MonoBehaviour**
+- **IA_P2_PathfindingModel** usa **IA_P2_PathNode**
+- **IA_P2_PathfindingModel** usa **IA_P2_LineOfSight3D**
+- **IA_P2_AgentIA** hereda de **MonoBehaviour**
+- **IA_P2_AgentIA** usa **UnitModel**
+- **IA_P2_AgentIA** usa **IA_P2_PathfindingModel**
+- **IA_P2_AgentIA** usa **IA_P2_PathfindingManager**
+- **IA_P2_AgentIA** usa **IA_F_PathFinding_Theta**
+- **RedesVisualConfigurator** usa **AssetDatabase**
+- **RedesVisualConfigurator** usa **EditorUtility**
+- **RedesVisualConfigurator** usa **LobbyView**
+- **RedesTestSceneBuilder** usa **CameraFollow**
+- **RedesTestSceneBuilder** usa **AssetDatabase**
+- **RedesTestSceneBuilder** usa **RedesPrefabCreator**
+- **RedesTestSceneBuilder** usa **EntityDisplayView**
+- **RedesTestSceneBuilder** usa **TestSceneManager**
+- **RedesTestSceneBuilder** usa **DummyEnemy**
+- **RedesTestSceneBuilder** usa **OfflinePlayerTester**
+- **RedesTestSceneBuilder** usa **PlayerEventBus**
+- **RedesTestSceneBuilder** usa **RedesAudioSetup**
+- **RedesTestSceneBuilder** usa **PlayerAnimationView**
+- **RedesTestSceneBuilder** usa **RagdollController**
+- **RedesTestSceneBuilder** usa **PlayerAmmoView**
+- **RedesTestSceneBuilder** usa **CustomCursorView**
+- **RedesTestSceneBuilder** usa **GameEventBus**
+- **RedesTestSceneBuilder** usa **DeathScreenView**
+- **RedesTestSceneBuilder** usa **DeathScreenController**
+- **GameFlowController** hereda de **MonoBehaviour**
+- **GameFlowController** usa **HostNetworkService**
+- **GameFlowController** usa **LobbyView**
+- **GameFlowController** usa **GameHudView**
+- **GameFlowController** usa **MatchController**
+- **GameFlowController** usa **GameStateModel**
+- **GameFlowController** usa **INetworkService**
+- **GameFlowController** usa **RedesLog**
+- **GameFlowController** usa **GameConstants**
+- **GameFlowController** usa **GamePhase**
+- **GameFlowController** usa **ResultView**
+- **GameFlowController** usa **RedesLoadingScreen**
+- **GameFlowController** usa **MatchResult**
+- **TeleportCooldownView** hereda de **MonoBehaviour**
+- **TeleportCooldownView** usa **PlayerTeleport**
+- **TeleportCooldownView** usa **PlayerEventBus**
+- **TeleportCooldownView** usa **GameConstants**
+- **ResultView** hereda de **MonoBehaviour**
+- **ResultView** usa **MatchResult**
+- **ResultView** usa **RedesLog**
+- **NetworkSceneManagerDefault** hereda de **Behaviour**
+- **NetworkSceneManagerDefault** implementa **INetworkSceneManager**
+- **NetworkSceneManagerDefault** usa **FusionUnitySceneManagerUtils**
+- **NetworkSceneManagerDefault** usa **SceneEqualityComparer**
+- **NetworkSceneManagerDefault** usa **MultiPeerSceneRoot**
+- **NetworkSceneManagerDefault** usa **FusionCoroutine**
+- **NetworkSceneManagerDefault** usa **LoadingScope**
+- **MultiPeerSceneRoot** hereda de **MonoBehaviour**
+- **LoadingScope** implementa **IDisposable**
+- **LoadingScope** usa **NetworkSceneManagerDefault**
+- **RedesSceneLinker** usa **HostNetworkService**
+- **RedesSceneLinker** usa **PlayerSpawner**
+- **RedesSceneLinker** usa **GameFlowController**
+- **RedesSceneLinker** usa **MatchController**
+- **RedesSceneLinker** usa **PlayerController**
+- **RedesSceneLinker** usa **MatchNetworkController**
+- **RedesSceneLinker** usa **LobbyView**
+- **RedesSceneLinker** usa **GameHudView**
+- **RedesSceneLinker** usa **ResultView**
+- **RedesSceneLinker** usa **AssetDatabase**
+- **RedesSceneLinker** usa **RedesPrefabCreator**
+- **RedesSceneLinker** usa **VFXManager**
+- **RedesSceneLinker** usa **TeleportCooldownView**
+- **RedesSceneLinker** usa **EntityDisplayManager**
+- **RedesSceneLinker** usa **EntityDisplayView**
+- **RedesSceneLinker** usa **GameEventBus**
+- **RedesSceneLinker** usa **PlayerHealth**
+- **RedesSceneLinker** usa **PlayerShooting**
+- **RedesSceneLinker** usa **AmmoSystem**
+- **RedesSceneLinker** usa **PlayerAnimationView**
+- **RedesSceneLinker** usa **RedesProceduralAudio**
+- **RedesSceneLinker** usa **RedesAudioSetup**
+- **RedesSceneLinker** usa **PlaySoundOnButtonClick**
+- **RedesSceneLinker** usa **EditorUtility**
 
 ### Tipos
 
@@ -3071,15 +3202,6 @@ Generado: 2026-06-23 16:17:35
 - public PuedeDisparar() : bool
 - public GastarBala() : void
 
-##### class NewTestScript
-
-- Archivo: `NewTestScript.cs` (19 líneas)
-
-**Métodos:**
-
-- public NewTestScriptSimplePasses() : void
-- public NewTestScriptWithEnumeratorPasses() : IEnumerator
-
 ##### class NodeDistance
 
 - Archivo: `IA_P2_PathfindingManager.cs` (5 líneas)
@@ -3395,7 +3517,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class UnitCommander
 
-- Archivo: `UnitCommander.cs` (285 líneas)
+- Archivo: `UnitCommander.cs` (283 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `GEN_Inputs`, `LeaderManager`, `UnitController`, `SeguirFormacionState`, `UnitTeam`, `IrADestinoState`, `EsperandoState`, `PerseguirState`
 
@@ -3403,7 +3525,6 @@ Generado: 2026-06-23 16:17:35
 
 - _suscrito : bool
 - _ultimaPosOrden : Vector3
-- _hayOrdenPendiente : bool
 - _destinosActivos : System.Collections.Generic.Dictionary<UnitController, Vector3>
 
 **Métodos:**
@@ -4222,8 +4343,8 @@ Generado: 2026-06-23 16:17:35
 
 ##### class CreateScenesAndPrefabsMenu
 
-- Archivo: `CreateScenesAndPrefabsMenu.cs` (685 líneas)
-- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `SerializedProperty`
+- Archivo: `CreateScenesAndPrefabsMenu.cs` (771 líneas)
+- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `DeathScreenView`, `DeathScreenController`, `SerializedProperty`
 
 **Métodos:**
 
@@ -7840,16 +7961,6 @@ Generado: 2026-06-23 16:17:35
 
 ##### class Postprocessor
 
-- Archivo: `Fusion.Unity.Editor.cs` (30 líneas)
-- Hereda de: `AssetPostprocessor`
-- Usa: `AssetDatabaseUtils`
-
-**Métodos:**
-
-- private static OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
-
-##### class Postprocessor
-
 - Archivo: `NetworkProjectConfigImporter.cs` (57 líneas)
 - Hereda de: `AssetPostprocessor`
 - Usa: `AssetDatabase`
@@ -7864,6 +7975,16 @@ Generado: 2026-06-23 16:17:35
 - Archivo: `FusionWeaverTriggerImporter.cs` (10 líneas)
 - Hereda de: `AssetPostprocessor`
 - Usa: `NetworkProjectConfigImporter`
+
+**Métodos:**
+
+- private static OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) : void
+
+##### class Postprocessor
+
+- Archivo: `Fusion.Unity.Editor.cs` (30 líneas)
+- Hereda de: `AssetPostprocessor`
+- Usa: `AssetDatabaseUtils`
 
 **Métodos:**
 
@@ -9624,7 +9745,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class RevivingState
 
-- Archivo: `RevivingState.cs` (105 líneas)
+- Archivo: `RevivingState.cs` (97 líneas)
 - Implementa: `IUnitState`
 - Usa: `UnitController`, `IndicatorType`, `SeguirFormacionState`
 
@@ -9634,7 +9755,6 @@ Generado: 2026-06-23 16:17:35
 - revivalDuration : float
 - revivalTimer : float
 - revivalRange : float
-- isActivelyReviving : bool
 
 **Métodos:**
 
@@ -9792,6 +9912,62 @@ Generado: 2026-06-23 16:17:35
 
 #### Namespace `Redes.Combat`
 
+##### enum BombState
+
+- Archivo: `DestructibleBombObstacle.cs` (6 líneas)
+
+**Campos:**
+
+- Normal : enum
+- OnFire : enum
+- Exploded : enum
+
+##### class DestructibleBombObstacle
+
+- Archivo: `DestructibleBombObstacle.cs` (332 líneas)
+- Hereda de: `NetworkBehaviour`
+- Implementa: `IDamageable`
+- Usa: `BombState`, `RedesLog`, `NetworkPlayer`
+
+**Propiedades:**
+
+- CurrentState : BombState
+- _currentHealth : int
+- IsAlive : bool
+
+**Campos:**
+
+- _bombHealth : int
+- _explosionDamage : int
+- _explosionRadius : float
+- _explosionSound : AudioClip
+- _boxCollider : Collider
+- _explosionTrigger : SphereCollider
+- _fireParticles : ParticleSystem
+- _explosionParticles : ParticleSystem
+- _audioSource : AudioSource
+- _visualCube : Transform
+- _originalScale : Vector3
+- _fireLerpCoroutine : Coroutine
+- _chargeCanvas : Canvas
+- _chargeImage : Image
+
+**Métodos:**
+
+- private Awake() : void
+- private OnEnable() : void
+- private SetupChargeUI() : void
+- public Spawned() : void
+- public TakeDamage(int amount, PlayerRef attacker) : void
+- private ServerOnFireTimer() : IEnumerator
+- private OnTriggerEnter(Collider other) : void
+- private OnStateChangedRender() : void
+- private ResetObstacle() : void
+- private StartOnFireVisuals() : void
+- private IncendiandoLerpEffect() : IEnumerator
+- private TriggerExplosionVisuals() : void
+- private GreenExplosionSphereRoutine() : IEnumerator
+
 ##### interface IDamageable
 
 - Archivo: `IDamageable.cs` (11 líneas)
@@ -9804,11 +9980,31 @@ Generado: 2026-06-23 16:17:35
 
 - public TakeDamage(int amount, PlayerRef attacker) : void
 
+##### class ObstacleHitFeedback
+
+- Archivo: `ObstacleHitFeedback.cs` (60 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `RedesLog`
+
+**Campos:**
+
+- _bounceDuration : float
+- _bounceScaleFactor : float
+- _originalScale : Vector3
+- _bounceCoroutine : Coroutine
+- _visualTransform : Transform
+
+**Métodos:**
+
+- private Awake() : void
+- public DoBounce() : void
+- private BounceRoutine() : IEnumerator
+
 ##### class Projectile
 
-- Archivo: `Projectile.cs` (84 líneas)
+- Archivo: `Projectile.cs` (111 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`
+- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`, `MatchNetworkController`
 
 **Propiedades:**
 
@@ -9831,7 +10027,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class EntityDisplayManager
 
-- Archivo: `EntityDisplayManager.cs` (112 líneas)
+- Archivo: `EntityDisplayManager.cs` (113 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `EntityDisplayView`, `NetworkPlayer`, `IEntityDisplayModel`, `RedesLog`
 
@@ -9852,9 +10048,9 @@ Generado: 2026-06-23 16:17:35
 
 ##### class GameFlowController
 
-- Archivo: `GameFlowController.cs` (356 líneas)
+- Archivo: `GameFlowController.cs` (388 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `MatchResult`
+- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `RedesLoadingScreen`, `MatchResult`
 
 **Propiedades:**
 
@@ -9891,9 +10087,9 @@ Generado: 2026-06-23 16:17:35
 
 ##### class MatchController
 
-- Archivo: `MatchController.cs` (147 líneas)
+- Archivo: `MatchController.cs` (149 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`
+- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`, `RedesLoadingScreen`
 
 **Propiedades:**
 
@@ -9917,13 +10113,14 @@ Generado: 2026-06-23 16:17:35
 
 ##### class PlayerController
 
-- Archivo: `PlayerController.cs` (57 líneas)
+- Archivo: `PlayerController.cs` (87 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`
+- Usa: `GameHudView`, `TeleportCooldownView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`, `EventBus`
 
 **Campos:**
 
 - _hudView : GameHudView
+- _teleportCooldownView : TeleportCooldownView
 - _model : PlayerModel
 - _localPlayer : NetworkPlayer
 
@@ -9931,6 +10128,27 @@ Generado: 2026-06-23 16:17:35
 
 - public Bind(NetworkPlayer player) : void
 - private Update() : void
+
+##### class RedesLoadingScreen
+
+- Archivo: `RedesLoadingScreen.cs` (43 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Propiedades:**
+
+- Instance : RedesLoadingScreen
+
+**Campos:**
+
+- _instance : RedesLoadingScreen
+- _loadingPanel : GameObject
+- _loadingText : Text
+
+**Métodos:**
+
+- private Awake() : void
+- public ShowLoading(string message) : void
+- public HideLoading() : void
 
 ##### class TerrainController
 
@@ -9953,7 +10171,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### static class GameConstants
 
-- Archivo: `GameConstants.cs` (21 líneas)
+- Archivo: `GameConstants.cs` (31 líneas)
 
 **Campos:**
 
@@ -9965,6 +10183,9 @@ Generado: 2026-06-23 16:17:35
 - DEFAULT_BULLET_DAMAGE : int
 - DEFAULT_MAGAZINE_SIZE : int
 - DEFAULT_RELOAD_TIME : float
+- TELEPORT_RANGE : float
+- TELEPORT_COOLDOWN : float
+- CROUCH_SCALE_Y : float
 
 ##### class GameEventBus
 
@@ -10002,7 +10223,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### static class RedesLog
 
-- Archivo: `RedesLog.cs` (39 líneas)
+- Archivo: `RedesLog.cs` (58 líneas)
 
 **Campos:**
 
@@ -10013,20 +10234,47 @@ Generado: 2026-06-23 16:17:35
 - PLAYER : string
 - COMBAT : string
 - AMMO : string
+- VFX : string
 
 **Métodos:**
 
 - public static Info(string flag, string message) : void
 - public static Warn(string flag, string message) : void
 - public static Error(string flag, string message) : void
+- private static IsSoundOrCursorLog(string msg) : bool
 - public static Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info") : void
 
 #### Namespace `Redes.EditorTools`
 
+##### class AddObstacleFeedbackToPrefabs
+
+- Archivo: `AddObstacleFeedbackToPrefabs.cs` (40 líneas)
+- Usa: `EditorApplication`, `AssetDatabase`, `ObstacleHitFeedback`, `EditorUtility`
+
+**Métodos:**
+
+- private static AddObstacleFeedbackToPrefabs() : (constructor)
+- private static Run() : void
+
+##### static class RedesAudioSetup
+
+- Archivo: `RedesAudioSetup.cs` (105 líneas)
+- Usa: `AssetDatabase`, `Editor`
+
+**Campos:**
+
+- MixerPath : string
+
+**Métodos:**
+
+- public static CreateAudioMixerAndSetup() : void
+- private static EnsureGroupExists(AudioMixer mixer, Type controllerType, Type groupType, object masterGroup, MethodInfo addChildMethod, string name) : void
+- public static GetGroup(string name) : AudioMixerGroup
+
 ##### static class RedesBuildAll
 
-- Archivo: `RedesBuildAll.cs` (86 líneas)
-- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`
+- Archivo: `RedesBuildAll.cs` (233 líneas)
+- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`, `RedesAudioSetup`, `RedesProceduralAudio`, `AssetDatabase`, `RedesVisualConfigurator`
 
 **Campos:**
 
@@ -10043,8 +10291,8 @@ Generado: 2026-06-23 16:17:35
 
 ##### static class RedesPrefabCreator
 
-- Archivo: `RedesPrefabCreator.cs` (220 líneas)
-- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `Projectile`, `EntityDisplayView`
+- Archivo: `RedesPrefabCreator.cs` (648 líneas)
+- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerEventBus`, `PlayerAnimationView`, `PlayerCrouch`, `PlayerTeleport`, `RedesAudioSetup`, `RagdollController`, `Projectile`, `EntityDisplayView`, `DestructibleBombObstacle`
 
 **Campos:**
 
@@ -10052,21 +10300,48 @@ Generado: 2026-06-23 16:17:35
 - PlayerPrefabPath : string
 - BulletPrefabPath : string
 - EntityDisplayViewPrefabPath : string
+- CustomObstaclePrefabPath : string
+- BombObstaclePrefabPath : string
 
 **Métodos:**
 
 - public static CreatePrefabs() : void
 - private static CreateGameEventBusAsset() : void
 - private static CreatePlayerPrefab() : void
+- public static GetOrCreateAnimator(string path = null) : AnimatorController
+- private static GetOrCreatePlayerAnimator(string overridePath = null) : AnimatorController
 - private static CreateBulletPrefab() : void
 - private static CreateEntityDisplayViewPrefab() : void
+- private static CreateCustomObstaclePrefab() : void
+- private static CreateBombObstaclePrefab() : void
 - private static AssignRefs(Object target, params (string field, Object value)[] pairs) : void
+- private static AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) : void
+- private static EnsureFolder(string parent, string child) : void
+
+##### static class RedesProceduralAudio
+
+- Archivo: `RedesProceduralAudio.cs` (158 líneas)
+- Usa: `AssetDatabase`
+
+**Campos:**
+
+- AudioFolder : string
+- OuchPath : string
+- ObstacleHitPath : string
+- ClickPath : string
+
+**Métodos:**
+
+- public static EnsureAudioClips() : void
+- private static CreateOuchClip() : void
+- private static CreateObstacleHitClip() : void
+- private static WriteWav(string path, float[] samples, int sampleRate) : void
 - private static EnsureFolder(string parent, string child) : void
 
 ##### static class RedesSceneCreator
 
-- Archivo: `RedesSceneCreator.cs` (420 líneas)
-- Usa: `TerrainController`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `LobbyView`, `GameHudView`, `ResultView`, `RedesPrefabCreator`, `RedesSceneLinker`
+- Archivo: `RedesSceneCreator.cs` (609 líneas)
+- Usa: `TerrainController`, `TerrainView`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `RedesProceduralAudio`, `RedesAudioSetup`, `LobbyView`, `GameHudView`, `TeleportCooldownView`, `ResultView`, `DeathScreenView`, `DeathScreenController`, `CustomCursorView`, `GameEventBus`, `RedesLoadingScreen`
 
 **Campos:**
 
@@ -10083,13 +10358,12 @@ Generado: 2026-06-23 16:17:35
 - private static NewButton(string name, Transform parent, Font font, string label, Vector2 anchoredPos) : Button
 - private static NewInputField(string name, Transform parent, Font font, string placeholderTxt, Vector2 anchoredPos) : InputField
 - private static GetLegacyFont() : Font
-- public static Corregir() : void
 - private static EnsureFolder(string parent, string child) : void
 
 ##### static class RedesSceneLinker
 
-- Archivo: `RedesSceneLinker.cs` (168 líneas)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationController`, `EditorUtility`
+- Archivo: `RedesSceneLinker.cs` (315 líneas)
+- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `VFXManager`, `TeleportCooldownView`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationView`, `RedesProceduralAudio`, `RedesAudioSetup`, `PlaySoundOnButtonClick`, `EditorUtility`
 
 **Campos:**
 
@@ -10103,11 +10377,53 @@ Generado: 2026-06-23 16:17:35
 - private static ChildComp(Component root, string name) : TC
 - private static ChildGO(Component root, string name) : GameObject
 - private static Assign(Object target, params (string field, Object value)[] pairs) : void
+- private static ClearPersistentListeners(UnityEngine.Events.UnityEvent unityEvent) : void
+- private static AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) : void
+
+##### static class RedesTestSceneBuilder
+
+- Archivo: `RedesTestSceneBuilder.cs` (719 líneas)
+- Usa: `CameraFollow`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayView`, `TestSceneManager`, `DummyEnemy`, `OfflinePlayerTester`, `PlayerEventBus`, `RedesAudioSetup`, `PlayerAnimationView`, `RagdollController`, `PlayerAmmoView`, `CustomCursorView`, `GameEventBus`, `DeathScreenView`, `DeathScreenController`
+
+**Campos:**
+
+- TestScenePath : string
+
+**Métodos:**
+
+- public static BuildTestScene() : void
+- private static BuildEnvironment() : void
+- private static BuildPlayer() : GameObject
+- private static BuildDummy(Vector3 position) : GameObject
+- private static BuildUI(GameObject player) : (Text debug, Text kills, Text legend, Text log, Text ammo)
+- private static GetOrCreatePlayerAnimator() : AnimatorController
+- private static FindInChildren(Transform root, string name) : Transform
+- private static Assign(Object target, string field, Object value) : void
+- private static AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) : void
+- private static CreatePanel(Transform parent, Vector2 anchorMin, Vector2 anchorMax, Vector2 anchoredPos, Vector2 sizeDelta, Color color) : GameObject
+- private static CreateText(Transform parent, string name, string content, Vector2 anchorMin, Vector2 anchorMax, Vector2 sizeDelta, int fontSize, Color color, TextAnchor anchor) : Text
+
+##### static class RedesVisualConfigurator
+
+- Archivo: `RedesVisualConfigurator.cs` (255 líneas)
+- Usa: `AssetDatabase`, `EditorUtility`, `LobbyView`
+
+**Campos:**
+
+- TTFPath : string
+- SDFPath : string
+- ScenePath : string
+- PrefabFolder : string
+
+**Métodos:**
+
+- public static ConfigureAllVisuals() : void
+- private static ConfigureButton(Button btn, Sprite backgroundSprite) : void
 
 ##### static class TriggerCorregir
 
 - Archivo: `TriggerCorregir.cs` (8 líneas)
-- Usa: `RedesSceneCreator`
+- Usa: `RedesBuildAll`
 
 **Métodos:**
 
@@ -10115,11 +10431,23 @@ Generado: 2026-06-23 16:17:35
 
 #### Namespace `Redes.Gameplay`
 
+##### struct BoneJointData
+
+- Archivo: `RagdollController.cs` (8 líneas)
+
+**Campos:**
+
+- transform : Transform
+- rigidbody : Rigidbody
+- collider : Collider
+- initialLocalPos : Vector3
+- initialLocalRot : Quaternion
+
 ##### class MatchNetworkController
 
-- Archivo: `MatchNetworkController.cs` (285 líneas)
+- Archivo: `MatchNetworkController.cs` (330 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `GameFlowController`
+- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `VFXManager`, `IDamageable`, `ObstacleHitFeedback`, `GameFlowController`
 
 **Propiedades:**
 
@@ -10143,6 +10471,7 @@ Generado: 2026-06-23 16:17:35
 - private HandlePlayerDied(PlayerRef victim, PlayerRef attacker) : void
 - public AnnounceResult(PlayerRef loser, PlayerRef winner) : void
 - public RpcAnnounceResult(PlayerRef loser, PlayerRef winner) : void
+- public RpcPlaySparkVfx(Vector3 position, Vector3 normal) : void
 - public SetLocalPlayerReady() : void
 - public RpcSetReadyForRematch(RpcInfo info = default) : void
 - private RpcBroadcastOpponentReady(PlayerRef readyPlayer) : void
@@ -10151,6 +10480,27 @@ Generado: 2026-06-23 16:17:35
 - private AutoReturnToLobbyCoroutine() : System.Collections.IEnumerator
 - private RematchSequenceCoroutine() : System.Collections.IEnumerator
 - private RpcBroadcastRematchStatus(string text) : void
+
+##### class RagdollController
+
+- Archivo: `RagdollController.cs` (203 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `BoneJointData`
+
+**Campos:**
+
+- _animator : Animator
+- _mainRigidbody : Rigidbody
+- _mainCollider : Collider
+- _bones : List<BoneJointData>
+- _isRagdollActive : bool
+
+**Métodos:**
+
+- private Awake() : void
+- private SetupRagdollBones() : void
+- public SetRagdollActive(bool active, Vector3 forceDirection = default) : void
+- public ResetBones() : void
 
 #### Namespace `Redes.Models`
 
@@ -10171,7 +10521,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### interface IEntityDisplayModel
 
-- Archivo: `IEntityDisplayModel.cs` (7 líneas)
+- Archivo: `IEntityDisplayModel.cs` (9 líneas)
 
 **Propiedades:**
 
@@ -10179,6 +10529,8 @@ Generado: 2026-06-23 16:17:35
 - HealthProgress : float
 - Nickname : string
 - IsActive : bool
+- ReloadProgress : float
+- IsReloading : bool
 
 ##### class PlayerModel
 
@@ -10215,7 +10567,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class HostNetworkService
 
-- Archivo: `HostNetworkService.cs` (430 líneas)
+- Archivo: `HostNetworkService.cs` (583 líneas)
 - Hereda de: `MonoBehaviour`
 - Implementa: `INetworkService`, `INetworkRunnerCallbacks`
 - Usa: `PlayerSpawner`, `RedesLog`, `NetworkSceneManagerDefault`, `GameConstants`, `ResultView`, `GameFlowController`, `NetworkInputData`, `InputButton`
@@ -10236,7 +10588,6 @@ Generado: 2026-06-23 16:17:35
 - _gameRunner : NetworkRunner
 - _isInSession : bool
 - _lobbyShutdownIntentional : bool
-- _lastRoomAvailable : bool
 
 **Métodos:**
 
@@ -10244,7 +10595,7 @@ Generado: 2026-06-23 16:17:35
 - private CreateRunner(string goName, bool provideInput) : NetworkRunner
 - private DestroyRunnerGameObject(NetworkRunner runner) : void
 - public async StartLobbyWatch() : void
-- private ShutdownLobbyRunner() : void
+- private async ShutdownLobbyRunnerAsync() : System.Threading.Tasks.Task
 - public async StartAsHost(string sessionName) : void
 - public async StartAsClient(string sessionName) : void
 - private FailAndReturnToLobby(string reason) : void
@@ -10287,12 +10638,14 @@ Generado: 2026-06-23 16:17:35
 
 ##### enum InputButton
 
-- Archivo: `NetworkInputData.cs` (5 líneas)
+- Archivo: `NetworkInputData.cs` (7 líneas)
 
 **Campos:**
 
 - Fire : enum
 - Reload : enum
+- Crouch : enum
+- Teleport : enum
 
 ##### interface ISessionListHandler
 
@@ -10315,7 +10668,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class PlayerSpawner
 
-- Archivo: `PlayerSpawner.cs` (87 líneas)
+- Archivo: `PlayerSpawner.cs` (135 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `RedesLog`
 
@@ -10331,7 +10684,7 @@ Generado: 2026-06-23 16:17:35
 - public IsPlayerSpawned(PlayerRef player) : bool
 - public DespawnAllActivePlayers(NetworkRunner runner) : void
 - public ClearSpawned() : void
-- private GetSpawnPosition(PlayerRef player) : Vector3
+- private GetSpawnPosition(NetworkRunner runner, PlayerRef player) : Vector3
 
 ##### class RoomSessionHandler
 
@@ -10383,24 +10736,27 @@ Generado: 2026-06-23 16:17:35
 
 ##### class NetworkPlayer
 
-- Archivo: `NetworkPlayer.cs` (142 líneas)
+- Archivo: `NetworkPlayer.cs` (189 líneas)
 - Hereda de: `NetworkBehaviour`
 - Implementa: `IEntityDisplayModel`
-- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
+- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerEventBus`, `PlayerCrouch`, `PlayerTeleport`, `CustomCursorView`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
 
 **Propiedades:**
 
 - WorldPosition : Vector3
 - HealthProgress : float
 - IsActive : bool
+- ReloadProgress : float
+- IsReloading : bool
 - NetNickname : NetworkString<_16>
 - Nickname : string
 - Movement : PlayerMovement
 - Shooting : PlayerShooting
 - Health : PlayerHealth
 - Ammo : AmmoSystem
-- Animation : PlayerAnimationController
 - EventBus : PlayerEventBus
+- Crouch : PlayerCrouch
+- Teleport : PlayerTeleport
 - _previousButtons : NetworkButtons
 
 **Campos:**
@@ -10409,73 +10765,90 @@ Generado: 2026-06-23 16:17:35
 - _shooting : PlayerShooting
 - _health : PlayerHealth
 - _ammo : AmmoSystem
-- _animation : PlayerAnimationController
 - _eventBus : PlayerEventBus
+- _crouch : PlayerCrouch
+- _teleport : PlayerTeleport
 
 **Métodos:**
 
 - private OnNicknameChangedRender() : void
 - private RpcSetNickname(string nickname) : void
+- public RpcNotifyHitMarker() : void
 - public Spawned() : void
 - public Render() : void
 - public FixedUpdateNetwork() : void
 
-##### class PlayerAnimationController
+##### class PlayerCrouch
 
-- Archivo: `PlayerAnimationController.cs` (82 líneas)
+- Archivo: `PlayerCrouch.cs` (117 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `PlayerMovement`, `PlayerHealth`, `PlayerShooting`, `VFXManager`
+- Usa: `PlayerEventBus`, `GameConstants`, `NetworkInputData`, `InputButton`, `RedesLog`
+
+**Propiedades:**
+
+- IsCrouching : NetworkBool
 
 **Campos:**
 
-- _visuals : Transform
-- _shootSound : AudioClip
-- _movement : PlayerMovement
-- _health : PlayerHealth
-- _shooting : PlayerShooting
-- _lastShootCount : int
-- _bobTimer : float
-- _originalScale : Vector3
-- _recoilTimer : float
+- _standingScale : Vector3
+- _crouchingScale : Vector3
+- _controller : CharacterController
+- _eventBus : PlayerEventBus
+- _standingHeight : float
+- _crouchingHeight : float
+- _standingCenter : Vector3
+- _crouchingCenter : Vector3
+- SCALE_SPEED : float
+- _currentAlpha : float
 
 **Métodos:**
 
 - private Awake() : void
+- public FixedUpdateNetwork() : void
 - public Render() : void
+- private SetVisualsAlpha(float alpha) : void
+- private OnCrouchChangedRender() : void
 
 ##### class PlayerEventBus
 
-- Archivo: `PlayerEventBus.cs` (51 líneas)
+- Archivo: `PlayerEventBus.cs` (75 líneas)
 - Hereda de: `MonoBehaviour`
 
 **Campos:**
 
 - OnTookDamage : Action<int, GameObject>
-- OnShoot : Action
+- OnShoot : Action<float>
 - OnMove : Action<Vector3>
 - OnSpawned : Action
-- OnDied : Action
+- OnDied : Action<Vector3>
 - OnReload : Action
+- OnAmmoChanged : Action<int, int>
+- OnCrouch : Action<bool>
+- OnTeleport : Action<Vector3, Vector3>
 
 **Métodos:**
 
 - public TriggerTookDamage(int attackerId, GameObject bulletObj) : void
-- public TriggerShoot() : void
+- public TriggerShoot(float animSpeed = 1f) : void
 - public TriggerMove(Vector3 velocity) : void
 - public TriggerSpawned() : void
-- public TriggerDied() : void
+- public TriggerDied(Vector3 hitDirection = default) : void
 - public TriggerReload() : void
+- public TriggerAmmoChanged(int currentAmmo, int maxMagazine) : void
+- public TriggerCrouch(bool isCrouching) : void
+- public TriggerTeleport(Vector3 origin, Vector3 destination) : void
 
 ##### class PlayerHealth
 
-- Archivo: `PlayerHealth.cs` (133 líneas)
+- Archivo: `PlayerHealth.cs` (196 líneas)
 - Hereda de: `NetworkBehaviour`
 - Implementa: `IDamageable`
-- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`, `NetworkPlayer`
 
 **Propiedades:**
 
 - CurrentHealth : int
+- LastHitDirection : Vector3
 - IsAlive : bool
 
 **Campos:**
@@ -10495,7 +10868,7 @@ Generado: 2026-06-23 16:17:35
 
 ##### class PlayerMovement
 
-- Archivo: `PlayerMovement.cs` (48 líneas)
+- Archivo: `PlayerMovement.cs` (91 líneas)
 - Hereda de: `NetworkBehaviour`
 - Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`
 
@@ -10507,18 +10880,20 @@ Generado: 2026-06-23 16:17:35
 
 - _moveSpeed : float
 - _body : Rigidbody
+- _controller : CharacterController
 - _eventBus : PlayerEventBus
 
 **Métodos:**
 
 - private Awake() : void
+- public Spawned() : void
 - public FixedUpdateNetwork() : void
 
 ##### class PlayerShooting
 
-- Archivo: `PlayerShooting.cs` (53 líneas)
+- Archivo: `PlayerShooting.cs` (105 líneas)
 - Hereda de: `NetworkBehaviour`
-- Usa: `AmmoSystem`, `GameEventBus`, `GameConstants`, `PlayerEventBus`, `Projectile`, `RedesLog`
+- Usa: `AmmoSystem`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `Projectile`
 
 **Propiedades:**
 
@@ -10532,25 +10907,316 @@ Generado: 2026-06-23 16:17:35
 - _projectilePrefab : NetworkObject
 - _ammo : AmmoSystem
 - _eventBus : GameEventBus
-- _damage : int
 - _playerEventBus : PlayerEventBus
 
 **Métodos:**
 
+- private OnShootCountChanged() : void
 - private Awake() : void
 - public Fire() : void
 
+##### class PlayerTeleport
+
+- Archivo: `PlayerTeleport.cs` (136 líneas)
+- Hereda de: `NetworkBehaviour`
+- Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`, `InputButton`, `RedesLog`, `VFXManager`
+
+**Propiedades:**
+
+- TeleportCooldown : TickTimer
+- LastTeleportDest : Vector3
+- LastTeleportOrigin : Vector3
+- CooldownProgress : float
+- IsReady : bool
+
+**Campos:**
+
+- _range : float
+- _cooldown : float
+- _teleportOriginVfxPrefab : GameObject
+- _teleportDestVfxPrefab : GameObject
+- _eventBus : PlayerEventBus
+
+**Métodos:**
+
+- private Awake() : void
+- public FixedUpdateNetwork() : void
+- private ExecuteTeleport() : void
+- private OnTeleportChangedRender() : void
+
+#### Namespace `Redes.Test`
+
+##### class CameraFollow
+
+- Archivo: `CameraFollow.cs` (13 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- _target : Transform
+- _height : float
+
+**Métodos:**
+
+- private LateUpdate() : void
+
+##### class DummyEnemy
+
+- Archivo: `DummyEnemy.cs` (260 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `EntityDisplayView`, `OfflineBullet`, `RagdollController`
+
+**Propiedades:**
+
+- CurrentHealth : int
+- IsAlive : bool
+
+**Campos:**
+
+- _maxHealth : int
+- _respawnDelay : float
+- _bodyRenderer : Renderer
+- _aliveColor : Color
+- _deadColor : Color
+- _displayView : Views.EntityDisplayView
+- _autoShoot : bool
+- _shootInterval : float
+- _bulletPrefab : GameObject
+- _muzzle : Transform
+- _shootDamage : int
+- _shootSpeed : float
+- _audioSource : AudioSource
+- _shootSound : AudioClip
+- _hitSound : AudioClip
+- _deathSound : AudioClip
+- OnDummyKilled : System.Action<int>
+- _totalKills : int
+- _respawnTimer : float
+- _isDead : bool
+- _hitAnimCoroutine : Coroutine
+- _shootTimer : float
+- _lastHitDirection : Vector3
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
+- private Update() : void
+- private Shoot() : void
+- private LateUpdate() : void
+- public TakeDamage(int amount, Vector3 hitDirection = default) : void
+- private HitAnimation() : System.Collections.IEnumerator
+- private Die() : void
+- private Respawn() : void
+- private ApplyColor() : void
+- private PlaySound3D(AudioClip clip, float volume = 1f) : void
+
+##### class OfflineBullet
+
+- Archivo: `OfflineBullet.cs` (53 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `OfflinePlayerTester`, `DummyEnemy`, `CustomCursorView`
+
+**Campos:**
+
+- Speed : float
+- Damage : int
+- LifeTime : float
+- IsEnemyBullet : bool
+
+**Métodos:**
+
+- private Start() : void
+- private Update() : void
+- private OnTriggerEnter(Collider other) : void
+
+##### class OfflinePlayerTester
+
+- Archivo: `OfflinePlayerTester.cs` (422 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerInputMode`, `PlayerEventBus`, `DummyEnemy`, `EntityDisplayView`, `EventBus`, `LocalNetworkMock`, `OfflineBullet`
+
+**Campos:**
+
+- _inputMode : PlayerInputMode
+- _moveSpeed : float
+- _damage : int
+- _fireRate : float
+- _muzzle : Transform
+- _maxAmmo : int
+- _reloadDuration : float
+- _eventBus : PlayerEventBus
+- _target : DummyEnemy
+- _shootSound : AudioClip
+- _reloadSound : AudioClip
+- _deathSound : AudioClip
+- _bulletPrefab : GameObject
+- _debugText : Text
+- _displayView : Views.EntityDisplayView
+- _maxHealth : int
+- _fireCooldown : float
+- _shotsFired : int
+- _lastPosition : Vector3
+- _currentAmmo : int
+- _isReloading : bool
+- _reloadTimer : float
+- _shootClipDuration : float
+- _recoilCoroutine : Coroutine
+- _currentHealth : int
+- _isDead : bool
+- _lastHitDirection : Vector3
+
+**Métodos:**
+
+- private Start() : void
+- private Update() : void
+- private LateUpdate() : void
+- public TakeDamage(int amount, Vector3 hitDirection = default) : void
+- private Die() : void
+- private RespawnCoroutine() : System.Collections.IEnumerator
+- private HandleMovement() : void
+- private HandleShooting() : void
+- private Shoot() : void
+- private RecoilCoroutine() : System.Collections.IEnumerator
+- private HandleReloadInput() : void
+- private StartReload() : void
+- private HandleReloadTimer() : void
+- private HandleDebugKey() : void
+- private UpdateDebugUI() : void
+
+##### enum PlayerInputMode
+
+- Archivo: `OfflinePlayerTester.cs` (5 líneas)
+
+**Campos:**
+
+- WASD_Mouse : enum
+- Arrows_Space : enum
+
+##### class TestSceneManager
+
+- Archivo: `TestSceneManager.cs` (78 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `DummyEnemy`
+
+**Campos:**
+
+- _killCounterText : Text
+- _controlsLegendText : Text
+- _eventLog : Text
+- _dummy : DummyEnemy
+- _kills : int
+- _logBuffer : string
+
+**Métodos:**
+
+- private Start() : void
+- private OnDestroy() : void
+- private HandleKill(int totalKills) : void
+- private UpdateKillUI() : void
+- private OnLogReceived(string condition, string stackTrace, LogType type) : void
+
 #### Namespace `Redes.Views`
+
+##### class CustomCursorView
+
+- Archivo: `CustomCursorView.cs` (359 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerEventBus`, `GameEventBus`, `NetworkPlayer`, `OfflinePlayerTester`, `GameFlowController`, `GameStateModel`, `GamePhase`
+
+**Campos:**
+
+- _eventBus : PlayerEventBus
+- _globalEventBus : GameEventBus
+- _cursorBase : Sprite
+- _cursorShoot : Sprite
+- _cursorHit : Sprite
+- _cursorReload : Sprite
+- CursorSize : float
+- _canvas : Canvas
+- _cursorRect : RectTransform
+- _cursorImage : Image
+- _reloadProgressImage : Image
+- _reloadTimer : float
+- _reloadDuration : float
+- _isReloading : bool
+- _shootReboundScale : float
+- _hitScale : float
+- _isHitting : bool
+- _hitTimer : float
+- _lastSprite : Sprite
+
+**Métodos:**
+
+- private Awake() : void
+- private OnEnable() : void
+- private OnDisable() : void
+- private HandleGlobalPlayerTookDamage(PlayerRef victim, int newHealth, PlayerRef attacker) : void
+- private TryBindLocalPlayer() : void
+- private UnbindEventBus() : void
+- public TriggerHit() : void
+- private HandleShoot(float speed) : void
+- private HandleReload() : void
+- private HandleAmmoChanged(int currentAmmo, int maxAmmo) : void
+- private HandleTookDamage(int attackerId, GameObject bullet) : void
+- private HandleTeleport(Vector3 origin, Vector3 destination) : void
+- private Update() : void
+
+##### class DeathScreenController
+
+- Archivo: `DeathScreenController.cs` (92 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `DeathScreenView`, `PlayerEventBus`, `EventBus`, `LocalNetworkMock`
+
+**Campos:**
+
+- _view : DeathScreenView
+- _playerEventBus : PlayerEventBus
+- _deathDuration : float
+- _elapsed : float
+- _isDead : bool
+
+**Métodos:**
+
+- private OnEnable() : void
+- private OnDisable() : void
+- private HandleDied(Vector3 hitDirection) : void
+- private HandleSpawned() : void
+- private HandleGlobalDied(int actorId, int killerId, string cause) : void
+- private HandleGlobalSpawned() : void
+- private StartDeathCountdown(float duration) : void
+- private StopDeathCountdown() : void
+- private Update() : void
+
+##### class DeathScreenView
+
+- Archivo: `DeathScreenView.cs` (27 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- _panel : GameObject
+- _radialCircle : Image
+- _countdownText : Text
+
+**Métodos:**
+
+- public SetVisible(bool visible) : void
+- public UpdateProgress(float progress, float secondsLeft) : void
 
 ##### class EntityDisplayView
 
-- Archivo: `EntityDisplayView.cs` (42 líneas)
+- Archivo: `EntityDisplayView.cs` (64 líneas)
 - Hereda de: `MonoBehaviour`
 
 **Campos:**
 
 - _healthSlider : Slider
 - _nicknameText : Text
+- _reloadFillImage : Image
+- _reloadArea : GameObject
+- YOffset : float
+- XOffset : float
 
 **Métodos:**
 
@@ -10558,10 +11224,11 @@ Generado: 2026-06-23 16:17:35
 - public SetNickname(string nickname) : void
 - public SetPosition(Vector2 screenPos) : void
 - public SetVisible(bool visible) : void
+- public SetReloadProgress(float progress, bool isReloading) : void
 
 ##### class GameHudView
 
-- Archivo: `GameHudView.cs` (39 líneas)
+- Archivo: `GameHudView.cs` (81 líneas)
 - Hereda de: `MonoBehaviour`
 
 **Campos:**
@@ -10570,6 +11237,9 @@ Generado: 2026-06-23 16:17:35
 - _ammoText : Text
 - _stateText : Text
 - _reloadSlider : Slider
+- _teleportRadial : Image
+- _teleportText : Text
+- _crouchText : Text
 
 **Métodos:**
 
@@ -10577,18 +11247,19 @@ Generado: 2026-06-23 16:17:35
 - public ShowAmmo(int ammo, int magazineSize) : void
 - public ShowState(string state) : void
 - public ShowReloadProgress(float progress) : void
+- public ShowTeleportCooldown(float progress) : void
+- public ShowCrouch(bool isCrouching) : void
 - public SetVisible(bool visible) : void
 
 ##### class LobbyView
 
-- Archivo: `LobbyView.cs` (172 líneas)
+- Archivo: `LobbyView.cs` (253 líneas)
 - Hereda de: `MonoBehaviour`
-- Usa: `GameConstants`, `RedesLog`
+- Usa: `PlaySoundOnButtonClick`, `GameConstants`, `RedesLog`
 
 **Propiedades:**
 
 - HostButton : Button
-- JoinButton : Button
 - Username : string
 
 **Campos:**
@@ -10598,8 +11269,8 @@ Generado: 2026-06-23 16:17:35
 - _usernameInput : InputField
 - _roomListContainer : Transform
 - _roomButtonPrefab : GameObject
+- _buttonFont : Font
 - _hostButton : Button
-- _joinButton : Button
 - _ramboButton : Button
 - _t600Button : Button
 - _lionButton : Button
@@ -10607,7 +11278,8 @@ Generado: 2026-06-23 16:17:35
 **Métodos:**
 
 - private Start() : void
-- private SetUsername(string name) : void
+- public ApplyButtonStyle(Button button) : void
+- public SetUsername(string name) : void
 - public ShowStatus(string message) : void
 - public ShowPlayerCount(int current) : void
 - public ShowButtons() : void
@@ -10619,9 +11291,127 @@ Generado: 2026-06-23 16:17:35
 - private RestoreButtons() : void
 - private SetButtons(bool host, bool join) : void
 
+##### class PlayerAmmoView
+
+- Archivo: `PlayerAmmoView.cs` (162 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerEventBus`
+
+**Campos:**
+
+- _eventBus : PlayerEventBus
+- _ammoText : Text
+- _reloadSlider : Slider
+- _originalScale : Vector3
+- _animationCoroutine : Coroutine
+- _normalColor : Color
+- _emptyColor : Color
+- _rectTransform : RectTransform
+- _reloadTimer : float
+- _reloadDuration : float
+- _isReloading : bool
+
+**Métodos:**
+
+- private Awake() : void
+- private OnEnable() : void
+- private OnDisable() : void
+- private Update() : void
+- private HandleAmmoChanged(int currentAmmo, int maxAmmo) : void
+- private HandleReload() : void
+- private TriggerBounce(float targetScale, float duration, Color color, bool shake = false) : void
+- private BounceCoroutine(float targetScale, float duration, Color color, bool shake) : System.Collections.IEnumerator
+
+##### class PlayerAnimationView
+
+- Archivo: `PlayerAnimationView.cs` (449 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `RedesLog`, `RagdollController`, `VFXManager`
+
+**Campos:**
+
+- _animator : Animator
+- _eventBus : PlayerEventBus
+- _audioSource : AudioSource
+- _shootSounds : AudioClip[]
+- _ouchSounds : AudioClip[]
+- _reloadSound : AudioClip
+- _deathSound : AudioClip
+- _footstepSound : AudioClip
+- _cachedPlayerId : int
+- _footstepInterval : float
+- _footstepTimer : float
+- _currentMoveSpeed : float
+- _netPlayer : Redes.Player.NetworkPlayer
+- _movement : PlayerMovement
+- _shooting : PlayerShooting
+- _health : PlayerHealth
+- _ammo : AmmoSystem
+- _isNetworked : bool
+- _wasMoving : bool
+- _lastShootCount : int
+- _lastIsReloading : bool
+- _lastHealth : int
+
+**Métodos:**
+
+- private Awake() : void
+- private Start() : void
+- private OnEnable() : void
+- private OnDisable() : void
+- private Update() : void
+- private UpdateNetworkedState() : void
+- private UpdateOfflineFootsteps() : void
+- private HandleMove(Vector3 velocity) : void
+- private HandleShoot(float animSpeed) : void
+- private HandleReload() : void
+- private HandleDied(Vector3 hitDirection) : void
+- private HandleSpawned() : void
+- private SelectShootClip(int playerId) : AudioClip
+- private SelectRandomOuchClip() : AudioClip
+- private PlaySound3D(AudioClip clip, float volume = 1f) : void
+- private PlayMuzzleFlashEffect() : void
+
+##### class PlaySoundOnButtonClick
+
+- Archivo: `PlaySoundOnButtonClick.cs` (41 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Propiedades:**
+
+- ClickSound : AudioClip
+- SfxGroup : AudioMixerGroup
+
+**Campos:**
+
+- _clickSound : AudioClip
+- _sfxGroup : AudioMixerGroup
+- _button : Button
+
+**Métodos:**
+
+- public Initialize(AudioClip clickSound, AudioMixerGroup sfxGroup) : void
+- private Awake() : void
+- private PlayClickSound() : void
+
+##### class PooledParticleHelper
+
+- Archivo: `PooledParticleHelper.cs` (25 líneas)
+- Hereda de: `MonoBehaviour`
+
+**Campos:**
+
+- _particleSystem : ParticleSystem
+
+**Métodos:**
+
+- private Awake() : void
+- private OnEnable() : void
+- private Update() : void
+
 ##### class ResultView
 
-- Archivo: `ResultView.cs` (98 líneas)
+- Archivo: `ResultView.cs` (96 líneas)
 - Hereda de: `MonoBehaviour`
 - Usa: `MatchResult`, `RedesLog`
 
@@ -10637,10 +11427,45 @@ Generado: 2026-06-23 16:17:35
 **Métodos:**
 
 - private Awake() : void
+- public TriggerRetry() : void
+- public TriggerLobby() : void
 - public ShowResult(MatchResult result) : void
 - public ShowRematchStatus(string status) : void
 - public HideResult() : void
 - public SetRetryButtonInteractable(bool interactable) : void
+
+##### class TeleportCooldownView
+
+- Archivo: `TeleportCooldownView.cs` (189 líneas)
+- Hereda de: `MonoBehaviour`
+- Usa: `PlayerTeleport`, `PlayerEventBus`, `GameConstants`
+
+**Campos:**
+
+- _radialImage : Image
+- _labelText : Text
+- _teleport : PlayerTeleport
+- _eventBus : PlayerEventBus
+- ColorReady : Color
+- ColorCharging : Color
+- ColorUsed : Color
+- _useAnimCoroutine : Coroutine
+- _scaleAnimCoroutine : Coroutine
+- _playerTransform : Transform
+- _playerOriginalScale : Vector3
+- USE_ANIM_DURATION : float
+- SCALE_SHRINK_TIME : float
+- SCALE_GROW_TIME : float
+
+**Métodos:**
+
+- private OnEnable() : void
+- private OnDisable() : void
+- private Update() : void
+- public Bind(PlayerTeleport teleport, PlayerEventBus eventBus, Transform playerRoot) : void
+- private HandleTeleportUsed(Vector3 origin, Vector3 destination) : void
+- private UseAnimCoroutine() : IEnumerator
+- private PlayerScaleCoroutine() : IEnumerator
 
 ##### class TerrainView
 
@@ -10657,8 +11482,9 @@ Generado: 2026-06-23 16:17:35
 
 ##### class VFXManager
 
-- Archivo: `VFXManager.cs` (31 líneas)
+- Archivo: `VFXManager.cs` (168 líneas)
 - Hereda de: `MonoBehaviour`
+- Usa: `PooledParticleHelper`, `RedesLog`
 
 **Propiedades:**
 
@@ -10668,12 +11494,26 @@ Generado: 2026-06-23 16:17:35
 
 - _hitVfxPrefab : ParticleSystem
 - _muzzleFlashPrefab : ParticleSystem
+- _sparkVfxPrefab : ParticleSystem
+- _obstacleHitSound : AudioClip
+- _ouchSounds : AudioClip[]
+- _sfxGroup : AudioMixerGroup
+- _muzzlePool : List<ParticleSystem>
+- _hitPool : List<ParticleSystem>
+- _sparkPool : List<ParticleSystem>
+- PoolSize : int
 
 **Métodos:**
 
 - private Awake() : void
+- private InitializePools() : void
+- private GetFromPool(List<ParticleSystem> pool, ParticleSystem prefab) : ParticleSystem
+- public PlayHit(Vector3 position, Quaternion rotation) : void
 - public PlayHit(Vector3 position) : void
 - public PlayMuzzleFlash(Transform muzzlePoint) : void
+- public PlaySpark(Vector3 position, Quaternion rotation) : void
+- public PlayOuch(Vector3 position) : void
+- private PlayClipAtPointRouted(AudioClip clip, Vector3 position, float volume) : void
 
 #### Namespace `USP.Core`
 
@@ -11220,28 +12060,23 @@ Generado: 2026-06-23 16:17:35
 ## Volcado completo de Roslyn
 
 
-Generado: 2026-06-23 16:17:35
+Generado: 2026-06-26 15:03:13
 
-Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
+Tipos: 531 · Métodos: 2263 · Propiedades: 328 · Campos: 1821 · Eventos: 183
 
 ### Directivas using por archivo
 
-- **Fusion.Unity.cs**: `System`, `System.Runtime.ExceptionServices`, `UnityEngine`, `UnityEngine.Object`, `UnityEngine.Resources`, `System`, `UnityEngine.Serialization`, `System`, `UnityEngine`, `UnityEngine.Serialization`, `System`, `UnityEngine.Scripting`, `InternalLogStreams`, `System`, `System.IO`, `System.Reflection`, `UnityEngine`, `UnityEngine.Scripting`, `UnityEngine.Object`, `InternalLogStreams`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Runtime.ExceptionServices`, `System.Text`, `System.Threading`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Diagnostics`, `System.Linq`, `Unity.Collections.LowLevel.Unsafe`, `Unity.Profiling`, `Unity.Profiling.LowLevel`, `Unity.Profiling.LowLevel.Unsafe`, `UnityEngine`, `System.Object`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Text`, `System.Text.RegularExpressions`, `UnityEngine`, `System`, `UnityEngine`, `System`, `System.Diagnostics`, `JetBrains.Annotations`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEngine`, `System`, `UnityEngine.Object`, `System`, `UnityEngine`, `UnityEngine`, `UnityEngine.UI`, `System`, `System.Globalization`, `UnityEngine`, `System.Reflection`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `Analyzer`
-- **VfxController.cs**: `System.Collections.Generic`, `UnityEngine`
-- **DropdownController.cs**: `System.Collections.Generic`, `TMPro`, `UnityEngine`
-- **DebugColisionesFull.cs**: `UnityEngine`
-- **CollisionDetector.cs**: `UnityEngine`
-- **ShotImpactBus.cs**: `System`, `UnityEngine`
-- **IInteractable.cs**: `UnityEngine`
-- **DesactivarPorTimer.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **UnitView.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`
-- **TriggerCorregir.cs**: `UnityEditor`, `UnityEngine`
-- **Physics2DMigrator.cs**: `UnityEngine`, `UnityEditor`, `System.IO`, `System.Collections.Generic`
-- **HierarchyToClipboardMenu.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Text`
-- **CreateTestSceneMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `DebugSystem`
-- **CreateScenesAndPrefabsMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `DebugSystem`
-- **ComponentPropertiesCopierTestMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
 - **ComponentPropertiesCopier.cs**: `System.Text`, `UnityEditor`, `UnityEngine`
+- **CentralizadorScripts.cs**: `UnityEngine`, `UnityEditor`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.IO`
+- **Fusion.CodeGen.cs**: `System`, `System.Diagnostics`
+- **NetworkProjectConfigImporterEditor.cs**: `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **NetworkProjectConfigImporter.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEditor.PackageManager`, `UnityEngine`
+- **NetworkPrefabsInspector.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`
+- **FusionWeaverTriggerImporter.cs**: `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **FusionRunnerVisibilityControlsWindow.cs**: `System`, `System.Collections.Generic`, `Statistics`, `UnityEngine`, `UnityEditor`
+- **FusionEditorSkin.cs**: `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`
+- **FusionEditorConfigImporter.cs**: `System.IO`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **GameLoopReferee.cs**: `UnityEngine`
 - **FloatingHealthBar.cs**: `UnityEngine`, `UnityEngine.UI`
 - **EventBus.cs**: `System`
 - **EffectPool.cs**: `UnityEngine`, `System.Collections.Generic`
@@ -11255,37 +12090,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - **UnityCharacterInput.cs**: `UnityEngine`
 - **IWeaponInput.cs**: `UnityEngine`
 - **IMovementHandler.cs**: `UnityEngine`
-- **FusionNetworkObjectStatistics.cs**: `UnityEngine`
-- **RunnerVisibilityLinksRoot.cs**: `UnityEngine`
-- **RunnerVisibilityLink.cs**: `System`, `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
-- **RunnerLagCompensationGizmos.cs**: `LagCompensation`, `UnityEngine`
-- **RunnerEnableVisibility.cs**: `System`, `System.Collections.Generic`, `Sockets`, `UnityEngine`
-- **RunnerAOIGizmos.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
-- **EnableOnSingleRunner.cs**: `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
-- **NetworkSceneManagerDefault.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `UnityEngine.SceneManagement`
-- **NetworkObjectProviderDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.Serialization`
-- **NetworkCharacterController.cs**: `System.Runtime.CompilerServices`, `System.Runtime.InteropServices`, `UnityEngine`
-- **FusionBootstrapDebugGUI.cs**: `System`, `UnityEngine`, `System.Collections.Generic`
-- **FusionBootstrap.cs**: `System`, `Fusion.Sockets`, `System.Collections`, `System.Threading.Tasks`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `Statistics`, `UnityEngine.Serialization`
-- **FusionBasicBillboard.cs**: `UnityEngine`
-- **FusionAddressablePrefabsPreloader.cs**: `System.Collections.Generic`, `UnityEngine`
+- **IndicadorEnemigos.cs**: `USP.Services`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
+- **Ideas y pseudocodigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **GestorTexto.cs**: `UnityEngine`, `UnityEngine.UI`
+- **ConfiguracionGlobal.cs**: `UnityEngine`
+- **CodigoDeInicio.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **Camara.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **BD_Audios.cs**: `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
 - **GlobalLogicTests.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.TestTools`, `NUnit.Framework`, `DebugSystem`
-- **NewTestScript.cs**: `System.Collections`, `System.Collections.Generic`, `NUnit.Framework`, `UnityEngine`, `UnityEngine.TestTools`
-- **RedesSceneLinker.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`, `Redes.Player`
-- **RedesSceneCreator.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.UI`, `UnityEngine.EventSystems`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`
-- **RedesPrefabCreator.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Player`, `Redes.Combat`
-- **RedesBuildAll.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
-- **Projectile.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Player.NetworkPlayer`
-- **IDamageable.cs**: `Fusion`
-- **TerrainController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Views`
-- **PlayerController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Player`, `Redes.Views`, `Redes.Core`, `Redes.Player.NetworkPlayer`
-- **MatchController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Views`
-- **GameFlowController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Models`, `Redes.Network`, `Redes.Views`
-- **EntityDisplayManager.cs**: `System.Collections.Generic`, `UnityEngine`, `Redes.Models`, `Redes.Views`, `Redes.Player`, `Redes.Core`
-- **RedesLog.cs**: `UnityEngine`
-- **UnitPathRenderer.cs**: `UnityEngine`, `Game.Squad`
-- **UnitModel.cs**: `Game.Core`, `UnityEngine`, `USP.Core`
-- **UnitIndicatorSetup.cs**: `UnityEngine`, `System`
 - **UnitController_Revival.cs**: `UnityEngine`, `Game.Sensors`, `Game.Core`
 - **UnitController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections`, `Game.Sensors`, `Game.Core`
 - **UnitCommander.cs**: `Game.Core`, `Game.Squad`, `System.Linq`, `UnityEngine`
@@ -11293,24 +12105,122 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - **ShotSensor.cs**: `UnityEngine`, `Game.Squad`
 - **RevivingState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`
 - **RevivalSystemSetup.cs**: `UnityEngine`, `Game.Squad`
-- **RevivalBarView.cs**: `UnityEngine`
-- **RehenBruto.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
-- **PositionManager.cs**: `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `Game.Squad`, `Game.Core`
-- **Municion.cs**: `UnityEngine`
+- **RedesSceneCreator.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.UI`, `UnityEngine.EventSystems`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`
+- **RedesProceduralAudio.cs**: `UnityEditor`, `UnityEngine`, `System.IO`
+- **RedesPrefabCreator.cs**: `UnityEditor`, `UnityEditor.Animations`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Player`, `Redes.Combat`, `Redes.Views`
+- **RedesBuildAll.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
+- **RedesAudioSetup.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.Audio`, `System`, `System.Reflection`
+- **AddObstacleFeedbackToPrefabs.cs**: `UnityEngine`, `UnityEditor`
+- **Projectile.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Gameplay`, `Redes.Player.NetworkPlayer`
+- **ObstacleHitFeedback.cs**: `UnityEngine`, `System.Collections`, `Redes.Core`
+- **IDamageable.cs**: `Fusion`
+- **DestructibleBombObstacle.cs**: `Fusion`, `UnityEngine`, `UnityEngine.UI`, `System.Collections`, `Redes.Player`, `Redes.Core`
+- **TerrainController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Views`
+- **RedesLoadingScreen.cs**: `UnityEngine`, `UnityEngine.UI`
+- **PlayerController.cs**: `UnityEngine`, `Redes.Models`, `Redes.Player`, `Redes.Views`, `Redes.Core`, `Redes.Player.NetworkPlayer`
+- **MatchController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Views`
+- **EntityDisplayManager.cs**: `System.Collections.Generic`, `UnityEngine`, `Redes.Models`, `Redes.Views`, `Redes.Player`, `Redes.Core`
+- **RedesLog.cs**: `UnityEngine`
+- **GameEventBus.cs**: `System`, `UnityEngine`, `Fusion`
+- **RagdollController.cs**: `UnityEngine`, `System.Collections.Generic`
+- **MatchNetworkController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Controllers`, `Redes.Views`
+- **TerrainModel.cs**: `UnityEngine`
+- **PlayerModel.cs**: `System`, `Redes.Core`
+- **IEntityDisplayModel.cs**: `UnityEngine`
+- **GameStateModel.cs**: `System`, `Redes.Core`
+- **RoomSessionHandler.cs**: `System.Collections.Generic`, `Fusion`, `Redes.Core`
+- **PlayerSpawner.cs**: `System.Collections.Generic`, `Fusion`, `UnityEngine`, `Redes.Core`
+- **NetworkInputData.cs**: `Fusion`, `UnityEngine`
+- **ISessionListHandler.cs**: `System.Collections.Generic`, `Fusion`
+- **NetworkObjectProviderDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEngine.Serialization`
+- **NetworkCharacterController.cs**: `System.Runtime.CompilerServices`, `System.Runtime.InteropServices`, `UnityEngine`
+- **FusionBootstrapDebugGUI.cs**: `System`, `UnityEngine`, `System.Collections.Generic`
+- **FusionBootstrap.cs**: `System`, `Fusion.Sockets`, `System.Collections`, `System.Threading.Tasks`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `Statistics`, `UnityEngine.Serialization`
+- **FusionBasicBillboard.cs**: `UnityEngine`
+- **FusionAddressablePrefabsPreloader.cs**: `System.Collections.Generic`, `UnityEngine`
+- **Fusion.Unity.cs**: `System`, `System.Runtime.ExceptionServices`, `UnityEngine`, `UnityEngine.Object`, `UnityEngine.Resources`, `System`, `UnityEngine.Serialization`, `System`, `UnityEngine`, `UnityEngine.Serialization`, `System`, `UnityEngine.Scripting`, `InternalLogStreams`, `System`, `System.IO`, `System.Reflection`, `UnityEngine`, `UnityEngine.Scripting`, `UnityEngine.Object`, `InternalLogStreams`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Runtime.ExceptionServices`, `System.Text`, `System.Threading`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Diagnostics`, `System.Linq`, `Unity.Collections.LowLevel.Unsafe`, `Unity.Profiling`, `Unity.Profiling.LowLevel`, `Unity.Profiling.LowLevel.Unsafe`, `UnityEngine`, `System.Object`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Text`, `System.Text.RegularExpressions`, `UnityEngine`, `System`, `UnityEngine`, `System`, `System.Diagnostics`, `JetBrains.Annotations`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEngine`, `System`, `UnityEngine.Object`, `System`, `UnityEngine`, `UnityEngine`, `UnityEngine.UI`, `System`, `System.Globalization`, `UnityEngine`, `System.Reflection`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `Analyzer`
+- **VfxController.cs**: `System.Collections.Generic`, `UnityEngine`
+- **DropdownController.cs**: `System.Collections.Generic`, `TMPro`, `UnityEngine`
+- **DebugColisionesFull.cs**: `UnityEngine`
+- **CollisionDetector.cs**: `UnityEngine`
+- **ShotImpactBus.cs**: `System`, `UnityEngine`
+- **NetworkPlayer.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Network`, `Redes.Controllers`
+- **AmmoSystem.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
+- **TestSceneManager.cs**: `UnityEngine`, `UnityEngine.UI`
+- **OfflinePlayerTester.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Player`
+- **OfflineBullet.cs**: `UnityEngine`
+- **DummyEnemy.cs**: `UnityEngine`
+- **CameraFollow.cs**: `UnityEngine`
+- **Fusion.Unity.Editor.cs**: `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `Fusion.Internal`, `Unity.Collections.LowLevel.Unsafe`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditorInternal`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.IO`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor`, `System.Int32`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEngine.Object`, `System.Int32`, `UnityEditor.HierarchyProperty`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Object`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Reflection`, `System.Text.RegularExpressions`, `System.Xml`, `UnityEditor`, `UnityEngine`, `System`, `System.Diagnostics`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.IO`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `System.Reflection`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `ReflectionUtils`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `Unity.Profiling`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `UnityEngine`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`, `System`, `JetBrains.Annotations`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEngine.Scripting`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `Fusion.Analyzer`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `System.Text.RegularExpressions`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System`, `Internal`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEditor.Compilation`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor.Experimental.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`, `Photon.Realtime`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Runtime.CompilerServices`, `System.Text`, `UnityEngine`, `UnityEngine`, `UnityEditor`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor.Animations`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditor.Experimental.SceneManagement`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `System`, `System.Text`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `Fusion.Photon.Realtime`, `System.Linq`, `System.IO`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`
+- **FusionStatsWorldAnchor.cs**: `System`, `UnityEngine`
+- **Tanque.cs**: `USP.Weapons`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
+- **Puntero_Tanque.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **PlayerController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `Game.MVC`, `USP.Core`, `USP.Services`
+- **EntrarAlTanque.cs**: `UnityEngine`
+- **Enemigo.cs**: `USP.Services`, `UnityEngine`, `System.Collections`, `UnityEngine.UI`
+- **ControladorTanque.cs**: `USP.Weapons`, `UnityEngine`, `TMPro`
+- **CharacterView.cs**: `UnityEngine`
+- **FusionStatsPanelHeader.cs**: `UnityEngine`, `UnityEngine.UI`, `System`, `System.Collections.Generic`
+- **FusionStatsGraphDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
+- **FusionStatsConfig.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Serialization`, `UnityEngine.UI`
+- **FusionStatsCanvas.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Events`, `UnityEngine.EventSystems`, `UnityEngine.UI`
+- **FusionStatistics.cs**: `System`, `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `UnityEngine.EventSystems`, `UnityEngine.Profiling`, `UnityEngine.Serialization`
+- **FusionNetworkObjectStatsGraphCombine.cs**: `UnityEngine`, `System.Collections.Generic`, `UnityEngine.UI`, `System`
+- **FusionNetworkObjectStatsGraph.cs**: `System`, `UnityEngine`, `UnityEngine.UI`
+- **FusionNetworkObjectStatistics.cs**: `UnityEngine`
+- **RunnerVisibilityLinksRoot.cs**: `UnityEngine`
+- **RunnerVisibilityLink.cs**: `System`, `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
+- **RunnerLagCompensationGizmos.cs**: `LagCompensation`, `UnityEngine`
+- **RunnerEnableVisibility.cs**: `System`, `System.Collections.Generic`, `Sockets`, `UnityEngine`
+- **RunnerAOIGizmos.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
+- **EnableOnSingleRunner.cs**: `System.Collections.Generic`, `Fusion.Analyzer`, `UnityEngine`
+- **IA_P2_ST_SearchingState.cs**: `UnityEngine`
+- **IA_P2_ST_ReturningToPatrolState.cs**: `UnityEngine`
+- **IA_P2_ST_PatrolState.cs**: `UnityEngine`, `System.Collections.Generic`
+- **IA_P2_ST_ChaseState.cs**: `UnityEngine`
+- **IA_P2_PathfindingManager.cs**: `System.Collections.Generic`, `UnityEngine`, `System.Linq`
+- **IA_P2_LineOfSight3D.cs**: `UnityEngine`
+- **IA_P2_FSM.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
+- **IA_P2_FOV.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_PathFanding_Theta.cs**: `System.Collections.Generic`, `UnityEngine`
+- **IA_F_EnemyCercanos.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_ControllerSeguidor.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **IA_F_ChangeMode.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `CustomInspector`
 - **Rigidbody2DMovementHandler.cs**: `UnityEngine`
 - **ProxiesUSP.cs**: `UnityEngine`, `USP.Core`, `USP.Entities`, `USP.Weapons`
-- **PersecucionEnemigo.cs**: `USP.Entities`, `UnityEngine`
-- **IA_P2_BusEvent_Manager.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `UnityEngine`
-- **CrearYDestruir.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **AutoDestruccionSegura.cs**: `UnityEngine`
-- **Soldado_Anim.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **CambiarOpacidad.cs**: `UnityEngine`
-- **WeaponView.cs**: `System.Collections`, `UnityEngine`, `UnityEngine.UI`, `USP.Core`, `USP.UI`
-- **WeaponController.cs**: `UnityEngine`, `Game.MVC`, `USP.Core`
-- **Proyectil2.cs**: `UnityEngine`
-- **Proyectil.cs**: `USP.Core`, `USP.Entities`, `USP.Services`, `UnityEngine`, `UnityEngine.UI.GridLayoutGroup`
-- **Cohete.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **VibracionCamara.cs**: `UnityEngine`
+- **LobbyView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
+- **GameHudView.cs**: `UnityEngine`, `UnityEngine.UI`
+- **EntityDisplayView.cs**: `UnityEngine`, `UnityEngine.UI`
+- **DeathScreenView.cs**: `UnityEngine`, `UnityEngine.UI`
+- **CursorManager.cs**: `UnityEngine`
+- **ControlDerrota.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
+- **BalaPool.cs**: `UnityEngine`, `System.Collections.Generic`
+- **PooledParticleHelper.cs**: `UnityEngine`
+- **PlaySoundOnButtonClick.cs**: `UnityEngine`, `UnityEngine.UI`, `UnityEngine.Audio`
+- **PlayerAnimationView.cs**: `UnityEngine`, `Redes.Player`, `Redes.Core`
+- **PlayerAmmoView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Player`
+- **DeathScreenController.cs**: `UnityEngine`, `Redes.Player`
+- **CustomCursorView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Player`, `Fusion`, `Redes.Core`
+- **TriggerEventAndDestroy.cs**: `UnityEngine`, `UnityEngine.Events`
+- **TriggerCorregir.cs**: `UnityEditor`, `UnityEngine`
+- **Physics2DMigrator.cs**: `UnityEngine`, `UnityEditor`, `System.IO`, `System.Collections.Generic`
+- **HierarchyToClipboardMenu.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Text`
+- **CreateTestSceneMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `DebugSystem`
+- **CreateScenesAndPrefabsMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `DebugSystem`
+- **ComponentPropertiesCopierTestMenu.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEngine`, `System.IO`
+- **GlobalHUD.cs**: `Game.Squad`, `UnityEngine`
+- **GlobalData.cs**: `USP.Entities`, `UnityEngine`, `Game.Squad`
+- **GEN_Inputs.cs**: `UnityEngine`, `System`
+- **GenericDetector.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
+- **GameManager.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `USP.Entities`
+- **FormationRelocator.cs**: `UnityEngine`, `System.Collections.Generic`
+- **EnemyView.cs**: `UnityEngine`, `USP.Core`
+- **EnemyModel.cs**: `UnityEngine`
+- **Disparador.cs**: `UnityEngine`, `Game.Squad`
+- **Destruible.cs**: `UnityEngine`, `Game.Squad`
+- **DamagedState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
+- **Bala.cs**: `UnityEngine`, `System.Collections`, `System`, `Game.Sensors`, `Game.Squad`, `Game.Core`
+- **AmmoManager.cs**: `UnityEngine`, `Game.Squad`, `System.Linq`
 - **UnitFSM.cs**: `UnityEngine`, `System.Collections.Generic`, `Game.Squad`
 - **CambioDeLider.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
 - **Weapon.cs**: `System.Collections`, `UnityEngine`
@@ -11324,20 +12234,18 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - **LocalNetworkMock.cs**: `System`, `System.IO`, `UnityEngine`
 - **ImpactEffect.cs**: `UnityEngine`
 - **GameManager.cs**: `System.Collections`, `UnityEngine`
-- **GameLoopReferee.cs**: `UnityEngine`
-- **CharacterView.cs**: `UnityEngine`
-- **IA_P2_ST_SearchingState.cs**: `UnityEngine`
-- **IA_P2_ST_ReturningToPatrolState.cs**: `UnityEngine`
-- **IA_P2_ST_PatrolState.cs**: `UnityEngine`, `System.Collections.Generic`
-- **IA_P2_ST_ChaseState.cs**: `UnityEngine`
-- **IA_P2_PathfindingManager.cs**: `System.Collections.Generic`, `UnityEngine`, `System.Linq`
-- **IA_P2_LineOfSight3D.cs**: `UnityEngine`
-- **IA_P2_FSM.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
-- **IA_P2_FOV.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_PathFanding_Theta.cs**: `System.Collections.Generic`, `UnityEngine`
-- **IA_F_EnemyCercanos.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_ControllerSeguidor.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **IA_F_ChangeMode.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `CustomInspector`
+- **Prueba_de_color.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **PickUp.cs**: `UnityEngine`, `Game.Squad`
+- **Obstaculo.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **MenuVictoria.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`
+- **VFXManager.cs**: `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Audio`, `Redes.Core`
+- **TerrainView.cs**: `UnityEngine`
+- **IInteractable.cs**: `UnityEngine`
+- **DesactivarPorTimer.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **UnitView.cs**: `UnityEngine`, `System.Collections`, `System.Collections.Generic`, `Game.Squad`
+- **UnitPathRenderer.cs**: `UnityEngine`, `Game.Squad`
+- **UnitModel.cs**: `Game.Core`, `UnityEngine`, `USP.Core`
+- **UnitIndicatorSetup.cs**: `UnityEngine`, `System`
 - **ICharacterInput.cs**: `UnityEngine`
 - **CharacterControllerMVC.cs**: `USP.Core`, `USP.Entities`, `UnityEngine`
 - **SelectedSoldierUIFeedback.cs**: `UnityEngine`, `Game.Squad`
@@ -11346,39 +12254,33 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - **InformacionPersonaje.cs**: `System.Collections`, `System.Linq`, `UnityEngine`, `UnityEngine.UI`, `USP.Weapons`, `USP.Services`
 - **IDaniable.cs**: `UnityEngine`
 - **CharacterModel.cs**: `System.Collections`, `UnityEngine`
-- **Tanque.cs**: `USP.Weapons`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
-- **Puntero_Tanque.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **PlayerController.cs**: `UnityEngine`, `UnityEngine.SceneManagement`, `Game.MVC`, `USP.Core`, `USP.Services`
-- **EntrarAlTanque.cs**: `UnityEngine`
-- **Enemigo.cs**: `USP.Services`, `UnityEngine`, `System.Collections`, `UnityEngine.UI`
-- **ControladorTanque.cs**: `USP.Weapons`, `UnityEngine`, `TMPro`
-- **GenericDetector.cs**: `System`, `System.Collections.Generic`, `UnityEngine`
-- **GameManager.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `USP.Entities`
-- **FormationRelocator.cs**: `UnityEngine`, `System.Collections.Generic`
-- **EnemyView.cs**: `UnityEngine`, `USP.Core`
-- **EnemyModel.cs**: `UnityEngine`
-- **Disparador.cs**: `UnityEngine`, `Game.Squad`
-- **Destruible.cs**: `UnityEngine`, `Game.Squad`
-- **DamagedState.cs**: `UnityEngine`, `Game.Core`, `Game.Squad`, `Game.Sensors`
-- **CursorManager.cs**: `UnityEngine`
-- **ControlDerrota.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
-- **BalaPool.cs**: `UnityEngine`, `System.Collections.Generic`
-- **Bala.cs**: `UnityEngine`, `System.Collections`, `System`, `Game.Sensors`, `Game.Squad`, `Game.Core`
-- **AmmoManager.cs**: `UnityEngine`, `Game.Squad`, `System.Linq`
+- **PersecucionEnemigo.cs**: `USP.Entities`, `UnityEngine`
+- **IA_P2_BusEvent_Manager.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `UnityEngine`
+- **CrearYDestruir.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **AutoDestruccionSegura.cs**: `UnityEngine`
+- **Soldado_Anim.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **CambiarOpacidad.cs**: `UnityEngine`
+- **WeaponView.cs**: `System.Collections`, `UnityEngine`, `UnityEngine.UI`, `USP.Core`, `USP.UI`
+- **WeaponController.cs**: `UnityEngine`, `Game.MVC`, `USP.Core`
+- **Proyectil2.cs**: `UnityEngine`
+- **Proyectil.cs**: `USP.Core`, `USP.Entities`, `USP.Services`, `UnityEngine`, `UnityEngine.UI.GridLayoutGroup`
+- **Cohete.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **VibracionCamara.cs**: `UnityEngine`
+- **Torreta.cs**: `USP.Services`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **SistemaPuntaje.cs**: `UnityEngine`, `UnityEngine.UI`
+- **SenalisacionAEnemigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
+- **INetworkService.cs**: `System`, `System.Collections.Generic`, `Fusion`
+- **HostNetworkService.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `Fusion`, `Fusion.Sockets`, `UnityEngine`, `UnityEngine.SceneManagement`, `Redes.Core`, `Redes.Controllers`, `Redes.Views`
+- **PlayerTeleport.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
 - **PlayerShooting.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
 - **PlayerMovement.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Network`
 - **PlayerHealth.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Combat`, `Redes.Gameplay`, `Redes.Views`
 - **PlayerEventBus.cs**: `System`, `UnityEngine`
-- **PlayerAnimationController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Views`
-- **NetworkPlayer.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Network`, `Redes.Controllers`
-- **AmmoSystem.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
-- **VFXManager.cs**: `UnityEngine`
-- **TerrainView.cs**: `UnityEngine`
-- **ResultView.cs**: `System`, `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
-- **LobbyView.cs**: `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
-- **GameHudView.cs**: `UnityEngine`, `UnityEngine.UI`
-- **EntityDisplayView.cs**: `UnityEngine`, `UnityEngine.UI`
-- **TriggerEventAndDestroy.cs**: `UnityEngine`, `UnityEngine.Events`
+- **PlayerCrouch.cs**: `Fusion`, `UnityEngine`, `Redes.Core`
+- **RevivalBarView.cs**: `UnityEngine`
+- **RehenBruto.cs**: `UnityEngine`, `UnityEngine.SceneManagement`
+- **PositionManager.cs**: `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `Game.Squad`, `Game.Core`
+- **Municion.cs**: `UnityEngine`
 - **MenuPausa.cs**: `UnityEngine`
 - **MarkerAnim.cs**: `UnityEngine`
 - **Manager_VFX.cs**: `UnityEngine`, `System.Collections.Generic`, `System.IO`
@@ -11389,53 +12291,13 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - **IA_P2_PathNode.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
 - **IA_P2_PathfindingModel.cs**: `CustomInspector`, `System.Collections.Generic`, `UnityEngine`
 - **IA_P2_AgentIA.cs**: `CustomInspector`, `System`, `System.Collections.Generic`, `TMPro`, `UnityEngine`
-- **GlobalHUD.cs**: `Game.Squad`, `UnityEngine`
-- **GlobalData.cs**: `USP.Entities`, `UnityEngine`, `Game.Squad`
-- **GEN_Inputs.cs**: `UnityEngine`, `System`
-- **FusionRunnerVisibilityControlsWindow.cs**: `System`, `System.Collections.Generic`, `Statistics`, `UnityEngine`, `UnityEditor`
-- **FusionEditorSkin.cs**: `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`
-- **FusionEditorConfigImporter.cs**: `System.IO`, `UnityEditor.AssetImporters`, `UnityEngine`
-- **Fusion.Unity.Editor.cs**: `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `Fusion.Internal`, `Unity.Collections.LowLevel.Unsafe`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditorInternal`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.IO`, `UnityEditor`, `UnityEditor.Compilation`, `UnityEngine`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor`, `System.Int32`, `UnityEditor.HierarchyProperty`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEngine.Object`, `System.Int32`, `UnityEditor.HierarchyProperty`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Object`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Reflection`, `System.Text.RegularExpressions`, `System.Xml`, `UnityEditor`, `UnityEngine`, `System`, `System.Diagnostics`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.IO`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `System`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Text`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Linq.Expressions`, `System.Reflection`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `UnityEditor`, `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `ReflectionUtils`, `System`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `Unity.Profiling`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.IO`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Reflection`, `UnityEditor`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEngine.Object`, `UnityEditor`, `UnityEngine`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `UnityEditor`, `UnityEngine`, `System`, `JetBrains.Annotations`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEngine.Scripting`, `System.Linq`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `System`, `Fusion.Analyzer`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.IO`, `System.Text.RegularExpressions`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.PackageManager`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System`, `Internal`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `UnityEditor.Compilation`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `System`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `UnityEditor`, `UnityEngine`, `UnityEditor.Experimental.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.Build`, `UnityEditor.Build.Reporting`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.SceneManagement`, `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEngine`, `System`, `System.Linq`, `System.Runtime.InteropServices`, `UnityEditor`, `UnityEngine`, `UnityEditor`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`, `Photon.Realtime`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Reflection`, `System.Runtime.CompilerServices`, `System.Text`, `UnityEngine`, `UnityEngine`, `UnityEditor`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor.Animations`, `UnityEditor`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEditor.Experimental.SceneManagement`, `UnityEngine`, `System`, `System.Collections.Generic`, `System.Linq`, `System.Text`, `System.Threading.Tasks`, `UnityEditor`, `UnityEngine`, `System`, `System.Text`, `UnityEngine`, `UnityEditor`, `UnityEngine`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `Fusion.Photon.Realtime`, `System.Linq`, `System.IO`, `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEditor`
-- **FusionStatsWorldAnchor.cs**: `System`, `UnityEngine`
-- **FusionStatsPanelHeader.cs**: `UnityEngine`, `UnityEngine.UI`, `System`, `System.Collections.Generic`
-- **FusionStatsGraphDefault.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
-- **FusionStatsConfig.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Serialization`, `UnityEngine.UI`
-- **FusionStatsCanvas.cs**: `System`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.Events`, `UnityEngine.EventSystems`, `UnityEngine.UI`
-- **FusionStatistics.cs**: `System`, `UnityEngine`, `System.Collections.Generic`, `System.Linq`, `UnityEngine.EventSystems`, `UnityEngine.Profiling`, `UnityEngine.Serialization`
-- **FusionNetworkObjectStatsGraphCombine.cs**: `UnityEngine`, `System.Collections.Generic`, `UnityEngine.UI`, `System`
-- **FusionNetworkObjectStatsGraph.cs**: `System`, `UnityEngine`, `UnityEngine.UI`
-- **Torreta.cs**: `USP.Services`, `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **SistemaPuntaje.cs**: `UnityEngine`, `UnityEngine.UI`
-- **SenalisacionAEnemigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **Prueba_de_color.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **PickUp.cs**: `UnityEngine`, `Game.Squad`
-- **Obstaculo.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **MenuVictoria.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.SceneManagement`
-- **IndicadorEnemigos.cs**: `USP.Services`, `System.Collections.Generic`, `UnityEngine`, `UnityEngine.UI`
-- **Ideas y pseudocodigos.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **GestorTexto.cs**: `UnityEngine`, `UnityEngine.UI`
-- **ConfiguracionGlobal.cs**: `UnityEngine`
-- **CodigoDeInicio.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **Camara.cs**: `System.Collections`, `System.Collections.Generic`, `UnityEngine`
-- **BD_Audios.cs**: `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`
-- **GameEventBus.cs**: `System`, `UnityEngine`, `Fusion`
-- **MatchNetworkController.cs**: `Fusion`, `UnityEngine`, `Redes.Core`, `Redes.Controllers`
-- **TerrainModel.cs**: `UnityEngine`
-- **PlayerModel.cs**: `System`, `Redes.Core`
-- **IEntityDisplayModel.cs**: `UnityEngine`
-- **GameStateModel.cs**: `System`, `Redes.Core`
-- **RoomSessionHandler.cs**: `System.Collections.Generic`, `Fusion`, `Redes.Core`
-- **PlayerSpawner.cs**: `System.Collections.Generic`, `Fusion`, `UnityEngine`, `Redes.Core`
-- **NetworkInputData.cs**: `Fusion`, `UnityEngine`
-- **ISessionListHandler.cs**: `System.Collections.Generic`, `Fusion`
-- **INetworkService.cs**: `System`, `System.Collections.Generic`, `Fusion`
-- **HostNetworkService.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `Fusion`, `Fusion.Sockets`, `UnityEngine`, `UnityEngine.SceneManagement`, `Redes.Core`, `Redes.Controllers`, `Redes.Views`
-- **CentralizadorScripts.cs**: `UnityEngine`, `UnityEditor`, `UnityEngine.SceneManagement`, `System.Collections.Generic`, `System.IO`
-- **Fusion.CodeGen.cs**: `System`, `System.Diagnostics`
-- **NetworkProjectConfigImporterEditor.cs**: `System`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
-- **NetworkProjectConfigImporter.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEditor.PackageManager`, `UnityEngine`
-- **NetworkPrefabsInspector.cs**: `System`, `System.Collections.Generic`, `System.Linq`, `UnityEditor`, `UnityEditor.IMGUI.Controls`, `UnityEngine`, `UnityEngine.Object`
-- **FusionWeaverTriggerImporter.cs**: `System.IO`, `System.Linq`, `UnityEditor`, `UnityEditor.AssetImporters`, `UnityEngine`
+- **RedesVisualConfigurator.cs**: `UnityEditor`, `UnityEngine`, `UnityEngine.UI`, `System.IO`
+- **RedesTestSceneBuilder.cs**: `UnityEditor`, `UnityEditor.Animations`, `UnityEditor.SceneManagement`, `UnityEngine`, `UnityEngine.UI`, `UnityEngine.SceneManagement`, `Redes.Test`, `Redes.Views`, `Redes.Player`
+- **GameFlowController.cs**: `UnityEngine`, `Redes.Core`, `Redes.Models`, `Redes.Network`, `Redes.Views`
+- **TeleportCooldownView.cs**: `System.Collections`, `UnityEngine`, `UnityEngine.UI`, `Redes.Player`
+- **ResultView.cs**: `System`, `UnityEngine`, `UnityEngine.UI`, `Redes.Core`
+- **NetworkSceneManagerDefault.cs**: `System`, `System.Collections`, `System.Collections.Generic`, `System.Linq`, `UnityEngine`, `UnityEngine.SceneManagement`
+- **RedesSceneLinker.cs**: `UnityEditor`, `UnityEditor.SceneManagement`, `UnityEditor.Events`, `UnityEngine`, `UnityEngine.UI`, `Fusion`, `Redes.Network`, `Redes.Controllers`, `Redes.Views`, `Redes.Gameplay`, `Redes.Player`
 
 ### Namespace `(global)`
 
@@ -11655,7 +12517,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CentralizarScriptsEnEscena() | 12 | 56 | 95 | GetActiveScene, IsNullOrEmpty, LogError, Log, GetDirectoryName, FindObjectsByType, FromMonoBehaviour, GetAssetPath… |
+| public static void CentralizarScriptsEnEscena() | 12 | 56 | 94 | GetActiveScene, IsNullOrEmpty, LogError, Log, GetDirectoryName, FindObjectsByType, FromMonoBehaviour, GetAssetPath… |
 
 
 #### class CodigoDeInicio
@@ -11745,7 +12607,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void RunTest() | 8 | 31 | 50 | Exists, LogError, OpenScene, GetRootGameObjects, FindGameObjectWithComponents, Log, GetComponents, FormatComponentProperties… |
+| public static void RunTest() | 8 | 31 | 49 | Exists, LogError, OpenScene, GetRootGameObjects, FindGameObjectWithComponents, Log, GetComponents, FormatComponentProperties… |
 | private static GameObject FindGameObjectWithComponents(GameObject go) | 4 | 10 | 16 | GetComponents, FindGameObjectWithComponents |
 
 
@@ -12933,20 +13795,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | public void GastarBala() | 2 | 2 | 4 |  |
 
 
-#### class NewTestScript
-
-- Accesibilidad: `public`
-- Modificadores: `public`
-- Archivo: `NewTestScript.cs` · líneas 7-25 (19)
-
-**Métodos:**
-
-| Firma | Compl. | Sent. | Líneas | Llamadas |
-|-------|:-----:|:----:|:-----:|----------|
-| public void NewTestScriptSimplePasses() | 1 | 0 | 5 |  |
-| public IEnumerator NewTestScriptWithEnumeratorPasses() | 1 | 1 | 7 |  |
-
-
 #### class NodeDistance
 
 - Accesibilidad: `private`
@@ -13034,7 +13882,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void Migrate() | 21 | 65 | 107 | Log, FindAssets, GUIDToAssetPath, Contains, LoadAssetAtPath, InstantiatePrefab, CleanMissingScriptsRecursively, Convert3DTo2DComponents… |
+| public static void Migrate() | 21 | 65 | 106 | Log, FindAssets, GUIDToAssetPath, Contains, LoadAssetAtPath, InstantiatePrefab, CleanMissingScriptsRecursively, Convert3DTo2DComponents… |
 | private static void CleanMissingScriptsRecursively(GameObject obj) | 4 | 9 | 17 | RemoveMonoBehavioursWithMissingScript, Log, CleanMissingScriptsRecursively, GetChild |
 | private static void AlignZDepthRecursively(GameObject obj) | 5 | 11 | 19 | GetComponent, Abs, AlignZDepthRecursively, GetChild |
 | private static bool Convert3DTo2DComponents(GameObject obj) | 9 | 54 | 78 | GetComponent, DestroyImmediate, AddComponent, Log |
@@ -13402,7 +14250,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `UnitCommander.cs` · líneas 6-290 (285)
+- Archivo: `UnitCommander.cs` · líneas 6-288 (283)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `GEN_Inputs`, `LeaderManager`, `UnitController`, `SeguirFormacionState`, `UnitTeam`, `IrADestinoState`, `EsperandoState`, `PerseguirState`
 
@@ -13410,7 +14258,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - private bool **_suscrito** (inicializado)
 - private Vector3 **_ultimaPosOrden**
-- private bool **_hayOrdenPendiente** (inicializado)
 - private static readonly System.Collections.Generic.Dictionary<UnitController, Vector3> **_destinosActivos** (inicializado)
 
 **Métodos:**
@@ -13418,7 +14265,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | private void Start() | 3 | 4 | 8 | LogError, LogWarning |
-| private void Update() | 16 | 49 | 63 | SuscribirseAInputs, Where, FindObjectsOfType, CambiarEstado, IsDown, Distance, Log, MandarRevivir… |
+| private void Update() | 16 | 48 | 62 | SuscribirseAInputs, Where, FindObjectsOfType, CambiarEstado, IsDown, Distance, Log, MandarRevivir… |
 | private void SuscribirseAInputs() | 3 | 5 | 7 | Log |
 | private void OnDestroy() | 2 | 2 | 5 |  |
 | private void OnOrdenDirecta(int index) | 7 | 24 | 36 | LogWarning, Log, MandarMasCercano, MoveToPoint, CambiarEstado |
@@ -14511,22 +15358,22 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `CreateScenesAndPrefabsMenu.cs` · líneas 13-697 (685)
-- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `SerializedProperty`
+- Archivo: `CreateScenesAndPrefabsMenu.cs` · líneas 13-783 (771)
+- Usa: `AssetDatabase`, `Bullet`, `PlayerModel`, `PlayerView`, `PlayerController`, `SimpleAnimator`, `FloatingHealthBar`, `Weapon`, `GameManager`, `DebugLogger`, `GameLoopReferee`, `BulletPool`, `EffectPool`, `ScreenManager`, `DeathScreenView`, `DeathScreenController`, `SerializedProperty`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | private static Font GetDefaultFont() | 7 | 18 | 28 | GetBuiltinResource, FindObjectsOfTypeAll |
-| public static void GenerateProjectSetup() | 2 | 94 | 133 | Log, EnsureTagExists, EnsureDirectory, SetActive, AddComponent, GetBuiltinExtraResource, SaveAsPrefabAsset, DestroyImmediate… |
-| public static void FixAndConfigureScene() | 8 | 29 | 45 | Log, EnsureTagExists, LoadAssetAtPath, LogWarning, GenerateProjectSetup, GetActiveScene, GetRootGameObjects, DestroyImmediate… |
+| public static void GenerateProjectSetup() | 2 | 94 | 132 | Log, EnsureTagExists, EnsureDirectory, SetActive, AddComponent, GetBuiltinExtraResource, SaveAsPrefabAsset, DestroyImmediate… |
+| public static void FixAndConfigureScene() | 8 | 29 | 44 | Log, EnsureTagExists, LoadAssetAtPath, LogWarning, GenerateProjectSetup, GetActiveScene, GetRootGameObjects, DestroyImmediate… |
 | private static void EnsureDirectory(string path) | 2 | 5 | 9 | IsValidFolder, Replace, GetDirectoryName, GetFileName, CreateFolder |
 | private static void CreateGameScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) | 1 | 6 | 11 | NewScene, SetupBaseScene, MarkSceneDirty, SaveScene, Log |
 | private static void CreateTestScene(GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, string savePath) | 1 | 6 | 11 | NewScene, SetupBaseScene, MarkSceneDirty, SaveScene, Log |
-| private static void SetupBaseScene(Scene scene, GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, bool isTestScene) | 6 | 273 | 334 | Find, GetComponent, AddComponent, SetParent, FindProperty, ApplyModifiedProperties, GetBuiltinExtraResource, FindObjectOfType… |
+| private static void SetupBaseScene(Scene scene, GameObject bulletPrefab, GameObject playerPrefab, GameObject buttonPrefab, bool isTestScene) | 10 | 349 | 420 | Find, GetComponent, AddComponent, SetParent, FindProperty, ApplyModifiedProperties, GetBuiltinExtraResource, FindObjectOfType… |
 | private static void EnsureTagExists(string tag) | 5 | 13 | 19 | LoadAllAssetsAtPath, FindProperty, GetArrayElementAtIndex, InsertArrayElementAtIndex, ApplyModifiedProperties |
-| public static void BuildStandalonePlayer() | 9 | 50 | 84 | Log, GetActiveScene, IsNullOrEmpty, Add, ToLower, Replace, Exists, ToArray… |
+| public static void BuildStandalonePlayer() | 9 | 49 | 83 | Log, GetActiveScene, IsNullOrEmpty, Add, ToLower, Replace, Exists, ToArray… |
 
 
 #### class CreateTestSceneMenu
@@ -14540,7 +15387,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CreateScene() | 4 | 98 | 147 | NewScene, Find, GetComponent, AddComponent, SetParent, SetActive, GetBuiltinExtraResource, FindProperty… |
+| public static void CreateScene() | 4 | 98 | 146 | NewScene, Find, GetComponent, AddComponent, SetParent, SetActive, GetBuiltinExtraResource, FindProperty… |
 
 
 #### class HierarchyToClipboardMenu
@@ -14554,7 +15401,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CopyHierarchyToClipboard() | 3 | 18 | 31 | GetActiveScene, AppendLine, GetRootGameObjects, DumpGameObject, ToString, Log, DisplayDialog, LogError |
+| public static void CopyHierarchyToClipboard() | 3 | 18 | 30 | GetActiveScene, AppendLine, GetRootGameObjects, DumpGameObject, ToString, Log, DisplayDialog, LogError |
 | private static void DumpGameObject(GameObject go, StringBuilder sb, int indentLevel) | 14 | 29 | 52 | AppendLine, LayerToName, GetComponents, GetType, GetIterator, NextVisible, GetPropertyValueAsString, DumpGameObject… |
 | private static string GetPropertyValueAsString(SerializedProperty prop) | 17 | 18 | 38 | ToString, GetType |
 
@@ -19313,21 +20160,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 #### class Postprocessor
 
 - Accesibilidad: `private`
-- Modificadores: `private`
-- Archivo: `Fusion.Unity.Editor.cs` · líneas 4560-4589 (30)
-- Hereda de: `AssetPostprocessor` (profundidad 0)
-- Usa: `AssetDatabaseUtils`
-
-**Métodos:**
-
-| Firma | Compl. | Sent. | Líneas | Llamadas |
-|-------|:-----:|:----:|:-----:|----------|
-| private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) | 7 | 21 | 28 | StartsWith, EndsWith, HasLabel, Trace, InvalidateCache, Exists, Substring, SetLabel |
-
-
-#### class Postprocessor
-
-- Accesibilidad: `private`
 - Archivo: `NetworkProjectConfigImporter.cs` · líneas 132-188 (57)
 - Hereda de: `AssetPostprocessor` (profundidad 0)
 - Usa: `AssetDatabase`
@@ -19353,6 +20185,21 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) | 3 | 6 | 8 | EndsWith, Refresh |
+
+
+#### class Postprocessor
+
+- Accesibilidad: `private`
+- Modificadores: `private`
+- Archivo: `Fusion.Unity.Editor.cs` · líneas 4560-4589 (30)
+- Hereda de: `AssetPostprocessor` (profundidad 0)
+- Usa: `AssetDatabaseUtils`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) | 7 | 21 | 28 | StartsWith, EndsWith, HasLabel, Trace, InvalidateCache, Exists, Substring, SetLabel |
 
 
 #### static class PropertyDrawer
@@ -21595,7 +22442,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `RevivingState.cs` · líneas 14-118 (105)
+- Archivo: `RevivingState.cs` · líneas 14-110 (97)
 - Implementa: `IUnitState`
 - Usa: `UnitController`, `IndicatorType`, `SeguirFormacionState`
 
@@ -21605,18 +22452,17 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private float **revivalDuration** (inicializado)
 - private float **revivalTimer** (inicializado)
 - private float **revivalRange** (inicializado)
-- private bool **isActivelyReviving** (inicializado)
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | public (ctor) RevivingState(UnitController damagedTarget) | 1 | 2 | 5 | LogMethodEntry |
-| public void Enter(UnitController unit) | 2 | 9 | 18 | LogMethodEntry, StopAgent, StartBlink, HideLine |
-| public void Update(UnitController unit) | 5 | 20 | 32 | CambiarEstado, Distance, LogMethodEntry, CompleteRevival, RotateGraphicsSmooth, Atan2 |
+| public void Enter(UnitController unit) | 2 | 8 | 17 | LogMethodEntry, StopAgent, StartBlink, HideLine |
+| public void Update(UnitController unit) | 5 | 18 | 30 | CambiarEstado, Distance, LogMethodEntry, CompleteRevival, RotateGraphicsSmooth, Atan2 |
 | public void FixedUpdate(UnitController unit) | 1 | 0 | 4 |  |
-| public void Exit(UnitController unit) | 1 | 4 | 7 | LogMethodEntry, StopBlink |
-| private void CompleteRevival(UnitController unit) | 1 | 9 | 20 | LogMethodEntry, ReviveHealth, OnRevivalComplete, ExitDamagedState, CambiarEstado |
+| public void Exit(UnitController unit) | 1 | 3 | 6 | LogMethodEntry, StopBlink |
+| private void CompleteRevival(UnitController unit) | 1 | 8 | 17 | LogMethodEntry, ReviveHealth, OnRevivalComplete, ExitDamagedState, CambiarEstado |
 | private void LogMethodEntry(string message) | 1 | 0 | 4 |  |
 
 
@@ -21802,6 +22648,71 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 ### Namespace `Redes.Combat`
 
+#### enum BombState
+
+- Accesibilidad: `public`
+- Archivo: `DestructibleBombObstacle.cs` · líneas 29-34 (6)
+
+**Valores del enum:**
+
+- `Normal`
+- `OnFire`
+- `Exploded`
+
+#### class DestructibleBombObstacle
+
+> Network-enabled combustible bomb obstacle (3D Cube).
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DestructibleBombObstacle.cs` · líneas 13-344 (332)
+- Hereda de: `NetworkBehaviour` (profundidad 0)
+- Implementa: `IDamageable`
+- Tipos anidados: `BombState`
+- Usa: `BombState`, `RedesLog`, `NetworkPlayer`
+
+**Campos:**
+
+- private int **_bombHealth** (inicializado) `[Header][SerializeField]`
+- private int **_explosionDamage** (inicializado) `[SerializeField]`
+- private float **_explosionRadius** (inicializado) `[SerializeField]`
+- private AudioClip **_explosionSound** `[SerializeField]`
+- private Collider **_boxCollider** `[Header][SerializeField]`
+- private SphereCollider **_explosionTrigger** `[SerializeField]`
+- private ParticleSystem **_fireParticles** `[SerializeField]`
+- private ParticleSystem **_explosionParticles** `[SerializeField]`
+- private AudioSource **_audioSource** `[SerializeField]`
+- private Transform **_visualCube** `[SerializeField]`
+- private Vector3 **_originalScale**
+- private Coroutine **_fireLerpCoroutine**
+- private Canvas **_chargeCanvas**
+- private Image **_chargeImage**
+
+**Propiedades:**
+
+- public BombState **CurrentState** `{ get; set; }`
+- private int **_currentHealth** `{ get; set; }`
+- public bool **IsAlive** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 3 | 11 | 20 | SetupChargeUI |
+| private void OnEnable() | 3 | 6 | 7 | Info, Stop |
+| private void SetupChargeUI() | 2 | 19 | 28 | SetParent, AddComponent, GetComponent, SetActive |
+| public override void Spawned() | 2 | 6 | 10 | Info |
+| public void TakeDamage(int amount, PlayerRef attacker) | 4 | 12 | 15 | Info, StartCoroutine, ServerOnFireTimer |
+| private IEnumerator ServerOnFireTimer() | 2 | 12 | 20 | Info, Despawn |
+| private void OnTriggerEnter(Collider other) | 6 | 14 | 18 | Info, GetComponentInParent, TakeDamage |
+| private void OnStateChangedRender() | 4 | 9 | 17 | Info, ResetObstacle, StartOnFireVisuals, TriggerExplosionVisuals |
+| private void ResetObstacle() | 7 | 13 | 10 | Info, Stop, SetActive |
+| private void StartOnFireVisuals() | 3 | 8 | 14 | Info, Play, StopCoroutine, StartCoroutine, IncendiandoLerpEffect |
+| private IEnumerator IncendiandoLerpEffect() | 8 | 23 | 38 | SetActive, Sin, LookRotation |
+| private void TriggerExplosionVisuals() | 11 | 27 | 37 | Info, StopCoroutine, SetActive, Stop, PlayOneShot, PlayClipAtPoint, SetParent, Play… |
+| private IEnumerator GreenExplosionSphereRoutine() | 3 | 33 | 47 | Info, CreatePrimitive, GetComponent, Destroy, Find, SetFloat, SetInt, DisableKeyword… |
+
+
 #### interface IDamageable
 
 > SOLID (Interface Segregation + Dependency Inversion): Anything that can be hit implements this. Projectile depends on this abstraction, NOT on PlayerHealth directly, so new damageable things (crates, turrets) can be added without touching combat code.
@@ -21822,16 +22733,43 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - `TakeDamage`: Apply damage. 'attacker' lets the match system know who scored the hit (needed for the win/lose notification). Logic is implemented by another agent.
 
+#### class ObstacleHitFeedback
+
+> Component purely for visual feedback (squash & stretch) when an obstacle is hit by a projectile.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `ObstacleHitFeedback.cs` · líneas 10-69 (60)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `RedesLog`
+
+**Campos:**
+
+- private float **_bounceDuration** (inicializado) `[Header][SerializeField]`
+- private float **_bounceScaleFactor** (inicializado) `[SerializeField]`
+- private Vector3 **_originalScale**
+- private Coroutine **_bounceCoroutine**
+- private Transform **_visualTransform**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 2 | 5 |  |
+| public void DoBounce() | 3 | 8 | 13 | Info, StopCoroutine, StartCoroutine, BounceRoutine |
+| private IEnumerator BounceRoutine() | 3 | 18 | 29 | Lerp |
+
+
 #### class Projectile
 
 > Bullet as a Network Object (assignment requirement: Network Object). Spawned by PlayerShooting on the server. Moves forward and, on hit, calls IDamageable.TakeDamage (depends on the abstraction, not on the player - SOLID/DIP). Logic is implemented by another agent.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `Projectile.cs` · líneas 15-98 (84)
+- Archivo: `Projectile.cs` · líneas 16-126 (111)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Atributos: `[RequireComponent]`
-- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`
+- Usa: `GameConstants`, `RedesLog`, `IDamageable`, `NetworkPlayer`, `MatchNetworkController`
 
 **Campos:**
 
@@ -21850,7 +22788,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | public override void Spawned() | 2 | 4 | 9 | Info, CreateFromSeconds |
-| public override void FixedUpdateNetwork() | 12 | 38 | 57 | Expired, Info, Despawn, OverlapSphere, GetPhysicsScene, GetComponentInParent, TakeDamage, Error |
+| public override void FixedUpdateNetwork() | 16 | 56 | 84 | Expired, Info, Despawn, OverlapSphere, GetPhysicsScene, GetComponentInParent, TakeDamage, Error… |
 
 
 ### Namespace `Redes.Controllers`
@@ -21861,7 +22799,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `EntityDisplayManager.cs` · líneas 15-126 (112)
+- Archivo: `EntityDisplayManager.cs` · líneas 15-127 (113)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `EntityDisplayView`, `NetworkPlayer`, `IEntityDisplayModel`, `RedesLog`
 
@@ -21880,7 +22818,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 |-------|:-----:|:----:|:-----:|----------|
 | private void Awake() | 1 | 2 | 5 | InitializePool |
 | private void InitializePool() | 4 | 7 | 11 | Instantiate, SetVisible, Add |
-| private void LateUpdate() | 13 | 45 | 80 | FindObjectsByType, Add, WorldToScreenPoint, SetVisible, SetPosition, SetHealth, SetNickname, Info… |
+| private void LateUpdate() | 13 | 46 | 81 | FindObjectsByType, Add, WorldToScreenPoint, SetVisible, SetPosition, SetHealth, SetNickname, SetReloadProgress… |
 
 
 #### class GameFlowController
@@ -21889,9 +22827,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `GameFlowController.cs` · líneas 38-393 (356)
+- Archivo: `GameFlowController.cs` · líneas 38-425 (388)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `MatchResult`
+- Usa: `HostNetworkService`, `LobbyView`, `GameHudView`, `MatchController`, `GameStateModel`, `INetworkService`, `RedesLog`, `GameConstants`, `GamePhase`, `ResultView`, `RedesLoadingScreen`, `MatchResult`
 
 **Campos:**
 
@@ -21913,20 +22851,20 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 |-------|:-----:|:----:|:-----:|----------|
 | private void Awake() | 1 | 4 | 7 | Info |
 | private void Start() | 8 | 17 | 32 | Info, LogReferenceStatus, SetPhase, HandlePhaseChanged, IsNullOrEmpty, ShowStatus, StartLobbyWatch |
-| private void OnEnable() | 6 | 27 | 43 | Info, Error, AddListener |
-| private void OnDisable() | 5 | 15 | 21 | RemoveListener |
+| private void OnEnable() | 5 | 25 | 41 | Info, Error |
+| private void OnDisable() | 4 | 13 | 20 |  |
 | private void HandleReturnToLobbyClicked() | 1 | 2 | 5 | Trace, TriggerReturnToLobby |
-| public void TriggerReturnToLobby() | 4 | 16 | 27 | Trace, Shutdown, FindFirstObjectByType, HideResult, Error, SetPhase, LoadScene, GetActiveScene |
-| public void CreateRoom() | 8 | 21 | 26 | Info, Error, IsNullOrWhiteSpace, Trim, ShowStatus, ShowButtons, HideButtons, StartAsHost… |
-| public void JoinRoom(string sessionName) | 8 | 20 | 25 | Info, Error, IsNullOrWhiteSpace, Trim, ShowStatus, HideButtons, StartAsClient, SetPhase |
-| private void HandlePhaseChanged(GamePhase phase) | 16 | 41 | 37 | Info, SetVisible, ShowButtons, HideButtons, ShowStatus |
-| private void HandleHostStarted() | 1 | 3 | 6 | Info, SetPhase |
+| public void TriggerReturnToLobby() | 4 | 18 | 30 | Trace, Shutdown, FindFirstObjectByType, HideResult, Error, SetPhase, Log, LoadScene… |
+| public void CreateRoom() | 8 | 23 | 45 | Info, Error, IsNullOrWhiteSpace, Trim, ShowStatus, ShowButtons, HideButtons, StartAsHost… |
+| public void JoinRoom(string sessionName) | 8 | 20 | 35 | Error, IsNullOrWhiteSpace, Trim, ShowStatus, HideButtons, StartAsClient, SetPhase, Info |
+| private void HandlePhaseChanged(GamePhase phase) | 16 | 42 | 38 | Info, SetVisible, ShowButtons, HideButtons, ShowStatus, Log |
+| private void HandleHostStarted() | 1 | 4 | 7 | Info, SetPhase |
 | private void HandlePlayerCountChanged(int count) | 2 | 5 | 7 | Info, SetPlayers, ShowPlayerCount |
-| private void HandleEnoughPlayers() | 3 | 7 | 8 | Info, SetPhase, SetVisible |
+| private void HandleEnoughPlayers() | 3 | 8 | 9 | Info, SetPhase, SetVisible |
 | private void HandleRoomListUpdated(System.Collections.Generic.List&lt;Fusion.SessionInfo&gt; sessions) | 5 | 5 | 13 | Info, PopulateRooms, ShowStatus |
-| private void HandleConnectionFailed(string reason) | 4 | 15 | 25 | Error, SetPhase, SetVisible, ShowButtons, Contains, ShowStatus |
+| private void HandleConnectionFailed(string reason) | 4 | 16 | 26 | Error, SetPhase, SetVisible, ShowButtons, Contains, ShowStatus |
 | private void HandleMatchFinished(MatchResult result) | 1 | 3 | 6 | Info, SetPhase |
-| private void LogReferenceStatus() | 10 | 14 | 19 | Info |
+| private void LogReferenceStatus() | 9 | 13 | 18 | Info |
 
 
 #### class MatchController
@@ -21935,9 +22873,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `MatchController.cs` · líneas 16-162 (147)
+- Archivo: `MatchController.cs` · líneas 16-164 (149)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`
+- Usa: `ResultView`, `MatchNetworkController`, `MatchResult`, `RedesLog`, `RedesLoadingScreen`
 
 **Eventos:**
 
@@ -21959,9 +22897,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 |-------|:-----:|:----:|:-----:|----------|
 | private void OnEnable() | 2 | 5 | 9 |  |
 | private void OnDisable() | 2 | 5 | 9 |  |
-| private void HandleLobbyClicked() | 3 | 12 | 23 | Trace, NotifyReturnToLobby, Warn, Error, StartCoroutine, DelayLobbyExitCoroutine |
+| private void HandleLobbyClicked() | 3 | 13 | 24 | Trace, NotifyReturnToLobby, Warn, Error, StartCoroutine, DelayLobbyExitCoroutine |
 | private System.Collections.IEnumerator DelayLobbyExitCoroutine() | 1 | 4 | 7 | Trace |
-| private void HandleRetryClicked() | 4 | 19 | 30 | Info, SetRetryButtonInteractable, ShowRematchStatus, SetLocalPlayerReady, Error |
+| private void HandleRetryClicked() | 4 | 20 | 31 | Info, SetRetryButtonInteractable, ShowRematchStatus, SetLocalPlayerReady, Error |
 | public void UpdateRematchStatus(string text) | 3 | 13 | 22 | Info, ShowRematchStatus, Warn, Error |
 | public void NotifyResult(MatchResult result) | 2 | 3 | 7 | ShowResult |
 | private void HandleResultNotified(MatchResult result) | 1 | 1 | 4 |  |
@@ -21974,13 +22912,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerController.cs` · líneas 19-75 (57)
+- Archivo: `PlayerController.cs` · líneas 19-105 (87)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `GameHudView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`
+- Usa: `GameHudView`, `TeleportCooldownView`, `PlayerModel`, `NetworkPlayer`, `GameConstants`, `EventBus`
 
 **Campos:**
 
 - private GameHudView **_hudView** `[Header][SerializeField]`
+- private TeleportCooldownView **_teleportCooldownView** `[SerializeField]`
 - private PlayerModel **_model**
 - private NetworkPlayer **_localPlayer**
 
@@ -21988,10 +22927,38 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void Bind(NetworkPlayer player) | 5 | 18 | 20 | ShowHealth, ShowAmmo, SetHealth, SetAmmo |
-| private void Update() | 14 | 16 | 25 | ShowState, ShowReloadProgress |
+| public void Bind(NetworkPlayer player) | 7 | 21 | 29 | ShowHealth, ShowAmmo, SetHealth, SetAmmo, Bind |
+| private void Update() | 21 | 22 | 45 | ShowState, ShowReloadProgress, ShowCrouch |
 
 - `Bind`: Called by the local NetworkPlayer when it spawns.
+
+#### class RedesLoadingScreen
+
+> Singleton Screen Manager that provides a full-screen loading overlay to block inputs during network connection, scene restarting, and match ending.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `RedesLoadingScreen.cs` · líneas 10-52 (43)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private static RedesLoadingScreen **_instance**
+- private GameObject **_loadingPanel** `[SerializeField]`
+- private Text **_loadingText** `[SerializeField]`
+
+**Propiedades:**
+
+- public static RedesLoadingScreen **Instance** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 2 | 6 | 12 | Destroy |
+| public void ShowLoading(string message) | 3 | 7 | 12 | Log, SetActive |
+| public void HideLoading() | 2 | 4 | 8 | Log, SetActive |
+
 
 #### class TerrainController
 
@@ -22024,7 +22991,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `GameConstants.cs` · líneas 8-28 (21)
+- Archivo: `GameConstants.cs` · líneas 8-38 (31)
 
 **Campos:**
 
@@ -22036,6 +23003,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - public const int **DEFAULT_BULLET_DAMAGE** (inicializado)
 - public const int **DEFAULT_MAGAZINE_SIZE** (inicializado)
 - public const float **DEFAULT_RELOAD_TIME** (inicializado)
+- public const float **TELEPORT_RANGE** (inicializado)
+- public const float **TELEPORT_COOLDOWN** (inicializado)
+- public const float **CROUCH_SCALE_Y** (inicializado)
 
 #### class GameEventBus
 
@@ -22098,7 +23068,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesLog.cs` · líneas 16-54 (39)
+- Archivo: `RedesLog.cs` · líneas 16-73 (58)
 
 **Campos:**
 
@@ -22109,18 +23079,56 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - public const string **PLAYER** (inicializado)
 - public const string **COMBAT** (inicializado)
 - public const string **AMMO** (inicializado)
+- public const string **VFX** (inicializado)
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void Info(string flag, string message) | 1 | 0 | 4 |  |
-| public static void Warn(string flag, string message) | 1 | 0 | 4 |  |
-| public static void Error(string flag, string message) | 1 | 0 | 4 |  |
-| public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info") | 1 | 0 | 12 |  |
+| public static void Info(string flag, string message) | 2 | 3 | 7 | IsSoundOrCursorLog, Log |
+| public static void Warn(string flag, string message) | 2 | 3 | 7 | IsSoundOrCursorLog, LogWarning |
+| public static void Error(string flag, string message) | 1 | 1 | 5 | LogError |
+| private static bool IsSoundOrCursorLog(string msg) | 6 | 4 | 10 | IsNullOrEmpty, ToLower, Contains |
+| public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info") | 4 | 7 | 12 | IsNullOrEmpty, Warn, Error, Info |
 
 
 ### Namespace `Redes.EditorTools`
+
+#### class AddObstacleFeedbackToPrefabs
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `AddObstacleFeedbackToPrefabs.cs` · líneas 6-45 (40)
+- Atributos: `[InitializeOnLoad]`
+- Usa: `EditorApplication`, `AssetDatabase`, `ObstacleHitFeedback`, `EditorUtility`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private static (ctor) AddObstacleFeedbackToPrefabs() | 1 | 1 | 4 |  |
+| private static void Run() | 5 | 18 | 31 | LoadAssetAtPath, GetComponent, AddComponent, SetDirty, SavePrefabAsset, Log, SaveAssets |
+
+
+#### static class RedesAudioSetup
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `RedesAudioSetup.cs` · líneas 9-113 (105)
+- Usa: `AssetDatabase`, `Editor`
+
+**Campos:**
+
+- public const string **MixerPath** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void CreateAudioMixerAndSetup() | 11 | 31 | 51 | IsValidFolder, CreateFolder, LoadAssetAtPath, GetType, GetMethod, Invoke, Log, GetProperty… |
+| private static void EnsureGroupExists(AudioMixer mixer, Type controllerType, Type groupType, object masterGroup, MethodInfo addChildMethod, string name) | 7 | 24 | 34 | FindMatchingGroups, GetConstructor, Invoke, GetProperty, SetValue, GetField, Log |
+| public static AudioMixerGroup GetGroup(string name) | 5 | 10 | 12 | Refresh, LoadAssetAtPath, FindMatchingGroups |
+
 
 #### static class RedesBuildAll
 
@@ -22128,8 +23136,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesBuildAll.cs` · líneas 17-102 (86)
-- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`
+- Archivo: `RedesBuildAll.cs` · líneas 17-249 (233)
+- Usa: `RedesSceneCreator`, `RedesPrefabCreator`, `RedesSceneLinker`, `EditorApplication`, `RedesAudioSetup`, `RedesProceduralAudio`, `AssetDatabase`, `RedesVisualConfigurator`
 
 **Campos:**
 
@@ -22140,11 +23148,11 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void FullBuild() | 1 | 11 | 20 | Log, CreateScene, CreatePrefabs, LinkAll, EnsureRedesSceneIsFirst, DoBuild |
+| public static void FullBuild() | 1 | 11 | 19 | Log, CreateScene, CreatePrefabs, LinkAll, EnsureRedesSceneIsFirst, DoBuild |
 | public static void FullBuildCLI() | 2 | 8 | 14 | FullBuild, LogError, Exit |
-| private static void EnsureRedesSceneIsFirst() | 1 | 1 | 6 | Log |
+| private static void EnsureRedesSceneIsFirst() | 4 | 13 | 13 | Copy, Log |
 | private static void DoBuild() | 3 | 7 | 18 | GetDirectoryName, Exists, CreateDirectory, BuildPlayer, Log, LogError |
-| public static void Corregir() | 1 | 7 | 14 | Log, CreateScene, CreatePrefabs, LinkAll |
+| public static void Corregir() | 17 | 95 | 154 | Log, LogError, CreateAudioMixerAndSetup, EnsureAudioClips, CreatePrefabs, Exists, FindAssets, GUIDToAssetPath… |
 
 - `EnsureRedesSceneIsFirst`: Asegura que RedesGame sea la ÚNICA escena del build dedicado de Redes, cargada en índice 0. No toca el orden del proyecto principal.
 
@@ -22154,8 +23162,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesPrefabCreator.cs` · líneas 18-237 (220)
-- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `Projectile`, `EntityDisplayView`
+- Archivo: `RedesPrefabCreator.cs` · líneas 20-667 (648)
+- Usa: `AssetDatabase`, `GameEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerEventBus`, `PlayerAnimationView`, `PlayerCrouch`, `PlayerTeleport`, `RedesAudioSetup`, `RagdollController`, `Projectile`, `EntityDisplayView`, `DestructibleBombObstacle`
 
 **Campos:**
 
@@ -22163,19 +23171,59 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - public const string **PlayerPrefabPath** (inicializado)
 - public const string **BulletPrefabPath** (inicializado)
 - public const string **EntityDisplayViewPrefabPath** (inicializado)
+- public const string **CustomObstaclePrefabPath** (inicializado)
+- public const string **BombObstaclePrefabPath** (inicializado)
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CreatePrefabs() | 1 | 8 | 14 | EnsureFolder, CreateGameEventBusAsset, CreateBulletPrefab, CreatePlayerPrefab, CreateEntityDisplayViewPrefab, SaveAssets, Refresh, Log |
+| public static void CreatePrefabs() | 1 | 10 | 15 | EnsureFolder, CreateGameEventBusAsset, CreateBulletPrefab, CreatePlayerPrefab, CreateEntityDisplayViewPrefab, CreateCustomObstaclePrefab, CreateBombObstaclePrefab, SaveAssets… |
 | private static void CreateGameEventBusAsset() | 2 | 8 | 12 | LoadAssetAtPath, EnsureFolder, CreateInstance, CreateAsset, Log |
-| private static void CreatePlayerPrefab() | 2 | 39 | 60 | AddComponent, LoadAssetAtPath, InstantiatePrefab, SetParent, CreatePrimitive, DestroyImmediate, GetComponent, AssignRefs… |
+| private static void CreatePlayerPrefab() | 5 | 79 | 125 | AddComponent, CreateAudioMixerAndSetup, GetGroup, LoadAssetAtPath, InstantiatePrefab, SetParent, GetComponent, GetOrCreatePlayerAnimator… |
+| public static AnimatorController GetOrCreateAnimator(string path = null) | 1 | 1 | 4 | GetOrCreatePlayerAnimator |
+| private static AnimatorController GetOrCreatePlayerAnimator(string overridePath = null) | 7 | 94 | 137 | LoadAssetAtPath, DeleteAsset, IsValidFolder, CreateFolder, CreateAnimatorControllerAtPath, AddParameter, AddState, AddTransition… |
 | private static void CreateBulletPrefab() | 2 | 25 | 36 | LoadAssetAtPath, InstantiatePrefab, SetParent, CreatePrimitive, DestroyImmediate, GetComponent, AddComponent, SaveAsPrefabAsset |
-| private static void CreateEntityDisplayViewPrefab() | 1 | 55 | 67 | GetComponent, SetParent, AddComponent, GetBuiltinResource, AssignRefs, SaveAsPrefabAsset, DestroyImmediate |
+| private static void CreateEntityDisplayViewPrefab() | 1 | 87 | 104 | GetComponent, SetParent, AddComponent, GetBuiltinResource, GetBuiltinExtraResource, AssignRefs, SaveAsPrefabAsset, DestroyImmediate |
+| private static void CreateCustomObstaclePrefab() | 2 | 16 | 26 | CreatePrimitive, SetParent, GetComponent, DestroyImmediate, AddComponent, SaveAsPrefabAsset |
+| private static void CreateBombObstaclePrefab() | 12 | 84 | 127 | AddComponent, CreatePrimitive, SetParent, GetComponent, DestroyImmediate, LoadAssetAtPath, LogWarning, GetBuiltinExtraResource… |
 | private static void AssignRefs(Object target, params (string field, Object value)[] pairs) | 2 | 8 | 11 | FindProperty, LogWarning, GetType, ApplyModifiedPropertiesWithoutUndo |
+| private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) | 6 | 17 | 21 | FindProperty, LogWarning, GetType, ClearArray, GetArrayElementAtIndex, ApplyModifiedPropertiesWithoutUndo |
 | private static void EnsureFolder(string parent, string child) | 2 | 2 | 5 | IsValidFolder, CreateFolder |
 
+- `GetOrCreateAnimator`: Public entry-point so the test scene builder can reuse this.
+- `AssignArrayRefs`: Asigna un array de AudioClips a un campo serializado de tipo AudioClip[].
+
+#### static class RedesProceduralAudio
+
+> Creates procedural audio clips for VFX/SFX that don't have external audio files. Called by the Corregir pipeline to ensure all sounds exist.
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `RedesProceduralAudio.cs` · líneas 11-168 (158)
+- Usa: `AssetDatabase`
+
+**Campos:**
+
+- private const string **AudioFolder** (inicializado)
+- public const string **OuchPath** (inicializado)
+- public const string **ObstacleHitPath** (inicializado)
+- public const string **ClickPath** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void EnsureAudioClips() | 4 | 12 | 22 | EnsureFolder, Exists, LogWarning, Refresh |
+| private static void CreateOuchClip() | 4 | 19 | 32 | Lerp, Sin, WriteWav |
+| private static void CreateObstacleHitClip() | 3 | 16 | 29 | Pow, NextDouble, Sin, WriteWav |
+| private static void WriteWav(string path, float[] samples, int sampleRate) | 3 | 31 | 44 | Combine, GetDirectoryName, Exists, CreateDirectory, Write, Clamp, Log |
+| private static void EnsureFolder(string parent, string child) | 2 | 2 | 5 | IsValidFolder, CreateFolder |
+
+- `EnsureAudioClips`: Ensures both procedural audio clips exist. Safe to call multiple times.
+- `CreateOuchClip`: Creates a short descending-pitch sine wave that mimics a human grunt/ouch. Duration: ~0.25 seconds, starts at 400Hz descends to 200Hz.
+- `CreateObstacleHitClip`: Creates a short metallic impact / white noise burst. Duration: ~0.15 seconds.
+- `WriteWav`: Writes a mono 16-bit PCM WAV file.
 
 #### static class RedesSceneCreator
 
@@ -22183,8 +23231,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesSceneCreator.cs` · líneas 23-442 (420)
-- Usa: `TerrainController`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `LobbyView`, `GameHudView`, `ResultView`, `RedesPrefabCreator`, `RedesSceneLinker`
+- Archivo: `RedesSceneCreator.cs` · líneas 23-631 (609)
+- Usa: `TerrainController`, `TerrainView`, `AssetDatabase`, `HostNetworkService`, `PlayerSpawner`, `MatchNetworkController`, `GameFlowController`, `MatchController`, `PlayerController`, `EntityDisplayManager`, `VFXManager`, `RedesProceduralAudio`, `RedesAudioSetup`, `LobbyView`, `GameHudView`, `TeleportCooldownView`, `ResultView`, `DeathScreenView`, `DeathScreenController`, `CustomCursorView`, `GameEventBus`, `RedesLoadingScreen`
 
 **Campos:**
 
@@ -22195,15 +23243,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void CreateScene() | 6 | 90 | 126 | EnsureFolder, NewScene, AddComponent, Euler, LoadAssetAtPath, FindProperty, ApplyModifiedPropertiesWithoutUndo, SetParent… |
-| private static void BuildUI() | 1 | 114 | 134 | AddComponent, GetLegacyFont, NewUiPanel, NewText, NewInputField, SetParent, GetComponent, NewButton… |
+| public static void CreateScene() | 11 | 135 | 181 | EnsureFolder, NewScene, AddComponent, Euler, CreatePrimitive, GetComponent, Find, FindProperty… |
+| private static void BuildUI() | 1 | 237 | 283 | AddComponent, GetLegacyFont, NewUiPanel, NewText, NewInputField, SetParent, GetComponent, NewButton… |
 | private static Slider NewSlider(string name, Transform parent, Vector2 anchoredPos, Vector2 size) | 1 | 33 | 34 | SetParent, GetComponent, AddComponent |
 | private static GameObject NewUiPanel(string name, Transform parent) | 1 | 8 | 9 | SetParent |
 | private static Text NewText(string name, Transform parent, Font font, string content, Vector2 anchoredPos, int size, TextAnchor align = TextAnchor.MiddleCenter) | 1 | 13 | 17 | SetParent, AddComponent |
 | private static Button NewButton(string name, Transform parent, Font font, string label, Vector2 anchoredPos) | 1 | 20 | 27 | SetParent, AddComponent, NewText |
 | private static InputField NewInputField(string name, Transform parent, Font font, string placeholderTxt, Vector2 anchoredPos) | 1 | 21 | 28 | SetParent, AddComponent |
 | private static Font GetLegacyFont() | 2 | 4 | 7 | GetBuiltinResource |
-| public static void Corregir() | 1 | 5 | 16 | Log, CreatePrefabs, CreateScene, LinkAll |
 | private static void EnsureFolder(string parent, string child) | 2 | 2 | 5 | IsValidFolder, CreateFolder |
 
 
@@ -22213,8 +23260,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
-- Archivo: `RedesSceneLinker.cs` · líneas 23-190 (168)
-- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationController`, `EditorUtility`
+- Archivo: `RedesSceneLinker.cs` · líneas 24-338 (315)
+- Usa: `HostNetworkService`, `PlayerSpawner`, `GameFlowController`, `MatchController`, `PlayerController`, `MatchNetworkController`, `LobbyView`, `GameHudView`, `ResultView`, `AssetDatabase`, `RedesPrefabCreator`, `VFXManager`, `TeleportCooldownView`, `EntityDisplayManager`, `EntityDisplayView`, `GameEventBus`, `PlayerHealth`, `PlayerShooting`, `AmmoSystem`, `PlayerAnimationView`, `RedesProceduralAudio`, `RedesAudioSetup`, `PlaySoundOnButtonClick`, `EditorUtility`
 
 **Campos:**
 
@@ -22224,12 +23271,67 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void LinkAll() | 9 | 57 | 116 | OpenScene, Find, LoadAssetAtPath, GetComponent, Assign, ChildText, ChildComp, ChildGO… |
+| public static void LinkAll() | 24 | 130 | 230 | OpenScene, Find, LoadAssetAtPath, GetComponent, Assign, ChildText, ChildComp, ChildGO… |
 | private static T Find&lt;T&gt;() | 3 | 6 | 10 | FindObjectsByType, LogWarning |
 | private static Text ChildText(Component root, string name) | 1 | 1 | 1 | ChildComp |
 | private static TC ChildComp&lt;TC&gt;(Component root, string name) | 4 | 7 | 8 | GetComponentsInChildren, LogWarning |
 | private static GameObject ChildGO(Component root, string name) | 4 | 7 | 8 | GetComponentsInChildren, LogWarning |
 | private static void Assign(Object target, params (string field, Object value)[] pairs) | 3 | 13 | 13 | FindProperty, LogWarning, GetType, ApplyModifiedPropertiesWithoutUndo, SetDirty |
+| private static void ClearPersistentListeners(UnityEngine.Events.UnityEvent unityEvent) | 2 | 3 | 7 | GetPersistentEventCount, RemovePersistentListener |
+| private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) | 6 | 18 | 22 | FindProperty, LogWarning, GetType, ClearArray, GetArrayElementAtIndex, ApplyModifiedPropertiesWithoutUndo, SetDirty |
+
+- `AssignArrayRefs`: Asigna un array de AudioClips a un campo serializado de tipo AudioClip[].
+
+#### static class RedesTestSceneBuilder
+
+> Builds the offline "RedesTest" scene for testing animations, input, VFX, sounds offline. Invoked by Tools > Redes > 6. Crear Escena de Test and also called by Corregir (step 4).
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `RedesTestSceneBuilder.cs` · líneas 18-736 (719)
+- Usa: `CameraFollow`, `AssetDatabase`, `RedesPrefabCreator`, `EntityDisplayView`, `TestSceneManager`, `DummyEnemy`, `OfflinePlayerTester`, `PlayerEventBus`, `RedesAudioSetup`, `PlayerAnimationView`, `RagdollController`, `PlayerAmmoView`, `CustomCursorView`, `GameEventBus`, `DeathScreenView`, `DeathScreenController`
+
+**Campos:**
+
+- public const string **TestScenePath** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void BuildTestScene() | 15 | 81 | 128 | Log, NewScene, BuildEnvironment, BuildPlayer, FindWithTag, AddComponent, Assign, BuildDummy… |
+| private static void BuildEnvironment() | 2 | 41 | 58 | AddComponent, Euler, CreatePrimitive, Find, GetComponent, LoadAssetAtPath, CreateAudioMixerAndSetup, GetGroup… |
+| private static GameObject BuildPlayer() | 13 | 89 | 123 | LoadAssetAtPath, InstantiatePrefab, Log, LogWarning, CreatePrimitive, SetParent, Find, GetComponent… |
+| private static GameObject BuildDummy(Vector3 position) | 6 | 90 | 119 | Euler, LoadAssetAtPath, InstantiatePrefab, GetComponent, AddComponent, GetOrCreatePlayerAnimator, GetComponentsInChildren, Find… |
+| private static (Text debug, Text kills, Text legend, Text log, Text ammo) BuildUI(GameObject player) | 1 | 121 | 182 | AddComponent, CreatePanel, CreateText, SetParent, GetComponent, Assign, LoadAssetAtPath, SetActive… |
+| private static AnimatorController GetOrCreatePlayerAnimator() | 2 | 5 | 9 | LoadAssetAtPath, GetOrCreateAnimator |
+| private static Transform FindInChildren(Transform root, string name) | 3 | 4 | 6 | GetComponentsInChildren |
+| private static void Assign(Object target, string field, Object value) | 3 | 10 | 15 | FindProperty, ApplyModifiedPropertiesWithoutUndo, LogWarning, GetType |
+| private static void AssignArrayRefs(Object target, string fieldName, AudioClip[] clips) | 5 | 15 | 19 | FindProperty, LogWarning, GetType, ClearArray, GetArrayElementAtIndex, ApplyModifiedPropertiesWithoutUndo |
+| private static GameObject CreatePanel(Transform parent, Vector2 anchorMin, Vector2 anchorMax, Vector2 anchoredPos, Vector2 sizeDelta, Color color) | 1 | 10 | 14 | SetParent, AddComponent |
+| private static Text CreateText(Transform parent, string name, string content, Vector2 anchorMin, Vector2 anchorMax, Vector2 sizeDelta, int fontSize, Color color, TextAnchor anchor) | 2 | 19 | 25 | SetParent, AddComponent, GetBuiltinResource |
+
+
+#### static class RedesVisualConfigurator
+
+- Accesibilidad: `public`
+- Modificadores: `public`, `static`
+- Archivo: `RedesVisualConfigurator.cs` · líneas 8-262 (255)
+- Usa: `AssetDatabase`, `EditorUtility`, `LobbyView`
+
+**Campos:**
+
+- private const string **TTFPath** (inicializado)
+- private const string **SDFPath** (inicializado)
+- private const string **ScenePath** (inicializado)
+- private const string **PrefabFolder** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public static void ConfigureAllVisuals() | 21 | 116 | 173 | Log, LoadAssetAtPath, LogError, CreateFontAsset, CreateAsset, SaveAssets, OpenScene, Find… |
+| private static void ConfigureButton(Button btn, Sprite backgroundSprite) | 7 | 58 | 73 | GetComponent, AddComponent, GetComponentsInChildren, SetDirty, Log |
 
 
 #### static class TriggerCorregir
@@ -22237,25 +23339,39 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - Accesibilidad: `public`
 - Modificadores: `public`, `static`
 - Archivo: `TriggerCorregir.cs` · líneas 6-13 (8)
-- Usa: `RedesSceneCreator`
+- Usa: `RedesBuildAll`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public static void Run() | 1 | 1 | 5 | Corregir |
+| public static void Run() | 1 | 1 | 4 | Corregir |
 
 
 ### Namespace `Redes.Gameplay`
+
+#### struct BoneJointData
+
+- Accesibilidad: `private`
+- Modificadores: `private`
+- Archivo: `RagdollController.cs` · líneas 17-24 (8)
+
+**Campos:**
+
+- public Transform **transform**
+- public Rigidbody **rigidbody**
+- public Collider **collider**
+- public Vector3 **initialLocalPos**
+- public Quaternion **initialLocalRot**
 
 #### class MatchNetworkController
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `MatchNetworkController.cs` · líneas 8-292 (285)
+- Archivo: `MatchNetworkController.cs` · líneas 9-338 (330)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Atributos: `[RequireComponent]`
-- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `GameFlowController`
+- Usa: `MatchController`, `GameEventBus`, `RedesLog`, `MatchResult`, `VFXManager`, `IDamageable`, `ObstacleHitFeedback`, `GameFlowController`
 
 **Campos:**
 
@@ -22280,7 +23396,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | private void OnDestroy() | 2 | 5 | 9 | Trace |
 | private void HandlePlayerDied(PlayerRef victim, PlayerRef attacker) | 4 | 4 | 8 | Trace, AnnounceResult |
 | public void AnnounceResult(PlayerRef loser, PlayerRef winner) | 1 | 2 | 5 | Info, RpcAnnounceResult |
-| public void RpcAnnounceResult(PlayerRef loser, PlayerRef winner) | 10 | 11 | 20 | FindFirstObjectByType, PlayClipAtPoint, NotifyResult |
+| public void RpcAnnounceResult(PlayerRef loser, PlayerRef winner) | 9 | 16 | 28 | FindFirstObjectByType, Log, PlayClipAtPoint, NotifyResult |
+| public void RpcPlaySparkVfx(Vector3 position, Vector3 normal) | 9 | 21 | 36 | Info, LookRotation, PlaySpark, Warn, OverlapSphere, CompareTag, GetComponentInParent, DoBounce… |
 | public void SetLocalPlayerReady() | 2 | 9 | 15 | Info, RpcSetReadyForRematch, Error |
 | public void RpcSetReadyForRematch(RpcInfo info = default) | 4 | 17 | 28 | Trace, ToString, RpcBroadcastOpponentReady, StartCoroutine, RematchSequenceCoroutine, Error |
 | private void RpcBroadcastOpponentReady(PlayerRef readyPlayer) | 3 | 8 | 15 | Trace, ToString, FindFirstObjectByType, UpdateRematchStatus |
@@ -22292,6 +23409,35 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - `SetLocalPlayerReady`: Called by MatchController when the local player clicks "Retry". Sends to the server that we are ready.
 - `NotifyReturnToLobby`: Called by MatchController when this local player wants to return to the lobby. Broadcasts to the other client so they know they are disconnected/returning to lobby.
+
+#### class RagdollController
+
+> Procedurally registers bones on Start, adds capsule/sphere colliders and rigidbodies, and provides a simple API to enable/disable Ragdoll physics. Works for both online (NetworkPlayer) and offline (OfflinePlayerTester / DummyEnemy) characters.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `RagdollController.cs` · líneas 11-213 (203)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Tipos anidados: `BoneJointData`
+- Usa: `BoneJointData`
+
+**Campos:**
+
+- private Animator **_animator**
+- private Rigidbody **_mainRigidbody**
+- private Collider **_mainCollider**
+- private List<BoneJointData> **_bones** (inicializado)
+- private bool **_isRagdollActive** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 5 | 9 | GetComponentInChildren, GetComponent, SetupRagdollBones, SetRagdollActive |
+| private void SetupRagdollBones() | 37 | 84 | 117 | GetComponentsInChildren, ToLower, Contains, GetComponent, AddComponent, GetComponentInParent, Add |
+| public void SetRagdollActive(bool active, Vector3 forceDirection = default) | 11 | 25 | 41 | AddForce |
+| public void ResetBones() | 4 | 9 | 14 | SetRagdollActive |
+
 
 ### Namespace `Redes.Models`
 
@@ -22328,7 +23474,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `IEntityDisplayModel.cs` · líneas 9-15 (7)
+- Archivo: `IEntityDisplayModel.cs` · líneas 9-17 (9)
 
 **Propiedades:**
 
@@ -22336,6 +23482,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - public float **HealthProgress** `{ get; }`
 - public string **Nickname** `{ get; }`
 - public bool **IsActive** `{ get; }`
+- public float **ReloadProgress** `{ get; }`
+- public bool **IsReloading** `{ get; }`
 
 #### class PlayerModel
 
@@ -22390,7 +23538,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `HostNetworkService.cs` · líneas 49-478 (430)
+- Archivo: `HostNetworkService.cs` · líneas 49-631 (583)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Implementa: `INetworkService`, `INetworkRunnerCallbacks`
 - Usa: `PlayerSpawner`, `RedesLog`, `NetworkSceneManagerDefault`, `GameConstants`, `ResultView`, `GameFlowController`, `NetworkInputData`, `InputButton`
@@ -22411,7 +23559,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private NetworkRunner **_gameRunner**
 - private bool **_isInSession** (inicializado)
 - private bool **_lobbyShutdownIntentional** (inicializado)
-- private bool **_lastRoomAvailable** (inicializado)
 
 **Propiedades:**
 
@@ -22426,22 +23573,22 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | private void Awake() | 3 | 9 | 14 | Destroy, DontDestroyOnLoad, Info, StartLobbyWatch |
-| private NetworkRunner CreateRunner(string goName, bool provideInput) | 1 | 7 | 10 | SetParent, AddComponent, AddCallbacks, Info |
+| private NetworkRunner CreateRunner(string goName, bool provideInput) | 3 | 12 | 14 | SetParent, AddComponent, AddCallbacks, Info |
 | private void DestroyRunnerGameObject(NetworkRunner runner) | 3 | 5 | 6 | Destroy |
-| public async void StartLobbyWatch() | 6 | 21 | 32 | Info, CreateRunner, JoinSessionLobby, Warn, Error |
-| private void ShutdownLobbyRunner() | 2 | 8 | 10 | Info, Shutdown, DestroyRunnerGameObject |
-| public async void StartAsHost(string sessionName) | 6 | 28 | 45 | Info, Warn, ShutdownLobbyRunner, CreateRunner, GetActiveScene, AddComponent, StartGame, FromIndex… |
-| public async void StartAsClient(string sessionName) | 6 | 28 | 44 | Info, Warn, ShutdownLobbyRunner, CreateRunner, GetActiveScene, AddComponent, StartGame, FromIndex… |
+| public async void StartLobbyWatch() | 6 | 21 | 37 | Info, CreateRunner, JoinSessionLobby, Warn, Error |
+| private async System.Threading.Tasks.Task ShutdownLobbyRunnerAsync() | 2 | 10 | 18 | Info, Shutdown, DestroyRunnerGameObject, Yield |
+| public async void StartAsHost(string sessionName) | 11 | 43 | 106 | Info, Warn, ShutdownLobbyRunnerAsync, CreateRunner, GetActiveScene, AddComponent, FromIndex, StartGame… |
+| public async void StartAsClient(string sessionName) | 11 | 41 | 100 | Info, Warn, ShutdownLobbyRunnerAsync, CreateRunner, GetActiveScene, AddComponent, StartGame, LogError… |
 | private void FailAndReturnToLobby(string reason) | 2 | 10 | 15 | Shutdown, DestroyRunnerGameObject, Invoke, nameof |
 | public void Shutdown() | 4 | 18 | 14 | Info, Shutdown, DestroyRunnerGameObject, ClearSpawned |
 | public void OnSessionListUpdated(NetworkRunner runner, List&lt;SessionInfo&gt; sessionList) | 2 | 5 | 8 | Info |
-| public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) | 6 | 17 | 27 | Info, Error, IsPlayerSpawned, SpawnPlayer, RefreshPlayerCount |
-| public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) | 7 | 14 | 20 | Info, DespawnPlayer, RefreshPlayerCount, FindFirstObjectByType, TriggerReturnToLobby |
+| public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) | 7 | 19 | 30 | Info, Error, IsPlayerSpawned, SpawnPlayer, RefreshPlayerCount |
+| public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) | 8 | 16 | 25 | Info, DespawnPlayer, RefreshPlayerCount, FindFirstObjectByType, TriggerReturnToLobby |
 | public void OnConnectedToServer(NetworkRunner runner) | 2 | 3 | 5 | Info |
 | public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) | 2 | 4 | 6 | Warn, FailAndReturnToLobby |
 | public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) | 8 | 21 | 31 | Warn, Info, Invoke, nameof, Trace, FindFirstObjectByType, TriggerReturnToLobby |
 | public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) | 2 | 4 | 6 | Error, FailAndReturnToLobby |
-| public void OnInput(NetworkRunner runner, NetworkInput input) | 5 | 14 | 20 | GetAxisRaw, ScreenPointToRay, Raycast, GetPoint, Set, GetButton, GetKey |
+| public void OnInput(NetworkRunner runner, NetworkInput input) | 5 | 16 | 24 | GetAxisRaw, ScreenPointToRay, Raycast, GetPoint, Set, GetMouseButton, GetKey |
 | private void RefreshPlayerCount() | 3 | 7 | 12 | Count, Info |
 | public void OnInputMissing(NetworkRunner r, PlayerRef p, NetworkInput i) | 1 | 0 | 1 |  |
 | public void OnConnectRequest(NetworkRunner r, NetworkRunnerCallbackArgs.ConnectRequest req, byte[] t) | 1 | 0 | 1 |  |
@@ -22452,7 +23599,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | public void OnReliableDataProgress(NetworkRunner r, PlayerRef p, ReliableKey k, float prog) | 1 | 0 | 1 |  |
 | public void OnObjectExitAOI(NetworkRunner r, NetworkObject o, PlayerRef p) | 1 | 0 | 1 |  |
 | public void OnObjectEnterAOI(NetworkRunner r, NetworkObject o, PlayerRef p) | 1 | 0 | 1 |  |
-| public void OnSceneLoadDone(NetworkRunner runner) | 6 | 17 | 27 | Count, Info, DespawnAllActivePlayers, SpawnPlayer |
+| public void OnSceneLoadDone(NetworkRunner runner) | 9 | 23 | 35 | Count, Info, IsPlayerSpawned, SpawnPlayer, DespawnAllActivePlayers |
 | public void OnSceneLoadStart(NetworkRunner r) | 1 | 0 | 1 |  |
 
 - `FailAndReturnToLobby`: Limpia el runner de juego fallido y vuelve a mirar el lobby.
@@ -22490,12 +23637,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 #### enum InputButton
 
 - Accesibilidad: `public`
-- Archivo: `NetworkInputData.cs` · líneas 13-17 (5)
+- Archivo: `NetworkInputData.cs` · líneas 13-19 (7)
 
 **Valores del enum:**
 
 - `Fire` = 0
 - `Reload` = 1
+- `Crouch` = 2
+- `Teleport` = 3
 
 #### interface ISessionListHandler
 
@@ -22532,7 +23681,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerSpawner.cs` · líneas 15-101 (87)
+- Archivo: `PlayerSpawner.cs` · líneas 15-149 (135)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `RedesLog`
 
@@ -22545,12 +23694,12 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab) | 2 | 11 | 17 | Info, GetSpawnPosition, Spawn, Error |
+| public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab) | 2 | 12 | 18 | Info, GetSpawnPosition, Spawn, SetPlayerObject, Error |
 | public void DespawnPlayer(NetworkRunner runner, PlayerRef player) | 2 | 9 | 15 | Info, TryGetValue, Despawn, Remove, Warn |
 | public bool IsPlayerSpawned(PlayerRef player) | 2 | 1 | 4 | ContainsKey |
 | public void DespawnAllActivePlayers(NetworkRunner runner) | 4 | 9 | 14 | Info, Despawn, Clear |
 | public void ClearSpawned() | 1 | 1 | 4 | Clear |
-| private Vector3 GetSpawnPosition(PlayerRef player) | 3 | 8 | 16 |  |
+| private Vector3 GetSpawnPosition(NetworkRunner runner, PlayerRef player) | 11 | 39 | 63 | Add, Sort, CompareTo, IndexOf, Min, Range, Info, Warn |
 
 - `SpawnPlayer`: Spawns one player. Called by HostNetworkService.OnPlayerJoined (server only).
 
@@ -22628,11 +23777,11 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `NetworkPlayer.cs` · líneas 20-161 (142)
+- Archivo: `NetworkPlayer.cs` · líneas 20-208 (189)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Implementa: `IEntityDisplayModel`
 - Atributos: `[RequireComponent]`
-- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerAnimationController`, `PlayerEventBus`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
+- Usa: `GameConstants`, `RedesLog`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `PlayerEventBus`, `PlayerCrouch`, `PlayerTeleport`, `CustomCursorView`, `GameFlowController`, `PlayerController`, `NetworkInputData`, `InputButton`
 
 **Campos:**
 
@@ -22640,61 +23789,76 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private PlayerShooting **_shooting** `[SerializeField]`
 - private PlayerHealth **_health** `[SerializeField]`
 - private AmmoSystem **_ammo** `[SerializeField]`
-- private PlayerAnimationController **_animation** `[SerializeField]`
 - private PlayerEventBus **_eventBus** `[SerializeField]`
+- private PlayerCrouch **_crouch** `[SerializeField]`
+- private PlayerTeleport **_teleport** `[SerializeField]`
 
 **Propiedades:**
 
 - public Vector3 **WorldPosition** `=> expr`
 - public float **HealthProgress** `=> expr`
 - public bool **IsActive** `=> expr`
+- public float **ReloadProgress** `=> expr`
+- public bool **IsReloading** `=> expr`
 - private NetworkString<_16> **NetNickname** `{ get; set; }`
 - public string **Nickname** `=> expr`
 - public PlayerMovement **Movement** `=> expr`
 - public PlayerShooting **Shooting** `=> expr`
 - public PlayerHealth **Health** `=> expr`
 - public AmmoSystem **Ammo** `=> expr`
-- public PlayerAnimationController **Animation** `=> expr`
 - public PlayerEventBus **EventBus** `=> expr`
+- public PlayerCrouch **Crouch** `=> expr`
+- public PlayerTeleport **Teleport** `=> expr`
 - private NetworkButtons **_previousButtons** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void OnNicknameChangedRender() | 1 | 1 | 4 | Info |
-| private void RpcSetNickname(string nickname) | 7 | 19 | 28 | GetPlayerObject, Info |
-| public override void Spawned() | 8 | 28 | 44 | Info, TriggerSpawned, RpcSetNickname, GetComponentInChildren, FindFirstObjectByType, Euler |
+| private void OnNicknameChangedRender() | 4 | 8 | 16 | Info, Log |
+| private void RpcSetNickname(string nickname) | 11 | 28 | 42 | GetPlayerObject, FindObjectsByType, Info |
+| public void RpcNotifyHitMarker() | 2 | 5 | 10 | Log, FindFirstObjectByType, TriggerHit |
+| public override void Spawned() | 8 | 28 | 46 | Info, TriggerSpawned, RpcSetNickname, GetComponentInChildren, FindFirstObjectByType, Euler |
 | public override void Render() | 3 | 4 | 8 | Euler |
-| public override void FixedUpdateNetwork() | 7 | 13 | 25 | GetInput, GetPressed, IsSet, Fire, StartReload |
+| public override void FixedUpdateNetwork() | 7 | 13 | 29 | GetInput, GetPressed, IsSet, Fire, StartReload |
 
 
-#### class PlayerAnimationController
+#### class PlayerCrouch
+
+> MECÁNICA EXTRA: Agacharse (Crouch). El jugador mantiene presionado CTRL para agacharse: - Su escala Y se reduce al 50 % → hitbox más pequeño. - Puede moverse mientras está agachado. - El estado IsCrouching está [Networked] → todos los clientes ven la animación. El input se lee en FixedUpdateNetwork (server-authoritative) para evitar cualquier desfase entre host y cliente.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerAnimationController.cs` · líneas 8-89 (82)
+- Archivo: `PlayerCrouch.cs` · líneas 18-134 (117)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Usa: `PlayerMovement`, `PlayerHealth`, `PlayerShooting`, `VFXManager`
+- Usa: `PlayerEventBus`, `GameConstants`, `NetworkInputData`, `InputButton`, `RedesLog`
 
 **Campos:**
 
-- private Transform **_visuals** `[Header][SerializeField]`
-- private AudioClip **_shootSound** `[SerializeField]`
-- private PlayerMovement **_movement**
-- private PlayerHealth **_health**
-- private PlayerShooting **_shooting**
-- private int **_lastShootCount**
-- private float **_bobTimer**
-- private Vector3 **_originalScale** (inicializado)
-- private float **_recoilTimer**
+- private Vector3 **_standingScale** (inicializado)
+- private Vector3 **_crouchingScale**
+- private CharacterController **_controller**
+- private PlayerEventBus **_eventBus**
+- private float **_standingHeight**
+- private float **_crouchingHeight**
+- private Vector3 **_standingCenter**
+- private Vector3 **_crouchingCenter**
+- private const float **SCALE_SPEED** (inicializado)
+- private float **_currentAlpha** (inicializado)
+
+**Propiedades:**
+
+- public NetworkBool **IsCrouching** `{ get; set; }`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 1 | 3 | 6 | GetComponent |
-| public override void Render() | 12 | 34 | 58 | Lerp, Euler, Sin, PlayClipAtPoint, Find, PlayMuzzleFlash |
+| private void Awake() | 2 | 10 | 18 | GetComponent |
+| public override void FixedUpdateNetwork() | 10 | 16 | 26 | GetInput, IsSet, Info |
+| public override void Render() | 3 | 5 | 12 | Lerp, MoveTowards, SetVisualsAlpha |
+| private void SetVisualsAlpha(float alpha) | 5 | 16 | 22 | GetComponentsInChildren |
+| private void OnCrouchChangedRender() | 3 | 4 | 8 | Log |
 
 
 #### class PlayerEventBus
@@ -22703,29 +23867,35 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerEventBus.cs` · líneas 10-60 (51)
+- Archivo: `PlayerEventBus.cs` · líneas 10-84 (75)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Atributos: `[DisallowMultipleComponent]`
 
 **Campos:**
 
 - public Action<int, GameObject> **OnTookDamage**
-- public Action **OnShoot**
+- public Action<float> **OnShoot**
 - public Action<Vector3> **OnMove**
 - public Action **OnSpawned**
-- public Action **OnDied**
+- public Action<Vector3> **OnDied**
 - public Action **OnReload**
+- public Action<int, int> **OnAmmoChanged**
+- public Action<bool> **OnCrouch**
+- public Action<Vector3, Vector3> **OnTeleport**
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | public void TriggerTookDamage(int attackerId, GameObject bulletObj) | 1 | 1 | 4 |  |
-| public void TriggerShoot() | 1 | 1 | 4 |  |
+| public void TriggerShoot(float animSpeed = 1f) | 1 | 1 | 4 |  |
 | public void TriggerMove(Vector3 velocity) | 1 | 1 | 4 |  |
 | public void TriggerSpawned() | 1 | 1 | 4 |  |
-| public void TriggerDied() | 1 | 1 | 4 |  |
+| public void TriggerDied(Vector3 hitDirection = default) | 1 | 1 | 4 |  |
 | public void TriggerReload() | 1 | 1 | 4 |  |
+| public void TriggerAmmoChanged(int currentAmmo, int maxMagazine) | 1 | 1 | 4 |  |
+| public void TriggerCrouch(bool isCrouching) | 1 | 1 | 4 |  |
+| public void TriggerTeleport(Vector3 origin, Vector3 destination) | 1 | 1 | 4 |  |
 
 
 #### class PlayerHealth
@@ -22734,10 +23904,10 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerHealth.cs` · líneas 19-151 (133)
+- Archivo: `PlayerHealth.cs` · líneas 19-214 (196)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Implementa: `IDamageable`
-- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`
+- Usa: `GameConstants`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `VFXManager`, `NetworkPlayer`
 
 **Eventos:**
 
@@ -22754,6 +23924,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 **Propiedades:**
 
 - public int **CurrentHealth** `{ get; set; }`
+- public Vector3 **LastHitDirection** `{ get; set; }`
 - public bool **IsAlive** `=> expr`
 
 **Métodos:**
@@ -22761,9 +23932,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
 | private void Awake() | 1 | 1 | 4 | GetComponent |
-| private void OnHealthChangedRender() | 5 | 16 | 26 | Info, PlayClipAtPoint, PlayHit, Error |
-| public override void Spawned() | 3 | 11 | 18 | Info, Error |
-| public void TakeDamage(int amount, PlayerRef attacker) | 9 | 36 | 62 | Info, TriggerTookDamage, Max, TriggerPlayerTookDamage, Error, TriggerDied, TriggerPlayerDied |
+| private void OnHealthChangedRender() | 7 | 22 | 32 | Info, PlayClipAtPoint, LookRotation, PlayHit, Error |
+| public override void Spawned() | 3 | 12 | 19 | Info, Error |
+| public void TakeDamage(int amount, PlayerRef attacker) | 22 | 72 | 116 | Info, TriggerTookDamage, GetPlayerObject, FindObjectsByType, Max, GetComponent, Log, RpcNotifyHitMarker… |
 
 
 #### class PlayerMovement
@@ -22772,7 +23943,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerMovement.cs` · líneas 13-60 (48)
+- Archivo: `PlayerMovement.cs` · líneas 13-103 (91)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
 - Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`
 
@@ -22780,6 +23951,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - private float **_moveSpeed** (inicializado) `[Header][SerializeField]`
 - private Rigidbody **_body** `[SerializeField]`
+- private CharacterController **_controller**
 - private PlayerEventBus **_eventBus**
 
 **Propiedades:**
@@ -22790,8 +23962,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 1 | 1 | 4 | GetComponent |
-| public override void FixedUpdateNetwork() | 8 | 19 | 31 | GetInput, TriggerMove, LookRotation |
+| private void Awake() | 2 | 5 | 12 | GetComponent |
+| public override void Spawned() | 2 | 3 | 9 |  |
+| public override void FixedUpdateNetwork() | 12 | 34 | 55 | GetInput, Move, TriggerMove, LookRotation |
 
 
 #### class PlayerShooting
@@ -22800,9 +23973,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `PlayerShooting.cs` · líneas 13-65 (53)
+- Archivo: `PlayerShooting.cs` · líneas 13-117 (105)
 - Hereda de: `NetworkBehaviour` (profundidad 0)
-- Usa: `AmmoSystem`, `GameEventBus`, `GameConstants`, `PlayerEventBus`, `Projectile`, `RedesLog`
+- Usa: `AmmoSystem`, `GameEventBus`, `PlayerEventBus`, `RedesLog`, `Projectile`
 
 **Campos:**
 
@@ -22810,7 +23983,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private NetworkObject **_projectilePrefab** `[SerializeField]`
 - private AmmoSystem **_ammo** `[SerializeField]`
 - private GameEventBus **_eventBus** `[SerializeField]`
-- private int **_damage** (inicializado) `[Header][SerializeField]`
 - private PlayerEventBus **_playerEventBus**
 
 **Propiedades:**
@@ -22823,12 +23995,360 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
+| private void OnShootCountChanged() | 2 | 4 | 8 | Log, TriggerShoot |
 | private void Awake() | 1 | 1 | 4 | GetComponent |
-| public void Fire() | 9 | 21 | 28 | TryConsume, Spawn, GetComponent, CreateFromSeconds, TriggerPlayerShooting, TriggerShoot, Info |
+| public void Fire() | 15 | 43 | 71 | Info, TryConsume, StartReload, Error, Spawn, GetComponent, CreateFromSeconds, TriggerPlayerShooting… |
 
 - `Fire`: Called from the player's input tick when the fire button is pressed.
 
+#### class PlayerTeleport
+
+> MECÁNICA EXTRA: Teletransporte (Teleport). Al presionar SPACE (y si el cooldown expiró), el jugador se teletransporta a una posición aleatoria dentro de la arena (radio TELEPORT_RANGE). - [Networked] TickTimer TeleportCooldown → cooldown sincronizado en red. - [Networked] Vector3 LastTeleportOrigin / Destination → para VFX en clientes. - OnChangedRender notifica a la vista para mostrar el efecto visual. - Logs con PlayerRef para identificar al actor en todos los clientes.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerTeleport.cs` · líneas 18-153 (136)
+- Hereda de: `NetworkBehaviour` (profundidad 0)
+- Usa: `GameConstants`, `PlayerEventBus`, `NetworkInputData`, `InputButton`, `RedesLog`, `VFXManager`
+
+**Campos:**
+
+- private float **_range** (inicializado) `[Header][SerializeField]`
+- private float **_cooldown** (inicializado) `[SerializeField]`
+- private GameObject **_teleportOriginVfxPrefab** `[Header][SerializeField]`
+- private GameObject **_teleportDestVfxPrefab** `[SerializeField]`
+- private PlayerEventBus **_eventBus**
+
+**Propiedades:**
+
+- public TickTimer **TeleportCooldown** `{ get; set; }`
+- public Vector3 **LastTeleportDest** `{ get; set; }`
+- public Vector3 **LastTeleportOrigin** `{ get; set; }`
+- public float **CooldownProgress** `{ get; }`  — Progreso del cooldown entre 0 (recargando) y 1 (listo).
+- public bool **IsReady** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| public override void FixedUpdateNetwork() | 6 | 10 | 15 | GetInput, IsSet, ExpiredOrNotRunning, ExecuteTeleport |
+| private void ExecuteTeleport() | 5 | 24 | 44 | GetInput, GetComponent, CreateFromSeconds, Info |
+| private void OnTeleportChangedRender() | 6 | 15 | 32 | Info, Instantiate, PlaySpark |
+
+
+### Namespace `Redes.Test`
+
+#### class CameraFollow
+
+> Simple script to make the camera follow a target horizontally without copying its rotation (crucial for top-down mouse look).
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `CameraFollow.cs` · líneas 9-21 (13)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private Transform **_target** `[SerializeField]`
+- private float **_height** (inicializado) `[SerializeField]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void LateUpdate() | 2 | 3 | 7 |  |
+
+
+#### class DummyEnemy
+
+> Offline dummy enemy for the test scene. Takes damage, shows health, dies with Ragdoll, and respawns. Completely independent of Fusion networking.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DummyEnemy.cs` · líneas 10-269 (260)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `EntityDisplayView`, `OfflineBullet`, `RagdollController`
+
+**Campos:**
+
+- private int **_maxHealth** (inicializado) `[Header][SerializeField]`
+- private float **_respawnDelay** (inicializado) `[SerializeField]`
+- private Renderer **_bodyRenderer** `[Header][SerializeField]`
+- private Color **_aliveColor** (inicializado) `[SerializeField]`
+- private Color **_deadColor** (inicializado) `[SerializeField]`
+- private Views.EntityDisplayView **_displayView** `[Header][SerializeField]`
+- private bool **_autoShoot** (inicializado) `[Header][SerializeField]`
+- private float **_shootInterval** (inicializado) `[SerializeField]`
+- private GameObject **_bulletPrefab** `[SerializeField]`
+- private Transform **_muzzle** `[SerializeField]`
+- private int **_shootDamage** (inicializado) `[SerializeField]`
+- private float **_shootSpeed** (inicializado) `[SerializeField]`
+- private AudioSource **_audioSource** `[Header][SerializeField]`
+- private AudioClip **_shootSound** `[SerializeField]`
+- private AudioClip **_hitSound** `[SerializeField]`
+- private AudioClip **_deathSound** `[SerializeField]`
+- public System.Action<int> **OnDummyKilled**
+- private int **_totalKills**
+- private float **_respawnTimer**
+- private bool **_isDead**
+- private Coroutine **_hitAnimCoroutine**
+- private float **_shootTimer**
+- private Vector3 **_lastHitDirection**
+
+**Propiedades:**
+
+- public int **CurrentHealth** `{ get; set; }`
+- public bool **IsAlive** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 1 | 4 |  |
+| private void Start() | 2 | 6 | 10 | ApplyColor, SetNickname, SetHealth, Log |
+| private void Update() | 7 | 12 | 17 | Respawn, Shoot |
+| private void Shoot() | 4 | 8 | 11 | Instantiate, AddComponent, PlaySound3D |
+| private void LateUpdate() | 7 | 13 | 21 | WorldToScreenPoint, SetVisible, SetPosition |
+| public void TakeDamage(int amount, Vector3 hitDirection = default) | 5 | 17 | 27 | Max, SetHealth, Log, PlaySound3D, Die, StopCoroutine, StartCoroutine, HitAnimation |
+| private System.Collections.IEnumerator HitAnimation() | 5 | 25 | 42 | Lerp, Sin, GetComponentInChildren, ApplyColor |
+| private void Die() | 3 | 18 | 30 | StopCoroutine, Log, PlaySound3D, GetComponent, SetRagdollActive, Euler, ApplyColor |
+| private void Respawn() | 3 | 15 | 25 | GetComponent, ResetBones, ApplyColor, SetVisible, SetHealth, Log |
+| private void ApplyColor() | 4 | 5 | 10 | GetComponentInChildren, Lerp |
+| private void PlaySound3D(AudioClip clip, float volume = 1f) | 3 | 7 | 12 | PlayOneShot, PlayClipAtPoint |
+
+
+#### class OfflineBullet
+
+> Component added at runtime in the offline test scene to animate the bullet prefab's movement and handle offline trigger hits on DummyEnemy.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `OfflineBullet.cs` · líneas 9-61 (53)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `OfflinePlayerTester`, `DummyEnemy`, `CustomCursorView`
+
+**Campos:**
+
+- public float **Speed** (inicializado)
+- public int **Damage** (inicializado)
+- public float **LifeTime** (inicializado)
+- public bool **IsEnemyBullet** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Start() | 1 | 1 | 4 | Destroy |
+| private void Update() | 1 | 1 | 4 |  |
+| private void OnTriggerEnter(Collider other) | 6 | 19 | 34 | GetComponentInParent, TakeDamage, Destroy, FindAnyObjectByType, TriggerHit |
+
+
+#### class OfflinePlayerTester
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `OfflinePlayerTester.cs` · líneas 19-440 (422)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerInputMode`, `PlayerEventBus`, `DummyEnemy`, `EntityDisplayView`, `EventBus`, `LocalNetworkMock`, `OfflineBullet`
+
+**Campos:**
+
+- private PlayerInputMode **_inputMode** (inicializado) `[Header][SerializeField]`
+- private float **_moveSpeed** (inicializado) `[Header][SerializeField]`
+- private int **_damage** (inicializado) `[Header][SerializeField]`
+- private float **_fireRate** (inicializado) `[SerializeField]`
+- private Transform **_muzzle** `[SerializeField]`
+- private int **_maxAmmo** (inicializado) `[Header][SerializeField]`
+- private float **_reloadDuration** (inicializado) `[SerializeField]`
+- private PlayerEventBus **_eventBus** `[Header][SerializeField]`
+- private DummyEnemy **_target** `[SerializeField]`
+- private AudioClip **_shootSound** `[SerializeField]`
+- private AudioClip **_reloadSound** `[SerializeField]`
+- private AudioClip **_deathSound** `[SerializeField]`
+- private GameObject **_bulletPrefab** `[SerializeField]`
+- private Text **_debugText** `[SerializeField]`
+- private Views.EntityDisplayView **_displayView** `[SerializeField]`
+- private int **_maxHealth** (inicializado) `[Header][SerializeField]`
+- private float **_fireCooldown**
+- private int **_shotsFired**
+- private Vector3 **_lastPosition**
+- private int **_currentAmmo**
+- private bool **_isReloading**
+- private float **_reloadTimer**
+- private float **_shootClipDuration** (inicializado)
+- private Coroutine **_recoilCoroutine**
+- private int **_currentHealth**
+- private bool **_isDead**
+- private Vector3 **_lastHitDirection**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Start() | 15 | 37 | 55 | SetNickname, SetHealth, Find, GetComponent, Contains, ToLower, Log, Play |
+| private void Update() | 2 | 8 | 11 | HandleMovement, HandleShooting, HandleReloadInput, HandleReloadTimer, HandleDebugKey, UpdateDebugUI |
+| private void LateUpdate() | 6 | 12 | 19 | WorldToScreenPoint, SetVisible, SetPosition, SetReloadProgress |
+| public void TakeDamage(int amount, Vector3 hitDirection = default) | 4 | 11 | 17 | Max, SetHealth, Log, Die |
+| private void Die() | 1 | 6 | 9 | Log, TriggerPlayerDeath, StartCoroutine, RespawnCoroutine |
+| private System.Collections.IEnumerator RespawnCoroutine() | 2 | 13 | 21 | SetVisible, SetHealth, TriggerRespawnExecuted, Log |
+| private void HandleMovement() | 14 | 43 | 65 | GetAxisRaw, GetKey, ScreenPointToRay, Raycast, GetPoint, LookRotation |
+| private void HandleShooting() | 6 | 17 | 30 | GetMouseButton, GetKey, Shoot, StartReload |
+| private void Shoot() | 12 | 33 | 55 | Log, ToString, StopCoroutine, StartCoroutine, RecoilCoroutine, ScreenPointToRay, Raycast, GetPoint… |
+| private System.Collections.IEnumerator RecoilCoroutine() | 3 | 16 | 24 | Find, Sin |
+| private void HandleReloadInput() | 3 | 3 | 7 | GetKeyDown, StartReload |
+| private void StartReload() | 3 | 6 | 8 | Log |
+| private void HandleReloadTimer() | 3 | 9 | 14 | Log |
+| private void HandleDebugKey() | 5 | 9 | 14 | GetKeyDown, Log, ToString |
+| private void UpdateDebugUI() | 6 | 4 | 15 |  |
+
+
+#### enum PlayerInputMode
+
+> Offline player controller for the test scene. Directly drives movement, shooting and animates the player WITHOUT Fusion networking — purely for local input/animation/VFX testing. Handles death with ragdoll activation via EventBus.
+
+- Accesibilidad: `public`
+- Archivo: `OfflinePlayerTester.cs` · líneas 13-17 (5)
+
+**Valores del enum:**
+
+- `WASD_Mouse`
+- `Arrows_Space`
+
+#### class TestSceneManager
+
+> Manages the test scene HUD: kill counter, debug panel, controls legend.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `TestSceneManager.cs` · líneas 9-86 (78)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `DummyEnemy`
+
+**Campos:**
+
+- private Text **_killCounterText** `[Header][SerializeField]`
+- private Text **_controlsLegendText** `[SerializeField]`
+- private Text **_eventLog** `[SerializeField]`
+- private DummyEnemy **_dummy** `[Header][SerializeField]`
+- private int **_kills**
+- private string **_logBuffer** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Start() | 3 | 10 | 30 | FindObjectsByType, UpdateKillUI, Log |
+| private void OnDestroy() | 1 | 1 | 4 |  |
+| private void HandleKill(int totalKills) | 1 | 3 | 6 | UpdateKillUI, Log |
+| private void UpdateKillUI() | 2 | 2 | 5 |  |
+| private void OnLogReceived(string condition, string stackTrace, LogType type) | 6 | 8 | 15 | Contains, Substring |
+
+
 ### Namespace `Redes.Views`
+
+#### class CustomCursorView
+
+> Custom Cursor View following MVC/MVP pattern. Handles custom cursor graphics, scaling/rebound animations on shoot, target/hit color changes, radial loading indicator on reload, and ensures the custom cursor is only active when the mouse is within the game window/screen.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `CustomCursorView.cs` · líneas 15-373 (359)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerEventBus`, `GameEventBus`, `NetworkPlayer`, `OfflinePlayerTester`, `GameFlowController`, `GameStateModel`, `GamePhase`
+
+**Campos:**
+
+- private PlayerEventBus **_eventBus** `[Header][SerializeField]`
+- private GameEventBus **_globalEventBus** `[SerializeField]`
+- private Sprite **_cursorBase** `[Header][SerializeField]`
+- private Sprite **_cursorShoot** `[SerializeField]`
+- private Sprite **_cursorHit** `[SerializeField]`
+- private Sprite **_cursorReload** `[SerializeField]`
+- public float **CursorSize** (inicializado) `[Header]`
+- private Canvas **_canvas**
+- private RectTransform **_cursorRect**
+- private Image **_cursorImage**
+- private Image **_reloadProgressImage**
+- private float **_reloadTimer**
+- private float **_reloadDuration** (inicializado)
+- private bool **_isReloading**
+- private float **_shootReboundScale** (inicializado)
+- private float **_hitScale** (inicializado)
+- private bool **_isHitting**
+- private float **_hitTimer**
+- private Sprite **_lastSprite**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 3 | 28 | 46 | GetComponentInParent, SetParent, GetComponent, AddComponent, SetActive |
+| private void OnEnable() | 2 | 6 | 11 | TryBindLocalPlayer |
+| private void OnDisable() | 2 | 6 | 11 | UnbindEventBus |
+| private void HandleGlobalPlayerTookDamage(PlayerRef victim, int newHealth, PlayerRef attacker) | 6 | 6 | 11 | GetComponent, TriggerHit |
+| private void TryBindLocalPlayer() | 9 | 22 | 34 | FindObjectsByType, GetComponent, FindFirstObjectByType |
+| private void UnbindEventBus() | 2 | 8 | 12 |  |
+| public void TriggerHit() | 1 | 4 | 7 | Log |
+| private void HandleShoot(float speed) | 2 | 4 | 8 | Log |
+| private void HandleReload() | 2 | 6 | 10 | SetActive |
+| private void HandleAmmoChanged(int currentAmmo, int maxAmmo) | 4 | 6 | 12 | SetActive |
+| private void HandleTookDamage(int attackerId, GameObject bullet) | 1 | 3 | 7 |  |
+| private void HandleTeleport(Vector3 origin, Vector3 destination) | 1 | 1 | 5 |  |
+| private void Update() | 26 | 86 | 141 | TryBindLocalPlayer, FindFirstObjectByType, GetField, GetType, GetValue, GetComponent, ScreenPointToLocalPointInRectangle, SetActive… |
+
+
+#### class DeathScreenController
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DeathScreenController.cs` · líneas 6-97 (92)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `DeathScreenView`, `PlayerEventBus`, `EventBus`, `LocalNetworkMock`
+
+**Campos:**
+
+- private DeathScreenView **_view** `[Header][SerializeField]`
+- private PlayerEventBus **_playerEventBus** `[SerializeField]`
+- private float **_deathDuration** (inicializado)
+- private float **_elapsed**
+- private bool **_isDead**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void OnEnable() | 2 | 6 | 11 |  |
+| private void OnDisable() | 2 | 6 | 11 |  |
+| private void HandleDied(Vector3 hitDirection) | 1 | 1 | 4 | StartDeathCountdown |
+| private void HandleSpawned() | 1 | 1 | 4 | StopDeathCountdown |
+| private void HandleGlobalDied(int actorId, int killerId, string cause) | 2 | 3 | 7 | StartDeathCountdown |
+| private void HandleGlobalSpawned() | 1 | 1 | 4 | StopDeathCountdown |
+| private void StartDeathCountdown(float duration) | 2 | 7 | 11 | SetVisible, UpdateProgress |
+| private void StopDeathCountdown() | 2 | 4 | 8 | SetVisible |
+| private void Update() | 3 | 8 | 13 | Clamp01, Max, UpdateProgress |
+
+
+#### class DeathScreenView
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `DeathScreenView.cs` · líneas 6-32 (27)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private GameObject **_panel** `[Header][SerializeField]`
+- private Image **_radialCircle** `[SerializeField]`
+- private Text **_countdownText** `[SerializeField]`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void SetVisible(bool visible) | 2 | 3 | 7 | SetActive |
+| public void UpdateProgress(float progress, float secondsLeft) | 3 | 6 | 11 | ToString |
+
 
 #### class EntityDisplayView
 
@@ -22836,13 +24356,17 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `EntityDisplayView.cs` · líneas 10-51 (42)
+- Archivo: `EntityDisplayView.cs` · líneas 10-73 (64)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 
 **Campos:**
 
 - private Slider **_healthSlider** `[SerializeField]`
 - private Text **_nicknameText** `[SerializeField]`
+- private Image **_reloadFillImage** `[SerializeField]`
+- private GameObject **_reloadArea** `[SerializeField]`
+- public float **YOffset** (inicializado) `[Header]`
+- public float **XOffset** (inicializado)
 
 **Métodos:**
 
@@ -22852,15 +24376,16 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | public void SetNickname(string nickname) | 2 | 3 | 7 |  |
 | public void SetPosition(Vector2 screenPos) | 2 | 6 | 12 |  |
 | public void SetVisible(bool visible) | 2 | 3 | 7 | SetActive |
+| public void SetReloadProgress(float progress, bool isReloading) | 5 | 8 | 15 | SetActive, Clamp01 |
 
 
 #### class GameHudView
 
-> MVC - VIEW for the in-match HUD (local player health + ammo). ONLY draws UI. Binds to PlayerModel via PlayerController. Uses legacy UnityEngine.UI.Text.
+> MVC - VIEW for the in-match HUD (local player health + ammo + teleport cooldown). ONLY draws UI. Binds to PlayerModel via PlayerController. Uses legacy UnityEngine.UI.Text.
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `GameHudView.cs` · líneas 11-49 (39)
+- Archivo: `GameHudView.cs` · líneas 11-91 (81)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 
 **Campos:**
@@ -22869,6 +24394,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private Text **_ammoText** `[SerializeField]`
 - private Text **_stateText** `[SerializeField]`
 - private Slider **_reloadSlider** `[SerializeField]`
+- private Image **_teleportRadial** `[Header][SerializeField]`
+- private Text **_teleportText** `[SerializeField]`
+- private Text **_crouchText** `[Header][SerializeField]`
 
 **Métodos:**
 
@@ -22878,8 +24406,12 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | public void ShowAmmo(int ammo, int magazineSize) | 2 | 2 | 4 |  |
 | public void ShowState(string state) | 2 | 2 | 4 |  |
 | public void ShowReloadProgress(float progress) | 2 | 4 | 10 | Clamp01, SetActive |
+| public void ShowTeleportCooldown(float progress) | 5 | 8 | 20 | Clamp01, Lerp, CeilToInt |
+| public void ShowCrouch(bool isCrouching) | 2 | 4 | 8 | SetActive |
 | public void SetVisible(bool visible) | 1 | 1 | 4 | SetActive |
 
+- `ShowTeleportCooldown`: Actualiza el radial de cooldown del teleport. progress = 0 → recargando, 1 → listo.
+- `ShowCrouch`: Muestra/oculta indicador visual de crouch.
 
 #### class LobbyView
 
@@ -22887,9 +24419,9 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `LobbyView.cs` · líneas 12-183 (172)
+- Archivo: `LobbyView.cs` · líneas 12-264 (253)
 - Hereda de: `MonoBehaviour` (profundidad 0)
-- Usa: `GameConstants`, `RedesLog`
+- Usa: `PlaySoundOnButtonClick`, `GameConstants`, `RedesLog`
 
 **Campos:**
 
@@ -22898,8 +24430,8 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 - private InputField **_usernameInput** `[Header][SerializeField]`
 - private Transform **_roomListContainer** `[SerializeField]`
 - private GameObject **_roomButtonPrefab** `[SerializeField]`
+- private Font **_buttonFont** `[SerializeField]`
 - private Button **_hostButton** `[Header][SerializeField]`
-- private Button **_joinButton** `[SerializeField]`
 - private Button **_ramboButton** `[Header][SerializeField]`
 - private Button **_t600Button** `[SerializeField]`
 - private Button **_lionButton** `[SerializeField]`
@@ -22907,29 +24439,171 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 **Propiedades:**
 
 - public Button **HostButton** `=> expr`
-- public Button **JoinButton** `=> expr`
 - public string **Username** `=> expr`
 
 **Métodos:**
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Start() | 4 | 6 | 6 | AddListener, SetUsername |
-| private void SetUsername(string name) | 2 | 3 | 7 |  |
+| private void Start() | 1 | 0 | 4 |  |
+| public void ApplyButtonStyle(Button button) | 14 | 71 | 89 | GetComponent, AddComponent, Initialize, GetComponentsInChildren |
+| public void SetUsername(string name) | 2 | 3 | 7 |  |
 | public void ShowStatus(string message) | 2 | 2 | 4 |  |
 | public void ShowPlayerCount(int current) | 2 | 2 | 5 |  |
 | public void ShowButtons() | 1 | 3 | 7 | SetButtons, SetJoinButtonEnabled, ShowStatus |
-| public void SetJoinButtonEnabled(bool enabled) | 3 | 4 | 7 | Info |
+| public void SetJoinButtonEnabled(bool enabled) | 2 | 1 | 6 | Info |
 | public void HideButtons() | 2 | 3 | 5 | SetButtons, SetActive |
-| public void PopulateRooms(System.Collections.Generic.List&lt;Fusion.SessionInfo&gt; sessions, System.Action&lt;string&gt; onJoinClicked) | 8 | 46 | 62 | SetActive, Destroy, SetParent, AddComponent, GetBuiltinResource, SetJoinButtonEnabled, GetComponent, AddListener |
+| public void PopulateRooms(System.Collections.Generic.List&lt;Fusion.SessionInfo&gt; sessions, System.Action&lt;string&gt; onJoinClicked) | 10 | 45 | 62 | SetActive, Destroy, SetParent, AddComponent, GetBuiltinResource, SetJoinButtonEnabled, GetComponent, AddListener… |
 | public void SetVisible(bool visible) | 1 | 2 | 5 | Info, SetActive |
 | public void ShowError(string message) | 1 | 4 | 8 | SetButtons, ShowStatus, Error, Invoke, nameof |
 | private void RestoreButtons() | 1 | 1 | 4 | ShowButtons |
-| private void SetButtons(bool host, bool join) | 3 | 4 | 5 | SetActive |
+| private void SetButtons(bool host, bool join) | 2 | 2 | 4 | SetActive |
 
 - `ShowButtons`: Muestra solo los botones de selección (estado inicial).
-- `SetJoinButtonEnabled`: Habilita o deshabilita el botón "Unirse a Sala". Llamado por GameFlowController cuando OnRoomAvailabilityChanged llega.
 - `HideButtons`: Oculta botones mientras se conecta / espera.
+
+#### class PlayerAmmoView
+
+> UI View for ammunition. Listens to PlayerEventBus for ammo state and animates when shooting/reloading/empty. Completely follows the MVC pattern.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerAmmoView.cs` · líneas 12-173 (162)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerEventBus`
+
+**Campos:**
+
+- private PlayerEventBus **_eventBus** `[SerializeField]`
+- private Text **_ammoText** `[SerializeField]`
+- private Slider **_reloadSlider** `[SerializeField]`
+- private Vector3 **_originalScale** (inicializado)
+- private Coroutine **_animationCoroutine**
+- private Color **_normalColor** (inicializado)
+- private Color **_emptyColor** (inicializado)
+- private RectTransform **_rectTransform**
+- private float **_reloadTimer**
+- private float **_reloadDuration** (inicializado)
+- private bool **_isReloading**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 3 | 10 | 15 | GetComponent, SetActive |
+| private void OnEnable() | 2 | 4 | 8 |  |
+| private void OnDisable() | 2 | 4 | 8 |  |
+| private void Update() | 5 | 13 | 21 | Clamp01, SetActive |
+| private void HandleAmmoChanged(int currentAmmo, int maxAmmo) | 5 | 13 | 25 | SetActive, TriggerBounce |
+| private void HandleReload() | 3 | 11 | 17 | SetActive, TriggerBounce |
+| private void TriggerBounce(float targetScale, float duration, Color color, bool shake = false) | 2 | 4 | 8 | StopCoroutine, StartCoroutine, BounceCoroutine |
+| private System.Collections.IEnumerator BounceCoroutine(float targetScale, float duration, Color color, bool shake) | 7 | 22 | 35 | Lerp, Sin |
+
+
+#### class PlayerAnimationView
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlayerAnimationView.cs` · líneas 7-455 (449)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerEventBus`, `NetworkPlayer`, `PlayerMovement`, `PlayerShooting`, `PlayerHealth`, `AmmoSystem`, `RedesLog`, `RagdollController`, `VFXManager`
+
+**Campos:**
+
+- private Animator **_animator** `[Header][SerializeField]`
+- private PlayerEventBus **_eventBus** `[SerializeField]`
+- private AudioSource **_audioSource** `[SerializeField]`
+- private AudioClip[] **_shootSounds** `[Header][SerializeField]`
+- private AudioClip[] **_ouchSounds** `[Header][SerializeField]`
+- private AudioClip **_reloadSound** `[Header][SerializeField]`
+- private AudioClip **_deathSound** `[SerializeField]`
+- private AudioClip **_footstepSound** `[SerializeField]`
+- private int **_cachedPlayerId** (inicializado)
+- private float **_footstepInterval** (inicializado) `[Header][SerializeField]`
+- private float **_footstepTimer**
+- private float **_currentMoveSpeed**
+- private Redes.Player.NetworkPlayer **_netPlayer**
+- private PlayerMovement **_movement**
+- private PlayerShooting **_shooting**
+- private PlayerHealth **_health**
+- private AmmoSystem **_ammo**
+- private bool **_isNetworked**
+- private bool **_wasMoving**
+- private int **_lastShootCount**
+- private bool **_lastIsReloading**
+- private int **_lastHealth** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 5 | 8 | GetComponent |
+| private void Start() | 11 | 10 | 24 |  |
+| private void OnEnable() | 2 | 7 | 11 |  |
+| private void OnDisable() | 2 | 7 | 11 |  |
+| private void Update() | 2 | 5 | 11 | UpdateNetworkedState, UpdateOfflineFootsteps |
+| private void UpdateNetworkedState() | 35 | 95 | 149 | SetFloat, Dot, PlaySound3D, Info, SetTrigger, SelectShootClip, PlayMuzzleFlashEffect, SetBool… |
+| private void UpdateOfflineFootsteps() | 5 | 10 | 17 | GetKey, PlaySound3D |
+| private void HandleMove(Vector3 velocity) | 7 | 16 | 25 | SetFloat, Dot, GetKey |
+| private void HandleShoot(float animSpeed) | 4 | 11 | 18 | SetFloat, SetTrigger, PlaySound3D, SelectShootClip, PlayMuzzleFlashEffect |
+| private void HandleReload() | 3 | 6 | 10 | PlaySound3D |
+| private void HandleDied(Vector3 hitDirection) | 5 | 13 | 22 | SetBool, PlaySound3D, GetComponentInParent, SetRagdollActive |
+| private void HandleSpawned() | 5 | 13 | 21 | SetBool, SetFloat, GetComponentInParent, ResetBones |
+| private AudioClip SelectShootClip(int playerId) | 4 | 6 | 8 |  |
+| private AudioClip SelectRandomOuchClip() | 3 | 3 | 5 | Range |
+| private void PlaySound3D(AudioClip clip, float volume = 1f) | 4 | 9 | 16 | Log, PlayOneShot, PlayClipAtPoint |
+| private void PlayMuzzleFlashEffect() | 6 | 15 | 25 | Find, PlayMuzzleFlash |
+
+- `SelectShootClip`: Selecciona el clip de disparo según el PlayerId del jugador (1-indexado).
+- `SelectRandomOuchClip`: Selecciona un clip de dolor/impacto de forma aleatoria.
+
+#### class PlaySoundOnButtonClick
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PlaySoundOnButtonClick.cs` · líneas 7-47 (41)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Atributos: `[RequireComponent]`
+
+**Campos:**
+
+- private AudioClip **_clickSound** `[SerializeField]`
+- private AudioMixerGroup **_sfxGroup** `[SerializeField]`
+- private Button **_button**
+
+**Propiedades:**
+
+- public AudioClip **ClickSound** `=> expr`
+- public AudioMixerGroup **SfxGroup** `=> expr`
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| public void Initialize(AudioClip clickSound, AudioMixerGroup sfxGroup) | 1 | 2 | 5 |  |
+| private void Awake() | 2 | 4 | 8 | GetComponent, AddListener |
+| private void PlayClickSound() | 2 | 10 | 14 | AddComponent, Play, Destroy |
+
+
+#### class PooledParticleHelper
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `PooledParticleHelper.cs` · líneas 5-29 (25)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+
+**Campos:**
+
+- private ParticleSystem **_particleSystem**
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void Awake() | 1 | 1 | 4 | GetComponent |
+| private void OnEnable() | 2 | 3 | 7 | Play |
+| private void Update() | 3 | 3 | 7 | SetActive |
+
 
 #### class ResultView
 
@@ -22937,7 +24611,7 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `ResultView.cs` · líneas 15-112 (98)
+- Archivo: `ResultView.cs` · líneas 15-110 (96)
 - Hereda de: `MonoBehaviour` (profundidad 0)
 - Usa: `MatchResult`, `RedesLog`
 
@@ -22960,13 +24634,58 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 3 | 13 | 18 | Trace, AddListener |
+| private void Awake() | 1 | 1 | 4 | Trace |
+| public void TriggerRetry() | 1 | 2 | 5 | Trace |
+| public void TriggerLobby() | 1 | 2 | 5 | Trace |
 | public void ShowResult(MatchResult result) | 10 | 22 | 26 | Trace, SetActive, Info |
 | public void ShowRematchStatus(string status) | 2 | 3 | 5 | Trace |
 | public void HideResult() | 5 | 10 | 9 | Trace, SetActive |
 | public void SetRetryButtonInteractable(bool interactable) | 2 | 4 | 6 | Trace |
 
 - `ShowResult`: Called by MatchController when the match ends. Shows text AND fires the Action.
+
+#### class TeleportCooldownView
+
+> MVC - VIEW del cooldown radial de teleporte. Principio de responsabilidad única (SRP): - Lee CooldownProgress del modelo (PlayerTeleport) en Update. - Escucha OnTeleport del PlayerEventBus para disparar la animación "uso". - NUNCA llama a lógica de negocio; solo dibuja la UI y escala el jugador. Colores: - Amarillo → listo (fillAmount == 1) - Azul → cargando (fillAmount < 1) - Verde → animación de uso (expand → shrink en < 0.5s) Escala del jugador: - Al teleportarse: shrink (0.3s) → grow (0.3s) en la transform del jugador.
+
+- Accesibilidad: `public`
+- Modificadores: `public`
+- Archivo: `TeleportCooldownView.cs` · líneas 24-212 (189)
+- Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PlayerTeleport`, `PlayerEventBus`, `GameConstants`
+
+**Campos:**
+
+- private Image **_radialImage** `[Header][SerializeField]`
+- private Text **_labelText** `[SerializeField]`
+- private PlayerTeleport **_teleport** `[Header][SerializeField]`
+- private PlayerEventBus **_eventBus** `[SerializeField]`
+- private static readonly Color **ColorReady** (inicializado)
+- private static readonly Color **ColorCharging** (inicializado)
+- private static readonly Color **ColorUsed** (inicializado)
+- private Coroutine **_useAnimCoroutine**
+- private Coroutine **_scaleAnimCoroutine**
+- private Transform **_playerTransform**
+- private Vector3 **_playerOriginalScale**
+- private const float **USE_ANIM_DURATION** (inicializado)
+- private const float **SCALE_SHRINK_TIME** (inicializado)
+- private const float **SCALE_GROW_TIME** (inicializado)
+
+**Métodos:**
+
+| Firma | Compl. | Sent. | Líneas | Llamadas |
+|-------|:-----:|:----:|:-----:|----------|
+| private void OnEnable() | 2 | 2 | 5 |  |
+| private void OnDisable() | 2 | 2 | 5 |  |
+| private void Update() | 7 | 18 | 30 | CeilToInt |
+| public void Bind(PlayerTeleport teleport, PlayerEventBus eventBus, Transform playerRoot) | 4 | 9 | 17 |  |
+| private void HandleTeleportUsed(Vector3 origin, Vector3 destination) | 4 | 8 | 15 | StopCoroutine, StartCoroutine, UseAnimCoroutine, PlayerScaleCoroutine |
+| private IEnumerator UseAnimCoroutine() | 4 | 26 | 36 | Lerp |
+| private IEnumerator PlayerScaleCoroutine() | 4 | 24 | 33 | Lerp |
+
+- `Bind`: Llamado por PlayerController cuando vincula este View al jugador local.
+- `UseAnimCoroutine`: Animación del radial: verde, expande de 1→1.3, luego vuelve a 1, en USE_ANIM_DURATION segundos.
+- `PlayerScaleCoroutine`: Animación de escala del jugador: se achica (~0.3x) al inicio y vuelve al 100% al llegar. Total: SCALE_SHRINK_TIME + SCALE_GROW_TIME ≈ 0.45s.
 
 #### class TerrainView
 
@@ -22990,13 +24709,22 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 - Accesibilidad: `public`
 - Modificadores: `public`
-- Archivo: `VFXManager.cs` · líneas 5-35 (31)
+- Archivo: `VFXManager.cs` · líneas 8-175 (168)
 - Hereda de: `MonoBehaviour` (profundidad 0)
+- Usa: `PooledParticleHelper`, `RedesLog`
 
 **Campos:**
 
 - private ParticleSystem **_hitVfxPrefab** `[SerializeField]`
 - private ParticleSystem **_muzzleFlashPrefab** `[SerializeField]`
+- private ParticleSystem **_sparkVfxPrefab** `[SerializeField]`
+- private AudioClip **_obstacleHitSound** `[Header][SerializeField]`
+- private AudioClip[] **_ouchSounds** `[SerializeField]`
+- private AudioMixerGroup **_sfxGroup** `[SerializeField]`
+- private List<ParticleSystem> **_muzzlePool** (inicializado)
+- private List<ParticleSystem> **_hitPool** (inicializado)
+- private List<ParticleSystem> **_sparkPool** (inicializado)
+- private const int **PoolSize** (inicializado)
 
 **Propiedades:**
 
@@ -23006,9 +24734,15 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | Firma | Compl. | Sent. | Líneas | Llamadas |
 |-------|:-----:|:----:|:-----:|----------|
-| private void Awake() | 2 | 3 | 5 | Destroy |
-| public void PlayHit(Vector3 position) | 2 | 4 | 8 | Instantiate, Destroy |
-| public void PlayMuzzleFlash(Transform muzzlePoint) | 2 | 4 | 8 | Instantiate, Destroy |
+| private void Awake() | 2 | 4 | 7 | Destroy, InitializePools |
+| private void InitializePools() | 7 | 27 | 43 | Clear, Instantiate, AddComponent, SetActive, Add |
+| private ParticleSystem GetFromPool(List&lt;ParticleSystem&gt; pool, ParticleSystem prefab) | 5 | 13 | 21 | Instantiate, AddComponent, SetActive, Add |
+| public void PlayHit(Vector3 position, Quaternion rotation) | 2 | 7 | 11 | Info, GetFromPool, SetActive |
+| public void PlayHit(Vector3 position) | 1 | 1 | 4 | PlayHit |
+| public void PlayMuzzleFlash(Transform muzzlePoint) | 2 | 7 | 11 | Info, GetFromPool, SetActive |
+| public void PlaySpark(Vector3 position, Quaternion rotation) | 3 | 11 | 18 | Info, GetFromPool, SetActive, PlayClipAtPointRouted |
+| public void PlayOuch(Vector3 position) | 4 | 7 | 10 | Range, Info, PlayClipAtPointRouted |
+| private void PlayClipAtPointRouted(AudioClip clip, Vector3 position, float volume) | 2 | 13 | 15 | AddComponent, Play, Destroy |
 
 
 ### Namespace `USP.Core`
@@ -23703,6 +25437,100 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 
 | ClassName | Namespace | Kind | File | Lines | Methods | Fields | Properties | BaseClass | Interfaces | Uses |
 |---|---|---|---|---|---|---|---|---|---|---|
+| ComponentPropertiesCopier |  | static class | ComponentPropertiesCopier.cs | 517 | 22 | 0 | 0 |  |  | SerializedProperty |
+| CentralizadorScripts |  | class | CentralizadorScripts.cs | 98 | 1 | 0 | 0 | EditorWindow |  | AssetDatabase; EditorUtility |
+| ILWeaverException | Fusion.CodeGen | class | Fusion.CodeGen.cs | 15 | 3 | 0 | 0 | Exception |  |  |
+| NetworkProjectConfigImporterEditor | Fusion.Editor | class | NetworkProjectConfigImporterEditor.cs | 131 | 6 | 5 | 2 | ScriptedImporterEditor |  | NetworkProjectConfigImporter; LogSettingsDrawer; FusionEditorGUI; EditorGUI; NetworkPrefabsInspector; EnabledScope; NetworkProjectConfigUtilities; EditorUtility |
+| NetworkProjectConfigImporter | Fusion.Editor | class | NetworkProjectConfigImporter.cs | 225 | 5 | 9 | 0 | ScriptedImporter |  | NetworkAssetSourceFactory; AssetDatabaseUtils; AssetDatabase; NetworkAssetSourceFactoryContext; FusionCustomDependency |
+| Postprocessor | Fusion.Editor | class | NetworkProjectConfigImporter.cs | 57 | 2 | 0 | 0 | AssetPostprocessor |  | AssetDatabase |
+| NetworkPrefabsInspector | Fusion.Editor | class | NetworkPrefabsInspector.cs | 287 | 4 | 1 | 0 | EditorWindow |  | Grid; EditorGUI; FusionGridItem; AssetDatabase; NetworkProjectConfigUtilities; LoadState; GridItem; Column; FusionEditorSkin; FusionEditorGUI; ContentColorScope; INetworkPrefabSourceDrawer; EditorUtility; FusionGrid |
+| LoadState | Fusion.Editor | enum | NetworkPrefabsInspector.cs | 6 | 0 | 4 | 0 |  |  |  |
+| InspectorTreeViewState | Fusion.Editor | class | NetworkPrefabsInspector.cs | 5 | 0 | 2 | 0 | TreeViewState |  |  |
+| GridItem | Fusion.Editor | class | NetworkPrefabsInspector.cs | 53 | 1 | 2 | 8 | FusionGridItem |  | AssetDatabase; NetworkProjectConfigUtilities; LoadState |
+| Grid | Fusion.Editor | class | NetworkPrefabsInspector.cs | 179 | 5 | 2 | 0 | FusionGrid |  | GridItem; Column; FusionEditorSkin; LoadState; FusionEditorGUI; ContentColorScope; EditorGUI; INetworkPrefabSourceDrawer; EditorUtility |
+| FusionWeaverTriggerImporter | Fusion.Editor | class | FusionWeaverTriggerImporter.cs | 57 | 1 | 4 | 0 | ScriptedImporter |  | NetworkProjectConfigImporter; ILWeaverUtils; FusionCustomDependency; EditorApplication; NetworkProjectConfigUtilities |
+| Postprocessor | Fusion.Editor | class | FusionWeaverTriggerImporter.cs | 10 | 1 | 0 | 0 | AssetPostprocessor |  | NetworkProjectConfigImporter |
+| FusionRunnerVisibilityControlsWindow | Fusion.Editor | class | FusionRunnerVisibilityControlsWindow.cs | 338 | 9 | 32 | 1 | EditorWindow |  | RunnerEnableVisibility; NetworkRunnerVisibilityExtensions; EditorGUIUtility; Labels; FusionEditorSkin; FusionStatistics; EditorGUI; DisabledGroupScope; Event; CanvasAnchor |
+| Labels | Fusion.Editor | static class | FusionRunnerVisibilityControlsWindow.cs | 36 | 0 | 23 | 0 |  |  | RunnerEnableVisibility; NetworkRunnerVisibilityExtensions |
+| FusionEditorSkin | Fusion.Editor | class | FusionEditorSkin.cs | 95 | 3 | 11 | 13 | ScriptableObject |  | EditorGUIUtility; LazyAsset; LazyGUIStyle |
+| FusionEditorConfigImporter | Fusion.Editor | class | FusionEditorConfigImporter.cs | 16 | 1 | 0 | 0 | ScriptedImporter |  |  |
+| GameLoopReferee | DebugSystem | class | GameLoopReferee.cs | 29 | 2 | 2 | 0 | MonoBehaviour |  | PlayerModel; PlayerController; SimpleEnemyAI; GameManager |
+| FloatingHealthBar | DebugSystem | class | FloatingHealthBar.cs | 145 | 5 | 3 | 0 | MonoBehaviour |  | PlayerModel |
+| EventBus | DebugSystem | static class | EventBus.cs | 478 | 137 | 0 | 0 |  |  |  |
+| EffectPool | DebugSystem | class | EffectPool.cs | 90 | 6 | 3 | 1 | MonoBehaviour |  | ImpactEffect; ProceduralAudioGenerator |
+| LogCategory | DebugSystem | enum | DebugLogger.cs | 18 | 0 | 15 | 0 |  |  |  |
+| LogEntry | DebugSystem | struct | DebugLogger.cs | 7 | 0 | 4 | 0 |  |  | LogCategory |
+| DebugLogger | DebugSystem | class | DebugLogger.cs | 236 | 5 | 2 | 1 | MonoBehaviour |  | LogEntry; LogCategory; EventBus |
+| BulletPool | DebugSystem | class | BulletPool.cs | 47 | 4 | 3 | 1 | MonoBehaviour |  | Bullet |
+| Bullet | DebugSystem | class | Bullet.cs | 59 | 4 | 8 | 0 | MonoBehaviour |  | EventBus; PlayerModel; EffectPool; BulletPool |
+| DetectableType | Game.Sensors | enum | IDetectable.cs | 8 | 0 | 5 | 0 |  |  |  |
+| IDetectable | Game.Sensors | interface | IDetectable.cs | 6 | 3 | 0 | 0 |  |  | DetectableType |
+| DetectableEntity | Game.Sensors | class | DetectableEntity.cs | 15 | 4 | 2 | 0 | MonoBehaviour | IDetectable | DetectableType |
+| SquadEventBus |  | static class | SquadEventBus.cs | 46 | 6 | 0 | 0 |  |  | UnitController |
+| WeaponControllerMVC | Game.MVC | class | WeaponControllerMVC.cs | 109 | 7 | 3 | 1 |  |  | WeaponModel; WeaponView; IWeaponInput |
+| UnityWeaponInput | Game.MVC | class | UnityWeaponInput.cs | 29 | 3 | 0 | 0 |  | IWeaponInput |  |
+| UnityCharacterInput | Game.MVC | class | UnityCharacterInput.cs | 36 | 6 | 0 | 0 |  | ICharacterInput |  |
+| IWeaponInput | Game.MVC | interface | IWeaponInput.cs | 6 | 3 | 0 | 0 |  |  |  |
+| IMovementHandler | Game.MVC | interface | IMovementHandler.cs | 7 | 4 | 0 | 0 |  |  |  |
+| IndicadorEnemigos |  | class | IndicadorEnemigos.cs | 62 | 2 | 6 | 0 | MonoBehaviour |  | GameManager |
+| Ideasypseudocodigos |  | class | Ideas y pseudocodigos.cs | 33 | 2 | 0 | 0 | MonoBehaviour |  |  |
+| GestorTexto |  | class | GestorTexto.cs | 86 | 5 | 4 | 0 | MonoBehaviour |  |  |
+| ConfiguracionGlobal |  | static class | ConfiguracionGlobal.cs | 19 | 0 | 10 | 0 |  |  |  |
+| CodigoDeInicio |  | class | CodigoDeInicio.cs | 16 | 2 | 0 | 0 | MonoBehaviour |  | BD_Audios |
+| Camara |  | class | Camara.cs | 19 | 2 | 3 | 0 | MonoBehaviour |  |  |
+| BD_Audios |  | class | BD_Audios.cs | 198 | 9 | 1 | 0 | MonoBehaviour |  | CoroutineHelper |
+| CoroutineHelper |  | class | BD_Audios.cs | 26 | 1 | 1 | 1 | MonoBehaviour |  |  |
+| GlobalLogicTests | DebugSystem.Tests | class | GlobalLogicTests.cs | 633 | 22 | 4 | 0 |  |  | DebugLogger; GameManager; EventBus; GameLoopReferee; BulletPool; Bullet; LocalNetworkMock; PlayerModel; PlayerView; PlayerController |
+| UnitController | Game.Squad | class | UnitController_Revival.cs | 246 | 12 | 6 | 0 | MonoBehaviour | IDaniable; IDetectable | RevivalBarView; DamagedState; GEN_Inputs; SeguirFormacionState; AtacarState; PerseguirState; RevivingState |
+| UnitController | Game.Squad | class | UnitController.cs | 474 | 30 | 16 | 1 | MonoBehaviour | IDaniable; IDetectable | UnitModel; UnitView; IA_P2_AgentIA; Disparador; GenericDetector; DetectableType; UnitTeam; Enemigo; EsperandoState; UnitSpecialization; SquadEventBus; AtacarState; PerseguirState; IndicatorType; IrADestinoState; IUnitState; LiderandoState; RevivingState; GlobalData; SeguirFormacionState; DamagedState |
+| UnitCommander |  | class | UnitCommander.cs | 283 | 10 | 3 | 0 | MonoBehaviour |  | GEN_Inputs; LeaderManager; UnitController; SeguirFormacionState; UnitTeam; IrADestinoState; EsperandoState; PerseguirState |
+| TickManager |  | class | TickManager.cs | 30 | 2 | 4 | 0 | MonoBehaviour |  |  |
+| ShotSensor |  | class | ShotSensor.cs | 20 | 1 | 1 | 0 | MonoBehaviour |  | UnitController; Bala |
+| RevivingState | Game.Squad | class | RevivingState.cs | 97 | 7 | 4 | 0 |  | IUnitState | UnitController; IndicatorType; SeguirFormacionState |
+| RevivalSystemSetup |  | class | RevivalSystemSetup.cs | 90 | 1 | 0 | 0 | MonoBehaviour |  |  |
+| RedesSceneCreator | Redes.EditorTools | static class | RedesSceneCreator.cs | 609 | 9 | 2 | 0 |  |  | TerrainController; TerrainView; AssetDatabase; HostNetworkService; PlayerSpawner; MatchNetworkController; GameFlowController; MatchController; PlayerController; EntityDisplayManager; VFXManager; RedesProceduralAudio; RedesAudioSetup; LobbyView; GameHudView; TeleportCooldownView; ResultView; DeathScreenView; DeathScreenController; CustomCursorView; GameEventBus; RedesLoadingScreen |
+| RedesProceduralAudio | Redes.EditorTools | static class | RedesProceduralAudio.cs | 158 | 5 | 4 | 0 |  |  | AssetDatabase |
+| RedesPrefabCreator | Redes.EditorTools | static class | RedesPrefabCreator.cs | 648 | 12 | 6 | 0 |  |  | AssetDatabase; GameEventBus; NetworkPlayer; PlayerMovement; PlayerShooting; PlayerHealth; AmmoSystem; PlayerEventBus; PlayerAnimationView; PlayerCrouch; PlayerTeleport; RedesAudioSetup; RagdollController; Projectile; EntityDisplayView; DestructibleBombObstacle |
+| RedesBuildAll | Redes.EditorTools | static class | RedesBuildAll.cs | 233 | 5 | 2 | 0 |  |  | RedesSceneCreator; RedesPrefabCreator; RedesSceneLinker; EditorApplication; RedesAudioSetup; RedesProceduralAudio; AssetDatabase; RedesVisualConfigurator |
+| RedesAudioSetup | Redes.EditorTools | static class | RedesAudioSetup.cs | 105 | 3 | 1 | 0 |  |  | AssetDatabase; Editor |
+| AddObstacleFeedbackToPrefabs | Redes.EditorTools | class | AddObstacleFeedbackToPrefabs.cs | 40 | 2 | 0 | 0 |  |  | EditorApplication; AssetDatabase; ObstacleHitFeedback; EditorUtility |
+| Projectile | Redes.Combat | class | Projectile.cs | 111 | 2 | 3 | 3 | NetworkBehaviour |  | GameConstants; RedesLog; IDamageable; NetworkPlayer; MatchNetworkController |
+| ObstacleHitFeedback | Redes.Combat | class | ObstacleHitFeedback.cs | 60 | 3 | 5 | 0 | MonoBehaviour |  | RedesLog |
+| IDamageable | Redes.Combat | interface | IDamageable.cs | 11 | 1 | 0 | 1 |  |  |  |
+| DestructibleBombObstacle | Redes.Combat | class | DestructibleBombObstacle.cs | 332 | 13 | 14 | 3 | NetworkBehaviour | IDamageable | BombState; RedesLog; NetworkPlayer |
+| BombState | Redes.Combat | enum | DestructibleBombObstacle.cs | 6 | 0 | 3 | 0 |  |  |  |
+| TerrainController | Redes.Controllers | class | TerrainController.cs | 20 | 2 | 3 | 0 | MonoBehaviour |  | TerrainModel; TerrainView |
+| RedesLoadingScreen | Redes.Controllers | class | RedesLoadingScreen.cs | 43 | 3 | 3 | 1 | MonoBehaviour |  |  |
+| PlayerController | Redes.Controllers | class | PlayerController.cs | 87 | 2 | 4 | 0 | MonoBehaviour |  | GameHudView; TeleportCooldownView; PlayerModel; NetworkPlayer; GameConstants; EventBus |
+| MatchController | Redes.Controllers | class | MatchController.cs | 149 | 8 | 2 | 1 | MonoBehaviour |  | ResultView; MatchNetworkController; MatchResult; RedesLog; RedesLoadingScreen |
+| EntityDisplayManager | Redes.Controllers | class | EntityDisplayManager.cs | 113 | 3 | 6 | 0 | MonoBehaviour |  | EntityDisplayView; NetworkPlayer; IEntityDisplayModel; RedesLog |
+| RedesLog | Redes.Core | static class | RedesLog.cs | 58 | 5 | 8 | 0 |  |  |  |
+| GameEventBus | Redes.Core | class | GameEventBus.cs | 53 | 4 | 0 | 0 | ScriptableObject |  |  |
+| GamePhase | Redes.Core | enum | GameEnums.cs | 8 | 0 | 5 | 0 |  |  |  |
+| MatchResult | Redes.Core | enum | GameEnums.cs | 6 | 0 | 3 | 0 |  |  |  |
+| GameConstants | Redes.Core | static class | GameConstants.cs | 31 | 0 | 11 | 0 |  |  |  |
+| RagdollController | Redes.Gameplay | class | RagdollController.cs | 203 | 4 | 5 | 0 | MonoBehaviour |  | BoneJointData |
+| BoneJointData | Redes.Gameplay | struct | RagdollController.cs | 8 | 0 | 5 | 0 |  |  |  |
+| MatchNetworkController | Redes.Gameplay | class | MatchNetworkController.cs | 330 | 16 | 6 | 1 | NetworkBehaviour |  | MatchController; GameEventBus; RedesLog; MatchResult; VFXManager; IDamageable; ObstacleHitFeedback; GameFlowController |
+| TerrainModel | Redes.Models | class | TerrainModel.cs | 8 | 0 | 2 | 2 | MonoBehaviour |  |  |
+| PlayerModel | Redes.Models | class | PlayerModel.cs | 21 | 2 | 0 | 3 |  |  | GameConstants |
+| IEntityDisplayModel | Redes.Models | interface | IEntityDisplayModel.cs | 9 | 0 | 0 | 6 |  |  |  |
+| GameStateModel | Redes.Models | class | GameStateModel.cs | 25 | 2 | 0 | 2 |  |  | GamePhase |
+| RoomSessionHandler | Redes.Network | class | RoomSessionHandler.cs | 64 | 2 | 2 | 0 |  | ISessionListHandler | HostNetworkService; NetworkSceneManagerDefault; RedesLog; GameConstants |
+| PlayerSpawner | Redes.Network | class | PlayerSpawner.cs | 135 | 6 | 2 | 0 | MonoBehaviour |  | RedesLog |
+| NetworkInputData | Redes.Network | struct | NetworkInputData.cs | 6 | 0 | 3 | 0 |  | INetworkInput |  |
+| InputButton | Redes.Network | enum | NetworkInputData.cs | 7 | 0 | 4 | 0 |  |  |  |
+| ISessionListHandler | Redes.Network | interface | ISessionListHandler.cs | 8 | 1 | 0 | 0 |  |  |  |
+| NetworkObjectProviderDefault | Fusion | class | NetworkObjectProviderDefault.cs | 89 | 8 | 1 | 0 | Behaviour | INetworkObjectProvider |  |
+| NetworkCCData | Fusion | struct | NetworkCharacterController.cs | 27 | 0 | 5 | 2 |  | INetworkStruct |  |
+| NetworkCharacterController | Fusion | class | NetworkCharacterController.cs | 122 | 11 | 8 | 3 | NetworkTRSP | INetworkTRSPTeleport; IBeforeAllTicks; IAfterAllTicks; IBeforeCopyPreviousState | NetworkCCData |
+| FusionBootstrapDebugGUI | Fusion | class | FusionBootstrapDebugGUI.cs | 350 | 14 | 6 | 0 | Behaviour |  | FusionBootstrap; Stage; FusionScalableIMGUI |
+| FusionBootstrap | Fusion | class | FusionBootstrap.cs | 655 | 25 | 14 | 11 | Behaviour |  | FusionMppmCommand; StartCommand; StartModes; Stage; State; FusionBootstrapDebugGUI; FusionMppm; FusionMppmStatus; NetworkSceneManagerDefault; NetworkObjectProviderDefault |
+| StartModes | Fusion | enum | FusionBootstrap.cs | 5 | 0 | 3 | 0 |  |  |  |
+| Stage | Fusion | enum | FusionBootstrap.cs | 8 | 0 | 6 | 0 |  |  |  |
+| StartCommand | Fusion | class | FusionBootstrap.cs | 13 | 1 | 5 | 0 | FusionMppmCommand |  |  |
+| FusionBasicBillboard | Fusion | class | FusionBasicBillboard.cs | 67 | 5 | 3 | 1 | Behaviour |  |  |
+| FusionAddressablePrefabsPreloader | Fusion | class | FusionAddressablePrefabsPreloader.cs | 31 | 0 | 0 | 0 | MonoBehaviour |  |  |
 | NetworkAssetSourceResource | Fusion | class | Fusion.Unity.cs | 161 | 7 | 4 | 2 |  |  |  |
 | NetworkAssetSourceStatic | Fusion | class | Fusion.Unity.cs | 69 | 3 | 1 | 3 |  |  |  |
 | NetworkAssetSourceStaticLazy | Fusion | class | Fusion.Unity.cs | 61 | 3 | 1 | 3 |  |  |  |
@@ -23743,209 +25571,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | DebugColisionesFull |  | class | DebugColisionesFull.cs | 113 | 16 | 1 | 0 | MonoBehaviour |  |  |
 | CollisionDetector |  | class | CollisionDetector.cs | 73 | 7 | 2 | 0 | MonoBehaviour |  |  |
 | ShotImpactBus |  | static class | ShotImpactBus.cs | 13 | 1 | 0 | 0 |  |  |  |
-| IInteractable |  | interface | IInteractable.cs | 6 | 3 | 0 | 0 |  |  |  |
-| DesactivarPorTimer |  | class | DesactivarPorTimer.cs | 18 | 3 | 0 | 0 | MonoBehaviour |  |  |
-| UnitView |  | class | UnitView.cs | 479 | 30 | 29 | 0 | MonoBehaviour |  | UnitModel; IndicatorEntry; IndicatorType; UnitSpecialization |
-| UnitTeam | Game.Core | enum | UnitTeam.cs | 6 | 0 | 3 | 0 |  |  |  |
-| IUnitState | Game.Squad | interface | UnitStates.cs | 7 | 4 | 0 | 0 |  |  | UnitController |
-| TriggerCorregir | Redes.EditorTools | static class | TriggerCorregir.cs | 8 | 1 | 0 | 0 |  |  | RedesSceneCreator |
-| Physics2DMigrator |  | class | Physics2DMigrator.cs | 233 | 5 | 0 | 0 |  |  | AssetDatabase; EditorApplication |
-| HierarchyToClipboardMenu | DebugSystem.Editor | class | HierarchyToClipboardMenu.cs | 126 | 3 | 0 | 0 |  |  | EditorUtility; SerializedProperty |
-| CreateTestSceneMenu | DebugSystem.Editor | class | CreateTestSceneMenu.cs | 150 | 1 | 0 | 0 |  |  | GameManager; DebugLogger; GameLoopReferee; BulletPool; AssetDatabase; Bullet; PlayerModel; PlayerView; PlayerController; Weapon; SimpleEnemyAI |
-| CreateScenesAndPrefabsMenu | DebugSystem.Editor | class | CreateScenesAndPrefabsMenu.cs | 685 | 9 | 0 | 0 |  |  | AssetDatabase; Bullet; PlayerModel; PlayerView; PlayerController; SimpleAnimator; FloatingHealthBar; Weapon; GameManager; DebugLogger; GameLoopReferee; BulletPool; EffectPool; ScreenManager; SerializedProperty |
-| ComponentPropertiesCopierTestMenu |  | static class | ComponentPropertiesCopierTestMenu.cs | 70 | 2 | 0 | 0 |  |  | ComponentPropertiesCopier |
-| ComponentPropertiesCopier |  | static class | ComponentPropertiesCopier.cs | 517 | 22 | 0 | 0 |  |  | SerializedProperty |
-| FloatingHealthBar | DebugSystem | class | FloatingHealthBar.cs | 145 | 5 | 3 | 0 | MonoBehaviour |  | PlayerModel |
-| EventBus | DebugSystem | static class | EventBus.cs | 478 | 137 | 0 | 0 |  |  |  |
-| EffectPool | DebugSystem | class | EffectPool.cs | 90 | 6 | 3 | 1 | MonoBehaviour |  | ImpactEffect; ProceduralAudioGenerator |
-| LogCategory | DebugSystem | enum | DebugLogger.cs | 18 | 0 | 15 | 0 |  |  |  |
-| LogEntry | DebugSystem | struct | DebugLogger.cs | 7 | 0 | 4 | 0 |  |  | LogCategory |
-| DebugLogger | DebugSystem | class | DebugLogger.cs | 236 | 5 | 2 | 1 | MonoBehaviour |  | LogEntry; LogCategory; EventBus |
-| BulletPool | DebugSystem | class | BulletPool.cs | 47 | 4 | 3 | 1 | MonoBehaviour |  | Bullet |
-| Bullet | DebugSystem | class | Bullet.cs | 59 | 4 | 8 | 0 | MonoBehaviour |  | EventBus; PlayerModel; EffectPool; BulletPool |
-| DetectableType | Game.Sensors | enum | IDetectable.cs | 8 | 0 | 5 | 0 |  |  |  |
-| IDetectable | Game.Sensors | interface | IDetectable.cs | 6 | 3 | 0 | 0 |  |  | DetectableType |
-| DetectableEntity | Game.Sensors | class | DetectableEntity.cs | 15 | 4 | 2 | 0 | MonoBehaviour | IDetectable | DetectableType |
-| SquadEventBus |  | static class | SquadEventBus.cs | 46 | 6 | 0 | 0 |  |  | UnitController |
-| WeaponControllerMVC | Game.MVC | class | WeaponControllerMVC.cs | 109 | 7 | 3 | 1 |  |  | WeaponModel; WeaponView; IWeaponInput |
-| UnityWeaponInput | Game.MVC | class | UnityWeaponInput.cs | 29 | 3 | 0 | 0 |  | IWeaponInput |  |
-| UnityCharacterInput | Game.MVC | class | UnityCharacterInput.cs | 36 | 6 | 0 | 0 |  | ICharacterInput |  |
-| IWeaponInput | Game.MVC | interface | IWeaponInput.cs | 6 | 3 | 0 | 0 |  |  |  |
-| IMovementHandler | Game.MVC | interface | IMovementHandler.cs | 7 | 4 | 0 | 0 |  |  |  |
-| FusionNetworkObjectStatistics | Fusion.Statistics | class | FusionNetworkObjectStatistics.cs | 27 | 3 | 1 | 0 | MonoBehaviour |  | FusionStatistics |
-| RunnerVisibilityLinksRoot | Fusion | class | RunnerVisibilityLinksRoot.cs | 6 | 1 | 0 | 0 | MonoBehaviour |  |  |
-| IRunnerVisibilityRecognizedType | Fusion | interface | RunnerVisibilityLink.cs | 3 | 0 | 0 | 0 |  |  |  |
-| RunnerVisibilityLink | Fusion | class | RunnerVisibilityLink.cs | 222 | 11 | 8 | 3 | MonoBehaviour |  | PreferredRunners; ComponentType; NetworkRunnerVisibilityExtensions |
-| PreferredRunners | Fusion | enum | RunnerVisibilityLink.cs | 18 | 0 | 4 | 0 |  |  |  |
-| ComponentType | Fusion | enum | RunnerVisibilityLink.cs | 5 | 0 | 3 | 0 |  |  |  |
-| RunnerLagCompensationGizmos | Fusion | class | RunnerLagCompensationGizmos.cs | 74 | 4 | 5 | 0 | Behaviour |  |  |
-| RunnerEnableVisibility | Fusion | class | RunnerEnableVisibility.cs | 73 | 22 | 0 | 0 | Behaviour | INetworkRunnerCallbacks |  |
-| RunnerAOIGizmos | Fusion | class | RunnerAOIGizmos.cs | 74 | 0 | 0 | 0 | SimulationBehaviour |  |  |
-| EnableOnSingleRunner | Fusion | class | EnableOnSingleRunner.cs | 102 | 5 | 5 | 0 | Behaviour |  | RunnerVisibilityLink; PreferredRunners |
-| NetworkSceneManagerDefault | Fusion | class | NetworkSceneManagerDefault.cs | 831 | 24 | 9 | 6 | Behaviour | INetworkSceneManager | FusionUnitySceneManagerUtils; SceneEqualityComparer; MultiPeerSceneRoot; FusionCoroutine; LoadingScope |
-| MultiPeerSceneRoot | Fusion | class | NetworkSceneManagerDefault.cs | 6 | 0 | 4 | 0 | MonoBehaviour |  |  |
-| LoadingScope | Fusion | struct | NetworkSceneManagerDefault.cs | 14 | 2 | 1 | 0 |  | IDisposable | NetworkSceneManagerDefault |
-| NetworkObjectProviderDefault | Fusion | class | NetworkObjectProviderDefault.cs | 89 | 8 | 1 | 0 | Behaviour | INetworkObjectProvider |  |
-| NetworkCCData | Fusion | struct | NetworkCharacterController.cs | 27 | 0 | 5 | 2 |  | INetworkStruct |  |
-| NetworkCharacterController | Fusion | class | NetworkCharacterController.cs | 122 | 11 | 8 | 3 | NetworkTRSP | INetworkTRSPTeleport; IBeforeAllTicks; IAfterAllTicks; IBeforeCopyPreviousState | NetworkCCData |
-| FusionBootstrapDebugGUI | Fusion | class | FusionBootstrapDebugGUI.cs | 350 | 14 | 6 | 0 | Behaviour |  | FusionBootstrap; Stage; FusionScalableIMGUI |
-| FusionBootstrap | Fusion | class | FusionBootstrap.cs | 655 | 25 | 14 | 11 | Behaviour |  | FusionMppmCommand; StartCommand; StartModes; Stage; State; FusionBootstrapDebugGUI; FusionMppm; FusionMppmStatus; NetworkSceneManagerDefault; NetworkObjectProviderDefault |
-| StartModes | Fusion | enum | FusionBootstrap.cs | 5 | 0 | 3 | 0 |  |  |  |
-| Stage | Fusion | enum | FusionBootstrap.cs | 8 | 0 | 6 | 0 |  |  |  |
-| StartCommand | Fusion | class | FusionBootstrap.cs | 13 | 1 | 5 | 0 | FusionMppmCommand |  |  |
-| FusionBasicBillboard | Fusion | class | FusionBasicBillboard.cs | 67 | 5 | 3 | 1 | Behaviour |  |  |
-| FusionAddressablePrefabsPreloader | Fusion | class | FusionAddressablePrefabsPreloader.cs | 31 | 0 | 0 | 0 | MonoBehaviour |  |  |
-| GlobalLogicTests | DebugSystem.Tests | class | GlobalLogicTests.cs | 633 | 22 | 4 | 0 |  |  | DebugLogger; GameManager; EventBus; GameLoopReferee; BulletPool; Bullet; LocalNetworkMock; PlayerModel; PlayerView; PlayerController |
-| NewTestScript |  | class | NewTestScript.cs | 19 | 2 | 0 | 0 |  |  |  |
-| RedesSceneLinker | Redes.EditorTools | static class | RedesSceneLinker.cs | 168 | 6 | 1 | 0 |  |  | HostNetworkService; PlayerSpawner; GameFlowController; MatchController; PlayerController; MatchNetworkController; LobbyView; GameHudView; ResultView; AssetDatabase; RedesPrefabCreator; EntityDisplayManager; EntityDisplayView; GameEventBus; PlayerHealth; PlayerShooting; AmmoSystem; PlayerAnimationController; EditorUtility |
-| RedesSceneCreator | Redes.EditorTools | static class | RedesSceneCreator.cs | 420 | 10 | 2 | 0 |  |  | TerrainController; AssetDatabase; HostNetworkService; PlayerSpawner; MatchNetworkController; GameFlowController; MatchController; PlayerController; EntityDisplayManager; VFXManager; LobbyView; GameHudView; ResultView; RedesPrefabCreator; RedesSceneLinker |
-| RedesPrefabCreator | Redes.EditorTools | static class | RedesPrefabCreator.cs | 220 | 7 | 4 | 0 |  |  | AssetDatabase; GameEventBus; NetworkPlayer; PlayerMovement; PlayerShooting; PlayerHealth; AmmoSystem; PlayerAnimationController; PlayerEventBus; Projectile; EntityDisplayView |
-| RedesBuildAll | Redes.EditorTools | static class | RedesBuildAll.cs | 86 | 5 | 2 | 0 |  |  | RedesSceneCreator; RedesPrefabCreator; RedesSceneLinker; EditorApplication |
-| Projectile | Redes.Combat | class | Projectile.cs | 84 | 2 | 3 | 3 | NetworkBehaviour |  | GameConstants; RedesLog; IDamageable; NetworkPlayer |
-| IDamageable | Redes.Combat | interface | IDamageable.cs | 11 | 1 | 0 | 1 |  |  |  |
-| TerrainController | Redes.Controllers | class | TerrainController.cs | 20 | 2 | 3 | 0 | MonoBehaviour |  | TerrainModel; TerrainView |
-| PlayerController | Redes.Controllers | class | PlayerController.cs | 57 | 2 | 3 | 0 | MonoBehaviour |  | GameHudView; PlayerModel; NetworkPlayer; GameConstants |
-| MatchController | Redes.Controllers | class | MatchController.cs | 147 | 8 | 2 | 1 | MonoBehaviour |  | ResultView; MatchNetworkController; MatchResult; RedesLog |
-| GameFlowController | Redes.Controllers | class | GameFlowController.cs | 356 | 16 | 7 | 1 | MonoBehaviour |  | HostNetworkService; LobbyView; GameHudView; MatchController; GameStateModel; INetworkService; RedesLog; GameConstants; GamePhase; ResultView; MatchResult |
-| EntityDisplayManager | Redes.Controllers | class | EntityDisplayManager.cs | 112 | 3 | 6 | 0 | MonoBehaviour |  | EntityDisplayView; NetworkPlayer; IEntityDisplayModel; RedesLog |
-| RedesLog | Redes.Core | static class | RedesLog.cs | 39 | 4 | 7 | 0 |  |  |  |
-| UnitPathRenderer |  | class | UnitPathRenderer.cs | 45 | 3 | 5 | 0 | MonoBehaviour |  | UnitController; UnitFSM; State |
-| UnitSpecialization |  | enum | UnitModel.cs | 1 | 0 | 5 | 0 |  |  |  |
-| UnitModel |  | class | UnitModel.cs | 218 | 11 | 26 | 5 | MonoBehaviour | IHealth | UnitTeam; UnitSpecialization; Destruible |
-| IndicatorEntry |  | class | UnitIndicatorSetup.cs | 12 | 0 | 5 | 0 |  |  |  |
-| IndicatorType |  | enum | UnitIndicatorSetup.cs | 7 | 0 | 4 | 0 |  |  |  |
-| UnitController | Game.Squad | class | UnitController_Revival.cs | 246 | 12 | 6 | 0 | MonoBehaviour | IDaniable; IDetectable | RevivalBarView; DamagedState; GEN_Inputs; SeguirFormacionState; AtacarState; PerseguirState; RevivingState |
-| UnitController | Game.Squad | class | UnitController.cs | 474 | 30 | 16 | 1 | MonoBehaviour | IDaniable; IDetectable | UnitModel; UnitView; IA_P2_AgentIA; Disparador; GenericDetector; DetectableType; UnitTeam; Enemigo; EsperandoState; UnitSpecialization; SquadEventBus; AtacarState; PerseguirState; IndicatorType; IrADestinoState; IUnitState; LiderandoState; RevivingState; GlobalData; SeguirFormacionState; DamagedState |
-| UnitCommander |  | class | UnitCommander.cs | 285 | 10 | 4 | 0 | MonoBehaviour |  | GEN_Inputs; LeaderManager; UnitController; SeguirFormacionState; UnitTeam; IrADestinoState; EsperandoState; PerseguirState |
-| TickManager |  | class | TickManager.cs | 30 | 2 | 4 | 0 | MonoBehaviour |  |  |
-| ShotSensor |  | class | ShotSensor.cs | 20 | 1 | 1 | 0 | MonoBehaviour |  | UnitController; Bala |
-| RevivingState | Game.Squad | class | RevivingState.cs | 105 | 7 | 5 | 0 |  | IUnitState | UnitController; IndicatorType; SeguirFormacionState |
-| RevivalSystemSetup |  | class | RevivalSystemSetup.cs | 90 | 1 | 0 | 0 | MonoBehaviour |  |  |
-| RevivalBarView | Game.Squad | class | RevivalBarView.cs | 10 | 0 | 7 | 0 | MonoBehaviour |  | UnitController |
-| RehenBruto |  | class | RehenBruto.cs | 65 | 2 | 7 | 0 | MonoBehaviour |  | IA_P2_AgentIA; GlobalData |
-| PositionManager |  | class | PositionManager.cs | 30 | 3 | 2 | 0 | MonoBehaviour |  | GlobalData; UnitController; UnitTeam; EsperandoState; SeguirFormacionState |
-| Municion |  | class | Municion.cs | 15 | 2 | 2 | 0 | MonoBehaviour |  |  |
-| Rigidbody2DMovementHandler | Game.MVC | class | Rigidbody2DMovementHandler.cs | 71 | 4 | 1 | 0 | MonoBehaviour | IMovementHandler | BD_Audios |
-| MovementProxy | USP.Services | class | ProxiesUSP.cs | 12 | 2 | 0 | 0 |  |  | IMovable |
-| ShootingProxy | USP.Services | class | ProxiesUSP.cs | 10 | 1 | 0 | 0 |  |  | IAttackable |
-| AIProxy | USP.Services | class | ProxiesUSP.cs | 13 | 1 | 0 | 0 |  |  |  |
-| UIProxy | USP.Services | class | ProxiesUSP.cs | 11 | 1 | 0 | 0 |  |  |  |
-| PersecucionEnemigo |  | class | PersecucionEnemigo.cs | 70 | 4 | 5 | 0 | MonoBehaviour |  | Enemigo |
-| IA_P2_BusEvent_Manager |  | class | IA_P2_BusEvent_Manager.cs | 34 | 3 | 5 | 0 | MonoBehaviour |  | IA_P2_FSM |
-| CrearYDestruir |  | class | CrearYDestruir.cs | 23 | 2 | 2 | 0 | MonoBehaviour |  |  |
-| AutoDestruccionSegura |  | class | AutoDestruccionSegura.cs | 26 | 3 | 2 | 0 | MonoBehaviour |  |  |
-| Soldado_Anim | USP.UI | class | Soldado_Anim.cs | 40 | 2 | 2 | 0 | MonoBehaviour |  | BD_Audios |
-| CambiarOpacidad | USP.UI | class | CambiarOpacidad.cs | 41 | 2 | 8 | 0 | MonoBehaviour |  |  |
-| WeaponView | USP.Weapons | class | WeaponView.cs | 142 | 8 | 8 | 0 | MonoBehaviour |  | CambiarOpacidad; Proyectil; InformacionPersonaje; WeaponModel; Bala; BD_Audios |
-| WeaponController | USP.Weapons | class | WeaponController.cs | 78 | 4 | 6 | 0 | MonoBehaviour |  | WeaponModel; WeaponView; IWeaponInput; WeaponControllerMVC; UnityWeaponInput |
-| Proyectil2 | USP.Weapons | class | Proyectil2.cs | 30 | 3 | 3 | 0 | MonoBehaviour |  |  |
-| Proyectil | USP.Weapons | class | Proyectil.cs | 143 | 6 | 9 | 0 | MonoBehaviour |  | Manager_VFX; IDaniable; InformacionPersonaje; Enemigo |
-| Cohete | USP.Weapons | class | Cohete.cs | 54 | 6 | 4 | 0 | MonoBehaviour |  | IDaniable |
-| VibracionCamara |  | class | VibracionCamara.cs | 35 | 3 | 3 | 0 | MonoBehaviour |  | ConfiguracionGlobal |
-| UnitFSM | Game.Squad | class | UnitFSM.cs | 149 | 10 | 3 | 0 | MonoBehaviour |  | State; UnitController; TickManager |
-| State | Game.Squad | enum | UnitFSM.cs | 1 | 0 | 5 | 0 |  |  |  |
-| CambioDeLider |  | class | CambioDeLider.cs | 36 | 2 | 4 | 0 | MonoBehaviour |  |  |
-| Weapon | DebugSystem | class | Weapon.cs | 93 | 7 | 9 | 0 | MonoBehaviour |  | PlayerModel; PlayerView; EventBus; Bullet; BulletPool |
-| SimpleEnemyAI | DebugSystem | class | SimpleEnemyAI.cs | 56 | 3 | 7 | 0 | MonoBehaviour |  | PlayerModel; Weapon; PlayerView; PlayerController; EventBus |
-| SimpleAnimator | DebugSystem | class | SimpleAnimator.cs | 54 | 5 | 3 | 0 | MonoBehaviour |  |  |
-| ScreenManager | DebugSystem | class | ScreenManager.cs | 257 | 15 | 14 | 0 | MonoBehaviour |  | EventBus; LocalNetworkMock; RoomData |
-| ProceduralAudioGenerator | DebugSystem | static class | ProceduralAudioGenerator.cs | 72 | 3 | 1 | 0 |  |  |  |
-| PlayerView | DebugSystem | class | PlayerView.cs | 74 | 7 | 2 | 0 | MonoBehaviour |  | PlayerModel; SimpleAnimator; EventBus; ProceduralAudioGenerator |
-| PlayerModel | DebugSystem | class | PlayerModel.cs | 51 | 3 | 5 | 3 | MonoBehaviour |  | EventBus |
-| PlayerController | DebugSystem | class | PlayerController.cs | 71 | 3 | 4 | 0 | MonoBehaviour |  | PlayerModel; PlayerView; Weapon; LocalNetworkMock; EventBus |
-| LocalNetworkMock | DebugSystem | static class | LocalNetworkMock.cs | 103 | 6 | 0 | 4 |  |  | RoomData |
-| RoomData | DebugSystem | class | LocalNetworkMock.cs | 9 | 0 | 5 | 0 |  |  |  |
-| ImpactEffect | DebugSystem | class | ImpactEffect.cs | 46 | 3 | 3 | 0 | MonoBehaviour |  |  |
-| GameManager | DebugSystem | class | GameManager.cs | 128 | 8 | 3 | 1 | MonoBehaviour |  | EventBus; PlayerModel; LocalNetworkMock; FloatingHealthBar |
-| GameLoopReferee | DebugSystem | class | GameLoopReferee.cs | 29 | 2 | 2 | 0 | MonoBehaviour |  | PlayerModel; PlayerController; SimpleEnemyAI; GameManager |
-| CharacterView | USP.Entities | class | CharacterView.cs | 48 | 3 | 5 | 0 | MonoBehaviour |  |  |
-| IA_P2_ST_SearchingState |  | class | IA_P2_ST_SearchingState.cs | 51 | 3 | 2 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState; IA_P2_LineOfSight3D |
-| IA_P2_ST_ReturningToPatrolState |  | class | IA_P2_ST_ReturningToPatrolState.cs | 101 | 4 | 5 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState |
-| IA_P2_ST_PatrolState |  | class | IA_P2_ST_PatrolState.cs | 123 | 4 | 6 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState |
-| IA_P2_ST_ChaseState |  | class | IA_P2_ST_ChaseState.cs | 55 | 3 | 1 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState; IA_P2_LineOfSight3D |
-| IA_P2_PathfindingManager |  | static class | IA_P2_PathfindingManager.cs | 474 | 13 | 0 | 0 |  |  | IA_P2_PathNode; IA_P2_PathfindingModel; FinalPathResult; NodeDistance; IA_P2_LineOfSight3D; AStarResult; ThetaStarResult |
-| AStarResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  | IA_P2_PathNode |
-| FinalPathResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  |  |
-| NodeDistance |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  | IA_P2_PathNode |
-| ThetaStarResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  |  |
-| IA_P2_LineOfSight3D |  | static class | IA_P2_LineOfSight3D.cs | 24 | 1 | 0 | 0 |  |  |  |
-| IA_P2_INT_gentState |  | interface | IA_P2_INT_gentState.cs | 7 | 3 | 0 | 0 |  |  | IA_P2_FSM |
-| AgentState |  | enum | IA_P2_FSM.cs | 7 | 0 | 4 | 0 |  |  |  |
-| IA_P2_FSM |  | class | IA_P2_FSM.cs | 241 | 10 | 12 | 0 | MonoBehaviour |  | IA_P2_AgentIA; AgentState; IA_P2_INT_gentState; IA_P2_FOV; IA_P2_ST_PatrolState; IA_P2_ST_ChaseState; IA_P2_ST_SearchingState; IA_P2_ST_ReturningToPatrolState; IA_P2_BusEvent_Manager |
-| IA_P2_FOV |  | class | IA_P2_FOV.cs | 252 | 8 | 13 | 0 | MonoBehaviour |  | IA_P2_LineOfSight3D |
-| IA_F_PathFinding_Theta |  | static class | IA_F_PathFanding_Theta.cs | 82 | 1 | 0 | 0 |  |  | IA_P2_LineOfSight3D |
-| IA_F_EnemyCercanos |  | class | IA_F_EnemyCercanos.cs | 14 | 2 | 1 | 0 | MonoBehaviour |  |  |
-| IA_F_ControllerSeguidor |  | class | IA_F_ControllerSeguidor.cs | 83 | 3 | 6 | 0 | MonoBehaviour |  | IA_P2_AgentIA; IA_F_EnemyCercanos |
-| IA_F_ChangeMode |  | class | IA_F_ChangeMode.cs | 86 | 4 | 2 | 0 | MonoBehaviour |  | IA_P2_AgentIA; IA_P2_BusEvent_Manager |
-| ICharacterInput | Game.MVC | interface | ICharacterInput.cs | 9 | 6 | 0 | 0 |  |  |  |
-| CharacterControllerMVC | Game.MVC | class | CharacterControllerMVC.cs | 80 | 5 | 4 | 0 |  |  | CharacterModel; CharacterView; ICharacterInput; IMovementHandler |
-| SelectedSoldierUIFeedback |  | class | SelectedSoldierUIFeedback.cs | 11 | 1 | 0 | 0 | MonoBehaviour |  | UnitController |
-| WeaponModel | USP.Core | class | WeaponModel.cs | 121 | 11 | 8 | 3 | MonoBehaviour |  |  |
-| IHealth | USP.Core | interface | Interfaces.cs | 7 | 1 | 0 | 3 |  |  |  |
-| IMovable | USP.Core | interface | Interfaces.cs | 6 | 2 | 0 | 1 |  |  |  |
-| IAttackable | USP.Core | interface | Interfaces.cs | 5 | 1 | 0 | 1 |  |  |  |
-| IInputProvider | USP.Core | interface | Interfaces.cs | 5 | 2 | 0 | 0 |  |  |  |
-| InformacionPersonaje | USP.Core | class | InformacionPersonaje.cs | 199 | 16 | 22 | 3 | MonoBehaviour | IHealth | WeaponController; GameManager |
-| IDaniable |  | interface | IDaniable.cs | 9 | 1 | 0 | 0 |  |  |  |
-| CharacterModel | USP.Core | class | CharacterModel.cs | 93 | 8 | 12 | 0 | MonoBehaviour |  | InformacionPersonaje |
-| Tanque |  | class | Tanque.cs | 220 | 10 | 12 | 0 | MonoBehaviour |  | Puntero_Tanque; Cohete; ObjetoColisionado |
-| ObjetoColisionado |  | class | Tanque.cs | 12 | 1 | 2 | 0 |  |  |  |
-| Puntero_Tanque |  | class | Puntero_Tanque.cs | 45 | 3 | 2 | 0 | MonoBehaviour |  | Tanque |
-| PlayerController | USP.Entities | class | PlayerController.cs | 164 | 6 | 7 | 0 | MonoBehaviour |  | CharacterModel; CharacterView; Rigidbody2DMovementHandler; ICharacterInput; UnityCharacterInput; BD_Audios |
-| EntrarAlTanque |  | class | EntrarAlTanque.cs | 158 | 7 | 5 | 0 | MonoBehaviour |  | ControladorTanque |
-| Enemigo | USP.Entities | class | Enemigo.cs | 222 | 8 | 17 | 0 | MonoBehaviour |  | GameManager |
-| ControladorTanque |  | class | ControladorTanque.cs | 207 | 9 | 18 | 0 | MonoBehaviour |  | EntrarAlTanque; Proyectil; Bala; BD_Audios |
-| GenericDetector | Game.Sensors | class | GenericDetector.cs | 158 | 9 | 9 | 0 | MonoBehaviour |  | DetectableType; IDetectable |
-| GameManager | USP.Services | class | GameManager.cs | 176 | 12 | 8 | 0 | MonoBehaviour |  | Enemigo |
-| FormationRelocator |  | class | FormationRelocator.cs | 26 | 2 | 7 | 0 | MonoBehaviour |  | GlobalData |
-| EnemyView | USP.Entities | class | EnemyView.cs | 65 | 4 | 5 | 0 | MonoBehaviour |  | EnemyModel |
-| EnemyModel | USP.Core | class | EnemyModel.cs | 88 | 5 | 12 | 3 | MonoBehaviour | IHealth |  |
-| Disparador |  | class | Disparador.cs | 104 | 2 | 6 | 0 | MonoBehaviour |  | Manager_VFX; BD_Audios; BalaPool; Bala |
-| Destruible |  | class | Destruible.cs | 39 | 2 | 3 | 0 | MonoBehaviour | IDaniable | UnitController |
-| DamagedState | Game.Squad | class | DamagedState.cs | 160 | 8 | 6 | 0 |  | IUnitState | DamagedStateHandler; UnitController; IDetectable |
-| DamagedStateHandler | Game.Squad | class | DamagedState.cs | 97 | 7 | 3 | 0 | MonoBehaviour |  | UnitController |
-| CursorManager |  | class | CursorManager.cs | 157 | 7 | 11 | 1 | MonoBehaviour |  | IInteractable; IDaniable |
-| ControlDerrota |  | class | ControlDerrota.cs | 37 | 1 | 3 | 0 | MonoBehaviour |  | LeaderManager |
-| BalaPool |  | class | BalaPool.cs | 70 | 6 | 3 | 0 | MonoBehaviour |  | Bala |
-| Bala |  | class | Bala.cs | 182 | 13 | 12 | 0 | MonoBehaviour | IDetectable | DetectableType; Proyectil; CursorManager; IDaniable; UnitController; CoroutineHelper; Manager_VFX; BD_Audios; UnitTeam; BalaPool |
-| AmmoManager |  | class | AmmoManager.cs | 37 | 2 | 1 | 0 | MonoBehaviour |  | UnitController; UnitModel |
-| PlayerShooting | Redes.Player | class | PlayerShooting.cs | 53 | 2 | 6 | 3 | NetworkBehaviour |  | AmmoSystem; GameEventBus; GameConstants; PlayerEventBus; Projectile; RedesLog |
-| PlayerMovement | Redes.Player | class | PlayerMovement.cs | 48 | 2 | 3 | 1 | NetworkBehaviour |  | GameConstants; PlayerEventBus; NetworkInputData |
-| PlayerHealth | Redes.Player | class | PlayerHealth.cs | 133 | 4 | 5 | 2 | NetworkBehaviour | IDamageable | GameConstants; GameEventBus; PlayerEventBus; RedesLog; VFXManager |
-| PlayerEventBus | Redes.Player | class | PlayerEventBus.cs | 51 | 6 | 6 | 0 | MonoBehaviour |  |  |
-| PlayerAnimationController | Redes.Player | class | PlayerAnimationController.cs | 82 | 2 | 9 | 0 | NetworkBehaviour |  | PlayerMovement; PlayerHealth; PlayerShooting; VFXManager |
-| NetworkPlayer | Redes.Player | class | NetworkPlayer.cs | 142 | 5 | 6 | 12 | NetworkBehaviour | IEntityDisplayModel | GameConstants; RedesLog; PlayerMovement; PlayerShooting; PlayerHealth; AmmoSystem; PlayerAnimationController; PlayerEventBus; GameFlowController; PlayerController; NetworkInputData; InputButton |
+| NetworkPlayer | Redes.Player | class | NetworkPlayer.cs | 189 | 6 | 7 | 15 | NetworkBehaviour | IEntityDisplayModel | GameConstants; RedesLog; PlayerMovement; PlayerShooting; PlayerHealth; AmmoSystem; PlayerEventBus; PlayerCrouch; PlayerTeleport; CustomCursorView; GameFlowController; PlayerController; NetworkInputData; InputButton |
 | AmmoSystem | Redes.Player | class | AmmoSystem.cs | 83 | 6 | 4 | 5 | NetworkBehaviour |  | GameConstants; GameEventBus; PlayerEventBus; RedesLog |
-| VFXManager | Redes.Views | class | VFXManager.cs | 31 | 3 | 2 | 1 | MonoBehaviour |  |  |
-| TerrainView | Redes.Views | class | TerrainView.cs | 21 | 1 | 1 | 0 | MonoBehaviour |  |  |
-| ResultView | Redes.Views | class | ResultView.cs | 98 | 5 | 6 | 0 | MonoBehaviour |  | MatchResult; RedesLog |
-| LobbyView | Redes.Views | class | LobbyView.cs | 172 | 12 | 10 | 3 | MonoBehaviour |  | GameConstants; RedesLog |
-| GameHudView | Redes.Views | class | GameHudView.cs | 39 | 5 | 4 | 0 | MonoBehaviour |  |  |
-| EntityDisplayView | Redes.Views | class | EntityDisplayView.cs | 42 | 4 | 2 | 0 | MonoBehaviour |  |  |
-| TriggerEventAndDestroy |  | class | TriggerEventAndDestroy.cs | 24 | 1 | 1 | 0 | MonoBehaviour |  |  |
-| MenuPausa |  | class | MenuPausa.cs | 38 | 3 | 2 | 0 | MonoBehaviour |  |  |
-| MarkerAnim |  | class | MarkerAnim.cs | 33 | 2 | 3 | 0 | MonoBehaviour |  |  |
-| Manager_VFX |  | class | Manager_VFX.cs | 131 | 4 | 4 | 1 | MonoBehaviour |  |  |
-| MainGameController |  | class | MainGameController.cs | 94 | 2 | 10 | 0 | MonoBehaviour |  | LeaderManager; GlobalData; UnitModel; UnitSpecialization; UnitFSM |
-| LiderandoState | Game.Squad | class | LiderandoState.cs | 148 | 5 | 5 | 0 |  | IUnitState | UnitController; UnitSpecialization; LeaderManager; GEN_Inputs; CursorManager |
-| SeguirFormacionState | Game.Squad | class | LiderandoState.cs | 68 | 4 | 0 | 0 |  | IUnitState | UnitController; GlobalData; EsperandoState; DetectableType; Enemigo; AtacarState |
-| AtacarState | Game.Squad | class | LiderandoState.cs | 70 | 4 | 1 | 0 |  | IUnitState | UnitController; IndicatorType; UnitTeam; SeguirFormacionState; EsperandoState; PerseguirState |
-| PerseguirState | Game.Squad | class | LiderandoState.cs | 57 | 4 | 0 | 0 |  | IUnitState | UnitController; IndicatorType; UnitTeam; SeguirFormacionState; EsperandoState; AtacarState |
-| EsperandoState | Game.Squad | class | LiderandoState.cs | 44 | 6 | 3 | 0 |  | IUnitState | UnitController; IndicatorType; SeguirFormacionState |
-| HuirDetrasLiderState | Game.Squad | class | LiderandoState.cs | 34 | 4 | 0 | 0 |  | IUnitState | UnitController; GlobalData; SeguirFormacionState |
-| IrADestinoState | Game.Squad | class | LiderandoState.cs | 31 | 4 | 0 | 0 |  | IUnitState | UnitController; IndicatorType; EsperandoState |
-| LeaderManager |  | class | LeaderManager.cs | 263 | 11 | 9 | 0 | MonoBehaviour |  | UnitController; UnitSpecialization; GEN_Inputs; GlobalData; MainGameController; SeguirFormacionState; LiderandoState |
-| InteractableItem |  | class | InteractableItem.cs | 80 | 6 | 4 | 0 | MonoBehaviour | IInteractable | UnitController; UnitTeam; BD_Audios |
-| IA_P2_PathNode |  | class | IA_P2_PathNode.cs | 137 | 1 | 2 | 0 | MonoBehaviour |  | IA_P2_PathfindingModel |
-| IA_P2_PathfindingModel |  | class | IA_P2_PathfindingModel.cs | 97 | 5 | 6 | 0 | MonoBehaviour |  | IA_P2_PathNode; IA_P2_LineOfSight3D |
-| IA_P2_AgentIA |  | class | IA_P2_AgentIA.cs | 315 | 12 | 17 | 0 | MonoBehaviour |  | UnitModel; IA_P2_PathfindingModel; IA_P2_PathfindingManager; IA_F_PathFinding_Theta |
-| GlobalHUD |  | class | GlobalHUD.cs | 12 | 1 | 4 | 0 | MonoBehaviour |  | LeaderManager |
-| GlobalData |  | class | GlobalData.cs | 5 | 0 | 1 | 0 |  |  | UnitController |
-| GEN_Inputs |  | class | GEN_Inputs.cs | 115 | 5 | 3 | 10 | MonoBehaviour |  | Destruible |
-| FusionRunnerVisibilityControlsWindow | Fusion.Editor | class | FusionRunnerVisibilityControlsWindow.cs | 338 | 9 | 32 | 1 | EditorWindow |  | RunnerEnableVisibility; NetworkRunnerVisibilityExtensions; EditorGUIUtility; Labels; FusionEditorSkin; FusionStatistics; EditorGUI; DisabledGroupScope; Event; CanvasAnchor |
-| Labels | Fusion.Editor | static class | FusionRunnerVisibilityControlsWindow.cs | 36 | 0 | 23 | 0 |  |  | RunnerEnableVisibility; NetworkRunnerVisibilityExtensions |
-| FusionEditorSkin | Fusion.Editor | class | FusionEditorSkin.cs | 95 | 3 | 11 | 13 | ScriptableObject |  | EditorGUIUtility; LazyAsset; LazyGUIStyle |
-| FusionEditorConfigImporter | Fusion.Editor | class | FusionEditorConfigImporter.cs | 16 | 1 | 0 | 0 | ScriptedImporter |  |  |
+| TestSceneManager | Redes.Test | class | TestSceneManager.cs | 78 | 5 | 6 | 0 | MonoBehaviour |  | DummyEnemy |
+| PlayerInputMode | Redes.Test | enum | OfflinePlayerTester.cs | 5 | 0 | 2 | 0 |  |  |  |
+| OfflinePlayerTester | Redes.Test | class | OfflinePlayerTester.cs | 422 | 15 | 27 | 0 | MonoBehaviour |  | PlayerInputMode; PlayerEventBus; DummyEnemy; EntityDisplayView; EventBus; LocalNetworkMock; OfflineBullet |
+| OfflineBullet | Redes.Test | class | OfflineBullet.cs | 53 | 3 | 4 | 0 | MonoBehaviour |  | OfflinePlayerTester; DummyEnemy; CustomCursorView |
+| DummyEnemy | Redes.Test | class | DummyEnemy.cs | 260 | 11 | 23 | 2 | MonoBehaviour |  | EntityDisplayView; OfflineBullet; RagdollController |
+| CameraFollow | Redes.Test | class | CameraFollow.cs | 13 | 1 | 2 | 0 | MonoBehaviour |  |  |
 | AssetObjectEditor | Fusion.Editor | class | Fusion.Unity.Editor.cs | 6 | 1 | 0 | 0 | Editor |  |  |
 | BehaviourEditor | Fusion.Editor | class | Fusion.Unity.Editor.cs | 4 | 0 | 0 | 0 | FusionEditor |  |  |
 | ChangeDllManager | Fusion.Editor | static class | Fusion.Unity.Editor.cs | 102 | 5 | 2 | 0 |  |  | AssetDatabase; PathUtils |
@@ -24154,6 +25787,14 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | NetworkProjectConfigUtilities | Fusion.Editor | static class | Fusion.Unity.Editor.cs | 153 | 13 | 0 | 0 |  |  | EditorApplication; FusionGlobalScriptableObjectUtils; AssetDatabase; AssetDatabaseUtils; NetworkProjectConfigImporter; EditorGUIUtility; PathUtils |
 | NetworkRunnerUtilities | Fusion.Editor | static class | Fusion.Unity.Editor.cs | 27 | 2 | 1 | 0 |  |  |  |
 | FusionStatsWorldAnchor | Fusion.Statistics | class | FusionStatsWorldAnchor.cs | 20 | 3 | 0 | 0 | MonoBehaviour |  | FusionStatsConfig; FusionStatsCanvas |
+| Tanque |  | class | Tanque.cs | 220 | 10 | 12 | 0 | MonoBehaviour |  | Puntero_Tanque; Cohete; ObjetoColisionado |
+| ObjetoColisionado |  | class | Tanque.cs | 12 | 1 | 2 | 0 |  |  |  |
+| Puntero_Tanque |  | class | Puntero_Tanque.cs | 45 | 3 | 2 | 0 | MonoBehaviour |  | Tanque |
+| PlayerController | USP.Entities | class | PlayerController.cs | 164 | 6 | 7 | 0 | MonoBehaviour |  | CharacterModel; CharacterView; Rigidbody2DMovementHandler; ICharacterInput; UnityCharacterInput; BD_Audios |
+| EntrarAlTanque |  | class | EntrarAlTanque.cs | 158 | 7 | 5 | 0 | MonoBehaviour |  | ControladorTanque |
+| Enemigo | USP.Entities | class | Enemigo.cs | 222 | 8 | 17 | 0 | MonoBehaviour |  | GameManager |
+| ControladorTanque |  | class | ControladorTanque.cs | 207 | 9 | 18 | 0 | MonoBehaviour |  | EntrarAlTanque; Proyectil; Bala; BD_Audios |
+| CharacterView | USP.Entities | class | CharacterView.cs | 48 | 3 | 5 | 0 | MonoBehaviour |  |  |
 | RenderSimStats | Fusion.Statistics | enum | FusionStatsPanelHeader.cs | 142 | 0 | 28 | 0 |  |  |  |
 | FusionStatsPanelHeader | Fusion.Statistics | class | FusionStatsPanelHeader.cs | 130 | 12 | 7 | 0 | MonoBehaviour |  | FusionStatsGraphDefault; RenderSimStats; FusionStatistics; FusionStatisticsStatCustomConfig |
 | FusionStatsGraphDefault | Fusion.Statistics | class | FusionStatsGraphDefault.cs | 52 | 4 | 3 | 1 | FusionStatsGraphBase |  | RenderSimStats; FusionStatisticsHelper; FusionStatistics; FusionStatisticsStatCustomConfig |
@@ -24166,136 +25807,256 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | FusionNetworkObjectStatsGraphCombine | Fusion.Statistics | class | FusionNetworkObjectStatsGraphCombine.cs | 132 | 10 | 14 | 1 | MonoBehaviour |  | NetworkObjectStat; FusionNetworkObjectStatsGraph; FusionStatistics; FusionNetworkObjectStatistics |
 | NetworkObjectStat | Fusion.Statistics | enum | FusionNetworkObjectStatsGraph.cs | 9 | 0 | 6 | 0 |  |  |  |
 | FusionNetworkObjectStatsGraph | Fusion.Statistics | class | FusionNetworkObjectStatsGraph.cs | 76 | 3 | 4 | 0 | FusionStatsGraphBase |  | NetworkObjectStat; FusionNetworkObjectStatsGraphCombine |
-| Torreta |  | class | Torreta.cs | 28 | 2 | 4 | 0 | MonoBehaviour |  | GameManager |
-| SistemaPuntaje |  | class | SistemaPuntaje.cs | 4 | 0 | 0 | 0 | MonoBehaviour |  |  |
-| SenalizacionDeEnemigos |  | class | SenalisacionAEnemigos.cs | 101 | 3 | 6 | 0 | MonoBehaviour |  |  |
+| FusionNetworkObjectStatistics | Fusion.Statistics | class | FusionNetworkObjectStatistics.cs | 27 | 3 | 1 | 0 | MonoBehaviour |  | FusionStatistics |
+| RunnerVisibilityLinksRoot | Fusion | class | RunnerVisibilityLinksRoot.cs | 6 | 1 | 0 | 0 | MonoBehaviour |  |  |
+| IRunnerVisibilityRecognizedType | Fusion | interface | RunnerVisibilityLink.cs | 3 | 0 | 0 | 0 |  |  |  |
+| RunnerVisibilityLink | Fusion | class | RunnerVisibilityLink.cs | 222 | 11 | 8 | 3 | MonoBehaviour |  | PreferredRunners; ComponentType; NetworkRunnerVisibilityExtensions |
+| PreferredRunners | Fusion | enum | RunnerVisibilityLink.cs | 18 | 0 | 4 | 0 |  |  |  |
+| ComponentType | Fusion | enum | RunnerVisibilityLink.cs | 5 | 0 | 3 | 0 |  |  |  |
+| RunnerLagCompensationGizmos | Fusion | class | RunnerLagCompensationGizmos.cs | 74 | 4 | 5 | 0 | Behaviour |  |  |
+| RunnerEnableVisibility | Fusion | class | RunnerEnableVisibility.cs | 73 | 22 | 0 | 0 | Behaviour | INetworkRunnerCallbacks |  |
+| RunnerAOIGizmos | Fusion | class | RunnerAOIGizmos.cs | 74 | 0 | 0 | 0 | SimulationBehaviour |  |  |
+| EnableOnSingleRunner | Fusion | class | EnableOnSingleRunner.cs | 102 | 5 | 5 | 0 | Behaviour |  | RunnerVisibilityLink; PreferredRunners |
+| IA_P2_ST_SearchingState |  | class | IA_P2_ST_SearchingState.cs | 51 | 3 | 2 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState; IA_P2_LineOfSight3D |
+| IA_P2_ST_ReturningToPatrolState |  | class | IA_P2_ST_ReturningToPatrolState.cs | 101 | 4 | 5 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState |
+| IA_P2_ST_PatrolState |  | class | IA_P2_ST_PatrolState.cs | 123 | 4 | 6 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState |
+| IA_P2_ST_ChaseState |  | class | IA_P2_ST_ChaseState.cs | 55 | 3 | 1 | 0 |  | IA_P2_INT_gentState | IA_P2_FSM; AgentState; IA_P2_LineOfSight3D |
+| IA_P2_PathfindingManager |  | static class | IA_P2_PathfindingManager.cs | 474 | 13 | 0 | 0 |  |  | IA_P2_PathNode; IA_P2_PathfindingModel; FinalPathResult; NodeDistance; IA_P2_LineOfSight3D; AStarResult; ThetaStarResult |
+| AStarResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  | IA_P2_PathNode |
+| FinalPathResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  |  |
+| NodeDistance |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  | IA_P2_PathNode |
+| ThetaStarResult |  | class | IA_P2_PathfindingManager.cs | 5 | 0 | 2 | 0 |  |  |  |
+| IA_P2_LineOfSight3D |  | static class | IA_P2_LineOfSight3D.cs | 24 | 1 | 0 | 0 |  |  |  |
+| IA_P2_INT_gentState |  | interface | IA_P2_INT_gentState.cs | 7 | 3 | 0 | 0 |  |  | IA_P2_FSM |
+| AgentState |  | enum | IA_P2_FSM.cs | 7 | 0 | 4 | 0 |  |  |  |
+| IA_P2_FSM |  | class | IA_P2_FSM.cs | 241 | 10 | 12 | 0 | MonoBehaviour |  | IA_P2_AgentIA; AgentState; IA_P2_INT_gentState; IA_P2_FOV; IA_P2_ST_PatrolState; IA_P2_ST_ChaseState; IA_P2_ST_SearchingState; IA_P2_ST_ReturningToPatrolState; IA_P2_BusEvent_Manager |
+| IA_P2_FOV |  | class | IA_P2_FOV.cs | 252 | 8 | 13 | 0 | MonoBehaviour |  | IA_P2_LineOfSight3D |
+| IA_F_PathFinding_Theta |  | static class | IA_F_PathFanding_Theta.cs | 82 | 1 | 0 | 0 |  |  | IA_P2_LineOfSight3D |
+| IA_F_EnemyCercanos |  | class | IA_F_EnemyCercanos.cs | 14 | 2 | 1 | 0 | MonoBehaviour |  |  |
+| IA_F_ControllerSeguidor |  | class | IA_F_ControllerSeguidor.cs | 83 | 3 | 6 | 0 | MonoBehaviour |  | IA_P2_AgentIA; IA_F_EnemyCercanos |
+| IA_F_ChangeMode |  | class | IA_F_ChangeMode.cs | 86 | 4 | 2 | 0 | MonoBehaviour |  | IA_P2_AgentIA; IA_P2_BusEvent_Manager |
+| Rigidbody2DMovementHandler | Game.MVC | class | Rigidbody2DMovementHandler.cs | 71 | 4 | 1 | 0 | MonoBehaviour | IMovementHandler | BD_Audios |
+| MovementProxy | USP.Services | class | ProxiesUSP.cs | 12 | 2 | 0 | 0 |  |  | IMovable |
+| ShootingProxy | USP.Services | class | ProxiesUSP.cs | 10 | 1 | 0 | 0 |  |  | IAttackable |
+| AIProxy | USP.Services | class | ProxiesUSP.cs | 13 | 1 | 0 | 0 |  |  |  |
+| UIProxy | USP.Services | class | ProxiesUSP.cs | 11 | 1 | 0 | 0 |  |  |  |
+| LobbyView | Redes.Views | class | LobbyView.cs | 253 | 13 | 10 | 2 | MonoBehaviour |  | PlaySoundOnButtonClick; GameConstants; RedesLog |
+| GameHudView | Redes.Views | class | GameHudView.cs | 81 | 7 | 7 | 0 | MonoBehaviour |  |  |
+| EntityDisplayView | Redes.Views | class | EntityDisplayView.cs | 64 | 5 | 6 | 0 | MonoBehaviour |  |  |
+| DeathScreenView | Redes.Views | class | DeathScreenView.cs | 27 | 2 | 3 | 0 | MonoBehaviour |  |  |
+| CursorManager |  | class | CursorManager.cs | 157 | 7 | 11 | 1 | MonoBehaviour |  | IInteractable; IDaniable |
+| ControlDerrota |  | class | ControlDerrota.cs | 37 | 1 | 3 | 0 | MonoBehaviour |  | LeaderManager |
+| BalaPool |  | class | BalaPool.cs | 70 | 6 | 3 | 0 | MonoBehaviour |  | Bala |
+| PooledParticleHelper | Redes.Views | class | PooledParticleHelper.cs | 25 | 3 | 1 | 0 | MonoBehaviour |  |  |
+| PlaySoundOnButtonClick | Redes.Views | class | PlaySoundOnButtonClick.cs | 41 | 3 | 3 | 2 | MonoBehaviour |  |  |
+| PlayerAnimationView | Redes.Views | class | PlayerAnimationView.cs | 449 | 16 | 22 | 0 | MonoBehaviour |  | PlayerEventBus; NetworkPlayer; PlayerMovement; PlayerShooting; PlayerHealth; AmmoSystem; RedesLog; RagdollController; VFXManager |
+| PlayerAmmoView | Redes.Views | class | PlayerAmmoView.cs | 162 | 8 | 11 | 0 | MonoBehaviour |  | PlayerEventBus |
+| DeathScreenController | Redes.Views | class | DeathScreenController.cs | 92 | 9 | 5 | 0 | MonoBehaviour |  | DeathScreenView; PlayerEventBus; EventBus; LocalNetworkMock |
+| CustomCursorView | Redes.Views | class | CustomCursorView.cs | 359 | 13 | 19 | 0 | MonoBehaviour |  | PlayerEventBus; GameEventBus; NetworkPlayer; OfflinePlayerTester; GameFlowController; GameStateModel; GamePhase |
+| TriggerEventAndDestroy |  | class | TriggerEventAndDestroy.cs | 24 | 1 | 1 | 0 | MonoBehaviour |  |  |
+| TriggerCorregir | Redes.EditorTools | static class | TriggerCorregir.cs | 8 | 1 | 0 | 0 |  |  | RedesBuildAll |
+| Physics2DMigrator |  | class | Physics2DMigrator.cs | 233 | 5 | 0 | 0 |  |  | AssetDatabase; EditorApplication |
+| HierarchyToClipboardMenu | DebugSystem.Editor | class | HierarchyToClipboardMenu.cs | 126 | 3 | 0 | 0 |  |  | EditorUtility; SerializedProperty |
+| CreateTestSceneMenu | DebugSystem.Editor | class | CreateTestSceneMenu.cs | 150 | 1 | 0 | 0 |  |  | GameManager; DebugLogger; GameLoopReferee; BulletPool; AssetDatabase; Bullet; PlayerModel; PlayerView; PlayerController; Weapon; SimpleEnemyAI |
+| CreateScenesAndPrefabsMenu | DebugSystem.Editor | class | CreateScenesAndPrefabsMenu.cs | 771 | 9 | 0 | 0 |  |  | AssetDatabase; Bullet; PlayerModel; PlayerView; PlayerController; SimpleAnimator; FloatingHealthBar; Weapon; GameManager; DebugLogger; GameLoopReferee; BulletPool; EffectPool; ScreenManager; DeathScreenView; DeathScreenController; SerializedProperty |
+| ComponentPropertiesCopierTestMenu |  | static class | ComponentPropertiesCopierTestMenu.cs | 70 | 2 | 0 | 0 |  |  | ComponentPropertiesCopier |
+| GlobalHUD |  | class | GlobalHUD.cs | 12 | 1 | 4 | 0 | MonoBehaviour |  | LeaderManager |
+| GlobalData |  | class | GlobalData.cs | 5 | 0 | 1 | 0 |  |  | UnitController |
+| GEN_Inputs |  | class | GEN_Inputs.cs | 115 | 5 | 3 | 10 | MonoBehaviour |  | Destruible |
+| GenericDetector | Game.Sensors | class | GenericDetector.cs | 158 | 9 | 9 | 0 | MonoBehaviour |  | DetectableType; IDetectable |
+| GameManager | USP.Services | class | GameManager.cs | 176 | 12 | 8 | 0 | MonoBehaviour |  | Enemigo |
+| FormationRelocator |  | class | FormationRelocator.cs | 26 | 2 | 7 | 0 | MonoBehaviour |  | GlobalData |
+| EnemyView | USP.Entities | class | EnemyView.cs | 65 | 4 | 5 | 0 | MonoBehaviour |  | EnemyModel |
+| EnemyModel | USP.Core | class | EnemyModel.cs | 88 | 5 | 12 | 3 | MonoBehaviour | IHealth |  |
+| Disparador |  | class | Disparador.cs | 104 | 2 | 6 | 0 | MonoBehaviour |  | Manager_VFX; BD_Audios; BalaPool; Bala |
+| Destruible |  | class | Destruible.cs | 39 | 2 | 3 | 0 | MonoBehaviour | IDaniable | UnitController |
+| DamagedState | Game.Squad | class | DamagedState.cs | 160 | 8 | 6 | 0 |  | IUnitState | DamagedStateHandler; UnitController; IDetectable |
+| DamagedStateHandler | Game.Squad | class | DamagedState.cs | 97 | 7 | 3 | 0 | MonoBehaviour |  | UnitController |
+| Bala |  | class | Bala.cs | 182 | 13 | 12 | 0 | MonoBehaviour | IDetectable | DetectableType; Proyectil; CursorManager; IDaniable; UnitController; CoroutineHelper; Manager_VFX; BD_Audios; UnitTeam; BalaPool |
+| AmmoManager |  | class | AmmoManager.cs | 37 | 2 | 1 | 0 | MonoBehaviour |  | UnitController; UnitModel |
+| UnitFSM | Game.Squad | class | UnitFSM.cs | 149 | 10 | 3 | 0 | MonoBehaviour |  | State; UnitController; TickManager |
+| State | Game.Squad | enum | UnitFSM.cs | 1 | 0 | 5 | 0 |  |  |  |
+| CambioDeLider |  | class | CambioDeLider.cs | 36 | 2 | 4 | 0 | MonoBehaviour |  |  |
+| Weapon | DebugSystem | class | Weapon.cs | 93 | 7 | 9 | 0 | MonoBehaviour |  | PlayerModel; PlayerView; EventBus; Bullet; BulletPool |
+| SimpleEnemyAI | DebugSystem | class | SimpleEnemyAI.cs | 56 | 3 | 7 | 0 | MonoBehaviour |  | PlayerModel; Weapon; PlayerView; PlayerController; EventBus |
+| SimpleAnimator | DebugSystem | class | SimpleAnimator.cs | 54 | 5 | 3 | 0 | MonoBehaviour |  |  |
+| ScreenManager | DebugSystem | class | ScreenManager.cs | 257 | 15 | 14 | 0 | MonoBehaviour |  | EventBus; LocalNetworkMock; RoomData |
+| ProceduralAudioGenerator | DebugSystem | static class | ProceduralAudioGenerator.cs | 72 | 3 | 1 | 0 |  |  |  |
+| PlayerView | DebugSystem | class | PlayerView.cs | 74 | 7 | 2 | 0 | MonoBehaviour |  | PlayerModel; SimpleAnimator; EventBus; ProceduralAudioGenerator |
+| PlayerModel | DebugSystem | class | PlayerModel.cs | 51 | 3 | 5 | 3 | MonoBehaviour |  | EventBus |
+| PlayerController | DebugSystem | class | PlayerController.cs | 71 | 3 | 4 | 0 | MonoBehaviour |  | PlayerModel; PlayerView; Weapon; LocalNetworkMock; EventBus |
+| LocalNetworkMock | DebugSystem | static class | LocalNetworkMock.cs | 103 | 6 | 0 | 4 |  |  | RoomData |
+| RoomData | DebugSystem | class | LocalNetworkMock.cs | 9 | 0 | 5 | 0 |  |  |  |
+| ImpactEffect | DebugSystem | class | ImpactEffect.cs | 46 | 3 | 3 | 0 | MonoBehaviour |  |  |
+| GameManager | DebugSystem | class | GameManager.cs | 128 | 8 | 3 | 1 | MonoBehaviour |  | EventBus; PlayerModel; LocalNetworkMock; FloatingHealthBar |
 | Prueba_de_color |  | class | Prueba_de_color.cs | 14 | 2 | 0 | 0 | MonoBehaviour |  |  |
 | PickUp |  | class | PickUp.cs | 13 | 1 | 0 | 0 | MonoBehaviour |  | UnitController; UnitTeam |
 | Obstaculo |  | class | Obstaculo.cs | 22 | 2 | 0 | 0 | MonoBehaviour |  |  |
 | MenuVictoria |  | class | MenuVictoria.cs | 21 | 2 | 1 | 0 | MonoBehaviour |  |  |
-| IndicadorEnemigos |  | class | IndicadorEnemigos.cs | 62 | 2 | 6 | 0 | MonoBehaviour |  | GameManager |
-| Ideasypseudocodigos |  | class | Ideas y pseudocodigos.cs | 33 | 2 | 0 | 0 | MonoBehaviour |  |  |
-| GestorTexto |  | class | GestorTexto.cs | 86 | 5 | 4 | 0 | MonoBehaviour |  |  |
-| ConfiguracionGlobal |  | static class | ConfiguracionGlobal.cs | 19 | 0 | 10 | 0 |  |  |  |
-| CodigoDeInicio |  | class | CodigoDeInicio.cs | 16 | 2 | 0 | 0 | MonoBehaviour |  | BD_Audios |
-| Camara |  | class | Camara.cs | 19 | 2 | 3 | 0 | MonoBehaviour |  |  |
-| BD_Audios |  | class | BD_Audios.cs | 198 | 9 | 1 | 0 | MonoBehaviour |  | CoroutineHelper |
-| CoroutineHelper |  | class | BD_Audios.cs | 26 | 1 | 1 | 1 | MonoBehaviour |  |  |
-| GameEventBus | Redes.Core | class | GameEventBus.cs | 53 | 4 | 0 | 0 | ScriptableObject |  |  |
-| GamePhase | Redes.Core | enum | GameEnums.cs | 8 | 0 | 5 | 0 |  |  |  |
-| MatchResult | Redes.Core | enum | GameEnums.cs | 6 | 0 | 3 | 0 |  |  |  |
-| GameConstants | Redes.Core | static class | GameConstants.cs | 21 | 0 | 8 | 0 |  |  |  |
-| MatchNetworkController | Redes.Gameplay | class | MatchNetworkController.cs | 285 | 15 | 6 | 1 | NetworkBehaviour |  | MatchController; GameEventBus; RedesLog; MatchResult; GameFlowController |
-| TerrainModel | Redes.Models | class | TerrainModel.cs | 8 | 0 | 2 | 2 | MonoBehaviour |  |  |
-| PlayerModel | Redes.Models | class | PlayerModel.cs | 21 | 2 | 0 | 3 |  |  | GameConstants |
-| IEntityDisplayModel | Redes.Models | interface | IEntityDisplayModel.cs | 7 | 0 | 0 | 4 |  |  |  |
-| GameStateModel | Redes.Models | class | GameStateModel.cs | 25 | 2 | 0 | 2 |  |  | GamePhase |
-| RoomSessionHandler | Redes.Network | class | RoomSessionHandler.cs | 64 | 2 | 2 | 0 |  | ISessionListHandler | HostNetworkService; NetworkSceneManagerDefault; RedesLog; GameConstants |
-| PlayerSpawner | Redes.Network | class | PlayerSpawner.cs | 87 | 6 | 2 | 0 | MonoBehaviour |  | RedesLog |
-| NetworkInputData | Redes.Network | struct | NetworkInputData.cs | 6 | 0 | 3 | 0 |  | INetworkInput |  |
-| InputButton | Redes.Network | enum | NetworkInputData.cs | 5 | 0 | 2 | 0 |  |  |  |
-| ISessionListHandler | Redes.Network | interface | ISessionListHandler.cs | 8 | 1 | 0 | 0 |  |  |  |
+| VFXManager | Redes.Views | class | VFXManager.cs | 168 | 9 | 10 | 1 | MonoBehaviour |  | PooledParticleHelper; RedesLog |
+| TerrainView | Redes.Views | class | TerrainView.cs | 21 | 1 | 1 | 0 | MonoBehaviour |  |  |
+| IInteractable |  | interface | IInteractable.cs | 6 | 3 | 0 | 0 |  |  |  |
+| DesactivarPorTimer |  | class | DesactivarPorTimer.cs | 18 | 3 | 0 | 0 | MonoBehaviour |  |  |
+| UnitView |  | class | UnitView.cs | 479 | 30 | 29 | 0 | MonoBehaviour |  | UnitModel; IndicatorEntry; IndicatorType; UnitSpecialization |
+| UnitTeam | Game.Core | enum | UnitTeam.cs | 6 | 0 | 3 | 0 |  |  |  |
+| IUnitState | Game.Squad | interface | UnitStates.cs | 7 | 4 | 0 | 0 |  |  | UnitController |
+| UnitPathRenderer |  | class | UnitPathRenderer.cs | 45 | 3 | 5 | 0 | MonoBehaviour |  | UnitController; UnitFSM; State |
+| UnitSpecialization |  | enum | UnitModel.cs | 1 | 0 | 5 | 0 |  |  |  |
+| UnitModel |  | class | UnitModel.cs | 218 | 11 | 26 | 5 | MonoBehaviour | IHealth | UnitTeam; UnitSpecialization; Destruible |
+| IndicatorEntry |  | class | UnitIndicatorSetup.cs | 12 | 0 | 5 | 0 |  |  |  |
+| IndicatorType |  | enum | UnitIndicatorSetup.cs | 7 | 0 | 4 | 0 |  |  |  |
+| ICharacterInput | Game.MVC | interface | ICharacterInput.cs | 9 | 6 | 0 | 0 |  |  |  |
+| CharacterControllerMVC | Game.MVC | class | CharacterControllerMVC.cs | 80 | 5 | 4 | 0 |  |  | CharacterModel; CharacterView; ICharacterInput; IMovementHandler |
+| SelectedSoldierUIFeedback |  | class | SelectedSoldierUIFeedback.cs | 11 | 1 | 0 | 0 | MonoBehaviour |  | UnitController |
+| WeaponModel | USP.Core | class | WeaponModel.cs | 121 | 11 | 8 | 3 | MonoBehaviour |  |  |
+| IHealth | USP.Core | interface | Interfaces.cs | 7 | 1 | 0 | 3 |  |  |  |
+| IMovable | USP.Core | interface | Interfaces.cs | 6 | 2 | 0 | 1 |  |  |  |
+| IAttackable | USP.Core | interface | Interfaces.cs | 5 | 1 | 0 | 1 |  |  |  |
+| IInputProvider | USP.Core | interface | Interfaces.cs | 5 | 2 | 0 | 0 |  |  |  |
+| InformacionPersonaje | USP.Core | class | InformacionPersonaje.cs | 199 | 16 | 22 | 3 | MonoBehaviour | IHealth | WeaponController; GameManager |
+| IDaniable |  | interface | IDaniable.cs | 9 | 1 | 0 | 0 |  |  |  |
+| CharacterModel | USP.Core | class | CharacterModel.cs | 93 | 8 | 12 | 0 | MonoBehaviour |  | InformacionPersonaje |
+| PersecucionEnemigo |  | class | PersecucionEnemigo.cs | 70 | 4 | 5 | 0 | MonoBehaviour |  | Enemigo |
+| IA_P2_BusEvent_Manager |  | class | IA_P2_BusEvent_Manager.cs | 34 | 3 | 5 | 0 | MonoBehaviour |  | IA_P2_FSM |
+| CrearYDestruir |  | class | CrearYDestruir.cs | 23 | 2 | 2 | 0 | MonoBehaviour |  |  |
+| AutoDestruccionSegura |  | class | AutoDestruccionSegura.cs | 26 | 3 | 2 | 0 | MonoBehaviour |  |  |
+| Soldado_Anim | USP.UI | class | Soldado_Anim.cs | 40 | 2 | 2 | 0 | MonoBehaviour |  | BD_Audios |
+| CambiarOpacidad | USP.UI | class | CambiarOpacidad.cs | 41 | 2 | 8 | 0 | MonoBehaviour |  |  |
+| WeaponView | USP.Weapons | class | WeaponView.cs | 142 | 8 | 8 | 0 | MonoBehaviour |  | CambiarOpacidad; Proyectil; InformacionPersonaje; WeaponModel; Bala; BD_Audios |
+| WeaponController | USP.Weapons | class | WeaponController.cs | 78 | 4 | 6 | 0 | MonoBehaviour |  | WeaponModel; WeaponView; IWeaponInput; WeaponControllerMVC; UnityWeaponInput |
+| Proyectil2 | USP.Weapons | class | Proyectil2.cs | 30 | 3 | 3 | 0 | MonoBehaviour |  |  |
+| Proyectil | USP.Weapons | class | Proyectil.cs | 143 | 6 | 9 | 0 | MonoBehaviour |  | Manager_VFX; IDaniable; InformacionPersonaje; Enemigo |
+| Cohete | USP.Weapons | class | Cohete.cs | 54 | 6 | 4 | 0 | MonoBehaviour |  | IDaniable |
+| VibracionCamara |  | class | VibracionCamara.cs | 35 | 3 | 3 | 0 | MonoBehaviour |  | ConfiguracionGlobal |
+| Torreta |  | class | Torreta.cs | 28 | 2 | 4 | 0 | MonoBehaviour |  | GameManager |
+| SistemaPuntaje |  | class | SistemaPuntaje.cs | 4 | 0 | 0 | 0 | MonoBehaviour |  |  |
+| SenalizacionDeEnemigos |  | class | SenalisacionAEnemigos.cs | 101 | 3 | 6 | 0 | MonoBehaviour |  |  |
 | INetworkService | Redes.Network | interface | INetworkService.cs | 16 | 3 | 0 | 2 |  |  |  |
-| HostNetworkService | Redes.Network | class | HostNetworkService.cs | 430 | 29 | 7 | 5 | MonoBehaviour | INetworkService; INetworkRunnerCallbacks | PlayerSpawner; RedesLog; NetworkSceneManagerDefault; GameConstants; ResultView; GameFlowController; NetworkInputData; InputButton |
-| CentralizadorScripts |  | class | CentralizadorScripts.cs | 98 | 1 | 0 | 0 | EditorWindow |  | AssetDatabase; EditorUtility |
-| ILWeaverException | Fusion.CodeGen | class | Fusion.CodeGen.cs | 15 | 3 | 0 | 0 | Exception |  |  |
-| NetworkProjectConfigImporterEditor | Fusion.Editor | class | NetworkProjectConfigImporterEditor.cs | 131 | 6 | 5 | 2 | ScriptedImporterEditor |  | NetworkProjectConfigImporter; LogSettingsDrawer; FusionEditorGUI; EditorGUI; NetworkPrefabsInspector; EnabledScope; NetworkProjectConfigUtilities; EditorUtility |
-| NetworkProjectConfigImporter | Fusion.Editor | class | NetworkProjectConfigImporter.cs | 225 | 5 | 9 | 0 | ScriptedImporter |  | NetworkAssetSourceFactory; AssetDatabaseUtils; AssetDatabase; NetworkAssetSourceFactoryContext; FusionCustomDependency |
-| Postprocessor | Fusion.Editor | class | NetworkProjectConfigImporter.cs | 57 | 2 | 0 | 0 | AssetPostprocessor |  | AssetDatabase |
-| NetworkPrefabsInspector | Fusion.Editor | class | NetworkPrefabsInspector.cs | 287 | 4 | 1 | 0 | EditorWindow |  | Grid; EditorGUI; FusionGridItem; AssetDatabase; NetworkProjectConfigUtilities; LoadState; GridItem; Column; FusionEditorSkin; FusionEditorGUI; ContentColorScope; INetworkPrefabSourceDrawer; EditorUtility; FusionGrid |
-| LoadState | Fusion.Editor | enum | NetworkPrefabsInspector.cs | 6 | 0 | 4 | 0 |  |  |  |
-| InspectorTreeViewState | Fusion.Editor | class | NetworkPrefabsInspector.cs | 5 | 0 | 2 | 0 | TreeViewState |  |  |
-| GridItem | Fusion.Editor | class | NetworkPrefabsInspector.cs | 53 | 1 | 2 | 8 | FusionGridItem |  | AssetDatabase; NetworkProjectConfigUtilities; LoadState |
-| Grid | Fusion.Editor | class | NetworkPrefabsInspector.cs | 179 | 5 | 2 | 0 | FusionGrid |  | GridItem; Column; FusionEditorSkin; LoadState; FusionEditorGUI; ContentColorScope; EditorGUI; INetworkPrefabSourceDrawer; EditorUtility |
-| FusionWeaverTriggerImporter | Fusion.Editor | class | FusionWeaverTriggerImporter.cs | 57 | 1 | 4 | 0 | ScriptedImporter |  | NetworkProjectConfigImporter; ILWeaverUtils; FusionCustomDependency; EditorApplication; NetworkProjectConfigUtilities |
-| Postprocessor | Fusion.Editor | class | FusionWeaverTriggerImporter.cs | 10 | 1 | 0 | 0 | AssetPostprocessor |  | NetworkProjectConfigImporter |
+| HostNetworkService | Redes.Network | class | HostNetworkService.cs | 583 | 29 | 6 | 5 | MonoBehaviour | INetworkService; INetworkRunnerCallbacks | PlayerSpawner; RedesLog; NetworkSceneManagerDefault; GameConstants; ResultView; GameFlowController; NetworkInputData; InputButton |
+| PlayerTeleport | Redes.Player | class | PlayerTeleport.cs | 136 | 4 | 5 | 5 | NetworkBehaviour |  | GameConstants; PlayerEventBus; NetworkInputData; InputButton; RedesLog; VFXManager |
+| PlayerShooting | Redes.Player | class | PlayerShooting.cs | 105 | 3 | 5 | 3 | NetworkBehaviour |  | AmmoSystem; GameEventBus; PlayerEventBus; RedesLog; Projectile |
+| PlayerMovement | Redes.Player | class | PlayerMovement.cs | 91 | 3 | 4 | 1 | NetworkBehaviour |  | GameConstants; PlayerEventBus; NetworkInputData |
+| PlayerHealth | Redes.Player | class | PlayerHealth.cs | 196 | 4 | 5 | 3 | NetworkBehaviour | IDamageable | GameConstants; GameEventBus; PlayerEventBus; RedesLog; VFXManager; NetworkPlayer |
+| PlayerEventBus | Redes.Player | class | PlayerEventBus.cs | 75 | 9 | 9 | 0 | MonoBehaviour |  |  |
+| PlayerCrouch | Redes.Player | class | PlayerCrouch.cs | 117 | 5 | 10 | 1 | NetworkBehaviour |  | PlayerEventBus; GameConstants; NetworkInputData; InputButton; RedesLog |
+| RevivalBarView | Game.Squad | class | RevivalBarView.cs | 10 | 0 | 7 | 0 | MonoBehaviour |  | UnitController |
+| RehenBruto |  | class | RehenBruto.cs | 65 | 2 | 7 | 0 | MonoBehaviour |  | IA_P2_AgentIA; GlobalData |
+| PositionManager |  | class | PositionManager.cs | 30 | 3 | 2 | 0 | MonoBehaviour |  | GlobalData; UnitController; UnitTeam; EsperandoState; SeguirFormacionState |
+| Municion |  | class | Municion.cs | 15 | 2 | 2 | 0 | MonoBehaviour |  |  |
+| MenuPausa |  | class | MenuPausa.cs | 38 | 3 | 2 | 0 | MonoBehaviour |  |  |
+| MarkerAnim |  | class | MarkerAnim.cs | 33 | 2 | 3 | 0 | MonoBehaviour |  |  |
+| Manager_VFX |  | class | Manager_VFX.cs | 131 | 4 | 4 | 1 | MonoBehaviour |  |  |
+| MainGameController |  | class | MainGameController.cs | 94 | 2 | 10 | 0 | MonoBehaviour |  | LeaderManager; GlobalData; UnitModel; UnitSpecialization; UnitFSM |
+| LiderandoState | Game.Squad | class | LiderandoState.cs | 148 | 5 | 5 | 0 |  | IUnitState | UnitController; UnitSpecialization; LeaderManager; GEN_Inputs; CursorManager |
+| SeguirFormacionState | Game.Squad | class | LiderandoState.cs | 68 | 4 | 0 | 0 |  | IUnitState | UnitController; GlobalData; EsperandoState; DetectableType; Enemigo; AtacarState |
+| AtacarState | Game.Squad | class | LiderandoState.cs | 70 | 4 | 1 | 0 |  | IUnitState | UnitController; IndicatorType; UnitTeam; SeguirFormacionState; EsperandoState; PerseguirState |
+| PerseguirState | Game.Squad | class | LiderandoState.cs | 57 | 4 | 0 | 0 |  | IUnitState | UnitController; IndicatorType; UnitTeam; SeguirFormacionState; EsperandoState; AtacarState |
+| EsperandoState | Game.Squad | class | LiderandoState.cs | 44 | 6 | 3 | 0 |  | IUnitState | UnitController; IndicatorType; SeguirFormacionState |
+| HuirDetrasLiderState | Game.Squad | class | LiderandoState.cs | 34 | 4 | 0 | 0 |  | IUnitState | UnitController; GlobalData; SeguirFormacionState |
+| IrADestinoState | Game.Squad | class | LiderandoState.cs | 31 | 4 | 0 | 0 |  | IUnitState | UnitController; IndicatorType; EsperandoState |
+| LeaderManager |  | class | LeaderManager.cs | 263 | 11 | 9 | 0 | MonoBehaviour |  | UnitController; UnitSpecialization; GEN_Inputs; GlobalData; MainGameController; SeguirFormacionState; LiderandoState |
+| InteractableItem |  | class | InteractableItem.cs | 80 | 6 | 4 | 0 | MonoBehaviour | IInteractable | UnitController; UnitTeam; BD_Audios |
+| IA_P2_PathNode |  | class | IA_P2_PathNode.cs | 137 | 1 | 2 | 0 | MonoBehaviour |  | IA_P2_PathfindingModel |
+| IA_P2_PathfindingModel |  | class | IA_P2_PathfindingModel.cs | 97 | 5 | 6 | 0 | MonoBehaviour |  | IA_P2_PathNode; IA_P2_LineOfSight3D |
+| IA_P2_AgentIA |  | class | IA_P2_AgentIA.cs | 315 | 12 | 17 | 0 | MonoBehaviour |  | UnitModel; IA_P2_PathfindingModel; IA_P2_PathfindingManager; IA_F_PathFinding_Theta |
+| RedesVisualConfigurator | Redes.EditorTools | static class | RedesVisualConfigurator.cs | 255 | 2 | 4 | 0 |  |  | AssetDatabase; EditorUtility; LobbyView |
+| RedesTestSceneBuilder | Redes.EditorTools | static class | RedesTestSceneBuilder.cs | 719 | 11 | 1 | 0 |  |  | CameraFollow; AssetDatabase; RedesPrefabCreator; EntityDisplayView; TestSceneManager; DummyEnemy; OfflinePlayerTester; PlayerEventBus; RedesAudioSetup; PlayerAnimationView; RagdollController; PlayerAmmoView; CustomCursorView; GameEventBus; DeathScreenView; DeathScreenController |
+| GameFlowController | Redes.Controllers | class | GameFlowController.cs | 388 | 16 | 7 | 1 | MonoBehaviour |  | HostNetworkService; LobbyView; GameHudView; MatchController; GameStateModel; INetworkService; RedesLog; GameConstants; GamePhase; ResultView; RedesLoadingScreen; MatchResult |
+| TeleportCooldownView | Redes.Views | class | TeleportCooldownView.cs | 189 | 7 | 14 | 0 | MonoBehaviour |  | PlayerTeleport; PlayerEventBus; GameConstants |
+| ResultView | Redes.Views | class | ResultView.cs | 96 | 7 | 6 | 0 | MonoBehaviour |  | MatchResult; RedesLog |
+| NetworkSceneManagerDefault | Fusion | class | NetworkSceneManagerDefault.cs | 831 | 24 | 9 | 6 | Behaviour | INetworkSceneManager | FusionUnitySceneManagerUtils; SceneEqualityComparer; MultiPeerSceneRoot; FusionCoroutine; LoadingScope |
+| MultiPeerSceneRoot | Fusion | class | NetworkSceneManagerDefault.cs | 6 | 0 | 4 | 0 | MonoBehaviour |  |  |
+| LoadingScope | Fusion | struct | NetworkSceneManagerDefault.cs | 14 | 2 | 1 | 0 |  | IDisposable | NetworkSceneManagerDefault |
+| RedesSceneLinker | Redes.EditorTools | static class | RedesSceneLinker.cs | 315 | 8 | 1 | 0 |  |  | HostNetworkService; PlayerSpawner; GameFlowController; MatchController; PlayerController; MatchNetworkController; LobbyView; GameHudView; ResultView; AssetDatabase; RedesPrefabCreator; VFXManager; TeleportCooldownView; EntityDisplayManager; EntityDisplayView; GameEventBus; PlayerHealth; PlayerShooting; AmmoSystem; PlayerAnimationView; RedesProceduralAudio; RedesAudioSetup; PlaySoundOnButtonClick; EditorUtility |
 
 
 ### Relaciones
 
 | From | RelationType | To |
 |---|---|---|
-| FusionGlobalScriptableObjectAddressAttribute | hereda | FusionGlobalScriptableObjectSourceAttribute |
-| FusionGlobalScriptableObjectResourceAttribute | hereda | FusionGlobalScriptableObjectSourceAttribute |
-| FusionCoroutine | implementa | ICoroutine |
-| FusionCoroutine | implementa | IDisposable |
-| FusionLogInitializer | usa | FusionUnityLogger |
-| FusionUnityLogger | hereda | FusionUnityLoggerBase |
-| FusionUnityLogger | usa | Stage |
-| JsonUtilityExtensions | usa | TypeNameWrapper |
-| FusionMppm | usa | FusionMppmStatus |
-| FusionMppm | usa | FusionMppmCommand |
-| NetworkObjectBaker | usa | TransformPath |
-| NetworkObjectBaker | usa | TransformPathCache |
-| NetworkObjectBaker | usa | Result |
-| NetworkObjectBaker | usa | _Indices |
-| TransformPath | usa | _Indices |
-| TransformPathCache | implementa | IComparer |
-| TransformPathCache | implementa | IEqualityComparer |
-| TransformPathCache | usa | TransformPath |
-| NetworkPrefabSourceStatic | hereda | NetworkAssetSourceStatic |
-| NetworkPrefabSourceStatic | implementa | INetworkPrefabSource |
-| NetworkPrefabSourceStaticLazy | hereda | NetworkAssetSourceStaticLazy |
-| NetworkPrefabSourceStaticLazy | implementa | INetworkPrefabSource |
-| NetworkPrefabSourceResource | hereda | NetworkAssetSourceResource |
-| NetworkPrefabSourceResource | implementa | INetworkPrefabSource |
-| FusionStatisticsHelper | usa | RenderSimStats |
-| FusionStatsGraphBase | hereda | MonoBehaviour |
-| FusionStatsGraphBase | usa | FusionStatBuffer |
-| FusionStatsGraphBase | usa | FusionStatistics |
-| SceneEqualityComparer | implementa | IEqualityComparer |
-| NetworkRunnerVisibilityExtensions | usa | IRunnerVisibilityRecognizedType |
-| NetworkRunnerVisibilityExtensions | usa | RunnerVisibility |
-| NetworkRunnerVisibilityExtensions | usa | RunnerVisibilityLink |
-| NetworkRunnerVisibilityExtensions | usa | RunnerVisibilityLinksRoot |
-| NetworkRunnerVisibilityExtensions | usa | EnableOnSingleRunner |
-| NetworkRunnerVisibilityExtensions | usa | PreferredRunners |
-| RunnerVisibility | usa | RunnerVisibilityLink |
-| VfxController | hereda | MonoBehaviour |
-| DropdownController | hereda | MonoBehaviour |
-| DropdownController | usa | VfxController |
-| DebugColisionesFull | hereda | MonoBehaviour |
-| CollisionDetector | hereda | MonoBehaviour |
-| DesactivarPorTimer | hereda | MonoBehaviour |
-| UnitView | hereda | MonoBehaviour |
-| UnitView | usa | UnitModel |
-| UnitView | usa | IndicatorEntry |
-| UnitView | usa | IndicatorType |
-| UnitView | usa | UnitSpecialization |
-| IUnitState | usa | UnitController |
-| TriggerCorregir | usa | RedesSceneCreator |
-| Physics2DMigrator | usa | AssetDatabase |
-| Physics2DMigrator | usa | EditorApplication |
-| HierarchyToClipboardMenu | usa | EditorUtility |
-| HierarchyToClipboardMenu | usa | SerializedProperty |
-| CreateTestSceneMenu | usa | GameManager |
-| CreateTestSceneMenu | usa | DebugLogger |
-| CreateTestSceneMenu | usa | GameLoopReferee |
-| CreateTestSceneMenu | usa | BulletPool |
-| CreateTestSceneMenu | usa | AssetDatabase |
-| CreateTestSceneMenu | usa | Bullet |
-| CreateTestSceneMenu | usa | PlayerModel |
-| CreateTestSceneMenu | usa | PlayerView |
-| CreateTestSceneMenu | usa | PlayerController |
-| CreateTestSceneMenu | usa | Weapon |
-| CreateTestSceneMenu | usa | SimpleEnemyAI |
-| CreateScenesAndPrefabsMenu | usa | AssetDatabase |
-| CreateScenesAndPrefabsMenu | usa | Bullet |
-| CreateScenesAndPrefabsMenu | usa | PlayerModel |
-| CreateScenesAndPrefabsMenu | usa | PlayerView |
-| CreateScenesAndPrefabsMenu | usa | PlayerController |
-| CreateScenesAndPrefabsMenu | usa | SimpleAnimator |
-| CreateScenesAndPrefabsMenu | usa | FloatingHealthBar |
-| CreateScenesAndPrefabsMenu | usa | Weapon |
-| CreateScenesAndPrefabsMenu | usa | GameManager |
-| CreateScenesAndPrefabsMenu | usa | DebugLogger |
-| CreateScenesAndPrefabsMenu | usa | GameLoopReferee |
-| CreateScenesAndPrefabsMenu | usa | BulletPool |
-| CreateScenesAndPrefabsMenu | usa | EffectPool |
-| CreateScenesAndPrefabsMenu | usa | ScreenManager |
-| CreateScenesAndPrefabsMenu | usa | SerializedProperty |
-| ComponentPropertiesCopierTestMenu | usa | ComponentPropertiesCopier |
 | ComponentPropertiesCopier | usa | SerializedProperty |
+| CentralizadorScripts | hereda | EditorWindow |
+| CentralizadorScripts | usa | AssetDatabase |
+| CentralizadorScripts | usa | EditorUtility |
+| ILWeaverException | hereda | Exception |
+| NetworkProjectConfigImporterEditor | hereda | ScriptedImporterEditor |
+| NetworkProjectConfigImporterEditor | usa | NetworkProjectConfigImporter |
+| NetworkProjectConfigImporterEditor | usa | LogSettingsDrawer |
+| NetworkProjectConfigImporterEditor | usa | FusionEditorGUI |
+| NetworkProjectConfigImporterEditor | usa | EditorGUI |
+| NetworkProjectConfigImporterEditor | usa | NetworkPrefabsInspector |
+| NetworkProjectConfigImporterEditor | usa | EnabledScope |
+| NetworkProjectConfigImporterEditor | usa | NetworkProjectConfigUtilities |
+| NetworkProjectConfigImporterEditor | usa | EditorUtility |
+| NetworkProjectConfigImporter | hereda | ScriptedImporter |
+| NetworkProjectConfigImporter | usa | NetworkAssetSourceFactory |
+| NetworkProjectConfigImporter | usa | AssetDatabaseUtils |
+| NetworkProjectConfigImporter | usa | AssetDatabase |
+| NetworkProjectConfigImporter | usa | NetworkAssetSourceFactoryContext |
+| NetworkProjectConfigImporter | usa | FusionCustomDependency |
+| Postprocessor | hereda | AssetPostprocessor |
+| Postprocessor | usa | AssetDatabase |
+| NetworkPrefabsInspector | hereda | EditorWindow |
+| NetworkPrefabsInspector | usa | Grid |
+| NetworkPrefabsInspector | usa | EditorGUI |
+| NetworkPrefabsInspector | usa | FusionGridItem |
+| NetworkPrefabsInspector | usa | AssetDatabase |
+| NetworkPrefabsInspector | usa | NetworkProjectConfigUtilities |
+| NetworkPrefabsInspector | usa | LoadState |
+| NetworkPrefabsInspector | usa | GridItem |
+| NetworkPrefabsInspector | usa | Column |
+| NetworkPrefabsInspector | usa | FusionEditorSkin |
+| NetworkPrefabsInspector | usa | FusionEditorGUI |
+| NetworkPrefabsInspector | usa | ContentColorScope |
+| NetworkPrefabsInspector | usa | INetworkPrefabSourceDrawer |
+| NetworkPrefabsInspector | usa | EditorUtility |
+| NetworkPrefabsInspector | usa | FusionGrid |
+| InspectorTreeViewState | hereda | TreeViewState |
+| GridItem | hereda | FusionGridItem |
+| GridItem | usa | AssetDatabase |
+| GridItem | usa | NetworkProjectConfigUtilities |
+| GridItem | usa | LoadState |
+| Grid | hereda | FusionGrid |
+| Grid | usa | GridItem |
+| Grid | usa | Column |
+| Grid | usa | FusionEditorSkin |
+| Grid | usa | LoadState |
+| Grid | usa | FusionEditorGUI |
+| Grid | usa | ContentColorScope |
+| Grid | usa | EditorGUI |
+| Grid | usa | INetworkPrefabSourceDrawer |
+| Grid | usa | EditorUtility |
+| FusionWeaverTriggerImporter | hereda | ScriptedImporter |
+| FusionWeaverTriggerImporter | usa | NetworkProjectConfigImporter |
+| FusionWeaverTriggerImporter | usa | ILWeaverUtils |
+| FusionWeaverTriggerImporter | usa | FusionCustomDependency |
+| FusionWeaverTriggerImporter | usa | EditorApplication |
+| FusionWeaverTriggerImporter | usa | NetworkProjectConfigUtilities |
+| Postprocessor | hereda | AssetPostprocessor |
+| Postprocessor | usa | NetworkProjectConfigImporter |
+| FusionRunnerVisibilityControlsWindow | hereda | EditorWindow |
+| FusionRunnerVisibilityControlsWindow | usa | RunnerEnableVisibility |
+| FusionRunnerVisibilityControlsWindow | usa | NetworkRunnerVisibilityExtensions |
+| FusionRunnerVisibilityControlsWindow | usa | EditorGUIUtility |
+| FusionRunnerVisibilityControlsWindow | usa | Labels |
+| FusionRunnerVisibilityControlsWindow | usa | FusionEditorSkin |
+| FusionRunnerVisibilityControlsWindow | usa | FusionStatistics |
+| FusionRunnerVisibilityControlsWindow | usa | EditorGUI |
+| FusionRunnerVisibilityControlsWindow | usa | DisabledGroupScope |
+| FusionRunnerVisibilityControlsWindow | usa | Event |
+| FusionRunnerVisibilityControlsWindow | usa | CanvasAnchor |
+| Labels | usa | RunnerEnableVisibility |
+| Labels | usa | NetworkRunnerVisibilityExtensions |
+| FusionEditorSkin | hereda | ScriptableObject |
+| FusionEditorSkin | usa | EditorGUIUtility |
+| FusionEditorSkin | usa | LazyAsset |
+| FusionEditorSkin | usa | LazyGUIStyle |
+| FusionEditorConfigImporter | hereda | ScriptedImporter |
+| GameLoopReferee | hereda | MonoBehaviour |
+| GameLoopReferee | usa | PlayerModel |
+| GameLoopReferee | usa | PlayerController |
+| GameLoopReferee | usa | SimpleEnemyAI |
+| GameLoopReferee | usa | GameManager |
 | FloatingHealthBar | hereda | MonoBehaviour |
 | FloatingHealthBar | usa | PlayerModel |
 | EffectPool | hereda | MonoBehaviour |
@@ -24323,57 +26084,16 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | WeaponControllerMVC | usa | IWeaponInput |
 | UnityWeaponInput | implementa | IWeaponInput |
 | UnityCharacterInput | implementa | ICharacterInput |
-| FusionNetworkObjectStatistics | hereda | MonoBehaviour |
-| FusionNetworkObjectStatistics | usa | FusionStatistics |
-| RunnerVisibilityLinksRoot | hereda | MonoBehaviour |
-| RunnerVisibilityLink | hereda | MonoBehaviour |
-| RunnerVisibilityLink | usa | PreferredRunners |
-| RunnerVisibilityLink | usa | ComponentType |
-| RunnerVisibilityLink | usa | NetworkRunnerVisibilityExtensions |
-| RunnerLagCompensationGizmos | hereda | Behaviour |
-| RunnerEnableVisibility | hereda | Behaviour |
-| RunnerEnableVisibility | implementa | INetworkRunnerCallbacks |
-| RunnerAOIGizmos | hereda | SimulationBehaviour |
-| EnableOnSingleRunner | hereda | Behaviour |
-| EnableOnSingleRunner | usa | RunnerVisibilityLink |
-| EnableOnSingleRunner | usa | PreferredRunners |
-| NetworkSceneManagerDefault | hereda | Behaviour |
-| NetworkSceneManagerDefault | implementa | INetworkSceneManager |
-| NetworkSceneManagerDefault | usa | FusionUnitySceneManagerUtils |
-| NetworkSceneManagerDefault | usa | SceneEqualityComparer |
-| NetworkSceneManagerDefault | usa | MultiPeerSceneRoot |
-| NetworkSceneManagerDefault | usa | FusionCoroutine |
-| NetworkSceneManagerDefault | usa | LoadingScope |
-| MultiPeerSceneRoot | hereda | MonoBehaviour |
-| LoadingScope | implementa | IDisposable |
-| LoadingScope | usa | NetworkSceneManagerDefault |
-| NetworkObjectProviderDefault | hereda | Behaviour |
-| NetworkObjectProviderDefault | implementa | INetworkObjectProvider |
-| NetworkCCData | implementa | INetworkStruct |
-| NetworkCharacterController | hereda | NetworkTRSP |
-| NetworkCharacterController | implementa | INetworkTRSPTeleport |
-| NetworkCharacterController | implementa | IBeforeAllTicks |
-| NetworkCharacterController | implementa | IAfterAllTicks |
-| NetworkCharacterController | implementa | IBeforeCopyPreviousState |
-| NetworkCharacterController | usa | NetworkCCData |
-| FusionBootstrapDebugGUI | hereda | Behaviour |
-| FusionBootstrapDebugGUI | usa | FusionBootstrap |
-| FusionBootstrapDebugGUI | usa | Stage |
-| FusionBootstrapDebugGUI | usa | FusionScalableIMGUI |
-| FusionBootstrap | hereda | Behaviour |
-| FusionBootstrap | usa | FusionMppmCommand |
-| FusionBootstrap | usa | StartCommand |
-| FusionBootstrap | usa | StartModes |
-| FusionBootstrap | usa | Stage |
-| FusionBootstrap | usa | State |
-| FusionBootstrap | usa | FusionBootstrapDebugGUI |
-| FusionBootstrap | usa | FusionMppm |
-| FusionBootstrap | usa | FusionMppmStatus |
-| FusionBootstrap | usa | NetworkSceneManagerDefault |
-| FusionBootstrap | usa | NetworkObjectProviderDefault |
-| StartCommand | hereda | FusionMppmCommand |
-| FusionBasicBillboard | hereda | Behaviour |
-| FusionAddressablePrefabsPreloader | hereda | MonoBehaviour |
+| IndicadorEnemigos | hereda | MonoBehaviour |
+| IndicadorEnemigos | usa | GameManager |
+| Ideasypseudocodigos | hereda | MonoBehaviour |
+| GestorTexto | hereda | MonoBehaviour |
+| CodigoDeInicio | hereda | MonoBehaviour |
+| CodigoDeInicio | usa | BD_Audios |
+| Camara | hereda | MonoBehaviour |
+| BD_Audios | hereda | MonoBehaviour |
+| BD_Audios | usa | CoroutineHelper |
+| CoroutineHelper | hereda | MonoBehaviour |
 | GlobalLogicTests | usa | DebugLogger |
 | GlobalLogicTests | usa | GameManager |
 | GlobalLogicTests | usa | EventBus |
@@ -24384,99 +26104,6 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | GlobalLogicTests | usa | PlayerModel |
 | GlobalLogicTests | usa | PlayerView |
 | GlobalLogicTests | usa | PlayerController |
-| RedesSceneLinker | usa | HostNetworkService |
-| RedesSceneLinker | usa | PlayerSpawner |
-| RedesSceneLinker | usa | GameFlowController |
-| RedesSceneLinker | usa | MatchController |
-| RedesSceneLinker | usa | PlayerController |
-| RedesSceneLinker | usa | MatchNetworkController |
-| RedesSceneLinker | usa | LobbyView |
-| RedesSceneLinker | usa | GameHudView |
-| RedesSceneLinker | usa | ResultView |
-| RedesSceneLinker | usa | AssetDatabase |
-| RedesSceneLinker | usa | RedesPrefabCreator |
-| RedesSceneLinker | usa | EntityDisplayManager |
-| RedesSceneLinker | usa | EntityDisplayView |
-| RedesSceneLinker | usa | GameEventBus |
-| RedesSceneLinker | usa | PlayerHealth |
-| RedesSceneLinker | usa | PlayerShooting |
-| RedesSceneLinker | usa | AmmoSystem |
-| RedesSceneLinker | usa | PlayerAnimationController |
-| RedesSceneLinker | usa | EditorUtility |
-| RedesSceneCreator | usa | TerrainController |
-| RedesSceneCreator | usa | AssetDatabase |
-| RedesSceneCreator | usa | HostNetworkService |
-| RedesSceneCreator | usa | PlayerSpawner |
-| RedesSceneCreator | usa | MatchNetworkController |
-| RedesSceneCreator | usa | GameFlowController |
-| RedesSceneCreator | usa | MatchController |
-| RedesSceneCreator | usa | PlayerController |
-| RedesSceneCreator | usa | EntityDisplayManager |
-| RedesSceneCreator | usa | VFXManager |
-| RedesSceneCreator | usa | LobbyView |
-| RedesSceneCreator | usa | GameHudView |
-| RedesSceneCreator | usa | ResultView |
-| RedesSceneCreator | usa | RedesPrefabCreator |
-| RedesSceneCreator | usa | RedesSceneLinker |
-| RedesPrefabCreator | usa | AssetDatabase |
-| RedesPrefabCreator | usa | GameEventBus |
-| RedesPrefabCreator | usa | NetworkPlayer |
-| RedesPrefabCreator | usa | PlayerMovement |
-| RedesPrefabCreator | usa | PlayerShooting |
-| RedesPrefabCreator | usa | PlayerHealth |
-| RedesPrefabCreator | usa | AmmoSystem |
-| RedesPrefabCreator | usa | PlayerAnimationController |
-| RedesPrefabCreator | usa | PlayerEventBus |
-| RedesPrefabCreator | usa | Projectile |
-| RedesPrefabCreator | usa | EntityDisplayView |
-| RedesBuildAll | usa | RedesSceneCreator |
-| RedesBuildAll | usa | RedesPrefabCreator |
-| RedesBuildAll | usa | RedesSceneLinker |
-| RedesBuildAll | usa | EditorApplication |
-| Projectile | hereda | NetworkBehaviour |
-| Projectile | usa | GameConstants |
-| Projectile | usa | RedesLog |
-| Projectile | usa | IDamageable |
-| Projectile | usa | NetworkPlayer |
-| TerrainController | hereda | MonoBehaviour |
-| TerrainController | usa | TerrainModel |
-| TerrainController | usa | TerrainView |
-| PlayerController | hereda | MonoBehaviour |
-| PlayerController | usa | GameHudView |
-| PlayerController | usa | PlayerModel |
-| PlayerController | usa | NetworkPlayer |
-| PlayerController | usa | GameConstants |
-| MatchController | hereda | MonoBehaviour |
-| MatchController | usa | ResultView |
-| MatchController | usa | MatchNetworkController |
-| MatchController | usa | MatchResult |
-| MatchController | usa | RedesLog |
-| GameFlowController | hereda | MonoBehaviour |
-| GameFlowController | usa | HostNetworkService |
-| GameFlowController | usa | LobbyView |
-| GameFlowController | usa | GameHudView |
-| GameFlowController | usa | MatchController |
-| GameFlowController | usa | GameStateModel |
-| GameFlowController | usa | INetworkService |
-| GameFlowController | usa | RedesLog |
-| GameFlowController | usa | GameConstants |
-| GameFlowController | usa | GamePhase |
-| GameFlowController | usa | ResultView |
-| GameFlowController | usa | MatchResult |
-| EntityDisplayManager | hereda | MonoBehaviour |
-| EntityDisplayManager | usa | EntityDisplayView |
-| EntityDisplayManager | usa | NetworkPlayer |
-| EntityDisplayManager | usa | IEntityDisplayModel |
-| EntityDisplayManager | usa | RedesLog |
-| UnitPathRenderer | hereda | MonoBehaviour |
-| UnitPathRenderer | usa | UnitController |
-| UnitPathRenderer | usa | UnitFSM |
-| UnitPathRenderer | usa | State |
-| UnitModel | hereda | MonoBehaviour |
-| UnitModel | implementa | IHealth |
-| UnitModel | usa | UnitTeam |
-| UnitModel | usa | UnitSpecialization |
-| UnitModel | usa | Destruible |
 | UnitController | hereda | MonoBehaviour |
 | UnitController | implementa | IDaniable |
 | UnitController | implementa | IDetectable |
@@ -24529,253 +26156,185 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | RevivingState | usa | IndicatorType |
 | RevivingState | usa | SeguirFormacionState |
 | RevivalSystemSetup | hereda | MonoBehaviour |
-| RevivalBarView | hereda | MonoBehaviour |
-| RevivalBarView | usa | UnitController |
-| RehenBruto | hereda | MonoBehaviour |
-| RehenBruto | usa | IA_P2_AgentIA |
-| RehenBruto | usa | GlobalData |
-| PositionManager | hereda | MonoBehaviour |
-| PositionManager | usa | GlobalData |
-| PositionManager | usa | UnitController |
-| PositionManager | usa | UnitTeam |
-| PositionManager | usa | EsperandoState |
-| PositionManager | usa | SeguirFormacionState |
-| Municion | hereda | MonoBehaviour |
-| Rigidbody2DMovementHandler | hereda | MonoBehaviour |
-| Rigidbody2DMovementHandler | implementa | IMovementHandler |
-| Rigidbody2DMovementHandler | usa | BD_Audios |
-| MovementProxy | usa | IMovable |
-| ShootingProxy | usa | IAttackable |
-| PersecucionEnemigo | hereda | MonoBehaviour |
-| PersecucionEnemigo | usa | Enemigo |
-| IA_P2_BusEvent_Manager | hereda | MonoBehaviour |
-| IA_P2_BusEvent_Manager | usa | IA_P2_FSM |
-| CrearYDestruir | hereda | MonoBehaviour |
-| AutoDestruccionSegura | hereda | MonoBehaviour |
-| Soldado_Anim | hereda | MonoBehaviour |
-| Soldado_Anim | usa | BD_Audios |
-| CambiarOpacidad | hereda | MonoBehaviour |
-| WeaponView | hereda | MonoBehaviour |
-| WeaponView | usa | CambiarOpacidad |
-| WeaponView | usa | Proyectil |
-| WeaponView | usa | InformacionPersonaje |
-| WeaponView | usa | WeaponModel |
-| WeaponView | usa | Bala |
-| WeaponView | usa | BD_Audios |
-| WeaponController | hereda | MonoBehaviour |
-| WeaponController | usa | WeaponModel |
-| WeaponController | usa | WeaponView |
-| WeaponController | usa | IWeaponInput |
-| WeaponController | usa | WeaponControllerMVC |
-| WeaponController | usa | UnityWeaponInput |
-| Proyectil2 | hereda | MonoBehaviour |
-| Proyectil | hereda | MonoBehaviour |
-| Proyectil | usa | Manager_VFX |
-| Proyectil | usa | IDaniable |
-| Proyectil | usa | InformacionPersonaje |
-| Proyectil | usa | Enemigo |
-| Cohete | hereda | MonoBehaviour |
-| Cohete | usa | IDaniable |
-| VibracionCamara | hereda | MonoBehaviour |
-| VibracionCamara | usa | ConfiguracionGlobal |
-| UnitFSM | hereda | MonoBehaviour |
-| UnitFSM | usa | State |
-| UnitFSM | usa | UnitController |
-| UnitFSM | usa | TickManager |
-| CambioDeLider | hereda | MonoBehaviour |
-| Weapon | hereda | MonoBehaviour |
-| Weapon | usa | PlayerModel |
-| Weapon | usa | PlayerView |
-| Weapon | usa | EventBus |
-| Weapon | usa | Bullet |
-| Weapon | usa | BulletPool |
-| SimpleEnemyAI | hereda | MonoBehaviour |
-| SimpleEnemyAI | usa | PlayerModel |
-| SimpleEnemyAI | usa | Weapon |
-| SimpleEnemyAI | usa | PlayerView |
-| SimpleEnemyAI | usa | PlayerController |
-| SimpleEnemyAI | usa | EventBus |
-| SimpleAnimator | hereda | MonoBehaviour |
-| ScreenManager | hereda | MonoBehaviour |
-| ScreenManager | usa | EventBus |
-| ScreenManager | usa | LocalNetworkMock |
-| ScreenManager | usa | RoomData |
-| PlayerView | hereda | MonoBehaviour |
-| PlayerView | usa | PlayerModel |
-| PlayerView | usa | SimpleAnimator |
-| PlayerView | usa | EventBus |
-| PlayerView | usa | ProceduralAudioGenerator |
-| PlayerModel | hereda | MonoBehaviour |
-| PlayerModel | usa | EventBus |
+| RedesSceneCreator | usa | TerrainController |
+| RedesSceneCreator | usa | TerrainView |
+| RedesSceneCreator | usa | AssetDatabase |
+| RedesSceneCreator | usa | HostNetworkService |
+| RedesSceneCreator | usa | PlayerSpawner |
+| RedesSceneCreator | usa | MatchNetworkController |
+| RedesSceneCreator | usa | GameFlowController |
+| RedesSceneCreator | usa | MatchController |
+| RedesSceneCreator | usa | PlayerController |
+| RedesSceneCreator | usa | EntityDisplayManager |
+| RedesSceneCreator | usa | VFXManager |
+| RedesSceneCreator | usa | RedesProceduralAudio |
+| RedesSceneCreator | usa | RedesAudioSetup |
+| RedesSceneCreator | usa | LobbyView |
+| RedesSceneCreator | usa | GameHudView |
+| RedesSceneCreator | usa | TeleportCooldownView |
+| RedesSceneCreator | usa | ResultView |
+| RedesSceneCreator | usa | DeathScreenView |
+| RedesSceneCreator | usa | DeathScreenController |
+| RedesSceneCreator | usa | CustomCursorView |
+| RedesSceneCreator | usa | GameEventBus |
+| RedesSceneCreator | usa | RedesLoadingScreen |
+| RedesProceduralAudio | usa | AssetDatabase |
+| RedesPrefabCreator | usa | AssetDatabase |
+| RedesPrefabCreator | usa | GameEventBus |
+| RedesPrefabCreator | usa | NetworkPlayer |
+| RedesPrefabCreator | usa | PlayerMovement |
+| RedesPrefabCreator | usa | PlayerShooting |
+| RedesPrefabCreator | usa | PlayerHealth |
+| RedesPrefabCreator | usa | AmmoSystem |
+| RedesPrefabCreator | usa | PlayerEventBus |
+| RedesPrefabCreator | usa | PlayerAnimationView |
+| RedesPrefabCreator | usa | PlayerCrouch |
+| RedesPrefabCreator | usa | PlayerTeleport |
+| RedesPrefabCreator | usa | RedesAudioSetup |
+| RedesPrefabCreator | usa | RagdollController |
+| RedesPrefabCreator | usa | Projectile |
+| RedesPrefabCreator | usa | EntityDisplayView |
+| RedesPrefabCreator | usa | DestructibleBombObstacle |
+| RedesBuildAll | usa | RedesSceneCreator |
+| RedesBuildAll | usa | RedesPrefabCreator |
+| RedesBuildAll | usa | RedesSceneLinker |
+| RedesBuildAll | usa | EditorApplication |
+| RedesBuildAll | usa | RedesAudioSetup |
+| RedesBuildAll | usa | RedesProceduralAudio |
+| RedesBuildAll | usa | AssetDatabase |
+| RedesBuildAll | usa | RedesVisualConfigurator |
+| RedesAudioSetup | usa | AssetDatabase |
+| RedesAudioSetup | usa | Editor |
+| AddObstacleFeedbackToPrefabs | usa | EditorApplication |
+| AddObstacleFeedbackToPrefabs | usa | AssetDatabase |
+| AddObstacleFeedbackToPrefabs | usa | ObstacleHitFeedback |
+| AddObstacleFeedbackToPrefabs | usa | EditorUtility |
+| Projectile | hereda | NetworkBehaviour |
+| Projectile | usa | GameConstants |
+| Projectile | usa | RedesLog |
+| Projectile | usa | IDamageable |
+| Projectile | usa | NetworkPlayer |
+| Projectile | usa | MatchNetworkController |
+| ObstacleHitFeedback | hereda | MonoBehaviour |
+| ObstacleHitFeedback | usa | RedesLog |
+| DestructibleBombObstacle | hereda | NetworkBehaviour |
+| DestructibleBombObstacle | implementa | IDamageable |
+| DestructibleBombObstacle | usa | BombState |
+| DestructibleBombObstacle | usa | RedesLog |
+| DestructibleBombObstacle | usa | NetworkPlayer |
+| TerrainController | hereda | MonoBehaviour |
+| TerrainController | usa | TerrainModel |
+| TerrainController | usa | TerrainView |
+| RedesLoadingScreen | hereda | MonoBehaviour |
 | PlayerController | hereda | MonoBehaviour |
+| PlayerController | usa | GameHudView |
+| PlayerController | usa | TeleportCooldownView |
 | PlayerController | usa | PlayerModel |
-| PlayerController | usa | PlayerView |
-| PlayerController | usa | Weapon |
-| PlayerController | usa | LocalNetworkMock |
+| PlayerController | usa | NetworkPlayer |
+| PlayerController | usa | GameConstants |
 | PlayerController | usa | EventBus |
-| LocalNetworkMock | usa | RoomData |
-| ImpactEffect | hereda | MonoBehaviour |
-| GameManager | hereda | MonoBehaviour |
-| GameManager | usa | EventBus |
-| GameManager | usa | PlayerModel |
-| GameManager | usa | LocalNetworkMock |
-| GameManager | usa | FloatingHealthBar |
-| GameLoopReferee | hereda | MonoBehaviour |
-| GameLoopReferee | usa | PlayerModel |
-| GameLoopReferee | usa | PlayerController |
-| GameLoopReferee | usa | SimpleEnemyAI |
-| GameLoopReferee | usa | GameManager |
-| CharacterView | hereda | MonoBehaviour |
-| IA_P2_ST_SearchingState | implementa | IA_P2_INT_gentState |
-| IA_P2_ST_SearchingState | usa | IA_P2_FSM |
-| IA_P2_ST_SearchingState | usa | AgentState |
-| IA_P2_ST_SearchingState | usa | IA_P2_LineOfSight3D |
-| IA_P2_ST_ReturningToPatrolState | implementa | IA_P2_INT_gentState |
-| IA_P2_ST_ReturningToPatrolState | usa | IA_P2_FSM |
-| IA_P2_ST_ReturningToPatrolState | usa | AgentState |
-| IA_P2_ST_PatrolState | implementa | IA_P2_INT_gentState |
-| IA_P2_ST_PatrolState | usa | IA_P2_FSM |
-| IA_P2_ST_PatrolState | usa | AgentState |
-| IA_P2_ST_ChaseState | implementa | IA_P2_INT_gentState |
-| IA_P2_ST_ChaseState | usa | IA_P2_FSM |
-| IA_P2_ST_ChaseState | usa | AgentState |
-| IA_P2_ST_ChaseState | usa | IA_P2_LineOfSight3D |
-| IA_P2_PathfindingManager | usa | IA_P2_PathNode |
-| IA_P2_PathfindingManager | usa | IA_P2_PathfindingModel |
-| IA_P2_PathfindingManager | usa | FinalPathResult |
-| IA_P2_PathfindingManager | usa | NodeDistance |
-| IA_P2_PathfindingManager | usa | IA_P2_LineOfSight3D |
-| IA_P2_PathfindingManager | usa | AStarResult |
-| IA_P2_PathfindingManager | usa | ThetaStarResult |
-| AStarResult | usa | IA_P2_PathNode |
-| NodeDistance | usa | IA_P2_PathNode |
-| IA_P2_INT_gentState | usa | IA_P2_FSM |
-| IA_P2_FSM | hereda | MonoBehaviour |
-| IA_P2_FSM | usa | IA_P2_AgentIA |
-| IA_P2_FSM | usa | AgentState |
-| IA_P2_FSM | usa | IA_P2_INT_gentState |
-| IA_P2_FSM | usa | IA_P2_FOV |
-| IA_P2_FSM | usa | IA_P2_ST_PatrolState |
-| IA_P2_FSM | usa | IA_P2_ST_ChaseState |
-| IA_P2_FSM | usa | IA_P2_ST_SearchingState |
-| IA_P2_FSM | usa | IA_P2_ST_ReturningToPatrolState |
-| IA_P2_FSM | usa | IA_P2_BusEvent_Manager |
-| IA_P2_FOV | hereda | MonoBehaviour |
-| IA_P2_FOV | usa | IA_P2_LineOfSight3D |
-| IA_F_PathFinding_Theta | usa | IA_P2_LineOfSight3D |
-| IA_F_EnemyCercanos | hereda | MonoBehaviour |
-| IA_F_ControllerSeguidor | hereda | MonoBehaviour |
-| IA_F_ControllerSeguidor | usa | IA_P2_AgentIA |
-| IA_F_ControllerSeguidor | usa | IA_F_EnemyCercanos |
-| IA_F_ChangeMode | hereda | MonoBehaviour |
-| IA_F_ChangeMode | usa | IA_P2_AgentIA |
-| IA_F_ChangeMode | usa | IA_P2_BusEvent_Manager |
-| CharacterControllerMVC | usa | CharacterModel |
-| CharacterControllerMVC | usa | CharacterView |
-| CharacterControllerMVC | usa | ICharacterInput |
-| CharacterControllerMVC | usa | IMovementHandler |
-| SelectedSoldierUIFeedback | hereda | MonoBehaviour |
-| SelectedSoldierUIFeedback | usa | UnitController |
-| WeaponModel | hereda | MonoBehaviour |
-| InformacionPersonaje | hereda | MonoBehaviour |
-| InformacionPersonaje | implementa | IHealth |
-| InformacionPersonaje | usa | WeaponController |
-| InformacionPersonaje | usa | GameManager |
-| CharacterModel | hereda | MonoBehaviour |
-| CharacterModel | usa | InformacionPersonaje |
-| Tanque | hereda | MonoBehaviour |
-| Tanque | usa | Puntero_Tanque |
-| Tanque | usa | Cohete |
-| Tanque | usa | ObjetoColisionado |
-| Puntero_Tanque | hereda | MonoBehaviour |
-| Puntero_Tanque | usa | Tanque |
-| PlayerController | hereda | MonoBehaviour |
-| PlayerController | usa | CharacterModel |
-| PlayerController | usa | CharacterView |
-| PlayerController | usa | Rigidbody2DMovementHandler |
-| PlayerController | usa | ICharacterInput |
-| PlayerController | usa | UnityCharacterInput |
-| PlayerController | usa | BD_Audios |
-| EntrarAlTanque | hereda | MonoBehaviour |
-| EntrarAlTanque | usa | ControladorTanque |
-| Enemigo | hereda | MonoBehaviour |
-| Enemigo | usa | GameManager |
-| ControladorTanque | hereda | MonoBehaviour |
-| ControladorTanque | usa | EntrarAlTanque |
-| ControladorTanque | usa | Proyectil |
-| ControladorTanque | usa | Bala |
-| ControladorTanque | usa | BD_Audios |
-| GenericDetector | hereda | MonoBehaviour |
-| GenericDetector | usa | DetectableType |
-| GenericDetector | usa | IDetectable |
-| GameManager | hereda | MonoBehaviour |
-| GameManager | usa | Enemigo |
-| FormationRelocator | hereda | MonoBehaviour |
-| FormationRelocator | usa | GlobalData |
-| EnemyView | hereda | MonoBehaviour |
-| EnemyView | usa | EnemyModel |
-| EnemyModel | hereda | MonoBehaviour |
-| EnemyModel | implementa | IHealth |
-| Disparador | hereda | MonoBehaviour |
-| Disparador | usa | Manager_VFX |
-| Disparador | usa | BD_Audios |
-| Disparador | usa | BalaPool |
-| Disparador | usa | Bala |
-| Destruible | hereda | MonoBehaviour |
-| Destruible | implementa | IDaniable |
-| Destruible | usa | UnitController |
-| DamagedState | implementa | IUnitState |
-| DamagedState | usa | DamagedStateHandler |
-| DamagedState | usa | UnitController |
-| DamagedState | usa | IDetectable |
-| DamagedStateHandler | hereda | MonoBehaviour |
-| DamagedStateHandler | usa | UnitController |
-| CursorManager | hereda | MonoBehaviour |
-| CursorManager | usa | IInteractable |
-| CursorManager | usa | IDaniable |
-| ControlDerrota | hereda | MonoBehaviour |
-| ControlDerrota | usa | LeaderManager |
-| BalaPool | hereda | MonoBehaviour |
-| BalaPool | usa | Bala |
-| Bala | hereda | MonoBehaviour |
-| Bala | implementa | IDetectable |
-| Bala | usa | DetectableType |
-| Bala | usa | Proyectil |
-| Bala | usa | CursorManager |
-| Bala | usa | IDaniable |
-| Bala | usa | UnitController |
-| Bala | usa | CoroutineHelper |
-| Bala | usa | Manager_VFX |
-| Bala | usa | BD_Audios |
-| Bala | usa | UnitTeam |
-| Bala | usa | BalaPool |
-| AmmoManager | hereda | MonoBehaviour |
-| AmmoManager | usa | UnitController |
-| AmmoManager | usa | UnitModel |
-| PlayerShooting | hereda | NetworkBehaviour |
-| PlayerShooting | usa | AmmoSystem |
-| PlayerShooting | usa | GameEventBus |
-| PlayerShooting | usa | GameConstants |
-| PlayerShooting | usa | PlayerEventBus |
-| PlayerShooting | usa | Projectile |
-| PlayerShooting | usa | RedesLog |
-| PlayerMovement | hereda | NetworkBehaviour |
-| PlayerMovement | usa | GameConstants |
-| PlayerMovement | usa | PlayerEventBus |
-| PlayerMovement | usa | NetworkInputData |
-| PlayerHealth | hereda | NetworkBehaviour |
-| PlayerHealth | implementa | IDamageable |
-| PlayerHealth | usa | GameConstants |
-| PlayerHealth | usa | GameEventBus |
-| PlayerHealth | usa | PlayerEventBus |
-| PlayerHealth | usa | RedesLog |
-| PlayerHealth | usa | VFXManager |
-| PlayerEventBus | hereda | MonoBehaviour |
-| PlayerAnimationController | hereda | NetworkBehaviour |
-| PlayerAnimationController | usa | PlayerMovement |
-| PlayerAnimationController | usa | PlayerHealth |
-| PlayerAnimationController | usa | PlayerShooting |
-| PlayerAnimationController | usa | VFXManager |
+| MatchController | hereda | MonoBehaviour |
+| MatchController | usa | ResultView |
+| MatchController | usa | MatchNetworkController |
+| MatchController | usa | MatchResult |
+| MatchController | usa | RedesLog |
+| MatchController | usa | RedesLoadingScreen |
+| EntityDisplayManager | hereda | MonoBehaviour |
+| EntityDisplayManager | usa | EntityDisplayView |
+| EntityDisplayManager | usa | NetworkPlayer |
+| EntityDisplayManager | usa | IEntityDisplayModel |
+| EntityDisplayManager | usa | RedesLog |
+| GameEventBus | hereda | ScriptableObject |
+| RagdollController | hereda | MonoBehaviour |
+| RagdollController | usa | BoneJointData |
+| MatchNetworkController | hereda | NetworkBehaviour |
+| MatchNetworkController | usa | MatchController |
+| MatchNetworkController | usa | GameEventBus |
+| MatchNetworkController | usa | RedesLog |
+| MatchNetworkController | usa | MatchResult |
+| MatchNetworkController | usa | VFXManager |
+| MatchNetworkController | usa | IDamageable |
+| MatchNetworkController | usa | ObstacleHitFeedback |
+| MatchNetworkController | usa | GameFlowController |
+| TerrainModel | hereda | MonoBehaviour |
+| PlayerModel | usa | GameConstants |
+| GameStateModel | usa | GamePhase |
+| RoomSessionHandler | implementa | ISessionListHandler |
+| RoomSessionHandler | usa | HostNetworkService |
+| RoomSessionHandler | usa | NetworkSceneManagerDefault |
+| RoomSessionHandler | usa | RedesLog |
+| RoomSessionHandler | usa | GameConstants |
+| PlayerSpawner | hereda | MonoBehaviour |
+| PlayerSpawner | usa | RedesLog |
+| NetworkInputData | implementa | INetworkInput |
+| NetworkObjectProviderDefault | hereda | Behaviour |
+| NetworkObjectProviderDefault | implementa | INetworkObjectProvider |
+| NetworkCCData | implementa | INetworkStruct |
+| NetworkCharacterController | hereda | NetworkTRSP |
+| NetworkCharacterController | implementa | INetworkTRSPTeleport |
+| NetworkCharacterController | implementa | IBeforeAllTicks |
+| NetworkCharacterController | implementa | IAfterAllTicks |
+| NetworkCharacterController | implementa | IBeforeCopyPreviousState |
+| NetworkCharacterController | usa | NetworkCCData |
+| FusionBootstrapDebugGUI | hereda | Behaviour |
+| FusionBootstrapDebugGUI | usa | FusionBootstrap |
+| FusionBootstrapDebugGUI | usa | Stage |
+| FusionBootstrapDebugGUI | usa | FusionScalableIMGUI |
+| FusionBootstrap | hereda | Behaviour |
+| FusionBootstrap | usa | FusionMppmCommand |
+| FusionBootstrap | usa | StartCommand |
+| FusionBootstrap | usa | StartModes |
+| FusionBootstrap | usa | Stage |
+| FusionBootstrap | usa | State |
+| FusionBootstrap | usa | FusionBootstrapDebugGUI |
+| FusionBootstrap | usa | FusionMppm |
+| FusionBootstrap | usa | FusionMppmStatus |
+| FusionBootstrap | usa | NetworkSceneManagerDefault |
+| FusionBootstrap | usa | NetworkObjectProviderDefault |
+| StartCommand | hereda | FusionMppmCommand |
+| FusionBasicBillboard | hereda | Behaviour |
+| FusionAddressablePrefabsPreloader | hereda | MonoBehaviour |
+| FusionGlobalScriptableObjectAddressAttribute | hereda | FusionGlobalScriptableObjectSourceAttribute |
+| FusionGlobalScriptableObjectResourceAttribute | hereda | FusionGlobalScriptableObjectSourceAttribute |
+| FusionCoroutine | implementa | ICoroutine |
+| FusionCoroutine | implementa | IDisposable |
+| FusionLogInitializer | usa | FusionUnityLogger |
+| FusionUnityLogger | hereda | FusionUnityLoggerBase |
+| FusionUnityLogger | usa | Stage |
+| JsonUtilityExtensions | usa | TypeNameWrapper |
+| FusionMppm | usa | FusionMppmStatus |
+| FusionMppm | usa | FusionMppmCommand |
+| NetworkObjectBaker | usa | TransformPath |
+| NetworkObjectBaker | usa | TransformPathCache |
+| NetworkObjectBaker | usa | Result |
+| NetworkObjectBaker | usa | _Indices |
+| TransformPath | usa | _Indices |
+| TransformPathCache | implementa | IComparer |
+| TransformPathCache | implementa | IEqualityComparer |
+| TransformPathCache | usa | TransformPath |
+| NetworkPrefabSourceStatic | hereda | NetworkAssetSourceStatic |
+| NetworkPrefabSourceStatic | implementa | INetworkPrefabSource |
+| NetworkPrefabSourceStaticLazy | hereda | NetworkAssetSourceStaticLazy |
+| NetworkPrefabSourceStaticLazy | implementa | INetworkPrefabSource |
+| NetworkPrefabSourceResource | hereda | NetworkAssetSourceResource |
+| NetworkPrefabSourceResource | implementa | INetworkPrefabSource |
+| FusionStatisticsHelper | usa | RenderSimStats |
+| FusionStatsGraphBase | hereda | MonoBehaviour |
+| FusionStatsGraphBase | usa | FusionStatBuffer |
+| FusionStatsGraphBase | usa | FusionStatistics |
+| SceneEqualityComparer | implementa | IEqualityComparer |
+| NetworkRunnerVisibilityExtensions | usa | IRunnerVisibilityRecognizedType |
+| NetworkRunnerVisibilityExtensions | usa | RunnerVisibility |
+| NetworkRunnerVisibilityExtensions | usa | RunnerVisibilityLink |
+| NetworkRunnerVisibilityExtensions | usa | RunnerVisibilityLinksRoot |
+| NetworkRunnerVisibilityExtensions | usa | EnableOnSingleRunner |
+| NetworkRunnerVisibilityExtensions | usa | PreferredRunners |
+| RunnerVisibility | usa | RunnerVisibilityLink |
+| VfxController | hereda | MonoBehaviour |
+| DropdownController | hereda | MonoBehaviour |
+| DropdownController | usa | VfxController |
+| DebugColisionesFull | hereda | MonoBehaviour |
+| CollisionDetector | hereda | MonoBehaviour |
 | NetworkPlayer | hereda | NetworkBehaviour |
 | NetworkPlayer | implementa | IEntityDisplayModel |
 | NetworkPlayer | usa | GameConstants |
@@ -24784,8 +26343,10 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | NetworkPlayer | usa | PlayerShooting |
 | NetworkPlayer | usa | PlayerHealth |
 | NetworkPlayer | usa | AmmoSystem |
-| NetworkPlayer | usa | PlayerAnimationController |
 | NetworkPlayer | usa | PlayerEventBus |
+| NetworkPlayer | usa | PlayerCrouch |
+| NetworkPlayer | usa | PlayerTeleport |
+| NetworkPlayer | usa | CustomCursorView |
 | NetworkPlayer | usa | GameFlowController |
 | NetworkPlayer | usa | PlayerController |
 | NetworkPlayer | usa | NetworkInputData |
@@ -24795,111 +26356,25 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | AmmoSystem | usa | GameEventBus |
 | AmmoSystem | usa | PlayerEventBus |
 | AmmoSystem | usa | RedesLog |
-| VFXManager | hereda | MonoBehaviour |
-| TerrainView | hereda | MonoBehaviour |
-| ResultView | hereda | MonoBehaviour |
-| ResultView | usa | MatchResult |
-| ResultView | usa | RedesLog |
-| LobbyView | hereda | MonoBehaviour |
-| LobbyView | usa | GameConstants |
-| LobbyView | usa | RedesLog |
-| GameHudView | hereda | MonoBehaviour |
-| EntityDisplayView | hereda | MonoBehaviour |
-| TriggerEventAndDestroy | hereda | MonoBehaviour |
-| MenuPausa | hereda | MonoBehaviour |
-| MarkerAnim | hereda | MonoBehaviour |
-| Manager_VFX | hereda | MonoBehaviour |
-| MainGameController | hereda | MonoBehaviour |
-| MainGameController | usa | LeaderManager |
-| MainGameController | usa | GlobalData |
-| MainGameController | usa | UnitModel |
-| MainGameController | usa | UnitSpecialization |
-| MainGameController | usa | UnitFSM |
-| LiderandoState | implementa | IUnitState |
-| LiderandoState | usa | UnitController |
-| LiderandoState | usa | UnitSpecialization |
-| LiderandoState | usa | LeaderManager |
-| LiderandoState | usa | GEN_Inputs |
-| LiderandoState | usa | CursorManager |
-| SeguirFormacionState | implementa | IUnitState |
-| SeguirFormacionState | usa | UnitController |
-| SeguirFormacionState | usa | GlobalData |
-| SeguirFormacionState | usa | EsperandoState |
-| SeguirFormacionState | usa | DetectableType |
-| SeguirFormacionState | usa | Enemigo |
-| SeguirFormacionState | usa | AtacarState |
-| AtacarState | implementa | IUnitState |
-| AtacarState | usa | UnitController |
-| AtacarState | usa | IndicatorType |
-| AtacarState | usa | UnitTeam |
-| AtacarState | usa | SeguirFormacionState |
-| AtacarState | usa | EsperandoState |
-| AtacarState | usa | PerseguirState |
-| PerseguirState | implementa | IUnitState |
-| PerseguirState | usa | UnitController |
-| PerseguirState | usa | IndicatorType |
-| PerseguirState | usa | UnitTeam |
-| PerseguirState | usa | SeguirFormacionState |
-| PerseguirState | usa | EsperandoState |
-| PerseguirState | usa | AtacarState |
-| EsperandoState | implementa | IUnitState |
-| EsperandoState | usa | UnitController |
-| EsperandoState | usa | IndicatorType |
-| EsperandoState | usa | SeguirFormacionState |
-| HuirDetrasLiderState | implementa | IUnitState |
-| HuirDetrasLiderState | usa | UnitController |
-| HuirDetrasLiderState | usa | GlobalData |
-| HuirDetrasLiderState | usa | SeguirFormacionState |
-| IrADestinoState | implementa | IUnitState |
-| IrADestinoState | usa | UnitController |
-| IrADestinoState | usa | IndicatorType |
-| IrADestinoState | usa | EsperandoState |
-| LeaderManager | hereda | MonoBehaviour |
-| LeaderManager | usa | UnitController |
-| LeaderManager | usa | UnitSpecialization |
-| LeaderManager | usa | GEN_Inputs |
-| LeaderManager | usa | GlobalData |
-| LeaderManager | usa | MainGameController |
-| LeaderManager | usa | SeguirFormacionState |
-| LeaderManager | usa | LiderandoState |
-| InteractableItem | hereda | MonoBehaviour |
-| InteractableItem | implementa | IInteractable |
-| InteractableItem | usa | UnitController |
-| InteractableItem | usa | UnitTeam |
-| InteractableItem | usa | BD_Audios |
-| IA_P2_PathNode | hereda | MonoBehaviour |
-| IA_P2_PathNode | usa | IA_P2_PathfindingModel |
-| IA_P2_PathfindingModel | hereda | MonoBehaviour |
-| IA_P2_PathfindingModel | usa | IA_P2_PathNode |
-| IA_P2_PathfindingModel | usa | IA_P2_LineOfSight3D |
-| IA_P2_AgentIA | hereda | MonoBehaviour |
-| IA_P2_AgentIA | usa | UnitModel |
-| IA_P2_AgentIA | usa | IA_P2_PathfindingModel |
-| IA_P2_AgentIA | usa | IA_P2_PathfindingManager |
-| IA_P2_AgentIA | usa | IA_F_PathFinding_Theta |
-| GlobalHUD | hereda | MonoBehaviour |
-| GlobalHUD | usa | LeaderManager |
-| GlobalData | usa | UnitController |
-| GEN_Inputs | hereda | MonoBehaviour |
-| GEN_Inputs | usa | Destruible |
-| FusionRunnerVisibilityControlsWindow | hereda | EditorWindow |
-| FusionRunnerVisibilityControlsWindow | usa | RunnerEnableVisibility |
-| FusionRunnerVisibilityControlsWindow | usa | NetworkRunnerVisibilityExtensions |
-| FusionRunnerVisibilityControlsWindow | usa | EditorGUIUtility |
-| FusionRunnerVisibilityControlsWindow | usa | Labels |
-| FusionRunnerVisibilityControlsWindow | usa | FusionEditorSkin |
-| FusionRunnerVisibilityControlsWindow | usa | FusionStatistics |
-| FusionRunnerVisibilityControlsWindow | usa | EditorGUI |
-| FusionRunnerVisibilityControlsWindow | usa | DisabledGroupScope |
-| FusionRunnerVisibilityControlsWindow | usa | Event |
-| FusionRunnerVisibilityControlsWindow | usa | CanvasAnchor |
-| Labels | usa | RunnerEnableVisibility |
-| Labels | usa | NetworkRunnerVisibilityExtensions |
-| FusionEditorSkin | hereda | ScriptableObject |
-| FusionEditorSkin | usa | EditorGUIUtility |
-| FusionEditorSkin | usa | LazyAsset |
-| FusionEditorSkin | usa | LazyGUIStyle |
-| FusionEditorConfigImporter | hereda | ScriptedImporter |
+| TestSceneManager | hereda | MonoBehaviour |
+| TestSceneManager | usa | DummyEnemy |
+| OfflinePlayerTester | hereda | MonoBehaviour |
+| OfflinePlayerTester | usa | PlayerInputMode |
+| OfflinePlayerTester | usa | PlayerEventBus |
+| OfflinePlayerTester | usa | DummyEnemy |
+| OfflinePlayerTester | usa | EntityDisplayView |
+| OfflinePlayerTester | usa | EventBus |
+| OfflinePlayerTester | usa | LocalNetworkMock |
+| OfflinePlayerTester | usa | OfflineBullet |
+| OfflineBullet | hereda | MonoBehaviour |
+| OfflineBullet | usa | OfflinePlayerTester |
+| OfflineBullet | usa | DummyEnemy |
+| OfflineBullet | usa | CustomCursorView |
+| DummyEnemy | hereda | MonoBehaviour |
+| DummyEnemy | usa | EntityDisplayView |
+| DummyEnemy | usa | OfflineBullet |
+| DummyEnemy | usa | RagdollController |
+| CameraFollow | hereda | MonoBehaviour |
 | AssetObjectEditor | hereda | Editor |
 | BehaviourEditor | hereda | FusionEditor |
 | ChangeDllManager | usa | AssetDatabase |
@@ -25554,6 +27029,29 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | FusionStatsWorldAnchor | hereda | MonoBehaviour |
 | FusionStatsWorldAnchor | usa | FusionStatsConfig |
 | FusionStatsWorldAnchor | usa | FusionStatsCanvas |
+| Tanque | hereda | MonoBehaviour |
+| Tanque | usa | Puntero_Tanque |
+| Tanque | usa | Cohete |
+| Tanque | usa | ObjetoColisionado |
+| Puntero_Tanque | hereda | MonoBehaviour |
+| Puntero_Tanque | usa | Tanque |
+| PlayerController | hereda | MonoBehaviour |
+| PlayerController | usa | CharacterModel |
+| PlayerController | usa | CharacterView |
+| PlayerController | usa | Rigidbody2DMovementHandler |
+| PlayerController | usa | ICharacterInput |
+| PlayerController | usa | UnityCharacterInput |
+| PlayerController | usa | BD_Audios |
+| EntrarAlTanque | hereda | MonoBehaviour |
+| EntrarAlTanque | usa | ControladorTanque |
+| Enemigo | hereda | MonoBehaviour |
+| Enemigo | usa | GameManager |
+| ControladorTanque | hereda | MonoBehaviour |
+| ControladorTanque | usa | EntrarAlTanque |
+| ControladorTanque | usa | Proyectil |
+| ControladorTanque | usa | Bala |
+| ControladorTanque | usa | BD_Audios |
+| CharacterView | hereda | MonoBehaviour |
 | FusionStatsPanelHeader | hereda | MonoBehaviour |
 | FusionStatsPanelHeader | usa | FusionStatsGraphDefault |
 | FusionStatsPanelHeader | usa | RenderSimStats |
@@ -25599,44 +27097,307 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | FusionNetworkObjectStatsGraph | hereda | FusionStatsGraphBase |
 | FusionNetworkObjectStatsGraph | usa | NetworkObjectStat |
 | FusionNetworkObjectStatsGraph | usa | FusionNetworkObjectStatsGraphCombine |
-| Torreta | hereda | MonoBehaviour |
-| Torreta | usa | GameManager |
-| SistemaPuntaje | hereda | MonoBehaviour |
-| SenalizacionDeEnemigos | hereda | MonoBehaviour |
+| FusionNetworkObjectStatistics | hereda | MonoBehaviour |
+| FusionNetworkObjectStatistics | usa | FusionStatistics |
+| RunnerVisibilityLinksRoot | hereda | MonoBehaviour |
+| RunnerVisibilityLink | hereda | MonoBehaviour |
+| RunnerVisibilityLink | usa | PreferredRunners |
+| RunnerVisibilityLink | usa | ComponentType |
+| RunnerVisibilityLink | usa | NetworkRunnerVisibilityExtensions |
+| RunnerLagCompensationGizmos | hereda | Behaviour |
+| RunnerEnableVisibility | hereda | Behaviour |
+| RunnerEnableVisibility | implementa | INetworkRunnerCallbacks |
+| RunnerAOIGizmos | hereda | SimulationBehaviour |
+| EnableOnSingleRunner | hereda | Behaviour |
+| EnableOnSingleRunner | usa | RunnerVisibilityLink |
+| EnableOnSingleRunner | usa | PreferredRunners |
+| IA_P2_ST_SearchingState | implementa | IA_P2_INT_gentState |
+| IA_P2_ST_SearchingState | usa | IA_P2_FSM |
+| IA_P2_ST_SearchingState | usa | AgentState |
+| IA_P2_ST_SearchingState | usa | IA_P2_LineOfSight3D |
+| IA_P2_ST_ReturningToPatrolState | implementa | IA_P2_INT_gentState |
+| IA_P2_ST_ReturningToPatrolState | usa | IA_P2_FSM |
+| IA_P2_ST_ReturningToPatrolState | usa | AgentState |
+| IA_P2_ST_PatrolState | implementa | IA_P2_INT_gentState |
+| IA_P2_ST_PatrolState | usa | IA_P2_FSM |
+| IA_P2_ST_PatrolState | usa | AgentState |
+| IA_P2_ST_ChaseState | implementa | IA_P2_INT_gentState |
+| IA_P2_ST_ChaseState | usa | IA_P2_FSM |
+| IA_P2_ST_ChaseState | usa | AgentState |
+| IA_P2_ST_ChaseState | usa | IA_P2_LineOfSight3D |
+| IA_P2_PathfindingManager | usa | IA_P2_PathNode |
+| IA_P2_PathfindingManager | usa | IA_P2_PathfindingModel |
+| IA_P2_PathfindingManager | usa | FinalPathResult |
+| IA_P2_PathfindingManager | usa | NodeDistance |
+| IA_P2_PathfindingManager | usa | IA_P2_LineOfSight3D |
+| IA_P2_PathfindingManager | usa | AStarResult |
+| IA_P2_PathfindingManager | usa | ThetaStarResult |
+| AStarResult | usa | IA_P2_PathNode |
+| NodeDistance | usa | IA_P2_PathNode |
+| IA_P2_INT_gentState | usa | IA_P2_FSM |
+| IA_P2_FSM | hereda | MonoBehaviour |
+| IA_P2_FSM | usa | IA_P2_AgentIA |
+| IA_P2_FSM | usa | AgentState |
+| IA_P2_FSM | usa | IA_P2_INT_gentState |
+| IA_P2_FSM | usa | IA_P2_FOV |
+| IA_P2_FSM | usa | IA_P2_ST_PatrolState |
+| IA_P2_FSM | usa | IA_P2_ST_ChaseState |
+| IA_P2_FSM | usa | IA_P2_ST_SearchingState |
+| IA_P2_FSM | usa | IA_P2_ST_ReturningToPatrolState |
+| IA_P2_FSM | usa | IA_P2_BusEvent_Manager |
+| IA_P2_FOV | hereda | MonoBehaviour |
+| IA_P2_FOV | usa | IA_P2_LineOfSight3D |
+| IA_F_PathFinding_Theta | usa | IA_P2_LineOfSight3D |
+| IA_F_EnemyCercanos | hereda | MonoBehaviour |
+| IA_F_ControllerSeguidor | hereda | MonoBehaviour |
+| IA_F_ControllerSeguidor | usa | IA_P2_AgentIA |
+| IA_F_ControllerSeguidor | usa | IA_F_EnemyCercanos |
+| IA_F_ChangeMode | hereda | MonoBehaviour |
+| IA_F_ChangeMode | usa | IA_P2_AgentIA |
+| IA_F_ChangeMode | usa | IA_P2_BusEvent_Manager |
+| Rigidbody2DMovementHandler | hereda | MonoBehaviour |
+| Rigidbody2DMovementHandler | implementa | IMovementHandler |
+| Rigidbody2DMovementHandler | usa | BD_Audios |
+| MovementProxy | usa | IMovable |
+| ShootingProxy | usa | IAttackable |
+| LobbyView | hereda | MonoBehaviour |
+| LobbyView | usa | PlaySoundOnButtonClick |
+| LobbyView | usa | GameConstants |
+| LobbyView | usa | RedesLog |
+| GameHudView | hereda | MonoBehaviour |
+| EntityDisplayView | hereda | MonoBehaviour |
+| DeathScreenView | hereda | MonoBehaviour |
+| CursorManager | hereda | MonoBehaviour |
+| CursorManager | usa | IInteractable |
+| CursorManager | usa | IDaniable |
+| ControlDerrota | hereda | MonoBehaviour |
+| ControlDerrota | usa | LeaderManager |
+| BalaPool | hereda | MonoBehaviour |
+| BalaPool | usa | Bala |
+| PooledParticleHelper | hereda | MonoBehaviour |
+| PlaySoundOnButtonClick | hereda | MonoBehaviour |
+| PlayerAnimationView | hereda | MonoBehaviour |
+| PlayerAnimationView | usa | PlayerEventBus |
+| PlayerAnimationView | usa | NetworkPlayer |
+| PlayerAnimationView | usa | PlayerMovement |
+| PlayerAnimationView | usa | PlayerShooting |
+| PlayerAnimationView | usa | PlayerHealth |
+| PlayerAnimationView | usa | AmmoSystem |
+| PlayerAnimationView | usa | RedesLog |
+| PlayerAnimationView | usa | RagdollController |
+| PlayerAnimationView | usa | VFXManager |
+| PlayerAmmoView | hereda | MonoBehaviour |
+| PlayerAmmoView | usa | PlayerEventBus |
+| DeathScreenController | hereda | MonoBehaviour |
+| DeathScreenController | usa | DeathScreenView |
+| DeathScreenController | usa | PlayerEventBus |
+| DeathScreenController | usa | EventBus |
+| DeathScreenController | usa | LocalNetworkMock |
+| CustomCursorView | hereda | MonoBehaviour |
+| CustomCursorView | usa | PlayerEventBus |
+| CustomCursorView | usa | GameEventBus |
+| CustomCursorView | usa | NetworkPlayer |
+| CustomCursorView | usa | OfflinePlayerTester |
+| CustomCursorView | usa | GameFlowController |
+| CustomCursorView | usa | GameStateModel |
+| CustomCursorView | usa | GamePhase |
+| TriggerEventAndDestroy | hereda | MonoBehaviour |
+| TriggerCorregir | usa | RedesBuildAll |
+| Physics2DMigrator | usa | AssetDatabase |
+| Physics2DMigrator | usa | EditorApplication |
+| HierarchyToClipboardMenu | usa | EditorUtility |
+| HierarchyToClipboardMenu | usa | SerializedProperty |
+| CreateTestSceneMenu | usa | GameManager |
+| CreateTestSceneMenu | usa | DebugLogger |
+| CreateTestSceneMenu | usa | GameLoopReferee |
+| CreateTestSceneMenu | usa | BulletPool |
+| CreateTestSceneMenu | usa | AssetDatabase |
+| CreateTestSceneMenu | usa | Bullet |
+| CreateTestSceneMenu | usa | PlayerModel |
+| CreateTestSceneMenu | usa | PlayerView |
+| CreateTestSceneMenu | usa | PlayerController |
+| CreateTestSceneMenu | usa | Weapon |
+| CreateTestSceneMenu | usa | SimpleEnemyAI |
+| CreateScenesAndPrefabsMenu | usa | AssetDatabase |
+| CreateScenesAndPrefabsMenu | usa | Bullet |
+| CreateScenesAndPrefabsMenu | usa | PlayerModel |
+| CreateScenesAndPrefabsMenu | usa | PlayerView |
+| CreateScenesAndPrefabsMenu | usa | PlayerController |
+| CreateScenesAndPrefabsMenu | usa | SimpleAnimator |
+| CreateScenesAndPrefabsMenu | usa | FloatingHealthBar |
+| CreateScenesAndPrefabsMenu | usa | Weapon |
+| CreateScenesAndPrefabsMenu | usa | GameManager |
+| CreateScenesAndPrefabsMenu | usa | DebugLogger |
+| CreateScenesAndPrefabsMenu | usa | GameLoopReferee |
+| CreateScenesAndPrefabsMenu | usa | BulletPool |
+| CreateScenesAndPrefabsMenu | usa | EffectPool |
+| CreateScenesAndPrefabsMenu | usa | ScreenManager |
+| CreateScenesAndPrefabsMenu | usa | DeathScreenView |
+| CreateScenesAndPrefabsMenu | usa | DeathScreenController |
+| CreateScenesAndPrefabsMenu | usa | SerializedProperty |
+| ComponentPropertiesCopierTestMenu | usa | ComponentPropertiesCopier |
+| GlobalHUD | hereda | MonoBehaviour |
+| GlobalHUD | usa | LeaderManager |
+| GlobalData | usa | UnitController |
+| GEN_Inputs | hereda | MonoBehaviour |
+| GEN_Inputs | usa | Destruible |
+| GenericDetector | hereda | MonoBehaviour |
+| GenericDetector | usa | DetectableType |
+| GenericDetector | usa | IDetectable |
+| GameManager | hereda | MonoBehaviour |
+| GameManager | usa | Enemigo |
+| FormationRelocator | hereda | MonoBehaviour |
+| FormationRelocator | usa | GlobalData |
+| EnemyView | hereda | MonoBehaviour |
+| EnemyView | usa | EnemyModel |
+| EnemyModel | hereda | MonoBehaviour |
+| EnemyModel | implementa | IHealth |
+| Disparador | hereda | MonoBehaviour |
+| Disparador | usa | Manager_VFX |
+| Disparador | usa | BD_Audios |
+| Disparador | usa | BalaPool |
+| Disparador | usa | Bala |
+| Destruible | hereda | MonoBehaviour |
+| Destruible | implementa | IDaniable |
+| Destruible | usa | UnitController |
+| DamagedState | implementa | IUnitState |
+| DamagedState | usa | DamagedStateHandler |
+| DamagedState | usa | UnitController |
+| DamagedState | usa | IDetectable |
+| DamagedStateHandler | hereda | MonoBehaviour |
+| DamagedStateHandler | usa | UnitController |
+| Bala | hereda | MonoBehaviour |
+| Bala | implementa | IDetectable |
+| Bala | usa | DetectableType |
+| Bala | usa | Proyectil |
+| Bala | usa | CursorManager |
+| Bala | usa | IDaniable |
+| Bala | usa | UnitController |
+| Bala | usa | CoroutineHelper |
+| Bala | usa | Manager_VFX |
+| Bala | usa | BD_Audios |
+| Bala | usa | UnitTeam |
+| Bala | usa | BalaPool |
+| AmmoManager | hereda | MonoBehaviour |
+| AmmoManager | usa | UnitController |
+| AmmoManager | usa | UnitModel |
+| UnitFSM | hereda | MonoBehaviour |
+| UnitFSM | usa | State |
+| UnitFSM | usa | UnitController |
+| UnitFSM | usa | TickManager |
+| CambioDeLider | hereda | MonoBehaviour |
+| Weapon | hereda | MonoBehaviour |
+| Weapon | usa | PlayerModel |
+| Weapon | usa | PlayerView |
+| Weapon | usa | EventBus |
+| Weapon | usa | Bullet |
+| Weapon | usa | BulletPool |
+| SimpleEnemyAI | hereda | MonoBehaviour |
+| SimpleEnemyAI | usa | PlayerModel |
+| SimpleEnemyAI | usa | Weapon |
+| SimpleEnemyAI | usa | PlayerView |
+| SimpleEnemyAI | usa | PlayerController |
+| SimpleEnemyAI | usa | EventBus |
+| SimpleAnimator | hereda | MonoBehaviour |
+| ScreenManager | hereda | MonoBehaviour |
+| ScreenManager | usa | EventBus |
+| ScreenManager | usa | LocalNetworkMock |
+| ScreenManager | usa | RoomData |
+| PlayerView | hereda | MonoBehaviour |
+| PlayerView | usa | PlayerModel |
+| PlayerView | usa | SimpleAnimator |
+| PlayerView | usa | EventBus |
+| PlayerView | usa | ProceduralAudioGenerator |
+| PlayerModel | hereda | MonoBehaviour |
+| PlayerModel | usa | EventBus |
+| PlayerController | hereda | MonoBehaviour |
+| PlayerController | usa | PlayerModel |
+| PlayerController | usa | PlayerView |
+| PlayerController | usa | Weapon |
+| PlayerController | usa | LocalNetworkMock |
+| PlayerController | usa | EventBus |
+| LocalNetworkMock | usa | RoomData |
+| ImpactEffect | hereda | MonoBehaviour |
+| GameManager | hereda | MonoBehaviour |
+| GameManager | usa | EventBus |
+| GameManager | usa | PlayerModel |
+| GameManager | usa | LocalNetworkMock |
+| GameManager | usa | FloatingHealthBar |
 | Prueba_de_color | hereda | MonoBehaviour |
 | PickUp | hereda | MonoBehaviour |
 | PickUp | usa | UnitController |
 | PickUp | usa | UnitTeam |
 | Obstaculo | hereda | MonoBehaviour |
 | MenuVictoria | hereda | MonoBehaviour |
-| IndicadorEnemigos | hereda | MonoBehaviour |
-| IndicadorEnemigos | usa | GameManager |
-| Ideasypseudocodigos | hereda | MonoBehaviour |
-| GestorTexto | hereda | MonoBehaviour |
-| CodigoDeInicio | hereda | MonoBehaviour |
-| CodigoDeInicio | usa | BD_Audios |
-| Camara | hereda | MonoBehaviour |
-| BD_Audios | hereda | MonoBehaviour |
-| BD_Audios | usa | CoroutineHelper |
-| CoroutineHelper | hereda | MonoBehaviour |
-| GameEventBus | hereda | ScriptableObject |
-| MatchNetworkController | hereda | NetworkBehaviour |
-| MatchNetworkController | usa | MatchController |
-| MatchNetworkController | usa | GameEventBus |
-| MatchNetworkController | usa | RedesLog |
-| MatchNetworkController | usa | MatchResult |
-| MatchNetworkController | usa | GameFlowController |
-| TerrainModel | hereda | MonoBehaviour |
-| PlayerModel | usa | GameConstants |
-| GameStateModel | usa | GamePhase |
-| RoomSessionHandler | implementa | ISessionListHandler |
-| RoomSessionHandler | usa | HostNetworkService |
-| RoomSessionHandler | usa | NetworkSceneManagerDefault |
-| RoomSessionHandler | usa | RedesLog |
-| RoomSessionHandler | usa | GameConstants |
-| PlayerSpawner | hereda | MonoBehaviour |
-| PlayerSpawner | usa | RedesLog |
-| NetworkInputData | implementa | INetworkInput |
+| VFXManager | hereda | MonoBehaviour |
+| VFXManager | usa | PooledParticleHelper |
+| VFXManager | usa | RedesLog |
+| TerrainView | hereda | MonoBehaviour |
+| DesactivarPorTimer | hereda | MonoBehaviour |
+| UnitView | hereda | MonoBehaviour |
+| UnitView | usa | UnitModel |
+| UnitView | usa | IndicatorEntry |
+| UnitView | usa | IndicatorType |
+| UnitView | usa | UnitSpecialization |
+| IUnitState | usa | UnitController |
+| UnitPathRenderer | hereda | MonoBehaviour |
+| UnitPathRenderer | usa | UnitController |
+| UnitPathRenderer | usa | UnitFSM |
+| UnitPathRenderer | usa | State |
+| UnitModel | hereda | MonoBehaviour |
+| UnitModel | implementa | IHealth |
+| UnitModel | usa | UnitTeam |
+| UnitModel | usa | UnitSpecialization |
+| UnitModel | usa | Destruible |
+| CharacterControllerMVC | usa | CharacterModel |
+| CharacterControllerMVC | usa | CharacterView |
+| CharacterControllerMVC | usa | ICharacterInput |
+| CharacterControllerMVC | usa | IMovementHandler |
+| SelectedSoldierUIFeedback | hereda | MonoBehaviour |
+| SelectedSoldierUIFeedback | usa | UnitController |
+| WeaponModel | hereda | MonoBehaviour |
+| InformacionPersonaje | hereda | MonoBehaviour |
+| InformacionPersonaje | implementa | IHealth |
+| InformacionPersonaje | usa | WeaponController |
+| InformacionPersonaje | usa | GameManager |
+| CharacterModel | hereda | MonoBehaviour |
+| CharacterModel | usa | InformacionPersonaje |
+| PersecucionEnemigo | hereda | MonoBehaviour |
+| PersecucionEnemigo | usa | Enemigo |
+| IA_P2_BusEvent_Manager | hereda | MonoBehaviour |
+| IA_P2_BusEvent_Manager | usa | IA_P2_FSM |
+| CrearYDestruir | hereda | MonoBehaviour |
+| AutoDestruccionSegura | hereda | MonoBehaviour |
+| Soldado_Anim | hereda | MonoBehaviour |
+| Soldado_Anim | usa | BD_Audios |
+| CambiarOpacidad | hereda | MonoBehaviour |
+| WeaponView | hereda | MonoBehaviour |
+| WeaponView | usa | CambiarOpacidad |
+| WeaponView | usa | Proyectil |
+| WeaponView | usa | InformacionPersonaje |
+| WeaponView | usa | WeaponModel |
+| WeaponView | usa | Bala |
+| WeaponView | usa | BD_Audios |
+| WeaponController | hereda | MonoBehaviour |
+| WeaponController | usa | WeaponModel |
+| WeaponController | usa | WeaponView |
+| WeaponController | usa | IWeaponInput |
+| WeaponController | usa | WeaponControllerMVC |
+| WeaponController | usa | UnityWeaponInput |
+| Proyectil2 | hereda | MonoBehaviour |
+| Proyectil | hereda | MonoBehaviour |
+| Proyectil | usa | Manager_VFX |
+| Proyectil | usa | IDaniable |
+| Proyectil | usa | InformacionPersonaje |
+| Proyectil | usa | Enemigo |
+| Cohete | hereda | MonoBehaviour |
+| Cohete | usa | IDaniable |
+| VibracionCamara | hereda | MonoBehaviour |
+| VibracionCamara | usa | ConfiguracionGlobal |
+| Torreta | hereda | MonoBehaviour |
+| Torreta | usa | GameManager |
+| SistemaPuntaje | hereda | MonoBehaviour |
+| SenalizacionDeEnemigos | hereda | MonoBehaviour |
 | HostNetworkService | hereda | MonoBehaviour |
 | HostNetworkService | implementa | INetworkService |
 | HostNetworkService | implementa | INetworkRunnerCallbacks |
@@ -25648,65 +27409,194 @@ Tipos: 506 · Métodos: 2090 · Propiedades: 309 · Campos: 1603 · Eventos: 183
 | HostNetworkService | usa | GameFlowController |
 | HostNetworkService | usa | NetworkInputData |
 | HostNetworkService | usa | InputButton |
-| CentralizadorScripts | hereda | EditorWindow |
-| CentralizadorScripts | usa | AssetDatabase |
-| CentralizadorScripts | usa | EditorUtility |
-| ILWeaverException | hereda | Exception |
-| NetworkProjectConfigImporterEditor | hereda | ScriptedImporterEditor |
-| NetworkProjectConfigImporterEditor | usa | NetworkProjectConfigImporter |
-| NetworkProjectConfigImporterEditor | usa | LogSettingsDrawer |
-| NetworkProjectConfigImporterEditor | usa | FusionEditorGUI |
-| NetworkProjectConfigImporterEditor | usa | EditorGUI |
-| NetworkProjectConfigImporterEditor | usa | NetworkPrefabsInspector |
-| NetworkProjectConfigImporterEditor | usa | EnabledScope |
-| NetworkProjectConfigImporterEditor | usa | NetworkProjectConfigUtilities |
-| NetworkProjectConfigImporterEditor | usa | EditorUtility |
-| NetworkProjectConfigImporter | hereda | ScriptedImporter |
-| NetworkProjectConfigImporter | usa | NetworkAssetSourceFactory |
-| NetworkProjectConfigImporter | usa | AssetDatabaseUtils |
-| NetworkProjectConfigImporter | usa | AssetDatabase |
-| NetworkProjectConfigImporter | usa | NetworkAssetSourceFactoryContext |
-| NetworkProjectConfigImporter | usa | FusionCustomDependency |
-| Postprocessor | hereda | AssetPostprocessor |
-| Postprocessor | usa | AssetDatabase |
-| NetworkPrefabsInspector | hereda | EditorWindow |
-| NetworkPrefabsInspector | usa | Grid |
-| NetworkPrefabsInspector | usa | EditorGUI |
-| NetworkPrefabsInspector | usa | FusionGridItem |
-| NetworkPrefabsInspector | usa | AssetDatabase |
-| NetworkPrefabsInspector | usa | NetworkProjectConfigUtilities |
-| NetworkPrefabsInspector | usa | LoadState |
-| NetworkPrefabsInspector | usa | GridItem |
-| NetworkPrefabsInspector | usa | Column |
-| NetworkPrefabsInspector | usa | FusionEditorSkin |
-| NetworkPrefabsInspector | usa | FusionEditorGUI |
-| NetworkPrefabsInspector | usa | ContentColorScope |
-| NetworkPrefabsInspector | usa | INetworkPrefabSourceDrawer |
-| NetworkPrefabsInspector | usa | EditorUtility |
-| NetworkPrefabsInspector | usa | FusionGrid |
-| InspectorTreeViewState | hereda | TreeViewState |
-| GridItem | hereda | FusionGridItem |
-| GridItem | usa | AssetDatabase |
-| GridItem | usa | NetworkProjectConfigUtilities |
-| GridItem | usa | LoadState |
-| Grid | hereda | FusionGrid |
-| Grid | usa | GridItem |
-| Grid | usa | Column |
-| Grid | usa | FusionEditorSkin |
-| Grid | usa | LoadState |
-| Grid | usa | FusionEditorGUI |
-| Grid | usa | ContentColorScope |
-| Grid | usa | EditorGUI |
-| Grid | usa | INetworkPrefabSourceDrawer |
-| Grid | usa | EditorUtility |
-| FusionWeaverTriggerImporter | hereda | ScriptedImporter |
-| FusionWeaverTriggerImporter | usa | NetworkProjectConfigImporter |
-| FusionWeaverTriggerImporter | usa | ILWeaverUtils |
-| FusionWeaverTriggerImporter | usa | FusionCustomDependency |
-| FusionWeaverTriggerImporter | usa | EditorApplication |
-| FusionWeaverTriggerImporter | usa | NetworkProjectConfigUtilities |
-| Postprocessor | hereda | AssetPostprocessor |
-| Postprocessor | usa | NetworkProjectConfigImporter |
+| PlayerTeleport | hereda | NetworkBehaviour |
+| PlayerTeleport | usa | GameConstants |
+| PlayerTeleport | usa | PlayerEventBus |
+| PlayerTeleport | usa | NetworkInputData |
+| PlayerTeleport | usa | InputButton |
+| PlayerTeleport | usa | RedesLog |
+| PlayerTeleport | usa | VFXManager |
+| PlayerShooting | hereda | NetworkBehaviour |
+| PlayerShooting | usa | AmmoSystem |
+| PlayerShooting | usa | GameEventBus |
+| PlayerShooting | usa | PlayerEventBus |
+| PlayerShooting | usa | RedesLog |
+| PlayerShooting | usa | Projectile |
+| PlayerMovement | hereda | NetworkBehaviour |
+| PlayerMovement | usa | GameConstants |
+| PlayerMovement | usa | PlayerEventBus |
+| PlayerMovement | usa | NetworkInputData |
+| PlayerHealth | hereda | NetworkBehaviour |
+| PlayerHealth | implementa | IDamageable |
+| PlayerHealth | usa | GameConstants |
+| PlayerHealth | usa | GameEventBus |
+| PlayerHealth | usa | PlayerEventBus |
+| PlayerHealth | usa | RedesLog |
+| PlayerHealth | usa | VFXManager |
+| PlayerHealth | usa | NetworkPlayer |
+| PlayerEventBus | hereda | MonoBehaviour |
+| PlayerCrouch | hereda | NetworkBehaviour |
+| PlayerCrouch | usa | PlayerEventBus |
+| PlayerCrouch | usa | GameConstants |
+| PlayerCrouch | usa | NetworkInputData |
+| PlayerCrouch | usa | InputButton |
+| PlayerCrouch | usa | RedesLog |
+| RevivalBarView | hereda | MonoBehaviour |
+| RevivalBarView | usa | UnitController |
+| RehenBruto | hereda | MonoBehaviour |
+| RehenBruto | usa | IA_P2_AgentIA |
+| RehenBruto | usa | GlobalData |
+| PositionManager | hereda | MonoBehaviour |
+| PositionManager | usa | GlobalData |
+| PositionManager | usa | UnitController |
+| PositionManager | usa | UnitTeam |
+| PositionManager | usa | EsperandoState |
+| PositionManager | usa | SeguirFormacionState |
+| Municion | hereda | MonoBehaviour |
+| MenuPausa | hereda | MonoBehaviour |
+| MarkerAnim | hereda | MonoBehaviour |
+| Manager_VFX | hereda | MonoBehaviour |
+| MainGameController | hereda | MonoBehaviour |
+| MainGameController | usa | LeaderManager |
+| MainGameController | usa | GlobalData |
+| MainGameController | usa | UnitModel |
+| MainGameController | usa | UnitSpecialization |
+| MainGameController | usa | UnitFSM |
+| LiderandoState | implementa | IUnitState |
+| LiderandoState | usa | UnitController |
+| LiderandoState | usa | UnitSpecialization |
+| LiderandoState | usa | LeaderManager |
+| LiderandoState | usa | GEN_Inputs |
+| LiderandoState | usa | CursorManager |
+| SeguirFormacionState | implementa | IUnitState |
+| SeguirFormacionState | usa | UnitController |
+| SeguirFormacionState | usa | GlobalData |
+| SeguirFormacionState | usa | EsperandoState |
+| SeguirFormacionState | usa | DetectableType |
+| SeguirFormacionState | usa | Enemigo |
+| SeguirFormacionState | usa | AtacarState |
+| AtacarState | implementa | IUnitState |
+| AtacarState | usa | UnitController |
+| AtacarState | usa | IndicatorType |
+| AtacarState | usa | UnitTeam |
+| AtacarState | usa | SeguirFormacionState |
+| AtacarState | usa | EsperandoState |
+| AtacarState | usa | PerseguirState |
+| PerseguirState | implementa | IUnitState |
+| PerseguirState | usa | UnitController |
+| PerseguirState | usa | IndicatorType |
+| PerseguirState | usa | UnitTeam |
+| PerseguirState | usa | SeguirFormacionState |
+| PerseguirState | usa | EsperandoState |
+| PerseguirState | usa | AtacarState |
+| EsperandoState | implementa | IUnitState |
+| EsperandoState | usa | UnitController |
+| EsperandoState | usa | IndicatorType |
+| EsperandoState | usa | SeguirFormacionState |
+| HuirDetrasLiderState | implementa | IUnitState |
+| HuirDetrasLiderState | usa | UnitController |
+| HuirDetrasLiderState | usa | GlobalData |
+| HuirDetrasLiderState | usa | SeguirFormacionState |
+| IrADestinoState | implementa | IUnitState |
+| IrADestinoState | usa | UnitController |
+| IrADestinoState | usa | IndicatorType |
+| IrADestinoState | usa | EsperandoState |
+| LeaderManager | hereda | MonoBehaviour |
+| LeaderManager | usa | UnitController |
+| LeaderManager | usa | UnitSpecialization |
+| LeaderManager | usa | GEN_Inputs |
+| LeaderManager | usa | GlobalData |
+| LeaderManager | usa | MainGameController |
+| LeaderManager | usa | SeguirFormacionState |
+| LeaderManager | usa | LiderandoState |
+| InteractableItem | hereda | MonoBehaviour |
+| InteractableItem | implementa | IInteractable |
+| InteractableItem | usa | UnitController |
+| InteractableItem | usa | UnitTeam |
+| InteractableItem | usa | BD_Audios |
+| IA_P2_PathNode | hereda | MonoBehaviour |
+| IA_P2_PathNode | usa | IA_P2_PathfindingModel |
+| IA_P2_PathfindingModel | hereda | MonoBehaviour |
+| IA_P2_PathfindingModel | usa | IA_P2_PathNode |
+| IA_P2_PathfindingModel | usa | IA_P2_LineOfSight3D |
+| IA_P2_AgentIA | hereda | MonoBehaviour |
+| IA_P2_AgentIA | usa | UnitModel |
+| IA_P2_AgentIA | usa | IA_P2_PathfindingModel |
+| IA_P2_AgentIA | usa | IA_P2_PathfindingManager |
+| IA_P2_AgentIA | usa | IA_F_PathFinding_Theta |
+| RedesVisualConfigurator | usa | AssetDatabase |
+| RedesVisualConfigurator | usa | EditorUtility |
+| RedesVisualConfigurator | usa | LobbyView |
+| RedesTestSceneBuilder | usa | CameraFollow |
+| RedesTestSceneBuilder | usa | AssetDatabase |
+| RedesTestSceneBuilder | usa | RedesPrefabCreator |
+| RedesTestSceneBuilder | usa | EntityDisplayView |
+| RedesTestSceneBuilder | usa | TestSceneManager |
+| RedesTestSceneBuilder | usa | DummyEnemy |
+| RedesTestSceneBuilder | usa | OfflinePlayerTester |
+| RedesTestSceneBuilder | usa | PlayerEventBus |
+| RedesTestSceneBuilder | usa | RedesAudioSetup |
+| RedesTestSceneBuilder | usa | PlayerAnimationView |
+| RedesTestSceneBuilder | usa | RagdollController |
+| RedesTestSceneBuilder | usa | PlayerAmmoView |
+| RedesTestSceneBuilder | usa | CustomCursorView |
+| RedesTestSceneBuilder | usa | GameEventBus |
+| RedesTestSceneBuilder | usa | DeathScreenView |
+| RedesTestSceneBuilder | usa | DeathScreenController |
+| GameFlowController | hereda | MonoBehaviour |
+| GameFlowController | usa | HostNetworkService |
+| GameFlowController | usa | LobbyView |
+| GameFlowController | usa | GameHudView |
+| GameFlowController | usa | MatchController |
+| GameFlowController | usa | GameStateModel |
+| GameFlowController | usa | INetworkService |
+| GameFlowController | usa | RedesLog |
+| GameFlowController | usa | GameConstants |
+| GameFlowController | usa | GamePhase |
+| GameFlowController | usa | ResultView |
+| GameFlowController | usa | RedesLoadingScreen |
+| GameFlowController | usa | MatchResult |
+| TeleportCooldownView | hereda | MonoBehaviour |
+| TeleportCooldownView | usa | PlayerTeleport |
+| TeleportCooldownView | usa | PlayerEventBus |
+| TeleportCooldownView | usa | GameConstants |
+| ResultView | hereda | MonoBehaviour |
+| ResultView | usa | MatchResult |
+| ResultView | usa | RedesLog |
+| NetworkSceneManagerDefault | hereda | Behaviour |
+| NetworkSceneManagerDefault | implementa | INetworkSceneManager |
+| NetworkSceneManagerDefault | usa | FusionUnitySceneManagerUtils |
+| NetworkSceneManagerDefault | usa | SceneEqualityComparer |
+| NetworkSceneManagerDefault | usa | MultiPeerSceneRoot |
+| NetworkSceneManagerDefault | usa | FusionCoroutine |
+| NetworkSceneManagerDefault | usa | LoadingScope |
+| MultiPeerSceneRoot | hereda | MonoBehaviour |
+| LoadingScope | implementa | IDisposable |
+| LoadingScope | usa | NetworkSceneManagerDefault |
+| RedesSceneLinker | usa | HostNetworkService |
+| RedesSceneLinker | usa | PlayerSpawner |
+| RedesSceneLinker | usa | GameFlowController |
+| RedesSceneLinker | usa | MatchController |
+| RedesSceneLinker | usa | PlayerController |
+| RedesSceneLinker | usa | MatchNetworkController |
+| RedesSceneLinker | usa | LobbyView |
+| RedesSceneLinker | usa | GameHudView |
+| RedesSceneLinker | usa | ResultView |
+| RedesSceneLinker | usa | AssetDatabase |
+| RedesSceneLinker | usa | RedesPrefabCreator |
+| RedesSceneLinker | usa | VFXManager |
+| RedesSceneLinker | usa | TeleportCooldownView |
+| RedesSceneLinker | usa | EntityDisplayManager |
+| RedesSceneLinker | usa | EntityDisplayView |
+| RedesSceneLinker | usa | GameEventBus |
+| RedesSceneLinker | usa | PlayerHealth |
+| RedesSceneLinker | usa | PlayerShooting |
+| RedesSceneLinker | usa | AmmoSystem |
+| RedesSceneLinker | usa | PlayerAnimationView |
+| RedesSceneLinker | usa | RedesProceduralAudio |
+| RedesSceneLinker | usa | RedesAudioSetup |
+| RedesSceneLinker | usa | PlaySoundOnButtonClick |
+| RedesSceneLinker | usa | EditorUtility |
 
 
 ## Otros formatos

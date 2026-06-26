@@ -4,8 +4,15 @@ using System.Linq; // Necesario para OrderBy
 
 public static class IA_P2_PathfindingManager
 {
-    // [Clases internas AStarResult, FinalPathResult, NodeDistance no cambian]
-    // ... (Omitidas por brevedad, son iguales que en tu código)
+    // Diccionario de caché estático para rutas entre nodos
+    private static Dictionary<(IA_P2_PathNode, IA_P2_PathNode), ThetaStarResult> _pathCache = new Dictionary<(IA_P2_PathNode, IA_P2_PathNode), ThetaStarResult>();
+
+    public static void ClearCache()
+    {
+        _pathCache.Clear();
+        Debug.Log("<color=blue>[Path Cache]</color> Caché limpiado manualmente.");
+    }
+    
     #region Clases Internas
     private class AStarResult
     {
@@ -64,7 +71,24 @@ public static class IA_P2_PathfindingManager
         {
             foreach (var endNode in endNodes)
             {
-                var nodePathResult = RunThetaStar(startNode, endNode, targetPos, obstacleLayer, agentRadius);
+                var cacheKey = (startNode, endNode);
+                ThetaStarResult nodePathResult = null;
+
+                if (_pathCache.TryGetValue(cacheKey, out var cachedPath))
+                {
+                    Debug.Log($"<color=blue>[Path Cache]</color> CACHE HIT: Ruta de {startNode.name} a {endNode.name} reutilizada.");
+                    nodePathResult = cachedPath;
+                }
+                else
+                {
+                    nodePathResult = RunThetaStar(startNode, endNode, obstacleLayer, agentRadius);
+                    if (nodePathResult != null)
+                    {
+                        Debug.Log($"<color=blue>[Path Cache]</color> NUEVA RUTA CALCULADA de {startNode.name} a {endNode.name}. Guardando en caché.");
+                        _pathCache[cacheKey] = nodePathResult;
+                    }
+                }
+
                 if (nodePathResult == null) continue;
 
                 Vector3 lastNodePos = nodePathResult.path.Last();
@@ -262,7 +286,7 @@ public static class IA_P2_PathfindingManager
         public float cost;
     }
 
-    static ThetaStarResult RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, Vector3 targetPos, LayerMask obstacle, float agentRadius = 0f)
+    static ThetaStarResult RunThetaStar(IA_P2_PathNode start, IA_P2_PathNode end, LayerMask obstacle, float agentRadius = 0f)
     {
         var open = new List<IA_P2_PathNode>();
         var closed = new HashSet<IA_P2_PathNode>();
@@ -287,15 +311,6 @@ public static class IA_P2_PathfindingManager
         while (open.Count > 0)
         {
             IA_P2_PathNode current = open.OrderBy(n => fScore[n]).First();
-
-            // Check hacia el objetivo final con avoidance
-            var pathToTarget = CheckPathWithAvoidance(current.transform.position, targetPos, obstacle, agentRadius);
-            if (pathToTarget != null)
-            {
-                var finalPath = ReconstructPathWithAvoidance(parent, avoidancePoints, current);
-                finalPath.AddRange(pathToTarget);
-                return new ThetaStarResult { path = finalPath, cost = gScore[current] + Vector3.Distance(current.transform.position, targetPos) };
-            }
 
             if (current == end)
             {

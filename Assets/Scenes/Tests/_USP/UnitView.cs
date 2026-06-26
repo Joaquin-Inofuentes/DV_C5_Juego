@@ -219,6 +219,26 @@ public class UnitView : MonoBehaviour
         mainSprite.color = Color.white;
     }
 
+    public void TriggerLeaderFlash()
+    {
+        Debug.Log($"[UnitView] Inicio TriggerLeaderFlash en {name}");
+        if (mainSprite != null) StartCoroutine(LeaderFlashRoutine());
+        Debug.Log($"[UnitView] Fin TriggerLeaderFlash en {name}");
+    }
+
+    IEnumerator LeaderFlashRoutine()
+    {
+        Debug.Log($"[UnitView] Inicio Corutina LeaderFlashRoutine en {name}");
+        mainSprite.color = new Color(1.5f, 1.5f, 0.5f, 1f); // Glow amarillo brillante
+        yield return new WaitForSeconds(0.15f);
+        mainSprite.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        mainSprite.color = new Color(1.5f, 1.5f, 0.5f, 1f);
+        yield return new WaitForSeconds(0.15f);
+        mainSprite.color = Color.white;
+        Debug.Log($"[UnitView] Fin Corutina LeaderFlashRoutine en {name}");
+    }
+
     // === BARRA DE VIDA ===
 
     [Header("Colores Barra de Vida")]

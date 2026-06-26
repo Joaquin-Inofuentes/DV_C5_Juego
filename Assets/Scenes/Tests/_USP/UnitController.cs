@@ -207,7 +207,12 @@ namespace Game.Squad
 
         private void OnTargetDetected(IDetectable entity)
         {
-            if (Time.timeSinceLevelLoad < 2.0f) return;
+            Debug.Log($"[UnitController] Inicio OnTargetDetected en {name} para {entity.GetName()}");
+            if (Time.timeSinceLevelLoad < 5.0f)
+            {
+                Debug.Log($"[UnitController] Detección ignorada por 'Aire Inicial' (Time: {Time.timeSinceLevelLoad})");
+                return;
+            }
 
             UnitController other = entity.GetTransform().GetComponent<UnitController>();
             if (other != null && other.model.team != this.model.team)
@@ -227,6 +232,7 @@ namespace Game.Squad
                     CambiarEstado(dist <= model.attackRange ? new AtacarState() : new PerseguirState());
                 }
             }
+            Debug.Log($"[UnitController] Fin OnTargetDetected en {name}");
         }
 
         public void RecibirDano(int cantidad, GameObject atacante)
