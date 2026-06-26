@@ -27,17 +27,41 @@ namespace Redes.Core
 
         public static void Info(string flag, string message)
         {
-            Debug.Log($"{flag} {message}");
+            if (IsSoundOrCursorLog(message))
+            {
+                Debug.Log($"{flag} {message}");
+            }
         }
 
         public static void Warn(string flag, string message)
         {
-            Debug.LogWarning($"{flag} {message}");
+            if (IsSoundOrCursorLog(message))
+            {
+                Debug.LogWarning($"{flag} {message}");
+            }
         }
 
         public static void Error(string flag, string message)
         {
+            // Siempre mostrar errores del sistema para desarrollo
             Debug.LogError($"{flag} {message}");
+        }
+
+        private static bool IsSoundOrCursorLog(string msg)
+        {
+            if (string.IsNullOrEmpty(msg)) return false;
+            string lower = msg.ToLower();
+            return lower.Contains("sound") || 
+                   lower.Contains("sfx") || 
+                   lower.Contains("audio") || 
+                   lower.Contains("cursor") || 
+                   lower.Contains("disparo") || 
+                   lower.Contains("daño") || 
+                   lower.Contains("dano") || 
+                   lower.Contains("ouch") || 
+                   lower.Contains("hit") || 
+                   lower.Contains("reproduc") ||
+                   lower.Contains("play");
         }
 
         public static void Trace(string flag, string className, string methodName, string playerContext, string content, string type = "Info")

@@ -195,7 +195,42 @@ namespace Redes.Views
         {
             TryBindLocalPlayer();
 
-            // 1. Only show cursor when within game window bounds
+            // 1. Visibilidad basada en la fase del juego (solo visible en Playing)
+            bool isPlaying = false;
+            var flow = FindFirstObjectByType<Redes.Controllers.GameFlowController>();
+            if (flow != null)
+            {
+                // Obtenemos la fase desde el modelo del GameFlowController
+                var field = flow.GetType().GetField("_model", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (field != null)
+                {
+                    var model = field.GetValue(flow) as Redes.Models.GameStateModel;
+                    if (model != null)
+                    {
+                        isPlaying = (model.Phase == Redes.Core.GamePhase.Playing);
+                    }
+                }
+            }
+            else
+            {
+                // Fallback para test offline
+                isPlaying = (FindFirstObjectByType<Redes.Test.OfflinePlayerTester>() != null);
+            }
+
+            if (!isPlaying)
+            {
+                // Si está en el lobby u otra pantalla, el cursor personalizado no se ve y el del sistema se muestra libre
+                _cursorImage.enabled = false;
+                if (_reloadProgressImage != null) _reloadProgressImage.enabled = false;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                return;
+            }
+
+            // Ocultar el cursor del sistema y bloquearlo de forma simple cuando se está en juego
+            Cursor.visible = false;
+
+            // 2. Only show cursor when within game window bounds
             Vector3 mousePos = Input.mousePosition;
             bool insideWindow = mousePos.x >= 0 && mousePos.x <= Screen.width &&
                                 mousePos.y >= 0 && mousePos.y <= Screen.height;
@@ -219,20 +254,26 @@ namespace Redes.Views
                 _cursorRect.sizeDelta = new Vector2(CursorSize, CursorSize);
             }
 
-            // 2. Position custom cursor element matching mouse position
+            // 3. Position custom cursor element matching mouse position (enganchado simple al cursor)
             Vector2 localPoint;
-            var parentRect = transform as RectTransform;
-            if (parentRect == null) parentRect = GetComponent<RectTransform>();
-            if (parentRect == null) return;
+            RectTransform canvasRect = _canvas.GetComponent<RectTransform>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                parentRect,
+                canvasRect,
                 mousePos,
-                _canvas != null ? _canvas.worldCamera : null,
+                _canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : _canvas.worldCamera,
                 out localPoint
             );
-            _cursorRect.anchoredPosition = localPoint;
+            
+            // Movemos tanto el cursorRect como el propio transform si es necesario, o directamente asignamos al cursorRect bajo el Canvas
+            if (_cursorRect != null)
+            {
+                _cursorRect.anchoredPosition = localPoint;
+            }
 
-            // 3. Handle Reload radial fill animation
+            // Debug del cursor enganchado
+            Debug.Log($"[CURSOR_DEBUG] Posición del CustomCursor enganchado: Screen={mousePos}, LocalCanvas={localPoint}");
+
+            // 4. Handle Reload radial fill animation
             if (_isReloading)
             {
                 _reloadTimer -= Time.deltaTime;
@@ -249,7 +290,7 @@ namespace Redes.Views
                 }
             }
 
-            // 4. Handle hit state timers
+            // 5. Handle hit state timers
             if (_isHitting)
             {
                 _hitTimer -= Time.deltaTime;
@@ -259,7 +300,7 @@ namespace Redes.Views
                 }
             }
 
-            // 5. Select correct sprite & color based on priority: Hit -> Reload -> Shoot (momentary) -> Base
+            // 6. Select correct sprite & color based on priority: Hit -> Reload -> Shoot (momentary) -> Base
             if (_isHitting)
             {
                 _cursorImage.sprite = _cursorHit;

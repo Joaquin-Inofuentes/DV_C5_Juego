@@ -413,6 +413,10 @@ namespace Redes.Views
         private void PlaySound3D(AudioClip clip, float volume = 1f)
         {
             if (clip == null) return;
+            
+            string ownerName = (_netPlayer != null) ? _netPlayer.Nickname : "OfflinePlayer";
+            Debug.Log($"[SOUND_DEBUG] Clip '{clip.name}' reproducido por el jugador: '{ownerName}'");
+
             if (_audioSource != null)
             {
                 _audioSource.PlayOneShot(clip, volume);

@@ -1,4 +1,4 @@
-﻿using Fusion;
+using Fusion;
 using UnityEngine;
 using Redes.Core;
 
@@ -75,13 +75,29 @@ namespace Redes.Player
         private void ExecuteTeleport()
         {
             Vector3 origin = transform.position;
+            Vector3 dest = origin;
 
-            // Posición aleatoria en el plano XZ dentro del rango
-            Vector2 rand2D = Random.insideUnitCircle * _range;
-            Vector3 dest   = new Vector3(
-                origin.x + rand2D.x,
-                origin.y,
-                origin.z + rand2D.y);
+            // Leer la dirección o punto de destino enviado en data.AimDirection (puntero del mouse en plano 3D)
+            if (GetInput(out Network.NetworkInputData data))
+            {
+                // data.AimDirection contiene el punto 3D del plano XZ del cursor
+                Vector3 targetPoint = new Vector3(data.AimDirection.x, origin.y, data.AimDirection.y);
+                Vector3 toTarget = targetPoint - origin;
+                if (toTarget.magnitude > _range)
+                {
+                    dest = origin + toTarget.normalized * _range;
+                }
+                else
+                {
+                    dest = targetPoint;
+                }
+            }
+            else
+            {
+                // Fallback si no hay input (ej. bots o pérdida de paquetes)
+                Vector2 rand2D = Random.insideUnitCircle * _range;
+                dest = new Vector3(origin.x + rand2D.x, origin.y, origin.z + rand2D.y);
+            }
 
             // Guardar en red (dispara OnTeleportChangedRender en todos los clientes)
             LastTeleportOrigin = origin;
@@ -95,7 +111,7 @@ namespace Redes.Player
 
             RedesLog.Info(RedesLog.PLAYER,
                 $"[Teleport] Jugador {Object.InputAuthority} (ActorId={Object.InputAuthority.PlayerId}) " +
-                $"teletransportado de {origin:F1} → {dest:F1}  (cooldown={_cooldown}s)");
+                $"teletransportado al cursor de {origin:F1} → {dest:F1}  (cooldown={_cooldown}s)");
         }
 
         // ─── Render: VFX en todos los clientes ──────────────────────────
@@ -106,13 +122,27 @@ namespace Redes.Player
                 $"[Teleport VFX] Jugador {Object.InputAuthority} ({contexto}) " +
                 $"{LastTeleportOrigin:F1} → {LastTeleportDest:F1}");
 
-            // Partícula de origen
+            // Partícula de origen (con fallback a la chispa SparkVFX de VFXManager si no está configurada)
             if (_teleportOriginVfxPrefab != null)
+            {
                 Instantiate(_teleportOriginVfxPrefab, LastTeleportOrigin, Quaternion.identity);
+            }
+            else if (Views.VFXManager.Instance != null)
+            {
+                // Usamos la chispa como sistema de partículas en el origen
+                Views.VFXManager.Instance.PlaySpark(LastTeleportOrigin, Quaternion.identity);
+            }
 
-            // Partícula de destino
+            // Partícula de destino (con fallback a la chispa SparkVFX de VFXManager si no está configurada)
             if (_teleportDestVfxPrefab != null)
+            {
                 Instantiate(_teleportDestVfxPrefab, LastTeleportDest, Quaternion.identity);
+            }
+            else if (Views.VFXManager.Instance != null)
+            {
+                // Usamos la chispa como sistema de partículas en el destino
+                Views.VFXManager.Instance.PlaySpark(LastTeleportDest, Quaternion.identity);
+            }
 
             // Notificar vistas
             _eventBus?.TriggerTeleport(LastTeleportOrigin, LastTeleportDest);

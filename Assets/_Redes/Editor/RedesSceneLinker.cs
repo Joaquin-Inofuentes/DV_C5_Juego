@@ -60,7 +60,7 @@ namespace Redes.EditorTools
             var hitSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
             var winSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Win.wav");
             var loseSound  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
-            var bgmSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/AmbientNature.wav");
+            var bgmSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/SFX_Bosque.mp3");
 
             // ---- Network ----
             Assign(host, ("_playerSpawner", spawner), ("_playerPrefab", playerPrefabNo));

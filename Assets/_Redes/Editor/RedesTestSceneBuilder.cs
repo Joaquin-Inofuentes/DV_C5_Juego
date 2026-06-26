@@ -188,7 +188,7 @@ namespace Redes.EditorTools
             var bgmGo = new GameObject("AmbientMusic");
             bgmGo.transform.position = Vector3.zero;
             var bgmAudio = bgmGo.AddComponent<AudioSource>();
-            bgmAudio.clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Musica de fondo Audiomachine - The Last Stand (No Vocal).mp3");
+            bgmAudio.clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Audio/SFX_Bosque.mp3");
             bgmAudio.loop = true;
             bgmAudio.volume = 0.35f;
             bgmAudio.spatialBlend = 1.0f; // 3D
