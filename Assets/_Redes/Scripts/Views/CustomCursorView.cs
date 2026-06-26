@@ -14,6 +14,7 @@ namespace Redes.Views
     {
         [Header("References")]
         [SerializeField] private PlayerEventBus _eventBus;
+        [SerializeField] private GameEventBus _globalEventBus;
         
         [Header("Cursor Sprites")]
         [SerializeField] private Sprite _cursorBase;
@@ -77,6 +78,10 @@ namespace Redes.Views
         private void OnEnable()
         {
             TryBindLocalPlayer();
+            if (_globalEventBus != null)
+            {
+                _globalEventBus.OnPlayerTookDamage += HandleGlobalPlayerTookDamage;
+            }
             // Ocultar cursor del sistema al entrar al juego
             Cursor.visible   = false;
             Cursor.lockState = CursorLockMode.None; // libre pero invisible
@@ -85,9 +90,25 @@ namespace Redes.Views
         private void OnDisable()
         {
             UnbindEventBus();
+            if (_globalEventBus != null)
+            {
+                _globalEventBus.OnPlayerTookDamage -= HandleGlobalPlayerTookDamage;
+            }
             // Restaurar cursor del sistema al salir (lobby, resultados, etc.)
             Cursor.visible   = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+
+        private void HandleGlobalPlayerTookDamage(PlayerRef victim, int newHealth, PlayerRef attacker)
+        {
+            if (_eventBus != null)
+            {
+                var np = _eventBus.GetComponent<Redes.Player.NetworkPlayer>();
+                if (np != null && np.Object != null && np.Object.IsValid && attacker == np.Object.InputAuthority)
+                {
+                    TriggerHit();
+                }
+            }
         }
 
         private void TryBindLocalPlayer()

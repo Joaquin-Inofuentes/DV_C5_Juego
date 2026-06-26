@@ -1,4 +1,4 @@
-﻿using Fusion;
+using Fusion;
 using UnityEngine;
 using Redes.Core;
 
@@ -30,6 +30,7 @@ namespace Redes.Player
 
         // Velocidad de interpolación de escala
         private const float SCALE_SPEED = 10f;
+        private float _currentAlpha = 1f;
 
         private void Awake()
         {
@@ -70,6 +71,33 @@ namespace Redes.Player
                 transform.localScale,
                 targetScale,
                 Time.deltaTime * SCALE_SPEED);
+
+            float targetAlpha = IsCrouching ? 0.6f : 1.0f;
+            _currentAlpha = Mathf.MoveTowards(_currentAlpha, targetAlpha, Time.deltaTime * SCALE_SPEED);
+            SetVisualsAlpha(_currentAlpha);
+        }
+
+        private void SetVisualsAlpha(float alpha)
+        {
+            var spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+            foreach (var sr in spriteRenderers)
+            {
+                Color c = sr.color;
+                c.a = alpha;
+                sr.color = c;
+            }
+
+            var renderers = GetComponentsInChildren<Renderer>();
+            foreach (var r in renderers)
+            {
+                if (r is SpriteRenderer) continue;
+                if (r.material != null)
+                {
+                    Color c = r.material.color;
+                    c.a = alpha;
+                    r.material.color = c;
+                }
+            }
         }
 
         // ─── Callback de cambio de red ───────────────────────────────────
@@ -78,8 +106,8 @@ namespace Redes.Player
             _eventBus?.TriggerCrouch(IsCrouching);
 
             string contexto = Object.HasInputAuthority ? "Local" : "Remoto";
-            RedesLog.Info(RedesLog.PLAYER,
-                $"[Crouch Render] Jugador {Object.InputAuthority} ({contexto}) → IsCrouching={IsCrouching}");
+            string status = IsCrouching ? "Agachado (Transparencia 0.6)" : "De pie (Transparencia 1.0)";
+            Debug.Log($"[CROUCH] Jugador {Object.InputAuthority} ({contexto}) estado visual cambiado a: {status}");
         }
     }
 }

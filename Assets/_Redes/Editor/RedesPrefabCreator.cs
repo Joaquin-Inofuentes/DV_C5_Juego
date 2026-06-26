@@ -65,7 +65,7 @@ namespace Redes.EditorTools
             
             var col = go.AddComponent<CapsuleCollider>();
             col.height = 1.8f;
-            col.radius = 0.35f;
+            col.radius = 0.7f;
             col.center = new Vector3(0, 0.9f, 0); // pivot at feet, center at mid-body
 
             go.AddComponent<NetworkObject>();

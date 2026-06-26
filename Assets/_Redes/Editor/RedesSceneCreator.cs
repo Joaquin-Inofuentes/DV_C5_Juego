@@ -462,6 +462,7 @@ namespace Redes.EditorTools
             soCursor.FindProperty("_cursorShoot").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorShoot.png");
             soCursor.FindProperty("_cursorHit").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorHit.png");
             soCursor.FindProperty("_cursorReload").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorReload.png");
+            soCursor.FindProperty("_globalEventBus").objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
             soCursor.ApplyModifiedPropertiesWithoutUndo();
         }
 

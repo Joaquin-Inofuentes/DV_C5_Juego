@@ -321,7 +321,7 @@ namespace Redes.EditorTools
             {
                 col = playerGo.AddComponent<CapsuleCollider>();
                 col.height = 1.8f;
-                col.radius = 0.35f;
+                col.radius = 0.7f;
                 col.center = new Vector3(0, 0.9f, 0);
             }
 
@@ -555,6 +555,8 @@ namespace Redes.EditorTools
             // Create CustomCursorView on Canvas
             var cursorView = canvasGo.AddComponent<CustomCursorView>();
             Assign(cursorView, "_eventBus", peb);
+            var globalBus = AssetDatabase.LoadAssetAtPath<GameEventBus>("Assets/_Redes/Scripts/Core/GameEventBus.asset");
+            Assign(cursorView, "_globalEventBus", globalBus);
 
             // Load cursor sprites and assign them
             var cBase = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/_Redes/Art/Textures/CursorBase.png");
