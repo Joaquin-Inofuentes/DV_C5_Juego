@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Redes.Player;
+using Fusion;
+using Redes.Core;
 
 namespace Redes.Views
 {
