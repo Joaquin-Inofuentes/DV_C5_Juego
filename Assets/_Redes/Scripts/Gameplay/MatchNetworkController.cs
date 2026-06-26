@@ -95,13 +95,13 @@ namespace Redes.Gameplay
             {
                 Debug.Log("Se gano");
                 if (_winSound != null && Camera.main != null) 
-                    AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
+                    AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position, 0.2f);
             }
             else
             {
                 Debug.Log("Se perdio");
                 if (_loseSound != null && Camera.main != null) 
-                    AudioSource.PlayClipAtPoint(_loseSound, Camera.main.transform.position);
+                    AudioSource.PlayClipAtPoint(_loseSound, Camera.main.transform.position, 0.2f);
             }
 
             if (_matchController != null)

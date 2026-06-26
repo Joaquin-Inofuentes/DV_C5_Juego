@@ -80,7 +80,21 @@ namespace Redes.Player
                 foreach (var otherPlayer in Runner.ActivePlayers)
                 {
                     if (otherPlayer == Object.InputAuthority) continue;
-                    var otherNp = Runner.GetPlayerObject(otherPlayer)?.GetComponent<NetworkPlayer>();
+                    
+                    var otherObj = Runner.GetPlayerObject(otherPlayer);
+                    if (otherObj == null)
+                    {
+                        foreach (var np in FindObjectsByType<NetworkPlayer>(FindObjectsSortMode.None))
+                        {
+                            if (np.Object != null && np.Object.InputAuthority == otherPlayer)
+                            {
+                                otherObj = np.Object;
+                                break;
+                            }
+                        }
+                    }
+
+                    var otherNp = otherObj?.GetComponent<NetworkPlayer>();
                     if (otherNp != null && otherNp != this && otherNp.Nickname == finalNickname)
                     {
                         nameExists = true;
@@ -93,6 +107,17 @@ namespace Redes.Player
 
             NetNickname = finalNickname;
             RedesLog.Info(RedesLog.PLAYER, $"[Server Nickname Set] Player {Object.InputAuthority} set to '{finalNickname}'");
+        }
+
+        [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+        public void RpcNotifyHitMarker()
+        {
+            Debug.Log($"[CURSOR_DEBUG] 2. RpcNotifyHitMarker recibido del Servidor. Mostrando Hit en la cruz.");
+            var cursor = FindFirstObjectByType<Redes.Views.CustomCursorView>();
+            if (cursor != null)
+            {
+                cursor.TriggerHit();
+            }
         }
 
         public override void Spawned()

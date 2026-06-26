@@ -221,7 +221,7 @@ namespace Redes.Views
                         {
                             _animator.SetBool("IsDead", true);
                         }
-                        PlaySound3D(_deathSound, 1.0f);
+                        PlaySound3D(_deathSound, 0.2f);
 
                         // Trigger Ragdoll controller
                         var ragdoll = GetComponent<Gameplay.RagdollController>();
@@ -358,7 +358,7 @@ namespace Redes.Views
                 _animator.SetBool("IsDead", true);
             }
 
-            PlaySound3D(_deathSound, 1.0f);
+            PlaySound3D(_deathSound, 0.2f);
 
             var ragdoll = GetComponentInParent<Gameplay.RagdollController>();
             if (ragdoll != null)

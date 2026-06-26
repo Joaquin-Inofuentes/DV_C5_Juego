@@ -21,8 +21,17 @@ namespace Redes.Player
         // [Header("Tuning")]
         // [SerializeField] private int _damage = GameConstants.DEFAULT_BULLET_DAMAGE; // Removed unused field
 
-        [Networked] public int ShootCount { get; set; }
+        [Networked, OnChangedRender(nameof(OnShootCountChanged))] public int ShootCount { get; set; }
         [Networked] public TickTimer ShootTimer { get; set; }
+
+        private void OnShootCountChanged()
+        {
+            if (_playerEventBus != null)
+            {
+                Debug.Log($"[CURSOR_DEBUG] 1. ShootCount incrementado. Disparando _playerEventBus.TriggerShoot() localmente para UI.");
+                _playerEventBus.TriggerShoot();
+            }
+        }
 
         public bool IsShooting => !ShootTimer.ExpiredOrNotRunning(Runner);
 
@@ -93,7 +102,8 @@ namespace Redes.Player
                 ShootTimer = TickTimer.CreateFromSeconds(Runner, 0.2f);
 
                 if (_eventBus != null) _eventBus.TriggerPlayerShooting(Object.InputAuthority);
-                if (_playerEventBus != null) _playerEventBus.TriggerShoot();
+                
+                // Nota: _playerEventBus.TriggerShoot() ahora se llama en OnShootCountChanged para que ocurra en todos los clientes.
                 
                 string muzzlePosStr = _muzzle != null ? _muzzle.position.ToString() : "NULO";
                 float muzzleY = _muzzle != null ? _muzzle.position.y : 0f;

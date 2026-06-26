@@ -179,6 +179,7 @@ namespace Redes.Views
             _isHitting = true;
             _hitTimer = 0.2f;
             _hitScale = 1.4f;
+            Debug.Log("[CURSOR_DEBUG] 4. CustomCursorView.TriggerHit() ejecutado -> activando _cursorHit color rojo!");
         }
 
         private void HandleShoot(float speed)
@@ -186,6 +187,7 @@ namespace Redes.Views
             if (!_isReloading)
             {
                 _shootReboundScale = 1.5f; // Scale bounce on shoot
+                Debug.Log("[CURSOR_DEBUG] 5. CustomCursorView.HandleShoot() ejecutado -> activando rebote y _cursorShoot naranja!");
             }
         }
 

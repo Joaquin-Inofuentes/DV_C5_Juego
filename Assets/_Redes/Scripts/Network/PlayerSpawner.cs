@@ -31,6 +31,7 @@ namespace Redes.Network
             if (obj != null)
             {
                 _spawned[player] = obj;
+                runner.SetPlayerObject(player, obj);
                 RedesLog.Info(RedesLog.PLAYER, $"   Inicio el jugador {player} en {pos}");
             }
             else

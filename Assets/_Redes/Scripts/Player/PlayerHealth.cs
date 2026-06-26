@@ -118,6 +118,17 @@ namespace Redes.Player
             if (Runner != null)
             {
                 var attackerGo = Runner.GetPlayerObject(attacker);
+                if (attackerGo == null)
+                {
+                    foreach (var np in FindObjectsByType<NetworkPlayer>(FindObjectsSortMode.None))
+                    {
+                        if (np.Object != null && np.Object.InputAuthority == attacker)
+                        {
+                            attackerGo = np.Object;
+                            break;
+                        }
+                    }
+                }
                 if (attackerGo != null)
                 {
                     hitDirection = (transform.position - attackerGo.transform.position).normalized;
@@ -130,6 +141,37 @@ namespace Redes.Player
                 CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
                 RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: CurrentHealth updated to {CurrentHealth}");
                 
+                // Notificamos al atacante que dio en el blanco (para el cursor)
+                if (Runner != null)
+                {
+                    var attackerObj = Runner.GetPlayerObject(attacker);
+                    if (attackerObj == null)
+                    {
+                        foreach (var np in FindObjectsByType<NetworkPlayer>(FindObjectsSortMode.None))
+                        {
+                            if (np.Object != null && np.Object.InputAuthority == attacker)
+                            {
+                                attackerObj = np.Object;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (attackerObj != null)
+                    {
+                        var attackerNetPlayer = attackerObj.GetComponent<NetworkPlayer>();
+                        if (attackerNetPlayer != null)
+                        {
+                            Debug.Log($"[CURSOR_DEBUG] 3. Jugador {Object.InputAuthority} recibio daño. Llamando RpcNotifyHitMarker en atacante {attacker}");
+                            attackerNetPlayer.RpcNotifyHitMarker();
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[CURSOR_DEBUG] No se encontro el NetworkPlayer del atacante {attacker} para disparar RpcNotifyHitMarker.");
+                    }
+                }
+
                 if (_eventBus != null)
                 {
                     RedesLog.Info(RedesLog.COMBAT, $">> PlayerHealth: [IN] TriggerPlayerTookDamage event bus");
