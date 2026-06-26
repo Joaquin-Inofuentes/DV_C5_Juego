@@ -560,8 +560,8 @@ namespace Redes.Network
                 }
             }
 
-            // Fire: clic izquierdo o botón Fire1 (ya NO incluye Space, que ahora es Teleport)
-            data.Buttons.Set(InputButton.Fire,     Input.GetButton("Fire1"));
+            // Fire: clic izquierdo (ya NO incluye Fire1/Space, que causaban falsos positivos como Ctrl y Teleport)
+            data.Buttons.Set(InputButton.Fire,     Input.GetMouseButton(0));
             data.Buttons.Set(InputButton.Reload,   Input.GetKey(KeyCode.R));
             data.Buttons.Set(InputButton.Crouch,   Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl));
             data.Buttons.Set(InputButton.Teleport, Input.GetKey(KeyCode.Space));

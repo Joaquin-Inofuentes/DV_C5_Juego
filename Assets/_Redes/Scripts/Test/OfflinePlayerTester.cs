@@ -272,7 +272,7 @@ namespace Redes.Test
             bool firePressed = false;
             if (_inputMode == PlayerInputMode.WASD_Mouse)
             {
-                firePressed = Input.GetButton("Fire1") || Input.GetMouseButton(0);
+                firePressed = Input.GetMouseButton(0);
             }
             else
             {

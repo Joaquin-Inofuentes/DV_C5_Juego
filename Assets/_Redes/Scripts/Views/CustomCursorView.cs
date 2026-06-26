@@ -54,6 +54,12 @@ namespace Redes.Views
             _cursorRect.pivot = new Vector2(0.5f, 0.5f);
             
             _cursorImage = cursorGo.AddComponent<Image>();
+            if (_cursorBase == null)
+            {
+                #if UNITY_EDITOR
+                _cursorBase = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+                #endif
+            }
             _cursorImage.sprite = _cursorBase;
             _cursorImage.raycastTarget = false;
 
@@ -66,6 +72,12 @@ namespace Redes.Views
             reloadRect.sizeDelta = Vector2.zero;
 
             _reloadProgressImage = reloadGo.AddComponent<Image>();
+            if (_cursorReload == null)
+            {
+                #if UNITY_EDITOR
+                _cursorReload = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
+                #endif
+            }
             _reloadProgressImage.sprite = _cursorReload;
             _reloadProgressImage.type = Image.Type.Filled;
             _reloadProgressImage.fillMethod = Image.FillMethod.Radial360;

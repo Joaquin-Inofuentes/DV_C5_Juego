@@ -330,6 +330,7 @@ namespace Redes.EditorTools
             var teleportRadialGo = new GameObject("TeleportRadial", typeof(RectTransform));
             teleportRadialGo.transform.SetParent(teleportContainer.transform, false);
             var trImg = teleportRadialGo.AddComponent<Image>();
+            trImg.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
             trImg.type = Image.Type.Filled;
             trImg.fillMethod = Image.FillMethod.Radial360;
             trImg.fillOrigin = (int)Image.Origin360.Top;
