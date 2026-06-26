@@ -115,15 +115,17 @@ namespace Redes.EditorTools
             var hitMain = hitPs.main;
             hitMain.duration = 0.5f;
             hitMain.loop = false;
-            hitMain.startLifetime = 0.4f;
-            hitMain.startSpeed = 6f;
-            hitMain.startSize = 0.25f;
-            hitMain.startColor = Color.red;
+            hitMain.startLifetime = 0.6f;
+            hitMain.startSpeed = 5f;
+            hitMain.startSize = 0.35f;
+            hitMain.startColor = new Color(0.65f, 0.02f, 0.02f, 1.0f); // dark crimson red
+            hitMain.gravityModifier = 2.5f; // falls quickly like liquid
             var hitEmission = hitPs.emission;
             hitEmission.rateOverTime = 0;
-            hitEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 15) });
+            hitEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 25) }); // thick burst
             var hitShape = hitPs.shape;
             hitShape.shapeType = ParticleSystemShapeType.Sphere;
+            hitShape.radius = 0.15f;
 
             // Create Muzzle VFX Prefab (Green, Cone)
             var muzzleGo = new GameObject("MuzzleVFXPrefab");
@@ -131,18 +133,19 @@ namespace Redes.EditorTools
             muzzleGo.SetActive(false);
             var muzzlePs = muzzleGo.AddComponent<ParticleSystem>();
             var muzzleMain = muzzlePs.main;
-            muzzleMain.duration = 0.15f;
+            muzzleMain.duration = 0.12f;
             muzzleMain.loop = false;
-            muzzleMain.startLifetime = 0.15f;
-            muzzleMain.startSpeed = 8f;
-            muzzleMain.startSize = 0.2f;
+            muzzleMain.startLifetime = 0.12f; // very fast
+            muzzleMain.startSpeed = 16f; // fast forward speed
+            muzzleMain.startSize = 0.45f; // exaggerated size
             muzzleMain.startColor = Color.green;
             var muzzleEmission = muzzlePs.emission;
             muzzleEmission.rateOverTime = 0;
-            muzzleEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 8) });
+            muzzleEmission.SetBursts(new[] { new ParticleSystem.Burst(0, 25) }); // exaggerated burst
             var muzzleShape = muzzlePs.shape;
             muzzleShape.shapeType = ParticleSystemShapeType.Cone;
-            muzzleShape.angle = 12f;
+            muzzleShape.angle = 35f; // wide dispersion
+            muzzleShape.radius = 0.05f;
 
             // Create Spark VFX Prefab (White, Sphere/Cone)
             var sparkGo = new GameObject("SparkVFXPrefab");
@@ -191,8 +194,10 @@ namespace Redes.EditorTools
             // Load and assign SFX clips for VFXManager
             var obstacleHitClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.ObstacleHitPath);
             var ouchClip = AssetDatabase.LoadAssetAtPath<AudioClip>(Redes.EditorTools.RedesProceduralAudio.OuchPath);
+            var sfxGroup = Redes.EditorTools.RedesAudioSetup.GetGroup("SFX");
             soVfx.FindProperty("_obstacleHitSound").objectReferenceValue = obstacleHitClip;
             soVfx.FindProperty("_ouchSound").objectReferenceValue = ouchClip;
+            soVfx.FindProperty("_sfxGroup").objectReferenceValue = sfxGroup;
             soVfx.ApplyModifiedPropertiesWithoutUndo();
 
             // ---- UI (legacy Text) ----

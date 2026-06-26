@@ -11,8 +11,9 @@ namespace Redes.EditorTools
     public static class RedesProceduralAudio
     {
         private const string AudioFolder = "Assets/_Redes/Art/Audio";
-        public const string OuchPath = AudioFolder + "/Ouch.wav";
+        public const string OuchPath = AudioFolder + "/Ouch.ogg";
         public const string ObstacleHitPath = AudioFolder + "/ObstacleHit.wav";
+        public const string ClickPath = AudioFolder + "/Click.wav";
 
         /// <summary>
         /// Ensures both procedural audio clips exist. Safe to call multiple times.
@@ -24,14 +25,17 @@ namespace Redes.EditorTools
 
             if (!File.Exists(OuchPath))
             {
-                Debug.Log("[REDES][CORREGIR] Creando sonido 'Ouch' procedural...");
-                CreateOuchClip();
+                Debug.LogWarning("[REDES][CORREGIR] Falta el sonido 'Ouch.ogg'. Usando el archivo descargado...");
             }
 
             if (!File.Exists(ObstacleHitPath))
             {
-                Debug.Log("[REDES][CORREGIR] Creando sonido 'ObstacleHit' procedural...");
-                CreateObstacleHitClip();
+                Debug.LogWarning("[REDES][CORREGIR] Falta el sonido 'ObstacleHit.wav'. Usando el archivo descargado...");
+            }
+
+            if (!File.Exists(ClickPath))
+            {
+                Debug.LogWarning("[REDES][CORREGIR] Falta el sonido 'Click.wav'. Usando el archivo descargado...");
             }
 
             AssetDatabase.Refresh();

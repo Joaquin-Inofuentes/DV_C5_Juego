@@ -190,6 +190,22 @@ namespace Redes.EditorTools
             }
             Debug.Log("[REDES][LINKER] =============================================");
 
+            // ---- Add button sounds dynamically to all UI buttons ----
+            var clickSound = AssetDatabase.LoadAssetAtPath<AudioClip>(RedesProceduralAudio.ClickPath);
+            var sfxGroup = RedesAudioSetup.GetGroup("SFX");
+            var allButtons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var button in allButtons)
+            {
+                var clickPlayer = button.gameObject.GetComponent<PlaySoundOnButtonClick>();
+                if (clickPlayer == null)
+                {
+                    clickPlayer = button.gameObject.AddComponent<PlaySoundOnButtonClick>();
+                }
+                Assign(clickPlayer, 
+                    ("_clickSound", clickSound), 
+                    ("_sfxGroup", sfxGroup));
+            }
+
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
 

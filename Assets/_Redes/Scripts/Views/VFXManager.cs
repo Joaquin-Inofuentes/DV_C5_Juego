@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Redes.Core;
 
 namespace Redes.Views
@@ -15,6 +16,7 @@ namespace Redes.Views
         [Header("SFX")]
         [SerializeField] private AudioClip _obstacleHitSound;
         [SerializeField] private AudioClip _ouchSound;
+        [SerializeField] private AudioMixerGroup _sfxGroup;
 
         private List<ParticleSystem> _muzzlePool = new List<ParticleSystem>();
         private List<ParticleSystem> _hitPool = new List<ParticleSystem>();
@@ -140,7 +142,7 @@ namespace Redes.Views
             if (_obstacleHitSound != null)
             {
                 RedesLog.Info(RedesLog.VFX, $"[SFX] ObstacleHit sound at {position}");
-                AudioSource.PlayClipAtPoint(_obstacleHitSound, position, 0.7f);
+                PlayClipAtPointRouted(_obstacleHitSound, position, 0.7f);
             }
         }
 
@@ -149,8 +151,24 @@ namespace Redes.Views
             if (_ouchSound != null)
             {
                 RedesLog.Info(RedesLog.VFX, $"[SFX] Ouch sound at {position}");
-                AudioSource.PlayClipAtPoint(_ouchSound, position, 0.8f);
+                PlayClipAtPointRouted(_ouchSound, position, 0.8f);
             }
+        }
+
+        private void PlayClipAtPointRouted(AudioClip clip, Vector3 position, float volume)
+        {
+            if (clip == null) return;
+            GameObject tempGo = new GameObject("TempSFX_" + clip.name);
+            tempGo.transform.position = position;
+            AudioSource source = tempGo.AddComponent<AudioSource>();
+            source.clip = clip;
+            source.outputAudioMixerGroup = _sfxGroup;
+            source.volume = volume;
+            source.spatialBlend = 1f; // 3D spatial sound
+            source.minDistance = 2f;
+            source.maxDistance = 20f;
+            source.Play();
+            Destroy(tempGo, clip.length + 0.1f);
         }
     }
 }

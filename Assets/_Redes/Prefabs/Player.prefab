@@ -253,6 +253,7 @@ MonoBehaviour:
   _reloadSound: {fileID: 8300000, guid: 8394670cdd20419478437ae82dbdc1b8, type: 3}
   _deathSound: {fileID: 8300000, guid: 80bcfb9a8e320f1489968d6071eef5b2, type: 3}
   _footstepSound: {fileID: 8300000, guid: 1c696fad07bb73f4d9de7fcad4f547a9, type: 3}
+  _ouchSound: {fileID: 8300000, guid: 989594653bb0479448724241aac3cec0, type: 3}
   _footstepInterval: 0.38
 --- !u!82 &2197367697350939627
 AudioSource:
