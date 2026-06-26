@@ -33,7 +33,7 @@ namespace Redes.EditorTools
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             // ---- Camera (top-down) ----
-            var camGo = new GameObject("[ENV] Main Camera");
+            var camGo = new GameObject("[E] Main Camera");
             camGo.tag = "MainCamera";
             var cam = camGo.AddComponent<Camera>();
             cam.orthographic = true;
@@ -43,14 +43,14 @@ namespace Redes.EditorTools
             camGo.transform.rotation = Quaternion.Euler(90, 0, 0); // look straight down
 
             // ---- Light ----
-            var lightGo = new GameObject("[ENV] Directional Light");
+            var lightGo = new GameObject("[E] Directional Light");
             var light = lightGo.AddComponent<Light>();
             light.type = LightType.Directional;
             lightGo.transform.rotation = Quaternion.Euler(50, -30, 0);
 
             // ---- Ground (TerrainController MVC) ----
             var ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            ground.name = "[ENV] Ground Plane";
+            ground.name = "[E] Ground Plane";
             var renderer = ground.GetComponent<Renderer>();
             
             // Set default editor-time material to black
@@ -87,24 +87,24 @@ namespace Redes.EditorTools
             // OJO: NO agregamos NetworkRunner aquí. HostNetworkService crea sus
             // propios runners en runtime (lobbyRunner + gameRunner frescos) para
             // evitar reutilizar un runner muerto tras un Shutdown (Fusion 2).
-            var runnerGo = new GameObject("[MANAGER] Network Manager");
+            var runnerGo = new GameObject("[M] Network Manager");
             runnerGo.AddComponent<HostNetworkService>();
             runnerGo.AddComponent<PlayerSpawner>();
 
             // ---- GameManager (scene Network Object for win/lose RPC) ----
-            var gmGo = new GameObject("[MANAGER - Scene Network Object] Game Manager");
+            var gmGo = new GameObject("[SNO] Game Manager");
             gmGo.AddComponent<NetworkObject>();
             gmGo.AddComponent<MatchNetworkController>();
 
             // ---- Controllers ----
-            var ctrlGo = new GameObject("[CONTROLLERS] Game Logic Managers");
+            var ctrlGo = new GameObject("[C] Game Logic Managers");
             ctrlGo.AddComponent<GameFlowController>();
             ctrlGo.AddComponent<MatchController>();
             ctrlGo.AddComponent<PlayerController>();
             ctrlGo.AddComponent<EntityDisplayManager>();
             
             // ---- VFX Manager ----
-            var vfxGo = new GameObject("[MANAGER] VFX and SFX System");
+            var vfxGo = new GameObject("[M] VFX and SFX System");
             var vfxManager = vfxGo.AddComponent<VFXManager>();
             
             // Create Hit VFX Prefab (Red, Sphere)

@@ -97,8 +97,8 @@ namespace Redes.Network
         private NetworkRunner CreateRunner(string goName, bool provideInput)
         {
             string cleanName = goName;
-            if (goName == "LobbyRunner") cleanName = "[RUNNER] Lobby Network Runner";
-            else if (goName == "GameRunner") cleanName = "[RUNNER] Game Network Runner";
+            if (goName == "LobbyRunner") cleanName = "[R] Lobby Network Runner";
+            else if (goName == "GameRunner") cleanName = "[R] Game Network Runner";
 
             var go = new GameObject(cleanName);
             go.transform.SetParent(transform, false);

@@ -73,7 +73,7 @@ namespace Redes.Test
             }
 
             // Read the shoot clip duration from the animator so we can scale speed precisely
-            var model = transform.Find("[MODEL & ANIMATOR] Player Visual Model") ?? transform.Find("Model");
+            var model = transform.Find("[MA] Player Visual Model") ?? transform.Find("Model");
             if (model != null)
             {
                 var animator = model.GetComponent<Animator>();
@@ -352,7 +352,7 @@ namespace Redes.Test
 
         private System.Collections.IEnumerator RecoilCoroutine()
         {
-            var model = transform.Find("[MODEL & ANIMATOR] Player Visual Model") ?? transform.Find("Model");
+            var model = transform.Find("[MA] Player Visual Model") ?? transform.Find("Model");
             if (model == null) yield break;
 
             Vector3 origPos = Vector3.zero;

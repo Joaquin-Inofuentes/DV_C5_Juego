@@ -256,7 +256,7 @@ namespace Redes.EditorTools
             }
 
             // Find or setup Animator
-            var modelChild = playerGo.transform.Find("[MODEL & ANIMATOR] Player Visual Model") ?? playerGo.transform.Find("Model");
+            var modelChild = playerGo.transform.Find("[MA] Player Visual Model") ?? playerGo.transform.Find("Model");
             Animator animator = null;
             if (modelChild != null)
             {
