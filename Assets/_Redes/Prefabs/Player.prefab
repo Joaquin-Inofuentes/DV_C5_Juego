@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 3109412577341739674}
   - component: {fileID: 1659807546825643443}
   - component: {fileID: 4412493982859318464}
+  - component: {fileID: 3127250213055132550}
+  - component: {fileID: 7722847940241807649}
   - component: {fileID: 2197367697350939627}
   - component: {fileID: 8858672076999365881}
   m_Layer: 0
@@ -119,6 +121,8 @@ MonoBehaviour:
   - {fileID: 6760933024892967536}
   - {fileID: 427579071385923016}
   - {fileID: 3109412577341739674}
+  - {fileID: 3127250213055132550}
+  - {fileID: 7722847940241807649}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &344750802899601001
 MonoBehaviour:
@@ -154,6 +158,8 @@ MonoBehaviour:
   _health: {fileID: 427579071385923016}
   _ammo: {fileID: 3109412577341739674}
   _eventBus: {fileID: 1659807546825643443}
+  _crouch: {fileID: 3127250213055132550}
+  _teleport: {fileID: 7722847940241807649}
 --- !u!114 &2619016877980865621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +261,38 @@ MonoBehaviour:
   _footstepSound: {fileID: 8300000, guid: 1c696fad07bb73f4d9de7fcad4f547a9, type: 3}
   _ouchSound: {fileID: 8300000, guid: 346573fa4638f944eb1d3f114dc5d656, type: 3}
   _footstepInterval: 0.38
+--- !u!114 &3127250213055132550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129131023035394489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7caa012b28537d9468e852094bf88bf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsCrouching:
+    _value: 0
+--- !u!114 &7722847940241807649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129131023035394489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17e2c6492dbe9447889248181bffac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _LastTeleportDest: {x: 0, y: 0, z: 0}
+  _LastTeleportOrigin: {x: 0, y: 0, z: 0}
+  _range: 8
+  _cooldown: 2
+  _teleportOriginVfxPrefab: {fileID: 0}
+  _teleportDestVfxPrefab: {fileID: 0}
 --- !u!82 &2197367697350939627
 AudioSource:
   m_ObjectHideFlags: 0

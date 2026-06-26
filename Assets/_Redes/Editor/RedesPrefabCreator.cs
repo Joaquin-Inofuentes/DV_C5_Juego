@@ -133,8 +133,8 @@ namespace Redes.EditorTools
             muzzle.transform.localPosition = new Vector3(0, 1.5f, 0.8f); // ~chest height, forward
 
             // Load audio clips
-            var shootClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Disparo de Metralleta (1).mp3");
-            var reloadClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Recarga de Metralleta.mp3");
+            var shootClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/ShootRealistic.ogg");
+            var reloadClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Click.wav");
             var deathClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
             var footstepClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Resources/Audios/Caminar.mp3");
             var hitClip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");

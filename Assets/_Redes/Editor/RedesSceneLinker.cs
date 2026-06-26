@@ -48,11 +48,11 @@ namespace Redes.EditorTools
             var bulletPrefabNo = bulletPrefab != null ? bulletPrefab.GetComponent<NetworkObject>() : null;
 
             // ---- Load AudioClips ----
-            var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Shoot.wav");
+            var shootSound = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/ShootRealistic.ogg");
             var hitSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Hit.wav");
             var winSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Win.wav");
             var loseSound  = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/Lose.wav");
-            var bgmSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/BGM.wav");
+            var bgmSound   = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Redes/Art/Audio/AmbientNature.wav");
 
             // ---- Network ----
             Assign(host, ("_playerSpawner", spawner), ("_playerPrefab", playerPrefabNo));
