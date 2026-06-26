@@ -118,6 +118,29 @@ public class LeaderManager : MonoBehaviour
                 Debug.Log($"[Camper Toggle] {targetUnit.name} isCamper = {targetUnit.model.isCamper}");
             }
         }
+
+        // --- LÓGICA DE CAMBIO DE LÍDER POR MOUSE (Tecla F) ---
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (Camera.main != null)
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Collider2D hit = Physics2D.OverlapPoint(mousePos, LayerMask.GetMask("Soldado"));
+                if (hit != null)
+                {
+                    UnitController targetUnit = hit.GetComponent<UnitController>();
+                    if (targetUnit != null && targetUnit.model.team == UnitTeam.BandoA && !targetUnit.model.IsDead && targetUnit != GlobalData.liderActual)
+                    {
+                        int index = unidades.IndexOf(targetUnit);
+                        if (index >= 0)
+                        {
+                            Debug.Log($"[LeaderManager] Tecla F: Cambiando líder manualmente a {targetUnit.name}");
+                            CambiarLider(index);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void AsignarLiderMasCercanoALiderMuerto()

@@ -111,6 +111,16 @@ public class CursorManager : MonoBehaviour
             }
         }
 
+        // --- 2.5 LÓGICA DE CURSOR 2D PARA SOLDADOS ---
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit2D = Physics2D.OverlapPoint(mouseWorldPos, LayerMask.GetMask("Soldado"));
+        if (hit2D != null)
+        {
+            CambiarCursor(cursorInteractuar);
+            SetVisualColor(targetColor);
+            return;
+        }
+
         if ((Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) && Physics.Raycast(ray, out hit, 100f))
         {
             if (hit.collider.CompareTag("Enemy") || hit.collider.name.Contains("Enemigo") || hit.collider.GetComponent<IDaniable>() != null)

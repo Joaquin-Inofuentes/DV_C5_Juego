@@ -81,10 +81,30 @@ public class AmmoCreator : EditorWindow
 
     private static void ConfigurarYCorregirUnidades()
     {
-        Game.Squad.UnitController[] unidades = Object.FindObjectsOfType<Game.Squad.UnitController>(true);
-        int modificadas = 0;
+        Game.Squad.UnitController[] unidadesEnEscena = Object.FindObjectsOfType<Game.Squad.UnitController>(true);
+        
+        System.Collections.Generic.List<Game.Squad.UnitController> unidades = new System.Collections.Generic.List<Game.Squad.UnitController>(unidadesEnEscena);
+        
+        // Cargar prefabs de unidades para corregirlos también
+        string[] guidPrefabs = AssetDatabase.FindAssets("t:Prefab");
+        foreach(var guid in guidPrefabs)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            GameObject p = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (p != null)
+            {
+                var u = p.GetComponent<Game.Squad.UnitController>();
+                if (u != null && !unidades.Contains(u))
+                {
+                    unidades.Add(u);
+                }
+            }
+        }
 
-        Debug.Log($"<color=orange>[Herramienta]</color> Iniciando corrección y auto-asignación de variables en {unidades.Length} unidades...");
+        int modificadas = 0;
+        GameObject ammoPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/InteractableAmmo.prefab");
+
+        Debug.Log($"<color=orange>[Herramienta]</color> Iniciando corrección y auto-asignación de variables en {unidades.Count} unidades (Escena + Prefabs)...");
 
         foreach (var unit in unidades)
         {
@@ -311,15 +331,34 @@ public class AmmoCreator : EditorWindow
                     unit.view.damageSound = damageClip;
                     modificadoEsteUnit = true;
                 }
+            }
 
-                if (modificadoEsteUnit)
+            // --- 5. Loot Drop para Enemigos ---
+            if (unit.model != null && unit.model.team == Game.Core.UnitTeam.BandoB)
+            {
+                if (ammoPrefab != null && (unit.dropPrefab != ammoPrefab || unit.dropChance != 0.5f))
                 {
-                    EditorUtility.SetDirty(unit.view);
-                    EditorUtility.SetDirty(source);
-                    EditorUtility.SetDirty(unit);
-                    modificadas++;
-                    Debug.Log($"<color=lime>[Herramienta]</color> Configurado Audio 3D MVC para {unit.name} ({unit.model.specialization}). Disparo: {unit.view.shootSound?.name}, Daño: {unit.view.damageSound?.name}");
+                    unit.dropPrefab = ammoPrefab;
+                    unit.dropChance = 0.5f;
+                    modificadoEsteUnit = true;
+                    Debug.Log($"<color=cyan>[Autocorrección]</color> {unit.name}: Asignado dropPrefab (InteractableAmmo) con 50% de probabilidad");
                 }
+            }
+
+            if (modificadoEsteUnit)
+            {
+                EditorUtility.SetDirty(unit.view);
+                if (unit.view.audioSource != null) EditorUtility.SetDirty(unit.view.audioSource);
+                EditorUtility.SetDirty(unit);
+                
+                // Si es un prefab y estamos en editor, intentar guardar
+                if (PrefabUtility.IsPartOfPrefabAsset(unit.gameObject))
+                {
+                    PrefabUtility.SavePrefabAsset(unit.gameObject.transform.root.gameObject);
+                }
+
+                modificadas++;
+                Debug.Log($"<color=lime>[Herramienta]</color> Configurado Audio 3D y variables MVC para {unit.name}");
             }
         }
 

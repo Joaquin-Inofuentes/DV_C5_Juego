@@ -22,6 +22,11 @@ namespace Game.Squad
         [Tooltip("Collider de la unidad que se desactivará al morir y se reactivará al ser revivido.")]
         public Collider2D unitCollider;
 
+        [Header("Loot Drop (Enemigos)")]
+        public GameObject dropPrefab;
+        [Range(0f, 1f)]
+        public float dropChance = 0.5f;
+
         // Propiedades necesarias para la FSM
         public Transform currentSlot { get; set; } // Reemplaza slotAsignado
         public Transform target;
@@ -351,6 +356,13 @@ namespace Game.Squad
         {
             agent.StopAgent();
             ReleaseSlot();
+
+            if (dropPrefab != null && UnityEngine.Random.value <= dropChance)
+            {
+                Instantiate(dropPrefab, transform.position, Quaternion.identity);
+                Debug.Log($"<color=lime>[Loot]</color> {name} soltó {dropPrefab.name} al morir.");
+            }
+
             Destroy(gameObject, 0.1f);
         }
 

@@ -119,7 +119,7 @@ public class IA_P2_AgentIA : MonoBehaviour
 
     public void GoTo(Vector3 targetPosition, float Offset = 0)
     {
-        Debug.Log($"[IA_P2_AgentIA] Inicio GoTo hacia {targetPosition} en {name}");
+        // Debug.Log($"[IA_P2_AgentIA] Inicio GoTo hacia {targetPosition} en {name}");
         if (_unitModel != null && _unitModel.IsDown)
         {
             StopAgent();
@@ -132,7 +132,7 @@ public class IA_P2_AgentIA : MonoBehaviour
             float distAlDestinoFinal = Vector3.Distance(currentPath[currentPath.Count - 1], targetPosition);
             if (distAlDestinoFinal < 1.5f && Time.time - lastPathRecalcTime < 0.75f)
             {
-                Debug.Log($"[IA_P2_AgentIA] Recálculo optimizado ignorado por cercanía y tiempo (Dist: {distAlDestinoFinal}, Time: {Time.time - lastPathRecalcTime}) en {name}");
+                // Debug.Log($"[IA_P2_AgentIA] Recálculo optimizado ignorado por cercanía y tiempo (Dist: {distAlDestinoFinal}, Time: {Time.time - lastPathRecalcTime}) en {name}");
                 return;
             }
         }
