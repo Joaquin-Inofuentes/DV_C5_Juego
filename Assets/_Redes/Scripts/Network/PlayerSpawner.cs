@@ -25,7 +25,7 @@ namespace Redes.Network
         public void SpawnPlayer(NetworkRunner runner, PlayerRef player, NetworkObject prefab)
         {
             RedesLog.Info(RedesLog.NET, $">> PlayerSpawner.SpawnPlayer(player={player})");
-            Vector3 pos = GetSpawnPosition(player);
+            Vector3 pos = GetSpawnPosition(runner, player);
             RedesLog.Info(RedesLog.NET, $"   spawnPos={pos}  prefab={prefab.name}");
             var obj = runner.Spawn(prefab, pos, Quaternion.identity, player);
             if (obj != null)
@@ -81,12 +81,57 @@ namespace Redes.Network
             _spawned.Clear();
         }
 
-        // Helper for the other agent to pick a spawn position.
-        private Vector3 GetSpawnPosition(PlayerRef player)
+        // Helper to pick a spawn position.
+        private Vector3 GetSpawnPosition(NetworkRunner runner, PlayerRef player)
         {
             if (_spawnPoints != null && _spawnPoints.Length > 0)
             {
-                int randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Length);
+                // Determine player index (0 for first player, 1 for second player, etc.)
+                int playerIndex = 0;
+                if (runner != null)
+                {
+                    var activePlayers = new List<PlayerRef>();
+                    foreach (var p in runner.ActivePlayers)
+                    {
+                        activePlayers.Add(p);
+                    }
+                    activePlayers.Sort((a, b) => a.PlayerId.CompareTo(b.PlayerId));
+                    playerIndex = activePlayers.IndexOf(player);
+                    if (playerIndex < 0)
+                    {
+                        // Fallback using PlayerId
+                        playerIndex = (player.PlayerId == 1) ? 0 : 1;
+                    }
+                }
+                else
+                {
+                    playerIndex = (player.PlayerId == 1) ? 0 : 1;
+                }
+
+                int randomIndex = 0;
+                if (playerIndex == 0)
+                {
+                    // Player 1: index 0 and 1
+                    int maxIndex = Mathf.Min(2, _spawnPoints.Length);
+                    randomIndex = UnityEngine.Random.Range(0, maxIndex);
+                    RedesLog.Info(RedesLog.PLAYER, $"[PlayerSpawner] Player {player} es el Primer Jugador (Index {playerIndex}). Seleccionando aleatorio entre indices 0 y 1. Indice elegido: {randomIndex}");
+                }
+                else
+                {
+                    // Player 2 (and others): index 2, 3, and 4
+                    if (_spawnPoints.Length > 2)
+                    {
+                        int maxIndex = Mathf.Min(5, _spawnPoints.Length);
+                        randomIndex = UnityEngine.Random.Range(2, maxIndex);
+                        RedesLog.Info(RedesLog.PLAYER, $"[PlayerSpawner] Player {player} es el Segundo Jugador (Index {playerIndex}). Seleccionando aleatorio entre indices 2 y 4. Indice elegido: {randomIndex}");
+                    }
+                    else
+                    {
+                        randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Length);
+                        RedesLog.Warn(RedesLog.PLAYER, $"[PlayerSpawner] Player {player} es el Segundo Jugador (Index {playerIndex}), pero no hay suficientes spawn points ({_spawnPoints.Length}). Usando random index: {randomIndex}");
+                    }
+                }
+
                 Transform sp = _spawnPoints[randomIndex];
                 if (sp != null)
                 {
@@ -97,7 +142,7 @@ namespace Redes.Network
             
             // Fallback
             Vector3 fallbackPos = new Vector3(player.PlayerId * 3f, 0f, player.PlayerId * 3f);
-            RedesLog.Warn(RedesLog.PLAYER, $"[PlayerSpawner] No hay _spawnPoints validos asignados en el inspector. Usando posicion fallback {fallbackPos} para el jugador {player}");
+            RedesLog.Warn(RedesLog.PLAYER, $"[PlayerSpawner] No hay _spawnPoints validos asignados en el inspector o nulo. Usando posicion fallback {fallbackPos} para el jugador {player}");
             return fallbackPos;
         }
     }
