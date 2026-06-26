@@ -526,13 +526,19 @@ namespace Redes.EditorTools
             var primCollider = cubeVisual.GetComponent<BoxCollider>();
             if (primCollider != null) Object.DestroyImmediate(primCollider);
 
-            // Setup renderer with orange color initially for bomb
+            // Setup renderer with M_Negro material
             var renderer = cubeVisual.GetComponent<Renderer>();
             if (renderer != null)
             {
-                var orangeMat = new Material(Shader.Find("Standard"));
-                orangeMat.color = new Color(0.85f, 0.4f, 0.1f);
-                renderer.sharedMaterial = orangeMat;
+                var blackMat = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/M_negro.mat");
+                if (blackMat != null)
+                {
+                    renderer.sharedMaterial = blackMat;
+                }
+                else
+                {
+                    Debug.LogWarning("[REDES][PREFABS] No se encontro M_negro.mat en Assets/Materials/");
+                }
             }
 
             // Get default particle material
