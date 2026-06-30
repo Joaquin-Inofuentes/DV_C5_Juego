@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 796381161699690066}
-  mainSprite: {fileID: 180722605185607822}
+  mainSprite: {fileID: 0}
   selectionRing: {fileID: 0}
   graphicsRoot: {fileID: 7133489419772280197}
   lineRenderer: {fileID: 1644043348357668627}

@@ -63,8 +63,12 @@ public class UnitView : MonoBehaviour
         if (_revivalCompleteTimer > 0f) _revivalCompleteTimer -= Time.deltaTime;
         if (_healTimer > 0f) _healTimer -= Time.deltaTime;
         if (_speechTimer > 0f) _speechTimer -= Time.deltaTime;
+        
+        bool isSelected = model != null && model.IsLeader;
         if (selectionRing != null)
-            selectionRing.SetActive(model != null && model.IsLeader);
+            selectionRing.SetActive(isSelected);
+        if (mainSprite != null)
+            mainSprite.enabled = isSelected;
     }
 
     public void TriggerHealEffect() => _healTimer = 0.9f;
@@ -505,6 +509,8 @@ public class UnitView : MonoBehaviour
     {
         if (selectionRing != null)
             selectionRing.SetActive(isActive);
+        if (mainSprite != null)
+            mainSprite.enabled = isActive;
     }
 
     public void PlayShootSound()

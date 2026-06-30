@@ -13,10 +13,9 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
-  - _EMISSION
   - _METALLICGLOSSMAP
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2450
@@ -66,10 +65,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _Cutoff: 0.621
-    - _DetailNormalMapScale: 1
+    - _Cutoff: 0.301
+    - _DetailNormalMapScale: 0
     - _DstBlend: 0
-    - _GlossMapScale: 0.484
+    - _GlossMapScale: 0.475
     - _Glossiness: 0.67
     - _GlossyReflections: 1
     - _Metallic: 0.446
@@ -82,6 +81,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0.6597539, g: 0, b: 0.013621028, a: 1}
   m_BuildTextureStacks: []

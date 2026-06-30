@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class DesactivarPorTimer : MonoBehaviour
 {
+    public float tiempoDesactivacion = 2f; // Tiempo en segundos antes de desactivar el objeto
     public void OnEnable()
     {
-        Invoke(nameof(Desactivar), 2f);
+        Invoke(nameof(Desactivar), tiempoDesactivacion);
     }
 
     private void OnDisable()
